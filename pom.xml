@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
-    <version>3.8.3</version>
+    <groupId>com.risun</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-    <name>ruoyi</name>
-    <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <name>Risun Project With Java</name>
+    <description>睿阳Java开发框架</description>
     
     <properties>
-        <ruoyi.version>3.8.3</ruoyi.version>
+        <project.version>1.0.0</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -153,55 +153,53 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.risun</groupId>
+                <artifactId>project-quartz</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.risun</groupId>
+                <artifactId>project-generator</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.risun</groupId>
+                <artifactId>project-framework</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.risun</groupId>
+                <artifactId>project-system</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.risun</groupId>
+                <artifactId>project-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
-        <module>ruoyi-generator</module>
-        <module>ruoyi-common</module>
+        <module>project-admin</module>
+        <module>project-framework</module>
+        <module>project-system</module>
+        <module>project-quartz</module>
+        <module>project-generator</module>
+        <module>project-common</module>
     </modules>
-    <packaging>pom</packaging>
-
+    
 
     <dependencies>
-
     </dependencies>
 
     <build>
@@ -221,20 +219,20 @@
 
     <repositories>
         <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>maven-risun</id>
+            <name>maven-risun</name>
+            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
             <releases>
-                <enabled>true</enabled>
+            <enabled>true</enabled>
             </releases>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>maven-risun</id>
+            <name>maven-risun</name>
+            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
