@@ -1,7 +1,7 @@
 # 项目相关配置
-ruoyi:
+risun:
   # 名称
-  name: Risun
+  name: 睿阳Java开发框架
   # 版本
   version: 1.0.0
   # 版权年份
@@ -9,7 +9,7 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyi/uploadPath
+  profile: files
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数组计算 char 字符验证
@@ -22,21 +22,13 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /
-  tomcat:
-    # tomcat的URI编码
-    uri-encoding: UTF-8
-    # 连接数满后的排队数，默认为100
-    accept-count: 1000
-    threads:
-      # tomcat最大线程数，默认为200
-      max: 800
-      # Tomcat启动初始化的线程数，默认值10
-      min-spare: 100
+  undertow:
+    url-charset: UTF-8
 
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.risun: debug
     org.springframework: warn
 
 # Spring配置
@@ -94,7 +86,7 @@ token:
 # MyBatis配置
 mybatis:
     # 搜索指定包别名
-    typeAliasesPackage: com.ruoyi.**.domain
+    typeAliasesPackage: com.risun.**.domain
     # 配置mapper的扫描，找到所有的mapper.xml映射文件
     mapperLocations: classpath*:mapper/**/*Mapper.xml
     # 加载全局的配置文件
