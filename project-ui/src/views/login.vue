@@ -141,7 +141,9 @@ export default {
             Cookies.remove('rememberMe');
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+            // this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+            const uri = this.redirect && this.redirect != '/' ? this.redirect : "/index";
+            this.$router.push({path: uri}).catch(() => {});
           }).catch(() => {
             this.loading = false;
             if (this.captchaEnabled) {
