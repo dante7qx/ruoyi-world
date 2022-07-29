@@ -185,6 +185,13 @@
                 <artifactId>project-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <!-- 业务管理-->
+            <dependency>
+                <groupId>com.risun</groupId>
+                <artifactId>project-biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -196,6 +203,7 @@
         <module>project-quartz</module>
         <module>project-generator</module>
         <module>project-common</module>
+        <module>project-biz</module>
     </modules>
     
 

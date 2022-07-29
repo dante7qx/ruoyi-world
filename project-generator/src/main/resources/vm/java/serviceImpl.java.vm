@@ -15,6 +15,7 @@ import com.risun.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 import ${packageName}.domain.${subClassName};
 #end
+import com.risun.common.utils.SecurityUtils;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
@@ -71,6 +72,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #if($column.javaField == 'createTime')
         ${className}.setCreateTime(DateUtils.getNowDate());
 #end
+#if($column.javaField == 'createBy')
+        ${className}.setCreateBy(SecurityUtils.getUsername());
+#end
 #end
 #if($table.sub)
         int rows = ${className}Mapper.insert${ClassName}(${className});
@@ -96,6 +100,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #foreach ($column in $columns)
 #if($column.javaField == 'updateTime')
         ${className}.setUpdateTime(DateUtils.getNowDate());
+#end
+#if($column.javaField == 'updateBy')
+        ${className}.setUpdateBy(SecurityUtils.getUsername());
 #end
 #end
 #if($table.sub)

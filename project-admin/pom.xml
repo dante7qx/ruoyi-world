@@ -57,6 +57,12 @@
             <groupId>com.risun</groupId>
             <artifactId>project-generator</artifactId>
         </dependency>
+        
+        <!-- 业务管理-->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-biz</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

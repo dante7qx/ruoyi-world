@@ -140,6 +140,7 @@ public class VelocityUtils
         if (GenConstants.TPL_CRUD.equals(tplCategory))
         {
             templates.add("vm/vue/index.vue.vm");
+            templates.add("vm/vue/detail.vue.vm");
         }
         else if (GenConstants.TPL_TREE.equals(tplCategory))
         {
@@ -212,6 +213,10 @@ public class VelocityUtils
         else if (template.contains("index.vue.vm"))
         {
             fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
+        }
+        else if (template.contains("detail.vue.vm"))
+        {
+            fileName = StringUtils.format("{}/views/{}/{}/detail.vue", vuePath, moduleName, businessName);
         }
         else if (template.contains("index-tree.vue.vm"))
         {
