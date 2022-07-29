@@ -32,6 +32,9 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <poi-tl.version>1.10.4</poi-tl.version>
+        <aspose-word.version>15.8.0</aspose-word.version>
+        <hutool.version>5.8.4</hutool.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -115,6 +118,20 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
+            
+            <!-- word工具 -->
+            <dependency>
+			  <groupId>com.deepoove</groupId>
+			  <artifactId>poi-tl</artifactId>
+			  <version>${poi-tl.version}</version>
+			</dependency>
+			
+			<!-- word2pdf工具 -->
+			<dependency>
+			  <groupId>com.risun</groupId>
+			  <artifactId>aspose-word</artifactId>
+			  <version>${aspose-word.version}</version>
+			</dependency>
 
             <!-- velocity代码生成使用模板 -->
             <dependency>
@@ -129,6 +146,14 @@
                 <artifactId>commons-collections</artifactId>
                 <version>${commons.collections.version}</version>
             </dependency>
+            
+            <!-- Hutool 工具类 -->
+            <dependency>
+			    <groupId>cn.hutool</groupId>
+			    <artifactId>hutool-all</artifactId>
+			    <version>${hutool.version}</version>
+			</dependency>
+            
 
             <!-- 阿里JSON解析器 -->
             <dependency>
@@ -208,6 +233,11 @@
     
 
     <dependencies>
+    	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
 
     <build>

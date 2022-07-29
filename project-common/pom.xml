@@ -80,6 +80,18 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
         </dependency>
+        
+        <!-- word工具 -->
+        <dependency>
+			<groupId>com.deepoove</groupId>
+			<artifactId>poi-tl</artifactId>
+		</dependency>
+		
+		<!-- word2pdf工具 -->
+		<dependency>
+			<groupId>com.risun</groupId>
+			<artifactId>aspose-word</artifactId>
+		</dependency>
 
         <!-- yml解析器 -->
         <dependency>
@@ -122,6 +134,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
+        
+        <!-- Hutool 工具类 -->
+        <dependency>
+		    <groupId>cn.hutool</groupId>
+		    <artifactId>hutool-all</artifactId>
+		</dependency>
 
         <dependency>
         	<groupId>org.springframework.boot</groupId>
