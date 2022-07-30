@@ -111,7 +111,7 @@ export default {
   computed: {
     // 是否显示提示
     showTip() {
-      this.isShowTip = !this.disabled
+      // this.isShowTip = !this.disabled
       return this.isShowTip && (this.fileType || this.fileSize);
     },
   },
@@ -174,7 +174,9 @@ export default {
     // 获取文件名称
     getFileName(name) {
       if (name.lastIndexOf("/") > -1) {
-        return name.slice(name.lastIndexOf("/") + 1);
+        const ext = name.slice(name.lastIndexOf("."));
+        const actualName = name.slice(name.lastIndexOf("/") + 1, name.lastIndexOf("_"));
+        return actualName + ext;
       } else {
         return "";
       }

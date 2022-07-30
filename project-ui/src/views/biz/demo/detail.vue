@@ -14,7 +14,7 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label="业务图片">
-        <image-upload v-model="form.demoImage" />
+        <image-upload v-model="form.demoImage" :disabled="disabled" />
       </el-form-item>
       <el-form-item label="业务附件" prop="attachment">
         <file-upload v-model="form.attachment" :disabled="disabled"/>
