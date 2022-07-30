@@ -30,6 +30,17 @@ createNewProject() {
             echo "mv ${pdir} ${projectName}${pdir#*${curProject}}"
             mv ${pdir} ${projectName}${pdir#*${curProject}}
         done
+        
+        ## 删除git相关
+        rm -rf .git/
+        rm -rf .gitignore
+        
+        echo "1. 修改pom.xml"
+        echo $poms
+        echo "2. 修改${curProjectCN}"
+        echo $cnfiles
+        echo "3. 重命名目录"
+        echo $projectDirs
 
     fi
 }
