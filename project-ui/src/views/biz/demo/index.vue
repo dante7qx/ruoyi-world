@@ -75,7 +75,7 @@
     <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="业务名称" align="center" prop="demoName" />
-      <el-table-column label="业务时间" align="center" prop="demoTime" width="180">
+      <el-table-column label="业务时间" align="center" prop="demoTime" width="110">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>
         </template>
@@ -85,6 +85,19 @@
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
         </template>
       </el-table-column>
+      <el-table-column label="创建人" align="center" prop="createBy" width="100"></el-table-column>
+      <el-table-column label="业务时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="更新人" align="center" prop="updateBy" width="100"></el-table-column>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
