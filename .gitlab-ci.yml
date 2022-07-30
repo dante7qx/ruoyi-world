@@ -1,0 +1,29 @@
+stages: 
+  - pull_code
+  - mvn_test
+  - build
+
+# 拉取代码
+pull_code: 
+  stage: pull_code
+  script:
+    - echo "拉取代码"
+  tags:
+    - risun
+
+# 单元测试
+mvn_test: 
+  stage: mvn_test
+  script:
+    - echo "单元测试"
+  tags:
+    - risun
+
+# 编译打包
+build: 
+  stage: build
+  script:
+    - echo "编译打包"
+  tags:
+    - risun
+
