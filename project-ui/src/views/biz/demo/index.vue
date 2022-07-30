@@ -172,6 +172,7 @@ export default {
     };
   },
   created() {
+    console.log(this.parseTime(new Date(), '{y}-{m}-{d} {h}:{i}'))
     this.getList();
   },
   methods: {
