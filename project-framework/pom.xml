@@ -11,10 +11,8 @@
 
     <artifactId>project-framework</artifactId>
 
-    <description>
-        framework框架核心
-    </description>
-
+    <description>Framework框架核心</description>
+        
     <dependencies>
 
         <!-- SpringBoot Web容器 -->
