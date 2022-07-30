@@ -19,7 +19,7 @@ createNewProject() {
         done
         
         ## 修改XX管理系统
-        cnfiles=`grep ${curProjectCN} -rl ./ | grep -v new_project.sh | grep -v new_project_mac.sh`
+        cnfiles=`grep ${curProjectCN} -rl ./ | grep -v new_project.sh | grep -v new_project_mac.sh | grep -v git`
         for cnfile in $cnfiles; do
             sed -i "s/${curProjectCN}/${projectCN}/g" $cnfile
         done
