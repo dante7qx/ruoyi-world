@@ -15,7 +15,7 @@
       ref="upload"
     >
       <!-- 上传按钮 -->
-      <el-button size="mini" type="primary">选取文件</el-button>
+      <el-button size="mini" type="primary" :disabled="disabled">选取文件</el-button>
       <!-- 上传提示 -->
       <div class="el-upload__tip" slot="tip" v-if="showTip">
         请上传
@@ -31,7 +31,7 @@
         <el-link :href="`${baseUrl}${file.url}`" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
-        <div class="ele-upload-list__item-content-action">
+        <div class="ele-upload-list__item-content-action" v-if="!disabled">
           <el-link :underline="false" @click="handleDelete(index)" type="danger">删除</el-link>
         </div>
       </li>
@@ -60,13 +60,17 @@ export default {
     // 文件类型, 例如['png', 'jpg', 'jpeg']
     fileType: {
       type: Array,
-      default: () => ["doc", "xls", "ppt", "txt", "pdf"],
+      default: () => ["doc", "docs", "xls", "xlsx", "ppt", "ppx", "txt", "pdf"],
     },
     // 是否显示提示
     isShowTip: {
       type: Boolean,
       default: true
-    }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -107,6 +111,7 @@ export default {
   computed: {
     // 是否显示提示
     showTip() {
+      this.isShowTip = !this.disabled
       return this.isShowTip && (this.fileType || this.fileSize);
     },
   },

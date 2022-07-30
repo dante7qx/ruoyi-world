@@ -17,7 +17,7 @@
         <image-upload v-model="form.demoImage" />
       </el-form-item>
       <el-form-item label="业务附件" prop="attachment">
-        <el-input v-model="form.attachment" type="textarea" placeholder="请输入内容" :disabled="disabled"/>
+        <file-upload v-model="form.attachment" :disabled="disabled"/>
       </el-form-item>
 	</el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">

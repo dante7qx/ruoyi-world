@@ -74,7 +74,6 @@
 
     <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="业务主键ID" align="center" prop="demoId" />
       <el-table-column label="业务名称" align="center" prop="demoName" />
       <el-table-column label="业务时间" align="center" prop="demoTime" width="180">
         <template slot-scope="scope">
@@ -86,7 +85,6 @@
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
         </template>
       </el-table-column>
-      <el-table-column label="业务附件" align="center" prop="attachment" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
