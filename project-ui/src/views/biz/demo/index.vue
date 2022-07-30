@@ -122,7 +122,7 @@
     
     <!-- 添加或修改业务对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
-      <detail :key="new Date().getTime()" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
+      <detail :key="nanoid()" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>
 </template>
