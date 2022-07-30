@@ -4,7 +4,6 @@ curProject="project"
 curProjectCN="睿阳Java开发框架"
 projectName="xx-sys"
 projectCN="XX管理系统"
-modifys=()
 
 createNewProject() {
     ## 修改pom.xml
@@ -23,6 +22,8 @@ createNewProject() {
         echo $cnfile
         sed -i "s/${curProjectCN}/${projectCN}/g" $cnfile
     done
+    
+    sed -i "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RuoYiApplication.java
 
     ## 重命名目录
     echo "3. 重命名目录"
