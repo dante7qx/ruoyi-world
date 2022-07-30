@@ -1,7 +1,7 @@
 #! /bin/bash
 
 curProject="project"
-curProjectCN="XX管理系统"
+curProjectCN="睿阳Java开发框架"
 projectName=$1
 projectCN="XX管理系统"
 modifys=()
@@ -14,14 +14,14 @@ createNewProject() {
         ## 修改pom.xml
         poms=`find ./ -type f -name "pom.xml"`
         for pom in $poms; do 
-            sed -i '' "s/<artifactId>${curProject}<\/artifactId>/<artifactId>${projectName}<\/artifactId>/g" $pom
-            sed -i '' "s/${curProject}-/${projectName}-/g" $pom
+            sed -i "s/<artifactId>${curProject}<\/artifactId>/<artifactId>${projectName}<\/artifactId>/g" $pom
+            sed -i "s/${curProject}-/${projectName}-/g" $pom
         done
         
         ## 修改XX管理系统
-        cnfiles=`grep ${curProjectCN} -rl ./ `
+        cnfiles=`grep ${curProjectCN} -rl ./ | grep -v new_project.sh | grep -v new_project_mac.sh`
         for cnfile in $cnfiles; do
-            sed -i '' "s/${curProjectCN}/${projectCN}/g" $cnfile
+            sed -i "s/${curProjectCN}/${projectCN}/g" $cnfile
         done
 
         ## 重命名目录

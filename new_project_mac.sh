@@ -1,7 +1,7 @@
 #! /bin/bash
 
 curProject="project"
-curProjectCN="XX管理系统"
+curProjectCN="睿阳Java开发框架"
 projectName=$1
 projectCN="XX管理系统"
 modifys=()
