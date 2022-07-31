@@ -35,7 +35,7 @@ createNewProject() {
     
     ## 删除git相关
     rm -rf .git/
-    rm -rf .gitignore
+    ## rm -rf .gitignore
 }
 
 read -r -p "您确定要执行此操作吗? [Y/n] " input
