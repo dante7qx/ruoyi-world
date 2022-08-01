@@ -1,13 +1,15 @@
 import request from '@/utils/request'
+import { encrypt } from '@/utils/jsencrypt'
 
 // 登录方法
 export function login(username, password, code, uuid) {
   const data = {
     username,
-    password,
+    password: encrypt(password),
     code,
     uuid
   }
+  console.log(data)
   return request({
     url: '/login',
     headers: {
