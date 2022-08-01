@@ -19,6 +19,8 @@
   - 添加 lombok
   - 使用undertow替代tomcat容器
   - 集成redisson实现redis分布式锁
+  - 集成jsencrypt实现密码加密传输方式
+  - 修改代码生成器，将列表页面和详情页面分离，便于组件化开发
 
 
 - 前端
