@@ -1,4 +1,4 @@
-## 1.0.0 (2022-07-29)
+## 1.0.0 (2022-08-01)
 
 ### 更新依赖
 
@@ -13,11 +13,12 @@
 - 后端
 
   - 添加导出word工具，Poi-tl 1.10.4
-- 添加word转pdf工具，aspose-word 15.8.0
+  - 添加word转pdf工具，aspose-word 15.8.0
   - 添加word转pdf工具类，Word2PdfUtil，测试类Word2PdfUtilTests
-- 添加工具类库，Hutool 5.8.4
+  - 添加工具类库，Hutool 5.8.4
   - 添加 lombok
-- 使用undertow替代tomcat容器
+  - 使用undertow替代tomcat容器
+  - 集成redisson实现redis分布式锁
 
 
 - 前端
