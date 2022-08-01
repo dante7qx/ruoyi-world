@@ -15,6 +15,7 @@
   - 添加导出word工具，Poi-tl 1.10.4
   - 添加word转pdf工具，aspose-word 15.8.0
   - 添加word转pdf工具类，Word2PdfUtil，测试类Word2PdfUtilTests
+  - 添加Guava工具类库，Guava 31.1-jre
   - 添加工具类库，Hutool 5.8.4
   - 添加 lombok
   - 使用undertow替代tomcat容器
