@@ -9,7 +9,6 @@ export function login(username, password, code, uuid) {
     code,
     uuid
   }
-  console.log(data)
   return request({
     url: '/login',
     headers: {

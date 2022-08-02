@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Notification, MessageBox, Message, Loading } from 'element-ui'
 import store from '@/store'
+import router from '@/router'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { tansParams, blobValidate } from "@/utils/risun";
@@ -87,7 +88,7 @@ service.interceptors.response.use(res => {
         isRelogin.show = false;
         store.dispatch('LogOut').then(() => {
           // location.href = '/index';
-          location.href = this.$router.options.base == "/" ? "/index" : this.$router.options.base + '/index'
+          location.href = router.options.base == "/" ? "/index" : router.options.base + '/index'
         })
       }).catch(() => {
         isRelogin.show = false;
