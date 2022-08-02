@@ -63,18 +63,17 @@
             <artifactId>oshi-core</artifactId>
         </dependency>
         
-        <!-- Redis分布式锁 -->
-        <dependency>
-		    <groupId>org.redisson</groupId>
-		    <artifactId>redisson-spring-boot-starter</artifactId>
-		</dependency>
-
         <!-- 系统模块-->
         <dependency>
             <groupId>com.risun</groupId>
             <artifactId>project-system</artifactId>
         </dependency>
 
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-configuration-processor</artifactId>
+        	<optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
