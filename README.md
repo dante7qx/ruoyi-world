@@ -124,3 +124,11 @@ spring:
 </dependency>
 ```
 
+### 5. 项目启动
+
+Windows环境下，可能会报如下错误，需要添加 JVM 启动参数 `-Djdk.io.File.enableADS=true`
+
+```ABAP
+java.lang.NoClassDefFoundError: Could not initialize class org.xnio.conduits.Conduit
+```
+
