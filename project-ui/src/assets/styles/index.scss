@@ -189,3 +189,9 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+// el-input、textarea 禁用状态
+.el-input.is-disabled .el-input__inner,textarea:disabled{
+  color: #5f6266 !important;
+  background-color: #ffffff;
+}

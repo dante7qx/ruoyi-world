@@ -13,11 +13,12 @@
       :headers="headers"
       class="upload-file-uploader"
       ref="upload"
+      v-if="!disabled"
     >
       <!-- 上传按钮 -->
-      <el-button size="mini" type="primary" :disabled="disabled">选取文件</el-button>
+      <el-button size="mini" type="primary" v-if="!disabled">选取文件</el-button>
       <!-- 上传提示 -->
-      <div class="el-upload__tip" slot="tip" v-if="showTip">
+      <div class="el-upload__tip" slot="tip" v-if="showTip && !disabled">
         请上传
         <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
         <template v-if="fileType"> 格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b> </template>
