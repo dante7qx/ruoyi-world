@@ -18,22 +18,22 @@ import com.risun.system.service.ISysConfigService;
  * @author ruoyi
  */
 @RestController
-public class SysRegisterController extends BaseController
-{
-    @Autowired
-    private SysRegisterService registerService;
+public class SysRegisterController extends BaseController {
+	private static final String TRUE_ = "true";
+	private static final String CONFIG_KEY = "sys.account.registerUser";
+	
+	@Autowired
+	private SysRegisterService registerService;
 
-    @Autowired
-    private ISysConfigService configService;
+	@Autowired
+	private ISysConfigService configService;
 
-    @PostMapping("/register")
-    public AjaxResult register(@RequestBody RegisterBody user)
-    {
-        if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser"))))
-        {
-            return error("当前系统没有开启注册功能！");
-        }
-        String msg = registerService.register(user);
-        return StringUtils.isEmpty(msg) ? success() : error(msg);
-    }
+	@PostMapping("/register")
+	public AjaxResult register(@RequestBody RegisterBody user) {
+		if (!(TRUE_.equals(configService.selectConfigByKey(CONFIG_KEY)))) {
+			return error("当前系统没有开启注册功能！");
+		}
+		String msg = registerService.register(user);
+		return StringUtils.isEmpty(msg) ? success() : error(msg);
+	}
 }
