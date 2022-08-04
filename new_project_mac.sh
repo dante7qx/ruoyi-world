@@ -33,6 +33,10 @@ createNewProject() {
         mv ${pdir} ${projectName}${pdir#*${curProject}}
     done
     
+    echo "4. 修改常量 Common 下 Constants.java"
+    sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
+    
+    
     ## 删除git相关
     rm -rf .git/
     ## rm -rf .gitignore

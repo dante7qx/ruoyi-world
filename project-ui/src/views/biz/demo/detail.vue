@@ -19,6 +19,10 @@
       <el-form-item label="业务附件" prop="attachment">
         <file-upload v-model="form.attachment" :disabled="disabled"/>
       </el-form-item>
+      <el-form-item label="业务内容">
+        <editor v-model="form.demoContent" :fileSize="10" :minHeight="200" :readOnly="disabled"/>
+      </el-form-item>
+
 	</el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
@@ -69,6 +73,7 @@ export default {
         demoName: null,
         demoTime: null,
         demoImage: null,
+        demoContent: null,
         attachment: null,
         createBy: null,
         createTime: null,
@@ -81,6 +86,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.demoId != null) {
+            console.log(this.form)
             updateDemo(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.cancel();
