@@ -132,3 +132,9 @@ Windows环境下，可能会报如下错误，需要添加 JVM 启动参数 `-Dj
 java.lang.NoClassDefFoundError: Could not initialize class org.xnio.conduits.Conduit
 ```
 
+### 6. 图片代理
+
+若依默认的图片请求访问后台地址会根据`/profile`进行匹配，这里修改为`/project-profile`（默认，会随项目而定）。主要是为了解决同一台服务器上部署多个项目，引发路径重复的问题。
+
+修改的位置：`project-common 下 Constants.java 中的 RESOURCE_PREFIX`
+
