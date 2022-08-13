@@ -3,6 +3,8 @@ package com.risun.biz.demo.mapper;
 import java.util.List;
 import com.risun.biz.demo.domain.Demo;
 
+import org.apache.ibatis.annotations.Select;
+
 /**
  * 业务Mapper接口
  * 
@@ -58,4 +60,12 @@ public interface DemoMapper
      * @return 结果
      */
     public int deleteDemoByDemoIds(Long[] demoIds);
+    
+    /**
+     * 获取业务数量
+     * 
+     * @return
+     */
+    @Select("select count(demo_id) from t_demo")
+    public int selectDemoCount();
 }
