@@ -1,6 +1,7 @@
 <template>
   <div class="component-upload-image">
     <el-upload
+      ref="componentUploadImage"
       multiple
       :action="uploadImgUrl"
       list-type="picture-card"
@@ -120,6 +121,14 @@ export default {
     showTip() {
       return this.isShowTip && (this.fileType || this.fileSize);
     },
+  },
+  mounted() {
+    if(this.disabled) {
+      this.$refs['componentUploadImage'].$el.querySelectorAll('div[tabindex="0"]')[0].style.cssText = "display: none;"
+    } else {
+      this.$refs['componentUploadImage'].$el.querySelectorAll('div[tabindex="0"]')[0].style.cssText = "display: '';"
+    }
+    
   },
   methods: {
     // 删除图片
