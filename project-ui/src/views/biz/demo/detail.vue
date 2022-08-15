@@ -10,7 +10,8 @@
           type="date"
           value-format="yyyy-MM-dd"
           placeholder="请选择业务时间"
-          :disabled="disabled">
+          :disabled="disabled"
+          style="width: 100%">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="业务图片">
@@ -22,8 +23,7 @@
       <el-form-item label="业务内容">
         <editor v-model="form.demoContent" :fileSize="10" :minHeight="200" :readOnly="disabled"/>
       </el-form-item>
-
-	</el-form>
+	  </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
       <el-button @click="cancel">取 消</el-button>

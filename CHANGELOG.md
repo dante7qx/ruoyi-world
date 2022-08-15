@@ -27,8 +27,8 @@
 
 
 - 前端
-  - 添加 nanoid 4.0.0，唯一字符串生成器
-  - 添加 Moment.js 2.29.4，日期处理类库
+  - 添加 nanoid 4.0.0，唯一字符串生成器。官网：https://github.com/ai/nanoid#readme
+  - 添加 Moment.js 2.29.4，日期处理类库。官网：http://momentjs.cn
 
 
 
