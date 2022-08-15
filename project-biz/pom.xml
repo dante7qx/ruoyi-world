@@ -17,7 +17,7 @@
         <!-- 通用工具-->
         <dependency>
             <groupId>com.risun</groupId>
-            <artifactId>project-common</artifactId>
+            <artifactId>project-framework</artifactId>
         </dependency>
     </dependencies>
 
