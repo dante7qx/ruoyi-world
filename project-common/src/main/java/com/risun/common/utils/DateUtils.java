@@ -6,11 +6,12 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 
 /**
@@ -115,19 +116,20 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * 计算相差天数
 	 */
 	public static int differentDaysByMillisecond(Date date1, Date date2) {
-		return Math.abs((int) ((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)));
+//		return Math.abs((int) ((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)));
+		return Integer.parseInt(DateUtil.between(date1, date2, DateUnit.DAY) + ""); 
 	}
 
 	/**
-	 * 计算两个时间差
+	 * 计算两个时间差（天、时、分、秒）
 	 */
-	public static String getDatePoor(Date endDate, Date nowDate) {
+	public static String getDatePoor(Date startDate, Date endDate) {
 		long nd = 1000 * 24 * 60 * 60;
 		long nh = 1000 * 60 * 60;
 		long nm = 1000 * 60;
-		// long ns = 1000;
+		long ns = 1000;
 		// 获得两个时间的毫秒时间差异
-		long diff = endDate.getTime() - nowDate.getTime();
+		long diff = endDate.getTime() - startDate.getTime();
 		// 计算差多少天
 		long day = diff / nd;
 		// 计算差多少小时
@@ -135,10 +137,41 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		// 计算差多少分钟
 		long min = diff % nd % nh / nm;
 		// 计算差多少秒//输出结果
-		// long sec = diff % nd % nh % nm / ns;
-		return day + "天" + hour + "小时" + min + "分钟";
+		long sec = diff % nd % nh % nm / ns;
+		StringBuffer result = new StringBuffer();
+		boolean hasPrev = checkShowDiffStr(Integer.parseInt(day + ""), false, "天", result);
+	    hasPrev = checkShowDiffStr(Integer.parseInt(hour + ""), hasPrev, "小时", result);
+	    hasPrev = checkShowDiffStr(Integer.parseInt(min + ""), hasPrev, "分钟", result);
+	    checkShowDiffStr(Integer.parseInt(sec + ""), hasPrev, "秒", result);
+		return result.toString();
 	}
-
+	
+	/**
+	 * 计算两个时间差（年、月、天、时、分、秒）
+	 */
+	public static String getFullDatePoor(Date startDate, Date endDate) {
+		long nd = 1000 * 24 * 60 * 60;
+		long nh = 1000 * 60 * 60;
+		long nm = 1000 * 60;
+		long ns = 1000;
+		Period between = Period.between(toLocalDate(startDate), toLocalDate(endDate));
+		long diff = endDate.getTime() - startDate.getTime();
+		// 计算差多少小时
+		long hour = diff % nd / nh;
+		// 计算差多少分钟
+		long min = diff % nd % nh / nm;
+		// 计算差多少秒//输出结果
+	    long sec = diff % nd % nh % nm / ns;
+	    StringBuffer result = new StringBuffer();
+	    boolean hasPrev = checkShowDiffStr(Math.abs(between.getYears()), false, "年", result);
+	    hasPrev = checkShowDiffStr(Math.abs(between.getMonths()), hasPrev, "月", result);
+	    hasPrev = checkShowDiffStr(Math.abs(between.getDays()), hasPrev, "天", result);
+	    hasPrev = checkShowDiffStr(Integer.parseInt(hour + ""), hasPrev, "小时", result);
+	    hasPrev = checkShowDiffStr(Integer.parseInt(min + ""), hasPrev, "分钟", result);
+	    checkShowDiffStr(Integer.parseInt(sec + ""), hasPrev, "秒", result);
+		return result.toString();
+	}
+	
 	/**
 	 * 增加 LocalDateTime ==> Date
 	 */
@@ -155,4 +188,38 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
 		return Date.from(zdt.toInstant());
 	}
+	
+	/**
+	 * Date ==> LocalDate
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static LocalDate toLocalDate(Date date) {
+	    return date.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
+	}
+	
+	/**
+	 * Date ==> LocalDateTime
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static LocalDateTime toLocalDateTime(Date date) {
+	    return date.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDateTime();
+	}
+	
+	private static boolean checkShowDiffStr(int result, boolean hasPrev, String unit, StringBuffer buffer) {
+		boolean flag = false;
+		if(result > 0 || (hasPrev && result == 0)) {
+			flag = true;
+			buffer.append(result + unit);
+	    }
+		return flag;
+	}
+	
 }

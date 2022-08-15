@@ -118,7 +118,7 @@ public class Jvm
      */
     public String getRunTime()
     {
-        return DateUtils.getDatePoor(DateUtils.getNowDate(), DateUtils.getServerStartDate());
+        return DateUtils.getDatePoor(DateUtils.getServerStartDate(), DateUtils.getNowDate());
     }
 
     /**
