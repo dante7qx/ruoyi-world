@@ -138,3 +138,21 @@ java.lang.NoClassDefFoundError: Could not initialize class org.xnio.conduits.Con
 
 修改的位置：`project-common 下 Constants.java 中的 RESOURCE_PREFIX`
 
+### 7. 邮件服务
+
+框架自带邮件服务，可用于发送邮件。
+
+- 使用邮件服务，需要进行修改配置 application.yml
+
+```yaml
+## 修改下面的配置
+mail:
+  ## SMTP 服务器
+  host: smtp.163.com    
+  ## 发送端的用户邮箱名      
+  username: test@163.com
+  ## 发送端的密码（授权密码，不是邮箱密码）
+  password: 123456
+```
+
+- 邮件服务类 `EmailFactory`，测试类 `EmailFactoryTests`

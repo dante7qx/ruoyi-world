@@ -75,9 +75,12 @@ spring:
         max-wait: -1ms
   # 邮箱配置
   mail:
-    host: smtp.163.com
-    username: "sunchao.0129@163.com"
-    password: NWSONKUQNOKZFRRB
+    ## SMTP 服务器
+    host: smtp.163.com    
+    ## 发送端的用户邮箱名      
+    username: test@163.com
+    ## 发送端的密码（授权密码，不是邮箱密码）
+    password: 123456
     default-encoding: UTF-8
     protocol: smtps
     properties:
