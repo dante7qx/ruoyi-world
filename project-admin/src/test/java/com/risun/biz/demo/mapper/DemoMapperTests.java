@@ -17,4 +17,5 @@ public class DemoMapperTests extends RisunApplicationTests {
 		int count = demoMapper.selectDemoCount();
 		assertTrue(count >= 0);
 	}
+	
 }

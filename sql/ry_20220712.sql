@@ -170,6 +170,7 @@ insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    't
 -- 三级菜单
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
+insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog', 'monitor/emaillog/index', '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list', 'email',    'admin', sysdate(), '', null, '邮件日志菜单');
 -- 用户管理按钮
 insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'admin', sysdate(), '', null, '');
@@ -298,6 +299,7 @@ insert into sys_role_menu values ('2', '116');
 insert into sys_role_menu values ('2', '117');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');
+insert into sys_role_menu values ('2', '502');
 insert into sys_role_menu values ('2', '1000');
 insert into sys_role_menu values ('2', '1001');
 insert into sys_role_menu values ('2', '1002');
@@ -673,3 +675,22 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+-- 20、邮件日志表
+-- ----------------------------
+drop table if exists sys_email_log;
+create table sys_email_log (
+  email_id          bigint(20)        not null auto_increment   comment '邮件id',
+  send_to           varchar(512)     default ''                 comment '接收人',
+  send_cc           varchar(512)     default ''                 comment '抄送人',
+  send_bcc          varchar(512)     default ''                 comment '密送人',
+  subject           varchar(256)     default ''                 comment '邮件主题',
+  content           varchar(4096)    default ''                 comment '邮件内容',
+  send_date         datetime                                    comment '发送时间',
+  send_log          varchar(1024)    default ''                 comment '发送日志',
+  create_by         varchar(64)     default ''                 comment '创建者',
+  create_time 	    datetime                                   comment '创建时间',
+  update_by         varchar(64)     default ''                 comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  primary key (email_id)
+) engine=innodb auto_increment=1 comment = '邮件日志表';
