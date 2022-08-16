@@ -19,14 +19,7 @@
         <el-input v-model="form.content" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" resize="none" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="发送时间" prop="sendDate">
-        <el-date-picker clearable
-          v-model="form.sendDate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择发送时间"
-          :disabled="disabled"
-          style="width: 100%;">
-        </el-date-picker>
+        <span v-html="form.sendDate" />
       </el-form-item>
 	</el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">

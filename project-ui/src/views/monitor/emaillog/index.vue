@@ -140,8 +140,8 @@ export default {
       this.loading = true;
       this.queryParams.params = {};
       if (null != this.daterangeSendDate && '' != this.daterangeSendDate) {
-        this.queryParams.params["beginSendDate"] = this.daterangeSendDate[0];
-        this.queryParams.params["endSendDate"] = this.daterangeSendDate[1];
+        this.queryParams.params["beginSendDate"] = this.daterangeSendDate[0] + " 00:00:00";
+        this.queryParams.params["endSendDate"] = this.daterangeSendDate[1] + " 23:59:59";
       }
       listEmaillog(this.queryParams).then(response => {
         this.emaillogList = response.rows;
