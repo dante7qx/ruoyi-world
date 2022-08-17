@@ -2,14 +2,11 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.risun.system.mapper.SysEmailLogMapper">
+<mapper namespace="com.risun.system.mapper.SysSmsLogMapper">
     
-    <resultMap type="SysEmailLog" id="SysEmailLogResult">
-        <result property="emailId"    column="email_id"    />
+    <resultMap type="SysSmsLog" id="SysSmsLogResult">
+        <result property="smsId"    column="sms_id"    />
         <result property="sendTo"    column="send_to"    />
-        <result property="sendCc"    column="send_cc"    />
-        <result property="sendBcc"    column="send_bcc"    />
-        <result property="subject"    column="subject"    />
         <result property="content"    column="content"    />
         <result property="sendDate"    column="send_date"    />
         <result property="sendLog"    column="send_log"    />
@@ -20,36 +17,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectSysEmailLogVo">
-        select email_id, send_to, send_cc, send_bcc, subject, content, send_date, send_log, status, create_by, create_time, update_by, update_time from sys_email_log
+    <sql id="selectSysSmsLogVo">
+        select sms_id, send_to, content, send_date, send_log, status, create_by, create_time, update_by, update_time from sys_sms_log
     </sql>
 
-    <select id="selectSysEmailLogList" parameterType="SysEmailLog" resultMap="SysEmailLogResult">
-        <include refid="selectSysEmailLogVo"/>
+    <select id="selectSysSmsLogList" parameterType="SysSmsLog" resultMap="SysSmsLogResult">
+        <include refid="selectSysSmsLogVo"/>
         <where>  
             <if test="sendTo != null  and sendTo != ''"> and send_to = #{sendTo}</if>
-            <if test="sendCc != null  and sendCc != ''"> and send_cc = #{sendCc}</if>
-            <if test="sendBcc != null  and sendBcc != ''"> and send_bcc = #{sendBcc}</if>
-            <if test="subject != null  and subject != ''"> and subject = #{subject}</if>
             <if test="content != null  and content != ''"> and content like concat('%', #{content}, '%')</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="params.beginSendDate != null and params.beginSendDate != '' and params.endSendDate != null and params.endSendDate != ''"> and send_date between #{params.beginSendDate} and #{params.endSendDate}</if>
+            <if test="sendLog != null  and sendLog != ''"> and send_log = #{sendLog}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
         </where>
         order by send_date desc
     </select>
     
-    <select id="selectSysEmailLogByEmailId" parameterType="Long" resultMap="SysEmailLogResult">
-        <include refid="selectSysEmailLogVo"/>
-        where email_id = #{emailId}
+    <select id="selectSysSmsLogBySmsId" parameterType="Long" resultMap="SysSmsLogResult">
+        <include refid="selectSysSmsLogVo"/>
+        where sms_id = #{smsId}
     </select>
         
-    <insert id="insertSysEmailLog" parameterType="SysEmailLog" useGeneratedKeys="true" keyProperty="emailId">
-        insert into sys_email_log
+    <insert id="insertSysSmsLog" parameterType="SysSmsLog" useGeneratedKeys="true" keyProperty="smsId">
+        insert into sys_sms_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sendTo != null">send_to,</if>
-            <if test="sendCc != null">send_cc,</if>
-            <if test="sendBcc != null">send_bcc,</if>
-            <if test="subject != null">subject,</if>
             <if test="content != null">content,</if>
             <if test="sendDate != null">send_date,</if>
             <if test="sendLog != null">send_log,</if>
@@ -61,9 +53,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sendTo != null">#{sendTo},</if>
-            <if test="sendCc != null">#{sendCc},</if>
-            <if test="sendBcc != null">#{sendBcc},</if>
-            <if test="subject != null">#{subject},</if>
             <if test="content != null">#{content},</if>
             <if test="sendDate != null">#{sendDate},</if>
             <if test="sendLog != null">#{sendLog},</if>
@@ -74,16 +63,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
     </insert>
-	
-	<delete id="deleteSysEmailLogByEmailId" parameterType="Long">
-        delete from sys_email_log where email_id = #{emailId}
+
+    <update id="updateSysSmsLog" parameterType="SysSmsLog">
+        update sys_sms_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sendTo != null">send_to = #{sendTo},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="sendDate != null">send_date = #{sendDate},</if>
+            <if test="sendLog != null">send_log = #{sendLog},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where sms_id = #{smsId}
+    </update>
+
+    <delete id="deleteSysSmsLogBySmsId" parameterType="Long">
+        delete from sys_sms_log where sms_id = #{smsId}
     </delete>
 
-    <delete id="deleteSysEmailLogByEmailIds" parameterType="String">
-        delete from sys_email_log where email_id in 
-        <foreach item="emailId" collection="array" open="(" separator="," close=")">
-            #{emailId}
+    <delete id="deleteSysSmsLogBySmsIds" parameterType="String">
+        delete from sys_sms_log where sms_id in 
+        <foreach item="smsId" collection="array" open="(" separator="," close=")">
+            #{smsId}
         </foreach>
     </delete>
-	
 </mapper>

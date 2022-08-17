@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.risun.web.controller.monitor;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import com.risun.system.service.ISysEmailLogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022-08-16
  */
 @RestController
-@RequestMapping("/system/emaillog")
+@RequestMapping("/monitor/emaillog")
 public class SysEmailLogController extends BaseController {
 	@Autowired
 	private ISysEmailLogService sysEmailLogService;
@@ -37,7 +37,7 @@ public class SysEmailLogController extends BaseController {
 	/**
 	 * 查询邮件日志列表
 	 */
-	@PreAuthorize("@ss.hasPermi('system:emaillog:list')")
+	@PreAuthorize("@ss.hasPermi('monitor:emaillog:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(SysEmailLog sysEmailLog) {
 		startPage();
@@ -48,7 +48,7 @@ public class SysEmailLogController extends BaseController {
 	/**
 	 * 导出邮件日志列表
 	 */
-	@PreAuthorize("@ss.hasPermi('system:emaillog:export')")
+	@PreAuthorize("@ss.hasPermi('monitor:emaillog:export')")
 	@Log(title = "邮件日志", businessType = BusinessType.EXPORT)
 	@PostMapping("/export")
 	public void export(HttpServletResponse response, SysEmailLog sysEmailLog) {
@@ -60,20 +60,22 @@ public class SysEmailLogController extends BaseController {
 	/**
 	 * 获取邮件日志详细信息
 	 */
-	@PreAuthorize("@ss.hasPermi('system:emaillog:query')")
+	@PreAuthorize("@ss.hasPermi('monitor:emaillog:query')")
 	@GetMapping(value = "/{emailId}")
 	public AjaxResult getInfo(@PathVariable("emailId") Long emailId) {
 		return AjaxResult.success(sysEmailLogService.selectSysEmailLogByEmailId(emailId));
 	}
 
+	
 	/**
-	 * 新增邮件日志
-	 */
-	@PreAuthorize("@ss.hasPermi('system:emaillog:add')")
-	@Log(title = "邮件日志", businessType = BusinessType.INSERT)
-	@PostMapping
-	public AjaxResult add(@RequestBody SysEmailLog sysEmailLog) {
-		return toAjax(sysEmailLogService.insertSysEmailLog(sysEmailLog));
-	}
+     * 删除邮件日志
+     */
+    @PreAuthorize("@ss.hasPermi('monitor:emaillog:remove')")
+    @Log(title = "邮件日志", businessType = BusinessType.DELETE)
+	@DeleteMapping("/{emailIds}")
+    public AjaxResult remove(@PathVariable Long[] emailIds)
+    {
+        return toAjax(sysEmailLogService.deleteSysEmailLogByEmailIds(emailIds));
+    }
 
 }

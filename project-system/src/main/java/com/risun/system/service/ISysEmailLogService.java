@@ -35,5 +35,19 @@ public interface ISysEmailLogService
      */
     public int insertSysEmailLog(SysEmailLog sysEmailLog);
 
+    /**
+     * 批量删除邮件日志
+     * 
+     * @param emailIds 需要删除的邮件日志主键集合
+     * @return 结果
+     */
+    public int deleteSysEmailLogByEmailIds(Long[] emailIds);
 
+    /**
+     * 删除邮件日志信息
+     * 
+     * @param emailId 邮件日志主键
+     * @return 结果
+     */
+    public int deleteSysEmailLogByEmailId(Long emailId);
 }

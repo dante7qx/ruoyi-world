@@ -1,15 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="邮件主题" prop="subject">
-        <el-input
-          v-model="queryParams.subject"
-          placeholder="请输入邮件主题"
-          clearable
-          @keyup.enter.native="handleQuery"
-          style="width: 240px;"
-        />
-      </el-form-item>
       <el-form-item label="发送时间">
         <el-date-picker
           v-model="daterangeSendDate"
@@ -46,7 +37,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['monitor:emaillog:remove']"
+          v-hasPermi="['monitor:smslog:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -56,30 +47,19 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['monitor:emaillog:export']"
+          v-hasPermi="['monitor:smslog:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="emaillogList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="smslogList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" width="50" align="center" />
       <el-table-column label="接收人" align="center" prop="sendTo" />
-      <el-table-column label="抄送人" align="center" prop="sendCc" />
-      <el-table-column label="邮件主题" align="center" prop="subject" />
-      <el-table-column label="邮件内容" align="center" prop="content">
-        <template slot-scope="scope">
-          <el-popover placement="top-start" width="300" trigger="hover" v-if="scope.row.content && scope.row.content.length > 20">
-            <div style="padding: 10px; height: 400px; overflow: auto;">
-              {{ scope.row.content }}
-            </div>
-            <span slot="reference">{{scope.row.content.substring(0, 20) + '...' }}</span>
-          </el-popover>
-          <span v-else>{{ scope.row.content }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="发送时间" align="center" prop="sendDate" width="155"/>
+      <el-table-column label="短信内容" align="center" prop="content" />
+      <el-table-column label="发送时间" align="center" prop="sendDate" width="155" />
+      <el-table-column label="发送日志" align="center" prop="sendLog" />
       <el-table-column label="状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_common_status" :value="scope.row.status"/>
@@ -92,14 +72,14 @@
             type="text"
             icon="el-icon-view"
             @click="handleUpdate(scope.row, true)"
-            v-hasPermi="['monitor:emaillog:query']"
+            v-hasPermi="['monitor:smslog:edit']"
           >详情</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['monitor:emaillog:remove']"
+            v-hasPermi="['monitor:smslog:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -113,19 +93,19 @@
       @pagination="getList"
     />
     
-    <!-- 添加或修改邮件日志对话框 -->
+    <!-- 添加或修改短信日志对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
-      <detail :key="nanoid()" :emailId="emailId" :disabled="disabled"  @closeWindow="closeFlowWin" />
+      <detail :key="nanoid()" :smsId="smsId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { listEmaillog, delEmaillog } from "@/api/monitor/emaillog"
+import { listSmslog, delSmslog } from "@/api/monitor/smslog"
 import Detail from "./detail"
 
 export default {
-  name: "Emaillog",
+  name: "Smslog",
   components: {
     "detail": Detail
   },
@@ -144,8 +124,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 邮件日志表格数据
-      emaillogList: [],
+      // 短信日志表格数据
+      smslogList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -157,13 +137,11 @@ export default {
         pageNum: 1,
         pageSize: 10,
         sendTo: null,
-        sendCc: null,
-        sendBcc: null,
-        subject: null,
         content: null,
         sendDate: null,
+        sendLog: null,
       },
-      emailId: 0,
+      smsId: 0,
       disabled: false
     };
   },
@@ -178,8 +156,8 @@ export default {
         this.queryParams.params["beginSendDate"] = this.daterangeSendDate[0] + " 00:00:00";
         this.queryParams.params["endSendDate"] = this.daterangeSendDate[1] + " 23:59:59";
       }
-      listEmaillog(this.queryParams).then(response => {
-        this.emaillogList = response.rows;
+      listSmslog(this.queryParams).then(response => {
+        this.smslogList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -194,30 +172,30 @@ export default {
       this.handleQuery();
     },
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.emailId)
+      this.ids = selection.map(item => item.smsId)
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
     handleAdd() {
       this.open = true;
-      this.title = "添加邮件日志";
-      this.emailId = 0;
+      this.title = "添加短信日志";
+      this.smsId = 0;
       this.disabled = false;
     },
     handleUpdate(row, disabled) {
       this.disabled = disabled;
-      this.emailId = row.emailId;
+      this.smsId = row.smsId;
       if(this.disabled) {
-        this.title = "查看邮件日志";
+        this.title = "查看短信日志";
       } else {
-        this.title = "修改邮件日志";
+        this.title = "修改短信日志";
       }
       this.open = true;
     },
     handleDelete(row) {
-      const emailIds = row.emailId || this.ids;
+      const smsIds = row.smsId || this.ids;
       this.$modal.confirm('是否确认删除？').then(function() {
-        return delEmaillog(emailIds);
+        return delSmslog(smsIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -225,9 +203,9 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
-      this.download('system/emaillog/export', {
+      this.download('monitor/smslog/export', {
         ...this.queryParams
-      }, `emaillog_${new Date().getTime()}.xlsx`)
+      }, `smslog_${new Date().getTime()}.xlsx`)
     },
     closeFlowWin() {
       this.title = "";

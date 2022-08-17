@@ -59,5 +59,27 @@ public class SysEmailLogServiceImpl implements ISysEmailLogService
         return sysEmailLogMapper.insertSysEmailLog(sysEmailLog);
     }
 
-    
+    /**
+     * 批量删除邮件日志
+     * 
+     * @param emailIds 需要删除的邮件日志主键
+     * @return 结果
+     */
+    @Override
+    public int deleteSysEmailLogByEmailIds(Long[] emailIds)
+    {
+        return sysEmailLogMapper.deleteSysEmailLogByEmailIds(emailIds);
+    }
+
+    /**
+     * 删除邮件日志信息
+     * 
+     * @param emailId 邮件日志主键
+     * @return 结果
+     */
+    @Override
+    public int deleteSysEmailLogByEmailId(Long emailId)
+    {
+        return sysEmailLogMapper.deleteSysEmailLogByEmailId(emailId);
+    }
 }

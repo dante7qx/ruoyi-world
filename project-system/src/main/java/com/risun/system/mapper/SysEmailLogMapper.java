@@ -34,5 +34,21 @@ public interface SysEmailLogMapper
      * @return 结果
      */
     public int insertSysEmailLog(SysEmailLog sysEmailLog);
+    
+    /**
+     * 删除邮件日志
+     * 
+     * @param emailId 邮件日志主键
+     * @return 结果
+     */
+    public int deleteSysEmailLogByEmailId(Long emailId);
+
+    /**
+     * 批量删除邮件日志
+     * 
+     * @param emailIds 需要删除的数据主键集合
+     * @return 结果
+     */
+    public int deleteSysEmailLogByEmailIds(Long[] emailIds);
 
 }

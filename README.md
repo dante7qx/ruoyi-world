@@ -156,3 +156,13 @@ mail:
 ```
 
 - 邮件服务类 `EmailFactory`，测试类 `EmailFactoryTests`
+
+### 8. 短信服务
+
+框架自带短息服务，可用于发送短信。
+
+- 修改系统参数
+
+![sms](./image/sms.png)
+
+- 短信服务类 `SmsFactory`，测试类 `SmsFactoryTests`

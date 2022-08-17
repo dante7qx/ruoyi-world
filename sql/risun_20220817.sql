@@ -171,6 +171,7 @@ insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    't
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
 insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog', 'monitor/emaillog/index', '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list', 'email',    'admin', sysdate(), '', null, '邮件日志菜单');
+insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog', 'monitor/smslog/index', '', 1, 0, 'C', '0', '0', 'monitor:smslog:list', 'message',    'admin', sysdate(), '', null, '短信日志菜单');
 -- 用户管理按钮
 insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'admin', sysdate(), '', null, '');
@@ -226,6 +227,14 @@ insert into sys_menu values('1041', '日志导出', '500', '4', '#', '', '', 1, 
 insert into sys_menu values('1042', '登录查询', '501', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1043', '登录删除', '501', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1044', '日志导出', '501', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'admin', sysdate(), '', null, '');
+-- 邮件日志按钮
+insert into sys_menu values('1060', '邮件日志查询', '502', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:query',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1061', '邮件日志删除', '502', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:remove',  '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1062', '邮件日志导出', '502', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:export',  '#', 'admin', sysdate(), '', null, '');
+-- 短信日志按钮
+insert into sys_menu values('1063', '短信日志查询', '503', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1064', '短信日志删除', '503', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1065', '短信日志导出', '503', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'admin', sysdate(), '', null, '');
 -- 在线用户按钮
 insert into sys_menu values('1045', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1046', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
@@ -300,6 +309,7 @@ insert into sys_role_menu values ('2', '117');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');
 insert into sys_role_menu values ('2', '502');
+insert into sys_role_menu values ('2', '503');
 insert into sys_role_menu values ('2', '1000');
 insert into sys_role_menu values ('2', '1001');
 insert into sys_role_menu values ('2', '1002');
@@ -360,6 +370,12 @@ insert into sys_role_menu values ('2', '1056');
 insert into sys_role_menu values ('2', '1057');
 insert into sys_role_menu values ('2', '1058');
 insert into sys_role_menu values ('2', '1059');
+insert into sys_role_menu values ('2', '1060');
+insert into sys_role_menu values ('2', '1061');
+insert into sys_role_menu values ('2', '1062');
+insert into sys_role_menu values ('2', '1063');
+insert into sys_role_menu values ('2', '1064');
+insert into sys_role_menu values ('2', '1065');
 
 -- ----------------------------
 -- 8、角色和部门关联表  角色1-N部门
@@ -528,7 +544,7 @@ insert into sys_config values(2, '用户管理-账号初始密码',         'sys
 insert into sys_config values(3, '主框架页-侧边栏主题',           'sys.index.sideTheme',           'theme-dark',    'Y', 'admin', sysdate(), '', null, '深色主题theme-dark，浅色主题theme-light' );
 insert into sys_config values(4, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',          'Y', 'admin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
 insert into sys_config values(5, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         'Y', 'admin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
-insert into sys_config values(6, '短信发送标识码',               'sys.sms.sendFlag',      '123456',         'Y', 'admin', sysdate(), '', null, '短信发送标识（向领导申请）');
+insert into sys_config values(6, '短信发送标识码',               'sys.sms.sendModelID',           '123456',         'Y', 'admin', sysdate(), '', null, '短信发送标识（向领导申请）');
 
 
 -- ----------------------------
@@ -680,17 +696,35 @@ create table gen_table_column (
 -- ----------------------------
 drop table if exists sys_email_log;
 create table sys_email_log (
-  email_id          bigint(20)        not null auto_increment   comment '邮件id',
-  send_to           varchar(512)     default ''                 comment '接收人',
-  send_cc           varchar(512)     default ''                 comment '抄送人',
-  send_bcc          varchar(512)     default ''                 comment '密送人',
-  subject           varchar(256)     default ''                 comment '邮件主题',
-  content           varchar(4096)    default ''                 comment '邮件内容',
-  send_date         datetime                                    comment '发送时间',
-  send_log          varchar(1024)    default ''                 comment '发送日志',
+  email_id          bigint(20)        not null auto_increment  comment '邮件id',
+  send_to           varchar(512)     default ''                comment '接收人',
+  send_cc           varchar(512)     default ''                comment '抄送人',
+  send_bcc          varchar(512)     default ''                comment '密送人',
+  subject           varchar(256)     default ''                comment '邮件主题',
+  content           varchar(4096)    default ''                comment '邮件内容',
+  send_date         datetime                                   comment '发送时间',
+  send_log          varchar(1024)    default ''                comment '发送日志',
+  status            char(1)        default '0'                 comment '发送状态（0正常 1失败）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
   update_time       datetime                                   comment '更新时间',
   primary key (email_id)
 ) engine=innodb auto_increment=1 comment = '邮件日志表';
+
+-- 21、短信日志表
+-- ----------------------------
+drop table if exists sys_sms_log;
+create table sys_sms_log (
+  sms_id          bigint(20)        not null auto_increment    comment '短信id',
+  send_to           varchar(512)     default ''                comment '接收人',
+  content           varchar(4096)    default ''                comment '短信内容',
+  send_date         datetime                                   comment '发送时间',
+  send_log          varchar(1024)    default ''                comment '发送日志',
+  status            char(1)        default '0'                 comment '发送状态（0正常 1失败）',
+  create_by         varchar(64)     default ''                 comment '创建者',
+  create_time 	    datetime                                   comment '创建时间',
+  update_by         varchar(64)     default ''                 comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  primary key (sms_id)
+) engine=innodb auto_increment=1 comment = '短信日志表';

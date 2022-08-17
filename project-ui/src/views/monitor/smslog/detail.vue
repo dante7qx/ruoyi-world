@@ -1,25 +1,17 @@
 <template>
   <div>
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="接受人" prop="sendTo">
+      <el-form-item label="接收人" prop="sendTo">
         <el-input v-model="form.sendTo" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" :disabled="disabled"/>
       </el-form-item>
-      <el-form-item label="抄送人" prop="sendCc">
-        <el-input v-model="form.sendCc" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" :disabled="disabled"/>
-      </el-form-item>
-      <!--
-      <el-form-item label="密送人" prop="sendBcc">
-        <el-input v-model="form.sendBcc" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" :disabled="disabled"/>
-      </el-form-item>
-      -->
-      <el-form-item label="邮件主题" prop="subject">
-        <el-input v-model="form.subject" placeholder="请输入邮件主题" :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="邮件内容">
+      <el-form-item label="短信内容">
         <el-input v-model="form.content" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" resize="none" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="发送时间" prop="sendDate">
         <span v-html="form.sendDate" />
+      </el-form-item>
+      <el-form-item label="发送日志" prop="sendLog">
+        <el-input v-model="form.sendLog" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" placeholder="请输入内容" :disabled="disabled"/>
       </el-form-item>
 	</el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
@@ -30,12 +22,12 @@
 </template>
 
 <script>
-import { getEmaillog, addEmaillog, updateEmaillog } from "@/api/monitor/emaillog";
+import { getSmslog, addSmslog, updateSmslog } from "@/api/monitor/smslog";
 
 export default {
-  name: "EmaillogDetail",
+  name: "SmslogDetail",
   props: {
-    emailId: {
+    smsId: {
       type: Number,
       required: true,
       default: 0
@@ -59,21 +51,19 @@ export default {
   methods: {
     loadForm() {
       this.reset();
-      if(this.emailId > 0) {
-        getEmaillog(this.emailId).then(response => {
+      if(this.smsId > 0) {
+        getSmslog(this.smsId).then(response => {
           this.form = response.data;
         });
       }
     },
     reset() {
       this.form = {
-        emailId: null,
+        smsId: null,
         sendTo: null,
-        sendCc: null,
-        sendBcc: null,
-        subject: null,
         content: null,
         sendDate: null,
+        sendLog: null,
         createBy: null,
         createTime: null,
         updateBy: null,
@@ -84,13 +74,13 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.emailId != null) {
-            updateEmaillog(this.form).then(response => {
+          if (this.form.smsId != null) {
+            updateSmslog(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.cancel();
             });
           } else {
-            addEmaillog(this.form).then(response => {
+            addSmslog(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.cancel();
             });

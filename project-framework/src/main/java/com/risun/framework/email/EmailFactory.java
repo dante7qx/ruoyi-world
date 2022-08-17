@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
+import com.risun.common.constant.Constants;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.system.domain.SysEmailLog;
@@ -17,6 +18,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -29,7 +31,7 @@ import cn.hutool.core.util.ArrayUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 发送邮件工厂
+ * 邮件发送工厂
  * 
  * @author dante
  */
@@ -99,8 +101,26 @@ public class EmailFactory {
 		catch (Exception e) {
 			log.error("发送邮件时发生异常！【{}】- 【{}】", to, subject, e);
             sysEmailLog.setSendLog(e.getMessage());
+            sysEmailLog.setStatus(Constants.FAIL);
         }
 		sysEmailLogMapper.insertSysEmailLog(sysEmailLog);
+	}
+	
+	/**
+	 * 发送邮件（异步 - HTML 格式）
+	 * 
+	 * @param to
+	 * @param cc
+	 * @param bcc
+	 * @param subject
+	 * @param templatePath	    模板路径，模板位于 classpath:/template下，这里传递模板文件名称。例如: 模板文件 templates/sms/news.html，则传递 sms/news
+	 * @param dataMap	        模板数据
+	 * @param attachmentType	附件类型
+	 * @param attachments		附件（可传多个）
+	 */
+	@Async("threadPoolTaskExecutor")
+	public void sendMediaMailAsync(String to, String cc, String bcc, String subject, String templatePath, Map<String, Object> dataMap, String attachmentType, String... attachments) {
+		sendMediaMail(to, cc, bcc, subject, templatePath, dataMap, attachmentType, attachments);
 	}
 	
 	/**
@@ -202,8 +222,22 @@ public class EmailFactory {
         } catch (Exception e) {
             log.error("发送邮件时发生异常！【{}】- 【{}】", to, subject, e);
             sysEmailLog.setSendLog(e.getMessage());
+            sysEmailLog.setStatus(Constants.FAIL);
         }
 		sysEmailLogMapper.insertSysEmailLog(sysEmailLog);
+	}
+	
+	/**
+	 * 发送邮件 （异步）
+	 * 
+	 * @param to  接收人，不可为空，多个用逗号分割
+	 * @param cc  抄送人，可为空，多个用逗号分割
+	 * @param bcc  密送人，可为空，多个用逗号分割
+	 * @param subject  主题
+	 * @param content  内容
+	 */
+	public void sendSimpleMailAsync(String to, String cc, String bcc, String subject, String content) {
+		sendSimpleMail(to, cc, bcc, subject, content);
 	}
 
 	/**
@@ -279,6 +313,7 @@ public class EmailFactory {
 		log.setContent(content);
 		log.setSendDate(DateUtils.getNowDate());
 		log.setSendLog(sendlog);
+		log.setStatus(Constants.SUCCESS);
 		try {
 			log.setCreateBy(SecurityUtils.getUsername());
 		} catch (Exception e) {
