@@ -1,5 +1,12 @@
 package com.risun.framework.config;
 
+import com.risun.common.constant.Constants;
+import com.risun.common.utils.sign.RisunRASPasswordEncoder;
+import com.risun.framework.config.properties.PermitAllUrlProperties;
+import com.risun.framework.security.filter.JwtAuthenticationTokenFilter;
+import com.risun.framework.security.handle.AuthenticationEntryPointImpl;
+import com.risun.framework.security.handle.LogoutSuccessHandlerImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -11,16 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
-
-import com.risun.common.constant.Constants;
-import com.risun.framework.config.properties.PermitAllUrlProperties;
-import com.risun.framework.security.filter.JwtAuthenticationTokenFilter;
-import com.risun.framework.security.handle.AuthenticationEntryPointImpl;
-import com.risun.framework.security.handle.LogoutSuccessHandlerImpl;
 
 /**
  * spring security配置
@@ -111,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/register", "/captchaImage").anonymous()
+                .antMatchers("/login", "/register", "/captchaImage", "/sendLoginSmsCode/**").anonymous()
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", Constants.RESOURCE_PREFIX + "/**").permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
@@ -131,10 +131,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     /**
      * 强散列哈希加密实现
      */
+    /**
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder()
     {
         return new BCryptPasswordEncoder();
+    }
+    */
+    
+    @Bean
+    public RisunRASPasswordEncoder risunRASPasswordEncoder() {
+    	return new RisunRASPasswordEncoder();
     }
 
     /**
@@ -143,6 +150,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(risunRASPasswordEncoder());
     }
 }

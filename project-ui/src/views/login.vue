@@ -1,44 +1,86 @@
 <template>
   <div class="login">
+    
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">睿阳Java开发框架</h3>
-      <el-form-item prop="username">
+      <el-tabs v-model="loginType" @tab-click="switchLoginType" v-if="smsEnabled">
+        <el-tab-pane label="账号密码登录" name="uname"></el-tab-pane>
+        <el-tab-pane label="短信验证码登录" name="sms"></el-tab-pane>
+      </el-tabs>
+      <div v-if="loginType === 'uname'">
+        <el-form-item prop="username">
+          <el-input
+            v-model="loginForm.username"
+            type="text"
+            auto-complete="off"
+            autofocus
+            ref="username"
+            placeholder="账号"
+          >
+            <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            v-model="loginForm.password"
+            type="password"
+            auto-complete="off"
+            placeholder="密码"
+            @keyup.enter.native="handleLogin"
+          >
+            <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="code" v-if="captchaEnabled">
+          <el-input
+            v-model="loginForm.code"
+            auto-complete="off"
+            placeholder="验证码"
+            style="width: 63%"
+            @keyup.enter.native="handleLogin"
+          >
+            <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+          </el-input>
+          <div class="login-code">
+            <img :src="codeUrl" @click="getCode" class="login-code-img"/>
+          </div>
+        </el-form-item>
+        <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      </div>
+      <div v-if="loginType === 'sms'">
+        <el-form-item prop="userPhone">
+          <el-input
+            v-model="loginForm.userPhone"
+            type="text"
+            auto-complete="off"
+            ref="userPhone"
+            placeholder="手机号"
+          >
+            <svg-icon slot="prefix" icon-class="phone" class="el-input__icon input-icon" />
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="smsCode" style="margin:0px 0px 25px 0px;">
         <el-input
-          v-model="loginForm.username"
-          type="text"
-          auto-complete="off"
-          autofocus
-          placeholder="账号"
-        >
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
-          v-model="loginForm.password"
-          type="password"
-          auto-complete="off"
-          placeholder="密码"
-          @keyup.enter.native="handleLogin"
-        >
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="code" v-if="captchaEnabled">
-        <el-input
-          v-model="loginForm.code"
-          auto-complete="off"
-          placeholder="验证码"
-          style="width: 63%"
-          @keyup.enter.native="handleLogin"
-        >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
-        </el-input>
-        <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
-        </div>
-      </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+            v-model="loginForm.smsCode"
+            type="text"
+            auto-complete="off"
+            placeholder="验证码"
+          >
+            <svg-icon slot="prefix" icon-class="message" class="el-input__icon input-icon" />
+            <template slot="append">
+              <countdown :key="smsCodeDuration" :end-time="smsCodeDuration">
+                <template
+                  v-slot:process="anyYouWantedScopName">
+                    <span>{{ `${anyYouWantedScopName.timeObj.ceil.s} 秒` }}</span>
+                  </template>
+                <template v-slot:finish>
+                    <span @click="sendSmsCode" style="cursor: pointer;">发送验证码</span>
+                </template>
+              </countdown>
+            </template>
+          </el-input>
+        </el-form-item>
+      </div>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -63,37 +105,46 @@
 </template>
 
 <script>
-import { getCodeImg } from "@/api/login";
-import Cookies from "js-cookie";
+import { getCodeImg, getSmsCode } from "@/api/login"
+import Cookies from "js-cookie"
 import { encrypt, decrypt } from '@/utils/jsencrypt'
+import { validPhoneNumber } from "@/utils/validate"
 
 export default {
   name: "Login",
   data() {
+    
     return {
+      loginType: "uname",
       codeUrl: "",
       loginForm: {
         username: "",
         password: "",
         rememberMe: false,
         code: "",
+        userPhone: "",
+        smsCode: "",
+        loginType: "",
         uuid: ""
       },
       loginRules: {
         username: [
-          { required: true, trigger: "blur", message: "请输入您的账号" }
-        ],
-        password: [
-          { required: true, trigger: "blur", message: "请输入您的密码" }
-        ],
-        code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+            { required: true, trigger: "blur", message: "请输入您的账号" }
+          ],
+          password: [
+            { required: true, trigger: "blur", message: "请输入您的密码" }
+          ],
+          code: [{ required: true, trigger: "change", message: "请输入验证码" }]
       },
       loading: false,
       // 验证码开关
       captchaEnabled: true,
       // 注册开关
       register: false,
-      redirect: undefined
+      redirect: undefined,
+      // 短信开关
+      smsEnabled: true, 
+      smsCodeDuration: null
     };
   },
   watch: {
@@ -128,21 +179,39 @@ export default {
         rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
       };
     },
+    sendSmsCode() {
+      this.$refs.loginForm.validateField('userPhone', err => {
+          if(!err) {
+            getSmsCode(this.loginForm.userPhone).then(res => {
+              this.$modal.msgSuccess("验证码发送成功，请在2分钟内完成验证！");
+              this.smsCodeDuration = new Date().getTime() + 120000
+            })
+          }
+      })
+    },
+    handleUsernameLogin() {
+      if (this.loginForm.rememberMe) {
+        Cookies.set("username", this.loginForm.username, { expires: 30 });
+        Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
+        Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
+      } else {
+        Cookies.remove("username");
+        Cookies.remove("password");
+        Cookies.remove('rememberMe');
+      }
+    },
+    handleSmsLogin() {},
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          this.loginForm.loginType = this.loginType
           this.loading = true;
-          if (this.loginForm.rememberMe) {
-            Cookies.set("username", this.loginForm.username, { expires: 30 });
-            Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
-            Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
-          } else {
-            Cookies.remove("username");
-            Cookies.remove("password");
-            Cookies.remove('rememberMe');
+          if(this.loginType == "uname") {
+            this.handleUsernameLogin()
+          } else if(this.loginType == "sms") {
+            this.handleSmsLogin()
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
-            // this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
             const uri = this.redirect && this.redirect != '/' ? this.redirect : "/index";
             this.$router.push({path: uri}).catch(() => {});
           }).catch(() => {
@@ -153,7 +222,45 @@ export default {
           });
         }
       });
-    }
+    },
+    switchLoginType(tab, event) {
+      let that = this
+      this.loginType = tab.name
+      this.$refs.loginForm.clearValidate()
+      if(this.loginType == 'uname') {
+        this.loginRules = {
+          username: [
+            { required: true, trigger: "blur", message: "请输入您的账号" }
+          ],
+          password: [
+            { required: true, trigger: "blur", message: "请输入您的密码" }
+          ],
+          code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+        }
+        setTimeout(()=>{ that.$refs['username'].focus() }, 1)
+      } else if(this.loginType == 'sms') {
+        const checkUserPhone = (rule, value, callback) => {
+            if (!value) {
+              return callback(new Error('手机号不能为空'));
+            }
+            if (validPhoneNumber(value)) {
+              callback()
+            } else {
+              callback(new Error('请输入正确的手机号'));
+            }
+        };
+        this.loginRules = {
+          userPhone: [
+            { required: true, trigger: "blur", message: "请输入您的手机号" },
+            { validator: checkUserPhone, trigger: 'blur' }
+          ],
+          smsCode: [
+            { required: true, trigger: "blur", message: "请输入您的验证码" }
+          ]
+        }
+        setTimeout(()=>{ that.$refs['userPhone'].focus() }, 1)
+      }
+    },
   }
 };
 </script>

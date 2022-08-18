@@ -28,6 +28,16 @@ public class Constants
      * https请求
      */
     public static final String HTTPS = "https://";
+    
+    /**
+     * 通用删除标识
+     */
+    public static final String DEL_FLAG = "1";
+    
+    /**
+     * 通用停用标识
+     */
+    public static final String LOCK_FLAG = "1";
 
     /**
      * 通用成功标识

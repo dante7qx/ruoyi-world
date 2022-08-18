@@ -1,9 +1,10 @@
 package com.risun.system.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 import com.risun.common.core.domain.entity.SysUser;
+
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户表 数据层
@@ -51,6 +52,14 @@ public interface SysUserMapper
      * @return 用户对象信息
      */
     public SysUser selectUserById(Long userId);
+    
+    /**
+     * 通过用户phonenumber查询用户
+     * 
+     * @param phonenumber
+     * @return
+     */
+    public SysUser selectUserByPhonenumber(String phonenumber);
 
     /**
      * 新增用户信息
@@ -125,4 +134,5 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+    
 }

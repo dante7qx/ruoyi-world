@@ -1,15 +1,13 @@
 import request from '@/utils/request'
+import { encrypt } from '@/utils/jsencrypt'
 
 // 登录方法
-export function login(username, password, code, uuid, userPhone, smsCode, loginType) {
+export function login(username, password, code, uuid) {
   const data = {
     username,
-    password,
+    password: encrypt(password),
     code,
-    uuid,
-    userPhone,
-    smsCode,
-    loginType
+    uuid
   }
   return request({
     url: '/login',
@@ -57,15 +55,6 @@ export function getCodeImg() {
       isToken: false
     },
     method: 'get',
-    timeout: 20000
-  })
-}
-
-// 获取短信验证码
-export function getSmsCode(userPhone) {
-  return request({
-    url: '/sendLoginSmsCode/' + userPhone,
-    method: 'post',
     timeout: 20000
   })
 }

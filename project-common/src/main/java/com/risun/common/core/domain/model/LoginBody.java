@@ -5,65 +5,101 @@ package com.risun.common.core.domain.model;
  * 
  * @author ruoyi
  */
-public class LoginBody
-{
-    /**
-     * 用户名
-     */
-    private String username;
+public class LoginBody {
+	/** 账号密码登录 */
+	public static final String LOGIN_UNAME = "uname";
+	/** 短信登录 */
+	public static final String LOGIN_SMS = "sms";
 
-    /**
-     * 用户密码
-     */
-    private String password;
+	/**
+	 * 用户名
+	 */
+	private String username;
 
-    /**
-     * 验证码
-     */
-    private String code;
+	/**
+	 * 用户密码
+	 */
+	private String password;
 
-    /**
-     * 唯一标识
-     */
-    private String uuid;
+	/**
+	 * 验证码
+	 */
+	private String code;
 
-    public String getUsername()
-    {
-        return username;
-    }
+	/**
+	 * 唯一标识
+	 */
+	private String uuid;
 
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
+	/**
+	 * 用户手机号
+	 */
+	private String userPhone;
 
-    public String getPassword()
-    {
-        return password;
-    }
+	/**
+	 * 手机验证码
+	 */
+	private String smsCode;
 
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
+	/**
+	 * 登录方式
+	 */
+	private String loginType;
 
-    public String getCode()
-    {
-        return code;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setCode(String code)
-    {
-        this.code = code;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getUuid()
-    {
-        return uuid;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setUuid(String uuid)
-    {
-        this.uuid = uuid;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getSmsCode() {
+		return smsCode;
+	}
+
+	public void setSmsCode(String smsCode) {
+		this.smsCode = smsCode;
+	}
+
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
 }

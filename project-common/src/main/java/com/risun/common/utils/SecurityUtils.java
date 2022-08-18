@@ -1,12 +1,12 @@
 package com.risun.common.utils;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.risun.common.constant.HttpStatus;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.exception.ServiceException;
+import com.risun.common.utils.sign.RisunRASPasswordEncoder;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * 安全服务工具类
@@ -84,14 +84,14 @@ public class SecurityUtils
     }
 
     /**
-     * 生成BCryptPasswordEncoder密码
+     * 生成RisunRASPasswordEncoder密码
      *
      * @param password 密码
      * @return 加密字符串
      */
     public static String encryptPassword(String password)
     {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        RisunRASPasswordEncoder passwordEncoder = new RisunRASPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 
@@ -104,7 +104,7 @@ public class SecurityUtils
      */
     public static boolean matchesPassword(String rawPassword, String encodedPassword)
     {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	RisunRASPasswordEncoder passwordEncoder = new RisunRASPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 

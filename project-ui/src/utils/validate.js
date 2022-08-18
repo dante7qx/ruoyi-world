@@ -24,6 +24,11 @@ export function validURL(url) {
   return reg.test(url)
 }
 
+export function validPhoneNumber(phoneNumber) {
+  const reg = /^1[3456789]\d{9}$/
+  return reg.test(phoneNumber)
+}
+
 /**
  * @param {string} str
  * @returns {Boolean}

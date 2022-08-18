@@ -20,6 +20,7 @@ import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/risun";
 import { nanoid } from 'nanoid';
+import vueAwesomeCountdown from 'vue-awesome-countdown'
 
 // 分页组件
 import Pagination from "@/components/Pagination";
@@ -65,6 +66,7 @@ Vue.component('ImagePreview', ImagePreview)
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
+Vue.use(vueAwesomeCountdown, 'vac')
 DictData.install()
 
 // 模态框点击空白不消失

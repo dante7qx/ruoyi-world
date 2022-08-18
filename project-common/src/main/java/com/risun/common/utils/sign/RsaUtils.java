@@ -14,6 +14,13 @@ import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
 
 public class RsaUtils {
+	
+	// Rsa 公钥
+	public static String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCcCMq56AI4zdkfXMmL71FJY1rP"
+			+ "+0JYOzoJc8QyMcT0biimOMeHsz6uPXAT4pInJ4cQdTl3d9voaMLrKhtNb6l2ZdqW"
+			+ "0Owow9SRLtuG9OT392y01szN2GyHJENDTOa7+0l9t5yUxiLpNYGWX/uI67NVxZ1F"
+			+ "Co7/oXnhOX++PdbUnQIDAQAB";
+	
 	// Rsa 私钥
 	public static String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJwIyrnoAjjN2R9c"
 			+ "yYvvUUljWs/7Qlg7OglzxDIxxPRuKKY4x4ezPq49cBPikicnhxB1OXd32+howusq"
@@ -37,8 +44,13 @@ public class RsaUtils {
 	 * @param text             待解密的文本
 	 * @return 解密后的文本
 	 */
-	public static String decryptByPrivateKey(String text) throws Exception {
-		return decryptByPrivateKey(privateKey, text);
+	public static String decryptByPrivateKey(String text) {
+		try {
+			return decryptByPrivateKey(privateKey, text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -90,6 +102,22 @@ public class RsaUtils {
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 		byte[] result = cipher.doFinal(Base64.decode(text));
 		return new String(result);
+	}
+	
+	/**
+	 * 公钥加密
+	 * 
+	 * @param text
+	 * @return
+	 * @throws Exception
+	 */
+	public static String encryptByPublicKey(String text) {
+		try {
+			return encryptByPublicKey(publicKey, text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
