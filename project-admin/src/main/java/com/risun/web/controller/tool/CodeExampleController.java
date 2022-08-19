@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tool/codeexample")
 public class CodeExampleController extends BaseController {
 	
-	private static final Map<String, Object> cacheMap = Maps.newHashMap();
+	private static final Map<String, Object> CACHE_MAP = Maps.newHashMap();
 	
 	/**
 	 * 模拟查询数据，获取详情信息
@@ -33,7 +33,7 @@ public class CodeExampleController extends BaseController {
 	 */
 	@GetMapping("/key/{key}")
 	public AjaxResult loadData(@PathVariable String key) {
-		return AjaxResult.success(cacheMap.get(key));
+		return AjaxResult.success(CACHE_MAP.get(key));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CodeExampleController extends BaseController {
 	 */
 	@PostMapping("/submit")
 	public AjaxResult submit(@RequestBody Map<String, Object> formData) {
-		cacheMap.put(formData.get("key").toString(), formData);
+		CACHE_MAP.put(formData.get("key").toString(), formData);
 		return AjaxResult.success();
 	}
 	
