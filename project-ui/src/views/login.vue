@@ -142,7 +142,7 @@ export default {
       // 注册开关
       register: false,
       redirect: undefined,
-      // 短信开关
+      // 短信开关（若只需要账号登录，将smsEnabled设为false即可，其他不需要修改）
       smsEnabled: true, 
       smsCodeDuration: null
     };
