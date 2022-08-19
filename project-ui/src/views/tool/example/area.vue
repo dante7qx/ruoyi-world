@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>地区选择 - views/tool/area.vue</h2>
+		<h2>地区选择 - views/tool/example/area.vue</h2>
 		<el-form ref="form" :model="form" :rules="rules" label-width="80px">
 			<el-form-item label="地区" prop="areaData">
 				<el-cascader
@@ -22,7 +22,7 @@
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="submitCascade">提交</el-button>
-				<el-button>取消</el-button>
+				<el-button type="success" @click="loadData">加载列表</el-button>
 			</el-form-item>
 		</el-form>
 		<el-row>
@@ -65,6 +65,7 @@ export default {
 			this.areaOptions = getAreaData()
 		},
 		loadData() {
+			this.tableList = []
 			getDataDetail(this.form.key).then(res => {
 				if(res.data) {
 					this.form = res.data
