@@ -25,6 +25,13 @@
 				<el-button>取消</el-button>
 			</el-form-item>
 		</el-form>
+		<el-row>
+			<el-table :data="tableList" style="width: 500px">
+				<el-table-column type="index" label="序号" width="55" align="center" />
+      	<el-table-column prop="key" label="键值" width="100" />
+				<el-table-column prop="areaData" label="地区" />
+			</el-table>
+		</el-row>
 	</div>
 </template>
 
@@ -37,6 +44,7 @@ export default {
 	data() {
 		return {
 			areaOptions: null,
+			tableList: [],
 			form: {
 				key: 'AreaSel',
 				areaData: null,
@@ -62,6 +70,7 @@ export default {
 					this.form = res.data
 					// 将数据库中地区字符串转化为数组
 					this.form.areaData = this.form.areaData ? this.form.areaData.split(',') : null
+					this.tableList.push(this.form)
 				}
 			})
 		},
