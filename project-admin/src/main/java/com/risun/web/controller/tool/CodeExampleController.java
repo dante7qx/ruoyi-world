@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tool/codeexample")
 public class CodeExampleController extends BaseController {
 	
-	private static final Map<String, Object> CACHE_MAP = Maps.newHashMap();
+	private static final Map<String, Object> CACHE_MAP = Maps.newConcurrentMap();
 	
 	/**
 	 * 模拟查询数据，获取详情信息
