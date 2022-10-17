@@ -166,3 +166,13 @@ mail:
 ![sms](./image/sms.png)
 
 - 短信服务类 `SmsFactory`，测试类 `SmsFactoryTests`
+
+### 9. 业务附件
+
+框架对附件上传功能进行了增强，新增附件表`sys_attachment`。使用时需要传递业务模块`bizModel`。
+
+```vue
+<!-- 业务模块名可以设置为业务模块的domain -->
+<file-upload v-model="form.attachment" :bizModel="'<业务模块名>'" :disabled="disabled"/>
+```
+
