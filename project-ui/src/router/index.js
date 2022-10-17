@@ -92,6 +92,11 @@ export const constantRoutes = [
 		path: "/word-preview",
 		component: () => import('@/components/WordPreview/index'),
 		hidden: true
+	},
+  {
+		path: "/excel-preview",
+		component: () => import('@/components/ExcelPreview/index'),
+		hidden: true
 	}
 ]
 

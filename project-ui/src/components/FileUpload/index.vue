@@ -243,15 +243,12 @@ export default {
       if (fileUrl.lastIndexOf(".") > -1) {
         fileExtension = fileUrl.slice(fileUrl.lastIndexOf(".") + 1);
       }
-      if(['doc','xls','ppt','pptx','xlsx'].indexOf(fileExtension) >= 0) {
+      if(['doc','xls','ppt','pptx'].indexOf(fileExtension) >= 0) {
         this.$modal.msgWarning(fileExtension+'格式的文件不支持在线预览，请您下载后进行查看！');
       } else if(fileExtension == 'docx') {
-        const fileName = this.getFileName(fileUrl)
-        let routeUrl = this.$router.resolve({
-          path: "/word-preview",
-          query: {fileUrl: fileUrl, fileName: fileName}
-        });
-        window.open(routeUrl.href)
+        this.previewOfficeX("/word-preview", fileUrl)
+      } else if(fileExtension == 'xlsx') {
+        this.previewOfficeX("/excel-preview", fileUrl)
       } else {
         window.open(this.baseUrl + fileUrl)
       }
@@ -261,6 +258,14 @@ export default {
         this.fileDetail = [res.data]
       })
     },
+    previewOfficeX(routerPath, fileUrl) {
+      const fileName = this.getFileName(fileUrl)
+      let routeUrl = this.$router.resolve({
+        path: routerPath,
+        query: {fileUrl: fileUrl, fileName: fileName}
+      });
+      window.open(routeUrl.href)
+    }
   }
 };
 </script>

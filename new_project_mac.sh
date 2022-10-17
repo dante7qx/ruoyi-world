@@ -23,7 +23,9 @@ createNewProject() {
         sed -i '' "s/${curProjectCN}/${projectCN}/g" $cnfile
     done
     
-    sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RuoYiApplication.java
+    sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RisunApplication.java
+    echo "修改常量 Common 下 Constants.java"
+    sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
 
     ## 重命名目录
     echo "3. 重命名目录"
@@ -33,8 +35,7 @@ createNewProject() {
         mv ${pdir} ${projectName}${pdir#*${curProject}}
     done
     
-    echo "4. 修改常量 Common 下 Constants.java"
-    sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
+    
     
     
     ## 删除git相关
