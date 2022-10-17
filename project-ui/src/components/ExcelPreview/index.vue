@@ -51,7 +51,6 @@ export default {
         return;
       }
       LuckyExcel.transformExcelToLuckyByUrl(this.baseUrl + fileUrl, fileName,function (exportJson, luckysheetfile) {
-        console.log(exportJson)
         if (exportJson.sheets == null || exportJson.sheets.length == 0) {
           that.$modal.msgWarning("暂不适配xls文件，请下载后查看");
           return;
@@ -70,12 +69,12 @@ export default {
             enableAddRow: false, // 允许增加行
             enableAddCol: false, // 允许增加列
             userInfo: false, // 右上角的用户信息展示样式
-            showRowBar: false, // 是否显示行号区域
-            showColumnBar: false, // 是否显示列号区域
+            showRowBar: true, // 是否显示行号区域
+            showColumnBar: true, // 是否显示列号区域
             sheetFormulaBar: false, // 是否显示公式栏
-            enableAddBackTop: false,//返回头部按钮
-            rowHeaderWidth: 0,//纵坐标
-            columnHeaderHeight: 0,//横坐标
+            enableAddBackTop: true,//返回头部按钮
+            rowHeaderWidth: 30,//纵坐标
+            columnHeaderHeight: 30,//横坐标
             showstatisticBarConfig: {
               count:false,
               view:false,
