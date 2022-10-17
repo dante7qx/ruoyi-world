@@ -29,11 +29,21 @@
     <!-- 文件列表 -->
     <transition-group class="upload-file-list el-upload-list el-upload-list--text" name="el-fade-in-linear" tag="ul">
       <li :key="file.url" class="el-upload-list__item ele-upload-list__item-content" v-for="(file, index) in fileList">
+        <!--
         <el-link :href="`${baseUrl}${file.url}`" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
-        <div class="ele-upload-list__item-content-action" v-if="!disabled">
-          <el-link :underline="false" @click="handleDelete(index)" type="danger">删除</el-link>
+        -->
+        <el-link @click="filePreview(file.url)" :underline="false" target="_blank">
+          <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
+        </el-link>
+        <div class="ele-upload-list__item-content-action" >
+          <el-tooltip class="item" effect="dark" content="下载" placement="top">
+            <el-link :underline="false" @click="fileDownload(file.url, file.name)" type="success"><i class="el-icon-download"></i></el-link>
+          </el-tooltip>
+          <el-tooltip class="item" effect="dark" content="删除" placement="top">
+            <el-link :underline="false" @click="handleDelete(index)" type="danger" v-if="!disabled" title="删除"><i class="el-icon-delete"></i></el-link>
+          </el-tooltip>
         </div>
       </li>
     </transition-group>
@@ -42,6 +52,9 @@
 
 <script>
 import { getToken } from "@/utils/auth";
+import { getAttachmentByUrl } from "@/api/system/attachment"
+import axios from "axios"
+require("docx-preview")
 
 export default {
   name: "FileUpload",
@@ -61,7 +74,7 @@ export default {
     // 文件类型, 例如['png', 'jpg', 'jpeg']
     fileType: {
       type: Array,
-      default: () => ["doc", "docs", "xls", "xlsx", "ppt", "ppx", "txt", "pdf"],
+      default: () => ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf", "jpg", "jpeg", "bmp", "png"],
     },
     // 是否显示提示
     isShowTip: {
@@ -72,18 +85,23 @@ export default {
       type: Boolean,
       default: false
     },
+    bizModel: {
+      type: String,
+      required: true
+    },
   },
   data() {
     return {
       number: 0,
       uploadList: [],
       baseUrl: process.env.VUE_APP_BASE_API,
-      uploadFileUrl: process.env.VUE_APP_BASE_API + "/common/upload", // 上传的图片服务器地址
+      uploadFileUrl: process.env.VUE_APP_BASE_API + "/common/upload/" + this.bizModel, // 上传的图片服务器地址
       headers: {
         Authorization: "Bearer " + getToken(),
       },
       fileList: [],
-    };
+      fileDetail: [],
+    }
   },
   watch: {
     value: {
@@ -135,6 +153,11 @@ export default {
           return false;
         }
       }
+      // 校验文件名是否含有非法字符
+      if(file.name.indexOf(",") >= 0) {
+        this.$modal.msgError(`文件名含有非法字符 , `);
+        return false;
+      }
       // 校检文件大小
       if (this.fileSize) {
         const isLt = file.size / 1024 / 1024 < this.fileSize;
@@ -142,6 +165,11 @@ export default {
           this.$modal.msgError(`上传文件大小不能超过 ${this.fileSize} MB!`);
           return false;
         }
+      }
+      // 校验业务模块必填
+      if(this.bizModel == null) {
+        this.$modal.msgError('业务模块不能为空！');
+        return false;
       }
       this.$modal.loading("正在上传文件，请稍候...");
       this.number++;
@@ -158,7 +186,8 @@ export default {
     },
     // 上传成功回调
     handleUploadSuccess(res) {
-      this.uploadList.push({ name: res.fileName, url: res.fileName });
+      const attachment = res.data
+      this.uploadList.push({ id: attachment.attachId, name: attachment.fileUrl, url: attachment.fileUrl });
       if (this.uploadList.length === this.number) {
         this.fileList = this.fileList.concat(this.uploadList);
         this.uploadList = [];
@@ -190,7 +219,48 @@ export default {
         strs += list[i].url + separator;
       }
       return strs != '' ? strs.substr(0, strs.length - 1) : '';
-    }
+    },
+    //文件下载
+    fileDownload(file, name) {
+      axios({
+        methods: "get",
+        responseType: "blob",
+        url: this.baseUrl + file,
+      }).then(res => {
+        let href = window.URL.createObjectURL(res.data); //创建下载的链接
+        let downloadElement = document.createElement('a');
+        downloadElement.href = href;
+        downloadElement.download = this.getFileName(name); //下载后文件名
+        document.body.appendChild(downloadElement);
+        downloadElement.click(); //点击下载
+        document.body.removeChild(downloadElement); //下载完成移除元素
+        window.URL.revokeObjectURL(href); //释放掉blob对象
+      })
+    },
+    // 文件预览
+    filePreview(fileUrl) {
+      let fileExtension = "";
+      if (fileUrl.lastIndexOf(".") > -1) {
+        fileExtension = fileUrl.slice(fileUrl.lastIndexOf(".") + 1);
+      }
+      if(['doc','xls','ppt','pptx','xlsx'].indexOf(fileExtension) >= 0) {
+        this.$modal.msgWarning(fileExtension+'格式的文件不支持在线预览，请您下载后进行查看！');
+      } else if(fileExtension == 'docx') {
+        const fileName = this.getFileName(fileUrl)
+        let routeUrl = this.$router.resolve({
+          path: "/word-preview",
+          query: {fileUrl: fileUrl, fileName: fileName}
+        });
+        window.open(routeUrl.href)
+      } else {
+        window.open(this.baseUrl + fileUrl)
+      }
+    },
+    loadFileDetail(fileUrl) {
+      getAttachmentByUrl({fileUrl: fileUrl}).then(res => {
+        this.fileDetail = [res.data]
+      })
+    },
   }
 };
 </script>

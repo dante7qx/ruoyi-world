@@ -2,19 +2,22 @@ package com.risun.common.utils.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.Objects;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
+import com.risun.common.exception.file.FileNameInvalidException;
 import com.risun.common.exception.file.FileNameLengthLimitExceededException;
 import com.risun.common.exception.file.FileSizeLimitExceededException;
 import com.risun.common.exception.file.InvalidExtensionException;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.uuid.Seq;
+
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文件上传工具类
@@ -37,6 +40,8 @@ public class FileUploadUtils
      * 默认上传的地址
      */
     private static String defaultBaseDir = RisunConfig.getProfile();
+    
+    private static final String FILE_DELIMETER = ",";
 
     public static void setDefaultBaseDir(String defaultBaseDir)
     {
@@ -101,11 +106,13 @@ public class FileUploadUtils
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
-            InvalidExtensionException
-    {
+            InvalidExtensionException  {
+    	if(file.getOriginalFilename().contains(FILE_DELIMETER)) {
+    		throw new FileNameInvalidException(FILE_DELIMETER);
+    	}
+    	
         int fileNamelength = Objects.requireNonNull(file.getOriginalFilename()).length();
-        if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH)
-        {
+        if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
             throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
         }
 
@@ -159,7 +166,7 @@ public class FileUploadUtils
     public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, InvalidExtensionException
     {
-        long size = file.getSize();
+    	long size = file.getSize();
         if (size > DEFAULT_MAX_SIZE)
         {
             throw new FileSizeLimitExceededException(DEFAULT_MAX_SIZE / 1024 / 1024);
@@ -229,5 +236,37 @@ public class FileUploadUtils
             extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
         }
         return extension;
+    }
+    
+    /**
+     * 将文件大小转换为字符串 1024 转换成1kB，1024*1024 转换为MB(保留2为小数)
+     * 
+     * @param fileSize
+     * @return
+     */
+    public static String convertFileSizeToStr(Long fileSize) {
+       if (fileSize <= 0) {
+          return "0B";
+       } else if (fileSize < 1024) {
+          return fileSize + "B";
+       } else if (fileSize < 1024 * 1024) {
+          float size = Float.parseFloat(String.valueOf(fileSize)) / 1024;
+          BigDecimal b = new BigDecimal(size);
+          // 2表示2位 ROUND_HALF_UP表明四舍五入，
+          size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+          return size + "KB";
+       } else if (fileSize < 1024 * 1024 * 1024) {
+          float size = Float.parseFloat(String.valueOf(fileSize)) / (1024 * 1024);
+          BigDecimal b = new BigDecimal(size);
+          // 2表示2位 ROUND_HALF_UP表明四舍五入，
+          size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+          return size + "MB";
+       } else {
+          float size = Float.parseFloat(String.valueOf(fileSize)) / (1024 * 1024 * 1024);
+          BigDecimal b = new BigDecimal(size);
+          // 2表示2位 ROUND_HALF_UP表明四舍五入，
+          size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+          return size + "GB";
+       }
     }
 }

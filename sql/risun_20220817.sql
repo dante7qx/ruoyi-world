@@ -157,7 +157,8 @@ insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       's
 insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'admin', sysdate(), '', null, '字典管理菜单');
 insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'admin', sysdate(), '', null, '参数设置菜单');
 insert into sys_menu values('107',  '通知公告', '1',   '8', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'message',       'admin', sysdate(), '', null, '通知公告菜单');
-insert into sys_menu values('108',  '日志管理', '1',   '9', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                        'log',           'admin', sysdate(), '', null, '日志管理菜单');
+insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index', '', 1, 0, 'C', '0', '0', 'system:attachment:list',   'upload',        'admin', sysdate(), '', null, '系统业务附件菜单');
+insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                       'log',           'admin', sysdate(), '', null, '日志管理菜单');
 insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'admin', sysdate(), '', null, '在线用户菜单');
 insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'admin', sysdate(), '', null, '定时任务菜单');
 insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'admin', sysdate(), '', null, '数据监控菜单');
@@ -173,6 +174,7 @@ insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'm
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
 insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog', 'monitor/emaillog/index', '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list', 'email',    'admin', sysdate(), '', null, '邮件日志菜单');
 insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog', 'monitor/smslog/index', '', 1, 0, 'C', '0', '0', 'monitor:smslog:list', 'message',    'admin', sysdate(), '', null, '短信日志菜单');
+
 -- 用户管理按钮
 insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'admin', sysdate(), '', null, '');
@@ -220,6 +222,9 @@ insert into sys_menu values('1035', '公告查询', '107', '1', '#', '', '', 1, 
 insert into sys_menu values('1036', '公告新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add',          '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1037', '公告修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit',         '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1038', '公告删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove',       '#', 'admin', sysdate(), '', null, '');
+-- 系统附件按钮
+insert into sys_menu values('1066', '系统附件查询', '119', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1067', '系统附件删除', '119', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'admin', sysdate(), '', null, '');
 -- 操作日志按钮
 insert into sys_menu values('1039', '操作查询', '500', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1040', '操作删除', '500', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'admin', sysdate(), '', null, '');
@@ -236,6 +241,8 @@ insert into sys_menu values('1062', '邮件日志导出', '502', '3', '#', '', '
 insert into sys_menu values('1063', '短信日志查询', '503', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1064', '短信日志删除', '503', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1065', '短信日志导出', '503', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'admin', sysdate(), '', null, '');
+
+
 -- 在线用户按钮
 insert into sys_menu values('1045', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1046', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
@@ -377,6 +384,8 @@ insert into sys_role_menu values ('2', '1062');
 insert into sys_role_menu values ('2', '1063');
 insert into sys_role_menu values ('2', '1064');
 insert into sys_role_menu values ('2', '1065');
+insert into sys_role_menu values ('2', '1066');
+insert into sys_role_menu values ('2', '1067');
 
 -- ----------------------------
 -- 8、角色和部门关联表  角色1-N部门
@@ -717,15 +726,32 @@ create table sys_email_log (
 -- ----------------------------
 drop table if exists sys_sms_log;
 create table sys_sms_log (
-  sms_id          bigint(20)        not null auto_increment    comment '短信id',
+  sms_id            bigint(20)       not null auto_increment   comment '短信id',
   send_to           varchar(512)     default ''                comment '接收人',
   content           varchar(4096)    default ''                comment '短信内容',
   send_date         datetime                                   comment '发送时间',
   send_log          varchar(1024)    default ''                comment '发送日志',
-  status            char(1)        default '0'                 comment '发送状态（0正常 1失败）',
-  create_by         varchar(64)     default ''                 comment '创建者',
+  status            char(1)          default '0'               comment '发送状态（0正常 1失败）',
+  create_by         varchar(64)      default ''                comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
-  update_by         varchar(64)     default ''                 comment '更新者',
+  update_by         varchar(64)      default ''                comment '更新者',
   update_time       datetime                                   comment '更新时间',
   primary key (sms_id)
 ) engine=innodb auto_increment=1 comment = '短信日志表';
+
+-- 22、业务附件表
+-- ----------------------------
+drop table if exists sys_attachment;
+create table sys_attachment (
+  attach_id     	bigint(20)       not null auto_increment   comment '附件id',
+  file_name         varchar(128)     default ''                comment '文件名称',
+  file_url          varchar(256)     default ''                comment '文件路径',
+  file_suffix		varchar(24)      default ''                comment '文件后缀',
+  file_size         varchar(128)     default ''                comment '文件大小',
+  biz_model         varchar(64)      default ''                comment '业务模块',
+  create_by         varchar(64)      default ''                comment '创建者',
+  create_time 	    datetime                                   comment '创建时间',
+  update_by         varchar(64)      default ''                comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  primary key (attach_id)
+) engine=innodb auto_increment=1 comment = '业务附件表';

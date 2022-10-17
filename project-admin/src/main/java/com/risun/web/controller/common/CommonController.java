@@ -2,17 +2,9 @@ package com.risun.web.controller.common;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
@@ -21,6 +13,19 @@ import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.file.FileUploadUtils;
 import com.risun.common.utils.file.FileUtils;
 import com.risun.framework.config.ServerConfig;
+import com.risun.system.service.ISysAttachmentService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 通用请求处理
@@ -35,6 +40,8 @@ public class CommonController
 
     @Autowired
     private ServerConfig serverConfig;
+    @Autowired
+    private ISysAttachmentService sysAttachmentService;
 
     private static final String FILE_DELIMETER = ",";
 
@@ -73,22 +80,13 @@ public class CommonController
     /**
      * 通用上传请求（单个）
      */
-    @PostMapping("/upload")
-    public AjaxResult uploadFile(MultipartFile file) throws Exception
-    {
-        try
-        {
+    @PostMapping("/upload/{bizModel}")
+    public AjaxResult uploadFile(MultipartFile file, @PathVariable String bizModel) throws Exception {
+    	Assert.isTrue(!bizModel.equals("_"), "业务模块不能为空！");
+        try {
             // 上传文件路径
             String filePath = RisunConfig.getUploadPath();
-            // 上传并返回新文件名称
-            String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
-            AjaxResult ajax = AjaxResult.success();
-            ajax.put("url", url);
-            ajax.put("fileName", fileName);
-            ajax.put("newFileName", FileUtils.getName(fileName));
-            ajax.put("originalFilename", file.getOriginalFilename());
-            return ajax;
+            return AjaxResult.success(sysAttachmentService.uploadSysAttachment(filePath, bizModel, file));
         }
         catch (Exception e)
         {
@@ -159,6 +157,32 @@ public class CommonController
         catch (Exception e)
         {
             log.error("下载文件失败", e);
+        }
+    }
+    
+    /**
+     * 通用上传请求（单个）
+     */
+    @PostMapping("/upload_only")
+    public AjaxResult uploadOnlyFile(MultipartFile file) throws Exception
+    {
+        try
+        {
+            // 上传文件路径
+            String filePath = RisunConfig.getUploadPath();
+            // 上传并返回新文件名称
+            String fileName = FileUploadUtils.upload(filePath, file);
+            String url = serverConfig.getUrl() + fileName;
+            AjaxResult ajax = AjaxResult.success();
+            ajax.put("url", url);
+            ajax.put("fileName", fileName);
+            ajax.put("newFileName", FileUtils.getName(fileName));
+            ajax.put("originalFilename", file.getOriginalFilename());
+            return ajax;
+        }
+        catch (Exception e)
+        {
+            return AjaxResult.error(e.getMessage());
         }
     }
 }
