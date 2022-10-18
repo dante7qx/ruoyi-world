@@ -476,6 +476,7 @@ insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0',
 insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
+insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'admin', sysdate(), '', null, '业务模块列表');
 
 
 -- ----------------------------
@@ -755,3 +756,46 @@ create table sys_attachment (
   update_time       datetime                                   comment '更新时间',
   primary key (attach_id)
 ) engine=innodb auto_increment=1 comment = '业务附件表';
+
+
+-- 23、信息发布表
+-- ----------------------------
+drop table if exists sys_info_publish;
+create table sys_info_publish (
+  info_id     		bigint(20)       not null auto_increment   comment '信息发布id',
+  title             varchar(128)     default ''                comment '标题',
+  content           varchar(256)     default ''                comment '内容',
+  type           	varchar(24)      default ''                comment '类型',
+  set_top			tinyint(1)       default 0                 comment '是否置顶',
+  anonymous			tinyint(1)       default 0                 comment '是否匿名访问',
+  publish_time 	    datetime                                   comment '发布时间',
+  status			varchar(10)		 default 'DTJ'		       comment '状态',
+  create_by         varchar(64)      default ''                comment '创建者',
+  create_time 	    datetime                                   comment '创建时间',
+  update_by         varchar(64)      default ''                comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  primary key (info_id)
+) engine=innodb auto_increment=1 comment = '信息发布表';
+
+-- 信息访问范围
+drop table if exists sys_info_access_range;
+create table sys_info_access_range ( 
+  id                bigint(20)      not null auto_increment   comment '访问范围id',
+  info_id     		bigint(20)      not null				  comment '信息发布id',
+  dept_id 			bigint(20)      not null				  comment '部门id',
+  primary key (id)
+) engine=innodb auto_increment=1 comment = '信息访问范围';
+
+-- 24、审批日志表
+drop table if exists sys_approval_log;
+create table sys_approval_log ( 
+  log_id            bigint(20)      not null auto_increment   comment '日志id',
+  biz_model			varchar(64)     default ''                comment '业务模块',
+  biz_id     		bigint(20)      not null				  comment '业务id',
+  comment 		    varchar(256)    default ''                comment '审批意见',
+  operate_type 	    varchar(24)     default ''                comment '操作类型',
+  operator          varchar(24)     default ''                comment '操作人',
+  operate_time 	    datetime                                  comment '操作时间',
+  
+  primary key (log_id)
+) engine=innodb auto_increment=1 comment = '审批日志表';

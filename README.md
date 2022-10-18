@@ -176,3 +176,15 @@ mail:
 <file-upload v-model="form.attachment" :bizModel="'<业务模块名>'" :disabled="disabled"/>
 ```
 
+### 10. 项目健康指数和客户活跃度感知
+
+框架添加项目健康指数和客户活跃度感知统一接口，用于检测已交付项目客户使用的活跃度。接口的实现类为 `SysMonitor4RisunController`，BaseURI 是 `/risun/monitor`，接口可匿名访问。
+
+BaseURI：`/risun/monitor`，请求方式：POST
+
+| 接口名                 | URI                                  | 参数                          | 状态                       |
+| ---------------------- | ------------------------------------ | ----------------------------- | -------------------------- |
+| 每日用户访问数         | /user_visit_count/{queryDate}        | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
+| 每日新用户新增数       | /user_increase_count/{queryDate}     | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
+| 每日核心业务数据新增数 | /business_increase_count/{queryDate} | 查询日期，格式必须为 yyyyMMdd | 未实现，需业务系统自行实现 |
+

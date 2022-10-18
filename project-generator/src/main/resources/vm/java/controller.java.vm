@@ -6,8 +6,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +83,7 @@ public class ${ClassName}Controller extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:add')")
     @Log(title = "${functionName}", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping("/insert")
     public AjaxResult add(@RequestBody ${ClassName} ${className})
     {
         return toAjax(${className}Service.insert${ClassName}(${className}));
@@ -96,7 +94,7 @@ public class ${ClassName}Controller extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:edit')")
     @Log(title = "${functionName}", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PostMapping("/update")
     public AjaxResult edit(@RequestBody ${ClassName} ${className})
     {
         return toAjax(${className}Service.update${ClassName}(${className}));
@@ -107,7 +105,7 @@ public class ${ClassName}Controller extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:remove')")
     @Log(title = "${functionName}", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{${pkColumn.javaField}s}")
+	@PostMapping("/del/{${pkColumn.javaField}s}")
     public AjaxResult remove(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s)
     {
         return toAjax(${className}Service.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s));

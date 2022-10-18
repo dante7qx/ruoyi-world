@@ -135,7 +135,7 @@
     
     <!-- 添加或修改业务对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
-      <detail :key="nanoid()" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
+      <detail :key="key" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>
 </template>
@@ -181,7 +181,8 @@ export default {
         attachment: null,
       },
       demoId: 0,
-      disabled: false
+      disabled: false,
+      key: ''
     };
   },
   created() {
@@ -220,6 +221,7 @@ export default {
       this.title = "添加业务";
       this.demoId = 0;
       this.disabled = false;
+      this.key = this.nanoid();
     },
     handleUpdate(row, disabled) {
       this.disabled = disabled;
@@ -230,6 +232,7 @@ export default {
         this.title = "修改业务";
       }
       this.open = true;
+      this.key = this.nanoid();
     },
     handleDelete(row) {
       const demoIds = row.demoId || this.ids;

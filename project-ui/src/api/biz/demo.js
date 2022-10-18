@@ -20,7 +20,7 @@ export function getDemo(demoId) {
 // 新增业务
 export function addDemo(data) {
   return request({
-    url: '/biz/demo',
+    url: '/biz/demo/insert',
     method: 'post',
     data: data
   })
@@ -29,8 +29,8 @@ export function addDemo(data) {
 // 修改业务
 export function updateDemo(data) {
   return request({
-    url: '/biz/demo',
-    method: 'put',
+    url: '/biz/demo/update',
+    method: 'post',
     data: data
   })
 }
@@ -38,7 +38,7 @@ export function updateDemo(data) {
 // 删除业务
 export function delDemo(demoId) {
   return request({
-    url: '/biz/demo/' + demoId,
-    method: 'delete'
+    url: '/biz/demo/del/' + demoId,
+    method: 'post'
   })
 }

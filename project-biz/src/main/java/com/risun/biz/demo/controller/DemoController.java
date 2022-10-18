@@ -1,31 +1,32 @@
 package com.risun.biz.demo.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.risun.biz.demo.domain.Demo;
+import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.Log;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.enums.BusinessType;
-import com.risun.biz.demo.domain.Demo;
-import com.risun.biz.demo.service.IDemoService;
-import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.common.core.page.TableDataInfo;
+import com.risun.common.enums.BusinessType;
+import com.risun.common.utils.poi.ExcelUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 业务Controller
  * 
  * @author sunchao
- * @date 2022-07-30
+ * @date 2022-10-18
  */
 @RestController
 @RequestMapping("/biz/demo")
@@ -74,7 +75,7 @@ public class DemoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('biz:demo:add')")
     @Log(title = "业务", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping("/insert")
     public AjaxResult add(@RequestBody Demo demo)
     {
         return toAjax(demoService.insertDemo(demo));
@@ -85,7 +86,7 @@ public class DemoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('biz:demo:edit')")
     @Log(title = "业务", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PostMapping("/update")
     public AjaxResult edit(@RequestBody Demo demo)
     {
         return toAjax(demoService.updateDemo(demo));
@@ -96,7 +97,7 @@ public class DemoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('biz:demo:remove')")
     @Log(title = "业务", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{demoIds}")
+	@PostMapping("/del/{demoIds}")
     public AjaxResult remove(@PathVariable Long[] demoIds)
     {
         return toAjax(demoService.deleteDemoByDemoIds(demoIds));

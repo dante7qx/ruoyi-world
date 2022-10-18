@@ -61,9 +61,10 @@ export default {
   methods: {
     loadForm() {
       this.reset();
+      alert(11)
       if(this.demoId > 0) {
         getDemo(this.demoId).then(response => {
-          this.form = response.data;
+          this.form = response.data ? response.data : {};
         });
       }
     },
@@ -86,7 +87,6 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.demoId != null) {
-            console.log(this.form)
             updateDemo(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.cancel();
