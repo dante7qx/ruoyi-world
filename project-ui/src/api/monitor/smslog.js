@@ -17,28 +17,10 @@ export function getSmslog(smsId) {
   })
 }
 
-// 新增短信日志
-export function addSmslog(data) {
-  return request({
-    url: '/monitor/smslog',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改短信日志
-export function updateSmslog(data) {
-  return request({
-    url: '/monitor/smslog',
-    method: 'put',
-    data: data
-  })
-}
-
 // 删除短信日志
 export function delSmslog(smsId) {
   return request({
-    url: '/monitor/smslog/' + smsId,
-    method: 'delete'
+    url: '/monitor/smslog/del/' + smsId,
+    method: 'post'
   })
 }

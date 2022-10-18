@@ -20,7 +20,7 @@ export function getRole(roleId) {
 // 新增角色
 export function addRole(data) {
   return request({
-    url: '/system/role',
+    url: '/system/role/insert',
     method: 'post',
     data: data
   })
@@ -29,8 +29,8 @@ export function addRole(data) {
 // 修改角色
 export function updateRole(data) {
   return request({
-    url: '/system/role',
-    method: 'put',
+    url: '/system/role/update',
+    method: 'post',
     data: data
   })
 }
@@ -39,7 +39,7 @@ export function updateRole(data) {
 export function dataScope(data) {
   return request({
     url: '/system/role/dataScope',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -52,7 +52,7 @@ export function changeRoleStatus(roleId, status) {
   }
   return request({
     url: '/system/role/changeStatus',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -60,8 +60,8 @@ export function changeRoleStatus(roleId, status) {
 // 删除角色
 export function delRole(roleId) {
   return request({
-    url: '/system/role/' + roleId,
-    method: 'delete'
+    url: '/system/role/del/' + roleId,
+    method: 'post'
   })
 }
 
@@ -87,7 +87,7 @@ export function unallocatedUserList(query) {
 export function authUserCancel(data) {
   return request({
     url: '/system/role/authUser/cancel',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -96,7 +96,7 @@ export function authUserCancel(data) {
 export function authUserCancelAll(data) {
   return request({
     url: '/system/role/authUser/cancelAll',
-    method: 'put',
+    method: 'post',
     params: data
   })
 }
@@ -105,7 +105,7 @@ export function authUserCancelAll(data) {
 export function authUserSelectAll(data) {
   return request({
     url: '/system/role/authUser/selectAll',
-    method: 'put',
+    method: 'post',
     params: data
   })
 }

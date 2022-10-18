@@ -15,7 +15,6 @@ import com.risun.system.service.ISysSmsLogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,7 +70,7 @@ public class SysSmsLogController extends BaseController {
 	 */
 	@PreAuthorize("@ss.hasPermi('monitor:smslog:remove')")
 	@Log(title = "短信日志", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{smsIds}")
+	@PostMapping("/del/{smsIds}")
 	public AjaxResult remove(@PathVariable Long[] smsIds) {
 		return toAjax(sysSmsLogService.deleteSysSmsLogBySmsIds(smsIds));
 	}

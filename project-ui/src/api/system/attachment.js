@@ -26,28 +26,10 @@ export function getAttachmentByUrl(data) {
   })
 }
 
-// 新增业务附件
-export function addAttachment(data) {
-  return request({
-    url: '/system/attachment',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改业务附件
-export function updateAttachment(data) {
-  return request({
-    url: '/system/attachment',
-    method: 'put',
-    data: data
-  })
-}
-
 // 删除业务附件
 export function delAttachment(attachId) {
   return request({
-    url: '/system/attachment/' + attachId,
-    method: 'delete'
+    url: '/system/attachment/del/' + attachId,
+    method: 'post'
   })
 }

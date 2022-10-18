@@ -21,7 +21,7 @@ export function getUser(userId) {
 // 新增用户
 export function addUser(data) {
   return request({
-    url: '/system/user',
+    url: '/system/user/insert',
     method: 'post',
     data: data
   })
@@ -30,8 +30,8 @@ export function addUser(data) {
 // 修改用户
 export function updateUser(data) {
   return request({
-    url: '/system/user',
-    method: 'put',
+    url: '/system/user/update',
+    method: 'post',
     data: data
   })
 }
@@ -39,8 +39,8 @@ export function updateUser(data) {
 // 删除用户
 export function delUser(userId) {
   return request({
-    url: '/system/user/' + userId,
-    method: 'delete'
+    url: '/system/user/del/' + userId,
+    method: 'post'
   })
 }
 
@@ -52,7 +52,7 @@ export function resetUserPwd(userId, password) {
   }
   return request({
     url: '/system/user/resetPwd',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -65,7 +65,7 @@ export function changeUserStatus(userId, status) {
   }
   return request({
     url: '/system/user/changeStatus',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -82,7 +82,7 @@ export function getUserProfile() {
 export function updateUserProfile(data) {
   return request({
     url: '/system/user/profile',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }
@@ -95,7 +95,7 @@ export function updateUserPwd(oldPassword, newPassword) {
   }
   return request({
     url: '/system/user/profile/updatePwd',
-    method: 'put',
+    method: 'post',
     params: data
   })
 }
@@ -121,7 +121,7 @@ export function getAuthRole(userId) {
 export function updateAuthRole(data) {
   return request({
     url: '/system/user/authRole',
-    method: 'put',
+    method: 'post',
     params: data
   })
 }

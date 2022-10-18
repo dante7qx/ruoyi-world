@@ -17,19 +17,10 @@ export function getEmaillog(emailId) {
   })
 }
 
-// 新增邮件日志
-export function addEmaillog(data) {
-  return request({
-    url: '/monitor/emaillog',
-    method: 'post',
-    data: data
-  })
-}
-
 // 删除邮件日志
 export function delEmaillog(emailId) {
   return request({
-    url: '/monitor/emaillog/' + emailId,
-    method: 'delete'
+    url: '/monitor/emaillog/del/' + emailId,
+    method: 'post'
   })
 }

@@ -12,7 +12,6 @@ import com.risun.system.service.ISysAttachmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,7 +68,7 @@ public class SysAttachmentController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('monitor:attachment:remove')")
     @Log(title = "业务附件", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{attachIds}")
+    @PostMapping("/del/{attachIds}")
     public AjaxResult remove(@PathVariable Long[] attachIds)
     {
         return toAjax(sysAttachmentService.deleteSysAttachmentByAttachIds(attachIds));
