@@ -26,6 +26,11 @@ createNewProject() {
     sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RisunApplication.java
     echo "修改常量 Common 下 Constants.java"
     sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
+    sed -i '' "s/192.168.1.30/127.0.0.1/g" ./project-admin/src/main/resources/application.yml
+    sed -i '' "s/192.168.1.30:3306/<数据库url>/g" ./project-admin/src/main/resources/application-druid.yml
+    sed -i '' "s/risun_project/<数据库>/g" ./project-admin/src/main/resources/application-druid.yml
+    sed -i '' "s/root/<数据库账号>/g" ./project-admin/src/main/resources/application-druid.yml
+    sed -i '' "s/iamdante/<数据库密码>/g" ./project-admin/src/main/resources/application-druid.yml
 
     ## 重命名目录
     echo "3. 重命名目录"
