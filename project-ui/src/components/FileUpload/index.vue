@@ -218,7 +218,7 @@ export default {
       for (let i in list) {
         strs += list[i].url + separator;
       }
-      return strs != '' ? strs.substr(0, strs.length - 1) : '';
+      return strs != '' ? strs.substring(0, strs.length - 1) : '';
     },
     //文件下载
     fileDownload(file, name) {

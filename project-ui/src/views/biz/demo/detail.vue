@@ -21,7 +21,7 @@
         <file-upload v-model="form.attachment" :bizModel="'demo'" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="业务内容">
-        <editor v-model="form.demoContent" :fileSize="10" :minHeight="200" :readOnly="disabled"/>
+        <editor v-model="form.demoContent" :disabled="disabled"/>
       </el-form-item>
 	  </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">

@@ -26,7 +26,7 @@
       </el-form-item>
 #elseif($column.htmlType == "editor")
       <el-form-item label="${comment}">
-        <editor v-model="form.${field}" :min-height="192"/>
+        <editor v-model="form.${field}" :disabled="disabled"/>
       </el-form-item>
 #elseif($column.htmlType == "select" && "" != $dictType)
       <el-form-item label="${comment}" prop="${field}">

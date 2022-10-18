@@ -1,272 +1,209 @@
 <template>
-  <div>
-    <el-upload
-      :action="uploadUrl"
-      :before-upload="handleBeforeUpload"
-      :on-success="handleUploadSuccess"
-      :on-error="handleUploadError"
-      name="file"
-      :show-file-list="false"
-      :headers="headers"
-      style="display: none"
-      ref="upload"
-      v-if="this.type == 'url'"
-    >
-    </el-upload>
-    <div class="editor" ref="editor" :style="styles"></div>
+  <div class="tinymce-editor">
+    <editor v-model="myValue"
+      :init="init"
+      :disabled="disabled"
+      class="tox-tinymce-aux"
+     >
+    </editor>
   </div>
 </template>
 
 <script>
-import Quill from "quill";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
+import tinymce from 'tinymce/tinymce'
+import Editor from '@tinymce/tinymce-vue'
+// 主题
+import 'tinymce/themes/silver/theme'
+import 'tinymce/icons/default/icons'
+// 样式
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/skins/ui/oxide/content.inline.min.css'
+import '../../../public/static/tinymce/langs/zh_CN.js'
+// 插件
+import 'tinymce/plugins/image'  // 插入上传图片插件
+// import 'tinymce/plugins/imagetools'
+import 'tinymce/plugins/media'  // 插入视频插件
+import 'tinymce/plugins/table'  // 插入表格插件
+import 'tinymce/plugins/link' //超链接插件
+import 'tinymce/plugins/code' //代码块插件
+import 'tinymce/plugins/lists'  // 列表插件
+import 'tinymce/plugins/wordcount'  // 字数统计插件
+import 'tinymce/plugins/colorpicker'  //选择颜色插件
+import 'tinymce/plugins/textcolor' //文本颜色插件
+import 'tinymce/plugins/hr' // 水平线
+import 'tinymce/plugins/preview'  // 预览
+import 'tinymce/plugins/fullscreen' // 全屏
+import 'tinymce/plugins/searchreplace'  // 查找替换
+import 'tinymce/plugins/autoresize' // 编辑器大小自适应
+
+import request from '@/utils/request'
 import { getToken } from "@/utils/auth";
 
 export default {
-  name: "Editor",
-  props: {
-    /* 编辑器的内容 */
+	name: 'TinymceEditorWidget',
+  components: {
+    Editor
+  },
+	props: {
+    //传入一个value，使组件支持v-model绑定
     value: {
       type: String,
-      default: "",
+      default: ''
     },
-    /* 高度 */
-    height: {
-      type: Number,
-      default: null,
+    baseUrl: {
+      type: String,
+      default: '',
     },
-    /* 最小高度 */
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     minHeight: {
       type: Number,
-      default: null,
+      default: 450
     },
-    /* 只读 */
-    readOnly: {
-      type: Boolean,
-      default: false,
+    maxHeight: {
+      type: Number,
+      default: 700
     },
-    // 上传文件大小限制(MB)
+    plugins: {
+      type: [String, Array],
+      default: 'lists image media table textcolor wordcount link hr searchreplace autoresize preview fullscreen code'
+    },
+    toolbar: {
+      type: [String, Array, Boolean],
+      default: 'styleselect | bold italic underline strikethrough fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify | hr bullist numlist outdent indent blockquote subscript superscript | removeformat undo redo | image media link table | searchreplace preview fullscreen code'
+    },
+    menubar: {
+      type: [String, Boolean],
+      default: 'file edit insert view format table tools'
+      // default: false
+    },
+    // 大小限制(MB)
     fileSize: {
       type: Number,
       default: 5,
-    },
-    /* 类型（base64格式、url格式） */
-    type: {
-      type: String,
-      default: "url",
     }
   },
   data() {
-    return {
-      uploadUrl: process.env.VUE_APP_BASE_API + "/common/upload", // 上传的图片服务器地址
+		return {
+      uploadUrl: process.env.VUE_APP_BASE_API + "/common/upload_only", // 上传的图片服务器地址
       headers: {
         Authorization: "Bearer " + getToken()
       },
-      Quill: null,
-      currentValue: "",
-      options: {
-        theme: "snow",
-        bounds: document.body,
-        debug: "warn",
-        modules: {
-          // 工具栏配置
-          toolbar: [
-            ["bold", "italic", "underline", "strike"],       // 加粗 斜体 下划线 删除线
-            ["blockquote", "code-block"],                    // 引用  代码块
-            [{ list: "ordered" }, { list: "bullet" }],       // 有序、无序列表
-            [{ indent: "-1" }, { indent: "+1" }],            // 缩进
-            [{ size: ["small", false, "large", "huge"] }],   // 字体大小
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],         // 标题
-            [{ color: [] }, { background: [] }],             // 字体颜色、字体背景颜色
-            [{ align: [] }],                                 // 对齐方式
-            ["clean"],                                       // 清除文本格式
-            ["link", "image", "video"]                       // 链接、图片、视频
-          ],
+			//初始化配置
+      init: {
+        placeholder: "在这里输入文字",
+        language: 'zh_CN',
+        // content_style: 'body { font-family: STSong; font-size: 12pt} p {margin: 0px; border: 0px ; padding: 1px;}',
+        content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; text-indent: 2em; }',
+        object_resizing: true, //禁用表格内联样式拖拽拉伸
+        table_resize_bars: true,//禁用表格单元格拖拽拉伸
+        protect: [
+          /\<\/?(if|endif)\>/g, //<if> & </endif>
+          /\<xsl\:[^>]+\>/g, //<xsl:...>
+          /<\?php.*?\?>/g, //php代码
+        ], 
+        min_height: this.minHeight,
+        max_height: this.maxHeight,
+        autoresize_bottom_margin: 50,
+        plugins: this.plugins,
+        menubar: this.disabled ? false : this.menubar,
+        toolbar: this.disabled ? false : this.toolbar,
+        toolbar_mode: 'wrap',
+        font_formats: "宋体=SimSun,STSong;黑体=SimHei,STHeiti;仿宋=FangSong,STFangsong;楷体=KaiTi,STKaiti;微软雅黑=Microsoft YaHei;Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Times New Roman=times new roman,times;",
+        branding: false,
+        resize: false,
+        default_link_target: '_blank',
+        file_picker_types: "file image media",
+        file_picker_callback: (cb, value, meta) => {
+          if (meta.filetype == 'file') {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', '.doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf');
+            input.onchange = async(e) => {
+              this.handleFileUpload(e.path[0].files[0], cb, 'file')
+            }
+            input.click();
+          } else if (meta.filetype == 'image') {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.onchange = async(e) => {
+              this.handleFileUpload(e.path[0].files[0], cb, 'image')
+            }
+            input.click();
+          } else if (meta.filetype == 'media') {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'video/*');
+            input.onchange = async(e) => {
+              this.handleFileUpload(e.path[0].files[0], cb, 'media')
+            }
+            input.click();
+          }
         },
-        placeholder: "请输入内容",
-        readOnly: this.readOnly,
       },
-    };
-  },
-  computed: {
-    styles() {
-      let style = {};
-      if (this.minHeight) {
-        style.minHeight = `${this.minHeight}px`;
-      }
-      if (this.height) {
-        style.height = `${this.height}px`;
-      }
-      return style;
-    },
-  },
-  watch: {
-    value: {
-      handler(val) {
-        if (val !== this.currentValue) {
-          this.currentValue = val === null ? "" : val;
-          if (this.Quill) {
-            this.Quill.pasteHTML(this.currentValue);
-          }
-        }
-      },
-      immediate: true,
-    },
-  },
-  mounted() {
-    this.init();
-  },
-  beforeDestroy() {
-    this.Quill = null;
-  },
+      myValue: this.value
+		}
+	},
+	mounted() {
+		tinymce.init({})
+	},
   methods: {
-    init() {
-      const editor = this.$refs.editor;
-      this.Quill = new Quill(editor, this.options);
-      // 如果设置了上传地址则自定义图片上传事件
-      if (this.type == 'url') {
-        let toolbar = this.Quill.getModule("toolbar");
-        toolbar.addHandler("image", (value) => {
-          this.uploadType = "image";
-          if (value) {
-            this.$refs.upload.$children[0].$refs.input.click();
-          } else {
-            this.quill.format("image", false);
-          }
-        });
-      }
-      this.Quill.pasteHTML(this.currentValue);
-      this.Quill.on("text-change", (delta, oldDelta, source) => {
-        const html = this.$refs.editor.children[0].innerHTML;
-        const text = this.Quill.getText();
-        const quill = this.Quill;
-        this.currentValue = html;
-        this.$emit("input", html);
-        this.$emit("on-change", { html, text, quill });
-      });
-      this.Quill.on("text-change", (delta, oldDelta, source) => {
-        this.$emit("on-text-change", delta, oldDelta, source);
-      });
-      this.Quill.on("selection-change", (range, oldRange, source) => {
-        this.$emit("on-selection-change", range, oldRange, source);
-      });
-      this.Quill.on("editor-change", (eventName, ...args) => {
-        this.$emit("on-editor-change", eventName, ...args);
-      });
-    },
-    // 上传前校检格式和大小
     handleBeforeUpload(file) {
+      // 校验文件名是否含有非法字符
+      if(file.name.indexOf(",") >= 0) {
+        // cbFailure('文件名含有非法字符 , ', { remove: true });
+        this.$message({message: '文件名含有非法字符 , ', type:'error', center: true, duration: 1000, offset: 300, customClass: 'tinymce-alert'});
+        return false;
+      }
       // 校检文件大小
       if (this.fileSize) {
         const isLt = file.size / 1024 / 1024 < this.fileSize;
         if (!isLt) {
-          this.$message.error(`上传文件大小不能超过 ${this.fileSize} MB!`);
+          // cbFailure(`上传文件大小不能超过 ${this.fileSize} MB!`, { remove: true });
+          this.$message({message: `上传文件大小不能超过 ${this.fileSize} MB!`, type:'error', center: true, duration: 1000, offset: 300, customClass: 'tinymce-alert'});
           return false;
         }
       }
       return true;
     },
-    handleUploadSuccess(res, file) {
-      // 获取富文本组件实例
-      let quill = this.Quill;
-      // 如果上传成功
-      if (res.code == 200) {
-        // 获取光标所在位置
-        let length = quill.getSelection().index;
-        // 插入图片  res.url为服务器返回的图片地址
-        quill.insertEmbed(length, "image", process.env.VUE_APP_BASE_API + res.fileName);
-        // 调整光标到最后
-        quill.setSelection(length + 1);
-      } else {
-        this.$message.error("图片插入失败");
+    handleFileUpload(file, cb, fileType) {
+      if(this.handleBeforeUpload(file)) {
+        let formdata = new FormData()
+        formdata.set('file', file)
+        return request({
+          url: '/common/upload_only',
+          method: 'post',
+          data: formdata
+        }).then(res => {
+          if(fileType == 'file') {
+            cb(process.env.VUE_APP_BASE_API + res.fileName, {text: file.name})
+          } else if(fileType == 'image') {
+            cb(process.env.VUE_APP_BASE_API + res.fileName, {alt: file.name})
+          } else if(fileType == 'media') {
+            cb(process.env.VUE_APP_BASE_API + res.fileName, {title: file.name})
+          } 
+        })
       }
-    },
-    handleUploadError() {
-      this.$message.error("图片插入失败");
-    },
+    }
   },
-};
+  watch: {
+    value(newValue) {
+      this.myValue = newValue;
+    },
+    myValue(newValue) {
+      this.$emit("input", newValue);
+    },
+  }
+}
 </script>
-
 <style>
-.editor, .ql-toolbar {
-  white-space: pre-wrap !important;
-  line-height: normal !important;
+.tox-tinymce-aux {
+  z-index: 2509!important;
 }
-.quill-img {
-  display: none;
-}
-.ql-snow .ql-tooltip[data-mode="link"]::before {
-  content: "请输入链接地址:";
-}
-.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
-  border-right: 0px;
-  content: "保存";
-  padding-right: 0px;
-}
-
-.ql-snow .ql-tooltip[data-mode="video"]::before {
-  content: "请输入视频地址:";
-}
-
-.ql-snow .ql-picker.ql-size .ql-picker-label::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item::before {
-  content: "14px";
-}
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before {
-  content: "10px";
-}
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before {
-  content: "18px";
-}
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="huge"]::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="huge"]::before {
-  content: "32px";
-}
-
-.ql-snow .ql-picker.ql-header .ql-picker-label::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: "文本";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-  content: "标题1";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-  content: "标题2";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-  content: "标题3";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-  content: "标题4";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-  content: "标题5";
-}
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-  content: "标题6";
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item::before {
-  content: "标准字体";
-}
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
-  content: "衬线字体";
-}
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
-  content: "等宽字体";
+.tinymce-alert {
+  z-index: 2510 !important;
 }
 </style>
