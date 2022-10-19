@@ -14,7 +14,7 @@
 #set($dictType=$column.dictType)
 #if($column.htmlType == "input")
       <el-form-item label="${comment}" prop="${field}">
-        <el-input v-model="form.${field}" placeholder="请输入${comment}" :disabled="disabled"/>
+        <el-input v-model="form.${field}" placeholder="请输入${comment}" #if(${column.columnLength})maxlength="${column.columnLength}" show-word-limit#end :disabled="disabled"/>
       </el-form-item>
 #elseif($column.htmlType == "imageUpload")
       <el-form-item label="${comment}">
@@ -35,7 +35,7 @@
             v-for="dict in dict.type.${dictType}"
             :key="dict.value"
             :label="dict.label"
-            #if($column.javaType == "Integer" || $column.javaType == "Long"):value="parseInt(dict.value)"#else:value="dict.value"#end
+#if($column.javaType == "Integer" || $column.javaType == "Long"):value="parseInt(dict.value)"#else            :value="dict.value"#end
             
             style="width: 100%;"
           ></el-option>
@@ -93,7 +93,7 @@
       </el-form-item>
 #elseif($column.htmlType == "textarea")
       <el-form-item label="${comment}" prop="${field}">
-        <el-input v-model="form.${field}" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" placeholder="请输入内容" :disabled="disabled"/>
+        <el-input v-model="form.${field}" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="${column.columnLength}"  placeholder="请输入内容" :disabled="disabled"/>
       </el-form-item>
 #end
 #end

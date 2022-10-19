@@ -2,7 +2,7 @@
   <div>
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="业务名称" prop="demoName">
-        <el-input v-model="form.demoName" placeholder="请输入业务名称" :disabled="disabled"/>
+        <el-input v-model="form.demoName" placeholder="请输入业务名称" maxlength="10" show-word-limit :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="业务时间" prop="demoTime">
         <el-date-picker clearable
@@ -61,7 +61,6 @@ export default {
   methods: {
     loadForm() {
       this.reset();
-      alert(11)
       if(this.demoId > 0) {
         getDemo(this.demoId).then(response => {
           this.form = response.data ? response.data : {};

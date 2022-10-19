@@ -111,6 +111,8 @@ create table sys_role (
 -- ----------------------------
 insert into sys_role values('1', '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'admin', sysdate(), '', null, '超级管理员');
 insert into sys_role values('2', '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'admin', sysdate(), '', null, '普通角色');
+insert into sys_role values('3', '信息录入员',  'info_record', 3, 2, 0, 0, '0', '0', 'admin', sysdate(), '', null, '信息录入员');
+insert into sys_role values('4', '信息管理员',  'info_mgr', 4, 2, 0, 0, '0', '0', 'admin', sysdate(), '', null, '信息管理员');
 
 
 -- ----------------------------
@@ -156,8 +158,8 @@ insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       's
 insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'admin', sysdate(), '', null, '岗位管理菜单');
 insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'admin', sysdate(), '', null, '字典管理菜单');
 insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'admin', sysdate(), '', null, '参数设置菜单');
-insert into sys_menu values('107',  '通知公告', '1',   '8', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'message',       'admin', sysdate(), '', null, '通知公告菜单');
-insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index', '', 1, 0, 'C', '0', '0', 'system:attachment:list',   'upload',        'admin', sysdate(), '', null, '系统业务附件菜单');
+insert into sys_menu values('107',  '信息管理', '1',   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'admin', sysdate(), '', null, '信息管理菜单');
+insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'admin', sysdate(), '', null, '系统业务附件菜单');
 insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                       'log',           'admin', sysdate(), '', null, '日志管理菜单');
 insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'admin', sysdate(), '', null, '在线用户菜单');
 insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'admin', sysdate(), '', null, '定时任务菜单');
@@ -170,10 +172,13 @@ insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        't
 insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'swagger',       'admin', sysdate(), '', null, '系统接口菜单');
 insert into sys_menu values('118',  '代码示例', '3',   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'admin', sysdate(), '', null, '代码示例菜单');
 -- 三级菜单
+insert into sys_menu values('498',  '信息发布', '107', '1', 'infomgr',    'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',        'message',       'admin', sysdate(), '', null, '信息发布菜单');
+insert into sys_menu values('499',  '信息浏览', '107', '2', 'infoview',   'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',         'eye-open',      'admin', sysdate(), '', null, '信息浏览菜单');
+
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
-insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog', 'monitor/emaillog/index', '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list', 'email',    'admin', sysdate(), '', null, '邮件日志菜单');
-insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog', 'monitor/smslog/index', '', 1, 0, 'C', '0', '0', 'monitor:smslog:list', 'message',    'admin', sysdate(), '', null, '短信日志菜单');
+insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'admin', sysdate(), '', null, '邮件日志菜单');
+insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog',     'monitor/smslog/index',     '', 1, 0, 'C', '0', '0', 'monitor:smslog:list',     'message',       'admin', sysdate(), '', null, '短信日志菜单');
 
 -- 用户管理按钮
 insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
@@ -217,11 +222,11 @@ insert into sys_menu values('1031', '参数新增', '106', '2', '#', '', '', 1, 
 insert into sys_menu values('1032', '参数修改', '106', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1033', '参数删除', '106', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1034', '参数导出', '106', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'admin', sysdate(), '', null, '');
--- 通知公告按钮
-insert into sys_menu values('1035', '公告查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query',        '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1036', '公告新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1037', '公告修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1038', '公告删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove',       '#', 'admin', sysdate(), '', null, '');
+-- 信息管理按钮
+insert into sys_menu values('1035', '信息查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:query',        '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1036', '信息新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:add',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1037', '信息修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:edit',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1038', '信息删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:remove',       '#', 'admin', sysdate(), '', null, '');
 -- 系统附件按钮
 insert into sys_menu values('1066', '系统附件查询', '119', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1067', '系统附件删除', '119', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'admin', sysdate(), '', null, '');
@@ -314,6 +319,7 @@ insert into sys_role_menu values ('2', '114');
 insert into sys_role_menu values ('2', '115');
 insert into sys_role_menu values ('2', '116');
 insert into sys_role_menu values ('2', '117');
+insert into sys_role_menu values ('2', '499');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');
 insert into sys_role_menu values ('2', '502');
@@ -386,6 +392,22 @@ insert into sys_role_menu values ('2', '1064');
 insert into sys_role_menu values ('2', '1065');
 insert into sys_role_menu values ('2', '1066');
 insert into sys_role_menu values ('2', '1067');
+
+insert into sys_role_menu values ('3', '107');
+insert into sys_role_menu values ('3', '498');
+insert into sys_role_menu values ('3', '499');
+insert into sys_role_menu values ('3', '1035');
+insert into sys_role_menu values ('3', '1036');
+insert into sys_role_menu values ('3', '1037');
+insert into sys_role_menu values ('3', '1038');
+insert into sys_role_menu values ('4', '107');
+insert into sys_role_menu values ('4', '498');
+insert into sys_role_menu values ('4', '499');
+insert into sys_role_menu values ('4', '1035');
+insert into sys_role_menu values ('4', '1036');
+insert into sys_role_menu values ('4', '1037');
+insert into sys_role_menu values ('4', '1038');
+
 
 -- ----------------------------
 -- 8、角色和部门关联表  角色1-N部门
@@ -472,8 +494,7 @@ insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  '0',
 insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      '0', 'admin', sysdate(), '', null, '任务状态列表');
 insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       '0', 'admin', sysdate(), '', null, '任务分组列表');
 insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          '0', 'admin', sysdate(), '', null, '系统是否列表');
-insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0', 'admin', sysdate(), '', null, '通知类型列表');
-insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
+insert into sys_dict_type values(7,  '信息类型', 'sys_info_type',       '0', 'admin', sysdate(), '', null, '信息类型列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
 insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'admin', sysdate(), '', null, '业务模块列表');
@@ -515,10 +536,8 @@ insert into sys_dict_data values(10, 1,  '默认',     'DEFAULT', 'sys_job_group
 insert into sys_dict_data values(11, 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'admin', sysdate(), '', null, '系统分组');
 insert into sys_dict_data values(12, 1,  '是',       'Y',       'sys_yes_no',          '',   'primary', 'Y', '0', 'admin', sysdate(), '', null, '系统默认是');
 insert into sys_dict_data values(13, 2,  '否',       'N',       'sys_yes_no',          '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '系统默认否');
-insert into sys_dict_data values(14, 1,  '通知',     '1',       'sys_notice_type',     '',   'warning', 'Y', '0', 'admin', sysdate(), '', null, '通知');
-insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_notice_type',     '',   'success', 'N', '0', 'admin', sysdate(), '', null, '公告');
-insert into sys_dict_data values(16, 1,  '正常',     '0',       'sys_notice_status',   '',   'primary', 'Y', '0', 'admin', sysdate(), '', null, '正常状态');
-insert into sys_dict_data values(17, 2,  '关闭',     '1',       'sys_notice_status',   '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '关闭状态');
+insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'warning', 'Y', '0', 'admin', sysdate(), '', null, '新闻');
+insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'admin', sysdate(), '', null, '公告');
 insert into sys_dict_data values(18, 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'admin', sysdate(), '', null, '新增操作');
 insert into sys_dict_data values(19, 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'admin', sysdate(), '', null, '修改操作');
 insert into sys_dict_data values(20, 3,  '删除',     '3',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '删除操作');
@@ -620,29 +639,33 @@ create table sys_job_log (
 
 
 -- ----------------------------
--- 17、通知公告表
+-- 17、信息发布表
 -- ----------------------------
-drop table if exists sys_notice;
-create table sys_notice (
-  notice_id         int(4)          not null auto_increment    comment '公告ID',
-  notice_title      varchar(50)     not null                   comment '公告标题',
-  notice_type       char(1)         not null                   comment '公告类型（1通知 2公告）',
-  notice_content    longblob        default null               comment '公告内容',
-  status            char(1)         default '0'                comment '公告状态（0正常 1关闭）',
-  create_by         varchar(64)     default ''                 comment '创建者',
-  create_time       datetime                                   comment '创建时间',
-  update_by         varchar(64)     default ''                 comment '更新者',
+drop table if exists sys_info;
+create table sys_info (
+  info_id     		bigint(20)       not null auto_increment   comment '信息id',
+  title             varchar(128)     default ''                comment '标题',
+  content           text             		                   comment '内容',
+  type           	varchar(24)      default ''                comment '类型',
+  set_top			tinyint(1)       default 0                 comment '是否置顶',
+  anonymous			tinyint(1)       default 0                 comment '是否匿名访问',
+  publish_time 	    datetime                                   comment '发布时间',
+  status			varchar(2)		 default '0'		       comment '状态（0: 草稿，1: 待发布审批，2:已发布，3:关闭）',
+  create_by         varchar(64)      default ''                comment '创建者',
+  create_time 	    datetime                                   comment '创建时间',
+  update_by         varchar(64)      default ''                comment '更新者',
   update_time       datetime                                   comment '更新时间',
-  remark            varchar(255)    default null               comment '备注',
-  primary key (notice_id)
-) engine=innodb auto_increment=10 comment = '通知公告表';
+  primary key (info_id)
+) engine=innodb auto_increment=1 comment = '信息发布表';
 
--- ----------------------------
--- 初始化-公告信息表数据
--- ----------------------------
-insert into sys_notice values('1', '温馨提醒：2018-07-01 若依新版本发布啦', '2', '新版本内容', '0', 'admin', sysdate(), '', null, '管理员');
-insert into sys_notice values('2', '维护通知：2018-07-01 若依系统凌晨维护', '1', '维护内容',   '0', 'admin', sysdate(), '', null, '管理员');
-
+-- 信息访问范围
+drop table if exists sys_info_range;
+create table sys_info_range ( 
+  range_id          bigint(20)      not null auto_increment   comment '访问范围id',
+  info_id     		bigint(20)      not null				  comment '信息发布id',
+  dept_id 			bigint(20)      not null				  comment '部门id',
+  primary key (id)
+) engine=innodb auto_increment=1 comment = '信息访问范围'; 
 
 -- ----------------------------
 -- 18、代码生成业务表
@@ -683,6 +706,7 @@ create table gen_table_column (
   column_name       varchar(200)                               comment '列名称',
   column_comment    varchar(500)                               comment '列描述',
   column_type       varchar(100)                               comment '列类型',
+  column_length     int                               		   comment '列长度（字符类型）',
   java_type         varchar(500)                               comment 'JAVA类型',
   java_field        varchar(200)                               comment 'JAVA字段名',
   is_pk             char(1)                                    comment '是否主键（1是）',
@@ -703,6 +727,7 @@ create table gen_table_column (
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
 
+-- ----------------------------
 -- 20、邮件日志表
 -- ----------------------------
 drop table if exists sys_email_log;
@@ -723,6 +748,7 @@ create table sys_email_log (
   primary key (email_id)
 ) engine=innodb auto_increment=1 comment = '邮件日志表';
 
+-- ----------------------------
 -- 21、短信日志表
 -- ----------------------------
 drop table if exists sys_sms_log;
@@ -740,6 +766,7 @@ create table sys_sms_log (
   primary key (sms_id)
 ) engine=innodb auto_increment=1 comment = '短信日志表';
 
+-- ----------------------------
 -- 22、业务附件表
 -- ----------------------------
 drop table if exists sys_attachment;
@@ -757,36 +784,9 @@ create table sys_attachment (
   primary key (attach_id)
 ) engine=innodb auto_increment=1 comment = '业务附件表';
 
-
--- 23、信息发布表
 -- ----------------------------
-drop table if exists sys_info_publish;
-create table sys_info_publish (
-  info_id     		bigint(20)       not null auto_increment   comment '信息发布id',
-  title             varchar(128)     default ''                comment '标题',
-  content           varchar(256)     default ''                comment '内容',
-  type           	varchar(24)      default ''                comment '类型',
-  set_top			tinyint(1)       default 0                 comment '是否置顶',
-  anonymous			tinyint(1)       default 0                 comment '是否匿名访问',
-  publish_time 	    datetime                                   comment '发布时间',
-  status			varchar(10)		 default 'DTJ'		       comment '状态',
-  create_by         varchar(64)      default ''                comment '创建者',
-  create_time 	    datetime                                   comment '创建时间',
-  update_by         varchar(64)      default ''                comment '更新者',
-  update_time       datetime                                   comment '更新时间',
-  primary key (info_id)
-) engine=innodb auto_increment=1 comment = '信息发布表';
-
--- 信息访问范围
-drop table if exists sys_info_access_range;
-create table sys_info_access_range ( 
-  id                bigint(20)      not null auto_increment   comment '访问范围id',
-  info_id     		bigint(20)      not null				  comment '信息发布id',
-  dept_id 			bigint(20)      not null				  comment '部门id',
-  primary key (id)
-) engine=innodb auto_increment=1 comment = '信息访问范围';
-
--- 24、审批日志表
+-- 23、审批日志表
+-- ----------------------------
 drop table if exists sys_approval_log;
 create table sys_approval_log ( 
   log_id            bigint(20)      not null auto_increment   comment '日志id',

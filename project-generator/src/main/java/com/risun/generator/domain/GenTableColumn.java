@@ -28,6 +28,9 @@ public class GenTableColumn extends BaseEntity
 
     /** 列类型 */
     private String columnType;
+    
+    /** 列长度 */
+    private Integer columnLength;
 
     /** JAVA类型 */
     private String javaType;
@@ -119,7 +122,15 @@ public class GenTableColumn extends BaseEntity
         return columnType;
     }
 
-    public void setJavaType(String javaType)
+    public Integer getColumnLength() {
+		return columnLength;
+	}
+
+	public void setColumnLength(Integer columnLength) {
+		this.columnLength = columnLength;
+	}
+
+	public void setJavaType(String javaType)
     {
         this.javaType = javaType;
     }
