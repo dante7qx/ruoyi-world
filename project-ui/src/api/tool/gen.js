@@ -28,8 +28,8 @@ export function getGenTable(tableId) {
 // 修改代码生成信息
 export function updateGenTable(data) {
   return request({
-    url: '/tool/gen',
-    method: 'put',
+    url: '/tool/gen/update',
+    method: 'post',
     data: data
   })
 }
@@ -54,8 +54,8 @@ export function previewTable(tableId) {
 // 删除表数据
 export function delTable(tableId) {
   return request({
-    url: '/tool/gen/' + tableId,
-    method: 'delete'
+    url: '/tool/gen/del/' + tableId,
+    method: 'post'
   })
 }
 

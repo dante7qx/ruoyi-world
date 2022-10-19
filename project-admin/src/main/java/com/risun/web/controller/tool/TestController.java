@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.R;
 import com.risun.common.utils.StringUtils;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -82,7 +81,7 @@ public class TestController extends BaseController
     }
 
     @ApiOperation("更新用户")
-    @PutMapping("/update")
+    @PostMapping("/update")
     public R<String> update(@RequestBody UserEntity user)
     {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId()))
@@ -100,7 +99,7 @@ public class TestController extends BaseController
 
     @ApiOperation("删除用户信息")
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path", dataTypeClass = Integer.class)
-    @DeleteMapping("/{userId}")
+    @PostMapping("/del/{userId}")
     public R<String> delete(@PathVariable Integer userId)
     {
         if (!USERS.isEmpty() && USERS.containsKey(userId))
