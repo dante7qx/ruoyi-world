@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>Risun Project With Java</name>
-    <description>睿阳Java开发框架</description>
+    <description>睿阳RSP开发框架</description>
     
     <properties>
         <project.version>1.0.0</project.version>

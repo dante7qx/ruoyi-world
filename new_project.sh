@@ -1,7 +1,7 @@
 #! /bin/bash
 
 curProject="project"
-curProjectCN="睿阳Java开发框架"
+curProjectCN="睿阳RSP开发框架"
 projectName="xx-sys"
 projectCN="XX管理系统"
 
@@ -15,7 +15,7 @@ createNewProject() {
         sed -i "s/${curProject}-/${projectName}-/g" $pom
     done
     
-    ## 修改睿阳Java开发框架
+    ## 修改睿阳RSP开发框架
     echo "2. 修改${curProjectCN}"
     cnfiles=`grep ${curProjectCN} -rl ./ | grep -v new_project.sh | grep -v new_project_mac.sh | grep -v git`
     for cnfile in $cnfiles; do

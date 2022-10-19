@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '睿阳Java开发框架',
+      title: '睿阳RSP开发框架',
       logo: logoImg
     }
   }

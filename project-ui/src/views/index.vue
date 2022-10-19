@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h1>睿阳Java开发框架</h1>
+    <h1>睿阳RSP开发框架</h1>
   </div>
 </template>
 

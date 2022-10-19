@@ -2,7 +2,7 @@
   <div class="login">
     
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">睿阳Java开发框架</h3>
+      <h3 class="title">睿阳RSP开发框架</h3>
       <el-tabs v-model="loginType" @tab-click="switchLoginType" v-if="smsEnabled">
         <el-tab-pane label="账号密码登录" name="uname"></el-tab-pane>
         <el-tab-pane label="短信验证码登录" name="sms"></el-tab-pane>
