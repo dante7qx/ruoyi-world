@@ -115,8 +115,8 @@
     </el-row>
 
     <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" label="序号" align="center" />
-      <el-table-column type="index" width="50" align="center" />
+      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="index" label="序号" width="50" align="center" />
 #foreach($column in $columns)
 #set($javaField=$column.javaField)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
@@ -160,7 +160,7 @@
             type="text"
             icon="el-icon-view"
             @click="handleUpdate(scope.row, true)"
-            v-hasPermi="['${moduleName}:${businessName}:edit']"
+            v-hasPermi="['${moduleName}:${businessName}:query']"
           >查看</el-button>
           <el-button
             size="mini"

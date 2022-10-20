@@ -1,0 +1,214 @@
+package com.risun.system.domain;
+
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import com.risun.common.annotation.Excel;
+import com.risun.common.core.domain.BaseEntity;
+
+/**
+ * 信息发布对象 sys_info
+ * 
+ * @author sunchao
+ * @date 2022-10-19
+ */
+public class SysInfo extends BaseEntity
+{
+    private static final long serialVersionUID = 1L;
+    
+    /** 草稿箱 */
+    public static final String DRAFT_STATUS = "0";
+    /** 待审批 */
+    public static final String DSP_STATUS = "1";
+    /** 已发布 */
+    public static final String PUBLISH_STATUS = "2";
+    
+    /** 信息id */
+    private Long infoId;
+
+    /** 标题 */
+    @Excel(name = "标题")
+    private String title;
+    
+    /** 封面 */
+    @Excel(name = "封面")
+    private String cover;
+
+    /** 内容 */
+    @Excel(name = "内容")
+    private String content;
+
+    /** 类型 */
+    @Excel(name = "类型")
+    private String type;
+
+    /** 是否置顶 */
+    @Excel(name = "是否置顶")
+    private Integer setTop;
+
+    /** 是否匿名访问 */
+    @Excel(name = "是否匿名访问")
+    private Integer anonymous;
+
+    /** 发布时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "发布时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date publishTime;
+
+    /** 状态（0: 草稿，1: 待发布审批，2:已发布） */
+    @Excel(name = "状态", readConverterExp = "0=:,草=稿，1:,待=发布审批，2:已发布，3:关闭")
+    private String status;
+    
+    /** 是否停用 */
+    @Excel(name = "是否停用")
+    private Integer disabled;
+    
+    /** 审批信息id */
+    private Long[] ids;
+    /** 审批意见 */
+    private String comment;
+    /** 审批通过 */
+    private Boolean approval = Boolean.FALSE;
+    /** 访问范围部门id */
+    private Long[] rangeDeptIds;
+
+    public void setInfoId(Long infoId) 
+    {
+        this.infoId = infoId;
+    }
+
+    public Long getInfoId() 
+    {
+        return infoId;
+    }
+    public void setTitle(String title) 
+    {
+        this.title = title;
+    }
+
+    public String getTitle() 
+    {
+        return title;
+    }
+    public void setContent(String content) 
+    {
+        this.content = content;
+    }
+
+    public String getContent() 
+    {
+        return content;
+    }
+    public void setType(String type) 
+    {
+        this.type = type;
+    }
+
+    public String getType() 
+    {
+        return type;
+    }
+    public void setSetTop(Integer setTop) 
+    {
+        this.setTop = setTop;
+    }
+
+    public Integer getSetTop() 
+    {
+        return setTop;
+    }
+    public void setAnonymous(Integer anonymous) 
+    {
+        this.anonymous = anonymous;
+    }
+
+    public Integer getAnonymous() 
+    {
+        return anonymous;
+    }
+    public void setPublishTime(Date publishTime) 
+    {
+        this.publishTime = publishTime;
+    }
+
+    public Date getPublishTime() 
+    {
+        return publishTime;
+    }
+    public void setStatus(String status) 
+    {
+        this.status = status;
+    }
+
+    public String getStatus() 
+    {
+        return status;
+    }
+
+    public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public Integer getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Integer disabled) {
+		this.disabled = disabled;
+	}
+
+	public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Boolean getApproval() {
+		return approval;
+	}
+
+	public void setApproval(Boolean approval) {
+		this.approval = approval;
+	}
+
+	public Long[] getRangeDeptIds() {
+		return rangeDeptIds;
+	}
+
+	public void setRangeDeptIds(Long[] rangeDeptIds) {
+		this.rangeDeptIds = rangeDeptIds;
+	}
+
+	@Override
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("infoId", getInfoId())
+            .append("title", getTitle())
+            .append("cover", getCover())
+            .append("type", getType())
+            .append("setTop", getSetTop())
+            .append("anonymous", getAnonymous())
+            .append("publishTime", getPublishTime())
+            .append("status", getStatus())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .toString();
+    }
+}

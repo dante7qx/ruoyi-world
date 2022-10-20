@@ -56,4 +56,10 @@ public enum BusinessType
      * 清空数据
      */
     CLEAN,
+    
+    /**
+     * 审批数据
+     */
+    APPROVAL,
+    
 }

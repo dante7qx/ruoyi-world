@@ -57,7 +57,7 @@ export default {
     },
     // 大小限制(MB)
     fileSize: {
-       type: Number,
+      type: Number,
       default: 5,
     },
     // 文件类型, 例如['png', 'jpg', 'jpeg']
@@ -119,7 +119,7 @@ export default {
   computed: {
     // 是否显示提示
     showTip() {
-      return this.isShowTip && (this.fileType || this.fileSize);
+      return this.isShowTip && !this.disabled && (this.fileType || this.fileSize) ;
     },
   },
   mounted() {

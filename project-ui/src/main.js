@@ -19,6 +19,7 @@ import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/risun";
+import moment from 'moment';
 import { nanoid } from 'nanoid';
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 
@@ -51,7 +52,9 @@ Vue.prototype.selectDictLabel = selectDictLabel
 Vue.prototype.selectDictLabels = selectDictLabels
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
+Vue.prototype.$moment = moment
 Vue.prototype.nanoid = nanoid
+
 
 
 // 全局组件挂载

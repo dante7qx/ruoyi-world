@@ -536,7 +536,7 @@ insert into sys_dict_data values(10, 1,  '默认',     'DEFAULT', 'sys_job_group
 insert into sys_dict_data values(11, 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'admin', sysdate(), '', null, '系统分组');
 insert into sys_dict_data values(12, 1,  '是',       'Y',       'sys_yes_no',          '',   'primary', 'Y', '0', 'admin', sysdate(), '', null, '系统默认是');
 insert into sys_dict_data values(13, 2,  '否',       'N',       'sys_yes_no',          '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '系统默认否');
-insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'warning', 'Y', '0', 'admin', sysdate(), '', null, '新闻');
+insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'admin', sysdate(), '', null, '新闻');
 insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'admin', sysdate(), '', null, '公告');
 insert into sys_dict_data values(18, 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'admin', sysdate(), '', null, '新增操作');
 insert into sys_dict_data values(19, 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'admin', sysdate(), '', null, '修改操作');
@@ -645,12 +645,14 @@ drop table if exists sys_info;
 create table sys_info (
   info_id     		bigint(20)       not null auto_increment   comment '信息id',
   title             varchar(128)     default ''                comment '标题',
-  content           text             		                   comment '内容',
+  cover				varchar(256)     default ''                comment '封面',
+  content           text             		               	   comment '内容',
   type           	varchar(24)      default ''                comment '类型',
   set_top			tinyint(1)       default 0                 comment '是否置顶',
   anonymous			tinyint(1)       default 0                 comment '是否匿名访问',
   publish_time 	    datetime                                   comment '发布时间',
-  status			varchar(2)		 default '0'		       comment '状态（0: 草稿，1: 待发布审批，2:已发布，3:关闭）',
+  status			varchar(2)		 default '0'		       comment '状态（0: 草稿，1: 待发布审批，2:已发布）',
+  disabled			tinyint(1)       default 0				   comment '停用（0: 否，1: 是）',
   create_by         varchar(64)      default ''                comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)      default ''                comment '更新者',

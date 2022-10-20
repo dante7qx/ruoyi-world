@@ -27,6 +27,12 @@
 			</exclusions>
         </dependency>
         
+        <!-- SpringBoot 监控 -->
+        <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
+        
         <!-- SpringBoot Undertow 容器 -->
         <dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysInfoMapper">
+    
+    <resultMap type="SysInfo" id="SysInfoResult">
+        <result property="infoId"    column="info_id"    />
+        <result property="title"    column="title"    />
+        <result property="cover"    column="cover"    />
+        <result property="content"    column="content"    />
+        <result property="type"    column="type"    />
+        <result property="setTop"    column="set_top"    />
+        <result property="anonymous"    column="anonymous"    />
+        <result property="publishTime"    column="publish_time"    />
+        <result property="status"    column="status"    />
+        <result property="disabled"    column="disabled"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysInfoVo">
+        select info_id, title, cover, content, type, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
+    </sql>
+
+    <select id="selectSysInfoList" parameterType="SysInfo" resultMap="SysInfoResult">
+        <include refid="selectSysInfoVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="setTop != null "> and set_top = #{setTop}</if>
+            <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="disabled != null  and disabled != ''"> and disabled = #{disabled}</if>
+            <if test="anonymous != null  and anonymous != ''"> and anonymous = #{anonymous}</if>
+        </where>
+        order by disabled asc, set_top desc, publish_time desc
+    </select>
+    
+    <select id="selectSysInfoByInfoId" parameterType="Long" resultMap="SysInfoResult">
+        <include refid="selectSysInfoVo"/>
+        where info_id = #{infoId}
+    </select>
+        
+    <insert id="insertSysInfo" parameterType="SysInfo" useGeneratedKeys="true" keyProperty="infoId">
+        insert into sys_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="cover != null">cover,</if>
+            <if test="content != null">content,</if>
+            <if test="type != null">type,</if>
+            <if test="setTop != null">set_top,</if>
+            <if test="anonymous != null">anonymous,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="status != null">status,</if>
+            <if test="disabled != null">disabled,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="cover != null">#{cover},</if>
+            <if test="content != null">#{content},</if>
+            <if test="type != null">#{type},</if>
+            <if test="setTop != null">#{setTop},</if>
+            <if test="anonymous != null">#{anonymous},</if>
+            <if test="publishTime != null">#{publishTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="disabled != null">#{disabled},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysInfo" parameterType="SysInfo">
+        update sys_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="cover != null">cover = #{cover},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="setTop != null">set_top = #{setTop},</if>
+            <if test="anonymous != null">anonymous = #{anonymous},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="disabled != null">disabled = #{disabled},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where info_id = #{infoId} 
+    </update>
+    
+    <update id="disabledSysInfo" parameterType="SysInfo">
+        update sys_info set disabled = #{disabled}, update_by = #{updateBy}, update_time = #{updateTime} where info_id = #{infoId} 
+    </update>
+    
+    <update id="setAnonymousSysInfo" parameterType="SysInfo">
+        update sys_info set anonymous = #{anonymous}, update_by = #{updateBy}, update_time = #{updateTime} where info_id = #{infoId} 
+    </update>
+
+    <delete id="deleteSysInfoByInfoId" parameterType="Long">
+        delete from sys_info where info_id = #{infoId}
+    </delete>
+
+    <delete id="deleteSysInfoByInfoIds" parameterType="String">
+        delete from sys_info where info_id in 
+        <foreach item="infoId" collection="array" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </delete>
+    <update id="cancelSysInfoTop">
+    	update sys_info set set_top = 0 where set_top = 1
+    </update>
+</mapper>
