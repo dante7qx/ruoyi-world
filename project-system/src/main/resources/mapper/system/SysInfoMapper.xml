@@ -31,7 +31,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from sys_info t
         left join sys_info_range t1 on t1.info_id = t.info_id 
     </sql>
-    
 
     <select id="selectSysInfoList" parameterType="SysInfo" resultMap="SysInfoResult">
         <include refid="selectSysInfoVo"/>
