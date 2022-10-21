@@ -42,23 +42,12 @@ bash new_project_mac.sh
 
 ### 1. 将项目导入到你的IDE中
 
-### 2. 创建文件上传目录
-
-在你`项目名-admin`目录下，创建文件夹`files`。
-
-***（ 注意：不要将 `files` 文件夹加入到版本控制中）*** 
-
-### 3. 根据实际项目修改配置
+### 2. 根据实际项目修改配置
 
 ```yml
 ## application.yml
-redis:
-  # 地址
-  host: localhost
-  # 端口，默认为6379
-  port: 6379
-  # 数据库索引
-  database: 0
+risun:
+  profile: <文件上传目录>
   
 ## application-druid.yml
 spring:
@@ -68,9 +57,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/risun_project?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: 用户名
-        password: 密码
+        url: jdbc:mysql://<数据库url>/<数据库>?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: <数据库账号>
+        password: <数据库密码>
 ```
 
 ### 4. 业务开发
@@ -187,4 +176,6 @@ BaseURI：`/risun/monitor`，请求方式：POST
 | 每日用户访问数         | /user_visit_count/{queryDate}        | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
 | 每日新用户新增数       | /user_increase_count/{queryDate}     | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
 | 每日核心业务数据新增数 | /business_increase_count/{queryDate} | 查询日期，格式必须为 yyyyMMdd | 未实现，需业务系统自行实现 |
+
+### 11. 信息发布
 

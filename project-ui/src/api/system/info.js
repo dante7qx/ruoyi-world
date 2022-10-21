@@ -9,8 +9,6 @@ export function listInfo(query) {
   })
 }
 
-
-
 // 查询待审批信息发布列表（信息管理员可见）
 export function listApproval(query) {
   return request({
