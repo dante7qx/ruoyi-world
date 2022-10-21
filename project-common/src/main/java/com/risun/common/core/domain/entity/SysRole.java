@@ -1,13 +1,16 @@
 package com.risun.common.core.domain.entity;
 
+import java.util.Set;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.risun.common.annotation.Excel;
 import com.risun.common.annotation.Excel.ColumnType;
 import com.risun.common.core.domain.BaseEntity;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 角色表 sys_role
@@ -59,6 +62,9 @@ public class SysRole extends BaseEntity
 
     /** 部门组（数据权限） */
     private Long[] deptIds;
+    
+    /** 角色菜单权限 */
+    private Set<String> permissions;
 
     public SysRole()
     {
@@ -203,6 +209,16 @@ public class SysRole extends BaseEntity
     public void setDeptIds(Long[] deptIds)
     {
         this.deptIds = deptIds;
+    }
+    
+    public Set<String> getPermissions()
+    {
+        return permissions;
+    }
+
+    public void setPermissions(Set<String> permissions)
+    {
+        this.permissions = permissions;
     }
     
     @Override

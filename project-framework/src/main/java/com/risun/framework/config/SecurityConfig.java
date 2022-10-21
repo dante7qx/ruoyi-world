@@ -104,6 +104,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         httpSecurity
                 // CSRF禁用，因为不使用session
                 .csrf().disable()
+                // 禁用HTTP响应标头
+                .headers().cacheControl().disable().and()
                 // 认证失败处理类
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // 基于token，所以不需要session
@@ -111,9 +113,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/register", "/captchaImage", "/sendLoginSmsCode/**").anonymous()
+                .antMatchers("/login", "/register", "/captchaImage", "/sendLoginSmsCode/**").permitAll()
                 // 静态资源，可匿名访问
-                .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", Constants.RESOURCE_PREFIX + "/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", Constants.RESOURCE_PREFIX.concat("/**")).permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()

@@ -1,13 +1,16 @@
 package com.risun.framework.web.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.system.service.ISysMenuService;
 import com.risun.system.service.ISysRoleService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 用户权限处理
@@ -52,7 +55,7 @@ public class SysPermissionService
      */
     public Set<String> getMenuPermission(SysUser user)
     {
-        Set<String> perms = new HashSet<String>();
+    	Set<String> perms = new HashSet<String>();
         // 管理员拥有所有权限
         if (user.isAdmin())
         {
@@ -60,7 +63,21 @@ public class SysPermissionService
         }
         else
         {
-            perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
+            List<SysRole> roles = user.getRoles();
+            if (!roles.isEmpty() && roles.size() > 1)
+            {
+                // 多角色设置permissions属性，以便数据权限匹配权限
+                for (SysRole role : roles)
+                {
+                    Set<String> rolePerms = menuService.selectMenuPermsByRoleId(role.getRoleId());
+                    role.setPermissions(rolePerms);
+                    perms.addAll(rolePerms);
+                }
+            }
+            else
+            {
+                perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
+            }
         }
         return perms;
     }

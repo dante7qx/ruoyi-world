@@ -1,13 +1,15 @@
 package com.risun.framework.web.service;
 
 import java.util.Set;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.StringUtils;
+import com.risun.framework.security.context.PermissionContextHolder;
+
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 /**
  * RuoYi首创 自定义权限实现，ss取自SpringSecurity首字母
@@ -44,6 +46,7 @@ public class PermissionService
         {
             return false;
         }
+        PermissionContextHolder.setContext(permission);
         return hasPermissions(loginUser.getPermissions(), permission);
     }
 
@@ -75,6 +78,8 @@ public class PermissionService
         {
             return false;
         }
+
+        PermissionContextHolder.setContext(permissions);
         Set<String> authorities = loginUser.getPermissions();
         for (String permission : permissions.split(PERMISSION_DELIMETER))
         {

@@ -319,6 +319,7 @@ insert into sys_role_menu values ('2', '114');
 insert into sys_role_menu values ('2', '115');
 insert into sys_role_menu values ('2', '116');
 insert into sys_role_menu values ('2', '117');
+insert into sys_role_menu values ('2', '118');
 insert into sys_role_menu values ('2', '499');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');

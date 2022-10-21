@@ -4,7 +4,7 @@
  */
 
  /** 基础通用 **/
-.pt5 {
+ .pt5 {
 	padding-top: 5px;
 }
 .pr5 {
@@ -250,9 +250,10 @@
 }
 
 .avatar-upload-preview {
-	position: absolute;
+	position: relative;
 	top: 50%;
-	transform: translate(50%, -50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 200px;
 	height: 200px;
 	border-radius: 50%;

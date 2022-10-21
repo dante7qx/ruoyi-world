@@ -9,6 +9,7 @@ import com.risun.common.annotation.Log;
 import com.risun.common.constant.UserConstants;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.domain.entity.SysDept;
 import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.core.page.TableDataInfo;
@@ -16,6 +17,7 @@ import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.poi.ExcelUtil;
+import com.risun.system.service.ISysDeptService;
 import com.risun.system.service.ISysPostService;
 import com.risun.system.service.ISysRoleService;
 import com.risun.system.service.ISysUserService;
@@ -46,6 +48,9 @@ public class SysUserController extends BaseController
 
     @Autowired
     private ISysRoleService roleService;
+    
+    @Autowired
+    private ISysDeptService deptService;
 
     @Autowired
     private ISysPostService postService;
@@ -121,7 +126,7 @@ public class SysUserController extends BaseController
     @PostMapping("/insert")
     public AjaxResult add(@Validated @RequestBody SysUser user)
     {
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user.getUserName())))
+    	if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user)))
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         }
@@ -150,7 +155,11 @@ public class SysUserController extends BaseController
     {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
-        if (StringUtils.isNotEmpty(user.getPhonenumber())
+        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user)))
+        {
+            return AjaxResult.error("修改用户'" + user.getUserName() + "'失败，登录账号已存在");
+        }
+        else if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
         {
             return AjaxResult.error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
@@ -234,5 +243,15 @@ public class SysUserController extends BaseController
         userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
         return success();
+    }
+    
+    /**
+     * 获取部门树列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/deptTree")
+    public AjaxResult deptTree(SysDept dept)
+    {
+        return AjaxResult.success(deptService.selectDeptTreeList(dept));
     }
 }

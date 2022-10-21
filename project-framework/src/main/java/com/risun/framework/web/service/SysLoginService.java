@@ -24,6 +24,7 @@ import com.risun.common.utils.ip.IpUtils;
 import com.risun.common.utils.sign.RsaUtils;
 import com.risun.framework.manager.AsyncManager;
 import com.risun.framework.manager.factory.AsyncFactory;
+import com.risun.framework.security.context.AuthenticationContextHolder;
 import com.risun.framework.sms.SmsFactory;
 import com.risun.system.service.ISysConfigService;
 import com.risun.system.service.ISysUserService;
@@ -129,9 +130,11 @@ public class SysLoginService {
 		// 用户验证
 		Authentication authentication = null;
 		try {
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, RsaUtils.decryptByPrivateKey(password));
+			AuthenticationContextHolder.setContext(authenticationToken);
 			// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
 			authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(username, RsaUtils.decryptByPrivateKey(password)));
+					.authenticate(authenticationToken);
 		} catch (Exception e) {
 			if (e instanceof BadCredentialsException) {
 				AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,

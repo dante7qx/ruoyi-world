@@ -18,6 +18,11 @@ public class Constants
      * GBK 字符集
      */
     public static final String GBK = "GBK";
+    
+    /**
+     * www主域
+     */
+    public static final String WWW = "www.";
 
     /**
      * http请求

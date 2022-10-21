@@ -1,6 +1,5 @@
 package com.risun.web.controller.system;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.risun.common.annotation.Log;
@@ -54,16 +53,7 @@ public class SysDeptController extends BaseController
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
     {
         List<SysDept> depts = deptService.selectDeptList(new SysDept());
-        Iterator<SysDept> it = depts.iterator();
-        while (it.hasNext())
-        {
-            SysDept d = (SysDept) it.next();
-            if (d.getDeptId().intValue() == deptId
-                    || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""))
-            {
-                it.remove();
-            }
-        }
+        depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
         return AjaxResult.success(depts);
     }
 
@@ -76,29 +66,6 @@ public class SysDeptController extends BaseController
     {
         deptService.checkDeptDataScope(deptId);
         return AjaxResult.success(deptService.selectDeptById(deptId));
-    }
-
-    /**
-     * 获取部门下拉树列表
-     */
-    @GetMapping("/treeselect")
-    public AjaxResult treeselect(SysDept dept)
-    {
-        List<SysDept> depts = deptService.selectDeptList(dept);
-        return AjaxResult.success(deptService.buildDeptTreeSelect(depts));
-    }
-
-    /**
-     * 加载对应角色部门列表树
-     */
-    @GetMapping(value = "/roleDeptTreeselect/{roleId}")
-    public AjaxResult roleDeptTreeselect(@PathVariable("roleId") Long roleId)
-    {
-        List<SysDept> depts = deptService.selectDeptList(new SysDept());
-        AjaxResult ajax = AjaxResult.success();
-        ajax.put("checkedKeys", deptService.selectDeptListByRoleId(roleId));
-        ajax.put("depts", deptService.buildDeptTreeSelect(depts));
-        return ajax;
     }
 
     /**
@@ -125,7 +92,7 @@ public class SysDeptController extends BaseController
     @PostMapping("/update")
     public AjaxResult edit(@Validated @RequestBody SysDept dept)
     {
-        Long deptId = dept.getDeptId();
+    	Long deptId = dept.getDeptId();
         deptService.checkDeptDataScope(deptId);
         if (UserConstants.NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept)))
         {
@@ -162,4 +129,5 @@ public class SysDeptController extends BaseController
         deptService.checkDeptDataScope(deptId);
         return toAjax(deptService.deleteDeptById(deptId));
     }
+    
 }

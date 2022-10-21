@@ -1,9 +1,18 @@
 const state = {
   visitedViews: [],
-  cachedViews: []
+  cachedViews: [],
+  iframeViews: []
 }
 
 const mutations = {
+  ADD_IFRAME_VIEW: (state, view) => {
+    if (state.iframeViews.some(v => v.path === view.path)) return
+    state.iframeViews.push(
+      Object.assign({}, view, {
+        title: view.meta.title || 'no-name'
+      })
+    )
+  },
   ADD_VISITED_VIEW: (state, view) => {
     if (state.visitedViews.some(v => v.path === view.path)) return
     state.visitedViews.push(
@@ -26,6 +35,9 @@ const mutations = {
         break
       }
     }
+  },
+  DEL_IFRAME_VIEW: (state, view) => {
+    state.iframeViews = state.iframeViews.filter(item => item.path !== view.path)
   },
   DEL_CACHED_VIEW: (state, view) => {
     const index = state.cachedViews.indexOf(view.name)
@@ -50,6 +62,7 @@ const mutations = {
     // keep affix tags
     const affixTags = state.visitedViews.filter(tag => tag.meta.affix)
     state.visitedViews = affixTags
+    state.iframeViews = []
   },
   DEL_ALL_CACHED_VIEWS: state => {
     state.cachedViews = []
@@ -77,6 +90,10 @@ const mutations = {
       if (i > -1) {
         state.cachedViews.splice(i, 1)
       }
+      if(item.meta.link) {
+        const fi = state.iframeViews.findIndex(v => v.path === item.path)
+        state.iframeViews.splice(fi, 1)
+      }
       return false
     })
   },
@@ -94,6 +111,10 @@ const mutations = {
       if (i > -1) {
         state.cachedViews.splice(i, 1)
       }
+      if(item.meta.link) {
+        const fi = state.iframeViews.findIndex(v => v.path === item.path)
+        state.iframeViews.splice(fi, 1)
+      }
       return false
     })
   }
@@ -103,6 +124,9 @@ const actions = {
   addView({ dispatch }, view) {
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
+  },
+  addIframeView({ commit }, view) {
+    commit('ADD_IFRAME_VIEW', view)
   },
   addVisitedView({ commit }, view) {
     commit('ADD_VISITED_VIEW', view)
@@ -125,6 +149,12 @@ const actions = {
     return new Promise(resolve => {
       commit('DEL_VISITED_VIEW', view)
       resolve([...state.visitedViews])
+    })
+  },
+  delIframeView({ commit, state }, view) {
+    return new Promise(resolve => {
+      commit('DEL_IFRAME_VIEW', view)
+      resolve([...state.iframeViews])
     })
   },
   delCachedView({ commit, state }, view) {

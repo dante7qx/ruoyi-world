@@ -300,6 +300,10 @@ export default {
       });
       listDeptExcludeChild(row.deptId).then(response => {
         this.deptOptions = this.handleTree(response.data, "deptId");
+        if (this.deptOptions.length == 0) {
+          const noResultsOptions = { deptId: this.form.parentId, deptName: this.form.parentName, children: [] };
+          this.deptOptions.push(noResultsOptions);
+        }
       });
     },
     /** 提交按钮 */
