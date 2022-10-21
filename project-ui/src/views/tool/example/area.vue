@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="app-container">
 		<h2>地区选择 - views/tool/example/area.vue</h2>
 		<el-form ref="form" :model="form" :rules="rules" label-width="80px">
 			<el-form-item label="地区" prop="areaData">
