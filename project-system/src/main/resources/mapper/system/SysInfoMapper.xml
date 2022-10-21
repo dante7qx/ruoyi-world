@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="SysInfo" id="SysInfoResult">
         <result property="infoId"    column="info_id"    />
         <result property="title"    column="title"    />
+        <result property="subTitle"    column="sub_title"    />
         <result property="cover"    column="cover"    />
         <result property="content"    column="content"    />
         <result property="type"    column="type"    />
@@ -22,13 +23,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysInfoVo">
-        select info_id, title, cover, content, type, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
+        select info_id, title, sub_title, cover, content, type, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
     </sql>
+    
+     <sql id="selectSysInfo4ViewVo">
+        select t.info_id, t.title, t.sub_title, t.cover, t.content, t.type, t.set_top, t.anonymous, t.publish_time, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
+        from sys_info t
+        left join sys_info_range t1 on t1.info_id = t.info_id 
+    </sql>
+    
 
     <select id="selectSysInfoList" parameterType="SysInfo" resultMap="SysInfoResult">
         <include refid="selectSysInfoVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="subTitle != null  and subTitle != ''"> and sub_title like concat('%', #{subTitle}, '%')</if>
             <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="setTop != null "> and set_top = #{setTop}</if>
             <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
@@ -37,6 +46,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="anonymous != null  and anonymous != ''"> and anonymous = #{anonymous}</if>
         </where>
         order by disabled asc, set_top desc, publish_time desc
+    </select>
+    
+    <select id="selectSysInfoList4View" parameterType="SysInfo" resultMap="SysInfoResult">
+    	<include refid="selectSysInfo4ViewVo"/>
+    	<where>
+    		t.status = 2 and t.disabled = 0 
+			and
+			(
+				t.anonymous = 1 or 
+				(
+					t.anonymous = 0 and exists (select 1 from sys_dept d where d.dept_id = #{loginDeptId} and (d.dept_id = t1.dept_id or find_in_set(t1.dept_id, d.ancestors))) 
+				)
+			)
+			<if test="title != null  and title != ''"> and t.title like concat('%', #{title}, '%')</if>
+            <if test="type != null  and type != ''"> and t.type = #{type}</if>
+            <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and t.publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
+    	</where>
+    	order by disabled asc, set_top desc, publish_time desc
     </select>
     
     <select id="selectSysInfoByInfoId" parameterType="Long" resultMap="SysInfoResult">
@@ -48,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into sys_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null">title,</if>
+            <if test="subTitle != null">sub_title,</if>
             <if test="cover != null">cover,</if>
             <if test="content != null">content,</if>
             <if test="type != null">type,</if>
@@ -63,6 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title != null">#{title},</if>
+            <if test="subTitle != null">#{subTitle},</if>
             <if test="cover != null">#{cover},</if>
             <if test="content != null">#{content},</if>
             <if test="type != null">#{type},</if>
@@ -82,6 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update sys_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>
+            <if test="subTitle != null">sub_title = #{subTitle},</if>
             <if test="cover != null">cover = #{cover},</if>
             <if test="content != null">content = #{content},</if>
             <if test="type != null">type = #{type},</if>

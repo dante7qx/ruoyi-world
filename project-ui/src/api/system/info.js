@@ -9,10 +9,21 @@ export function listInfo(query) {
   })
 }
 
+
+
 // 查询待审批信息发布列表（信息管理员可见）
 export function listApproval(query) {
   return request({
     url: '/system/info/list_approval',
+    method: 'get',
+    params: query
+  })
+}
+
+// 查询信息发布浏览列表
+export function listInfo4View(query) {
+  return request({
+    url: '/system/info/list_view',
     method: 'get',
     params: query
   })

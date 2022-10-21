@@ -534,8 +534,8 @@ insert into sys_dict_data values(8,  1,  '正常',     '0',       'sys_job_statu
 insert into sys_dict_data values(9,  2,  '暂停',     '1',       'sys_job_status',      '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '停用状态');
 insert into sys_dict_data values(10, 1,  '默认',     'DEFAULT', 'sys_job_group',       '',   '',        'Y', '0', 'admin', sysdate(), '', null, '默认分组');
 insert into sys_dict_data values(11, 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'admin', sysdate(), '', null, '系统分组');
-insert into sys_dict_data values(12, 1,  '是',       'Y',       'sys_yes_no',          '',   'primary', 'Y', '0', 'admin', sysdate(), '', null, '系统默认是');
-insert into sys_dict_data values(13, 2,  '否',       'N',       'sys_yes_no',          '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '系统默认否');
+insert into sys_dict_data values(12, 1,  '是',       '1',       'sys_yes_no',          '',   'primary', 'Y', '0', 'admin', sysdate(), '', null, '系统默认是');
+insert into sys_dict_data values(13, 2,  '否',       '0',       'sys_yes_no',          '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '系统默认否');
 insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'admin', sysdate(), '', null, '新闻');
 insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'admin', sysdate(), '', null, '公告');
 insert into sys_dict_data values(18, 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'admin', sysdate(), '', null, '新增操作');
@@ -549,6 +549,7 @@ insert into sys_dict_data values(25, 8,  '生成代码', '8',       'sys_oper_ty
 insert into sys_dict_data values(26, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '清空操作');
 insert into sys_dict_data values(27, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'admin', sysdate(), '', null, '正常状态');
 insert into sys_dict_data values(28, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '停用状态');
+insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_model',   '',   '', 'N', '0', 'admin', sysdate(), '', null, '信息发布');
 
 
 -- ----------------------------
@@ -569,12 +570,12 @@ create table sys_config (
   primary key (config_id)
 ) engine=innodb auto_increment=100 comment = '参数配置表';
 
-insert into sys_config values(1, '主框架页-默认皮肤样式名称',     'sys.index.skinName',            'skin-blue',     'Y', 'admin', sysdate(), '', null, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
-insert into sys_config values(2, '用户管理-账号初始密码',         'sys.user.initPassword',         '123456',        'Y', 'admin', sysdate(), '', null, '初始化密码 123456' );
-insert into sys_config values(3, '主框架页-侧边栏主题',           'sys.index.sideTheme',           'theme-dark',    'Y', 'admin', sysdate(), '', null, '深色主题theme-dark，浅色主题theme-light' );
-insert into sys_config values(4, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',          'Y', 'admin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
-insert into sys_config values(5, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         'Y', 'admin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
-insert into sys_config values(6, '短信发送标识码',               'sys.sms.sendModelID',           '123456',         'Y', 'admin', sysdate(), '', null, '短信发送标识（向领导申请）');
+insert into sys_config values(1, '主框架页-默认皮肤样式名称',     'sys.index.skinName',            'skin-blue',     '1', 'admin', sysdate(), '', null, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
+insert into sys_config values(2, '用户管理-账号初始密码',         'sys.user.initPassword',         '123456',        '1', 'admin', sysdate(), '', null, '初始化密码 123456' );
+insert into sys_config values(3, '主框架页-侧边栏主题',           'sys.index.sideTheme',           'theme-dark',    '1', 'admin', sysdate(), '', null, '深色主题theme-dark，浅色主题theme-light' );
+insert into sys_config values(4, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',          '1', 'admin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
+insert into sys_config values(5, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'admin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
+insert into sys_config values(6, '短信发送标识码',               'sys.sms.sendModelID',           '123456',         '1', 'admin', sysdate(), '', null, '短信发送标识（向领导申请）');
 
 
 -- ----------------------------
@@ -637,7 +638,6 @@ create table sys_job_log (
   primary key (job_log_id)
 ) engine=innodb comment = '定时任务调度日志表';
 
-
 -- ----------------------------
 -- 17、信息发布表
 -- ----------------------------
@@ -645,6 +645,7 @@ drop table if exists sys_info;
 create table sys_info (
   info_id     		bigint(20)       not null auto_increment   comment '信息id',
   title             varchar(128)     default ''                comment '标题',
+  sub_title         varchar(64)      default ''                comment '副标题',
   cover				varchar(256)     default ''                comment '封面',
   content           text             		               	   comment '内容',
   type           	varchar(24)      default ''                comment '类型',
@@ -666,7 +667,7 @@ create table sys_info_range (
   range_id          bigint(20)      not null auto_increment   comment '访问范围id',
   info_id     		bigint(20)      not null				  comment '信息发布id',
   dept_id 			bigint(20)      not null				  comment '部门id',
-  primary key (id)
+  primary key (range_id)
 ) engine=innodb auto_increment=1 comment = '信息访问范围'; 
 
 -- ----------------------------

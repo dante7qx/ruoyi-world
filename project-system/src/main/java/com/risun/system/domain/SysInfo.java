@@ -31,6 +31,10 @@ public class SysInfo extends BaseEntity
     @Excel(name = "标题")
     private String title;
     
+    /** 副标题 */
+    @Excel(name = "副标题")
+    private String subTitle;
+    
     /** 封面 */
     @Excel(name = "封面")
     private String cover;
@@ -72,7 +76,9 @@ public class SysInfo extends BaseEntity
     private Boolean approval = Boolean.FALSE;
     /** 访问范围部门id */
     private Long[] rangeDeptIds;
-
+    /** 登录用户部门 */
+    private Long loginDeptId;
+    
     public void setInfoId(Long infoId) 
     {
         this.infoId = infoId;
@@ -91,7 +97,16 @@ public class SysInfo extends BaseEntity
     {
         return title;
     }
-    public void setContent(String content) 
+    
+    public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public void setContent(String content) 
     {
         this.content = content;
     }
@@ -192,6 +207,14 @@ public class SysInfo extends BaseEntity
 
 	public void setRangeDeptIds(Long[] rangeDeptIds) {
 		this.rangeDeptIds = rangeDeptIds;
+	}
+
+	public Long getLoginDeptId() {
+		return loginDeptId;
+	}
+
+	public void setLoginDeptId(Long loginDeptId) {
+		this.loginDeptId = loginDeptId;
 	}
 
 	@Override

@@ -26,6 +26,14 @@ public interface ISysInfoService
      * @return 信息发布集合
      */
     public List<SysInfo> selectSysInfoList(SysInfo sysInfo);
+    
+    /**
+     * 查询信息发布浏览列表
+     * 
+     * @param sysInfo 信息发布
+     * @return 信息发布集合
+     */
+    public List<SysInfo> selectSysInfoList4View(SysInfo sysInfo);
 
     /**
      * 新增信息发布

@@ -60,6 +60,17 @@ public class SysInfoController extends BaseController
         List<SysInfo> list = sysInfoService.selectSysInfoList(sysInfo);
         return getDataTable(list);
     }
+    
+    /**
+     * 查询信息发布浏览列表
+     */
+    @GetMapping("/list_view")
+    public TableDataInfo list4View(SysInfo sysInfo)
+    {
+        startPage();
+        List<SysInfo> list = sysInfoService.selectSysInfoList4View(sysInfo);
+        return getDataTable(list);
+    }
 
     /**
      * 导出信息发布列表

@@ -4,6 +4,9 @@
       <el-form-item label="标题" prop="title">
         <el-input v-model="form.title" placeholder="请输入标题" maxlength="128" show-word-limit :disabled="disabled"/>
       </el-form-item>
+      <el-form-item label="副标题" prop="subTitle">
+        <el-input v-model="form.subTitle" placeholder="请输入副标题" maxlength="64" show-word-limit :disabled="disabled"/>
+      </el-form-item>
       <el-form-item label="类型" prop="type">
         <el-select v-model="form.type" placeholder="请选择类型" :disabled="disabled">
           <el-option
@@ -122,6 +125,7 @@ export default {
       this.form = {
         infoId: null,
         title: null,
+        subTitle: null,
         content: null,
         type: null,
         setTop: 0,

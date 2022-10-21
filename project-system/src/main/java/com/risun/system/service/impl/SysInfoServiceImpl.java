@@ -57,6 +57,18 @@ public class SysInfoServiceImpl implements ISysInfoService
     {
         return sysInfoMapper.selectSysInfoList(sysInfo);
     }
+    
+    /**
+     * 查询信息发布浏览列表
+     * 
+     * @param sysInfo 信息发布
+     * @return 信息发布集合
+     */
+    @Override
+    public List<SysInfo> selectSysInfoList4View(SysInfo sysInfo) {
+    	sysInfo.setLoginDeptId(SecurityUtils.getDeptId());
+    	return sysInfoMapper.selectSysInfoList4View(sysInfo);
+    }
 
     /**
      * 新增信息发布
@@ -232,6 +244,8 @@ public class SysInfoServiceImpl implements ISysInfoService
     		info.setUpdateBy(SecurityUtils.getUsername());
     		info.setUpdateTime(DateUtils.getNowDate());
     		result += sysInfoMapper.setAnonymousSysInfo(info);
+//    		清除访问范围
+//    		sysInfoRangeMapper.deleteSysInfoRangeByInfoId(id);
     	}
     	return result;
     }

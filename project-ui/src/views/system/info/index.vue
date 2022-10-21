@@ -1,39 +1,86 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="标题" prop="title">
-        <el-input
-          v-model="queryParams.title"
-          placeholder="请输入标题"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="类型" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择类型" clearable>
-          <el-option
-            v-for="dict in dict.type.sys_info_type"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="发布时间" v-if="queryStatus == 2">
-        <el-date-picker
-          v-model="daterangePublishTime"
-          style="width: 240px"
-          value-format="yyyy-MM-dd"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
+      <el-row>
+        <el-col :span="6">
+          <el-form-item label="标题" prop="title">
+            <el-input
+              v-model="queryParams.title"
+              placeholder="请输入标题"
+              clearable
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="类型" prop="type">
+            <el-select v-model="queryParams.type" placeholder="请选择类型" clearable>
+              <el-option
+                v-for="dict in dict.type.sys_info_type"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="发布时间" v-if="queryStatus == 2">
+            <el-date-picker
+              v-model="daterangePublishTime"
+              style="width: 240px"
+              value-format="yyyy-MM-dd"
+              type="daterange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            ></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="置顶" prop="setTop" v-if="queryStatus == 2">
+            <el-select v-model="queryParams.setTop" placeholder="请选择" clearable>
+              <el-option
+                v-for="dict in dict.type.sys_yes_no"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+      
+        <el-col :span="6">
+          <el-form-item label="匿名访问" prop="anonymous" v-if="queryStatus == 2">
+            <el-select v-model="queryParams.anonymous" placeholder="请选择" clearable>
+              <el-option
+                v-for="dict in dict.type.sys_yes_no"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="停用" prop="disabled" v-if="queryStatus == 2">
+            <el-select v-model="queryParams.disabled" placeholder="请选择" clearable>
+              <el-option
+                v-for="dict in dict.type.sys_yes_no"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item>
+            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
@@ -182,12 +229,12 @@
         </template>
       </el-table-column>
       <el-table-column label="标题" align="center" prop="title" />
+      <el-table-column label="副标题" align="center" prop="subTitle" />
       <el-table-column label="封面" align="center" prop="cover" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.cover" :width="50" :height="50"/>
         </template>
       </el-table-column>
-      <el-table-column label="内容" align="center" prop="content" v-if="false"/>
       <el-table-column label="已置顶" align="center" prop="setTop" v-if="queryStatus==2" width="60">
         <template slot-scope="scope">
           {{ scope.row.setTop == 0 ? '否' : '是' }}
@@ -289,7 +336,7 @@
 
     <!-- 审批对话框-->
     <el-dialog title="审批" :visible.sync="openApproval" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form ref="formApproval" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="发布时间" prop="publishTime" v-if="pass">
           <el-date-picker clearable
             v-model="form.publishTime"
@@ -312,7 +359,7 @@
 
     <!-- 访问范围对话框-->
     <el-dialog title="设置访问范围" :visible.sync="openRange" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form ref="formRange" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="访问范围" prop="rangeDeptIds">
           <treeselect 
             v-model="form.rangeDeptIds" 
@@ -348,7 +395,7 @@ export default {
     Treeselect,
     "detail": Detail
   },
-  dicts: ['sys_info_type'],
+  dicts: ['sys_info_type', 'sys_yes_no'],
   data() {
     return {
       statusMap: {
@@ -383,6 +430,8 @@ export default {
         title: null,
         type: null,
         setTop: null,
+        anonymous: null,
+        disabled: null,
         publishTime: null,
         status: null,
       },
@@ -463,6 +512,17 @@ export default {
     resetQuery() {
       this.daterangePublishTime = [];
       this.resetForm("queryForm");
+      this.queryParams = {
+        pageNum: 1,
+        pageSize: 10,
+        title: null,
+        type: null,
+        setTop: null,
+        anonymous: null,
+        disabled: null,
+        publishTime: null,
+        status: null,
+      },
       this.handleQuery();
     },
     handleSelectionChange(selection) {
@@ -500,7 +560,6 @@ export default {
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
     },
-    /** 导出按钮操作 */
     handleExport() {
       this.download('system/info/export', {
         ...this.queryParams
@@ -534,7 +593,7 @@ export default {
       }
     },
     approvalSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["formApproval"].validate(valid => {
         if (valid) {
           this.form.ids = this.ids;
           this.form.approval = this.pass;
@@ -594,18 +653,17 @@ export default {
         this.loadInfoRange(this.form.ids[0])
       }
       this.openRange = true
-      
     },
     rangeSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["formRange"].validate(valid => {
         if (valid) {
           setRangeInfo(this.form).then(res => {
+            this.getList();
+            this.cancelRange();
             this.$modal.msgSuccess("设置成功");
-            this.cancelRange()
           })
         }
       });
-       
     },
     cancelRange() {
       this.openRange = false
