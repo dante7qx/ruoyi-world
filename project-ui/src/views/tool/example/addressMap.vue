@@ -1,6 +1,6 @@
 <template>
 	<div class="app-container">
-    <h2>地区选择 - views/tool/example/addressMap.vue</h2>
+    <h2>地址地图 - views/tool/example/addressMap.vue</h2>
     <el-button type="primary" @click="openDialog">打 开</el-button>
     <el-descriptions title="地址信息" :column="2" style="margin-top: 15px;">
       <el-descriptions-item label="经度">{{ form.lat }}</el-descriptions-item>
