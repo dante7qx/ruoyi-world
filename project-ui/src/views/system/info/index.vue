@@ -129,7 +129,7 @@
           >导出</el-button>
         </el-col>
       </div>
-      <div v-if="queryStatus==1 && checkRole(['info_record', 'info_mgr'])">
+      <div v-if="queryStatus==1 && checkRole(['info_mgr'])">
         <el-col :span="1.5">
           <el-button
             type="success"
@@ -153,7 +153,7 @@
           >批量驳回</el-button>
         </el-col>
       </div>
-      <div v-if="queryStatus==2 && checkRole(['info_mgr'])">
+      <div v-if="queryStatus==2 && checkRole(['info_record','info_mgr'])">
         <el-col :span="1.5">
           <el-button
             type="primary"
@@ -295,8 +295,6 @@
             type="text"
             icon="el-icon-view"
             @click="handleViewDetail(scope.row)"
-            v-hasPermi="['system:info:edit']"
-            v-hasRole="['info_record', 'info_mgr']"
             v-if="queryStatus == 2"
           >详情</el-button>
           <el-button

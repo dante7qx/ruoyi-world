@@ -152,7 +152,7 @@ mail:
 
 - 修改系统参数
 
-![sms](./image/sms.png)
+<img src="./image/sms.png" alt="sms" style="zoom:40%;" />
 
 - 短信服务类 `SmsFactory`，测试类 `SmsFactoryTests`
 
@@ -178,4 +178,75 @@ BaseURI：`/risun/monitor`，请求方式：POST
 | 每日核心业务数据新增数 | /business_increase_count/{queryDate} | 查询日期，格式必须为 yyyyMMdd | 未实现，需业务系统自行实现 |
 
 ### 11. 信息发布
+
+框架添加了信息发布功能，包含信息草稿、审批、发布、浏览功能。菜单位于**系统管理 —> 信息管理**。
+
+涉及角色：信息录入员、信息管理员
+
+功能权限说明：
+
+| 功能                                                       | 角色                             |
+| ---------------------------------------------------------- | -------------------------------- |
+| 新增、修改、删除                                           | 信息录入员（√）  信息管理员（√） |
+| 批量通过、批量驳回、通过、驳回                             | 信息录入员（X）  信息管理员（√） |
+| 设置匿名访问、取消匿名访问、设置访问范围、启用、停用、置顶 | 信息录入员（√）  信息管理员（√） |
+
+其他说明：
+
+- 置顶：同时只能有一条记录被置顶。
+
+- 设置访问范围后，匿名访问会被取消。
+
+### 12. 代码示例
+
+框架添加了代码示例菜单（系统工具—> 代码示例），包含了日常开发中一些通用、特别的功能，便于开发人员参考。
+
+<img src="./image/code.png" alt="code" style="zoom:50%;" />
+
+### 13. 增强工具
+
+- Word导出
+
+  添加依赖Poi-tl 1.10.4
+
+- Word转PDF
+
+  工具类Word2PdfUtil.java，测试类Word2PdfUtilTests
+
+- Hutool
+
+  添加依赖 Hutool 5.8.4。官网：https://hutool.cn/docs
+
+  开发时，不要去写太多的工具类，Hutool包含的工具类已经覆盖了99%的场景，我们只需写业务相关的工具类。
+
+- 汉字转拼音工具类
+
+  添加依赖 pinyin4j 2.5.0，工具类PinyinUtil.java
+
+- 添加 lombok 插件
+
+- Moment.js
+
+  添加 Moment.js 2.29.4，前端日期处理类库。官网：http://momentjs.cn
+
+  ```js
+  this.$moment(new Date()).format("YYYY-MM-DD")	// 2022-10-24
+  ```
+
+- 集成jsencrypt实现密码加密传输方式
+
+  ```js
+  import { encrypt, decrypt } from '@/utils/jsencrypt'
+  
+  encrypt(this.loginForm.password)
+  decrypt(this.loginForm.password)
+  ```
+
+### 14. 代码生成
+
+框架对代码生成进行了修改，修改内容如下
+
+- 列表页和详情页分离，便于组件化开发。
+- 添加查看按钮及相关逻辑。
+- 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`
 

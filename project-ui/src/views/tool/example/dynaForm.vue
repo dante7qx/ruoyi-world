@@ -1,6 +1,6 @@
 <template>
 	<div class="app-container">
-    <h2>动态生成新表单并添加验证 - views/tool/example/dynaForm.vue</h2>
+    <h2>动态表单（验证）、身份证验证及出生日期、性别提取 - views/tool/example/dynaForm.vue</h2>
     
     <el-form :model="form" :inline="true" ref="form" label-width="110px" size="medium">
       <el-row v-for="(item,index) in form.list" :key="index">
