@@ -9,7 +9,7 @@
     <el-descriptions title="地址信息 - (开发时需要设计经度、纬度、地址三个字段，保存入库)" :column="1" style="margin-top: 15px;">
       <el-descriptions-item label="经度">{{ form.lat }}</el-descriptions-item>
       <el-descriptions-item label="纬度">{{ form.lng }}</el-descriptions-item>
-      <el-descriptions-item label="地址详情">{{ form.address }}</el-descriptions-item>
+      <el-descriptions-item label="地址">{{ form.address }}</el-descriptions-item>
     </el-descriptions>
 
     <el-dialog :title="title" :visible.sync="open" width="60%" append-to-body>

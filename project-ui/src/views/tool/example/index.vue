@@ -14,25 +14,27 @@
 			</el-submenu>
 			<el-menu-item index="addressMap">坐标识取</el-menu-item>
 			<el-submenu index="2">
-				<template slot="title">其他</template>
-				<el-menu-item index="21">选项1</el-menu-item>
-				<el-menu-item index="22">选项2</el-menu-item>
+				<template slot="title">表单</template>
+				<el-menu-item index="dynaForm">动态表单</el-menu-item>
 			</el-submenu>
 		</el-menu>
-		<code-area :key="activeIndex" v-if="activeIndex=='area'" />
-		<address-map :key="activeIndex" v-if="activeIndex=='addressMap'" />
+		<code-area v-if="activeIndex=='area'" />
+		<address-map v-else-if="activeIndex=='addressMap'" />
+		<dyna-form v-if="activeIndex=='dynaForm'" />
 	</div>
 </template>
 
 <script>
 import Area from './area'
 import AddressMap from './addressMap'
+import DynaForm from './dynaForm'
 
 export default {
   name: "CodeExample",
 	components: {
 		'code-area' : Area,
-		'address-map': AddressMap
+		'address-map': AddressMap,
+		'dyna-form': DynaForm
 	},
 	data() {
     return {

@@ -16,3 +16,11 @@ export function submitData(data) {
     data: data
   })
 }
+
+// 清空表单数据
+export function clearData(key) {
+  return request({
+    url: '/tool/codeexample/clear/' + key,
+    method: 'post'
+  })
+}

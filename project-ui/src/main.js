@@ -18,7 +18,7 @@ import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
-import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/risun";
+import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/risun";
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import vueAwesomeCountdown from 'vue-awesome-countdown'
@@ -48,6 +48,7 @@ import AddressMapSelect from '@/components/AddressMapSelect'
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
 Vue.prototype.parseTime = parseTime
+Vue.prototype.parseIdCard = parseIdCard
 Vue.prototype.resetForm = resetForm
 Vue.prototype.addDateRange = addDateRange
 Vue.prototype.selectDictLabel = selectDictLabel
@@ -75,15 +76,6 @@ DictData.install()
 
 // 模态框点击空白不消失
 Element.Dialog.props.closeOnClickModal.default = false
-
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
- */
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size

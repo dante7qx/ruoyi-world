@@ -47,4 +47,11 @@ public class CodeExampleController extends BaseController {
 		return AjaxResult.success();
 	}
 	
+	/**
+	 *  清空数据
+	 */
+	@PostMapping("/clear/{key}")
+	public AjaxResult clear(@PathVariable String key) {
+		return AjaxResult.success(CACHE_MAP.remove(key));
+	}
 }
