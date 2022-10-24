@@ -160,13 +160,14 @@ insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       's
 insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'admin', sysdate(), '', null, '参数设置菜单');
 insert into sys_menu values('107',  '信息管理', '1',   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'admin', sysdate(), '', null, '信息管理菜单');
 insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'admin', sysdate(), '', null, '系统业务附件菜单');
-insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                       'log',           'admin', sysdate(), '', null, '日志管理菜单');
+insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                        '', 1, 0, 'M', '0', '0', '',                       'log',           'admin', sysdate(), '', null, '日志管理菜单');
 insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'admin', sysdate(), '', null, '在线用户菜单');
 insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'admin', sysdate(), '', null, '定时任务菜单');
 insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'admin', sysdate(), '', null, '数据监控菜单');
 insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'admin', sysdate(), '', null, '服务监控菜单');
 insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'admin', sysdate(), '', null, '缓存监控菜单');
 insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'admin', sysdate(), '', null, '缓存列表菜单');
+insert into sys_menu values('120',  '审批记录', '2',   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'admin', sysdate(), '', null, '审批记录菜单');
 insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'admin', sysdate(), '', null, '表单构建菜单');
 insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'admin', sysdate(), '', null, '代码生成菜单');
 insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'swagger',       'admin', sysdate(), '', null, '系统接口菜单');
@@ -499,6 +500,7 @@ insert into sys_dict_type values(7,  '信息类型', 'sys_info_type',       '0',
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
 insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'admin', sysdate(), '', null, '业务模块列表');
+insert into sys_dict_type values(12, '审批类型', 'sys_approval_type',   '0', 'admin', sysdate(), '', null, '审批类型列表');
 
 
 -- ----------------------------
@@ -550,7 +552,10 @@ insert into sys_dict_data values(25, 8,  '生成代码', '8',       'sys_oper_ty
 insert into sys_dict_data values(26, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '清空操作');
 insert into sys_dict_data values(27, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'admin', sysdate(), '', null, '正常状态');
 insert into sys_dict_data values(28, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '停用状态');
-insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_model',   '',   '', 'N', '0', 'admin', sysdate(), '', null, '信息发布');
+insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_model',       '',   '', 'N', '0', 'admin', sysdate(), '', null, '信息发布');
+insert into sys_dict_data values(30, 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'admin', sysdate(), '', null, '提交');
+insert into sys_dict_data values(31, 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'admin', sysdate(), '', null, '审批通过');
+insert into sys_dict_data values(32, 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'admin', sysdate(), '', null, '审批驳回');
 
 
 -- ----------------------------

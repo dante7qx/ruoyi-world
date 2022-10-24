@@ -23,9 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="bizModel != null  and bizModel != ''"> and biz_model = #{bizModel}</if>
             <if test="bizId != null "> and biz_id = #{bizId}</if>
-            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="comment != null  and comment != ''"> and comment like concat('%', #{comment}, '%')</if>
             <if test="operateType != null  and operateType != ''"> and operate_type = #{operateType}</if>
-            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
             <if test="params.beginOperateTime != null and params.beginOperateTime != '' and params.endOperateTime != null and params.endOperateTime != ''"> and operate_time between #{params.beginOperateTime} and #{params.endOperateTime}</if>
         </where>
     </select>
@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSysApprovalLogByLogId" parameterType="Long" resultMap="SysApprovalLogResult">
         <include refid="selectSysApprovalLogVo"/>
         where log_id = #{logId}
+        order by biz_id, operate_time desc
     </select>
         
     <insert id="insertSysApprovalLog" parameterType="SysApprovalLog" useGeneratedKeys="true" keyProperty="logId">
@@ -55,27 +56,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysApprovalLog" parameterType="SysApprovalLog">
-        update sys_approval_log
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="bizModel != null">biz_model = #{bizModel},</if>
-            <if test="bizId != null">biz_id = #{bizId},</if>
-            <if test="comment != null">comment = #{comment},</if>
-            <if test="operateType != null">operate_type = #{operateType},</if>
-            <if test="operator != null">operator = #{operator},</if>
-            <if test="operateTime != null">operate_time = #{operateTime},</if>
-        </trim>
-        where log_id = #{logId}
-    </update>
-
-    <delete id="deleteSysApprovalLogByLogId" parameterType="Long">
-        delete from sys_approval_log where log_id = #{logId}
-    </delete>
-
-    <delete id="deleteSysApprovalLogByLogIds" parameterType="String">
-        delete from sys_approval_log where log_id in 
-        <foreach item="logId" collection="array" open="(" separator="," close=")">
-            #{logId}
-        </foreach>
-    </delete>
 </mapper>
