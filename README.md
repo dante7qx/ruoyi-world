@@ -242,10 +242,15 @@ BaseURI：`/risun/monitor`，请求方式：POST
   decrypt(this.loginForm.password)
   ```
 
+- 地址地图选择组件
+
+  （前端）添加地址地图选择组件，`@/components/AddressMapSelect`。具体使用方式请参考代码示例。
+
 ### 14. 代码生成
 
 框架对代码生成进行了修改，修改内容如下
 
+- 去除PUT、DELETE方式的HTTP方法，替换为POST。（安全考量，https://cloud.tencent.com/developer/article/1472910）
 - 列表页和详情页分离，便于组件化开发。
 - 添加查看按钮及相关逻辑。
 - 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`
