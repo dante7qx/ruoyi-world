@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      poiaddress: null,
+      address: null,
       latlng: {
         lat: null,
         lng: null,
@@ -42,9 +42,8 @@ export default {
         return false
       }
       if (loc && loc.module === 'locationPicker') { // 防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
-        self.poiaddress = loc.poiaddress;
+        self.address = loc.poiaddress;
         self.latlng = loc.latlng;
-     /*   self.$emit('callback', loc)*/
       }
     }, false)
   },

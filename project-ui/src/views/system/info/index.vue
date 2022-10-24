@@ -383,7 +383,7 @@
 
 <script>
 import { listInfo, listApproval, batchApproval, setTopInfo, setDisabledInfo, setAnonymousInfo, setRangeInfo, getInfoRange, delInfo } from "@/api/system/info";
-import { deptTreeSelect } from "@/api/system/user";
+import { allDeptTreeSelect } from "@/api/system/user";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import Detail from "./detail"
@@ -472,7 +472,7 @@ export default {
   methods: {
     checkRole,
     loadDeptData() {
-      deptTreeSelect().then(res => {
+      allDeptTreeSelect().then(res => {
         this.deptOptions = res.data
       })
     },

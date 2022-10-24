@@ -1,8 +1,12 @@
 <template>
 	<div class="app-container">
     <h2>地址地图 - views/tool/example/addressMap.vue</h2>
-    <el-button type="primary" @click="openDialog">打 开</el-button>
-    <el-descriptions title="地址信息" :column="2" style="margin-top: 15px;">
+    
+    <el-input placeholder="请输入内容" v-model="form.address" style="width: 70%;">
+      <template slot="append"><el-button type="primary" @click="openDialog">打开地图</el-button></template>
+    </el-input>
+
+    <el-descriptions title="地址信息 - (开发时需要设计经度、纬度、地址三个字段，保存入库)" :column="1" style="margin-top: 15px;">
       <el-descriptions-item label="经度">{{ form.lat }}</el-descriptions-item>
       <el-descriptions-item label="纬度">{{ form.lng }}</el-descriptions-item>
       <el-descriptions-item label="地址详情">{{ form.address }}</el-descriptions-item>
@@ -38,7 +42,7 @@ export default {
     },
     submitForm() {
       const latlng = this.$refs.AddressMapSelect.latlng;
-      const address = this.$refs.AddressMapSelect.poiaddress;
+      const address = this.$refs.AddressMapSelect.address;
       this.form.address = address
       this.form.lat = latlng.lat
       this.form.lng = latlng.lng

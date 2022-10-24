@@ -133,3 +133,13 @@ export function deptTreeSelect() {
     method: 'get'
   })
 }
+
+// 查询所有部门下拉树结构
+export function allDeptTreeSelect() {
+  return request({
+    url: '/system/user/allDeptTree',
+    method: 'get'
+  })
+}
+
+
