@@ -45,8 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="setTop != null "> and set_top = #{setTop}</if>
             <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
-            <if test="disabled != null  and disabled != ''"> and disabled = #{disabled}</if>
-            <if test="anonymous != null  and anonymous != ''"> and anonymous = #{anonymous}</if>
+            <if test="disabled != null"> and disabled = #{disabled}</if>
+            <if test="anonymous != null"> and anonymous = #{anonymous}</if>
         </where>
         order by disabled asc, set_top desc, publish_time desc
     </select>
