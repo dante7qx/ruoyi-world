@@ -46,6 +46,14 @@ public class SysInfo extends BaseEntity
     /** 类型 */
     @Excel(name = "类型")
     private String type;
+    
+    /** 作者 */
+    @Excel(name = "作者")
+    private String author;
+    
+    /** 来源 */
+    @Excel(name = "来源")
+    private String source;
 
     /** 是否置顶 */
     @Excel(name = "是否置顶")
@@ -124,7 +132,24 @@ public class SysInfo extends BaseEntity
     {
         return type;
     }
-    public void setSetTop(Integer setTop) 
+    
+    public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public void setSetTop(Integer setTop) 
     {
         this.setTop = setTop;
     }

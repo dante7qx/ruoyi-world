@@ -11,6 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cover"    column="cover"    />
         <result property="content"    column="content"    />
         <result property="type"    column="type"    />
+        <result property="source"    column="source"    />
+        <result property="author"    column="author"    />
         <result property="setTop"    column="set_top"    />
         <result property="anonymous"    column="anonymous"    />
         <result property="publishTime"    column="publish_time"    />
@@ -23,11 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysInfoVo">
-        select info_id, title, sub_title, cover, content, type, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
+        select info_id, title, sub_title, cover, content, type, source, author, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
     </sql>
     
      <sql id="selectSysInfo4ViewVo">
-        select t.info_id, t.title, t.sub_title, t.cover, t.content, t.type, t.set_top, t.anonymous, t.publish_time, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
+        select t.info_id, t.title, t.sub_title, t.cover, t.content, t.type, t.set_top, t.source, t.author, t.anonymous, t.publish_time, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
         from sys_info t
         left join sys_info_range t1 on t1.info_id = t.info_id 
     </sql>
@@ -38,6 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
             <if test="subTitle != null  and subTitle != ''"> and sub_title like concat('%', #{subTitle}, '%')</if>
             <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="source != null  and source != ''"> and source like concat('%', #{source}, '%')</if>
+            <if test="author != null  and author != ''"> and author like concat('%', #{author}, '%')</if>
             <if test="setTop != null "> and set_top = #{setTop}</if>
             <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
@@ -69,6 +73,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSysInfoVo"/>
         where info_id = #{infoId}
     </select>
+    
+    <select id="selectSysInfo4ViewByInfoId" parameterType="Long" resultMap="SysInfoResult">
+        <include refid="selectSysInfo4ViewVo"/>
+        where t.info_id = #{infoId}
+        	 and t.status = 2 
+        	 and t.disabled = 0 
+        	 and
+			(
+				t.anonymous = 1 or 
+				(
+					t.anonymous = 0 and exists (select 1 from sys_dept d where d.dept_id = #{loginDeptId} and (d.dept_id = t1.dept_id or find_in_set(t1.dept_id, d.ancestors))) 
+				)
+			)
+    </select>
         
     <insert id="insertSysInfo" parameterType="SysInfo" useGeneratedKeys="true" keyProperty="infoId">
         insert into sys_info
@@ -78,6 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cover != null">cover,</if>
             <if test="content != null">content,</if>
             <if test="type != null">type,</if>
+            <if test="source != null">source,</if>
+            <if test="author != null">author,</if>
             <if test="setTop != null">set_top,</if>
             <if test="anonymous != null">anonymous,</if>
             <if test="publishTime != null">publish_time,</if>
@@ -94,6 +114,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cover != null">#{cover},</if>
             <if test="content != null">#{content},</if>
             <if test="type != null">#{type},</if>
+            <if test="source != null">#{source},</if>
+            <if test="author != null">#{author},</if>
             <if test="setTop != null">#{setTop},</if>
             <if test="anonymous != null">#{anonymous},</if>
             <if test="publishTime != null">#{publishTime},</if>
@@ -114,6 +136,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="cover != null">cover = #{cover},</if>
             <if test="content != null">content = #{content},</if>
             <if test="type != null">type = #{type},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="author != null">author = #{author},</if>
             <if test="setTop != null">set_top = #{setTop},</if>
             <if test="anonymous != null">anonymous = #{anonymous},</if>
             <if test="publishTime != null">publish_time = #{publishTime},</if>

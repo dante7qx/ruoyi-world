@@ -72,7 +72,7 @@
                 <template
                   v-slot:process="anyYouWantedScopName">
                     <span>{{ `${anyYouWantedScopName.timeObj.ceil.s} 秒` }}</span>
-                  </template>
+                </template>
                 <template v-slot:finish>
                     <span @click="sendSmsCode" style="cursor: pointer;">发送验证码</span>
                 </template>

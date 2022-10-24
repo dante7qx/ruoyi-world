@@ -18,6 +18,14 @@ public interface ISysInfoService
      * @return 信息发布
      */
     public SysInfo selectSysInfoByInfoId(Long infoId);
+    
+    /**
+     * 查询信息发布4浏览详情
+     * 
+     * @param infoId 信息发布主键
+     * @return 信息发布
+     */
+    public SysInfo selectSysInfo4ViewByInfoId(Long infoId);
 
     /**
      * 查询信息发布列表

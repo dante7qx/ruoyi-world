@@ -1,31 +1,52 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="标题" prop="title">
-        <el-input v-model="form.title" placeholder="请输入标题" maxlength="128" show-word-limit :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="副标题" prop="subTitle">
-        <el-input v-model="form.subTitle" placeholder="请输入副标题" maxlength="64" show-word-limit :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="类型" prop="type">
-        <el-select v-model="form.type" placeholder="请选择类型" :disabled="disabled">
-          <el-option
-            v-for="dict in dict.type.sys_info_type"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"            
-            style="width: 100%;"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="封面">
-        <image-upload v-model="form.cover" :limit="1" :fileSize="1" :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="内容" prop="content">
-        <editor v-model="form.content" :disabled="disabled"/>
-      </el-form-item>
-      
-	  </el-form>
+    <el-row>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-col :span="24">
+          <el-form-item label="标题" prop="title">
+            <el-input v-model="form.title" placeholder="请输入标题" maxlength="128" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="副标题" prop="subTitle">
+            <el-input v-model="form.subTitle" placeholder="请输入副标题" maxlength="64" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="类型" prop="type">
+            <el-select v-model="form.type" placeholder="请选择类型" :disabled="disabled">
+              <el-option
+                v-for="dict in dict.type.sys_info_type"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"            
+                style="width: 100%;"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="封面">
+            <image-upload v-model="form.cover" :limit="1" :fileSize="1" :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="来源" prop="source">
+            <el-input v-model="form.source" placeholder="请输入来源" maxlength="24" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="作者" prop="author">
+            <el-input v-model="form.author" placeholder="请输入作者" maxlength="12" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="内容" prop="content">
+            <editor v-model="form.content" :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+      </el-form>
+    </el-row>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm('0')" v-show="!disabled && !showApproval">确 定</el-button>
       <el-button type="success" @click="submitForm('1')" v-show="!disabled && !showApproval">提 交</el-button>

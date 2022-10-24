@@ -235,6 +235,8 @@
           <image-preview :src="scope.row.cover" :width="50" :height="50"/>
         </template>
       </el-table-column>
+      <el-table-column label="来源" align="center" prop="source" />
+      <el-table-column label="作者" align="center" prop="author" />
       <el-table-column label="已置顶" align="center" prop="setTop" v-if="queryStatus==2" width="60">
         <template slot-scope="scope">
           {{ scope.row.setTop == 0 ? '否' : '是' }}
@@ -564,7 +566,12 @@ export default {
       }, `info_${new Date().getTime()}.xlsx`)
     },
     handleViewDetail(row) {
-      this.$modal.msgSuccess("信息模板开发中...");
+      const routeUrl = this.$router.resolve({
+        path: '/publish-info-preview',
+        query: {id: row.infoId}
+
+      });
+      window.open(routeUrl.href)
     },
     closeFlowWin() {
       this.title = "";

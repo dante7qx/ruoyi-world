@@ -94,6 +94,15 @@ public class SysInfoController extends BaseController
     {
         return AjaxResult.success(sysInfoService.selectSysInfoByInfoId(infoId));
     }
+    
+    /**
+     * 获取信息发布详细信息4浏览
+     */
+    @PostMapping(value = "/view/{infoId}")
+    public AjaxResult getInfo4View(@PathVariable("infoId") Long infoId)
+    {
+        return AjaxResult.success(sysInfoService.selectSysInfo4ViewByInfoId(infoId));
+    }
 
     /**
      * 新增信息发布

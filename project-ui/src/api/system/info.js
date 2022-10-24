@@ -35,6 +35,14 @@ export function getInfo(infoId) {
   })
 }
 
+// 查询信息发布详细4浏览
+export function getInfo4View(infoId) {
+  return request({
+    url: '/system/info/view/' + infoId,
+    method: 'post'
+  })
+}
+
 // 新增信息发布
 export function addInfo(data) {
   return request({

@@ -45,6 +45,20 @@ public class SysInfoServiceImpl implements ISysInfoService
     {
         return sysInfoMapper.selectSysInfoByInfoId(infoId);
     }
+    
+    /**
+     * 查询信息发布4浏览详情
+     * 
+     * @param infoId 信息发布主键
+     * @return 信息发布
+     */
+    @Override
+    public SysInfo selectSysInfo4ViewByInfoId(Long infoId) {
+    	SysInfo sysInfo = new SysInfo();
+    	sysInfo.setInfoId(infoId);
+    	sysInfo.setLoginDeptId(SecurityUtils.getDeptId());
+    	return sysInfoMapper.selectSysInfo4ViewByInfoId(sysInfo);
+    }
 
     /**
      * 查询信息发布列表

@@ -1,49 +1,49 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-          <el-form-item label="标题" prop="title">
-            <el-input
-              v-model="queryParams.title"
-              placeholder="请输入标题"
-              clearable
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
-          <el-form-item label="类型" prop="type">
-            <el-select v-model="queryParams.type" placeholder="请选择类型" clearable>
-              <el-option
-                v-for="dict in dict.type.sys_info_type"
-                :key="dict.value"
-                :label="dict.label"
-                :value="dict.value"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="发布时间">
-            <el-date-picker
-              v-model="daterangePublishTime"
-              style="width: 220px"
-              value-format="yyyy-MM-dd"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="置顶" prop="setTop">
-            <el-select v-model="queryParams.setTop" placeholder="请选择" clearable>
-              <el-option
-                v-for="dict in dict.type.sys_yes_no"
-                :key="dict.value"
-                :label="dict.label"
-                :value="dict.value"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-          </el-form-item>
+      <el-form-item label="标题" prop="title">
+        <el-input
+          v-model="queryParams.title"
+          placeholder="请输入标题"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="类型" prop="type">
+        <el-select v-model="queryParams.type" placeholder="请选择类型" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_info_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="发布时间">
+        <el-date-picker
+          v-model="daterangePublishTime"
+          style="width: 220px"
+          value-format="yyyy-MM-dd"
+          type="daterange"
+          range-separator="-"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
+      </el-form-item>
+      <el-form-item label="置顶" prop="setTop">
+        <el-select v-model="queryParams.setTop" placeholder="请选择" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_yes_no"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+      </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
@@ -64,6 +64,8 @@
           <image-preview :src="scope.row.cover" :width="50" :height="50"/>
         </template>
       </el-table-column>
+      <el-table-column label="来源" align="center" prop="source" />
+      <el-table-column label="作者" align="center" prop="author" />
       <el-table-column label="已置顶" align="center" prop="setTop" width="60">
         <template slot-scope="scope">
           {{ scope.row.setTop == 0 ? '否' : '是' }}
@@ -157,7 +159,12 @@ export default {
       this.handleQuery();
     },
     handleViewDetail(row) {
-      this.$modal.msgSuccess("信息模板开发中...");
+      const routeUrl = this.$router.resolve({
+        path: '/publish-info-preview',
+        query: {id: row.infoId}
+
+      });
+      window.open(routeUrl.href)
     }
   }
 };

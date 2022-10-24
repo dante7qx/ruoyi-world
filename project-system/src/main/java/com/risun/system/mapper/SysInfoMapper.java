@@ -18,6 +18,14 @@ public interface SysInfoMapper
      * @return 信息发布
      */
     public SysInfo selectSysInfoByInfoId(Long infoId);
+    
+    /**
+     * 查询信息发布4浏览详情
+     * 
+     * @param sysInfo
+     * @return 信息发布
+     */
+    public SysInfo selectSysInfo4ViewByInfoId(SysInfo sysInfo);
 
     /**
      * 查询信息发布列表

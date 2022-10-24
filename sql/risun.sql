@@ -321,6 +321,7 @@ insert into sys_role_menu values ('2', '115');
 insert into sys_role_menu values ('2', '116');
 insert into sys_role_menu values ('2', '117');
 insert into sys_role_menu values ('2', '118');
+insert into sys_role_menu values ('2', '120');
 insert into sys_role_menu values ('2', '499');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');
@@ -655,6 +656,8 @@ create table sys_info (
   cover				varchar(256)     default ''                comment '封面',
   content           text             		               	   comment '内容',
   type           	varchar(24)      default ''                comment '类型',
+  source			varchar(24)      default ''                comment '来源',
+  author			varchar(16)      default ''                comment '作者',
   set_top			tinyint(1)       default 0                 comment '是否置顶',
   anonymous			tinyint(1)       default 0                 comment '是否匿名访问',
   publish_time 	    datetime                                   comment '发布时间',
