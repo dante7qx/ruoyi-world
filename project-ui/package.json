@@ -34,6 +34,7 @@
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",
     "@tinymce/tinymce-vue": "^3.2.8",
+    "@videojs/http-streaming": "^2.15.0",
     "axios": "0.24.0",
     "clipboard": "2.0.8",
     "core-js": "3.25.3",
@@ -54,6 +55,8 @@
     "screenfull": "5.0.2",
     "sortablejs": "1.10.2",
     "tinymce": "^5.10.5",
+    "video.js": "^7.20.3",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "2.6.12",
     "vue-awesome-countdown": "^1.1.4",
     "vue-count-to": "1.0.13",

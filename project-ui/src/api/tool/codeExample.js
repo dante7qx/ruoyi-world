@@ -24,3 +24,12 @@ export function clearData(key) {
     method: 'post'
   })
 }
+
+// 请求指定url
+export function fetchData(url) {
+  return request({
+    url: '/tool/codeexample/fetch',
+    method: 'post',
+    data: { url: url}
+  })
+}

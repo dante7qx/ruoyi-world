@@ -253,5 +253,9 @@ BaseURI：`/risun/monitor`，请求方式：POST
 - 去除PUT、DELETE方式的HTTP方法，替换为POST。（安全考量，https://cloud.tencent.com/developer/article/1472910）
 - 列表页和详情页分离，便于组件化开发。
 - 添加查看按钮及相关逻辑。
-- 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`
+- 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`。
+
+### 15. 审批记录
+
+框架设计了一个统一的审批记录表，`sys_approval_log`。当业务中有审批逻辑时，在 `sys_approval_log` 中插入一条数据。相关的处理类为`ISysOperLogService.java`、`ApprovalFlowConstats.java`。
 

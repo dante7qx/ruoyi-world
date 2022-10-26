@@ -7,6 +7,7 @@ import './assets/styles/element-variables.scss'
 
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
+import 'video.js/dist/video-js.css'  // video css
 import App from './App'
 import store from './store'
 import router from './router'
@@ -43,6 +44,8 @@ import VueMeta from 'vue-meta'
 import DictData from '@/components/DictData'
 // 地址地图选择组件
 import AddressMapSelect from '@/components/AddressMapSelect'
+// 视频播放组件
+import VideoPlayer from '@/components/Video' 
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -67,6 +70,7 @@ Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
 Vue.component('AddressMapSelect', AddressMapSelect)
+Vue.component('VideoPlayer', VideoPlayer)
 
 Vue.use(directive)
 Vue.use(plugins)

@@ -2,7 +2,7 @@
 	<div class="app-container">
     <h2>地址地图 - views/tool/example/addressMap.vue</h2>
     
-    <el-input placeholder="请输入内容" v-model="form.address" style="width: 70%;">
+    <el-input placeholder="请输入内容" v-model="form.address" style="width: 50%;">
       <template slot="append"><el-button type="primary" @click="openDialog">打开地图</el-button></template>
     </el-input>
 

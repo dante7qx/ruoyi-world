@@ -17,10 +17,12 @@
 				<template slot="title">表单</template>
 				<el-menu-item index="dynaForm">动态表单</el-menu-item>
 			</el-submenu>
+			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
 		</el-menu>
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
-		<dyna-form v-if="activeIndex=='dynaForm'" />
+		<dyna-form v-else-if="activeIndex=='dynaForm'" />
+		<code-video v-else-if="activeIndex=='videoMonitor'" />
 	</div>
 </template>
 
@@ -28,13 +30,15 @@
 import Area from './area'
 import AddressMap from './addressMap'
 import DynaForm from './dynaForm'
+import Video from './video'
 
 export default {
   name: "CodeExample",
 	components: {
 		'code-area' : Area,
 		'address-map': AddressMap,
-		'dyna-form': DynaForm
+		'dyna-form': DynaForm,
+		'code-video': Video,
 	},
 	data() {
     return {
