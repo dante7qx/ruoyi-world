@@ -244,7 +244,7 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
 - 地址地图选择组件
 
-  （前端）添加地址地图选择组件，`@/components/AddressMapSelect`。具体使用方式请参考代码示例。
+  （前端）框架添加地址地图选择组件，`@/components/AddressMapSelect`。具体使用方式请参考代码示例。
 
 ### 14. 代码生成
 
@@ -255,7 +255,14 @@ BaseURI：`/risun/monitor`，请求方式：POST
 - 添加查看按钮及相关逻辑。
 - 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`。
 
-### 15. 审批记录
+### 15. 视频播放组件
+
+（前端）框架添加视频播放组件，`@/components/Video`，可用于对接视频监控功能。具体使用方式请参考代码示例。
+
+### 16. 页面水印
+
+（前端）框架添加了页面水印功能。具体使用方式请参考代码示例。
+
+### 17. 审批记录
 
 框架设计了一个统一的审批记录表，`sys_approval_log`。当业务中有审批逻辑时，在 `sys_approval_log` 中插入一条数据。相关的处理类为`ISysOperLogService.java`、`ApprovalFlowConstats.java`。
-

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.hutool.core.util.URLUtil;
-import cn.hutool.http.HtmlUtil;
 import cn.hutool.http.HttpUtil;
 
 
