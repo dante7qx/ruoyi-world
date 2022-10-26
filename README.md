@@ -156,7 +156,13 @@ mail:
 
 - 短信服务类 `SmsFactory`，测试类 `SmsFactoryTests`
 
-### 9. 业务附件
+### 9. 登录增强
+
+框架对登录功能进行了增强，增加短信验证码登录方式。若只需要账号登录，将 `login.vue` 中的 `smsEnabled` 设为 false 即可。
+
+<img src="./image/login.png" alt="login" style="zoom:50%;" />
+
+### 10. 业务附件
 
 框架对附件上传功能进行了增强，新增附件表`sys_attachment`。使用时需要传递业务模块`bizModel`。
 
@@ -165,7 +171,7 @@ mail:
 <file-upload v-model="form.attachment" :bizModel="'<业务模块名>'" :disabled="disabled"/>
 ```
 
-### 10. 项目健康指数和客户活跃度感知
+### 11. 项目健康指数和客户活跃度感知
 
 框架添加项目健康指数和客户活跃度感知统一接口，用于检测已交付项目客户使用的活跃度。接口的实现类为 `SysMonitor4RisunController`，BaseURI 是 `/risun/monitor`，接口可匿名访问。
 
@@ -177,7 +183,7 @@ BaseURI：`/risun/monitor`，请求方式：POST
 | 每日新用户新增数       | /user_increase_count/{queryDate}     | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
 | 每日核心业务数据新增数 | /business_increase_count/{queryDate} | 查询日期，格式必须为 yyyyMMdd | 未实现，需业务系统自行实现 |
 
-### 11. 信息发布
+### 12. 信息发布
 
 框架添加了信息发布功能，包含信息草稿、审批、发布、浏览功能。菜单位于**系统管理 —> 信息管理**。
 
@@ -197,13 +203,13 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
 - 设置访问范围后，匿名访问会被取消。
 
-### 12. 代码示例
+### 13. 代码示例
 
 框架添加了代码示例菜单（系统工具—> 代码示例），包含了日常开发中一些通用、特别的功能，便于开发人员参考。
 
 <img src="./image/code.png" alt="code" style="zoom:50%;" />
 
-### 13. 增强工具
+### 14. 增强工具
 
 - Word导出
 
@@ -246,7 +252,7 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
   （前端）框架添加地址地图选择组件，`@/components/AddressMapSelect`。具体使用方式请参考代码示例。
 
-### 14. 代码生成
+### 15. 代码生成
 
 框架对代码生成进行了修改，修改内容如下
 
@@ -255,14 +261,14 @@ BaseURI：`/risun/monitor`，请求方式：POST
 - 添加查看按钮及相关逻辑。
 - 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`。
 
-### 15. 视频播放组件
+### 16. 视频播放组件
 
 （前端）框架添加视频播放组件，`@/components/Video`，可用于对接视频监控功能。具体使用方式请参考代码示例。
 
-### 16. 页面水印
+### 17. 页面水印
 
 （前端）框架添加了页面水印功能。具体使用方式请参考代码示例。
 
-### 17. 审批记录
+### 18. 审批记录
 
 框架设计了一个统一的审批记录表，`sys_approval_log`。当业务中有审批逻辑时，在 `sys_approval_log` 中插入一条数据。相关的处理类为`ISysOperLogService.java`、`ApprovalFlowConstats.java`。
