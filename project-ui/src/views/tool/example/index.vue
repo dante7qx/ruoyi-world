@@ -19,12 +19,14 @@
 			</el-submenu>
 			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
 			<el-menu-item index="watermark">页面水印</el-menu-item>
+			<el-menu-item index="calendar">日历</el-menu-item>
 		</el-menu>
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
 		<dyna-form v-else-if="activeIndex=='dynaForm'" />
 		<code-video v-else-if="activeIndex=='videoMonitor'" />
 		<water-mark v-else-if="activeIndex=='watermark'" />
+		<code-calendar v-else-if="activeIndex=='calendar'" />
 	</div>
 </template>
 
@@ -34,6 +36,7 @@ import AddressMap from './addressMap'
 import DynaForm from './dynaForm'
 import Video from './video'
 import Watermark from './watermark'
+import Calendar from './calendar'
 
 export default {
   name: "CodeExample",
@@ -42,7 +45,8 @@ export default {
 		'address-map': AddressMap,
 		'dyna-form': DynaForm,
 		'code-video': Video,
-		'water-mark': Watermark
+		'water-mark': Watermark,
+		'code-calendar': Calendar
 	},
 	data() {
     return {
