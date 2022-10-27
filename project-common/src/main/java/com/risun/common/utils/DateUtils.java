@@ -119,7 +119,6 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * 计算相差天数
 	 */
 	public static int differentDaysByMillisecond(Date date1, Date date2) {
-//		return Math.abs((int) ((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)));
 		return Integer.parseInt(DateUtil.between(date1, date2, DateUnit.DAY) + ""); 
 	}
 	
@@ -138,7 +137,6 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		for (int i = 1; i <= 12; i++) {
 			yearMonth.add(year + spliter[0] + (i < 10 ? "0" + i : i) + (spliter.length == 2 ? spliter[1] : ""));
 		}
-		System.out.println(spliter.length);
 		return yearMonth;
 	}
 	
