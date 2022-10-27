@@ -36,7 +36,7 @@
         <aspose-word.version>15.8.0</aspose-word.version>
         <hutool.version>5.8.9</hutool.version>
         <guava.version>31.1-jre</guava.version>
-        <pinyin4j.version>2.5.0</pinyin4j.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
     </properties>
 	
     <!-- 依赖声明 -->
