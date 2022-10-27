@@ -10,6 +10,9 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.compress.utils.Lists;
 
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
@@ -119,7 +122,26 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 //		return Math.abs((int) ((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)));
 		return Integer.parseInt(DateUtil.between(date1, date2, DateUnit.DAY) + ""); 
 	}
-
+	
+	/**
+	 * 获取指定年的所有月份
+	 * 
+	 * getYearMonth(2022, "-")
+	 * getYearMonth(2022, "年", "月")
+	 * 
+	 * @param year
+	 * @param spliter
+	 * @return
+	 */
+	public static List<String> getYearMonth(int year, String... spliter) {
+		List<String> yearMonth = Lists.newArrayList();
+		for (int i = 1; i <= 12; i++) {
+			yearMonth.add(year + spliter[0] + (i < 10 ? "0" + i : i) + (spliter.length == 2 ? spliter[1] : ""));
+		}
+		System.out.println(spliter.length);
+		return yearMonth;
+	}
+	
 	/**
 	 * 计算两个时间差（天、时、分、秒）
 	 */
