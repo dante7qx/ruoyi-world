@@ -212,4 +212,12 @@ public interface ISysUserService
      * @return 结果
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+    
+    /**
+     * 用户密码是否符合安全策略
+     * 
+     * @param unEncryptPassword
+     * @return
+     */
+    public void checkPasswordValid(String unEncryptPassword);
 }

@@ -3,7 +3,32 @@ package com.risun.system.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.validation.Validator;
+
+import com.risun.common.annotation.DataScope;
+import com.risun.common.constant.UserConstants;
+import com.risun.common.core.domain.entity.SysRole;
+import com.risun.common.core.domain.entity.SysUser;
+import com.risun.common.exception.ServiceException;
+import com.risun.common.utils.DateUtils;
+import com.risun.common.utils.SecurityUtils;
+import com.risun.common.utils.StringUtils;
+import com.risun.common.utils.bean.BeanValidators;
+import com.risun.common.utils.spring.SpringUtils;
+import com.risun.system.domain.SysPost;
+import com.risun.system.domain.SysUserPost;
+import com.risun.system.domain.SysUserPwdModify;
+import com.risun.system.domain.SysUserRole;
+import com.risun.system.mapper.SysPostMapper;
+import com.risun.system.mapper.SysRoleMapper;
+import com.risun.system.mapper.SysUserMapper;
+import com.risun.system.mapper.SysUserPostMapper;
+import com.risun.system.mapper.SysUserPwdModifyMapper;
+import com.risun.system.mapper.SysUserRoleMapper;
+import com.risun.system.service.ISysConfigService;
+import com.risun.system.service.ISysUserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +36,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.risun.common.annotation.DataScope;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
-import com.risun.common.utils.bean.BeanValidators;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.system.domain.SysPost;
-import com.risun.system.domain.SysUserPost;
-import com.risun.system.domain.SysUserRole;
-import com.risun.system.mapper.SysPostMapper;
-import com.risun.system.mapper.SysRoleMapper;
-import com.risun.system.mapper.SysUserMapper;
-import com.risun.system.mapper.SysUserPostMapper;
-import com.risun.system.mapper.SysUserRoleMapper;
-import com.risun.system.service.ISysConfigService;
-import com.risun.system.service.ISysUserService;
+import cn.hutool.core.util.ReUtil;
 
 /**
  * 用户 业务层处理
@@ -55,13 +62,16 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private SysUserPostMapper userPostMapper;
+    
+    @Autowired
+    private SysUserPwdModifyMapper sysUserPwdModifyMapper;
 
     @Autowired
     private ISysConfigService configService;
 
     @Autowired
     protected Validator validator;
-
+    
     /**
      * 根据条件分页查询用户列表
      * 
@@ -369,8 +379,10 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional
     public int resetPwd(SysUser user)
     {
+    	recordPwdModify(user.getUserId());
         return userMapper.updateUser(user);
     }
 
@@ -382,8 +394,11 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional
     public int resetUserPwd(String userName, String password)
     {
+    	SysUser user = userMapper.selectUserByUserName(userName);
+    	recordPwdModify(user.getUserId());
         return userMapper.resetUserPwd(userName, password);
     }
 
@@ -497,11 +512,13 @@ public class SysUserServiceImpl implements ISysUserService
         {
             throw new ServiceException("导入用户数据不能为空！");
         }
+        String password = configService.selectConfigByKey("sys.user.initPassword");
+        checkPasswordValid(password);
         int successNum = 0;
         int failureNum = 0;
         StringBuilder successMsg = new StringBuilder();
         StringBuilder failureMsg = new StringBuilder();
-        String password = configService.selectConfigByKey("sys.user.initPassword");
+        
         for (SysUser user : userList)
         {
             try
@@ -552,4 +569,39 @@ public class SysUserServiceImpl implements ISysUserService
         }
         return successMsg.toString();
     }
+    
+    /**
+     * 用户密码是否符合安全策略 (用户密码长度不能少于6位，包含字母、数字、特殊字符)
+     * 
+     * @param unEncryptPassword
+     * @return
+     */
+    public void checkPasswordValid(String unEncryptPassword) {
+    	if (!ReUtil.isMatch("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{6,}$", unEncryptPassword)) {
+    		throw new ServiceException("用户密码长度不能少于6位，包含字母、数字、特殊字符！");
+        }
+    }
+    
+    /**
+     * 记录密码修改记录
+     * 
+     * @param userId
+     */
+    public void recordPwdModify(Long userId) {
+    	boolean updated = true;
+    	SysUserPwdModify sysUserPwdModify = sysUserPwdModifyMapper.selectSysUserPwdModifyByUserId(userId);
+    	if(sysUserPwdModify == null) {
+    		sysUserPwdModify = new SysUserPwdModify();
+    		sysUserPwdModify.setUserId(userId);
+    		updated = false;
+    	}
+    	sysUserPwdModify.setModifyBy(SecurityUtils.getUsername());
+		sysUserPwdModify.setModifyTime(DateUtils.getNowDate());
+    	if(updated) {
+    		sysUserPwdModifyMapper.updateSysUserPwdModify(sysUserPwdModify);
+    	} else {
+    		sysUserPwdModifyMapper.insertSysUserPwdModify(sysUserPwdModify);
+    	}
+    }
+    
 }

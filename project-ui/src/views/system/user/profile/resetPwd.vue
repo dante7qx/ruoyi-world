@@ -11,7 +11,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" size="mini" @click="submit">保存</el-button>
-      <el-button type="danger" size="mini" @click="close">关闭</el-button>
+      <el-button type="danger" size="mini" @click="close" v-if="showCloseBtn">关闭</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -20,6 +20,13 @@
 import { updateUserPwd } from "@/api/system/user";
 
 export default {
+  props: { 
+    showClose: {
+      type: Boolean,
+      defalut: true,
+      required: false
+    }
+  },
   data() {
     const equalToPassword = (rule, value, callback) => {
       if (this.user.newPassword !== value) {
@@ -29,6 +36,7 @@ export default {
       }
     };
     return {
+      showCloseBtn: true,
       user: {
         oldPassword: undefined,
         newPassword: undefined,
@@ -50,12 +58,16 @@ export default {
       }
     };
   },
+  created() {
+    this.showCloseBtn = this.showClose
+  },
   methods: {
     submit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           updateUserPwd(this.user.oldPassword, this.user.newPassword).then(response => {
             this.$modal.msgSuccess("修改成功");
+            this.$emit('closeWindow');
           });
         }
       });

@@ -20,6 +20,7 @@ import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.system.service.ISysDeptService;
 import com.risun.system.service.ISysPostService;
 import com.risun.system.service.ISysRoleService;
+import com.risun.system.service.ISysUserPwdModifyService;
 import com.risun.system.service.ISysUserService;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -54,6 +55,9 @@ public class SysUserController extends BaseController
 
     @Autowired
     private ISysPostService postService;
+    
+    @Autowired
+    private ISysUserPwdModifyService userPwdModifyService;
 
     /**
      * 获取用户列表
@@ -126,6 +130,7 @@ public class SysUserController extends BaseController
     @PostMapping("/insert")
     public AjaxResult add(@Validated @RequestBody SysUser user)
     {
+    	userService.checkPasswordValid(user.getPassword());
     	if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user)))
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
@@ -196,6 +201,7 @@ public class SysUserController extends BaseController
     @PostMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody SysUser user)
     {
+    	userService.checkPasswordValid(user.getPassword());
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
@@ -263,5 +269,15 @@ public class SysUserController extends BaseController
     public AjaxResult allDeptTree(SysDept dept)
     {
         return AjaxResult.success(deptService.selectDeptTreeList(dept));
+    }
+    
+    /**
+     * 监控用户初始密码修改和定期提示更新
+     * 
+     * @return
+     */
+    @PostMapping("/monitorModifyPwd")
+    public AjaxResult loginUserPasswordMonitor() {
+    	return AjaxResult.success(userPwdModifyService.monitorLoginUserPassword());
     }
 }

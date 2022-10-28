@@ -434,7 +434,11 @@ export default {
         ],
         password: [
           { required: true, message: "用户密码不能为空", trigger: "blur" },
-          { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
+          { 
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/,
+            message: "用户密码长度不能少于6位，包含字母、数字、特殊字符",
+            trigger: "blur"
+          }
         ],
         email: [
           {
@@ -444,11 +448,15 @@ export default {
           }
         ],
         phonenumber: [
+          { required: true, message: "手机号码不能为空", trigger: "blur" },
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: "请输入正确的手机号码",
             trigger: "blur"
           }
+        ],
+        deptId: [
+          { required: true, message: "归属部门不能为空", trigger: "change" }
         ]
       }
     };
@@ -462,9 +470,11 @@ export default {
   created() {
     this.getList();
     this.getDeptTree();
+    /*
     this.getConfigKey("sys.user.initPassword").then(response => {
       this.initPassword = response.msg;
     });
+    */
   },
   methods: {
     /** 查询用户列表 */
@@ -589,8 +599,8 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         closeOnClickModal: false,
-        inputPattern: /^.{5,20}$/,
-        inputErrorMessage: "用户密码长度必须介于 5 和 20 之间"
+        inputPattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/,
+        inputErrorMessage: "用户密码长度不能少于6位，包含字母、数字、特殊字符"
       }).then(({ value }) => {
           resetUserPwd(row.userId, value).then(response => {
             this.$modal.msgSuccess("修改成功，新密码是：" + value);

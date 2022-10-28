@@ -95,7 +95,11 @@ export default {
         ],
         password: [
           { required: true, trigger: "blur", message: "请输入您的密码" },
-          { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
+          { 
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/,
+            message: "用户密码长度不能少于6位，包含字母、数字、特殊字符",
+            trigger: "blur"
+          }
         ],
         confirmPassword: [
           { required: true, trigger: "blur", message: "请再次输入您的密码" },

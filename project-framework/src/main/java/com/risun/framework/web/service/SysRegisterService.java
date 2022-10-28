@@ -41,7 +41,9 @@ public class SysRegisterService
      */
     public String register(RegisterBody registerBody)
     {
+    	
         String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
+        userService.checkPasswordValid(password);
         SysUser sysUser = new SysUser();
         sysUser.setUserName(username);
 
@@ -68,7 +70,7 @@ public class SysRegisterService
         else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
                 || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
         {
-            msg = "密码长度必须在5到20个字符之间";
+            msg = "密码长度必须在6到20个字符之间";
         }
         else if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(sysUser)))
         {

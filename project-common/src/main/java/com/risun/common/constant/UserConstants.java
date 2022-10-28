@@ -78,6 +78,12 @@ public class UserConstants
     /**
      * 密码长度限制
      */
-    public static final int PASSWORD_MIN_LENGTH = 5;
+    public static final int PASSWORD_MIN_LENGTH = 6;
     public static final int PASSWORD_MAX_LENGTH = 20;
+    
+    /**
+     * 密码策略
+     */
+    public static final String MODIFY_PASSWORD = "modifyPwd";	// 修改密码
+    public static final String PROMPT_MODIFY_PASSWORD = "PromptModifyPwd";	// 提示更新
 }

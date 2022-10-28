@@ -142,4 +142,11 @@ export function allDeptTreeSelect() {
   })
 }
 
+// 监控用户初始密码修改和定期提示更新
+export function monitorPwdModify(){
+  return request({
+    url: '/system/user/monitorModifyPwd',
+    method: 'post'
+  })
+}
 

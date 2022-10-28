@@ -55,7 +55,7 @@
               <userInfo :user="user" />
             </el-tab-pane>
             <el-tab-pane label="修改密码" name="resetPwd">
-              <resetPwd :user="user" />
+              <resetPwd :user="user" :showClose="true"/>
             </el-tab-pane>
           </el-tabs>
         </el-card>
