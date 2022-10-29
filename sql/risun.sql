@@ -595,7 +595,7 @@ insert into sys_config values(4, '账号自助-是否开启用户注册功能', 
 insert into sys_config values(5, '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'fqyczadmin', sysdate(), '', null, '短信发送标识（向领导申请）');
 insert into sys_config values(6, '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'fqyczadmin', sysdate(), '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
 insert into sys_config values(7, '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'fqyczadmin', sysdate(), '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
-insert into sys_config values(8, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',        'Y', 'fqyczadmin', sysdate(), '', null, '初始化密码 rs@123!' );
+insert into sys_config values(8, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'fqyczadmin', sysdate(), '', null, '初始化密码 rs@123!' );
 
 -- ----------------------------
 -- 14、系统访问记录

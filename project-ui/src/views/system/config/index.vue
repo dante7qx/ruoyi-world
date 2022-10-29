@@ -105,8 +105,8 @@
     <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="参数主键" align="center" prop="configId" />
-      <el-table-column label="参数名称" align="center" prop="configName" :show-overflow-tooltip="true" />
-      <el-table-column label="参数键名" align="center" prop="configKey" :show-overflow-tooltip="true" />
+      <el-table-column label="参数名称" align="center" prop="configName"  width="240" />
+      <el-table-column label="参数键名" align="center" prop="configKey" width="240" />
       <el-table-column label="参数键值" align="center" prop="configValue" />
       <el-table-column label="系统内置" align="center" prop="configType">
         <template slot-scope="scope">

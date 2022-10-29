@@ -272,3 +272,32 @@ BaseURI：`/risun/monitor`，请求方式：POST
 ### 18. 审批记录
 
 框架设计了一个统一的审批记录表，`sys_approval_log`。当业务中有审批逻辑时，在 `sys_approval_log` 中插入一条数据。相关的处理类为`ISysOperLogService.java`、`ApprovalFlowConstats.java`。
+
+### 19. 富文本编辑器
+
+框架更换了原来的富文本编辑器`quill`，更换为 [Tinymce](https://www.tiny.cloud/docs)。`TinyMCE`的优势：
+
+- 开源可商用，基于LGPL2.1
+- 插件丰富，自带插件基本涵盖日常所需功能
+- 接口丰富，可扩展性强，有能力可以无限拓展功能
+- 界面好看，符合现代审美
+- 提供经典、内联、沉浸无干扰三种模式
+- 对标准支持优秀（自v5开始）
+- 多语言支持，官网可下载几十种语言。
+
+### 20. 密码功能增强
+
+1. 增强密码强度策略，用户密码长度不能少于6位，包含字母、数字、特殊字符
+
+2. 用户首次登录，初始密码必须修改配置
+
+   可在**系统管理 —> 参数设置**页面中进行配置。
+
+   <img src="./image/pwdModify.png" alt="pwdModify" style="zoom:50%; margin-left: -10px" />
+
+3. 用户周期性提示密码修改配置
+
+   可在**系统管理 —> 参数设置**页面中进行配置。
+
+   <img src="./image/pwdPeriod.png" alt="pwdPeriod" style="zoom:50%; margin-left: -10px" />
+

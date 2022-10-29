@@ -36,7 +36,7 @@ export default {
     notifyUpdatePwd(day) {
       this.$notify({
         title: '修改密码',
-        duration: 10000,
+        duration: 8000,
         dangerouslyUseHTMLString: true,
         message: `<strong>您的密码已经超过${day}天为进行修改，请及时进行修改！</strong>`
       });
