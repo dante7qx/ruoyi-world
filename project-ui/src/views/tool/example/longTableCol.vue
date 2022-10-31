@@ -3,27 +3,27 @@
     <h2>列表中长字段处理方式 - views/tool/example/longTableCol.vue</h2>
     <el-table :data="tableList" style="width: 800px; margin-top: 15px;">
       <el-table-column type="index" label="序号" width="55" align="center" />
-        <el-table-column prop="name" label="名称" width="180"/>
-        <el-table-column label="备注1">
-          <template slot-scope="scope">
-            <long-table-col :str="scope.row.remark1"/>
-          </template>
-        </el-table-column>
-        <el-table-column label="备注2">
-          <template slot-scope="scope">
-            <long-table-col :str="scope.row.remark2" :len="7"/>
-          </template>
-        </el-table-column>
-        <el-table-column label="备注3">
-          <template slot-scope="scope">
-            <long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="80"/>
-          </template>
-        </el-table-column>
-        <el-table-column label="备注4">
-          <template slot-scope="scope">
-            <long-table-col :str="scope.row.remark4" :len="8" :width="300" :maxHeight="100" placement="right-end" trigger="click"/>
-          </template>
-        </el-table-column>
+      <el-table-column prop="name" label="名称" width="180"/>
+      <el-table-column label="备注1">
+        <template slot-scope="scope">
+          <long-table-col :str="scope.row.remark1"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="备注2">
+        <template slot-scope="scope">
+          <long-table-col :str="scope.row.remark2" :len="7"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="备注3">
+        <template slot-scope="scope">
+          <long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="80"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="备注4">
+        <template slot-scope="scope">
+          <long-table-col :str="scope.row.remark4" :len="8" :width="300" :maxHeight="100" placement="right-end" trigger="click"/>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
