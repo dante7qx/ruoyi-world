@@ -74,7 +74,11 @@
 
     <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="业务名称" align="center" prop="demoName" />
+      <el-table-column label="业务名称" align="center" prop="demoName">
+        <template slot-scope="scope">
+          <long-table-col :str="scope.row.demoName" :len="5"/>
+        </template>
+      </el-table-column>
       <el-table-column label="业务时间" align="center" prop="demoTime" width="110">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>

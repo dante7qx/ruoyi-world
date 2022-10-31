@@ -14,8 +14,9 @@
 			</el-submenu>
 			<el-menu-item index="addressMap">地址地图</el-menu-item>
 			<el-submenu index="2">
-				<template slot="title">表单</template>
+				<template slot="title">表格表单</template>
 				<el-menu-item index="dynaForm">动态表单</el-menu-item>
+				<el-menu-item index="longTableCol">长表格字段</el-menu-item>
 			</el-submenu>
 			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
 			<el-menu-item index="watermark">页面水印</el-menu-item>
@@ -24,6 +25,7 @@
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
 		<dyna-form v-else-if="activeIndex=='dynaForm'" />
+		<long-tab-col v-else-if="activeIndex=='longTableCol'" />
 		<code-video v-else-if="activeIndex=='videoMonitor'" />
 		<water-mark v-else-if="activeIndex=='watermark'" />
 		<code-calendar v-else-if="activeIndex=='calendar'" />
@@ -34,6 +36,7 @@
 import Area from './area'
 import AddressMap from './addressMap'
 import DynaForm from './dynaForm'
+import LongTabCol from './longTableCol'
 import Video from './video'
 import Watermark from './watermark'
 import Calendar from './calendar'
@@ -44,6 +47,7 @@ export default {
 		'code-area' : Area,
 		'address-map': AddressMap,
 		'dyna-form': DynaForm,
+		'long-tab-col': LongTabCol,
 		'code-video': Video,
 		'water-mark': Watermark,
 		'code-calendar': Calendar

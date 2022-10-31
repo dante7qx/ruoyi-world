@@ -2,7 +2,7 @@
   <div>
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="业务名称" prop="demoName">
-        <el-input v-model="form.demoName" placeholder="请输入业务名称" maxlength="10" show-word-limit :disabled="disabled"/>
+        <el-input v-model="form.demoName" placeholder="请输入业务名称" maxlength="30" show-word-limit :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="业务时间" prop="demoTime">
         <el-date-picker clearable

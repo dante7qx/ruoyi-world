@@ -131,6 +131,16 @@ export function parseStrEmpty(str) {
   return str;
 }
 
+// 显示列表中字数过长的列
+export function printLongTableColumn(str, length) {
+  if(!str) return '';
+  if(str.length > length) {
+    return str.substring(0, length) + '...';
+  } else {
+    return str
+  }
+}
+
 // 数据合并
 export function mergeRecursive(source, target) {
   for (var p in target) {

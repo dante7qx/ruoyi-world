@@ -19,7 +19,7 @@ import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
-import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/risun";
+import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree, printLongTableColumn } from "@/utils/risun";
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import vueAwesomeCountdown from 'vue-awesome-countdown'
@@ -46,6 +46,8 @@ import DictData from '@/components/DictData'
 import AddressMapSelect from '@/components/AddressMapSelect'
 // 视频播放组件
 import VideoPlayer from '@/components/Video' 
+// 列表长字段展示组件
+import LongTableCol from '@/components/LongTableCol'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -58,6 +60,7 @@ Vue.prototype.selectDictLabel = selectDictLabel
 Vue.prototype.selectDictLabels = selectDictLabels
 Vue.prototype.download = download
 Vue.prototype.handleTree = handleTree
+Vue.prototype.printLongTableColumn = printLongTableColumn
 Vue.prototype.$moment = moment
 Vue.prototype.nanoid = nanoid
 
@@ -71,6 +74,7 @@ Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
 Vue.component('AddressMapSelect', AddressMapSelect)
 Vue.component('VideoPlayer', VideoPlayer)
+Vue.component('LongTableCol', LongTableCol)
 
 Vue.use(directive)
 Vue.use(plugins)
