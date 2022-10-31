@@ -329,12 +329,12 @@
     />
     
     <!-- 添加或修改信息发布对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="1000px" v-dialog-drag append-to-body>
       <detail :key="key" :infoId="infoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
 
     <!-- 审批对话框-->
-    <el-dialog title="审批" :visible.sync="openApproval" width="600px" append-to-body>
+    <el-dialog title="审批" :visible.sync="openApproval" width="600px" v-dialog-drag append-to-body>
       <el-form ref="formApproval" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="发布时间" prop="publishTime" v-if="pass">
           <el-date-picker clearable
@@ -357,7 +357,7 @@
     </el-dialog>
 
     <!-- 访问范围对话框-->
-    <el-dialog title="设置访问范围" :visible.sync="openRange" width="600px" append-to-body>
+    <el-dialog title="设置访问范围" :visible.sync="openRange" width="600px" v-dialog-drag append-to-body>
       <el-form ref="formRange" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="访问范围" prop="rangeDeptIds">
           <treeselect 

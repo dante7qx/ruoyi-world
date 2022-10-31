@@ -134,7 +134,7 @@
     />
     
     <!-- 添加或修改业务对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="1000px" v-dialog-drag append-to-body>
       <detail :key="key" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>

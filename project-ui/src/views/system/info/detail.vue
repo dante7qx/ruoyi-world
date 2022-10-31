@@ -56,7 +56,7 @@
     </div>
 
     <!-- 审批对话框-->
-    <el-dialog title="审批" :visible.sync="openApproval" width="600px" append-to-body>
+    <el-dialog title="审批" :visible.sync="openApproval" width="600px" v-dialog-drag append-to-body>
       <el-form ref="formApproval" :model="formApproval" :rules="rulesApproval" label-width="100px">
         <el-form-item label="发布时间" prop="publishTime" v-if="pass">
           <el-date-picker clearable

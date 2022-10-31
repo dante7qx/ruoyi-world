@@ -12,7 +12,7 @@
       <el-descriptions-item label="地址">{{ form.address }}</el-descriptions-item>
     </el-descriptions>
 
-    <el-dialog :title="title" :visible.sync="open" width="60%" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="60%" v-dialog-drag append-to-body>
       <address-map-select ref="AddressMapSelect" :lat="form.lat" :lng="form.lng" />
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

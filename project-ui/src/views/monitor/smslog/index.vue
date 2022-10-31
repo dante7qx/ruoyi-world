@@ -94,7 +94,7 @@
     />
     
     <!-- 添加或修改短信日志对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
       <detail :key="nanoid()" :smsId="smsId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>

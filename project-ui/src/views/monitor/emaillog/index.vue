@@ -114,7 +114,7 @@
     />
     
     <!-- 添加或修改邮件日志对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
       <detail :key="nanoid()" :emailId="emailId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>

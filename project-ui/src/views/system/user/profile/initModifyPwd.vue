@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-dialog title="修改初始密码" :visible.sync="open" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false">
+    <el-dialog title="修改初始密码" :visible.sync="open" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false" v-dialog-drag append-to-body>
       <reset-pwd :showClose="false" @closeWindow="closeWin"/>
     </el-dialog>
   </div>
