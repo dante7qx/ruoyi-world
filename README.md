@@ -283,7 +283,7 @@ BaseURI：`/risun/monitor`，请求方式：POST
 - 界面好看，符合现代审美
 - 提供经典、内联、沉浸无干扰三种模式
 - 对标准支持优秀（自v5开始）
-- 多语言支持，官网可下载几十种语言。
+- 多语言支持，官网可下载几十种语言
 
 ### 20. 密码功能增强
 
@@ -300,4 +300,31 @@ BaseURI：`/risun/monitor`，请求方式：POST
    可在**系统管理 —> 参数设置**页面中进行配置。
 
    <img src="./image/pwdPeriod.png" alt="pwdPeriod" style="zoom:50%; margin-left: -10px" />
+
+### 21. 列表长字段
+
+开发中，经常会遇到列表中要显示一些很长的字段的场景，例如：备注字段。框架中添加了处理这种情况的组件，具体使用方式请参考代码示例。
+
+```vue
+<el-table-column label="备注1">
+  <template slot-scope="scope">
+		<long-table-col :str="scope.row.remark1"/>
+  </template>
+</el-table-column>
+<el-table-column label="备注2">
+  <template slot-scope="scope">
+		<long-table-col :str="scope.row.remark2" :len="7"/>
+  </template>
+</el-table-column>
+<el-table-column label="备注3">
+  <template slot-scope="scope">
+		<long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="80"/>
+  </template>
+</el-table-column>
+<el-table-column label="备注4">
+  <template slot-scope="scope">
+		<long-table-col :str="scope.row.remark4" :len="8" :width="300" :maxHeight="100" placement="right-end" trigger="click"/>
+  </template>
+</el-table-column>
+```
 
