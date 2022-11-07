@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column label="备注3">
         <template slot-scope="scope">
-          <long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="80"/>
+          <long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="30"/>
         </template>
       </el-table-column>
       <el-table-column label="备注4">
