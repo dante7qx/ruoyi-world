@@ -93,7 +93,7 @@
       </el-form-item>
 #elseif($column.htmlType == "textarea")
       <el-form-item label="${comment}" prop="${field}">
-        <el-input v-model="form.${field}" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="${column.columnLength}"  placeholder="请输入内容" :disabled="disabled"/>
+        <el-input v-model="form.${field}" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="${column.columnLength}"  placeholder="请输入内容" :readonly="disabled"/>
       </el-form-item>
 #end
 #end
