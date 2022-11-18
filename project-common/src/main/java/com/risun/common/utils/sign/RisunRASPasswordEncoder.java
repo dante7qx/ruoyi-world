@@ -16,5 +16,9 @@ public class RisunRASPasswordEncoder implements PasswordEncoder {
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
 		return rawPassword.toString().equals(RsaUtils.decryptByPrivateKey(encodedPassword));
 	}
+	
+//	public static void main(String[] args) {
+//		System.out.println(new RisunRASPasswordEncoder().encode("123@qwe"));
+//	}
 
 }
