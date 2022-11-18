@@ -38,10 +38,12 @@
     "axios": "0.24.0",
     "clipboard": "2.0.8",
     "core-js": "3.25.3",
+    "diagram-js": "^10.0.0",
     "docx-preview": "^0.1.13",
     "echarts": "^5.4.0",
     "element-ui": "2.15.10",
     "file-saver": "2.0.5",
+    "form-gen-parser": "^1.0.3",
     "fuse.js": "6.4.3",
     "highlight.js": "9.18.5",
     "js-beautify": "1.13.0",
@@ -57,6 +59,7 @@
     "tinymce": "^5.10.5",
     "video.js": "^7.20.3",
     "videojs-contrib-hls": "^5.15.0",
+    "vkbeautify": "^0.99.3",
     "vue": "2.6.12",
     "vue-awesome-countdown": "^1.1.4",
     "vue-count-to": "1.0.13",
@@ -65,7 +68,8 @@
     "vue-router": "3.4.9",
     "vuedraggable": "2.24.3",
     "vuex": "3.6.0",
-    "watermark-dom": "^2.3.0"
+    "watermark-dom": "^2.3.0",
+    "workflow-bpmn-modeler": "^0.2.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",

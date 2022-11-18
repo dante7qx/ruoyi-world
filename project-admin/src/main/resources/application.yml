@@ -30,6 +30,10 @@ logging:
   level:
     com.risun: debug
     org.springframework: warn
+    org:
+      flowable: 
+        engine.impl.persistence.entity.*: debug
+        task.service.impl.persistence.entity.*: debug
 
 # 用户配置
 user:
@@ -145,3 +149,7 @@ management:
   health:
     mail:
       enabled: false
+
+## 工作流配置
+flowable:
+  database-schema-update: false

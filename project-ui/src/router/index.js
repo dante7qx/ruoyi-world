@@ -102,7 +102,40 @@ export const constantRoutes = [
 		path: "/publish-info-preview",
 		component: () => import('@/views/system/info/publish'),
 		hidden: true
-	}
+	},
+  {
+    path: '/flowable',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'definition/model',
+        component: () => import('@/views/flowable/definition/model'),
+        name: 'Model',
+        meta: { title: '流程设计', activeMenu: '/flowable/definition' }
+      },
+      {
+        path: 'task/record/index',
+        component: () => import('@/views/flowable/task/record/index'),
+        name: 'Record',
+        meta: { title: '流程处理' }
+      }
+    ]
+  },
+  {
+		path: '/tool',
+		component: Layout,
+		hidden: true,
+		children: [{
+			path: 'build/index',
+      component: () => import('@/views/tool/build/index'),
+			name: 'FormBuild',
+			meta: {
+				title: '表单配置',
+				icon: ''
+			}
+		}]
+	},
 ]
 
 // 动态路由，基于用户权限动态去加载

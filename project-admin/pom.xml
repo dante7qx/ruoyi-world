@@ -70,6 +70,12 @@
             <groupId>com.risun</groupId>
             <artifactId>project-biz</artifactId>
         </dependency>
+        
+        <!-- 流程管理-->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-flowable</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
