@@ -14,4 +14,7 @@ public class BizModelConstants {
 	/** 信息发布 */
 	public static final String SYS_INFO = "SysInfo"; 
 	
+    /** 业务流程示例 */
+	public static final String FLOW_DEMO = "FlowDemo"; 
+
 }
