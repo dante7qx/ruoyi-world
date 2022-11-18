@@ -1,330 +1,278 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Risun Java v3.0.0</h1>
-<h4 align="center">基于Ruoyi v3.8.4 前后端分离的Java快速开发框架</h4>
-
-
 ## 一. 框架简介
 
-本框架基于 [若依分离版](http://doc.ruoyi.vip/ruoyi-vue/) 进行二次开发，若依的所有功能均可正常使用，并涵盖了更多的基础功能和公共业务模块。
+本框架基于睿阳RSP开发框架，集成 [Flowable](https://tkjohn.github.io/flowable-userguide/) 6.7.2，分为工程版和插件版。
+- 工程版：已集成工作流相关组件，可直接使用，适用于明确要使用工作流的新项目。
+- 插件版：只包含工作流涉及的组件，需要按文档集成到你现有的项目中，适用于进行过程中，需要集成工作流的项目。
 
-## 二. 使用说明
+## 二. 集成插件
 
-当有一个新项目要进行开发，需要进行如下操作。
+### 1. 下载插件
 
-### 1. 下载项目
+### 2. 集成操作
 
-下载 [开发框架](https://192.168.1.30/risun/java-web/-/archive/main/java-web-main.zip)，下载完成后，进行解压，解压后将目录名修改为您的项目名称（英文）。
+解压下载后的 flowable.zip。（可以将project-flowable 修改为 [项目]-flowable）
 
-### 2. 修改项目包路径
+- 将`project-flowable`加入工程，并修改`pom.xml`
 
-- 进入项目目录，修改 new_project.sh （或 new_project_mac.sh）
+``` xml
+<parent>
+    <groupId>com.risun</groupId>
+    <artifactId>[项目]</artifactId>
+    <version>3.0.0</version>
+</parent>
 
-```shell
-## 找到
-projectName="xx-sys"
-projectCN="XX管理系统"
-
-## 根据实际项目进行修改
-projectName="gangu"
-projectCN="干谷社区管理系统"
-```
-
-- 执行脚本
-
-```shell
-## Linux 系统
-bash new_project.sh
-
-## MAC 系统
-bash new_project_mac.sh
-```
-
-## 三. 开发说明
-
-### 1. 将项目导入到你的IDE中
-
-### 2. 根据实际项目修改配置
-
-```yml
-## application.yml
-risun:
-  profile: <文件上传目录>
-  
-## application-druid.yml
-spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    druid:
-      # 主库数据源
-      master:
-        url: jdbc:mysql://<数据库url>/<数据库>?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: <数据库账号>
-        password: <数据库密码>
-```
-
-### 4. 业务开发
-
-项目在业务逻辑都在 `项目名-biz`模块下进行开发。如果要修改模块的名称，则需要修改以下地方。例如：修改为 `xx-build`
-
-- `项目名-biz` 下 pom.xml
-
-```xml
-<!-- 找到 -->
-<artifactId>项目名-biz</artifactId>
-<!-- 修改为 -->
-<artifactId>xx-build</artifactId>
-```
-
-- 项目根目录下的 pom.xml
-
-```xml
-<!-- 找到 -->
 <dependency>
-  <groupId>com.risun</groupId>
-  <artifactId>项目名-biz</artifactId>
-  <version>${project.version}</version>
-</dependency>
-...
-<module>项目名-biz</module>
-
-<!-- 修改为 -->
-<dependency>
-  <groupId>com.risun</groupId>
-  <artifactId>xx-build</artifactId>
-  <version>${project.version}</version>
-</dependency>
-...
-<module>xx-build</module>
-```
-
-- `项目名-admin` 下的 pom.xml
-
-```xml
-<!-- 找到 -->
-<dependency>
-  <groupId>com.risun</groupId>
-  <artifactId>项目名-biz</artifactId>
-</dependency>
-
-<!-- 修改为 -->
-<dependency>
-  <groupId>com.risun</groupId>
-  <artifactId>xx-build</artifactId>
+    <groupId>com.risun</groupId>
+    <artifactId>[项目]-framework</artifactId>
 </dependency>
 ```
 
-### 5. 项目启动
+- 修改项目根目录下的 `pom.xml`
+``` xml
+<!-- 流程管理-->
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+        <groupId>com.risun</groupId>
+        <artifactId>project-flowable</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
 
-Windows环境下，可能会报如下错误，需要添加 JVM 启动参数 `-Djdk.io.File.enableADS=true`
-
-```ABAP
-java.lang.NoClassDefFoundError: Could not initialize class org.xnio.conduits.Conduit
+<modules>
+  <module>project-flowable</module>
+</modules>
 ```
 
-### 6. 图片代理
-
-若依默认的图片请求访问后台地址会根据`/profile`进行匹配，这里修改为`/project-profile`（默认，会随项目而定）。主要是为了解决同一台服务器上部署多个项目，引发路径重复的问题。
-
-修改的位置：`project-common 下 Constants.java 中的 RESOURCE_PREFIX`
-
-### 7. 邮件服务
-
-框架自带邮件服务，可用于发送邮件。
-
-- 使用邮件服务，需要进行修改配置 application.yml
-
-```yaml
-## 修改下面的配置
-mail:
-  ## SMTP 服务器
-  host: smtp.163.com    
-  ## 发送端的用户邮箱名      
-  username: test@163.com
-  ## 发送端的密码（授权密码，不是邮箱密码）
-  password: 123456
+- 修改`<项目>-admin`目录下的 `pom.xml`
+``` xml
+<!-- 流程管理-->
+<dependencies>
+  <dependency>
+      <groupId>com.risun</groupId>
+      <artifactId>project-flowable</artifactId>
+  </dependency>
+</dependencies>
 ```
 
-- 邮件服务类 `EmailFactory`，测试类 `EmailFactoryTests`
+- 修改 `application.yml`，添加配置
 
-### 8. 短信服务
-
-框架自带短息服务，可用于发送短信。
-
-- 修改系统参数
-
-<img src="./image/sms.png" alt="sms" style="zoom:40%;" />
-
-- 短信服务类 `SmsFactory`，测试类 `SmsFactoryTests`
-
-### 9. 登录增强
-
-框架对登录功能进行了增强，增加短信验证码登录方式。若只需要账号登录，将 `login.vue` 中的 `smsEnabled` 设为 false 即可。
-
-<img src="./image/login.png" alt="login" style="zoom:50%;" />
-
-### 10. 业务附件
-
-框架对附件上传功能进行了增强，新增附件表`sys_attachment`。使用时需要传递业务模块`bizModel`。
-
-```vue
-<!-- 业务模块名可以设置为业务模块的domain -->
-<file-upload v-model="form.attachment" :bizModel="'<业务模块名>'" :disabled="disabled"/>
+  注意： 当项目库中已经生成`flowable`相关表之后，将`database-schema-update`设置为`false`
+``` yml
+## 工作流配置
+flowable:
+  database-schema-update: true
 ```
 
-### 11. 项目健康指数和客户活跃度感知
+- 添加前端依赖
+``` bash
+npm i vkbeautify
+npm i form-gen-parser
+npm i workflow-bpmn-modeler
+npm i diagram-js
+```
 
-框架添加项目健康指数和客户活跃度感知统一接口，用于检测已交付项目客户使用的活跃度。接口的实现类为 `SysMonitor4RisunController`，BaseURI 是 `/risun/monitor`，接口可匿名访问。
+- 将`ui`下的文件加入到`[项目]-ui`模块下（已存在的文件进行覆盖）
 
-BaseURI：`/risun/monitor`，请求方式：POST
+  - 将`styles`文件夹复制到`[项目]-ui/src/assets`下
+  - 将`Process`文件夹复制到`[项目]-ui/src/components`下
+  - 将`generator`文件夹复制到`[项目]-ui/src/utils`下
+  - 将`flowable`文件夹复制到`[项目]-ui/src/views`下
+  - 将`api/flowable`文件夹复制到`[项目]-ui/src/api`下
+  - 将`build`文件夹复制到`[项目]-ui/src/views/tool`下
+  - 在`<项目>-ui/src/router/index.js`中，添加如下内容
+    ``` js
+    // export const constantRoutes 的最后，添加
+    {
+      path: '/flowable',
+      component: Layout,
+      hidden: true,
+      children: [
+        {
+          path: 'definition/model',
+          component: () => import('@/views/flowable/definition/model'),
+          name: 'Model',
+          meta: { title: '流程设计', activeMenu: '/flowable/definition' }
+        },
+        {
+          path: 'task/record/index',
+          component: () => import('@/views/flowable/task/record/index'),
+          name: 'Record',
+          meta: { title: '流程处理' }
+        }
+      ]
+    },
+    {
+      path: '/tool',
+      component: Layout,
+      hidden: true,
+      children: [{
+        path: 'build/index',
+        component: () => import('@/views/tool/build/index'),
+        name: 'FormBuild',
+        meta: {
+          title: '表单配置',
+          icon: ''
+        }
+      }]
+    }
+    ```
 
-| 接口名                 | URI                                  | 参数                          | 状态                       |
-| ---------------------- | ------------------------------------ | ----------------------------- | -------------------------- |
-| 每日用户访问数         | /user_visit_count/{queryDate}        | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
-| 每日新用户新增数       | /user_increase_count/{queryDate}     | 查询日期，格式必须为 yyyyMMdd | 框架自带                   |
-| 每日核心业务数据新增数 | /business_increase_count/{queryDate} | 查询日期，格式必须为 yyyyMMdd | 未实现，需业务系统自行实现 |
+- 执行数据库脚本 `sql/flowable.sql`
 
-### 12. 信息发布
+## 三. 示例说明
 
-框架添加了信息发布功能，包含信息草稿、审批、发布、浏览功能。菜单位于**系统管理 —> 信息管理**。
+框架预先提供了两个流程示例，一般请假流程和会签请假流程。要使用这两个流程，需要先将 `sql/员工请假.bpmn20.xml` 和 `sql/员工请假2.bpmn20.xml` 导入到你的项目中。
 
-涉及角色：信息录入员、信息管理员
+<img src="./images/flowdemo.png" alt="flowdemo" style="zoom:40%;" />
 
-功能权限说明：
+框架预设了3个用户`test`、`spuser1`、`spuser2`，密码：`123@qwe`
 
-| 功能                                                       | 角色                             |
-| ---------------------------------------------------------- | -------------------------------- |
-| 新增、修改、删除                                           | 信息录入员（√）  信息管理员（√） |
-| 批量通过、批量驳回、通过、驳回                             | 信息录入员（X）  信息管理员（√） |
-| 设置匿名访问、取消匿名访问、设置访问范围、启用、停用、置顶 | 信息录入员（√）  信息管理员（√） |
+- 一般请假流程
 
-其他说明：
+  - 请假 < 3天 
 
-- 置顶：同时只能有一条记录被置顶。
+    员工请假申请 —> 一级审批组（spuser1）进行审批 —> 结束（驳回：回到员工请假申请）
 
-- 设置访问范围后，匿名访问会被取消。
+  - 请假 >= 3天 
 
-### 13. 代码示例
+    员工请假申请 —> 一级审批组（spuser1）进行审批 —> 二级审批组（spuser2）进行审批 —> 结束（驳回：回到员工请假申请）
 
-框架添加了代码示例菜单（系统工具—> 代码示例），包含了日常开发中一些通用、特别的功能，便于开发人员参考。
+- 会签请假流程
 
-<img src="./image/code.png" alt="code" style="zoom:50%;" />
+  - 请假 < 3天 
 
-### 14. 增强工具
+    员工请假申请 —> 上级进行会签（spuser1、spuser2全部同意）—> 结束（驳回：回到员工请假申请）
 
-- Word导出
+  - 请假 >= 3天 
 
-  添加依赖Poi-tl 1.10.4
+    员工请假申请 —> 上级进行会签（spuser1、spuser2全部同意）—> 领导（管理员）—> 审批结束（驳回：回到员工请假申请）
 
-- Word转PDF
-
-  工具类Word2PdfUtil.java，测试类Word2PdfUtilTests
-
-- Hutool
-
-  添加依赖 Hutool 5.8.4。官网：https://hutool.cn/docs
-
-  开发时，不要去写太多的工具类，Hutool包含的工具类已经覆盖了99%的场景，我们只需写业务相关的工具类。
-
-- 汉字转拼音工具类
-
-  添加依赖 pinyin4j 2.5.0，工具类PinyinUtil.java
-
-- 添加 lombok 插件
-
-- Moment.js
-
-  添加 Moment.js 2.29.4，前端日期处理类库。官网：http://momentjs.cn
-
-  ```js
-  this.$moment(new Date()).format("YYYY-MM-DD")	// 2022-10-24
+> 注意：要测试会签请假流程，需要对`FlowDemoServiceImpl`进行如下修改
+  ``` java
+  public int commitFlowDemo(FlowDemo flowDemo) {
+      ...
+      // flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO, startFlowVo);
+    	
+    	// 验证多实例（3、4为spuser1、spuser2）时，请打开注释，并将上一行 flowInstanceService.commit(...) 注释
+    	startFlowVo.addParams(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Lists.newArrayList("3", "4"));
+    	flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO + "2", startFlowVo);
+      ...
+  }
   ```
 
-- 集成jsencrypt实现密码加密传输方式
+## 四. 设计说明
 
-  ```js
-  import { encrypt, decrypt } from '@/utils/jsencrypt'
-  
-  encrypt(this.loginForm.password)
-  decrypt(this.loginForm.password)
+本框架使用的工作流引擎是[Flowable](https://tkjohn.github.io/flowable-userguide/)，如果要对框架有更深的掌握，需要熟悉[Flowable](https://tkjohn.github.io/flowable-userguide/)。
+
+
+### 1. 流程图
+
+使用工作流框架，主要的工作就是绘制流程图，所以熟悉流程图中的相关概念是使用本框架的前提条件。下面列出必须熟知的技术点：
+
+- 用户任务（UserTask）
+- 排他网关（Exclusive Gateway）
+- 条件顺序流（Conditional Sequence Flow）
+- 多实例任务（Multi-instance）
+
+本框架预设了流程处理逻辑，在绘制流程图时需要注意以下部分：
+
+- 第一个任务处理人要设置为`流程发起人`
+
+<img src="./images/starter.png" alt="starter" style="zoom:40%;" />
+
+- 动态人员（组）的变量固定为 `approval`
+
+- 多实例配置中，集合必须是 `userList`（候选用户）或（`groupList`（候选组）），元素变量必须是 `approval`
+
+<img src="./images/multi.png" alt="multi" style="zoom:40%;" />
+
+- 审批通过（驳回）的参数固定为 `agree`（true 同意 false 驳回）
+
+### 2. 业务设计
+
+涉及流程的业务，在设计时需要设计一个 uid 字段，类型为 uuid，在流程启动时，需要传递给到流程启动参数`StartFlowVo.java`中的`bizUid`字段。
+
+``` java
+/** 业务主键ID */
+private String bizId;
+/** 业务标识ID（不是主键，推荐UUID） */
+private String bizUid;
+```
+详细操作，请参考 `FlowDemoServiceImpl.java`
+
+### 3. 业务页面
+
+涉及流程的业务页面需要做出如下修改。
+
+- 列表页面
+  - 只保留新增操作，去掉列表上的修改、删除操作
+
+  <img src="./images/demolist.png" alt="demolist" style="zoom:40%;" />
+
+  - 列表状态、行操作，需要连表`sys_flow_biz_monitor`查询
+
+    `FlowDemoMapper.xml`
+    ``` sql
+    select 
+      t.demo_id, t.leave_user_id, t.uid, t.start_time, t.end_time, t.leave_reason, t.create_by, t.create_time, t.update_by, t.update_time,
+      t1.monitor_id, t1.proc_inst_id, t1.status, t1.passed, t1.finished, t1.commited
+    from t_flow_demo t
+    left join sys_flow_biz_monitor t1 on t1.biz_uid = t.uid
+    ```
+  - 列表状态
+    ``` vue
+    <el-table-column label="状态" align="center" prop="flowMonitor.status">
+      <template slot-scope="scope">
+        <span v-if="scope.row.flowMonitor == null" v-html="'申请'"></span>
+        <span v-else>{{ scope.row.flowMonitor.status }}{{  scope.row.flowMonitor.finished ? scope.row.flowMonitor.passed ? ' - 通过' : ' - 驳回' : '' }}</span>
+      </template>
+    </el-table-column>
+    ```
+  - 行操作（修改、删除）
+    ``` vue
+    <el-button
+      size="mini"
+      type="text"
+      icon="el-icon-edit"
+      @click="handleUpdate(scope.row, false)"
+      v-if="scope.row.flowMonitor == null || scope.row.flowMonitor.commited == true"
+    >修改</el-button>
+    <el-button
+      size="mini"
+      type="text"
+      icon="el-icon-delete"
+      @click="handleDelete(scope.row)"
+      v-if="scope.row.flowMonitor == null || scope.row.flowMonitor.commited == true"
+    >删除</el-button>
+    ```
+
+- 详情页面
+
+  查看状态下，需要去除底部操作按钮 `v-if="!disabled"`
+  ``` vue
+  <div slot="footer" class="dialog-footer" style="text-align: right;" v-if="!disabled">
+    <el-button type="primary" @click="submitForm(false)" v-show="!disabled">保 存</el-button>
+    <el-button type="success" @click="submitForm(true)" v-show="!disabled">提 交</el-button>
+    <el-button @click="cancel">取 消</el-button>
+  </div>
   ```
 
-- 地址地图选择组件
+### 4. 流程启动
 
-  （前端）框架添加地址地图选择组件，`@/components/AddressMapSelect`。具体使用方式请参考代码示例。
+框架使用流程定义Key来启动流程，框架定义了常量类`ProcessDefKeyConstants.java`来定义流程定义Key，涉及流程的业务，流程定义Key需要在该类中定义。
 
-### 15. 代码生成
+详细操作，请参考 `IFlowInstanceService.java` 的 `startProcessInstanceByKey(String procDefKey, StartFlowVo startFlowVo)` 方法。
 
-框架对代码生成进行了修改，修改内容如下
+### 5. 流程处理
 
-- 去除PUT、DELETE方式的HTTP方法，替换为POST。（安全考量，https://cloud.tencent.com/developer/article/1472910）
-- 列表页和详情页分离，便于组件化开发。
-- 添加查看按钮及相关逻辑。
-- 根据数据库设计，自动的为文本框和文本域设置 `maxlength` 和 `show-word-limit`。
+框架中流程处理的相关操作都定义在 `IFlowTaskService.java` 中，主要方法如下：
 
-### 16. 视频播放组件
-
-（前端）框架添加视频播放组件，`@/components/Video`，可用于对接视频监控功能。具体使用方式请参考代码示例。
-
-### 17. 页面水印
-
-（前端）框架添加了页面水印功能。具体使用方式请参考代码示例。
-
-### 18. 审批记录
-
-框架设计了一个统一的审批记录表，`sys_approval_log`。当业务中有审批逻辑时，在 `sys_approval_log` 中插入一条数据。相关的处理类为`ISysOperLogService.java`、`ApprovalFlowConstats.java`。
-
-### 19. 富文本编辑器
-
-框架更换了原来的富文本编辑器`quill`，更换为 [Tinymce](https://www.tiny.cloud/docs)。`TinyMCE`的优势：
-
-- 开源可商用，基于LGPL2.1
-- 插件丰富，自带插件基本涵盖日常所需功能
-- 接口丰富，可扩展性强，有能力可以无限拓展功能
-- 界面好看，符合现代审美
-- 提供经典、内联、沉浸无干扰三种模式
-- 对标准支持优秀（自v5开始）
-- 多语言支持，官网可下载几十种语言
-
-### 20. 密码功能增强
-
-1. 增强密码强度策略，用户密码长度不能少于6位，包含字母、数字、特殊字符
-
-2. 用户首次登录，初始密码必须修改配置
-
-   可在**系统管理 —> 参数设置**页面中进行配置。
-
-   <img src="./image/pwdModify.png" alt="pwdModify" style="zoom:50%; margin-left: -10px" />
-
-3. 用户周期性提示密码修改配置
-
-   可在**系统管理 —> 参数设置**页面中进行配置。
-
-   <img src="./image/pwdPeriod.png" alt="pwdPeriod" style="zoom:50%; margin-left: -10px" />
-
-### 21. 列表长字段
-
-开发中，经常会遇到列表中要显示一些很长的字段的场景，例如：备注字段。框架中添加了处理这种情况的组件，具体使用方式请参考代码示例。
-
-```vue
-<el-table-column label="备注1">
-  <template slot-scope="scope">
-		<long-table-col :str="scope.row.remark1"/>
-  </template>
-</el-table-column>
-<el-table-column label="备注2">
-  <template slot-scope="scope">
-		<long-table-col :str="scope.row.remark2" :len="7"/>
-  </template>
-</el-table-column>
-<el-table-column label="备注3">
-  <template slot-scope="scope">
-		<long-table-col :str="scope.row.remark3" :len="8" :width="400" :maxHeight="80"/>
-  </template>
-</el-table-column>
-<el-table-column label="备注4">
-  <template slot-scope="scope">
-		<long-table-col :str="scope.row.remark4" :len="8" :width="300" :maxHeight="100" placement="right-end" trigger="click"/>
-  </template>
-</el-table-column>
-```
-
+|  方法        |   |
+|  ----       | ----  |
+| 审批         | approval(FlowTaskVo flowTask) |
+| 转办         | assignTask(FlowTaskVo flowTaskVo) |
+| 代办任务列表  | todoList(FlowQueryVo queryVo)  |
+| 已办任务列表  | doneList(FlowQueryVo queryVo)  |
+| 办结任务列表  | finishedList(FlowQueryVo queryVo)  |
