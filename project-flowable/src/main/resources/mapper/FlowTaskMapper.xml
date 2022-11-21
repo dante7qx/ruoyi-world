@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			t.task_def_key_ as taskDefKey,
 			t.create_time_ as createTime,
 			t0.business_key_ as bizId,
-			(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_='businessUID' limit 1) as bizUid,
+			(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessUID' limit 1) as bizUid,
 			(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessDetailDesc' limit 1) as bizDetail,
 			t0.business_status_ as bizModel,
 			t1.deployment_id_ as deployId,
@@ -73,6 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="flowName != null and flowName != ''">
                and t.name_ like concat('%', #{flowName}, '%')
             </if>
+            <if test="bizModel != null and bizModel != ''">
+	           and t0.business_status_ = #{bizModel}
+	        </if>
             <if test="startTime != null and endTime != null"> 
             	and t.create_time_ between #{startTime} and #{endTime}
             </if>
@@ -118,6 +121,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            </if>
 				<if test="flowName != null and flowName != ''">
 	               and t.name_ like concat('%', #{flowName}, '%')
+	            </if>
+	            <if test="bizModel != null and bizModel != ''">
+	               and t1.business_status_ = #{bizModel}
 	            </if>
 	            <if test="startTime != null and endTime != null"> 
 	            	and t.end_time_ between #{startTime} and #{endTime}
@@ -170,8 +176,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<if test="flowCategory != null and flowCategory != ''">
 	               and t2.category_ = #{flowCategory}
 	            </if>
-				<if test="flowName != null and flowName != ''">
+	            <if test="flowName != null and flowName != ''">
 	               and t.name_ like concat('%', #{flowName}, '%')
+	            </if>
+	            <if test="bizModel != null and bizModel != ''">
+	               and t1.business_status_ = #{bizModel}
 	            </if>
 	            <if test="startTime != null and endTime != null"> 
 	            	and t.end_time_ between #{startTime} and #{endTime}
@@ -194,7 +203,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		inner join act_hi_taskinst t1 on
 			t1.ID_ = t.TASK_ID_
 		inner join sys_user u on
-			(concat(u.user_id, '') = concat(t.USER_ID_, '') or u.user_name = concat(t.USER_ID_, ''))
+			(concat(u.user_id, '') = concat(t.user_id_, '') or u.user_name = concat(t.user_id_, ''))
 		inner join sys_dept d on
 			d.dept_id = u.dept_id
 		where t.PROC_INST_ID_ = #{procInsId}
