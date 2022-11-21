@@ -112,7 +112,7 @@ public class FlowTaskDto {
     	// 可以通过业务模块bizModel来设置是否在审核时需要传递附件
 		switch (bizModel) {
 			case "<业务模块>":
-				// 设置
+				// 设置 hasApprovalAttach
 				break;
 			default:
 				break;
