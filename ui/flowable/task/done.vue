@@ -59,7 +59,7 @@
           <dict-tag :options="dict.type.sys_process_category" :value="scope.row.category"/>
         </template>
       </el-table-column>
-      <el-table-column label="流程名称" align="center" prop="procDefName"/>
+      <el-table-column label="流程详情" align="center" prop="bizDetail" />
       <el-table-column label="任务节点" align="center" prop="taskName" />
       <el-table-column label="流程发起人" align="center">
         <template slot-scope="scope">

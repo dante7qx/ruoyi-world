@@ -102,7 +102,11 @@ public final class ProcessConstants {
      * 业务标识ID（非业务主键）
      */
     public static final String PROCESS_BIZ_UID = "businessUID";
-    
+
+    /** 
+     * 业务详情描述
+     */
+    public static final String PROCESS_BIZ_DETAIL_DESC = "businessDetailDesc";
     
     /**
      * 任务转办参数Key

@@ -40,6 +40,9 @@ public class FlowTaskDto {
     /** 业务模块 */
     private String bizModel;
 
+    /** 业务详情描述 */
+    private String bizDetail;
+
     /** 任务执行人Id */
     private Long assigneeId;
 

@@ -117,12 +117,26 @@ public class FlowDemoServiceImpl implements IFlowDemoService
     	startFlowVo.setBizModel(BizModelConstants.FLOW_DEMO);
     	// 这里的 days 是你在绘制流程图时，设置的条件参数
     	startFlowVo.addParams("days", DateUtil.betweenDay(flowDemo.getStartTime(), flowDemo.getEndTime(), true) + 1);
+        // 一定设置业务详情描述
+    	startFlowVo.addParams(ProcessConstants.PROCESS_BIZ_DETAIL_DESC, wrapBizDetailDesc(flowDemo));
     	flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO, startFlowVo);
     	
     	// 验证多实例（3、4为spuser1、spuser2）时，请打开注释，并将上一行 flowInstanceService.commit(...) 注释
 //    	startFlowVo.addParams(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Lists.newArrayList("3", "4"));
 //    	flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO+"2", startFlowVo);
         return result;
+    }
+
+    private String wrapBizDetailDesc(FlowDemo flowDemo) {
+		String nickName = SecurityUtils.getLoginUser().getUser().getNickName();
+    	StringBuilder builder = new StringBuilder();
+    	builder
+    		.append(nickName)
+    		.append("请假")
+    		.append(DateUtil.betweenDay(flowDemo.getStartTime(), flowDemo.getEndTime(), true) + 1)
+    		.append("天，请假原因：")
+    		.append(flowDemo.getLeaveReason());
+    	return builder.toString();
     }
     
     /**

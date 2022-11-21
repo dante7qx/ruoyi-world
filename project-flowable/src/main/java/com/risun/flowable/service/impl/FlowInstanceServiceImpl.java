@@ -56,6 +56,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 	public ProcessInstance startProcessInstanceByKey(String procDefKey, StartFlowVo startFlowVo) {
 		Assert.hasText(procDefKey, "流程定义Key不能为空！");
 		Assert.hasText(startFlowVo.getBizUid(), "业务标识ID不能为空！");
+		Assert.notNull(startFlowVo.getParams().get(ProcessConstants.PROCESS_BIZ_DETAIL_DESC), "流程业务详情描述不能为空！");
 		ProcessInstance processInstance = null;
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
 				.processDefinitionKey(procDefKey).latestVersion().singleResult();
