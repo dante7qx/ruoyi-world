@@ -393,24 +393,6 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 		return sysFlowAssignMapper.selectSysFlowAssignList(flowAssign);
 	}
 	
-
-	/*
-	 @Override 
-	 public List<FlowTaskDto> todoList(FlowTaskDto flowTaskDto) {
-	 	SecurityUtils.getLoginUser().getUser().getUserId(); 
-	 	TaskQuery taskQuery = taskService
-	 		.createTaskQuery() 
-	 		.active() 
-	 		.includeProcessVariables()
-	  		.taskAssignee(SecurityUtils.getUserId().toString()) 
-	  		.orderByTaskCreateTime()
-	  		.desc(); 
-	  	List<Task> taskList = taskQuery.list(); 
-	  	List<FlowTaskDto> flowList = new ArrayList<>(); 
-	  	return flowList; 
-	 }
-	*/
-
 	/**
 	 * 根据任务ID查询挂载的表单信息
 	 *
