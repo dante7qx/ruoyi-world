@@ -102,6 +102,24 @@ public class FlowTaskDto {
     	}
     	return this.duration;
     }
+
+    /**
+     * 设置审批过程是否需要附件
+     *
+     * @return
+     */
+    public Boolean getHasApprovalAttach() {
+    	// 可以通过业务模块bizModel来设置是否在审核时需要传递附件
+		switch (bizModel) {
+			case "<业务模块>":
+				// 设置
+				break;
+			default:
+				break;
+
+		}
+    	return this.hasApprovalAttach;
+    }
     
     /**
      * 流程完成时间处理
