@@ -77,12 +77,26 @@ export function getAssignList(procInsId) {
   })
 }
 
-
-
 // 读取image文件
 export function getFlowViewer(procInsId) {
   return request({
     url: '/flowable/task/flowViewer/' + procInsId,
     method: 'get'
+  })
+}
+
+// 根据任务Id获取流程变量
+export function getProcessVarsByTaskId(taskId) {
+  return request({
+    url: '/flowable/task/processVarsByTaskId/'+taskId,
+    method: 'post'
+  })
+}
+
+// 根据流程实例Id获取流程变量
+export function getProcessVarsByProcInsId(procInsId) {
+  return request({
+    url: '/flowable/task/processVarsByProcInsId/'+procInsId,
+    method: 'post'
   })
 }

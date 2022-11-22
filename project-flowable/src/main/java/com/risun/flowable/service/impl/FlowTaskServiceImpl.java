@@ -496,16 +496,32 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 	 * @return
 	 */
 	@Override
-	public AjaxResult processVariables(String taskId) {
+	public Map<String, Object> processVariablesByTaskId(String taskId) {
 		// 流程变量
 		HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery()
 				.includeProcessVariables().finished().taskId(taskId).singleResult();
 		if (Objects.nonNull(historicTaskInstance)) {
-			return AjaxResult.success(historicTaskInstance.getProcessVariables());
+			return historicTaskInstance.getProcessVariables();
 		} else {
-			Map<String, Object> variables = taskService.getVariables(taskId);
-			return AjaxResult.success(variables);
+			return taskService.getVariables(taskId);
 		}
+	}
+	
+	/**
+	 * 获取流程变量
+	 *
+	 * @param procInsId
+	 * @return
+	 */
+	@Override
+	public Map<String, Object> processVariablesByProcInsId(String procInsId) {
+		Map<String, Object> vars = Maps.newHashMap();
+		HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery()
+				.processInstanceId(procInsId).singleResult();
+		if (Objects.nonNull(historicTaskInstance)) {
+			vars = historicTaskInstance.getProcessVariables();
+		} 
+		return vars;
 	}
 	
 	/**

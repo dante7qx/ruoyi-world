@@ -109,10 +109,19 @@ public interface IFlowTaskService {
 
     /**
      * 获取流程变量
+     * 
      * @param taskId
      * @return
      */
-    AjaxResult processVariables(String taskId);
+	public Map<String, Object> processVariablesByTaskId(String taskId);
+    
+    /**
+     * 获取流程变量
+     * 
+     * @param procInsId
+     * @return
+     */
+	public Map<String, Object> processVariablesByProcInsId(String procInsId);
     
     /**
      * 驳回任务

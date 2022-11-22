@@ -163,9 +163,20 @@ public class FlowTaskController extends BaseController {
      * @param taskId
      * @return
      */
-    @GetMapping(value = "/processVariables/{taskId}")
-    public AjaxResult processVariables(@PathVariable(value = "taskId") String taskId) {
-        return flowTaskService.processVariables(taskId);
+    @PostMapping(value = "/processVarsByTaskId/{taskId}")
+    public AjaxResult processVarsByTaskId(@PathVariable(value = "taskId") String taskId) {
+        return AjaxResult.success(flowTaskService.processVariablesByTaskId(taskId));
+    }
+    
+    /**
+     * 获取流程变量
+     * 
+     * @param procInsId
+     * @return
+     */
+    @PostMapping(value = "/processVarsByProcInsId/{procInsId}")
+    public AjaxResult processVarsByProcInsId(@PathVariable(value = "procInsId") String procInsId) {
+        return AjaxResult.success(flowTaskService.processVariablesByProcInsId(procInsId));
     }
     
     /**
