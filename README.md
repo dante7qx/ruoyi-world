@@ -8,6 +8,8 @@
 
 ### 1. 下载插件
 
+下载 [工作流插件](https://192.168.1.30/risun/java-web/-/archive/flowable-plugin/java-web-flowable-plugin.zip)
+
 ### 2. 集成操作
 
 解压下载后的 flowable.zip。（可以将project-flowable 修改为 [项目]-flowable）
@@ -154,7 +156,7 @@ npm i diagram-js
   public int commitFlowDemo(FlowDemo flowDemo) {
       ...
       // flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO, startFlowVo);
-    	
+
     	// 验证多实例（3、4为spuser1、spuser2）时，请打开注释，并将上一行 flowInstanceService.commit(...) 注释
     	startFlowVo.addParams(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Lists.newArrayList("3", "4"));
     	flowInstanceService.commit(ProcessDefKeyConstants.KEY_FLOW_DEMO + "2", startFlowVo);
@@ -199,7 +201,11 @@ npm i diagram-js
 private String bizId;
 /** 业务标识ID（不是主键，推荐UUID） */
 private String bizUid;
-```
+/** 业务模块 BizModelConstants 中定义 */
+private String bizModel;
+/** 业务详情描述 */
+private String bizDetail;
+  ```
 详细操作，请参考 `FlowDemoServiceImpl.java`
 
 ### 3. 业务页面
@@ -276,3 +282,32 @@ private String bizUid;
 | 代办任务列表  | todoList(FlowQueryVo queryVo)  |
 | 已办任务列表  | doneList(FlowQueryVo queryVo)  |
 | 办结任务列表  | finishedList(FlowQueryVo queryVo)  |
+
+### 6. 审批附件
+
+有些业务在审批时，需要审批人上传附件，本框架也对这种情况做了处理。可以通过业务模块字段来进行处理：
+
+`FlowTaskDto.java`
+
+``` java
+/** 审批过程是否需要附件 */
+private Boolean hasApprovalAttach = Boolean.FALSE;
+
+/**
+  * 设置审批过程是否需要附件
+  * 
+  * @return
+  */
+public Boolean getHasApprovalAttach() {
+  // 可以通过业务模块bizModel来设置是否在审核时需要传递附件
+  switch (bizModel) {
+    case "<业务模块>":
+      // 设置 hasApprovalAttach
+      break;
+    default:
+      break;
+
+  }
+  return this.hasApprovalAttach;
+}
+```
