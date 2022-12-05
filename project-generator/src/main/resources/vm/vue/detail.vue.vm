@@ -18,11 +18,11 @@
       </el-form-item>
 #elseif($column.htmlType == "imageUpload")
       <el-form-item label="${comment}">
-        <image-upload v-model="form.${field}" />
+        <image-upload v-model="form.${field}" :disabled="disabled"/>
       </el-form-item>
 #elseif($column.htmlType == "fileUpload")
       <el-form-item label="${comment}">
-        <file-upload v-model="form.${field}"/>
+        <file-upload v-model="form.${field}" :disabled="disabled"/>
       </el-form-item>
 #elseif($column.htmlType == "editor")
       <el-form-item label="${comment}">
