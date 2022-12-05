@@ -31,7 +31,7 @@ public class FlowTaskVo implements Serializable {
 	private String attachment;
 
 	/** 审批通过（默认为驳回） */
-	private Boolean agree = Boolean.FALSE;
+	private Boolean agree;
 
 	/** 审批人(组) */
 	private String assignee;

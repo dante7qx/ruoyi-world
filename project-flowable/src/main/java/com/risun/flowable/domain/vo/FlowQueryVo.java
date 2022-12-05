@@ -29,6 +29,9 @@ public class FlowQueryVo implements Serializable {
 	/** 流程分类 */
 	private String flowCategory;
 	
+	/** 业务模块 */
+	private String bizModel;
+	
 	/** 开始时间 */
 	private Date startTime;
 	
@@ -37,6 +40,8 @@ public class FlowQueryVo implements Serializable {
 	
 	/** 超级管理员 */
 	private int isAdmin = 0;
+	
+	
 	
 	
 }

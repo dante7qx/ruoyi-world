@@ -67,6 +67,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -170,7 +171,14 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 			}
 			// 设置审批意见
 			taskService.addComment(task.getId(), task.getProcessInstanceId(), flowTask.getComment());
-			flowTask.addVariables(ProcessConstants.PROCESS_ARG_AGREE, flowTask.getAgree());
+			if(ObjectUtil.isNotNull(flowTask.getAgree())) {
+				flowTask.addVariables(ProcessConstants.PROCESS_ARG_AGREE, flowTask.getAgree());
+				// 驳回操作
+				if(!flowTask.getAgree().booleanValue()) {
+					this.rejectTask(flowTask, task);
+				}
+			}
+			
 			// 设置附件
 			if (StrUtil.isNotEmpty(flowTask.getAttachment())) {
 				taskService.createAttachment("", task.getId(), task.getProcessInstanceId(), "", "",
@@ -192,6 +200,48 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 			throw new ServiceException(e.getLocalizedMessage(), HttpStatus.ERROR);
 		}
 		return result;
+	}
+	
+	/**
+	 * 驳回操作
+	 * 
+	 * @param flowTask
+	 * @param task
+	 */
+	private void rejectTask(FlowTaskVo flowTask, Task task) {
+		// 获取上一个任务的执行人（单点或会签）
+		// 已完成历史任务
+		List<HistoricTaskInstance> histTasks = historyService.createHistoricTaskInstanceQuery()
+				.processInstanceId(task.getProcessInstanceId())
+				.orderByHistoricTaskInstanceStartTime().desc()
+				.list();
+		if(CollUtil.isEmpty(histTasks)) {
+			throw new ServiceException("已完成流程记录缺失！", HttpStatus.ERROR);
+		}
+		// 过滤掉当前待办任务
+		histTasks = histTasks.stream().filter(t -> ObjectUtil.isNotNull(t.getEndTime())).collect(toList());
+		for (HistoricTaskInstance histTask : histTasks) {
+			// 会签 TODO: 待开发
+			if(histTask.getName().equals("会签")) {
+				flowTask.addVariables(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, "待开发");
+			} else {
+				// 单点
+				flowTask.addVariables(ProcessConstants.PROCESS_APPROVAL, histTask.getAssignee());
+			}
+			break;
+		}
+		
+	}
+	
+	/**
+	 * 驳回后到达的任务是否为会签节点
+	 * 
+	 * @param rejectTask 驳回后到达的任务
+	 */
+	private boolean rejectNodeIsMultiTask(HistoricTaskInstance rejectTask) {
+		String taskDefinitionKey = rejectTask.getTaskDefinitionKey();
+		
+		return false;
 	}
 	
 	/**
@@ -401,8 +451,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 	 */
 	@Override
 	public Task getTaskForm(String taskId) {
-		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-		return task;
+		return taskService.createTaskQuery().taskId(taskId).singleResult();
 	}
 
 	/**

@@ -324,7 +324,9 @@ export default {
     },
     handleSelUser(row) {
       this.openSelUser = true;
-      this.$refs.userTable.clearSelection();
+      setTimeout(() => { 
+        this.$refs.userTable.clearSelection(); 
+      }, 0)
       this.selGroupId = row.groupId;
     },
     getUserList() {

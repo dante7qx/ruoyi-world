@@ -2,6 +2,7 @@ package com.risun.flowable.service;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.flowable.domain.SysFlowAssign;
@@ -113,7 +114,7 @@ public interface IFlowTaskService {
      * @param taskId
      * @return
      */
-	public Map<String, Object> processVariablesByTaskId(String taskId);
+    Map<String, Object> processVariablesByTaskId(String taskId);
     
     /**
      * 获取流程变量
@@ -121,7 +122,7 @@ public interface IFlowTaskService {
      * @param procInsId
      * @return
      */
-	public Map<String, Object> processVariablesByProcInsId(String procInsId);
+    Map<String, Object> processVariablesByProcInsId(String procInsId);
     
     /**
      * 驳回任务
@@ -144,5 +145,7 @@ public interface IFlowTaskService {
      * @return
      */
     AjaxResult getNextFlowNode(FlowTaskVo flowTaskVo);
+    
+    
 	
 }
