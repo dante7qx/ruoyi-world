@@ -21,6 +21,7 @@ import 'tinymce/skins/ui/oxide/content.inline.min.css'
 import '../../../public/static/tinymce/langs/zh_CN.js'
 // 插件
 import 'tinymce/plugins/image'  // 插入上传图片插件
+import '../../../public/static/tinymce/indent2em.js'
 // import 'tinymce/plugins/imagetools'
 import 'tinymce/plugins/media'  // 插入视频插件
 import 'tinymce/plugins/table'  // 插入表格插件
@@ -96,8 +97,8 @@ export default {
         placeholder: "在这里输入文字",
         convert_urls: false,  //禁用URL自动转换
         language: 'zh_CN',
-        // content_style: 'body { font-family: STSong; font-size: 12pt} p {margin: 0px; border: 0px ; padding: 1px;}',
-        content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; text-indent: 2em; }',
+        // content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; } p {text-indent: 2em;}',
+        content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; }',
         object_resizing: true, //禁用表格内联样式拖拽拉伸
         table_resize_bars: true,//禁用表格单元格拖拽拉伸
         protect: [
