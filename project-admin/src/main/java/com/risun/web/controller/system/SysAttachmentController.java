@@ -35,7 +35,7 @@ public class SysAttachmentController extends BaseController
     /**
      * 查询业务附件列表
      */
-    @PreAuthorize("@ss.hasPermi('monitor:attachment:list')")
+    @PreAuthorize("@ss.hasPermi('system:attachment:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysAttachment sysAttachment)
     {
@@ -47,7 +47,7 @@ public class SysAttachmentController extends BaseController
     /**
      * 获取业务附件详细信息
      */
-    @PreAuthorize("@ss.hasPermi('monitor:attachment:query')")
+    @PreAuthorize("@ss.hasPermi('system:attachment:query')")
     @GetMapping(value = "/{attachId}")
     public AjaxResult getInfo(@PathVariable("attachId") Long attachId)
     {
@@ -66,7 +66,7 @@ public class SysAttachmentController extends BaseController
     /**
      * 删除业务附件
      */
-    @PreAuthorize("@ss.hasPermi('monitor:attachment:remove')")
+    @PreAuthorize("@ss.hasPermi('system:attachment:remove')")
     @Log(title = "业务附件", businessType = BusinessType.DELETE)
     @PostMapping("/del/{attachIds}")
     public AjaxResult remove(@PathVariable Long[] attachIds)
