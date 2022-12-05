@@ -94,6 +94,7 @@ export default {
 			//初始化配置
       init: {
         placeholder: "在这里输入文字",
+        convert_urls: false,  //禁用URL自动转换
         language: 'zh_CN',
         // content_style: 'body { font-family: STSong; font-size: 12pt} p {margin: 0px; border: 0px ; padding: 1px;}',
         content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; text-indent: 2em; }',

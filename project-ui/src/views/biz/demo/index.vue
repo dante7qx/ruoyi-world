@@ -44,7 +44,7 @@
           icon="el-icon-edit"
           size="mini"
           :disabled="single"
-          @click="handleUpdate"
+          @click="handleUpdate(null, true)"
           v-hasPermi="['biz:demo:edit']"
         >修改</el-button>
       </el-col>
@@ -229,7 +229,7 @@ export default {
     },
     handleUpdate(row, disabled) {
       this.disabled = disabled;
-      this.demoId = row.demoId;
+      this.demoId = row != null ? row.demoId : this.ids[0];
       if(this.disabled) {
         this.title = "查看业务";
       } else {
