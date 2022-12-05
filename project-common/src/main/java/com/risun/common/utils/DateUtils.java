@@ -43,7 +43,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * @return Date() 当前日期
 	 */
 	public static Date getNowDate() {
-		return new Date();
+		return Date.from(Instant.now());
 	}
 
 	/**
