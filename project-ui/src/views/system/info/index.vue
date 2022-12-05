@@ -101,7 +101,7 @@
             icon="el-icon-edit"
             size="mini"
             :disabled="single"
-            @click="handleUpdate"
+            @click="handleUpdate(null, true)"
             v-hasPermi="['system:info:edit']"
           >修改</el-button>
         </el-col>
@@ -538,7 +538,7 @@ export default {
     },
     handleUpdate(row, disabled) {
       this.disabled = disabled;
-      this.infoId = row.infoId;
+      this.infoId = row != null ? row.infoId : this.ids[0];
       if(this.disabled) {
         this.title = "查看信息发布";
       } else {
