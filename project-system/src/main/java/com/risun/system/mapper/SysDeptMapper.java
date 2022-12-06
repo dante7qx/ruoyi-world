@@ -116,4 +116,20 @@ public interface SysDeptMapper
      * @return 结果
      */
     public int deleteDeptById(Long deptId);
+    
+    /**
+     * 根据当前部门查询部门及上级部门
+     * 
+     * @param dept
+     * @return
+     */
+    public List<SysDept> selectHigherCascadeDeptList(SysDept dept);
+    
+    /**
+     * 根据当前部门查询部门及下级部门
+     * 
+     * @param dept
+     * @return
+     */
+    public List<SysDept> selectLowerCascadeDeptList(SysDept dept);
 }

@@ -1,10 +1,24 @@
 package com.risun.web.controller.system;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.collect.Maps;
 import com.risun.common.annotation.Log;
 import com.risun.common.constant.UserConstants;
 import com.risun.common.core.controller.BaseController;
@@ -22,18 +36,6 @@ import com.risun.system.service.ISysPostService;
 import com.risun.system.service.ISysRoleService;
 import com.risun.system.service.ISysUserPwdModifyService;
 import com.risun.system.service.ISysUserService;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 用户信息
@@ -279,5 +281,31 @@ public class SysUserController extends BaseController
     @PostMapping("/monitorModifyPwd")
     public AjaxResult loginUserPasswordMonitor() {
     	return AjaxResult.success(userPwdModifyService.monitorLoginUserPassword());
+    }
+    
+    /**
+     * 根据部门用户选择组件获取部门树列表
+     * 
+     * @param level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级
+     * @return
+     */
+    @PostMapping("/deptTree4UserSel/{level}")
+    public AjaxResult deptTree4UserSel(@PathVariable Integer level)
+    {
+    	Map<String, Object> data = Maps.newHashMap();
+    	data.put("loginDeptId", getDeptId());
+    	data.put("tree", deptService.deptTree4UserSel(level));
+        return AjaxResult.success(data);
+    }
+    
+    /**
+     * 根据部门树查询用户列表
+     */
+    @GetMapping("/deptUser")
+    public TableDataInfo deptUser(SysUser user)
+    {
+        startPage();
+        List<SysUser> list = userService.selectUserList(user);
+        return getDataTable(list);
     }
 }

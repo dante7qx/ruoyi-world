@@ -130,4 +130,12 @@ public interface ISysDeptService
      * @return 结果
      */
     public int deleteDeptById(Long deptId);
+    
+    /**
+     * 根据部门用户选择组件获取部门树列表
+     * 
+     * @param level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级
+     * @return
+     */
+    public List<TreeSelect> deptTree4UserSel(Integer level);
 }

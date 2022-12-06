@@ -31,16 +31,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDeptVo"/>
         where d.del_flag = '0'
 		<if test="deptId != null and deptId != 0">
-			AND dept_id = #{deptId}
+			AND d.dept_id = #{deptId}
 		</if>
         <if test="parentId != null and parentId != 0">
-			AND parent_id = #{parentId}
+			AND d.parent_id = #{parentId}
 		</if>
 		<if test="deptName != null and deptName != ''">
-			AND dept_name like concat('%', #{deptName}, '%')
+			AND d.dept_name like concat('%', #{deptName}, '%')
 		</if>
 		<if test="status != null and status != ''">
-			AND status = #{status}
+			AND d.status = #{status}
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
@@ -156,4 +156,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update sys_dept set del_flag = '2' where dept_id = #{deptId}
 	</delete>
 
+	<!-- 部门及上级部门 -->
+	<select id="selectHigherCascadeDeptList" parameterType="SysDept" resultMap="SysDeptResult">
+        <include refid="selectDeptVo"/>
+       	where 
+       		d.del_flag = '0'  
+       		and find_in_set (d.dept_id,  (select concat(t.ancestors, ',', t.dept_id) from sys_dept t where t.dept_id = #{deptId}))
+ 		order BY d.parent_id, d.order_num
+	</select>
+	
+	<!-- 部门及下级部门 -->
+	<select id="selectLowerCascadeDeptList" parameterType="SysDept" resultMap="SysDeptResult">
+		<include refid="selectDeptVo"/>
+        where d.del_flag = '0' and d.dept_id = #{deptId} or find_in_set( #{deptId} , d.ancestors )
+		order by d.parent_id, d.order_num
+	</select>
+	
 </mapper> 

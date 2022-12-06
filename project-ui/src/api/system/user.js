@@ -142,6 +142,23 @@ export function allDeptTreeSelect() {
   })
 }
 
+// 根据部门用户选择组件获取部门树列表（level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级）
+export function deptTree4UserSel(level) {
+  return request({
+    url: '/system/user/deptTree4UserSel/' + level,
+    method: 'post'
+  })
+}
+
+// 根据部门树查询用户列表
+export function listDeptUser(query) {
+  return request({
+    url: '/system/user/deptUser',
+    method: 'get',
+    params: query
+  })
+}
+
 // 监控用户初始密码修改和定期提示更新
 export function monitorPwdModify(){
   return request({
