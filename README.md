@@ -1,4 +1,4 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Risun Java v3.0.0</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Risun Java v3.0.1</h1>
 <h4 align="center">基于Ruoyi v3.8.4 前后端分离的Java快速开发框架</h4>
 
 
@@ -328,3 +328,16 @@ BaseURI：`/risun/monitor`，请求方式：POST
 </el-table-column>
 ```
 
+### 22. 部门用户选择
+
+框架添加部门用户选择组件，适用于用户选择的场景，页面布局为左（部门）树右（用户列表）表，用户单选或多选。使用详情请查看 `代码示例 ——> 用户选择`
+
+## 四. 更新记录
+
+### **v3.0.1**
+
+1. 更新时间 2022-12-06 16:50
+2. Hutool 版本升级到 5.8.10
+3. Fastjson2 版本升级到 2.0.20
+4. 优化富文本编辑器，添加首行缩进插件、禁用URL自动转换
+5. 添加部门用户选择组件，使用详情请查看 `代码示例 ——> 用户选择`
