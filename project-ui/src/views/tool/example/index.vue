@@ -8,6 +8,7 @@
   		text-color="#fff"
   		active-text-color="#3b8be0"
 			@select="handleSelect">
+			<el-menu-item index="sysUserSel">用户选择</el-menu-item>
 			<el-submenu index="1">
 				<template slot="title">下拉框</template>
 				<el-menu-item index="area">地区</el-menu-item>
@@ -29,6 +30,7 @@
 		<code-video v-else-if="activeIndex=='videoMonitor'" />
 		<water-mark v-else-if="activeIndex=='watermark'" />
 		<code-calendar v-else-if="activeIndex=='calendar'" />
+		<sys-user-sel v-else-if="activeIndex=='sysUserSel'" />
 	</div>
 </template>
 
@@ -40,6 +42,7 @@ import LongTabCol from './longTableCol'
 import Video from './video'
 import Watermark from './watermark'
 import Calendar from './calendar'
+import SysUserSel from './sysUserSel'
 
 export default {
   name: "CodeExample",
@@ -50,11 +53,12 @@ export default {
 		'long-tab-col': LongTabCol,
 		'code-video': Video,
 		'water-mark': Watermark,
-		'code-calendar': Calendar
+		'code-calendar': Calendar,
+		'sys-user-sel': SysUserSel
 	},
 	data() {
     return {
-			activeIndex: 'area'
+			activeIndex: 'sysUserSel'
 		}
 	},
 	methods: {

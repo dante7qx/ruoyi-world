@@ -81,8 +81,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="deptId != null and deptId != 0">
 			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{deptId}, ancestors) ))
 		</if>
+		<!-- 根据部门树查询用户列表 (level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级) -->
+		<if test="(0 == params.level or 1 == params.level)">
+			AND u.user_id > 1 AND (u.dept_id = #{params.deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{params.deptId}, ancestors) ))
+		</if>
+		<if test="2 == params.level">
+			AND u.user_id > 1 AND u.dept_id = #{params.deptId}
+		</if>
+		<if test="3 == params.level">
+			AND u.user_id > 1 AND find_in_set (u.dept_id, (select concat(dp.ancestors, ',', dp.dept_id) from sys_dept dp where dp.dept_id = #{params.deptId}))
+		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
+		order by d.parent_id, d.order_num
 	</select>
 	
 	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">

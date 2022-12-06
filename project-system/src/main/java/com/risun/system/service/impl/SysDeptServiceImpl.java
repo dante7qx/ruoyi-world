@@ -1,9 +1,14 @@
 package com.risun.system.service.impl;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -352,5 +357,41 @@ public class SysDeptServiceImpl implements ISysDeptService
     private boolean hasChild(List<SysDept> list, SysDept t)
     {
         return getChildList(list, t).size() > 0;
+    }
+    
+    /**
+     * 根据部门用户选择组件获取部门树列表
+     * 
+     * @param level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级
+     * @return
+     */
+    public List<TreeSelect> deptTree4UserSel(Integer level) {
+    	 List<SysDept> depts = new ArrayList<SysDept>();
+    	 SysDept query = new SysDept();
+    	 switch (level) {
+			case 0:
+				depts = deptMapper.selectDeptList(query);
+				break;
+			case 1:
+				query.setDeptId(SecurityUtils.getDeptId());
+				List<SysDept> lowers = deptMapper.selectLowerCascadeDeptList(query);
+				List<SysDept> highers = deptMapper.selectHigherCascadeDeptList(query);
+				depts = Stream.of(highers, lowers.stream()
+							.filter(d -> !d.getDeptId().equals(query.getDeptId())).collect(toList()))
+							.flatMap(Collection::stream)
+							.collect(toList());
+				break;
+			case 2:
+				query.setDeptId(SecurityUtils.getDeptId());
+				depts = deptMapper.selectHigherCascadeDeptList(query);
+				break;
+			case 3:
+				query.setDeptId(SecurityUtils.getDeptId());
+				depts = deptMapper.selectHigherCascadeDeptList(query);
+				break;
+			default:
+				break;
+		}
+    	 return buildDeptTreeSelect(depts);
     }
 }

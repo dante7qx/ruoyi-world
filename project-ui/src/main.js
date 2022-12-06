@@ -48,6 +48,8 @@ import AddressMapSelect from '@/components/AddressMapSelect'
 import VideoPlayer from '@/components/Video' 
 // 列表长字段展示组件
 import LongTableCol from '@/components/LongTableCol'
+// 部门人员选择
+import DeptUserSelect from '@/components/DeptUserSelect'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -75,6 +77,7 @@ Vue.component('ImagePreview', ImagePreview)
 Vue.component('AddressMapSelect', AddressMapSelect)
 Vue.component('VideoPlayer', VideoPlayer)
 Vue.component('LongTableCol', LongTableCol)
+Vue.component('SysDeptUserSelect', DeptUserSelect)
 
 Vue.use(directive)
 Vue.use(plugins)
