@@ -20,10 +20,9 @@ import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/skins/ui/oxide/content.inline.min.css'
 import '../../../public/static/tinymce/langs/zh_CN.js'
 // 插件
-import 'tinymce/plugins/image'  // 插入上传图片插件
 import '../../../public/static/tinymce/indent2em.js'  // 首行缩进插件
-// import 'tinymce/plugins/imagetools'
-import 'tinymce/plugins/media'  // 插入视频插件
+import '../../../public/static/tinymce/media.js'  // 插入视频插件
+import 'tinymce/plugins/image'  // 插入上传图片插件
 import 'tinymce/plugins/table'  // 插入表格插件
 import 'tinymce/plugins/link' //超链接插件
 import 'tinymce/plugins/code' //代码块插件
