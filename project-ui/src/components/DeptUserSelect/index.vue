@@ -214,7 +214,7 @@ export default {
     },
     clickUserRow(row) {
       // 单选
-      if(this.selUserRow.length == 0) {
+      if(!this.multi && this.selUserRow.length == 0) {
         this.selUserRow.push(row)
       }
     },

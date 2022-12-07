@@ -74,6 +74,7 @@
 
     <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="业务名称" align="center" prop="demoName">
         <template slot-scope="scope">
           <long-table-col :str="scope.row.demoName" :len="5"/>
