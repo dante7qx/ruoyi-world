@@ -8,21 +8,10 @@
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />
-        <!--
-        <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <ruo-yi-git id="ruoyi-git" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
-        <el-tooltip content="文档地址" effect="dark" placement="bottom">
-          <ruo-yi-doc id="ruoyi-doc" class="right-menu-item hover-effect" />
-        </el-tooltip>
-        -->
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
-
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -56,6 +45,7 @@ import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
 import RuoYiGit from '@/components/RuoYi/Git'
 import RuoYiDoc from '@/components/RuoYi/Doc'
+import store from '@/store'
 
 export default {
   components: {
@@ -67,6 +57,11 @@ export default {
     Search,
     RuoYiGit,
     RuoYiDoc
+  },
+  data() {
+    return {
+      ws: null
+    }
   },
   computed: {
     ...mapGetters([
@@ -91,6 +86,10 @@ export default {
       }
     }
   },
+  mounted() {
+    // 建立WebSocket连接，进行消息提醒（若项目中无需求，可注释或删除该行代码）
+    this.connWS()
+  },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
@@ -101,11 +100,50 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        if (this.ws) {
+          this.ws.close();
+          this.ws = null;
+        }
         this.$store.dispatch('LogOut').then(() => {
-          // location.href = '/index';
           location.href = this.$router.options.base == "/" ? "/index" : this.$router.options.base + '/index'
         })
       }).catch(() => {});
+    },
+    connWS() {
+      const user = this.$store.state.user
+      if(user == null) {
+        return;
+      }
+      const { host } = location
+      const wsuri = `ws://${host}${process.env.VUE_APP_BASE_API}/websocket/message/${user.name}`;
+      this.ws = new WebSocket(wsuri);
+      const self = this;
+      this.ws.onopen = function (event) {
+        console.log('已建立WebSocket连接！')
+      };
+      this.ws.onmessage = function (event) {
+        self.notifyUser(event.data)
+      };
+      this.ws.onclose = function (event) {
+        console.log('已关闭WebSocket连接！')
+      };
+    },
+    notifyUser(msg) {
+      const data = JSON.parse(msg)
+      const that = this
+      this.$notify({
+        title: data.title,
+        type: 'success',
+        iconClass: 'el-icon-info',
+        message: data.content,
+        onClick() {
+          that.handleNotifyClick(data)
+        }
+      });
+    },
+    handleNotifyClick(data) {
+      // 按项目需求实现相关业务逻辑
+      console.log(data)
     }
   }
 }

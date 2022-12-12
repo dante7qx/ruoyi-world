@@ -39,6 +39,14 @@ module.exports = {
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
+      },
+      [process.env.VUE_SOCKET_BASE_API]: {
+        target: 'http://localhost:9080',
+        ws: true, // 开启websocket代理
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_SOCKET_BASE_API]: ''
+        }
       }
     },
     disableHostCheck: true
