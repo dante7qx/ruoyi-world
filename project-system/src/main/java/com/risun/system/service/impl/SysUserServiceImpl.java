@@ -12,6 +12,7 @@ import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.exception.ServiceException;
 import com.risun.common.utils.DateUtils;
+import com.risun.common.utils.PinyinUtil;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.bean.BeanValidators;
@@ -37,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import cn.hutool.core.util.ReUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 用户 业务层处理
@@ -279,6 +281,10 @@ public class SysUserServiceImpl implements ISysUserService
     public int insertUser(SysUser user)
     {
         // 新增用户信息
+    	if(StrUtil.isNotEmpty(user.getNickName())) {
+    		user.setPyName(PinyinUtil.toPinyin(user.getNickName()));
+    		user.setFirstSpellName(PinyinUtil.toFirstSpell(user.getNickName()));
+    	}
         int rows = userMapper.insertUser(user);
         // 新增用户岗位关联
         insertUserPost(user);
@@ -318,6 +324,10 @@ public class SysUserServiceImpl implements ISysUserService
         userPostMapper.deleteUserPostByUserId(userId);
         // 新增用户与岗位管理
         insertUserPost(user);
+        if(StrUtil.isNotEmpty(user.getNickName())) {
+    		user.setPyName(PinyinUtil.toPinyin(user.getNickName()));
+    		user.setFirstSpellName(PinyinUtil.toFirstSpell(user.getNickName()));
+    	}
         return userMapper.updateUser(user);
     }
 
@@ -523,6 +533,11 @@ public class SysUserServiceImpl implements ISysUserService
         {
             try
             {
+            	// 设置用户名拼音、拼音首字母
+            	if(StrUtil.isNotEmpty(user.getNickName())) {
+            		user.setPyName(PinyinUtil.toPinyin(user.getNickName()));
+            		user.setFirstSpellName(PinyinUtil.toFirstSpell(user.getNickName()));
+            	}
                 // 验证是否存在这个用户
                 SysUser u = userMapper.selectUserByUserName(user.getUserName());
                 if (StringUtils.isNull(u))

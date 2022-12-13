@@ -55,6 +55,12 @@ public class SysUser extends BaseEntity
 
     /** 密码 */
     private String password;
+    
+    /** 用户名拼音 */
+    private String pyName;
+    
+    /** 用户名拼音首字母 */
+    private String firstSpellName;
 
     /** 帐号状态（0正常 1停用） */
     @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
@@ -208,7 +214,23 @@ public class SysUser extends BaseEntity
         this.password = password;
     }
 
-    public String getStatus()
+    public String getPyName() {
+		return pyName;
+	}
+
+	public void setPyName(String pyName) {
+		this.pyName = pyName;
+	}
+
+	public String getFirstSpellName() {
+		return firstSpellName;
+	}
+
+	public void setFirstSpellName(String firstSpellName) {
+		this.firstSpellName = firstSpellName;
+	}
+
+	public String getStatus()
     {
         return status;
     }

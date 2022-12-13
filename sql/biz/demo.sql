@@ -16,3 +16,6 @@ create table t_demo (
 -- 菜单 SQL
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values('业务', '4', '1', 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', sysdate(), '', null, '业务菜单');
+
+--alter table sys_user add column py_name varchar(200) null default '' COMMENT '用户名拼音' after password;
+--alter table sys_user add column first_spell_name varchar(16) null default '' COMMENT '用户名拼音首字母' after py_name;
