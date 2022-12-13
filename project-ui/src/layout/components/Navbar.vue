@@ -87,8 +87,8 @@ export default {
     }
   },
   mounted() {
-    // 建立WebSocket连接，进行消息提醒（若项目中无需求，可注释或删除该行代码）
-    this.connWS()
+    // 建立WebSocket连接，进行消息提醒（若项目有此需求，放开该行代码）
+    // this.connWS()
   },
   methods: {
     toggleSideBar() {

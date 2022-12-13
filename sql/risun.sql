@@ -41,6 +41,8 @@ create table sys_user (
   sex               char(1)         default '0'                comment '用户性别（0男 1女 2未知）',
   avatar            varchar(100)    default ''                 comment '头像地址',
   password          varchar(200)    default ''                 comment '密码',
+  py_name	        varchar(200)    default ''                 comment '用户名拼音',
+  first_spell_name	varchar(16)     default ''                 comment '用户名拼音首字母',
   status            char(1)         default '0'                comment '帐号状态（0正常 1停用）',
   del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
   login_ip          varchar(128)    default ''                 comment '最后登录IP',
@@ -56,7 +58,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'fFkaUuxwx9ICnqBXDYBZXnHZ1zJU5gVzdssxJJuSf+idRQZl2ELxBSaAp6HGh1hJVNOa3xcqeBUOzy/fEobZmDG7jsW8PhTKyfs4kkywQqAtHMs1A72o36WxR6H9M88+LDz9+3a7YFm44JzPUCxdhhR8yvzZbjWVAM24ee2DMtI=', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'fFkaUuxwx9ICnqBXDYBZXnHZ1zJU5gVzdssxJJuSf+idRQZl2ELxBSaAp6HGh1hJVNOa3xcqeBUOzy/fEobZmDG7jsW8PhTKyfs4kkywQqAtHMs1A72o36WxR6H9M88+LDz9+3a7YFm44JzPUCxdhhR8yvzZbjWVAM24ee2DMtI=', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表
