@@ -85,9 +85,10 @@
           <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="业务图片" align="center" prop="demoImage" width="100">
+      <el-table-column label="业务图片" align="center" prop="demoImage" width="180">
         <template slot-scope="scope">
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
+          <label class="unpack" @click="downloadZip(scope.row)">打包下载</label>
         </template>
       </el-table-column>
       <el-table-column label="创建人" align="center" prop="createBy" width="100"></el-table-column>
@@ -258,7 +259,19 @@ export default {
       this.title = "";
       this.open = false;
       this.handleQuery();
+    },
+    downloadZip(row) {
+      this.$download.resource2zip({ resource: row.demoImage, fileName: "示例图片.zip"})
     }
   }
 };
 </script>
+
+<style scoped>
+.unpack {
+  position: absolute; 
+  top: 28px;
+  margin-left: 5px;  
+  cursor: pointer;
+}
+</style>
