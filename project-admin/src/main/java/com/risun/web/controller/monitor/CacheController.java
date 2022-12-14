@@ -37,13 +37,13 @@ public class CacheController
 
     private final static List<SysCache> CACHES = new ArrayList<SysCache>();
     {
-    	CACHES.add(new SysCache(CacheConstants.LOGIN_TOKEN_KEY, "用户信息"));
-    	CACHES.add(new SysCache(CacheConstants.SYS_CONFIG_KEY, "配置信息"));
-    	CACHES.add(new SysCache(CacheConstants.SYS_DICT_KEY, "数据字典"));
-    	CACHES.add(new SysCache(CacheConstants.CAPTCHA_CODE_KEY, "验证码"));
-    	CACHES.add(new SysCache(CacheConstants.REPEAT_SUBMIT_KEY, "防重提交"));
-        CACHES.add(new SysCache(CacheConstants.RATE_LIMIT_KEY, "限流处理"));
-        CACHES.add(new SysCache(CacheConstants.PWD_ERR_CNT_KEY, "密码错误次数"));
+    	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.LOGIN_TOKEN_KEY, "用户信息"));
+    	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.SYS_CONFIG_KEY, "配置信息"));
+    	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.SYS_DICT_KEY, "数据字典"));
+    	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.CAPTCHA_CODE_KEY, "验证码"));
+    	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.REPEAT_SUBMIT_KEY, "防重提交"));
+        CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.RATE_LIMIT_KEY, "限流处理"));
+        CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.PWD_ERR_CNT_KEY, "密码错误次数"));
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:cache:list')")
