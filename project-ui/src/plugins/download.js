@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { blobValidate } from "@/utils/risun";
+import { param } from "@/utils/index"
 
 const baseURL = process.env.VUE_APP_BASE_API
 
@@ -32,6 +33,27 @@ export default {
       url: url,
       responseType: 'blob',
       headers: { 'Authorization': 'Bearer ' + getToken() }
+    }).then(async (res) => {
+      const isLogin = await blobValidate(res.data);
+      if (isLogin) {
+        const blob = new Blob([res.data])
+        this.saveAs(blob, decodeURI(res.headers['download-filename']))
+      } else {
+        this.printErrMsg(res.data);
+      }
+    })
+  },
+  resource2zip(query) {
+    var url = baseURL + "/common/download/resource2zip"
+    axios({
+      method: 'post',
+      url: url,
+      responseType: 'blob',
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + getToken() 
+      },
+      data: param(query)
     }).then(async (res) => {
       const isLogin = await blobValidate(res.data);
       if (isLogin) {

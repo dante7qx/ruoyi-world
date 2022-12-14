@@ -6,26 +6,29 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.StringUtils;
-import com.risun.common.utils.file.FileUploadUtils;
-import com.risun.common.utils.file.FileUtils;
-import com.risun.framework.config.ServerConfig;
-import com.risun.system.service.ISysAttachmentService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.risun.common.config.RisunConfig;
+import com.risun.common.constant.Constants;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.domain.entity.SysDownload;
+import com.risun.common.utils.StringUtils;
+import com.risun.common.utils.ZipDownloadUtil;
+import com.risun.common.utils.file.FileUploadUtils;
+import com.risun.common.utils.file.FileUtils;
+import com.risun.framework.config.ServerConfig;
+import com.risun.system.service.ISysAttachmentService;
 
 /**
  * 通用请求处理
@@ -185,4 +188,26 @@ public class CommonController
             return AjaxResult.error(e.getMessage());
         }
     }
+    
+    /**
+     * 本地资源打包成ZIP并下载
+     */
+	@PostMapping("/download/resource2zip")
+	public void resource2ZipDownload(@Validated SysDownload sysDownload, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String resource = sysDownload.getResource();
+			String downloadName = sysDownload.getFileName();
+			if (!FileUtils.checkAllowDownload(downloadName)) {
+				throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", downloadName));
+			}
+			// 本地资源路径
+			String localPath = RisunConfig.getProfile();
+			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			FileUtils.setAttachmentResponseHeader(response, downloadName);
+			ZipDownloadUtil.zip(localPath, resource, response.getOutputStream());
+		} catch (Exception e) {
+			log.error("下载文件失败", e);
+		}
+	}
 }
