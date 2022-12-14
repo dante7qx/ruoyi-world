@@ -7,6 +7,11 @@ package com.risun.common.constant;
  */
 public class CacheConstants
 {
+	/**
+	 * 项目 redis key
+	 */
+	public static final String SYS_KEY = "project:";
+	
     /**
      * 登录用户 redis key
      */

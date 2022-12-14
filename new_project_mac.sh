@@ -26,6 +26,8 @@ createNewProject() {
     sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RisunApplication.java
     echo "修改常量 Common 下 Constants.java"
     sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
+    sed -i '' "s/project/${projectName}/g" ./project-common/src/main/java/com/risun/common/constant/CacheConstants.java
+    sed -i '' "s/-/_/g" ./project-common/src/main/java/com/risun/common/constant/CacheConstants.java
     sed -i '' "s/192.168.1.30/127.0.0.1/g" ./project-admin/src/main/resources/application.yml
     sed -i '' "s/: files/: <文件上传目录>/g" ./project-admin/src/main/resources/application.yml
     sed -i '' "s/192.168.1.30:3306/<数据库url>/g" ./project-admin/src/main/resources/application-druid.yml

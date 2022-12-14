@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * redis配置
@@ -20,19 +19,19 @@ public class RedisConfig extends CachingConfigurerSupport {
 
 	@Bean
     @SuppressWarnings(value = { "unchecked", "rawtypes" })
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory)
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory, RedisKeySerializer redisKeySerializer)
     {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
         FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
 
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        template.setKeySerializer(new StringRedisSerializer());
+        // 使用RedisKeySerializer来序列化和反序列化redis的key值
+        template.setKeySerializer(redisKeySerializer);
         template.setValueSerializer(serializer);
 
-        // Hash的key也采用StringRedisSerializer的序列化方式
-        template.setHashKeySerializer(new StringRedisSerializer());
+        // Hash的key也采用RedisKeySerializer的序列化方式
+        template.setHashKeySerializer(redisKeySerializer);
         template.setHashValueSerializer(serializer);
 
         template.afterPropertiesSet();

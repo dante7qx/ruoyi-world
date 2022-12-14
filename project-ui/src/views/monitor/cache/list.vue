@@ -218,7 +218,8 @@ export default {
     },
     /** 列表前缀去除 */
     nameFormatter(row) {
-      return row.cacheName.replace(":", "");
+      // return row.cacheName.replace(":", "");
+      return row.cacheName.split(":")[1];
     },
     /** 键名前缀去除 */
     keyFormatter(cacheKey) {

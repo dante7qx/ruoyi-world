@@ -34,7 +34,8 @@ public class SysCache
 
     public SysCache(String cacheName, String cacheKey, String cacheValue)
     {
-        this.cacheName = StringUtils.replace(cacheName, ":", "");
+//        this.cacheName = StringUtils.replace(cacheName, ":", "");
+        this.cacheName = cacheName.split(":")[1];
         this.cacheKey = StringUtils.replace(cacheKey, cacheName, "");
         this.cacheValue = cacheValue;
     }
