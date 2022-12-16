@@ -21,7 +21,7 @@
         <file-upload v-model="form.attachment" :bizModel="'demo'" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="业务内容">
-        <editor v-model="form.demoContent" :disabled="disabled"/>
+        <editor v-model="form.demoContent" :disabled="disabled" :max-height="400"/>
       </el-form-item>
 	  </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
@@ -55,14 +55,15 @@ export default {
       }
     };
   },
-  created() {
-    this.loadForm()
+  async created() {
+    await this.loadForm()
+    this.form.demoName = this.form.demoName + ' - [同步调用]'
   },
   methods: {
-    loadForm() {
+    async loadForm() {
       this.reset();
       if(this.demoId > 0) {
-        getDemo(this.demoId).then(response => {
+        await getDemo(this.demoId).then(response => {
           this.form = response.data ? response.data : {};
         });
       }
