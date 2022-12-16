@@ -11,13 +11,11 @@
       <el-button type="primary" @click="submitForm">确 定</el-button>
       <el-button @click="cancel">清 除</el-button>
     </el-form>
-
     <div>
       <span class="demonstration">二维码</span>
       <br />
       <el-image :src="qrCode"></el-image>
-  </div>
-   
+    </div>
   </div>
 </template>
 
