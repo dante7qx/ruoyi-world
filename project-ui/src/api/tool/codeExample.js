@@ -33,3 +33,12 @@ export function fetchData(url) {
     data: { url: url}
   })
 }
+
+// 生成二维码
+export function genQrCode(data) {
+  return request({
+    url: '/tool/codeexample/qrcode',
+    method: 'post',
+    data: data
+  })
+}
