@@ -22,6 +22,7 @@
 			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
 			<el-menu-item index="watermark">页面水印</el-menu-item>
 			<el-menu-item index="calendar">日历</el-menu-item>
+			<el-menu-item index="qrcode">二维码</el-menu-item>
 		</el-menu>
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
@@ -31,6 +32,7 @@
 		<water-mark v-else-if="activeIndex=='watermark'" />
 		<code-calendar v-else-if="activeIndex=='calendar'" />
 		<sys-user-sel v-else-if="activeIndex=='sysUserSel'" />
+		<gen-qrcode v-else-if="activeIndex=='qrcode'" />
 	</div>
 </template>
 
@@ -43,6 +45,7 @@ import Video from './video'
 import Watermark from './watermark'
 import Calendar from './calendar'
 import SysUserSel from './sysUserSel'
+import QrCode from './qrcode'
 
 export default {
   name: "CodeExample",
@@ -54,7 +57,8 @@ export default {
 		'code-video': Video,
 		'water-mark': Watermark,
 		'code-calendar': Calendar,
-		'sys-user-sel': SysUserSel
+		'sys-user-sel': SysUserSel,
+		'gen-qrcode': QrCode
 	},
 	data() {
     return {

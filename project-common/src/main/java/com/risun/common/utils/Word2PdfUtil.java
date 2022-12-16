@@ -13,6 +13,12 @@ import com.aspose.words.SaveFormat;
 
 import lombok.SneakyThrows;
 
+/**
+ * Word 转 Pdf 工具类
+ * 
+ * @author dante
+ *
+ */
 public class Word2PdfUtil {
 	
 	private static final String licenseStr="<License>\n" +
