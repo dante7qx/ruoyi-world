@@ -17,6 +17,7 @@
         :key="child.path"
         :is-nest="true"
         :item="child"
+        :title="child.meta.title"
         :base-path="resolvePath(child.path)"
         class="nest-menu"
       />
