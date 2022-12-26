@@ -116,6 +116,11 @@ export default {
         branding: false,
         resize: false,
         default_link_target: '_blank',
+        init_instance_callback: editor => {
+          editor.on('paste', (evt) => {
+            this.onPaste(evt)
+          })
+        },
         file_picker_types: "file image media",
         file_picker_callback: (cb, value, meta) => {
           if (meta.filetype == 'file') {
@@ -186,6 +191,23 @@ export default {
           } else if(fileType == 'media') {
             cb(process.env.VUE_APP_BASE_API + res.fileName, {title: file.name})
           } 
+        })
+      }
+    },
+    onPaste(event) {
+      const items = (event.clipboardData || window.clipboardData).items
+      if (items[0].type.indexOf('image') !== -1) {
+        const file = items[0].getAsFile()
+        const formData = new FormData()
+        formData.append('file', file)
+        return request({
+          url: '/common/upload_only',
+          method: 'post',
+          data: formData
+        }).then(res => {
+          if(res.code == 200) {
+            this.myValue = this.myValue.replace(/<img src="data:image.*"/, '<img src="'+process.env.VUE_APP_BASE_API + res.fileName+'" alt=""')
+          }
         })
       }
     }
