@@ -125,9 +125,10 @@ create table t_flow_demo (
   primary key (demo_id)
 ) engine=innodb auto_increment=1 comment = '业务流程示例';
 
-insert into sys_user values(2,  100, 'test', '测试用户', '00', 'test@test.com', '15888888999', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
-insert into sys_user values(3,  100, 'spuser1', '审批用户1', '00', 'spuser1@test.com', '15888888977', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
-insert into sys_user values(4,  100, 'spuser2', '审批用户2', '00', 'spuser2@test.com', '15888888966', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(2,  100, 'test', '测试用户', '00', 'test@test.com', '15888888999', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', 'ceshiyonghu', 'csyy', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(3,  100, 'spuser1', '审批用户1', '00', 'spuser1@test.com', '15888888977', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', 'shenpiyonghu1', 'spyy1', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(4,  100, 'spuser2', '审批用户2', '00', 'spuser2@test.com', '15888888966', '1', '', 'chaOivnBHUglDuv6lCRq2fOgzqR90NkiF8MAntOl8pZOjcHKShZ3qIBrN/JLsZnXZqghL34uJP2PglQplVDGyQlsrwV3LTFHqJe0PKAzJVFJNfun7OXXHr5ZdkPPRigi5dYNF9toQ0rlfNQCNjML1WeL/NnwvhW6eG2FTAU4LX4=', 'shenpiyonghu2', 'spyy2', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+
 
 insert into sys_user_role values ('2', '2');
 insert into sys_user_role values ('3', '2');
