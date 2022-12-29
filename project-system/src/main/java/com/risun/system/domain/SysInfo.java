@@ -64,8 +64,8 @@ public class SysInfo extends BaseEntity
     private Integer anonymous;
 
     /** 发布时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "发布时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Excel(name = "发布时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm")
     private Date publishTime;
 
     /** 状态（0: 草稿，1: 待发布审批，2:已发布） */
