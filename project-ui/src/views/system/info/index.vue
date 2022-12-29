@@ -339,8 +339,9 @@
         <el-form-item label="发布时间" prop="publishTime" v-if="pass">
           <el-date-picker clearable
             v-model="form.publishTime"
-            type="date"
-            value-format="yyyy-MM-dd"
+            type="datetime"
+            format="yyyy-MM-dd HH:mm"
+            value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择发布时间"
             @input="changePublishTime($event)"
             style="width: 100%;">
@@ -594,7 +595,7 @@ export default {
       this.openApproval = true
       this.pass = pass;
       if(this.pass) {
-        this.form.publishTime = this.$moment(new Date()).format("YYYY-MM-DD")
+        this.form.publishTime = this.$moment(new Date()).format("YYYY-MM-DD HH:mm")
       }
     },
     approvalSubmit() {
