@@ -369,10 +369,11 @@
             :flat="true" 
             :normalizer="normalizer" 
             search-nested 
+            :max-height="300"
             placeholder="请选择部门" />
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer" style="text-align: right;">
+      <div slot="footer" class="dialog-footer" style="text-align: right; margin-top: 200px;">
         <el-button type="primary" @click="rangeSubmit">确 定</el-button>
         <el-button @click="cancelRange">取 消</el-button>
       </div>
