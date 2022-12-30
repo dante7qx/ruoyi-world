@@ -161,7 +161,7 @@
 
     <!-- 流程图 -->
     <el-dialog :title="readImage.title" :visible.sync="readImage.open" width="70%" append-to-body>
-      <flow-diagram :xmlData="xmlData" />
+      <flow-diagram :deployId="deploymentId" />
     </el-dialog>
 
     <!--表单配置详情-->
@@ -212,7 +212,7 @@
 </template>
 
 <script>
-import { listDefinition, updateState, delDeployment, readXml} from "@/api/flowable/definition";
+import { listDefinition, updateState, delDeployment} from "@/api/flowable/definition";
 import { getToken } from "@/utils/auth";
 import { getForm, addDeployForm ,listForm } from "@/api/flowable/form";
 import Parser from '@/components/Process/parser/Parser'
@@ -297,8 +297,8 @@ export default {
         deployId: null
       },
       currentRow: null,
-      // xml
-      xmlData:"",
+      // deploymentId
+      deploymentId: '',
       // 表单参数
       form: {},
       // 表单校验
@@ -371,10 +371,7 @@ export default {
     handleReadImage(deploymentId){
       this.readImage.title = "流程图";
       this.readImage.open = true;
-       // 发送请求，获取xml
-      readXml(deploymentId).then(res =>{
-        this.xmlData = res.data
-      })
+      this.deploymentId = deploymentId;
     },
     /** 表单查看 */
     handleForm(formId){

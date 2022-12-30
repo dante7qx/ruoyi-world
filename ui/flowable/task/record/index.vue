@@ -12,7 +12,7 @@
         <flow-assign-record :procInsId="flowData.procInsId" />
       </el-tab-pane>
       <el-tab-pane label="流程监控" name="monitor" lazy>
-        <flow-diagram :xmlData="xmlData" :taskData="taskList" />
+        <flow-diagram :deployId="flowData.deployId" :procInsId="flowData.procInsId" />
       </el-tab-pane>
     </el-tabs>
     <el-row v-if="disabled">
@@ -28,8 +28,7 @@
 <script>
 import Parser from '@/components/Process/parser/Parser'
 import FlowDiagram from '@/views/flowable/task/diagram'
-import {readXml, beginUserTask} from "@/api/flowable/definition"
-import { getFlowViewer } from "@/api/flowable/flowlist"
+import { beginUserTask } from "@/api/flowable/definition"
 import BizDetail from '@/views/flowable/task/record/bizdetail'
 import FlowApproval from '@/views/flowable/task/record/approval'
 import FlowHistRecord from '@/views/flowable/task/record/recordhist'
@@ -71,8 +70,6 @@ export default {
   },
   created() {
     this.operControls();
-    this.loadFlowDiagram(this.flowData.deployId, this.flowData.procInsId);
-    
   },
   methods: {
     // 按钮控制
@@ -93,15 +90,6 @@ export default {
           }
         })
       }
-    },
-    // 加载流程图
-    loadFlowDiagram(deployId, procInsId) {
-      readXml(deployId).then(res => {
-        this.xmlData = res.data
-      })
-      getFlowViewer(procInsId).then(res => {
-        this.taskList = res.data
-      })
     },
     closeWindow() {
       this.$emit('closeWindow');
