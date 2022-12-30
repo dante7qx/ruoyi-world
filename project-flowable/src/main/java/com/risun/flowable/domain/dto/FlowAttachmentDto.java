@@ -20,6 +20,9 @@ public class FlowAttachmentDto implements Serializable {
 	
 	/** 任务附件Id */
 	private String id;
+	
+	/** 任务Id */
+	private String taskId;
 
 	/** 任务名称 */
 	private String taskName;

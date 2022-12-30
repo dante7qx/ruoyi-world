@@ -11,6 +11,7 @@
         placement="top">
         <el-card class="record-card">
           <span v-html="`${record.fullFlowRecord}`"></span>
+          <file-upload v-model="record.attachUrl" :bizModel="'flow'" :disabled="true"/>
         </el-card>
       </el-timeline-item>
     </el-timeline>
@@ -75,6 +76,6 @@ export default {
 }
 
 .record-card {
-  height: 60px;
+  height: auto;
 }
 </style>

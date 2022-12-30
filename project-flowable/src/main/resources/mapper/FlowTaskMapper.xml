@@ -193,6 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectFlowAttachmentList" parameterType="String" resultType="com.risun.flowable.domain.dto.FlowAttachmentDto">
 		select
 			t.ID_ as id,
+			t1.ID_ as taskId,
 			t1.NAME_ as taskName,
 			u.nick_name as userNickName,
 			d.dept_name as userDeptName,

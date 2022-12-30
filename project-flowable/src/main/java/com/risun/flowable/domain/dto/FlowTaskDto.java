@@ -39,7 +39,7 @@ public class FlowTaskDto {
     
     /** 业务模块 */
     private String bizModel;
-
+    
     /** 业务详情描述 */
     private String bizDetail;
 
@@ -97,7 +97,7 @@ public class FlowTaskDto {
     private Boolean passed;
     
     /** 审批过程是否需要附件 */
-    private Boolean hasApprovalAttach = Boolean.FALSE;
+    private Boolean hasApprovalAttach = Boolean.TRUE;
 	
     public String getDuration() {
     	if(createTime != null && endTime != null) {
@@ -105,10 +105,10 @@ public class FlowTaskDto {
     	}
     	return this.duration;
     }
-
+    
     /**
      * 设置审批过程是否需要附件
-     *
+     * 
      * @return
      */
     public Boolean getHasApprovalAttach() {

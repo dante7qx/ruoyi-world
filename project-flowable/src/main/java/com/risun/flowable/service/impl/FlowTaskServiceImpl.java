@@ -72,7 +72,9 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author XuanXuan
+ * 流程任务服务实现类
+ * 
+ * @author dante
  * @date 2021-04-03
  **/
 @Service
@@ -315,8 +317,10 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 		List<HistoricActivityInstance> haiList = historyService.createHistoricActivityInstanceQuery()
 				.processInstanceId(procInsId).orderByHistoricActivityInstanceStartTime().asc().list();
 		List<Comment> comments = new ArrayList<>();
+		List<FlowAttachmentDto> attachments = new ArrayList<>();
 		if (CollUtil.isNotEmpty(haiList)) {
 			comments = taskService.getProcessInstanceComments(procInsId, ProcessConstants.COMMENT_TYPE);
+			attachments = flowTaskMapper.selectFlowAttachmentList(procInsId);
 		}
 
 		List<FlowHistRecordDto> tmps = new ArrayList<>();
@@ -363,6 +367,14 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 						break;
 					}
 				}
+				for (int i = attachments.size() - 1; i >= 0; i--) {
+					FlowAttachmentDto attach = attachments.get(i);
+					if (h.getTaskId().equals(attach.getTaskId())) {
+						vo.setAttachUrl(attach.getUrl());
+						break;
+					}
+				}
+				
 			} else if (ProcessConstants.SEQUENCE_FLOW.equals(h.getActivityType()) && vo != null) {
 				vo.setFlowName(h.getActivityName());
 				if (StrUtil.isEmpty(vo.getComment())) {

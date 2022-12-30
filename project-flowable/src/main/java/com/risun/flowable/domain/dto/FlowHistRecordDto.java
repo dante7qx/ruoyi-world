@@ -59,6 +59,9 @@ public class FlowHistRecordDto implements Serializable {
 
 	/** 审批意见 */
 	private String comment;
+	
+	/** 审批附件 */
+	private String attachUrl;
 
 	/** 流程完结标识 */
 	private Boolean finished = Boolean.FALSE;

@@ -190,7 +190,7 @@ export default {
     handleProcess(row) {
       this.open = true;
       this.title = "审批详情";
-      this.key = this.nanoid();
+      this.key = row.taskId;
       this.flowData = row;
     },
     /** 搜索按钮操作 */
@@ -228,7 +228,7 @@ export default {
     closeFlowWin() {
       this.title = "";
       this.open = false;
-      this.handleQuery();
+      this.getList();
     },
     handleAssign() {
       this.openAssign = true
@@ -236,7 +236,7 @@ export default {
     },
     closeAssignWin() {
       this.openAssign = false;
-      this.handleQuery();
+      this.getList();
     }
     
   }
