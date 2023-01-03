@@ -20,6 +20,15 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="流程详情" prop="bizDetail">
+        <el-input
+          v-model="queryParams.bizDetail"
+          placeholder="请输入流程详情"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="审批时间">
         <el-date-picker
           v-model="daterangeTime"
@@ -135,6 +144,7 @@ export default {
         pageSize: 10,
         flowName: null,
         flowCategory: null,
+        bizDetail: null,
         startTime: null,
         endTime: null
       },

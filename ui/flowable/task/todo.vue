@@ -20,6 +20,15 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="流程详情" prop="bizDetail">
+        <el-input
+          v-model="queryParams.bizDetail"
+          placeholder="请输入流程详情"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="接收时间">
         <el-date-picker
           v-model="daterangeTime"
@@ -73,11 +82,6 @@
       </el-table-column>
       <el-table-column label="流程详情" align="center" prop="bizDetail" />
       <el-table-column label="任务节点" align="center" prop="taskName"/>
-      <el-table-column label="流程版本" align="center">
-        <template slot-scope="scope">
-          <el-tag size="medium">v{{scope.row.procDefVersion}}</el-tag>
-        </template>
-      </el-table-column>
       <el-table-column label="流程发起人" align="center">
         <template slot-scope="scope">
           <label>{{scope.row.startUserName}} <el-tag type="info" size="mini">{{scope.row.startDeptName}}</el-tag></label>
@@ -157,6 +161,7 @@ export default {
         pageSize: 10,
         flowName: null,
         flowCategory: null,
+        bizDetail: null,
         startTime: null,
         endTime: null
       },

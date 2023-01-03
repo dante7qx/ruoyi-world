@@ -5,82 +5,89 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.risun.flowable.mapper.FlowTaskMapper">
 
     <select id="selectFlowTodoList" parameterType="com.risun.flowable.domain.vo.FlowQueryVo" resultType="com.risun.flowable.domain.dto.FlowTaskDto">
-		select
-			t.id_ as taskId,
-			t.execution_id_ as executionId,
-			t.name_ as taskName,
-			t.task_def_key_ as taskDefKey,
-			t.create_time_ as createTime,
-			t0.business_key_ as bizId,
-			(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessUID' limit 1) as bizUid,
-			(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessDetailDesc' limit 1) as bizDetail,
-			t0.business_status_ as bizModel,
-			t1.deployment_id_ as deployId,
-			t1.id_ as procDefId,
-			t1.key_ as procDefKey,
-			t1.version_ as procDefVersion,
-			t1.name_ as procDefName,
-			t1.category_ as category,
-			t.proc_inst_id_ as procInsId,
-			t2.user_id_ as startUserId,
-			u.nick_name as startUserName,
-			d.dept_name as startDeptName
-		from
-			act_ru_task t
-		inner join act_ru_execution t0 on t0.proc_inst_id_ = t.proc_inst_id_
-		left join act_re_procdef t1 on t.proc_def_id_ = t1.id_  
-		left join act_ru_identitylink t2 on t2.proc_inst_id_ = t.proc_inst_id_ and t2.type_ = 'starter'
-		left join sys_user u on u.user_id = t2.user_id_
-		left join sys_dept d on u.dept_id = d.dept_id
-		where
-			t.suspension_state_ = 1 and t0.business_key_ is not null
-			and 
-			((
-				t.assignee_ = #{userId} 
-				or (
-					t.owner_ = #{userId} 
-					and t.delegation_ = 'PENDING'
-					and exists (
-						select v.LONG_ from act_ru_variable v where v.PROC_INST_ID_ = t.PROC_INST_ID_ and v.NAME_ = 'TASK_KEEP_TODO' and v.LONG_ = 1
+    	select tx.* from (
+			select
+				t.id_ as taskId,
+				t.execution_id_ as executionId,
+				t.name_ as taskName,
+				t.task_def_key_ as taskDefKey,
+				t.create_time_ as createTime,
+				t0.business_key_ as bizId,
+				(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessUID' limit 1) as bizUid,
+				(select v.text_ from act_ru_variable v where v.proc_inst_id_ = t.proc_inst_id_ and v.name_ = 'businessDetailDesc' limit 1) as bizDetail,
+				t0.business_status_ as bizModel,
+				t1.deployment_id_ as deployId,
+				t1.id_ as procDefId,
+				t1.key_ as procDefKey,
+				t1.version_ as procDefVersion,
+				t1.name_ as procDefName,
+				t1.category_ as category,
+				t.proc_inst_id_ as procInsId,
+				t2.user_id_ as startUserId,
+				u.nick_name as startUserName,
+				d.dept_name as startDeptName
+			from
+				act_ru_task t
+			inner join act_ru_execution t0 on t0.proc_inst_id_ = t.proc_inst_id_
+			left join act_re_procdef t1 on t.proc_def_id_ = t1.id_  
+			left join act_ru_identitylink t2 on t2.proc_inst_id_ = t.proc_inst_id_ and t2.type_ = 'starter'
+			left join sys_user u on u.user_id = t2.user_id_
+			left join sys_dept d on u.dept_id = d.dept_id
+			where
+				t.suspension_state_ = 1 and t0.business_key_ is not null
+				and 
+				((
+					t.assignee_ = #{userId} 
+					or (
+						t.owner_ = #{userId} 
+						and t.delegation_ = 'PENDING'
+						and exists (
+							select v.LONG_ from act_ru_variable v where v.PROC_INST_ID_ = t.PROC_INST_ID_ and v.NAME_ = 'TASK_KEEP_TODO' and v.LONG_ = 1
+						)
 					)
-				)
-				or ( 
-					t.assignee_ is null
-					and exists(
-						select link.id_
-						from act_ru_identitylink link
-						where
-							link.task_id_ = t.id_
-							and link.type_ = 'candidate'
-							and (
-								link.user_id_ = #{userId} 
-								<if test="null != userGroupIds and userGroupIds.size > 0">
-									or 
-									(   
-										link.group_id_ in 
-										<foreach item="groupId" collection="userGroupIds" open="(" separator="," close=")">
-								            #{groupId}
-								        </foreach>
-									) 
-								</if>
-							)
+					or ( 
+						t.assignee_ is null
+						and exists(
+							select link.id_
+							from act_ru_identitylink link
+							where
+								link.task_id_ = t.id_
+								and link.type_ = 'candidate'
+								and (
+									link.user_id_ = #{userId} 
+									<if test="null != userGroupIds and userGroupIds.size > 0">
+										or 
+										(   
+											link.group_id_ in 
+											<foreach item="groupId" collection="userGroupIds" open="(" separator="," close=")">
+									            #{groupId}
+									        </foreach>
+										) 
+									</if>
+								)
+						)
 					)
-				)
-			))
-			<if test="flowCategory != null and flowCategory != ''">
-               and t1.category_ = #{flowCategory}
+				))
+				<if test="flowCategory != null and flowCategory != ''">
+	               and t1.category_ = #{flowCategory}
+	            </if>
+				<if test="flowName != null and flowName != ''">
+	               and t.name_ like concat('%', #{flowName}, '%')
+	            </if>
+	            <if test="bizModel != null and bizModel != ''">
+		           and t0.business_status_ = #{bizModel}
+		        </if>
+	            <if test="startTime != null and endTime != null"> 
+	            	and t.create_time_ between #{startTime} and #{endTime}
+	            </if>
+			
+		) tx 
+		<where>
+			<if test="bizDetail != null and bizDetail != ''">
+               and tx.bizDetail like concat('%', #{bizDetail}, '%')
             </if>
-			<if test="flowName != null and flowName != ''">
-               and t.name_ like concat('%', #{flowName}, '%')
-            </if>
-            <if test="bizModel != null and bizModel != ''">
-	           and t0.business_status_ = #{bizModel}
-	        </if>
-            <if test="startTime != null and endTime != null"> 
-            	and t.create_time_ between #{startTime} and #{endTime}
-            </if>
-		order by
-			t.create_time_ desc
+		</where>
+		order by tx.createTime desc	
     </select>
     
     <select id="selectFlowDoneList" parameterType="com.risun.flowable.domain.vo.FlowQueryVo" resultType="com.risun.flowable.domain.dto.FlowTaskDto">
@@ -129,7 +136,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            	and t.end_time_ between #{startTime} and #{endTime}
 	            </if>
 			having 1=1 order by t.end_time_ desc
-		) tx group by tx.procInsId, tx.bizUid
+		) tx 
+		<where>
+			<if test="bizDetail != null and bizDetail != ''">
+               and tx.bizDetail like concat('%', #{bizDetail}, '%')
+            </if>
+		</where>
+		group by tx.procInsId, tx.bizUid
 		order by tx.endTime desc
 	</select>
 	
@@ -186,7 +199,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            	and t.end_time_ between #{startTime} and #{endTime}
 	            </if>
 			having 1=1 order by t.end_time_ desc
-		) tx group by tx.procInsId, tx.bizUid
+		) tx 
+		<where>
+			<if test="bizDetail != null and bizDetail != ''">
+            	and tx.bizDetail like concat('%', #{bizDetail}, '%')
+            </if>
+		</where>
+		group by tx.procInsId, tx.bizUid
 		order by tx.endTime desc
 	</select>
 	

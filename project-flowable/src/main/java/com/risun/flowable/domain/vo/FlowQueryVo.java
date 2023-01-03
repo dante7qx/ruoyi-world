@@ -32,6 +32,9 @@ public class FlowQueryVo implements Serializable {
 	/** 业务模块 */
 	private String bizModel;
 	
+	/** 流程详情 */
+	private String bizDetail;
+	
 	/** 开始时间 */
 	private Date startTime;
 	

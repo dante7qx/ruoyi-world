@@ -45,7 +45,7 @@ export default {
           { required: true, message: "审批意见不能为空", trigger: "blur" }
         ],
         attachment: [
-          { required: true, message: "审批附件不能为空", trigger: "blur" }
+          { required: false, message: "审批附件不能为空", trigger: "blur" }
         ],
       },
     }
