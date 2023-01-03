@@ -36,7 +36,11 @@
 			<el-table :data="tableList" style="width: 800px; margin-top: 15px;">
 				<el-table-column type="index" label="序号" width="55" align="center" />
         <el-table-column label="身份证参数" header-align="center">
-          <el-table-column prop="arg1" label="身份证" width="180"/>
+          <el-table-column prop="arg1" label="身份证" width="180">
+            <template slot-scope="scope">
+              <span>{{ desensitizeIdCard(scope.row.arg1) }}</span>
+            </template>
+          </el-table-column>
           <el-table-column label="出生日期">
             <template slot-scope="scope">
               <span>{{  parseIdCard(scope.row.arg1).birthday }}</span>

@@ -291,3 +291,31 @@ export function parseIdCard(idCard) {
     sex
   }
 }
+
+// 身份证号脱敏
+export function desensitizeIdCard(idCard) {
+  // 身份证不能为空
+  if (idCard == '' || idCard == null) {
+    return '';
+  }
+  if (idCard.length == 15) {
+    return idCard.replace(/(?<=\d{3})\d{10}(?=\d{2})/,"**********");
+  } else if (idCard.length == 18) {
+    return idCard.replace(/(?<=\d{3})\d{12}(?=\d{2})/,"************");
+  } else {
+    return '';
+  }
+}
+
+// 手机号码脱敏
+export function desensitizeMobilePhone(mobilePhone) {
+  // 手机号码不能为空
+  if (mobilePhone == '' || mobilePhone == null) {
+    return '';
+  }
+  if(mobilePhone.length == 11) {
+    return mobilePhone.replace(/(?<=\d{3})\d{4}(?=\d{4})/,"****");
+  } else {
+    return '';
+  }
+}
