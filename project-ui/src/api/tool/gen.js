@@ -74,3 +74,11 @@ export function synchDb(tableName) {
     method: 'get'
   })
 }
+
+// 刷新敏感词文件
+export function refreshSensitiveWord() {
+  return request({
+    url: '/refresh_sensitive_word',
+    method: 'get'
+  })
+}
