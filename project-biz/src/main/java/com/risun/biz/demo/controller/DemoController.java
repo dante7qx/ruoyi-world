@@ -109,4 +109,21 @@ public class DemoController extends BaseController
     {
         return toAjax(demoService.deleteDemoByDemoIds(demoIds));
     }
+    
+    /**
+     * 批量新增业务
+     */
+    @PreAuthorize("@ss.hasPermi('biz:demo:add')")
+    @Log(title = "业务", businessType = BusinessType.INSERT)
+    @PostMapping("/insertBatch")
+    public AjaxResult addBatch()
+    {
+    	for (int i = 0; i < 200; i++) {
+    		Demo demo = new Demo();
+    		demo.setDemoName("测试数据" + i);
+    		demoService.insertDemo(demo);
+		}
+    	return AjaxResult.success();
+        
+    }
 }
