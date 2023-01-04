@@ -77,6 +77,15 @@
           v-hasPermi="['tool:gen:remove']"
         >删除</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-refresh"
+          size="mini"
+          @click="doRefreshSensitiveWord"
+        >刷新敏感词文件</el-button>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -176,7 +185,7 @@
 </template>
 
 <script>
-import { listTable, previewTable, delTable, genCode, synchDb } from "@/api/tool/gen";
+import { listTable, previewTable, delTable, genCode, synchDb, refreshSensitiveWord } from "@/api/tool/gen";
 import importTable from "./importTable";
 import hljs from "highlight.js/lib/highlight";
 import "highlight.js/styles/github-gist.css";
@@ -331,6 +340,11 @@ export default {
         this.getList();
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
+    },
+    doRefreshSensitiveWord() {
+      refreshSensitiveWord().then(res => {
+        this.$modal.msgSuccess("刷新成功");
+      })
     }
   }
 };

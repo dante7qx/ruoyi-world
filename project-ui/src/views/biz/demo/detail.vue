@@ -57,7 +57,7 @@ export default {
   },
   async created() {
     await this.loadForm()
-    this.form.demoName = this.form.demoName + ' - [同步调用]'
+    this.form.demoName = this.form.demoName + '-Async'
   },
   methods: {
     async loadForm() {

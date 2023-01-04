@@ -12,6 +12,7 @@ import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.poi.ExcelUtil;
+import com.risun.common.utils.wordfilter.SensitiveWordUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -78,7 +79,12 @@ public class DemoController extends BaseController
     @PostMapping("/insert")
     public AjaxResult add(@RequestBody Demo demo)
     {
-        return toAjax(demoService.insertDemo(demo));
+    	if(SensitiveWordUtil.allowed(demo)) {
+    		return toAjax(demoService.insertDemo(demo));
+    	} else {
+    		return AjaxResult.error("新增内容包含非法字符，请检查后再尝试！");
+    	}
+        
     }
 
     /**
@@ -89,6 +95,7 @@ public class DemoController extends BaseController
     @PostMapping("/update")
     public AjaxResult edit(@RequestBody Demo demo)
     {
+    	demo.setDemoName(SensitiveWordUtil.filter(demo.getDemoName()));
         return toAjax(demoService.updateDemo(demo));
     }
 

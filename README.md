@@ -344,6 +344,12 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
 框架添加了二维码生成工具，`QrCodeUtils.java`，使用详情可参考代码示例。
 
+### 26. 敏感词过滤工具
+
+框架添加了敏感词过滤工具，`SensitiveWordUtil.java`，使用时需要在项目 `risun.profile` 文件上传路径下，创建一个文本文件，名字必须叫 `SensitiveWord.txt`。内容示例如下：
+
+<img src="/Users/dante/Documents/Project/ruiyang-world/risun-java/image/wordfilter.png" alt="wordfilter" style="zoom:50%;" />
+
 ## 四. 更新记录
 
 ### **v3.0.1**
@@ -360,3 +366,4 @@ BaseURI：`/risun/monitor`，请求方式：POST
 8. 区分部署多个项目Redis缓存
 9. 二维码生成工具
 10. 验证码版本升级到 2.3.3
+11. 敏感词过滤功能
