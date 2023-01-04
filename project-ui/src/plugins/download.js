@@ -44,6 +44,10 @@ export default {
     })
   },
   resource2zip(query) {
+    if(!query.resource) {
+      Message.error('打包文件不能为空！');
+      return false;
+    }
     var url = baseURL + "/common/download/resource2zip"
     axios({
       method: 'post',

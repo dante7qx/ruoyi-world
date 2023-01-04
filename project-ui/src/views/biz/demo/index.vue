@@ -69,10 +69,20 @@
           v-hasPermi="['biz:demo:export']"
         >导出</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="batchAdd"
+          v-hasPermi="['biz:demo:add']"
+        >批量新增</el-button>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange" v-adaptive height="100">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="业务名称" align="center" prop="demoName">
@@ -147,7 +157,7 @@
 </template>
 
 <script>
-import { listDemo, delDemo } from "@/api/biz/demo"
+import { listDemo, delDemo, addBatchDemo } from "@/api/biz/demo"
 import Detail from "./detail"
 
 export default {
@@ -259,6 +269,12 @@ export default {
       this.title = "";
       this.open = false;
       this.handleQuery();
+    },
+    batchAdd() {
+      addBatchDemo().then(res => {
+        this.$modal.msgSuccess("新增成功");
+        this.getList();
+      })
     },
     downloadZip(row) {
       this.$download.resource2zip({ resource: row.demoImage, fileName: "示例图片.zip"})

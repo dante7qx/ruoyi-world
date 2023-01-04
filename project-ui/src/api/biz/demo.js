@@ -42,3 +42,11 @@ export function delDemo(demoId) {
     method: 'post'
   })
 }
+
+// 批量新增业务
+export function addBatchDemo() {
+  return request({
+    url: '/biz/demo/insertBatch',
+    method: 'post'
+  })
+}
