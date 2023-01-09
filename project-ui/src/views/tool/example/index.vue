@@ -23,6 +23,7 @@
 			<el-menu-item index="watermark">页面水印</el-menu-item>
 			<el-menu-item index="calendar">日历</el-menu-item>
 			<el-menu-item index="qrcode">二维码</el-menu-item>
+			<el-menu-item index="comment">留言板</el-menu-item>
 		</el-menu>
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
@@ -33,6 +34,7 @@
 		<code-calendar v-else-if="activeIndex=='calendar'" />
 		<sys-user-sel v-else-if="activeIndex=='sysUserSel'" />
 		<gen-qrcode v-else-if="activeIndex=='qrcode'" />
+		<comment-page v-else-if="activeIndex=='comment'" />
 	</div>
 </template>
 
@@ -46,6 +48,7 @@ import Watermark from './watermark'
 import Calendar from './calendar'
 import SysUserSel from './sysUserSel'
 import QrCode from './qrcode'
+import Comment from './comment'
 
 export default {
   name: "CodeExample",
@@ -58,7 +61,8 @@ export default {
 		'water-mark': Watermark,
 		'code-calendar': Calendar,
 		'sys-user-sel': SysUserSel,
-		'gen-qrcode': QrCode
+		'gen-qrcode': QrCode,
+		'comment-page': Comment
 	},
 	data() {
     return {

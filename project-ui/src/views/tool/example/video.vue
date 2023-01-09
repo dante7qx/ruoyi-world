@@ -1,7 +1,7 @@
 <template>
 	<div class="app-container">
 		<h2>视频监控 - views/tool/example/video.vue</h2>
-    <video-player :key="nanoid()" :videoSrc="videoSrc" />
+    <video-monitor :key="nanoid()" :videoSrc="videoSrc" />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
         if(result.error == 200) {
           // this.videoSrc = result.data[0].url
           this.videoSrc = 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8'
+					// this.videoSrc = '/aaa/video/1.m3u8'
         }
       })
 		}
