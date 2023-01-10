@@ -86,36 +86,36 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="业务名称" align="center" prop="demoName">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <long-table-col :str="scope.row.demoName" :len="5"/>
         </template>
       </el-table-column>
       <el-table-column label="业务时间" align="center" prop="demoTime" width="110">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="业务图片" align="center" prop="demoImage" width="180">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
           <label class="unpack" @click="downloadZip(scope.row)">打包下载</label>
         </template>
       </el-table-column>
       <el-table-column label="创建人" align="center" prop="createBy" width="100"></el-table-column>
-      <el-table-column label="业务时间" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+        <template v-slot="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="更新人" align="center" prop="updateBy" width="100"></el-table-column>
       <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             size="mini"
             type="text"

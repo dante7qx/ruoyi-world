@@ -350,11 +350,15 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
 <img src="/Users/dante/Documents/Project/ruiyang-world/risun-java/image/wordfilter.png" alt="wordfilter" style="zoom:50%;" />
 
+### 27.留言评论
+
+框架添加了留言评论功能，使用详情请[点击查看](http://116.176.33.76:9103/pages/53a7a2/)
+
 ## 四. 更新记录
 
 ### **v3.0.1**
 
-更新时间 2022-12-16 17:50
+更新时间 2023-01-10 11:50
 
 1. Hutool 版本升级到 5.8.10
 2. Fastjson2 版本升级到 2.0.20
@@ -368,3 +372,4 @@ BaseURI：`/risun/monitor`，请求方式：POST
 10. 验证码版本升级到 2.3.3
 11. 敏感词过滤功能
 12. 表格`el-table`自适应高度
+13. 留言评论功能

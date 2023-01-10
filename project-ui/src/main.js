@@ -45,7 +45,8 @@ import DictData from '@/components/DictData'
 // 地址地图选择组件
 import AddressMapSelect from '@/components/AddressMapSelect'
 // 视频播放组件
-import VideoPlayer from '@/components/Video' 
+import VideoMonitor from '@/components/Video'
+import VideoPlayer from '@/components/Video/play' 
 // 列表长字段展示组件
 import LongTableCol from '@/components/LongTableCol'
 // 部门人员选择
@@ -77,6 +78,7 @@ Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
 Vue.component('AddressMapSelect', AddressMapSelect)
+Vue.component('VideoMonitor', VideoMonitor)
 Vue.component('VideoPlayer', VideoPlayer)
 Vue.component('LongTableCol', LongTableCol)
 Vue.component('SysDeptUserSelect', DeptUserSelect)
