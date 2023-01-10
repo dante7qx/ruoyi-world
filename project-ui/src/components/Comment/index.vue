@@ -281,10 +281,14 @@ export default {
           this.$modal.msgSuccess("恭喜你，评论成功！")
         })
       } else {
+        const commentPrefix = "@" + this.curComment.fromName + " "
+        if(!this.inputComment || this.inputComment.trim() == commentPrefix.trim()) {
+          this.$modal.msgError("请填写您的评论信息！");
+          return false;
+        }
         commentData['commentId'] = this.curComment.commentId
         commentData['toId'] = this.curComment.fromId
-        const commentPrefix = "@" + this.curComment.fromName + " "
-        commentData['content'] = this.inputComment.replace(commentPrefix, "")
+        commentData['content'] = this.inputComment.replace(commentPrefix.trim(), "")
         commentData['imgUrl'] = this.imgUrl
         commentData['thumbUrl'] = this.thumbnail
         commentData['videoUrl'] = this.videoUrl
