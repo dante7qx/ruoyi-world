@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysCommentReplyMapper">
+    
+    <resultMap type="SysCommentReply" id="SysCommentReplyResult">
+        <result property="replyId"    column="reply_id"    />
+        <result property="commentId"    column="comment_id"    />
+        <result property="fromId"    column="from_id"    />
+        <result property="toId"    column="to_id"    />
+        <result property="commentDate"    column="comment_date"    />
+        <result property="content"    column="content"    />
+        <result property="imgUrl"    column="img_url"    />
+        <result property="thumbUrl"    column="thumb_url"    />
+        <result property="videoUrl"    column="video_url"    />
+        <result property="fromName"    column="fromName"    />
+        <result property="fromAvatar"    column="fromAvatar"    />
+        <result property="toName"    column="toName"    />
+        <result property="toAvatar"    column="toAvatar"    />
+    </resultMap>
+
+    <sql id="selectSysCommentReplyVo">
+        select 
+        	t.reply_id, t.comment_id, t.from_id, t.to_id, t.comment_date, t.content, t.img_url, t.thumb_url, t.video_url,
+        	u1.nick_name as fromName,
+        	u1.avatar as fromAvatar,
+        	u2.nick_name as toName,
+        	u2.avatar as toAvatar
+        from sys_comment_reply t
+        left join sys_user u1 on u1.user_name = t.from_id 
+        left join sys_user u2 on u2.user_name = t.to_id 
+    </sql>
+
+    <select id="selectSysCommentReplyList" parameterType="SysCommentReply" resultMap="SysCommentReplyResult">
+        <include refid="selectSysCommentReplyVo"/>
+        <where>  
+            <if test="commentId != null "> and t.comment_id = #{commentId}</if>
+            <if test="fromId != null  and fromId != ''"> and t.from_id = #{fromId}</if>
+            <if test="toId != null  and toId != ''"> and t.to_id = #{toId}</if>
+            <if test="params.beginCommentDate != null and params.beginCommentDate != '' and params.endCommentDate != null and params.endCommentDate != ''"> and t.comment_date between #{params.beginCommentDate} and #{params.endCommentDate}</if>
+            <if test="content != null  and content != ''"> and t.content = #{content}</if>
+            <if test="imgUrl != null  and imgUrl != ''"> and t.img_url = #{imgUrl}</if>
+            <if test="videoUrl != null  and videoUrl != ''"> and t.video_url = #{videoUrl}</if>
+        </where>
+        order by t.comment_date asc
+    </select>
+    
+    <select id="selectSysCommentReplyByReplyId" parameterType="Long" resultMap="SysCommentReplyResult">
+        <include refid="selectSysCommentReplyVo"/>
+        where t.reply_id = #{replyId}
+    </select>
+    
+    <select id="selectSysCommentReplyByCommentId" parameterType="Long" resultMap="SysCommentReplyResult">
+        <include refid="selectSysCommentReplyVo"/>
+        where t.comment_id = #{commentId} order by t.comment_date asc
+    </select>
+    
+    <select id="selectSysCommentReplyByCommentIds" resultMap="SysCommentReplyResult">
+        <include refid="selectSysCommentReplyVo"/>
+        where t.comment_id in
+        <foreach collection="commentIds" item="commentId" open="(" separator="," close=")">
+            #{commentId}
+        </foreach>
+        order by t.comment_date asc
+    </select>
+        
+    <insert id="insertSysCommentReply" parameterType="SysCommentReply" useGeneratedKeys="true" keyProperty="replyId">
+        insert into sys_comment_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">comment_id,</if>
+            <if test="fromId != null">from_id,</if>
+            <if test="toId != null">to_id,</if>
+            <if test="commentDate != null">comment_date,</if>
+            <if test="content != null">content,</if>
+            <if test="imgUrl != null">img_url,</if>
+            <if test="thumbUrl != null">thumb_url,</if>
+            <if test="videoUrl != null">video_url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">#{commentId},</if>
+            <if test="fromId != null">#{fromId},</if>
+            <if test="toId != null">#{toId},</if>
+            <if test="commentDate != null">#{commentDate},</if>
+            <if test="content != null">#{content},</if>
+            <if test="imgUrl != null">#{imgUrl},</if>
+            <if test="thumbUrl != null">#{thumbUrl},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCommentReply" parameterType="SysCommentReply">
+        update sys_comment_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="commentId != null">comment_id = #{commentId},</if>
+            <if test="fromId != null">from_id = #{fromId},</if>
+            <if test="toId != null">to_id = #{toId},</if>
+            <if test="commentDate != null">comment_date = #{commentDate},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="imgUrl != null">img_url = #{imgUrl},</if>
+            <if test="thumbUrl != null">thumb_url = #{thumbUrl},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
+        </trim>
+        where reply_id = #{replyId}
+    </update>
+
+    <delete id="deleteSysCommentReplyByReplyId" parameterType="Long">
+        delete from sys_comment_reply where reply_id = #{replyId}
+    </delete>
+
+    <delete id="deleteSysCommentReplyByReplyIds" parameterType="String">
+        delete from sys_comment_reply where reply_id in 
+        <foreach item="replyId" collection="array" open="(" separator="," close=")">
+            #{replyId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteSysCommentReplyByCommentIds">
+        delete from sys_comment_reply where comment_id in 
+        <foreach item="commentId" collection="commentIds" open="(" separator="," close=")">
+            #{commentId}
+        </foreach>
+    </delete>
+</mapper>
