@@ -80,6 +80,8 @@
                 :before-upload="handleBeforeUploadImg"
                 :on-error="handleUploadError"
                 :on-exceed="handleExceed"
+                :on-remove="handleRemoveImg"
+                :file-list="imgList"
                 :limit="1">
                 <el-tooltip content="上传图片" placement="top">
                   <i class="el-icon-picture"></i>
@@ -95,6 +97,8 @@
                 :before-upload="handleBeforeUploadVideo"
                 :on-error="handleUploadError"
                 :on-exceed="handleExceed"
+                :on-remove="handleRemoveVideo"
+                :file-list="videoList"
                 :limit="1">
                 <el-tooltip content="上传视频" placement="top">
                   <i class="el-icon-video-camera-solid"></i>
@@ -120,17 +124,21 @@
             v-model="inputComment"
             type="textarea"
             :rows="3"
+            autofocus
             placeholder="请写下您的评论">
           </el-input>
           <div class="btn-upload" v-if="showImg">
             <el-upload
               class="upload-picture"
+              :style="imgStyle"
               :action="uploadImgUrl"
               :headers="headers"
               :on-success="handleUploadImgSuccess"
               :before-upload="handleBeforeUploadImg"
               :on-error="handleUploadError"
               :on-exceed="handleExceed"
+              :on-remove="handleRemoveImg"
+              :file-list="imgList"
               :limit="1">
               <el-tooltip content="上传图片" placement="top">
                 <i class="el-icon-picture"></i>
@@ -140,12 +148,15 @@
           <div class="btn-upload" v-if="showVideo">
             <el-upload
               class="upload-video"
+              :style="videoStyle"
               :action="uploadVideoUrl"
               :headers="headers"
               :on-success="handleUploadVideoSuccess"
               :before-upload="handleBeforeUploadVideo"
               :on-error="handleUploadError"
               :on-exceed="handleExceed"
+              :on-remove="handleRemoveVideo"
+              :file-list="videoList"
               :limit="1">
               <el-tooltip content="上传视频" placement="top">
                 <i class="el-icon-video-camera-solid"></i>
@@ -184,11 +195,21 @@ export default {
       required: false,
       default: false
     },
+    imgFileSize: {
+      type: Number,
+      required: false,
+      default: 1  // 图片大小，默认1Mb
+    },
     showVideo: {
       type: Boolean,
       required: false,
       default: false
-    }
+    },
+    videoFileSize: {
+      type: Number,
+      required: false,
+      default: 8  // 视频大小，默认8Mb
+    },
   },
   data() {
     return {
@@ -200,18 +221,32 @@ export default {
       curComment: {},
       inputComment: '',
       newComment: false,
-      imgType: ["png", "jpg", "jpeg", "bmp"],
-      imgFileSize: 1, // 图片最大1Mb
-      videoType: ["mp4", "avi"],
-      videoFileSize: 8, // 视频最大8Mb
       uploadImgUrl: process.env.VUE_APP_BASE_API + "/common/upload_img_with_thumb",
+      imgType: ["png", "jpg", "jpeg", "bmp"],
       uploadVideoUrl: process.env.VUE_APP_BASE_API + "/common/upload_only",
+      videoType: ["mp4", "avi"],
       headers: {
         Authorization: "Bearer " + getToken()
       },
       imgUrl: null,
       thumbnail: null,
-      videoUrl: null
+      imgList: [],
+      videoUrl: null,
+      videoList: [],
+    }
+  },
+  computed: {
+    imgStyle: function () {
+      return {
+        position: 'relative',
+        top: this.videoUrl && !this.imgUrl ? '-38px' : '0px'
+      }
+    },
+    videoStyle: function () {
+      return {
+        position: 'relative',
+        top: this.imgUrl && !this.videoUrl ? '-38px' : '0px'
+      }
     }
   },
   created() {
@@ -242,6 +277,11 @@ export default {
     // 点击评论按钮显示输入框
     showCommentInput(item, reply) {
       this.newComment = false
+      this.imgUrl = null
+      this.thumbnail = null
+      this.imgList = []
+      this.videoUrl = null
+      this.videoList = []
       if (reply) {
         this.inputComment = "@" + reply.fromName + " "
         this.curComment = reply
@@ -258,7 +298,9 @@ export default {
       this.inputComment = ''
       this.imgUrl = null
       this.thumbnail = null
+      this.imgList = []
       this.videoUrl = null
+      this.videoList = []
     },
     // 提交评论
     commitComment() {
@@ -281,10 +323,14 @@ export default {
           this.$modal.msgSuccess("恭喜你，评论成功！")
         })
       } else {
+        const commentPrefix = "@" + this.curComment.fromName + " "
+        if(!this.inputComment || this.inputComment.trim() == commentPrefix.trim()) {
+          this.$modal.msgError("请填写您的评论信息！");
+          return false;
+        }
         commentData['commentId'] = this.curComment.commentId
         commentData['toId'] = this.curComment.fromId
-        const commentPrefix = "@" + this.curComment.fromName + " "
-        commentData['content'] = this.inputComment.replace(commentPrefix, "")
+        commentData['content'] = this.inputComment.replace(commentPrefix.trim(), "")
         commentData['imgUrl'] = this.imgUrl
         commentData['thumbUrl'] = this.thumbnail
         commentData['videoUrl'] = this.videoUrl
@@ -299,6 +345,11 @@ export default {
     cancel() {
       this.showItemId = ''
       this.inputComment = ''
+      this.imgUrl = null
+      this.thumbnail = null
+      this.imgList = []
+      this.videoUrl = null
+      this.videoList = []
       this.newComment = this.comments.length > 0 ? false : true
     },
     // 删除评论
@@ -324,6 +375,9 @@ export default {
       this.newComment = false
       this.imgUrl = null
       this.thumbnail = null
+      this.imgList = []
+      this.videoUrl = null
+      this.videoList = []
     },
     handleBeforeUploadImg(file) {
       let isImg = false;
@@ -360,6 +414,12 @@ export default {
       this.$modal.msgSuccess("上传成功！")
       this.imgUrl = res.fileName
       this.thumbnail = res.thumbnailName
+      this.imgList = [{name: res.originalFilename, url: res.fileName}]
+    },
+    handleRemoveImg(file, fileList) {
+      this.imgUrl = null
+      this.thumbnail = null 
+      this.imgList = []
     },
     handleBeforeUploadVideo(file) {
       let isVideo = false;
@@ -395,6 +455,11 @@ export default {
       this.$modal.closeLoading();
       this.$modal.msgSuccess("上传成功！")
       this.videoUrl = res.fileName
+      this.videoList = [{name: res.originalFilename, url: res.fileName}]
+    },
+    handleRemoveVideo(file, fileList) {
+      this.videoUrl = null
+      this.videoList = []
     },
     // 文件个数超出
     handleExceed() {
@@ -404,7 +469,7 @@ export default {
     handleUploadError() {
       this.$modal.msgError("上传失败，请重试");
       this.$modal.closeLoading();
-    },
+    }
   }
 }
 </script>
@@ -636,4 +701,9 @@ export default {
 
 }
 
+.upload-video {
+  position: relative;
+  // top: -38px;
+
+}
 </style>
