@@ -623,8 +623,6 @@ export default {
       }
       .input-wrapper {
         padding: 10px;
-        .gray-bg-input, .el-input__inner {
-        }
         .btn-control {
           display: flex;
           justify-content: flex-end;
@@ -672,8 +670,6 @@ export default {
   }
   .input-wrapper {
     padding: 10px;
-    .gray-bg-input, .el-input__inner {
-    }
     .btn-control {
       display: flex;
       justify-content: flex-end;
