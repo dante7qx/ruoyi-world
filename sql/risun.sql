@@ -183,7 +183,6 @@ insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'm
 insert into sys_menu values('120',  '审批记录', '2',   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'fqyczadmin', sysdate(), '', null, '审批记录菜单');
 insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'fqyczadmin', sysdate(), '', null, '表单构建菜单');
 insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'fqyczadmin', sysdate(), '', null, '代码生成菜单');
-insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'swagger',       'fqyczadmin', sysdate(), '', null, '系统接口菜单');
 insert into sys_menu values('118',  '代码示例', '3',   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'fqyczadmin', sysdate(), '', null, '代码示例菜单');
 -- 三级菜单
 insert into sys_menu values('498',  '信息发布', '107', '1', 'infomgr',    'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',        'message',       'fqyczadmin', sysdate(), '', null, '信息发布菜单');
@@ -332,7 +331,6 @@ insert into sys_role_menu values ('2', '113');
 insert into sys_role_menu values ('2', '114');
 insert into sys_role_menu values ('2', '115');
 insert into sys_role_menu values ('2', '116');
-insert into sys_role_menu values ('2', '117');
 insert into sys_role_menu values ('2', '118');
 insert into sys_role_menu values ('2', '119');
 insert into sys_role_menu values ('2', '120');
