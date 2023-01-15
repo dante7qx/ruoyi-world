@@ -16,6 +16,7 @@ import com.risun.framework.web.service.TokenService;
 import com.risun.system.service.ISysUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,9 @@ public class SysProfileController extends BaseController
 
     @Autowired
     private TokenService tokenService;
+    
+    @Autowired
+	private MultipartProperties multipartProp;
 
     /**
      * 个人信息
@@ -127,7 +131,7 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = getLoginUser();
-            String avatar = FileUploadUtils.upload(RisunConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION);
+            String avatar = FileUploadUtils.upload(RisunConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION, multipartProp.getMaxFileSize().toBytes());
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();
