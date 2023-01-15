@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
@@ -47,6 +48,8 @@ public class CommonController {
 	private ServerConfig serverConfig;
 	@Autowired
 	private ISysAttachmentService sysAttachmentService;
+	@Autowired
+	private MultipartProperties multipartProp;
 
 	private static final String FILE_DELIMETER = ",";
 	
@@ -88,7 +91,7 @@ public class CommonController {
 		try {
 			// 上传文件路径
 			String filePath = RisunConfig.getUploadPath();
-			return AjaxResult.success(sysAttachmentService.uploadSysAttachment(filePath, bizModel, file));
+			return AjaxResult.success(sysAttachmentService.uploadSysAttachment(filePath, bizModel, file, multipartProp.getMaxFileSize().toBytes()));
 		} catch (Exception e) {
 			return AjaxResult.error(e.getMessage());
 		}
@@ -108,7 +111,7 @@ public class CommonController {
 			List<String> originalFilenames = new ArrayList<String>();
 			for (MultipartFile file : files) {
 				// 上传并返回新文件名称
-				String fileName = FileUploadUtils.upload(filePath, file);
+				String fileName = FileUploadUtils.upload(filePath, file, multipartProp.getMaxFileSize().toBytes());
 				String url = serverConfig.getUrl() + fileName;
 				urls.add(url);
 				fileNames.add(fileName);
@@ -159,7 +162,7 @@ public class CommonController {
 			// 上传文件路径
 			String filePath = RisunConfig.getUploadPath();
 			// 上传并返回新文件名称
-			String fileName = FileUploadUtils.upload(filePath, file);
+			String fileName = FileUploadUtils.upload(filePath, file, multipartProp.getMaxFileSize().toBytes());
 			String url = serverConfig.getUrl() + fileName;
 			AjaxResult ajax = AjaxResult.success();
 			ajax.put("url", url);
@@ -182,7 +185,7 @@ public class CommonController {
 			String profile = RisunConfig.getProfile();
 			String filePath = RisunConfig.getUploadPath();
 			// 上传并返回新文件名称
-			String fileName = FileUploadUtils.upload(filePath, file);
+			String fileName = FileUploadUtils.upload(filePath, file, multipartProp.getMaxFileSize().toBytes());
 			String url = serverConfig.getUrl() + fileName;
 			AjaxResult ajax = AjaxResult.success();
 			

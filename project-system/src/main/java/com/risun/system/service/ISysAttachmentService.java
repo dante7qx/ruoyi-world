@@ -77,5 +77,5 @@ public interface ISysAttachmentService
      * @param file 业务附件
      * @return SysAttachment
      */
-    public SysAttachment uploadSysAttachment(String rootDir, String bizModel, MultipartFile file) throws IOException;
+    public SysAttachment uploadSysAttachment(String rootDir, String bizModel, MultipartFile file, long allowMaxFileSize) throws IOException;
 }

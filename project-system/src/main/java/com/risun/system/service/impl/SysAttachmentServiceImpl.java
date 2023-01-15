@@ -119,10 +119,10 @@ public class SysAttachmentServiceImpl implements ISysAttachmentService {
      * @param file
      */
 	@Override
-	public SysAttachment uploadSysAttachment(String rootDir, String bizModel, MultipartFile file) throws IOException {
+	public SysAttachment uploadSysAttachment(String rootDir, String bizModel, MultipartFile file, long allowMaxFileSize) throws IOException {
 		try
         {
-			String fileFullName = FileUploadUtils.upload(rootDir, file);
+			String fileFullName = FileUploadUtils.upload(rootDir, file, allowMaxFileSize);
 			SysAttachment attachment = new SysAttachment();
 			attachment.setBizModel(bizModel);
 			attachment.setFileName(file.getOriginalFilename());
