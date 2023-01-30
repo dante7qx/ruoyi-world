@@ -354,6 +354,36 @@ BaseURI：`/risun/monitor`，请求方式：POST
 
 框架添加了留言评论功能，使用详情请[点击查看](http://116.176.33.76:9103/pages/53a7a2/)
 
+### 28. 数据脱敏
+
+框架添加了数据脱敏功能，对某些敏感信息通过脱敏规则进行数据的变形，实现敏感隐私数据的可靠保护。
+开发人员可以通过注解`@DesensitizeMethod`和`@DesensitizeField`来实现业务需求。
+
+1. 在实体类上添加注解，例如：
+
+- `@DesensitizeField(type = DesensitizeType.ID_CARD)`                                                             // 身份证号脱敏
+- `@DesensitizeField(type = DesensitizeType.PASSWORD)`                                                            // 密码脱敏
+- `@DesensitizeField(type = DesensitizeType.PHONE)`                                                               // 手机号脱敏
+- `@DesensitizeField(type = DesensitizeType.FIX_PHONE)`                                                           // 固定电话脱敏
+- `@DesensitizeField(type = DesensitizeType.BANK_CARD)`                                                           // 银行卡脱敏
+- `@DesensitizeField(type = DesensitizeType.EMAIL)`                                                               // 电子邮箱脱敏
+- `@DesensitizeField(type = DesensitizeType.CUSTOMER, prefixLen=7, suffixLen=1, symbol = "#")`                    // 自定义脱敏规则，prefixNoMaskLen：开头显示原始字符数；prefixNoMaskLen：结尾显示原始字符数；symbol：替换后的字符
+
+```java
+/** 业务名称 */
+@DesensitizeField(type = DesensitizeType.ID_CARD)
+private String demoName;
+```
+
+2. 在`Controller`的接口方法上添加注解，`@DesensitizeMethod`
+```java
+@DesensitizeMethod
+@GetMapping(value = "/{demoId}")
+public AjaxResult getInfo(@PathVariable("demoId") Long demoId) {
+    return AjaxResult.success(demoService.selectDemoByDemoId(demoId));
+}
+```
+
 ## 四. 更新记录
 
 ### **v3.0.1**
@@ -373,3 +403,4 @@ BaseURI：`/risun/monitor`，请求方式：POST
 11. 敏感词过滤功能
 12. 表格`el-table`自适应高度
 13. 留言评论功能
+14. 数据脱敏功能
