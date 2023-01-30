@@ -4,6 +4,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.Log;
@@ -13,15 +22,6 @@ import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 业务Controller
@@ -70,7 +70,7 @@ public class DemoController extends BaseController
     {
         return AjaxResult.success(demoService.selectDemoByDemoId(demoId));
     }
-
+    
     /**
      * 新增业务
      */

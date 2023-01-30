@@ -17,8 +17,7 @@ import com.risun.common.utils.StringUtils;
  * @author ruoyi
  */
 @Component
-public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware 
-{
+public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
     /** Spring应用上下文环境 */
     private static ConfigurableListableBeanFactory beanFactory;
 
@@ -34,6 +33,15 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException 
     {
         SpringUtils.applicationContext = applicationContext;
+    }
+    
+    /**
+     * 获取ApplicationContext
+     * 
+     * @return
+     */
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
     }
 
     /**
