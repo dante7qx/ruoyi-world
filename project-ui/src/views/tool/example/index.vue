@@ -18,6 +18,7 @@
 				<template slot="title">表格表单</template>
 				<el-menu-item index="dynaForm">动态表单</el-menu-item>
 				<el-menu-item index="longTableCol">长表格字段</el-menu-item>
+				<el-menu-item index="iframe">iframe标签</el-menu-item>
 			</el-submenu>
 			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
 			<el-menu-item index="watermark">页面水印</el-menu-item>
@@ -35,6 +36,7 @@
 		<sys-user-sel v-else-if="activeIndex=='sysUserSel'" />
 		<gen-qrcode v-else-if="activeIndex=='qrcode'" />
 		<comment-page v-else-if="activeIndex=='comment'" />
+		<iframe-page v-else-if="activeIndex=='iframe'" />
 	</div>
 </template>
 
@@ -49,6 +51,7 @@ import Calendar from './calendar'
 import SysUserSel from './sysUserSel'
 import QrCode from './qrcode'
 import Comment from './comment'
+import Iframe from './iframe'
 
 export default {
   name: "CodeExample",
@@ -62,7 +65,8 @@ export default {
 		'code-calendar': Calendar,
 		'sys-user-sel': SysUserSel,
 		'gen-qrcode': QrCode,
-		'comment-page': Comment
+		'comment-page': Comment,
+		'iframe-page': Iframe
 	},
 	data() {
     return {
