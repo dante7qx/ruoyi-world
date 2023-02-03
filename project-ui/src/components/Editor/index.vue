@@ -96,8 +96,8 @@ export default {
         placeholder: "在这里输入文字",
         convert_urls: false,  //禁用URL自动转换
         language: 'zh_CN',
-        content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; } p {text-indent: 2em;}',
-        // content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; }',
+        // content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; } p {text-indent: 2em;}',
+        content_style: 'body { font-size: 12pt; word-break: break-all; text-align: justify; line-height: 25px; }',
         object_resizing: true, //禁用表格内联样式拖拽拉伸
         table_resize_bars: true,//禁用表格单元格拖拽拉伸
         protect: [
@@ -123,28 +123,34 @@ export default {
         },
         file_picker_types: "file image media",
         file_picker_callback: (cb, value, meta) => {
+          const that = this
           if (meta.filetype == 'file') {
             let input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', '.doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf');
-            input.onchange = async(e) => {
-              this.handleFileUpload(e.path[0].files[0], cb, 'file')
+            input.onchange = function() { 
+              that.handleFileUpload(this.files[0], cb, 'file')
             }
             input.click();
           } else if (meta.filetype == 'image') {
             let input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'image/*');
+            /*
             input.onchange = async(e) => {
               this.handleFileUpload(e.path[0].files[0], cb, 'image')
+            }
+            */
+            input.onchange = function() { 
+              that.handleFileUpload(this.files[0], cb, 'image')
             }
             input.click();
           } else if (meta.filetype == 'media') {
             let input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'video/*');
-            input.onchange = async(e) => {
-              this.handleFileUpload(e.path[0].files[0], cb, 'media')
+            input.onchange = function() { 
+              that.handleFileUpload(this.files[0], cb, 'media')
             }
             input.click();
           }
