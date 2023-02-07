@@ -24,8 +24,12 @@ public class DemoInnerMQService extends InnerMQService<DemoBiz> {
 		// 设置消费者处理方式（独立消费、共同消费）
 		// 独立消费
 		innerMQ.handleEventsWith(new DemoIdependentConsumer(demoBizService));
+		
 		// 共同消费
 //		innerMQ.handleEventsWithWorkerPool(new DemoTogetherConsumer(demoBizService), new DemoTogetherConsumer(demoBizService));
+		
+		// 消费后清理数据
+//		innerMQ.handleEventsWith(new DemoIdependentConsumer(demoBizService)).then(new CleaingEventHandler<>());
 	}
 
 }
