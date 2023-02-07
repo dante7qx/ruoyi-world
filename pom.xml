@@ -206,6 +206,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- 消息队列模块 -->
+            <dependency>
+		       <groupId>com.risun</groupId>
+			   <artifactId>project-mq</artifactId>
+			   <version>${project.version}</version>
+		   </dependency>
+
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.risun</groupId>

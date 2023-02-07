@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.risun</groupId>
+        <artifactId>project</artifactId>
+        <version>3.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>project-mq</artifactId>
+
+    <description>消息队列（内/外）组件</description>
+    
+    <properties>
+    	<disruptor.version>3.4.4</disruptor.version>
+    </properties>
+
+    <dependencies>
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-framework</artifactId>
+        </dependency>
+        
+        <!-- Disruptor 内部消息队列 -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>${disruptor.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

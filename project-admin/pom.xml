@@ -34,11 +34,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!-- 核心模块-->
+        <!-- 核心模块
         <dependency>
             <groupId>com.risun</groupId>
             <artifactId>project-framework</artifactId>
         </dependency>
+        -->
 
         <!-- 定时任务-->
         <dependency>
@@ -50,6 +51,12 @@
         <dependency>
             <groupId>com.risun</groupId>
             <artifactId>project-generator</artifactId>
+        </dependency>
+        
+        <!-- 消息队列-->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-mq</artifactId>
         </dependency>
         
         <!-- 业务管理-->
