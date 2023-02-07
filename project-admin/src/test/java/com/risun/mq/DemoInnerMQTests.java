@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.risun.RisunApplicationTests;
+import com.risun.mq.inner.InnerMQService;
 import com.risun.mq.inner.event.InnerMQEvent;
 
 import cn.hutool.core.thread.ThreadUtil;
@@ -15,7 +16,7 @@ public class DemoInnerMQTests extends RisunApplicationTests {
 
 	@Autowired
 	@Qualifier("demoInnerMQService")
-	private DemoInnerMQService demoInnerMQService;
+	private InnerMQService<DemoBiz> demoInnerMQService;
 
 	int EVENT_COUNT = 5;
 
