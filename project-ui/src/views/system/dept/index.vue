@@ -147,6 +147,11 @@
               </el-radio-group>
             </el-form-item>
           </el-col>
+          <el-col :span="24">
+            <el-form-item label="部门标识" prop="deptKey">
+              <el-input v-model="form.deptKey" placeholder="请输入部门标识" />
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -257,7 +262,8 @@ export default {
         leader: undefined,
         phone: undefined,
         email: undefined,
-        status: "0"
+        status: "0",
+        deptKey: undefined
       };
       this.resetForm("form");
     },
