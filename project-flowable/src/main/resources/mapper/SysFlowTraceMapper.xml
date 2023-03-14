@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="commitTime"    column="commit_time"    />
         <result property="procInstId"    column="proc_inst_id"    />
         <result property="procDefId"    column="proc_def_id"    />
+        <result property="procDefKey"    column="proc_def_key"    />
         <result property="taskId"    column="task_id"    />
         <result property="taskDefId"    column="task_def_id"    />
         <result property="taskDefName"    column="task_def_name"    />
@@ -25,7 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysFlowTraceVo">
-        select t.trace_id, t.flow_num, t.flow_date_num, t.flow_type, t.biz_uid, t.biz_desc, t.commit_user_id, t.commit_time, t.proc_inst_id, t.proc_def_id, t.task_id, t.task_def_id, t.task_def_name, t.task_def_desc, t.flow_status, t.flow_result, t.first_task from sys_flow_trace t
+        select 
+        	t.trace_id, t.flow_num, t.flow_date_num, t.flow_type, t.biz_uid, t.biz_desc, t.commit_user_id, t.commit_time, t.proc_inst_id, t.proc_def_id, p.key_ as proc_def_key, t.task_id, t.task_def_id, t.task_def_name, t.task_def_desc, t.flow_status, t.flow_result, t.first_task 
+        from sys_flow_trace t
+        left join act_re_procdef p on t.proc_def_id = p.id_
     </sql>
     
 

@@ -57,10 +57,17 @@ public class SysFlowTraceServiceImpl implements ISysFlowTraceService {
      */
 	@Override
 	public int insertSysFlowTrace(SysStartFlowVo startFlowVo, ProcessInstance procInst, List<Task> curTasks) {
-    	SysFlowTrace trace = new SysFlowTrace();
-		SysFlowSeq flowSeq = sysFlowSeqService.selectNextSysFlowSeq();
-		trace.setFlowNum(flowSeq.getSeqNum());
-		trace.setFlowDateNum(flowSeq.getDateNum());
+		int result = 0;
+		boolean isUpdate = true;
+    	SysFlowTrace trace = sysFlowTraceMapper.selectSysFlowTraceByBizUid(procInst.getBusinessKey());
+    	if(trace == null) {
+    		isUpdate = false;
+    		trace = new SysFlowTrace();
+    		SysFlowSeq flowSeq = sysFlowSeqService.selectNextSysFlowSeq();
+    		trace.setFlowNum(flowSeq.getSeqNum());
+    		trace.setFlowDateNum(flowSeq.getDateNum());
+    	}
+		
     	trace.setBizUid(procInst.getBusinessKey());
     	trace.setBizDesc(startFlowVo.getBizDesc());
     	trace.setTaskDefDesc(startFlowVo.getBizDesc());
@@ -80,7 +87,12 @@ public class SysFlowTraceServiceImpl implements ISysFlowTraceService {
 		} else {
 			trace.setFlowStatus(SysFlowStatusEnum.FINISHED.getType());
 		}
-        return sysFlowTraceMapper.insertSysFlowTrace(trace);
+		if(isUpdate) {
+			result = sysFlowTraceMapper.updateSysFlowTrace(trace);
+		} else {
+			result = sysFlowTraceMapper.insertSysFlowTrace(trace);
+		}
+        return result;
 	}
 	
 	/**
