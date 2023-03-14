@@ -190,7 +190,7 @@
     
     <!-- 添加或修改${functionName}对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
-      <detail :key="key" :${pkColumn.javaField}="${pkColumn.javaField}" :disabled="disabled"  @closeWindow="closeFlowWin" />
+      <detail v-if="open" :${pkColumn.javaField}="${pkColumn.javaField}" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
   </div>
 </template>
@@ -253,8 +253,7 @@ export default {
 #end
       },
       ${pkColumn.javaField}: 0,
-      disabled: false,
-      key: ''
+      disabled: false
     };
   },
   created() {
@@ -308,7 +307,6 @@ export default {
       this.title = "添加${functionName}";
       this.${pkColumn.javaField} = 0;
       this.disabled = false;
-      this.key = this.nanoid();
     },
     handleUpdate(row, disabled) {
       this.disabled = disabled;
@@ -319,7 +317,6 @@ export default {
         this.title = "修改${functionName}";
       }
       this.open = true;
-      this.key = this.nanoid();
     },
     handleDelete(row) {
       const ${pkColumn.javaField}s = row.${pkColumn.javaField} || this.ids;
