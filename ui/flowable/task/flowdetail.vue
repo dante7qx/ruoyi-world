@@ -2,7 +2,7 @@
   <div>
     <el-tabs type="border-card" value="info">
       <el-tab-pane label="基本信息" name="info" lazy>
-        <FlowDemo :key="key" :uid="bizUid" :pageCtl="pageCtl" :taskId="taskId" :procDef="procDef" @closeWindow="closeWindow" v-if="loadBizDetail" />
+        <FlowDemo :key="key" :uid="bizUid" :pageCtl="pageCtl" :taskId="taskId" :procDef="procDef" @closeWindow="closeWindow" v-if="flowType == 'leave' && loadBizDetail" />
         <span v-else>无相关业务</span>
       </el-tab-pane>
       <el-tab-pane label="流程记录" name="record" lazy style="height: 700px; overflow: auto;" v-if="procInstId">
