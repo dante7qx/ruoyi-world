@@ -173,7 +173,7 @@ public class SysDept extends BaseEntity
 		this.deptKey = deptKey;
 	}
 
-	public String getParentName()
+    public String getParentName()
     {
         return parentName;
     }
