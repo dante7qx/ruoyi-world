@@ -1,10 +1,10 @@
 package com.risun.flowable.domain;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.risun.common.annotation.Excel;
+import com.risun.common.core.domain.BaseEntity;
 
 /**
  * 流程审批组人关联对象 sys_flow_group_user
@@ -12,52 +12,59 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author sunchao
  * @date 2022-11-09
  */
-public class SysFlowGroupUser extends BaseEntity
-{
-    private static final long serialVersionUID = 1L;
+public class SysFlowGroupUser extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 
-    /** id */
-    private Long id;
+	/** id */
+	private Long id;
 
-    /** 审批组id */
-    @Excel(name = "审批组id")
-    private Long groupId;
+	/** 审批组id */
+	@Excel(name = "审批组id")
+	private Long groupId;
+	private String groupKey;
 
-    /** 用户id */
-    @Excel(name = "用户id")
-    private Long userId;
-    private String userName;
-    private String nickName;
+	/** 用户id */
+	@Excel(name = "用户id")
+	private Long userId;
+	private String userName;
+	private String nickName;
+	private Long deptId;
+	private String deptKey;
+	private String deptName;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setGroupId(Long groupId) 
-    {
-        this.groupId = groupId;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getGroupId() 
-    {
-        return groupId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    
-    public String getUserName() {
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public String getGroupKey() {
+		return groupKey;
+	}
+
+	public void setGroupKey(String groupKey) {
+		this.groupKey = groupKey;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public String getUserName() {
 		return userName;
 	}
 
@@ -73,17 +80,40 @@ public class SysFlowGroupUser extends BaseEntity
 		this.nickName = nickName;
 	}
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("groupId", getGroupId())
-            .append("userId", getUserId())
-            .append("remark", getRemark())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
+	public Long getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getDeptKey() {
+		return deptKey;
+	}
+
+	public void setDeptKey(String deptKey) {
+		this.deptKey = deptKey;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("id", getId())
+			.append("groupId", getGroupId())
+			.append("userId", getUserId())
+			.append("remark", getRemark())
+			.append("createBy", getCreateBy())
+			.append("createTime", getCreateTime())
+			.append("updateBy", getUpdateBy())
+			.append("updateTime", getUpdateTime())
+			.toString();
+	}
 }

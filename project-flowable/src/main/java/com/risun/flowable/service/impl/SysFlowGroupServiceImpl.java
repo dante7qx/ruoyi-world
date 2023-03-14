@@ -103,6 +103,7 @@ public class SysFlowGroupServiceImpl implements ISysFlowGroupService
      * @return 结果
      */
     @Override
+    // TODO: 流程类型关联后不允许删除
     public int deleteSysFlowGroupByGroupId(Long groupId)
     {
         return sysFlowGroupMapper.deleteSysFlowGroupByGroupId(groupId);

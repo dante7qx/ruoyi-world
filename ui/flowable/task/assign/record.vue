@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { getAssignList } from "@/api/flowable/flowlist"
+import { listAssign } from "@/api/flowable/process"
 
 export default {
   name: "FlowAssignRecord",
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     loadData() {
-      getAssignList(this.procInsId).then(res => {
+      listAssign(this.procInsId).then(res => {
         this.recordList = res.data
       })
     }

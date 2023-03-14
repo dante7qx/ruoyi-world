@@ -1,10 +1,20 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="名称" prop="name">
+      <el-form-item label="流程分类" prop="category">
+        <el-select v-model="queryParams.category" placeholder="请选择流程分类" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_process_category"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="流程名称" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入名称"
+          placeholder="请输入流程名称"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -64,7 +74,11 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="流程部署编号" align="center" prop="deploymentId" :show-overflow-tooltip="true" v-if="false"/>
       <el-table-column label="流程标识" align="center" prop="flowKey" :show-overflow-tooltip="true" />
-      <el-table-column label="流程分类" align="center" prop="category" />
+      <el-table-column label="流程分类" align="center" prop="category">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_process_category" :value="scope.row.category"/>
+        </template>
+      </el-table-column>
       <el-table-column label="流程名称" align="center" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <el-button type="text" @click="handleReadImage(scope.row.deploymentId)">
@@ -161,7 +175,7 @@
 
     <!-- 流程图 -->
     <el-dialog :title="readImage.title" :visible.sync="readImage.open" width="70%" append-to-body>
-      <flow-diagram :deployId="deploymentId" />
+      <flow-diagram v-if="readImage.open" :deployId="deploymentId" />
     </el-dialog>
 
     <!--表单配置详情-->
@@ -224,6 +238,7 @@ export default {
     Parser,
     FlowDiagram
   },
+  dicts: ['sys_process_category'],
   data() {
     return {
       // 遮罩层

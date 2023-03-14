@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="SysFlowGroup" id="SysFlowGroupResult">
         <result property="groupId"    column="group_id"    />
         <result property="groupName"    column="group_name"    />
+        <result property="groupKey"    column="group_key"    />
         <result property="remark"    column="remark"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -15,13 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysFlowGroupVo">
-        select group_id, group_name, remark, create_by, create_time, update_by, update_time from sys_flow_group
+        select group_id, group_name, group_key, remark, create_by, create_time, update_by, update_time from sys_flow_group
     </sql>
 
     <select id="selectSysFlowGroupList" parameterType="SysFlowGroup" resultMap="SysFlowGroupResult">
         <include refid="selectSysFlowGroupVo"/>
         <where>  
-            <if test="groupName != null  and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="groupName != null and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="groupKey != null and groupKey != ''"> and group_key = #{groupKey}</if>
         </where>
     </select>
     
@@ -34,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into sys_flow_group
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="groupName != null">group_name,</if>
+            <if test="groupKey != null">group_key,</if>
             <if test="remark != null">remark,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -42,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="groupName != null">#{groupName},</if>
+            <if test="groupKey != null">#{groupKey},</if>
             <if test="remark != null">#{remark},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -54,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update sys_flow_group
         <trim prefix="SET" suffixOverrides=",">
             <if test="groupName != null">group_name = #{groupName},</if>
+            <if test="groupKey != null">group_key = #{groupKey},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

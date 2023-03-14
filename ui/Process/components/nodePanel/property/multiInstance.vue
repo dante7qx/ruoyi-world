@@ -50,18 +50,21 @@ export default {
             xType: 'input',
             name: 'collection',
             label: '集合',
+            readonly: true,
             tooltip: '属性会作为表达式进行解析。如果表达式解析为字符串而不是一个集合，<br />不论是因为本身配置的就是静态字符串值，还是表达式计算结果为字符串，<br />这个字符串都会被当做变量名，并从流程变量中用于获取实际的集合。'
           },
           {
             xType: 'input',
             name: 'elementVariable',
             label: '元素变量',
+            readonly: true,
             tooltip: '每创建一个用户任务前，先以该元素变量为label，集合中的一项为value，<br />创建（局部）流程变量，该局部流程变量被用于指派用户任务。<br />一般来说，该字符串应与指定人员变量相同。'
           },
           {
             xType: 'radio',
             name: 'isSequential',
             label: '执行方式',
+            disabled: true,
             dic: [{ label: '串行', value: true }, { label: '并行', value: false }]
           },
           {
@@ -82,6 +85,9 @@ export default {
     const cache = JSON.parse(JSON.stringify(this.element.businessObject.loopCharacteristics ?? {}))
     cache.completionCondition = cache.completionCondition?.body
     this.formData = formatJsonKeyValue(cache)
+    this.formData.isSequential = false
+    this.formData.collection = 'userList'
+    this.formData.elementVariable = 'approval'
   },
   methods: {
     updateElement() {

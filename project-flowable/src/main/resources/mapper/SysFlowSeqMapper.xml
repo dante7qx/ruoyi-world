@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.flowable.mapper.SysFlowSeqMapper">
+    
+    <resultMap type="SysFlowSeq" id="SysFlowSeqResult">
+        <result property="id"    column="id"    />
+        <result property="seqNum"    column="seq_num"    />
+        <result property="dateNum"    column="date_num"    />
+    </resultMap>
+
+    <sql id="selectSysFlowSeqVo">
+        select id, seq_num, date_num from sys_flow_seq
+    </sql>
+
+    <select id="selectSysFlowSeqList" parameterType="SysFlowSeq" resultMap="SysFlowSeqResult">
+        <include refid="selectSysFlowSeqVo"/>
+        <where>  
+            <if test="seqNum != null "> and seq_num = #{seqNum}</if>
+            <if test="dateNum != null "> and date_num = #{dateNum}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysFlowSeqById" parameterType="Long" resultMap="SysFlowSeqResult">
+        <include refid="selectSysFlowSeqVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysFlowSeq" parameterType="SysFlowSeq" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_flow_seq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="seqNum != null">seq_num,</if>
+            <if test="dateNum != null">date_num,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="seqNum != null">#{seqNum},</if>
+            <if test="dateNum != null">#{dateNum},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysFlowSeq" parameterType="SysFlowSeq">
+        update sys_flow_seq
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="seqNum != null">seq_num = #{seqNum},</if>
+            <if test="dateNum != null">date_num = #{dateNum},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysFlowSeqById" parameterType="Long">
+        delete from sys_flow_seq where id = #{id}
+    </delete>
+
+    <delete id="deleteSysFlowSeqByIds" parameterType="String">
+        delete from sys_flow_seq where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

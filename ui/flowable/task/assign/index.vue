@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { assign } from "@/api/flowable/flowlist"
+import { assignFlow } from "@/api/flowable/process"
 import { userList } from "@/api/flowable/definition";
 
 export default {
@@ -71,7 +71,7 @@ export default {
       this.$refs["assignForm"].validate(valid => {
         if (valid) {
           this.assignForm.assignTaskIds = this.taskId;
-          assign(this.assignForm).then(res => {
+          assignFlow(this.assignForm).then(res => {
             this.$modal.msgSuccess("转办成功！");
             this.cancel();
           })

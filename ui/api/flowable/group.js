@@ -17,6 +17,14 @@ export function getGroup(groupId) {
   })
 }
 
+// 查询所有流程审批组
+export function getGroups() {
+  return request({
+    url: '/flowable/group/listgroups',
+    method: 'post'
+  })
+}
+
 // 新增流程审批组
 export function addGroup(data) {
   return request({

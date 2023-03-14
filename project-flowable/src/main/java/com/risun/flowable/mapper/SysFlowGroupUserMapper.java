@@ -26,6 +26,15 @@ public interface SysFlowGroupUserMapper
      * @return
      */
     public List<SysFlowGroupUser> selectSysFlowGroupUserByGroupId(Long groupId);
+    
+    /**
+     * 根据groupKey查询流程审批组人关联
+     * 
+     * @param groupKey
+     * @return
+     */
+    public List<SysFlowGroupUser> selectSysFlowGroupUserByGroupKey(String groupKey);
+    
 
     /**
      * 查询流程审批组人关联列表

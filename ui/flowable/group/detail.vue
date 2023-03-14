@@ -1,8 +1,11 @@
 <template>
   <div>
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="审批组名称" prop="groupName">
-        <el-input v-model="form.groupName" placeholder="请输入审批组名称" maxlength="30" show-word-limit :disabled="disabled"/>
+      <el-form-item label="组名称" prop="groupName">
+        <el-input v-model="form.groupName" placeholder="请输入组名称" maxlength="30" show-word-limit :disabled="disabled"/>
+      </el-form-item>
+      <el-form-item label="组键值" prop="groupKey">
+        <el-input v-model="form.groupKey" placeholder="请输入组键值" maxlength="30" show-word-limit :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input v-model="form.remark" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="500"  placeholder="请输入内容" :disabled="disabled"/>
@@ -37,8 +40,11 @@ export default {
       form: {},
       rules: {
         groupName: [
-          { required: true, message: "审批组名称不能为空", trigger: "blur" }
+          { required: true, message: "组名称不能为空", trigger: "blur" }
         ],
+        groupKey: [
+          { required: true, message: "组键值不能为空", trigger: "blur" }
+        ]
       }
     };
   },
@@ -58,6 +64,7 @@ export default {
       this.form = {
         groupId: null,
         groupName: null,
+        groupKey: null,
         remark: null,
         createBy: null,
         createTime: null,
@@ -78,6 +85,8 @@ export default {
             addGroup(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.cancel();
+            }).catch(e => {
+              this.$modal.msgError("组键值全局惟一，请重新填写！");
             });
           }
         }

@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import {readXml} from "@/api/flowable/definition"
-import { getFlowViewer } from "@/api/flowable/flowlist"
+import { readXml } from "@/api/flowable/definition"
+import { getFlowViewer } from "@/api/flowable/process"
 import FlowView from './view'
 
 export default {
@@ -25,7 +25,7 @@ export default {
       type: String,
       default: ''
     },
-    procInsId: {
+    procInstId: {
       type: String,
       default: ''
     },
@@ -40,8 +40,8 @@ export default {
     // 加载流程图
     readXml(this.deployId).then(res => {
       this.xmlData = res.data
-      if(this.procInsId) {
-        getFlowViewer(this.procInsId).then(res => {
+      if(this.procInstId) {
+        getFlowViewer(this.procInstId).then(res => {
           this.taskData = res.data
         })
       }

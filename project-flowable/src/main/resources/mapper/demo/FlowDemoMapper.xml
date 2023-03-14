@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.flowable.demo.mapper.FlowDemoMapper">
+    
+    <resultMap type="FlowDemo" id="FlowDemoResult">
+        <result property="demoId"    column="demo_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="uid"    column="uid"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="applReason"    column="appl_reason"    />
+        <result property="applAttachment"    column="appl_attachment"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFlowDemoVo">
+        select 
+        	t.demo_id, t.user_id, u.nick_name as user_name, t.uid, t.start_time, t.end_time, t.appl_reason, t.appl_attachment, t.create_by, t.create_time, t.update_by, t.update_time 
+        from t_flow_demo t
+        left join sys_user u on u.user_id = t.user_id
+    </sql>
+
+    <select id="selectFlowDemoList" parameterType="FlowDemo" resultMap="FlowDemoResult">
+        <include refid="selectFlowDemoVo"/>
+        <where>  
+            <if test="userId != null "> and t.user_id = #{userId}</if>
+            <if test="uid != null  and uid != ''"> and t.uid = #{uid}</if>
+            <if test="startTime != null "> and t.start_time = #{startTime}</if>
+            <if test="endTime != null "> and t.end_time = #{endTime}</if>
+            <if test="applReason != null  and applReason != ''"> and t.appl_reason = #{applReason}</if>
+            <if test="applAttachment != null  and applAttachment != ''"> and t.appl_attachment = #{applAttachment}</if>
+        </where>
+    </select>
+    
+    <select id="selectFlowDemoByUid" parameterType="String" resultMap="FlowDemoResult">
+        <include refid="selectFlowDemoVo"/>
+        where t.uid = #{uid}
+    </select>
+    
+    <select id="selectFlowDemoByDemoId" parameterType="Long" resultMap="FlowDemoResult">
+        <include refid="selectFlowDemoVo"/>
+        where t.demo_id = #{demoId}
+    </select>
+        
+    <insert id="insertFlowDemo" parameterType="FlowDemo" useGeneratedKeys="true" keyProperty="demoId">
+        insert into t_flow_demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="uid != null and uid != ''">uid,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="applReason != null">appl_reason,</if>
+            <if test="applAttachment != null">appl_attachment,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="uid != null and uid != ''">#{uid},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="applReason != null">#{applReason},</if>
+            <if test="applAttachment != null">#{applAttachment},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFlowDemo" parameterType="FlowDemo">
+        update t_flow_demo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="uid != null and uid != ''">uid = #{uid},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="applReason != null">appl_reason = #{applReason},</if>
+            <if test="applAttachment != null">appl_attachment = #{applAttachment},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where demo_id = #{demoId}
+    </update>
+    
+     <delete id="deleteFlowDemoByUid" parameterType="String">
+        delete from t_flow_demo where uid = #{uid}
+    </delete>
+
+    <delete id="deleteFlowDemoByDemoId" parameterType="Long">
+        delete from t_flow_demo where demo_id = #{demoId}
+    </delete>
+
+    <delete id="deleteFlowDemoByDemoIds" parameterType="String">
+        delete from t_flow_demo where demo_id in 
+        <foreach item="demoId" collection="array" open="(" separator="," close=")">
+            #{demoId}
+        </foreach>
+    </delete>
+</mapper>

@@ -59,6 +59,17 @@ public class SysFlowGroupController extends BaseController
 		}
         return getDataTable(list);
     }
+    
+    /**
+     * 查询流程审批组列表
+     * 
+     * @param sysFlowGroup
+     * @return
+     */
+    @PostMapping("/listgroups")
+    public AjaxResult listGroups(SysFlowGroup sysFlowGroup) {
+        return AjaxResult.success(sysFlowGroupService.selectSysFlowGroupList(sysFlowGroup));
+    }
 
     /**
      * 导出流程审批组列表

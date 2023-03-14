@@ -1,10 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="88px">
-      <el-form-item label="审批组名称" prop="groupName">
+      <el-form-item label="组名称" prop="groupName">
         <el-input
           v-model="queryParams.groupName"
-          placeholder="请输入审批组名称"
+          placeholder="请输入组名称"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="组键值" prop="groupKey">
+        <el-input
+          v-model="queryParams.groupKey"
+          placeholder="请输入组键值"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -70,7 +78,8 @@
       @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
-      <el-table-column label="审批组名称" align="center" prop="groupName" />
+      <el-table-column label="组名称" align="center" prop="groupName" />
+      <el-table-column label="组键值" align="center" prop="groupKey" />
       <el-table-column label="备注" align="center" prop="remark">
         <template slot-scope="scope">
           <long-table-col :str="scope.row.remark" :len="15"/>
@@ -123,7 +132,7 @@
       @pagination="getList"
     />
     
-    <!-- 添加或修改流程审批组对话框 -->
+    <!-- 添加或修改流程组对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
       <detail :key="key" :groupId="groupId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
@@ -210,7 +219,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 流程审批组表格数据
+      // 流程组表格数据
       groupList: [],
       // 弹出层标题
       title: "",
@@ -221,6 +230,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         groupName: null,
+        groupKey: null,
       },
       groupId: 0,
       disabled: false,
@@ -267,7 +277,7 @@ export default {
     },
     handleAdd() {
       this.open = true;
-      this.title = "添加流程审批组";
+      this.title = "添加流程组";
       this.groupId = 0;
       this.disabled = false;
       this.key = this.nanoid();
@@ -276,9 +286,9 @@ export default {
       this.disabled = disabled;
       this.groupId = row.groupId;
       if(this.disabled) {
-        this.title = "查看流程审批组";
+        this.title = "查看流程组";
       } else {
-        this.title = "修改流程审批组";
+        this.title = "修改流程组";
       }
       this.open = true;
       this.key = this.nanoid();

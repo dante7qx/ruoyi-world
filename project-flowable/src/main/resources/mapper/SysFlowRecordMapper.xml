@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.flowable.mapper.SysFlowRecordMapper">
+    
+    <resultMap type="SysFlowRecord" id="SysFlowRecordResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="bizUid"    column="biz_uid"    />
+        <result property="userId"    column="user_id"    />
+        <result property="groupId"    column="group_id"    />
+        <result property="userName"    column="nick_name"    />
+        <result property="userDept"    column="dept_name"    />
+        <result property="groupName"    column="group_name"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="taskDefId"    column="task_def_id"    />
+        <result property="taskDefName"    column="task_def_name"    />
+        <result property="taskDefDesc"    column="task_def_desc"    />
+        <result property="flowResult"    column="flow_result"    />
+        <result property="comment"    column="comment"    />
+        <result property="attachment"    column="attachment"    />
+    </resultMap>
+
+    <sql id="selectSysFlowRecordVo">
+        select 
+        	t.record_id, t.biz_uid, t.user_id, t.group_id, t.start_time, t.end_time, t.task_id, t.task_def_id, t.task_def_name, t.task_def_desc, t.flow_result, t.comment, t.attachment,
+        	u.nick_name, d.dept_name, g.group_name
+        from sys_flow_record t
+        left join sys_user u on u.user_id = t.user_id
+        left join sys_dept d on d.dept_id = u.dept_id
+        left join sys_flow_group g on g.group_id = t.group_id
+    </sql>
+
+    <select id="selectSysFlowRecordList" parameterType="SysFlowRecord" resultMap="SysFlowRecordResult">
+        <include refid="selectSysFlowRecordVo"/>
+        <where>  
+            <if test="bizUid != null  and bizUid != ''"> and t.biz_uid = #{bizUid}</if>
+            <if test="userId != null "> and t.user_id = #{userId}</if>
+            <if test="groupId != null "> and t.group_id = #{groupId}</if>
+            <if test="startTime != null "> and t.start_time = #{startTime}</if>
+            <if test="endTime != null "> and t.end_time = #{endTime}</if>
+            <if test="taskId != null  and taskId != ''"> and t.task_id = #{taskId}</if>
+            <if test="taskDefId != null  and taskDefId != ''"> and t.task_def_id = #{taskDefId}</if>
+            <if test="taskDefName != null  and taskDefName != ''"> and t.task_def_name like concat('%', #{taskDefName}, '%')</if>
+            <if test="taskDefDesc != null  and taskDefDesc != ''"> and t.task_def_desc = #{taskDefDesc}</if>
+            <if test="flowResult != null "> and t.flow_result = #{flowResult}</if>
+            <if test="comment != null  and comment != ''"> and t.comment = #{comment}</if>
+            <if test="attachment != null  and attachment != ''"> and t.attachment = #{attachment}</if>
+        </where>
+        order by t.record_id asc
+    </select>
+    
+    <select id="selectSysFlowRecordBybizUidAndTaskDefId" parameterType="SysFlowRecord" resultMap="SysFlowRecordResult">
+        <include refid="selectSysFlowRecordVo"/>
+        where t.biz_uid = #{bizUid} and t.task_def_id = #{taskDefId} and t.end_time is null
+    </select>
+        
+    <insert id="insertSysFlowRecord" parameterType="SysFlowRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into sys_flow_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bizUid != null and bizUid != ''">biz_uid,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="groupId != null">group_id,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="taskDefId != null">task_def_id,</if>
+            <if test="taskDefName != null">task_def_name,</if>
+            <if test="taskDefDesc != null">task_def_desc,</if>
+            <if test="flowResult != null">flow_result,</if>
+            <if test="comment != null">comment,</if>
+            <if test="attachment != null">attachment,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bizUid != null and bizUid != ''">#{bizUid},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="groupId != null">#{groupId},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="taskDefId != null">#{taskDefId},</if>
+            <if test="taskDefName != null">#{taskDefName},</if>
+            <if test="taskDefDesc != null">#{taskDefDesc},</if>
+            <if test="flowResult != null">#{flowResult},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="attachment != null">#{attachment},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysFlowRecord" parameterType="SysFlowRecord">
+        update sys_flow_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bizUid != null and bizUid != ''">biz_uid = #{bizUid},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="groupId != null">group_id = #{groupId},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="taskId != null">task_id = #{taskId},</if>
+            <if test="taskDefId != null">task_def_id = #{taskDefId},</if>
+            <if test="taskDefName != null">task_def_name = #{taskDefName},</if>
+            <if test="taskDefDesc != null">task_def_desc = #{taskDefDesc},</if>
+            <if test="flowResult != null">flow_result = #{flowResult},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteSysFlowRecordByRecordId" parameterType="Long">
+        delete from sys_flow_record where record_id = #{recordId}
+    </delete>
+    
+    <delete id="deleteSysFlowRecordByBizUid" parameterType="String">
+        delete from sys_flow_record where biz_uid = #{bizUid}
+    </delete>
+
+    <delete id="deleteSysFlowRecordByRecordIds" parameterType="String">
+        delete from sys_flow_record where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

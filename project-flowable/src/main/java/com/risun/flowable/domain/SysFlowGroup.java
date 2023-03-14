@@ -3,14 +3,13 @@ package com.risun.flowable.domain;
 import java.util.Date;
 import java.util.List;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.risun.common.core.domain.BaseEntity;
+
 /**
- * 流程审批组对象 sys_flow_group
+ * 流程组对象 sys_flow_group
  * 
  * @author sunchao
  * @date 2022-11-09
@@ -19,12 +18,14 @@ public class SysFlowGroup extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 审批组id */
+    /** 组id */
     private Long groupId;
 
-    /** 审批组名称 */
-    @Excel(name = "审批组名称")
+    /** 组名称 */
     private String groupName;
+    
+    /** 组Key */
+    private String groupKey;
     
     /** 分配用户 */
     private Long[] userIds;
@@ -68,7 +69,15 @@ public class SysFlowGroup extends BaseEntity
         return groupName;
     }
 
-    public Long[] getUserIds() {
+    public String getGroupKey() {
+		return groupKey;
+	}
+
+	public void setGroupKey(String groupKey) {
+		this.groupKey = groupKey;
+	}
+
+	public Long[] getUserIds() {
 		return userIds;
 	}
 

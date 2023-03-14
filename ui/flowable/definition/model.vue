@@ -23,6 +23,7 @@
     </el-dialog>
   </div>
 </template>
+
 <script>
 import {readXml, saveXml, userList, groupList} from "@/api/flowable/definition";
 import bpmnModeler from '@/components/Process/index'

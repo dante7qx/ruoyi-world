@@ -44,6 +44,17 @@ public class SysFlowGroupUserServiceImpl implements ISysFlowGroupUserService
     {
         return sysFlowGroupUserMapper.selectSysFlowGroupUserList(sysFlowGroupUser);
     }
+    
+    /**
+     * 根据groupKey查询流程审批组人关联
+     * 
+     * @param groupKey
+     * @return
+     */
+    @Override
+    public List<SysFlowGroupUser> selectSysFlowGroupUserByGroupKey(String groupKey) {
+    	return sysFlowGroupUserMapper.selectSysFlowGroupUserByGroupKey(groupKey);
+    }
 
     /**
      * 新增流程审批组人关联

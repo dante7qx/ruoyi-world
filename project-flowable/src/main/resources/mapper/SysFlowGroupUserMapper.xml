@@ -16,21 +16,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
         <result property="userName"    column="user_name"    />
         <result property="nickName"    column="nick_name"    />
+        
+        <result property="deptId"    column="dept_id"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="deptKey"    column="dept_key"    />
     </resultMap>
 
     <sql id="selectSysFlowGroupUserVo">
         select 
         	t.id, t.group_id, t.user_id, t.remark, t.create_by, t.create_time, t.update_by, t.update_time,
-        	u.user_name, u.nick_name 
+        	u.user_name, u.nick_name, d.dept_id, d.dept_name, d.dept_key
         from sys_flow_group_user t
+        left join sys_flow_group g on g.group_id = t.group_id
         left join sys_user u on u.user_id = t.user_id
+        left join sys_dept d on d.dept_id = u.dept_id
     </sql>
 
     <select id="selectSysFlowGroupUserList" parameterType="SysFlowGroupUser" resultMap="SysFlowGroupUserResult">
         <include refid="selectSysFlowGroupUserVo"/>
         <where>  
-            <if test="groupId != null "> and t.group_id = #{groupId}</if>
-            <if test="userId != null "> and t.user_id = #{userId}</if>
+            <if test="groupId != null"> and t.group_id = #{groupId}</if>
+            <if test="groupKey != null and groupKey != ''"> and g.group_key = #{groupKey}</if>
+            <if test="userId != null"> and t.user_id = #{userId}</if>
+            <if test="deptId != null"> and u.dept_id = #{deptId}</if>
+            <if test="deptKey != null and deptKey != ''"> and d.dept_key = #{deptKey}</if>
+            
         </where>
     </select>
     
@@ -42,6 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSysFlowGroupUserByGroupId" parameterType="Long" resultMap="SysFlowGroupUserResult">
         <include refid="selectSysFlowGroupUserVo"/>
         where t.group_id = #{groupId}
+    </select>
+    
+    <select id="selectSysFlowGroupUserByGroupKey" parameterType="String" resultMap="SysFlowGroupUserResult">
+        <include refid="selectSysFlowGroupUserVo"/>
+        where g.group_key = #{groupKey}
     </select>
     
      <select id="selectGroupByUserId" parameterType="Long" resultType="String">

@@ -19,6 +19,14 @@ public interface ISysFlowGroupUserService
      * @return 流程审批组人关联
      */
     public SysFlowGroupUser selectSysFlowGroupUserById(Long id);
+    
+    /**
+     * 根据groupKey查询流程审批组人关联
+     * 
+     * @param groupKey
+     * @return
+     */
+    public List<SysFlowGroupUser> selectSysFlowGroupUserByGroupKey(String groupKey);
 
     /**
      * 查询流程审批组人关联列表

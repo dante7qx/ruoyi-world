@@ -9,6 +9,15 @@ export function listDefinition(query) {
   })
 }
 
+// 查询最新版流程定义列表
+export function listLatestDefinition() {
+  return request({
+    url: '/flowable/definition/listLatest',
+    method: 'post'
+  })
+}
+
+
 // 激活/挂起流程
 export function updateState(params) {
   return request({
