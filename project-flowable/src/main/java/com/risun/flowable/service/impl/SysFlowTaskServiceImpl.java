@@ -188,7 +188,7 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 		Assert.hasText(startFlowVo.getProcDefKey(), "流程定义Key不能为空！");
 		Assert.hasText(startFlowVo.getBizUid(), "业务UID不能为空！");
 		Assert.hasText(startFlowVo.getBizDesc(), "业务详情描述不能为空！");
-		Assert.notNull(startFlowVo.getFlowType(), "流程类型不能为空！");
+		Assert.hasText(startFlowVo.getFlowType(), "流程类型不能为空！");
 
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
 			.processDefinitionKey(startFlowVo.getProcDefKey())
