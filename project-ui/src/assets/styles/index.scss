@@ -190,8 +190,8 @@ aside {
   z-index: 1000 !important;
 }
 
-// el-input、textarea 禁用状态
-.el-input.is-disabled .el-input__inner,textarea:disabled{
+// el-input、textarea、el-date、el-select 禁用状态
+.el-input.is-disabled .el-input__inner, .el-textarea.is-disabled .el-date-editor.is-disabled .el-select.is-disabled {
   color: #5f6266 !important;
   background-color: #ffffff;
 }
