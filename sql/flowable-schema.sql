@@ -113,6 +113,7 @@ create table sys_flow_trace (
   
   primary key (trace_id)
 ) engine=innodb auto_increment=1 comment = '流程跟踪表';
+create index idx_biz_uid on sys_flow_trace (biz_uid);
 
 -- 流程序号表
 drop table if exists sys_flow_seq;
@@ -144,6 +145,7 @@ create table sys_flow_record (
  
   primary key (record_id)
 ) engine=innodb auto_increment=1 comment = '流程记录表';
+create index idx_biz_uid on sys_flow_record (biz_uid);
 
 -- ----------------------------
 -- 流程任务转办表
