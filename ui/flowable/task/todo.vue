@@ -153,7 +153,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-  name: "FlowTodoPage",
+  name: "FlowTodo",
   components: { FlowDetail, FlowAssign, Treeselect },
   dicts: ['sys_process_category', 'sys_process_type', 'sys_process_result'],
   data() {

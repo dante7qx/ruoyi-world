@@ -151,7 +151,7 @@ import NewFlow from "@/views/flowable/task/newflow";
 import FlowDetail from "@/views/flowable/task/flowdetail";
 
 export default {
-  name: "MyFlowTaskPage",
+  name: "MyFlowTask",
   components: {
     NewFlow, FlowDetail
   },

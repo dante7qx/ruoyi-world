@@ -154,7 +154,7 @@ import { getGroups } from "@/api/flowable/group"
 import Detail from "./detail"
 
 export default {
-  name: "Type",
+  name: "FlowType",
   components: {
     "detail": Detail
   },

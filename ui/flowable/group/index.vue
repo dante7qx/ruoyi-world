@@ -199,7 +199,7 @@ import { listUser } from "@/api/system/user"
 import Detail from "./detail"
 
 export default {
-  name: "Group",
+  name: "FlowGroup",
   components: {
     "detail": Detail
   },

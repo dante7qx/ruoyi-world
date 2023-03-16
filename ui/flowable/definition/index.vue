@@ -233,7 +233,7 @@ import Parser from '@/components/Process/parser/Parser'
 import FlowDiagram from '@/views/flowable/task/diagram'
 
 export default {
-  name: "Definition",
+  name: "FlowDef",
   components: {
     Parser,
     FlowDiagram

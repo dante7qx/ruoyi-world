@@ -155,7 +155,7 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-  name: "FlowDonePage",
+  name: "FlowDone",
   components: { FlowDetail, Treeselect },
   dicts: ['sys_process_category', 'sys_process_type', 'sys_process_status', 'sys_process_result'],
   data() {

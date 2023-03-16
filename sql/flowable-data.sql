@@ -6,10 +6,10 @@ select @parentId := LAST_INSERT_ID();
 
 insert into sys_menu( parent_id, menu_name, order_num, path, component, query, is_frame, is_cache, menu_type, visible, status, icon, perms, create_by, create_time )
 values
-(@parentId, '流程定义', 1, 'flowdef', 'flowable/definition/index', '', '1', '0', 'C', '0', '0', 'job', '', 'fqyczadmin', sysdate()),
-(@parentId, '流程组', 2, 'flowgroup', 'flowable/group/index', '', '1', '0', 'C', '0', '0', 'form', 'flowable:group:list', 'fqyczadmin', sysdate()),
-(@parentId, '流程类型', 3, 'flowtype', 'flowable/type/index', '', '1', '0', 'C', '0', '0', 'guide', 'flowable:type:list', 'fqyczadmin', sysdate()),
-(@parentId, '表单配置', 4, 'flowform', 'flowable/task/form/index', '', '1', '0', 'C', '0', '0', 'form', 'flowable:form:list', 'fqyczadmin', sysdate());
+(@parentId, '流程定义', 1, 'flowDef', 'flowable/definition/index', '', '1', '0', 'C', '0', '0', 'job', '', 'fqyczadmin', sysdate()),
+(@parentId, '流程组', 2, 'flowGroup', 'flowable/group/index', '', '1', '0', 'C', '0', '0', 'form', 'flowable:group:list', 'fqyczadmin', sysdate()),
+(@parentId, '流程类型', 3, 'flowType', 'flowable/type/index', '', '1', '0', 'C', '0', '0', 'guide', 'flowable:type:list', 'fqyczadmin', sysdate()),
+(@parentId, '表单配置', 4, 'flowForm', 'flowable/task/form/index', '', '1', '0', 'C', '0', '0', 'form', 'flowable:form:list', 'fqyczadmin', sysdate());
 
 select @groupId := (select menu_id  from sys_menu where menu_name ='流程组');
 insert into sys_menu( parent_id, menu_name, order_num, path, component, query, is_frame, is_cache, menu_type, visible, status, icon, perms, create_by, create_time )
@@ -42,10 +42,10 @@ select @pid := LAST_INSERT_ID();
 
 insert into sys_menu( parent_id, menu_name, order_num, path, component, query, is_frame, is_cache, menu_type, visible, status, icon, create_by, create_time )
 values
-(@pid, '我的任务', 1, 'mytask', 'flowable/task/mytask', '', '1', '0', 'C', '0', '0', 'guide', 'fqyczadmin', sysdate()),
-(@pid, '待办任务', 2, 'todotask', 'flowable/task/todo', '', '1', '0', 'C', '0', '0', 'cascader', 'fqyczadmin', sysdate()),
-(@pid, '已办任务', 3, 'donetask', 'flowable/task/done', '', '1', '0', 'C', '0', '0', 'time-range', 'fqyczadmin', sysdate()),
-(@pid, '任务监控', 4, 'monitortask', 'flowable/task/monitor', '', '1', '0', 'C', '0', '0', 'online', 'fqyczadmin', sysdate());
+(@pid, '我的任务', 1, 'myFlowTask', 'flowable/task/mytask', '', '1', '0', 'C', '0', '0', 'guide', 'fqyczadmin', sysdate()),
+(@pid, '待办任务', 2, 'flowTodo', 'flowable/task/todo', '', '1', '0', 'C', '0', '0', 'cascader', 'fqyczadmin', sysdate()),
+(@pid, '已办任务', 3, 'flowDone', 'flowable/task/done', '', '1', '0', 'C', '0', '0', 'time-range', 'fqyczadmin', sysdate()),
+(@pid, '任务监控', 4, 'FlowMonitor', 'flowable/task/monitor', '', '1', '0', 'C', '0', '0', 'online', 'fqyczadmin', sysdate());
 
 -- 数据字典
 insert into sys_dict_type( dict_name, dict_type, status, create_by, create_time) 

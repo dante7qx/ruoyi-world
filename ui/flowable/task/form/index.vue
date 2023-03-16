@@ -135,7 +135,7 @@
 import { listForm, getForm, delForm, addForm, updateForm, exportForm } from "@/api/flowable/form";
 import Parser from '@/components/Process/parser/Parser'
 export default {
-  name: "Form",
+  name: "FlowForm",
   components: {
     Parser
   },
