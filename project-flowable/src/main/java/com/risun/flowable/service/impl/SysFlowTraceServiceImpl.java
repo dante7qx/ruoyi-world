@@ -35,6 +35,8 @@ public class SysFlowTraceServiceImpl implements ISysFlowTraceService {
 	private ISysFlowSeqService sysFlowSeqService;
 	@Autowired
 	private ISysFlowBpmnModelService sysFlowBpmnModelService;
+	
+	static final String END_NODE = "结束";
 
 	/**
 	 * 查询流程跟踪
@@ -130,7 +132,7 @@ public class SysFlowTraceServiceImpl implements ISysFlowTraceService {
 			trace.setTaskId("");
 			trace.setTaskDefId("");
 			trace.setTaskDefDesc("");
-			trace.setTaskDefName("结束");
+			trace.setTaskDefName(END_NODE);
 			trace.setFlowStatus(SysFlowStatusEnum.FINISHED.getType());
 			result = sysFlowTraceMapper.updateSysFlowTrace(trace);
 		}

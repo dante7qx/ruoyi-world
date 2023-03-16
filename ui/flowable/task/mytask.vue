@@ -98,7 +98,7 @@
             type="text"
             icon="el-icon-edit"
             @click="handleProcess(scope.row, 1)"
-            v-if="scope.row.recordCount == 0"
+            v-if="!scope.row.flowResult && scope.row.firstTask"
           >修改</el-button>
           <el-button
             size="mini"

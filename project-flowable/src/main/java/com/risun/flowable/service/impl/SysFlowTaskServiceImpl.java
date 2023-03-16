@@ -339,8 +339,8 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 			.processInstanceId(curTask.getProcessInstanceId())
 			.active()
 			.list();
-		List<SysFlowRecord> records = sysFlowRecordService.selectByBizUidAndTaskDefId(taskVo.getBizUid(),
-				taskVo.getTaskDefId());
+		List<SysFlowRecord> records = sysFlowRecordService.selectByBizUidAndTaskDefId(taskVo.getBizUid(), taskVo.getTaskDefId());
+		records = records.stream().filter(r -> ObjectUtil.isNull(r.getEndTime())).collect(toList());
 		for (int i = 0; i < tasks.size(); i++) {
 			Task task = tasks.get(i);
 			taskService.setAssignee(task.getId(), records.get(i)
@@ -386,29 +386,18 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	 */
 	private Long[] getPrevTaskApprover(SysApprovalFlowVo taskVo, Task task) {
 		List<SysFlowRecord> records = sysFlowRecordService.selectSysFlowRecordByBizUid(taskVo.getBizUid());
-		records.sort((r1, r2) -> Long.compare(r2.getRecordId(), r1.getRecordId()));
-		String prevTaskDefId = "";
-		int size = records.size();
-		for (int i = 0; i < size; i++) {
-			if (!taskVo.getTaskDefId()
-				.equals(records.get(i)
-					.getTaskDefId()) && records.get(i)
-						.getEndTime() != null) {
-				prevTaskDefId = records.get(i)
-					.getTaskDefId();
-				break;
-			}
-		}
+		String prevTaskDefId = getPrevTaskDefId(task.getTaskDefinitionKey(), records);
+		
 		if (StrUtil.isEmpty(prevTaskDefId)) {
 			throw new CustomWorkflowException("未找到上一步审批人");
 		}
+		int size = records.size();
+		records.sort((r1, r2) -> Long.compare(r2.getRecordId(), r1.getRecordId()));
 		boolean isPrev = false;
 		List<Long> prevApprover = Lists.newArrayList();
 		for (int i = 0; i < size; i++) {
-			if (prevTaskDefId.equals(records.get(i)
-				.getTaskDefId())) {
-				prevApprover.add(records.get(i)
-					.getUserId());
+			if (prevTaskDefId.equals(records.get(i).getTaskDefId())) {
+				prevApprover.add(records.get(i).getUserId());
 				isPrev = true;
 			} else {
 				if (isPrev) {
@@ -417,8 +406,26 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 				continue;
 			}
 		}
-		return prevApprover.stream()
-			.toArray(Long[]::new);
+		return prevApprover.stream().toArray(Long[]::new);
+	}
+	
+	/**
+	 * 获取流程定义中指定taskDefId的上一个用户任务定义Id
+	 * 
+	 * @param curTaskDefId
+	 * @param records
+	 * @return
+	 */
+	private String getPrevTaskDefId(String curTaskDefId, List<SysFlowRecord> records) {
+		String prevTaskDefId = null;
+		records.sort((r1, r2) -> Long.compare(r1.getRecordId(), r2.getRecordId()));
+		for (SysFlowRecord record : records) {
+			if(record.getTaskDefId().equals(curTaskDefId)) {
+				break;
+			}
+			prevTaskDefId = record.getTaskDefId();
+		}
+		return prevTaskDefId;
 	}
 
 	private List<SysFlowGroupUser> selectUserByDeptAndGroupKey(String deptKey, String groupKey) {

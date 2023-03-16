@@ -97,6 +97,7 @@ public class FlowDemoServiceImpl implements IFlowDemoService {
 		// 审批流程
 		if(trace != null && StrUtil.isNotEmpty(trace.getProcInstId())) {
 			SysApprovalFlowVo approvalVo = new SysApprovalFlowVo();
+			approvalVo.setFlowType(trace.getFlowType());
 			approvalVo.setTaskId(trace.getTaskId());
 			approvalVo.setTaskDefId(trace.getTaskDefId());
 			approvalVo.setBizUid(flowDemo.getUid());
