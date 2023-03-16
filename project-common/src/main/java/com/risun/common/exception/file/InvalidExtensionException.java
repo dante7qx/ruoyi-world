@@ -1,7 +1,6 @@
 package com.risun.common.exception.file;
 
 import java.util.Arrays;
-import org.apache.commons.fileupload.FileUploadException;
 
 /**
  * 文件上传 误异常类
@@ -10,9 +9,10 @@ import org.apache.commons.fileupload.FileUploadException;
  */
 public class InvalidExtensionException extends FileUploadException
 {
-    private static final long serialVersionUID = 1L;
 
-    private String[] allowedExtension;
+	private static final long serialVersionUID = 1L;
+	
+	private String[] allowedExtension;
     private String extension;
     private String filename;
 

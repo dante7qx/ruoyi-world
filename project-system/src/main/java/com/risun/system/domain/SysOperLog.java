@@ -82,6 +82,10 @@ public class SysOperLog extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;
+    
+    /** 消耗时间 */
+    @Excel(name = "消耗时间", suffix = "毫秒")
+    private Long costTime;
 
     public Long getOperId()
     {
@@ -252,4 +256,13 @@ public class SysOperLog extends BaseEntity
     {
         this.operTime = operTime;
     }
+
+	public Long getCostTime() {
+		return costTime;
+	}
+
+	public void setCostTime(Long costTime) {
+		this.costTime = costTime;
+	}
+    
 }

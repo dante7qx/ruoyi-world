@@ -99,7 +99,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2014-2022 睿阳科技 All Rights Reserved.</span>
+      <span>Copyright © 2014-2023 睿阳科技 All Rights Reserved.</span>
     </div>
   </div>
 </template>
