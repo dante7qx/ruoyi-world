@@ -45,6 +45,16 @@ export default {
     padding-top: 84px;
   }
 }
+
+.fade-transform-enter-active,
+.fade-transform-leave-active {
+  transition: opacity 0.1s ease;
+}
+
+.fade-transform-enter-from,
+.fade-transform-leave-to {
+  opacity: 0;
+}
 </style>
 
 <style lang="scss">

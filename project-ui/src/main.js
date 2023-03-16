@@ -92,6 +92,12 @@ DictData.install()
 // 模态框点击空白不消失
 Element.Dialog.props.closeOnClickModal.default = false
 
+// 表格带有边框
+Element.Table.props.border = {
+  default: true,
+  type: Boolean
+}
+
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
