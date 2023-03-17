@@ -4,16 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDictType;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.system.service.ISysDictTypeService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.risun.common.annotation.Log;
+import com.risun.common.core.controller.BaseController;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.domain.entity.SysDictType;
+import com.risun.common.core.page.TableDataInfo;
+import com.risun.common.enums.BusinessType;
+import com.risun.common.utils.poi.ExcelUtil;
+import com.risun.system.service.ISysDictTypeService;
 
 /**
  * 数据字典信息
@@ -73,9 +72,9 @@ public class SysDictTypeController extends BaseController
     @PostMapping("/insert")
     public AjaxResult add(@Validated @RequestBody SysDictType dict)
     {
-        if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict)))
+        if (!dictTypeService.checkDictTypeUnique(dict))
         {
-            return AjaxResult.error("新增字典'" + dict.getDictName() + "'失败，字典类型已存在");
+            return error("新增字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
         dict.setCreateBy(getUsername());
         return toAjax(dictTypeService.insertDictType(dict));
@@ -89,9 +88,9 @@ public class SysDictTypeController extends BaseController
     @PostMapping("/update")
     public AjaxResult edit(@Validated @RequestBody SysDictType dict)
     {
-        if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict)))
+        if (!dictTypeService.checkDictTypeUnique(dict))
         {
-            return AjaxResult.error("修改字典'" + dict.getDictName() + "'失败，字典类型已存在");
+            return error("修改字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
         dict.setUpdateBy(getUsername());
         return toAjax(dictTypeService.updateDictType(dict));
