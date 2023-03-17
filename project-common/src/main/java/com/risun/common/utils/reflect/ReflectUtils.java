@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
-import org.apache.commons.lang3.StringUtils;
+
 import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import com.risun.common.core.text.Convert;
 import com.risun.common.utils.DateUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 反射工具类. 提供调用getter/setter方法, 访问私有变量, 调用私有方法, 获取泛型类型Class, 被AOP过的真实类等工具函数.
@@ -40,9 +42,9 @@ public class ReflectUtils
     public static <E> E invokeGetter(Object obj, String propertyName)
     {
         Object object = obj;
-        for (String name : StringUtils.split(propertyName, "."))
+        for (String name : StrUtil.split(propertyName, "."))
         {
-            String getterMethodName = GETTER_PREFIX + StringUtils.capitalize(name);
+            String getterMethodName = GETTER_PREFIX + StrUtil.upperFirst(name);
             object = invokeMethod(object, getterMethodName, new Class[] {}, new Object[] {});
         }
         return (E) object;
@@ -55,17 +57,17 @@ public class ReflectUtils
     public static <E> void invokeSetter(Object obj, String propertyName, E value)
     {
         Object object = obj;
-        String[] names = StringUtils.split(propertyName, ".");
+        String[] names = StrUtil.splitToArray(propertyName, ".");
         for (int i = 0; i < names.length; i++)
         {
             if (i < names.length - 1)
             {
-                String getterMethodName = GETTER_PREFIX + StringUtils.capitalize(names[i]);
+                String getterMethodName = GETTER_PREFIX + StrUtil.upperFirst(names[i]);
                 object = invokeMethod(object, getterMethodName, new Class[] {}, new Object[] {});
             }
             else
             {
-                String setterMethodName = SETTER_PREFIX + StringUtils.capitalize(names[i]);
+                String setterMethodName = SETTER_PREFIX + StrUtil.upperFirst(names[i]);
                 invokeMethodByName(object, setterMethodName, new Object[] { value });
             }
         }
@@ -173,9 +175,9 @@ public class ReflectUtils
                     if (cs[i] == String.class)
                     {
                         args[i] = Convert.toStr(args[i]);
-                        if (StringUtils.endsWith((String) args[i], ".0"))
+                        if (StrUtil.endWith((String) args[i], ".0"))
                         {
-                            args[i] = StringUtils.substringBefore((String) args[i], ".0");
+                            args[i] = StrUtil.subBefore((String) args[i], ".0", false);
                         }
                     }
                     else if (cs[i] == Integer.class)

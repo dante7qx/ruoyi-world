@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.domain.model.RegisterBody;
-import com.risun.common.utils.StringUtils;
 import com.risun.framework.web.service.SysRegisterService;
 import com.risun.system.service.ISysConfigService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 注册验证
@@ -34,6 +35,6 @@ public class SysRegisterController extends BaseController {
 			return error("当前系统没有开启注册功能！");
 		}
 		String msg = registerService.register(user);
-		return StringUtils.isEmpty(msg) ? success() : error(msg);
+		return StrUtil.isEmpty(msg) ? success() : error(msg);
 	}
 }

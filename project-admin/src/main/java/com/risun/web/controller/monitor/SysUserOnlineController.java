@@ -5,6 +5,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.risun.common.annotation.Log;
 import com.risun.common.constant.CacheConstants;
 import com.risun.common.core.controller.BaseController;
@@ -13,17 +21,11 @@ import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.core.redis.RedisCache;
 import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.StringUtils;
 import com.risun.system.domain.SysUserOnline;
 import com.risun.system.service.ISysUserOnlineService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 在线用户监控
@@ -49,15 +51,15 @@ public class SysUserOnlineController extends BaseController
         for (String key : keys)
         {
             LoginUser user = redisCache.getCacheObject(key);
-            if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName))
+            if (StrUtil.isNotEmpty(ipaddr) && StrUtil.isNotEmpty(userName))
             {
                 userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
             }
-            else if (StringUtils.isNotEmpty(ipaddr))
+            else if (StrUtil.isNotEmpty(ipaddr))
             {
                 userOnlineList.add(userOnlineService.selectOnlineByIpaddr(ipaddr, user));
             }
-            else if (StringUtils.isNotEmpty(userName) && StringUtils.isNotNull(user.getUser()))
+            else if (StrUtil.isNotEmpty(userName) && ObjectUtil.isNotNull(user.getUser()))
             {
                 userOnlineList.add(userOnlineService.selectOnlineByUserName(userName, user));
             }

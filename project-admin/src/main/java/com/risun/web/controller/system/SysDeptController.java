@@ -8,10 +8,11 @@ import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.domain.entity.SysDept;
 import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.StringUtils;
 import com.risun.system.service.ISysDeptService;
 
-import org.apache.commons.lang3.ArrayUtils;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -53,7 +54,7 @@ public class SysDeptController extends BaseController
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
     {
         List<SysDept> depts = deptService.selectDeptList(new SysDept());
-        depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
+        depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtil.contains(StrUtil.splitToArray(d.getAncestors(), ","), deptId + ""));
         return AjaxResult.success(depts);
     }
 
@@ -102,7 +103,7 @@ public class SysDeptController extends BaseController
         {
             return error("修改部门'" + dept.getDeptName() + "'失败，上级部门不能是自己");
         }
-        else if (StringUtils.equals(UserConstants.DEPT_DISABLE, dept.getStatus()) && deptService.selectNormalChildrenDeptById(deptId) > 0)
+        else if (StrUtil.equals(UserConstants.DEPT_DISABLE, dept.getStatus()) && deptService.selectNormalChildrenDeptById(deptId) > 0)
         {
             return error("该部门包含未停用的子部门！");
         }

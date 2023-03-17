@@ -1,6 +1,7 @@
 package com.risun.quartz.util;
 
 import java.util.Date;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -10,12 +11,13 @@ import org.slf4j.LoggerFactory;
 import com.risun.common.constant.Constants;
 import com.risun.common.constant.ScheduleConstants;
 import com.risun.common.utils.ExceptionUtil;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.bean.BeanUtils;
 import com.risun.common.utils.spring.SpringUtils;
 import com.risun.quartz.domain.SysJob;
 import com.risun.quartz.domain.SysJobLog;
 import com.risun.quartz.service.ISysJobLogService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 抽象quartz调用
@@ -85,7 +87,7 @@ public abstract class AbstractQuartzJob implements Job
         if (e != null)
         {
             sysJobLog.setStatus(Constants.FAIL);
-            String errorMsg = StringUtils.substring(ExceptionUtil.getExceptionMessage(e), 0, 2000);
+            String errorMsg = StrUtil.sub(ExceptionUtil.getExceptionMessage(e), 0, 2000);
             sysJobLog.setExceptionInfo(errorMsg);
         }
         else

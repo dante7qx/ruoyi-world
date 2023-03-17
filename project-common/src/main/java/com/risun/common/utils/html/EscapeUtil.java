@@ -1,6 +1,6 @@
 package com.risun.common.utils.html;
 
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 转义和反转义工具类
@@ -69,9 +69,9 @@ public class EscapeUtil
      */
     private static String encode(String text)
     {
-        if (StringUtils.isEmpty(text))
+        if (StrUtil.isEmpty(text))
         {
-            return StringUtils.EMPTY;
+            return StrUtil.EMPTY;
         }
 
         final StringBuilder tmp = new StringBuilder(text.length() * 6);
@@ -110,7 +110,7 @@ public class EscapeUtil
      */
     public static String decode(String content)
     {
-        if (StringUtils.isEmpty(content))
+        if (StrUtil.isEmpty(content))
         {
             return content;
         }

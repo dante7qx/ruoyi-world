@@ -3,9 +3,11 @@ package com.risun.system.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.utils.StringUtils;
 import com.risun.system.domain.SysUserOnline;
 import com.risun.system.service.ISysUserOnlineService;
+
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 在线用户 服务层处理
@@ -25,7 +27,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     @Override
     public SysUserOnline selectOnlineByIpaddr(String ipaddr, LoginUser user)
     {
-        if (StringUtils.equals(ipaddr, user.getIpaddr()))
+        if (StrUtil.equals(ipaddr, user.getIpaddr()))
         {
             return loginUserToUserOnline(user);
         }
@@ -42,7 +44,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     @Override
     public SysUserOnline selectOnlineByUserName(String userName, LoginUser user)
     {
-        if (StringUtils.equals(userName, user.getUsername()))
+        if (StrUtil.equals(userName, user.getUsername()))
         {
             return loginUserToUserOnline(user);
         }
@@ -60,7 +62,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     @Override
     public SysUserOnline selectOnlineByInfo(String ipaddr, String userName, LoginUser user)
     {
-        if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userName, user.getUsername()))
+        if (StrUtil.equals(ipaddr, user.getIpaddr()) && StrUtil.equals(userName, user.getUsername()))
         {
             return loginUserToUserOnline(user);
         }
@@ -76,7 +78,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     @Override
     public SysUserOnline loginUserToUserOnline(LoginUser user)
     {
-        if (StringUtils.isNull(user) || StringUtils.isNull(user.getUser()))
+        if (ObjectUtil.isNull(user) || ObjectUtil.isNull(user.getUser()))
         {
             return null;
         }
@@ -88,7 +90,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
         sysUserOnline.setBrowser(user.getBrowser());
         sysUserOnline.setOs(user.getOs());
         sysUserOnline.setLoginTime(user.getLoginTime());
-        if (StringUtils.isNotNull(user.getUser().getDept()))
+        if (ObjectUtil.isNotNull(user.getUser().getDept()))
         {
             sysUserOnline.setDeptName(user.getUser().getDept().getDeptName());
         }

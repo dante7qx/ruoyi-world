@@ -143,7 +143,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	/**
 	 * 计算两个时间差（天、时、分、秒）
 	 */
-	public static String getDatePoor(Date startDate, Date endDate) {
+	public static String timeDistance(Date startDate, Date endDate) {
 		long nd = 1000 * 24 * 60 * 60;
 		long nh = 1000 * 60 * 60;
 		long nm = 1000 * 60;

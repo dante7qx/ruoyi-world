@@ -2,16 +2,19 @@ package com.risun.common.filter;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.html.EscapeUtil;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * XSS过滤处理
@@ -57,7 +60,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
 
         // 为空，直接返回
         String json = IOUtils.toString(super.getInputStream(), "utf-8");
-        if (StringUtils.isEmpty(json))
+        if (StrUtil.isEmpty(json))
         {
             return super.getInputStream();
         }
@@ -107,6 +110,6 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
     public boolean isJsonRequest()
     {
         String header = super.getHeader(HttpHeaders.CONTENT_TYPE);
-        return StringUtils.startsWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
+        return StrUtil.startWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
     }
 }

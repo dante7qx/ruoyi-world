@@ -3,10 +3,12 @@ package com.risun.common.core.controller;
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.risun.common.constant.HttpStatus;
@@ -18,8 +20,9 @@ import com.risun.common.core.page.TableSupport;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.PageUtils;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.sql.SqlUtil;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * web层通用数据处理
@@ -61,7 +64,7 @@ public class BaseController
     protected void startOrderBy()
     {
         PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (StringUtils.isNotEmpty(pageDomain.getOrderBy()))
+        if (StrUtil.isNotEmpty(pageDomain.getOrderBy()))
         {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
             PageHelper.orderBy(orderBy);
@@ -157,7 +160,7 @@ public class BaseController
      */
     public String redirect(String url)
     {
-        return StringUtils.format("redirect:{}", url);
+        return StrUtil.format("redirect:{}", url);
     }
 
     /**

@@ -1,17 +1,21 @@
 package com.risun.quartz.domain;
 
 import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.risun.common.annotation.Excel;
 import com.risun.common.annotation.Excel.ColumnType;
 import com.risun.common.constant.ScheduleConstants;
 import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.utils.StringUtils;
 import com.risun.quartz.util.CronUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 定时任务调度表 sys_job
@@ -113,7 +117,7 @@ public class SysJob extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getNextValidTime()
     {
-        if (StringUtils.isNotEmpty(cronExpression))
+        if (StrUtil.isNotEmpty(cronExpression))
         {
             return CronUtils.getNextExecution(cronExpression);
         }

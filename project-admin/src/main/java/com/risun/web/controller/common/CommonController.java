@@ -25,14 +25,15 @@ import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.domain.entity.SysDownload;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.ZipDownloadUtil;
 import com.risun.common.utils.file.FileUploadUtils;
 import com.risun.common.utils.file.FileUtils;
 import com.risun.framework.config.ServerConfig;
 import com.risun.system.service.ISysAttachmentService;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.img.ImgUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 通用请求处理
@@ -66,7 +67,8 @@ public class CommonController {
 			HttpServletRequest request) {
 		try {
 			if (!FileUtils.checkAllowDownload(fileName)) {
-				throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+				
+				throw new Exception(StrUtil.format("文件名称({})非法，不允许下载。 ", fileName));
 			}
 			String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
 			String filePath = RisunConfig.getDownloadPath() + fileName;
@@ -119,16 +121,16 @@ public class CommonController {
 				originalFilenames.add(file.getOriginalFilename());
 			}
 			AjaxResult ajax = AjaxResult.success();
-			ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
-			ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
-			ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMETER));
-			ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMETER));
+			ajax.put("urls", CollUtil.join(urls, FILE_DELIMETER));
+			ajax.put("fileNames", CollUtil.join(fileNames, FILE_DELIMETER));
+			ajax.put("newFileNames", CollUtil.join(newFileNames, FILE_DELIMETER));
+			ajax.put("originalFilenames", CollUtil.join(originalFilenames, FILE_DELIMETER));
 			return ajax;
 		} catch (Exception e) {
 			return AjaxResult.error(e.getMessage());
 		}
 	}
-
+	
 	/**
 	 * 本地资源通用下载
 	 */
@@ -137,14 +139,14 @@ public class CommonController {
 			throws Exception {
 		try {
 			if (!FileUtils.checkAllowDownload(resource)) {
-				throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+				throw new Exception(StrUtil.format("资源文件({})非法，不允许下载。 ", resource));
 			}
 			// 本地资源路径
 			String localPath = RisunConfig.getProfile();
 			// 数据库资源地址
-			String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
+			String downloadPath = localPath + StrUtil.subAfter(resource, Constants.RESOURCE_PREFIX, false);
 			// 下载名称
-			String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
+			String downloadName = StrUtil.subAfter(downloadPath, "/", true);
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 			FileUtils.setAttachmentResponseHeader(response, downloadName);
 			FileUtils.writeBytes(downloadPath, response.getOutputStream());
@@ -152,7 +154,7 @@ public class CommonController {
 			log.error("下载文件失败", e);
 		}
 	}
-
+	
 	/**
 	 * 通用上传请求（单个）
 	 */
@@ -189,7 +191,7 @@ public class CommonController {
 			String url = serverConfig.getUrl() + fileName;
 			AjaxResult ajax = AjaxResult.success();
 			
-			String source = profile.concat(StringUtils.substringAfter(fileName, Constants.RESOURCE_PREFIX));
+			String source = profile.concat(StrUtil.subAfter(fileName, Constants.RESOURCE_PREFIX, false));
 			String target = source.replaceAll(FileUtils.getName(fileName), THUMBNAIL_PREFIX.concat(FileUtils.getName(fileName)));
 			String thumbnailName = fileName.replaceAll(FileUtils.getName(fileName), THUMBNAIL_PREFIX.concat(FileUtils.getName(fileName)));
 			// 生成缩略图
@@ -215,7 +217,7 @@ public class CommonController {
 			String resource = sysDownload.getResource();
 			String downloadName = sysDownload.getFileName();
 			if (!FileUtils.checkAllowDownload(downloadName)) {
-				throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", downloadName));
+				throw new Exception(StrUtil.format("资源文件({})非法，不允许下载。 ", downloadName));
 			}
 			// 本地资源路径
 			String localPath = RisunConfig.getProfile();

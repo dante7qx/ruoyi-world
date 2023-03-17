@@ -20,6 +20,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.risun.common.constant.Constants;
 import com.risun.common.core.text.Convert;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+
 /**
  * 客户端工具类
  * 
@@ -98,7 +101,7 @@ public class ServletUtils
         Map<String, String> params = new HashMap<>();
         for (Map.Entry<String, String[]> entry : getParams(request).entrySet())
         {
-            params.put(entry.getKey(), StringUtils.join(entry.getValue(), ","));
+            params.put(entry.getKey(), ArrayUtil.join(entry.getValue(), ","));
         }
         return params;
     }
@@ -174,13 +177,13 @@ public class ServletUtils
         }
 
         String uri = request.getRequestURI();
-        if (StringUtils.inStringIgnoreCase(uri, ".json", ".xml"))
+        if (StrUtil.containsAnyIgnoreCase(uri, ".json", ".xml"))
         {
             return true;
         }
 
         String ajax = request.getParameter("__ajax");
-        return StringUtils.inStringIgnoreCase(ajax, "json", "xml");
+        return StrUtil.containsAnyIgnoreCase(ajax, "json", "xml");
     }
 
     /**
@@ -197,7 +200,7 @@ public class ServletUtils
         }
         catch (UnsupportedEncodingException e)
         {
-            return StringUtils.EMPTY;
+            return StrUtil.EMPTY;
         }
     }
 
@@ -215,7 +218,7 @@ public class ServletUtils
         }
         catch (UnsupportedEncodingException e)
         {
-            return StringUtils.EMPTY;
+            return StrUtil.EMPTY;
         }
     }
 }

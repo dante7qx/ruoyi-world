@@ -1,6 +1,8 @@
 package com.risun.common.core.page;
 
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 分页数据
@@ -26,12 +28,13 @@ public class PageDomain
 
     public String getOrderBy()
     {
-        if (StringUtils.isEmpty(orderByColumn))
+        if (StrUtil.isEmpty(orderByColumn))
         {
             return "";
         }
-        return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;
+        return StrUtil.toUnderlineCase(orderByColumn) + " " + isAsc;
     }
+    
 
     public Integer getPageNum()
     {
@@ -70,7 +73,7 @@ public class PageDomain
 
     public void setIsAsc(String isAsc)
     {
-        if (StringUtils.isNotEmpty(isAsc))
+        if (StrUtil.isNotEmpty(isAsc))
         {
             // 兼容前端排序类型
             if ("ascending".equals(isAsc))
@@ -87,7 +90,7 @@ public class PageDomain
 
     public Boolean getReasonable()
     {
-        if (StringUtils.isNull(reasonable))
+        if (ObjectUtil.isNull(reasonable))
         {
             return Boolean.TRUE;
         }

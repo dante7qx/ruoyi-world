@@ -12,8 +12,9 @@ import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.enums.UserStatus;
 import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.StringUtils;
 import com.risun.system.service.ISysUserService;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 用户验证处理
@@ -38,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         SysUser user = userService.selectUserByUserName(username);
-        if (StringUtils.isNull(user))
+        if (ObjectUtil.isNull(user))
         {
             log.info("登录用户：{} 不存在.", username);
             throw new ServiceException("登录用户：" + username + " 不存在");

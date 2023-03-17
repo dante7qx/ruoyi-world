@@ -9,17 +9,19 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.risun.common.config.RisunConfig;
 import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.uuid.IdUtils;
 
-import org.apache.commons.io.FilenameUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 文件处理工具类
@@ -144,7 +146,7 @@ public class FileUtils
     public static boolean checkAllowDownload(String resource)
     {
         // 禁止目录上跳级别
-        if (StringUtils.contains(resource, ".."))
+        if (StrUtil.contains(resource, ".."))
         {
             return false;
         }

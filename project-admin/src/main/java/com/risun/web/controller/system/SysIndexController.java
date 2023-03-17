@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.risun.common.config.RisunConfig;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 首页
@@ -25,6 +26,6 @@ public class SysIndexController
     @RequestMapping("/")
     public String index()
     {
-        return StringUtils.format("欢迎使用{}后台管理框架，当前版本：v{}，请通过前端地址访问。", ruoyiConfig.getName(), ruoyiConfig.getVersion());
+        return StrUtil.format("欢迎使用{}后台管理框架，当前版本：v{}，请通过前端地址访问。", ruoyiConfig.getName(), ruoyiConfig.getVersion());
     }
 }

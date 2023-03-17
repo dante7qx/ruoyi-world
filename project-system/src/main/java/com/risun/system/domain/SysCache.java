@@ -1,6 +1,6 @@
 package com.risun.system.domain;
 
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 缓存信息
@@ -36,7 +36,7 @@ public class SysCache
     {
 //        this.cacheName = StringUtils.replace(cacheName, ":", "");
         this.cacheName = cacheName.split(":")[1];
-        this.cacheKey = StringUtils.replace(cacheKey, cacheName, "");
+        this.cacheKey = StrUtil.replace(cacheKey, cacheName, "");
         this.cacheValue = cacheValue;
     }
 

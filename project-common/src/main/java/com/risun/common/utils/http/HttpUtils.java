@@ -11,17 +11,20 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.risun.common.constant.Constants;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 通用http发送方法
@@ -40,7 +43,7 @@ public class HttpUtils
      */
     public static String sendGet(String url)
     {
-        return sendGet(url, StringUtils.EMPTY);
+        return sendGet(url, StrUtil.EMPTY);
     }
 
     /**
@@ -69,7 +72,7 @@ public class HttpUtils
         BufferedReader in = null;
         try
         {
-            String urlNameString = StringUtils.isNotBlank(param) ? url + "?" + param : url;
+            String urlNameString = StrUtil.isNotBlank(param) ? url + "?" + param : url;
             log.info("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();

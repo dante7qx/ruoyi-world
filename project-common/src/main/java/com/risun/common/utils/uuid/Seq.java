@@ -3,7 +3,8 @@ package com.risun.common.utils.uuid;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * @author ruoyi 序列生成类
@@ -23,7 +24,7 @@ public class Seq
     private static AtomicInteger uploadSeq = new AtomicInteger(1);
 
     // 机器标识
-    private static String machineCode = "A";
+    private static final String machineCode = "A";
 
     /**
      * 获取通用序列号
@@ -82,6 +83,7 @@ public class Seq
             atomicInt.set(1);
         }
         // 转字符串，用0左补齐
-        return StringUtils.padl(value, length);
+        return StrUtil.padPre(value+"", length, '0');
     }
+    
 }

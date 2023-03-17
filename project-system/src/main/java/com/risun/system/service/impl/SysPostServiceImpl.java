@@ -1,16 +1,18 @@
 package com.risun.system.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.risun.common.constant.UserConstants;
 import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.StringUtils;
 import com.risun.system.domain.SysPost;
 import com.risun.system.mapper.SysPostMapper;
 import com.risun.system.mapper.SysUserPostMapper;
 import com.risun.system.service.ISysPostService;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 岗位信息 服务层处理
@@ -82,9 +84,9 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public boolean checkPostNameUnique(SysPost post)
     {
-        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
+        Long postId = ObjectUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
         SysPost info = postMapper.checkPostNameUnique(post.getPostName());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -100,9 +102,9 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public boolean checkPostCodeUnique(SysPost post)
     {
-        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
+        Long postId = ObjectUtil.isNull(post.getPostId()) ? -1L : post.getPostId();
         SysPost info = postMapper.checkPostCodeUnique(post.getPostCode());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }

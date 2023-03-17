@@ -1,5 +1,6 @@
 package com.risun.quartz.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -15,9 +16,10 @@ import com.risun.common.constant.Constants;
 import com.risun.common.constant.ScheduleConstants;
 import com.risun.common.exception.job.TaskException;
 import com.risun.common.exception.job.TaskException.Code;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.spring.SpringUtils;
 import com.risun.quartz.domain.SysJob;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 定时任务工具类
@@ -123,15 +125,15 @@ public class ScheduleUtils
      */
     public static boolean whiteList(String invokeTarget)
     {
-        String packageName = StringUtils.substringBefore(invokeTarget, "(");
+        String packageName = StrUtil.subBefore(invokeTarget, "(", false);
         int count = StringUtils.countMatches(packageName, ".");
         if (count > 1)
         {
-            return StringUtils.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR);
+            return StrUtil.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR);
         }
-        Object obj = SpringUtils.getBean(StringUtils.split(invokeTarget, ".")[0]);
+        Object obj = SpringUtils.getBean(StrUtil.splitToArray(invokeTarget, ".")[0]);
         String beanPackageName = obj.getClass().getPackage().getName();
-        return StringUtils.containsAnyIgnoreCase(beanPackageName, Constants.JOB_WHITELIST_STR)
-                && !StringUtils.containsAnyIgnoreCase(beanPackageName, Constants.JOB_ERROR_STR);
+        return StrUtil.containsAnyIgnoreCase(beanPackageName, Constants.JOB_WHITELIST_STR)
+                && !StrUtil.containsAnyIgnoreCase(beanPackageName, Constants.JOB_ERROR_STR);
     }
 }

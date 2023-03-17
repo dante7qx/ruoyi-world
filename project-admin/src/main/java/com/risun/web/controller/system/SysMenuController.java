@@ -2,15 +2,6 @@ package com.risun.web.controller.system;
 
 import java.util.List;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysMenu;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.StringUtils;
-import com.risun.system.service.ISysMenuService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.risun.common.annotation.Log;
+import com.risun.common.constant.Constants;
+import com.risun.common.constant.UserConstants;
+import com.risun.common.core.controller.BaseController;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.domain.entity.SysMenu;
+import com.risun.common.enums.BusinessType;
+import com.risun.system.service.ISysMenuService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 菜单信息
@@ -89,8 +91,9 @@ public class SysMenuController extends BaseController
         {
             return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath()))
+        else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StrUtil.startWithAny(menu.getPath(), Constants.HTTP, Constants.HTTPS))
         {
+        	
             return error("新增菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
         }
         menu.setCreateBy(getUsername());
@@ -109,7 +112,7 @@ public class SysMenuController extends BaseController
         {
             return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath()))
+        else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StrUtil.startWithAny(menu.getPath(), Constants.HTTP, Constants.HTTPS))
         {
             return error("修改菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
         }
