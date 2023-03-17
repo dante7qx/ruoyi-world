@@ -4,8 +4,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.risun.common.annotation.Log;
-import com.risun.common.constant.UserConstants;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.domain.entity.SysDept;
@@ -22,16 +31,6 @@ import com.risun.system.domain.SysUserRole;
 import com.risun.system.service.ISysDeptService;
 import com.risun.system.service.ISysRoleService;
 import com.risun.system.service.ISysUserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 角色信息
@@ -96,13 +95,13 @@ public class SysRoleController extends BaseController
     @PostMapping("/insert")
     public AjaxResult add(@Validated @RequestBody SysRole role)
     {
-        if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role)))
+        if (!roleService.checkRoleNameUnique(role))
         {
-            return AjaxResult.error("新增角色'" + role.getRoleName() + "'失败，角色名称已存在");
+            return error("新增角色'" + role.getRoleName() + "'失败，角色名称已存在");
         }
-        else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role)))
+        else if (!roleService.checkRoleKeyUnique(role))
         {
-            return AjaxResult.error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
+            return error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setCreateBy(getUsername());
         return toAjax(roleService.insertRole(role));
@@ -119,13 +118,13 @@ public class SysRoleController extends BaseController
     {
         roleService.checkRoleAllowed(role);
         roleService.checkRoleDataScope(role.getRoleId());
-        if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role)))
+        if (!roleService.checkRoleNameUnique(role))
         {
-            return AjaxResult.error("修改角色'" + role.getRoleName() + "'失败，角色名称已存在");
+            return error("修改角色'" + role.getRoleName() + "'失败，角色名称已存在");
         }
-        else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role)))
+        else if (!roleService.checkRoleKeyUnique(role))
         {
-            return AjaxResult.error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
+            return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setUpdateBy(getUsername());
         
@@ -141,7 +140,7 @@ public class SysRoleController extends BaseController
             }
             return AjaxResult.success();
         }
-        return AjaxResult.error("修改角色'" + role.getRoleName() + "'失败，请联系管理员");
+        return error("修改角色'" + role.getRoleName() + "'失败，请联系管理员");
     }
 
     /**
