@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
 import com.risun.common.exception.file.FileNameInvalidException;
@@ -13,11 +16,9 @@ import com.risun.common.exception.file.FileNameLengthLimitExceededException;
 import com.risun.common.exception.file.FileSizeLimitExceededException;
 import com.risun.common.exception.file.InvalidExtensionException;
 import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.uuid.Seq;
 
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.web.multipart.MultipartFile;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 文件上传工具类
@@ -129,7 +130,7 @@ public class FileUploadUtils
      * 编码文件名
      */
     public static final String extractFilename(MultipartFile file) {
-        return StringUtils.format("{}/{}_{}.{}", DateUtils.datePath(),
+        return StrUtil.format("{}/{}_{}.{}", DateUtils.datePath(),
                 FilenameUtils.getBaseName(file.getOriginalFilename()), Seq.getId(Seq.uploadSeqType), getExtension(file));
     }
     
@@ -150,7 +151,7 @@ public class FileUploadUtils
     public static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
         int dirLastIndex = RisunConfig.getProfile().length() + 1;
-        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        String currentDir = uploadDir.substring(dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
@@ -231,7 +232,7 @@ public class FileUploadUtils
     public static final String getExtension(MultipartFile file)
     {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        if (StringUtils.isEmpty(extension))
+        if (StrUtil.isEmpty(extension))
         {
             extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
         }

@@ -3,6 +3,7 @@ package com.risun.common.filter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,8 +13,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.util.AntPathMatcher;
+
 import com.risun.common.enums.HttpMethod;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 防止XSS攻击的过滤器
@@ -31,7 +36,7 @@ public class XssFilter implements Filter
     public void init(FilterConfig filterConfig) throws ServletException
     {
         String tempExcludes = filterConfig.getInitParameter("excludes");
-        if (StringUtils.isNotEmpty(tempExcludes))
+        if (StrUtil.isNotEmpty(tempExcludes))
         {
             String[] url = tempExcludes.split(",");
             for (int i = 0; url != null && i < url.length; i++)
@@ -65,8 +70,26 @@ public class XssFilter implements Filter
         {
             return true;
         }
-        return StringUtils.matches(url, excludes);
+        
+        return matches(url, excludes);
     }
+    
+    private boolean matches(String str, List<String> strs) {
+		if (StrUtil.isEmpty(str) || CollUtil.isEmpty(strs)) {
+			return false;
+		}
+		for (String pattern : strs) {
+			if (isMatch(pattern, str)) {
+				return true;
+			}
+		}
+		return false;
+	}
+    
+    private boolean isMatch(String pattern, String url) {
+		AntPathMatcher matcher = new AntPathMatcher();
+		return matcher.match(pattern, url);
+	}
 
     @Override
     public void destroy()

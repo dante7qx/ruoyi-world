@@ -5,7 +5,8 @@ import java.net.UnknownHostException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 获取IP方法
@@ -71,7 +72,7 @@ public class IpUtils {
 	 * @return 结果
 	 */
 	private static boolean internalIp(byte[] addr) {
-		if (StringUtils.isNull(addr) || addr.length < 2) {
+		if (ArrayUtil.isEmpty(addr) || addr.length < 2) {
 			return true;
 		}
 		final byte b0 = addr[0];
@@ -232,21 +233,21 @@ public class IpUtils {
 	 * @return 是否未知
 	 */
 	public static boolean isUnknown(String checkString) {
-		return StringUtils.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
+		return StrUtil.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
 	}
 
 	/**
 	 * 是否为IP
 	 */
 	public static boolean isIP(String ip) {
-		return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP);
+		return StrUtil.isNotBlank(ip) && ip.matches(REGX_IP);
 	}
 
 	/**
 	 * 是否为IP，或 *为间隔的通配符地址
 	 */
 	public static boolean isIpWildCard(String ip) {
-		return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
+		return StrUtil.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
 	}
 
 	/**
@@ -269,7 +270,7 @@ public class IpUtils {
 	 * 是否为特定格式如:“10.10.10.1-10.10.10.99”的ip段字符串
 	 */
 	public static boolean isIPSegment(String ipSeg) {
-		return StringUtils.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
+		return StrUtil.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
 	}
 
 	/**
@@ -304,7 +305,7 @@ public class IpUtils {
 	 * @return boolean 结果
 	 */
 	public static boolean isMatchedIp(String filter, String ip) {
-		if (StringUtils.isEmpty(filter) || StringUtils.isEmpty(ip)) {
+		if (StrUtil.isEmpty(filter) || StrUtil.isEmpty(ip)) {
 			return false;
 		}
 		String[] ips = filter.split(";");

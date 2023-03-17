@@ -1,7 +1,8 @@
 package com.risun.common.exception.base;
 
 import com.risun.common.utils.MessageUtils;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 基础异常
@@ -64,7 +65,7 @@ public class BaseException extends RuntimeException
     public String getMessage()
     {
         String message = null;
-        if (!StringUtils.isEmpty(code))
+        if (StrUtil.isNotEmpty(code))
         {
             message = MessageUtils.message(code, args);
         }

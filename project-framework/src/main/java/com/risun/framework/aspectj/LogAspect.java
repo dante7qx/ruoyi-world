@@ -27,11 +27,14 @@ import com.risun.common.enums.HttpMethod;
 import com.risun.common.filter.PropertyPreExcludeFilter;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.ip.IpUtils;
 import com.risun.framework.manager.AsyncManager;
 import com.risun.framework.manager.factory.AsyncFactory;
 import com.risun.system.domain.SysOperLog;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 操作日志记录处理
@@ -90,14 +93,14 @@ public class LogAspect {
 			// 请求的地址
 			String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
 			operLog.setOperIp(ip);
-			operLog.setOperUrl(StringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
+			operLog.setOperUrl(StrUtil.sub(ServletUtils.getRequest().getRequestURI(), 0, 255));
 			if (loginUser != null) {
 				operLog.setOperName(loginUser.getUsername());
 			}
 
 			if (e != null) {
 				operLog.setStatus(BusinessStatus.FAIL.ordinal());
-				operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
+				operLog.setErrorMsg(StrUtil.sub(e.getMessage(), 0, 2000));
 			}
 			// 设置方法名称
 			String className = joinPoint.getTarget().getClass().getName();
@@ -140,8 +143,8 @@ public class LogAspect {
             setRequestValue(joinPoint, operLog, log.excludeParamNames());
 		}
 		// 是否需要保存response，参数和值
-		if (log.isSaveResponseData() && StringUtils.isNotNull(jsonResult)) {
-			operLog.setJsonResult(StringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
+		if (log.isSaveResponseData() && ObjectUtil.isNotNull(jsonResult)) {
+			operLog.setJsonResult(StrUtil.sub(JSON.toJSONString(jsonResult), 0, 2000));
 		}
 	}
 
@@ -155,13 +158,13 @@ public class LogAspect {
 		Map<?, ?> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
 		String requestMethod = operLog.getRequestMethod();
 //		if (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod)) {
-		 if (StringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod))) {
+		 if (CollUtil.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod))) {
 //			String params = argsArrayToString(joinPoint.getArgs());
 			 String params = argsArrayToString(joinPoint.getArgs(), excludeParamNames);
-			operLog.setOperParam(StringUtils.substring(params, 0, 2000));
+			operLog.setOperParam(StrUtil.sub(params, 0, 2000));
 		} else {
 //			Map<?, ?> paramsMap = (Map<?, ?>) ServletUtils.getRequest().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-			operLog.setOperParam(StringUtils.substring(paramsMap.toString(), 0, 2000));
+			operLog.setOperParam(StrUtil.sub(paramsMap.toString(), 0, 2000));
 		}
 	}
 
@@ -175,7 +178,7 @@ public class LogAspect {
         {
             for (Object o : paramsArray)
             {
-                if (StringUtils.isNotNull(o) && !isFilterObject(o))
+                if (ObjectUtil.isNotNull(o) && !isFilterObject(o))
                 {
                     try
                     {

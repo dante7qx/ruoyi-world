@@ -8,11 +8,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.StringUtils;
-import com.risun.system.domain.SysCache;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.risun.common.constant.CacheConstants;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.system.domain.SysCache;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 缓存监控
@@ -62,14 +63,14 @@ public class CacheController
         commandStats.stringPropertyNames().forEach(key -> {
             Map<String, String> data = new HashMap<>(2);
             String property = commandStats.getProperty(key);
-            data.put("name", StringUtils.removeStart(key, "cmdstat_"));
-            data.put("value", StringUtils.substringBetween(property, "calls=", ",usec"));
+            data.put("name", StrUtil.removePrefix(key, "cmdstat_"));
+            data.put("value", StrUtil.subBetween(property, "calls=", ",usec"));
             pieList.add(data);
         });
         result.put("commandStats", pieList);
         return AjaxResult.success(result);
     }
-
+    
     @PreAuthorize("@ss.hasPermi('monitor:cache:list')")
     @GetMapping("/getNames")
     public AjaxResult cache()

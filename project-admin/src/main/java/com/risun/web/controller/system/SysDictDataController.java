@@ -5,17 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDictData;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.StringUtils;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.system.service.ISysDictDataService;
-import com.risun.system.service.ISysDictTypeService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.risun.common.annotation.Log;
+import com.risun.common.core.controller.BaseController;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.domain.entity.SysDictData;
+import com.risun.common.core.page.TableDataInfo;
+import com.risun.common.enums.BusinessType;
+import com.risun.common.utils.poi.ExcelUtil;
+import com.risun.system.service.ISysDictDataService;
+import com.risun.system.service.ISysDictTypeService;
+
+import cn.hutool.core.collection.CollUtil;
 
 /**
  * 数据字典信息
@@ -77,7 +78,7 @@ public class SysDictDataController extends BaseController
     public AjaxResult dictType(@PathVariable String dictType)
     {
         List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);
-        if (StringUtils.isNull(data))
+        if (CollUtil.isEmpty(data))
         {
             data = new ArrayList<SysDictData>();
         }

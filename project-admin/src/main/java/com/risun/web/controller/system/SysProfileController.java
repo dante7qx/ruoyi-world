@@ -18,11 +18,12 @@ import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.file.FileUploadUtils;
 import com.risun.common.utils.file.MimeTypeUtils;
 import com.risun.framework.web.service.TokenService;
 import com.risun.system.service.ISysUserService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 个人信息 业务处理
@@ -66,11 +67,11 @@ public class SysProfileController extends BaseController
         LoginUser loginUser = getLoginUser();
         SysUser sysUser = loginUser.getUser();
         user.setUserName(sysUser.getUserName());
-        if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user))
+        if (StrUtil.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user))
         {
             return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
         }
-        if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user))
+        if (StrUtil.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user))
         {
             return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }

@@ -6,6 +6,13 @@ import java.util.stream.Collectors;
 
 import javax.validation.Validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
 import com.risun.common.annotation.DataScope;
 import com.risun.common.constant.UserConstants;
 import com.risun.common.core.domain.entity.SysRole;
@@ -14,7 +21,6 @@ import com.risun.common.exception.ServiceException;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.PinyinUtil;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.bean.BeanValidators;
 import com.risun.common.utils.spring.SpringUtils;
 import com.risun.system.domain.SysPost;
@@ -30,13 +36,9 @@ import com.risun.system.mapper.SysUserRoleMapper;
 import com.risun.system.service.ISysConfigService;
 import com.risun.system.service.ISysUserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -160,7 +162,7 @@ public class SysUserServiceImpl implements ISysUserService
         List<SysRole> list = roleMapper.selectRolesByUserName(userName);
         if (CollectionUtils.isEmpty(list))
         {
-            return StringUtils.EMPTY;
+            return StrUtil.EMPTY;
         }
         return list.stream().map(SysRole::getRoleName).collect(Collectors.joining(","));
     }
@@ -177,7 +179,7 @@ public class SysUserServiceImpl implements ISysUserService
         List<SysPost> list = postMapper.selectPostsByUserName(userName);
         if (CollectionUtils.isEmpty(list))
         {
-            return StringUtils.EMPTY;
+            return StrUtil.EMPTY;
         }
         return list.stream().map(SysPost::getPostName).collect(Collectors.joining(","));
     }
@@ -191,9 +193,9 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public boolean checkUserNameUnique(SysUser user)
     {
-    	Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+    	Long userId = ObjectUtil.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkUserNameUnique(user.getUserName());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -209,9 +211,9 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public boolean checkPhoneUnique(SysUser user)
     {
-        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        Long userId = ObjectUtil.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkPhoneUnique(user.getPhonenumber());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -227,9 +229,9 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public boolean checkEmailUnique(SysUser user)
     {
-        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
+        Long userId = ObjectUtil.isNull(user.getUserId()) ? -1L : user.getUserId();
         SysUser info = userMapper.checkEmailUnique(user.getEmail());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -244,7 +246,7 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public void checkUserAllowed(SysUser user)
     {
-        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
+        if (ObjectUtil.isNotNull(user.getUserId()) && user.isAdmin())
         {
             throw new ServiceException("不允许操作超级管理员用户");
         }
@@ -263,7 +265,7 @@ public class SysUserServiceImpl implements ISysUserService
             SysUser user = new SysUser();
             user.setUserId(userId);
             List<SysUser> users = SpringUtils.getAopProxy(this).selectUserList(user);
-            if (StringUtils.isEmpty(users))
+            if (CollUtil.isEmpty(users))
             {
                 throw new ServiceException("没有权限访问用户数据！");
             }
@@ -430,7 +432,7 @@ public class SysUserServiceImpl implements ISysUserService
     public void insertUserPost(SysUser user)
     {
         Long[] posts = user.getPostIds();
-        if (StringUtils.isNotEmpty(posts))
+        if (ArrayUtil.isNotEmpty(posts))
         {
             // 新增用户与岗位管理
             List<SysUserPost> list = new ArrayList<SysUserPost>(posts.length);
@@ -453,7 +455,7 @@ public class SysUserServiceImpl implements ISysUserService
      */
     public void insertUserRole(Long userId, Long[] roleIds)
     {
-        if (StringUtils.isNotEmpty(roleIds))
+        if (ArrayUtil.isNotEmpty(roleIds))
         {
             // 新增用户与角色管理
             List<SysUserRole> list = new ArrayList<SysUserRole>(roleIds.length);
@@ -518,7 +520,7 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName)
     {
-        if (StringUtils.isNull(userList) || userList.size() == 0)
+        if (CollUtil.isEmpty(userList))
         {
             throw new ServiceException("导入用户数据不能为空！");
         }
@@ -540,7 +542,7 @@ public class SysUserServiceImpl implements ISysUserService
             	}
                 // 验证是否存在这个用户
                 SysUser u = userMapper.selectUserByUserName(user.getUserName());
-                if (StringUtils.isNull(u))
+                if (ObjectUtil.isNull(u))
                 {
                     BeanValidators.validateWithException(validator, user);
                     user.setPassword(SecurityUtils.encryptPassword(password));

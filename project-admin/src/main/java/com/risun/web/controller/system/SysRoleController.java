@@ -23,7 +23,6 @@ import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.framework.web.service.SysPermissionService;
 import com.risun.framework.web.service.TokenService;
@@ -31,6 +30,8 @@ import com.risun.system.domain.SysUserRole;
 import com.risun.system.service.ISysDeptService;
 import com.risun.system.service.ISysRoleService;
 import com.risun.system.service.ISysUserService;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 角色信息
@@ -132,7 +133,7 @@ public class SysRoleController extends BaseController
         {
             // 更新缓存用户权限
             LoginUser loginUser = getLoginUser();
-            if (StringUtils.isNotNull(loginUser.getUser()) && !loginUser.getUser().isAdmin())
+            if (ObjectUtil.isNotNull(loginUser.getUser()) && !loginUser.getUser().isAdmin())
             {
                 loginUser.setPermissions(permissionService.getMenuPermission(loginUser.getUser()));
                 loginUser.setUser(userService.selectUserByUserName(loginUser.getUser().getUserName()));

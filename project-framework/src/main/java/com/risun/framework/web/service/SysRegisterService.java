@@ -13,11 +13,12 @@ import com.risun.common.exception.user.CaptchaException;
 import com.risun.common.exception.user.CaptchaExpireException;
 import com.risun.common.utils.MessageUtils;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.framework.manager.AsyncManager;
 import com.risun.framework.manager.factory.AsyncFactory;
 import com.risun.system.service.ISysConfigService;
 import com.risun.system.service.ISysUserService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 注册校验方法
@@ -54,11 +55,11 @@ public class SysRegisterService
             validateCaptcha(username, registerBody.getCode(), registerBody.getUuid());
         }
 
-        if (StringUtils.isEmpty(username))
+        if (StrUtil.isEmpty(username))
         {
             msg = "用户名不能为空";
         }
-        else if (StringUtils.isEmpty(password))
+        else if (StrUtil.isEmpty(password))
         {
             msg = "用户密码不能为空";
         }
@@ -104,7 +105,7 @@ public class SysRegisterService
      */
     public void validateCaptcha(String username, String code, String uuid)
     {
-        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StrUtil.nullToDefault(uuid, "");
         String captcha = redisCache.getCacheObject(verifyKey);
         redisCache.deleteObject(verifyKey);
         if (captcha == null)

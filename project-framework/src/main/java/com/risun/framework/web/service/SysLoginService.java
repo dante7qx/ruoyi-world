@@ -4,6 +4,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
 import com.risun.common.constant.CacheConstants;
 import com.risun.common.constant.Constants;
 import com.risun.common.core.domain.entity.SysUser;
@@ -19,7 +27,6 @@ import com.risun.common.exception.user.UserPhoneNotFoundException;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.MessageUtils;
 import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.ip.IpUtils;
 import com.risun.common.utils.sign.RsaUtils;
 import com.risun.framework.manager.AsyncManager;
@@ -29,16 +36,9 @@ import com.risun.framework.sms.SmsFactory;
 import com.risun.system.service.ISysConfigService;
 import com.risun.system.service.ISysUserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 登录校验方法
@@ -117,7 +117,7 @@ public class SysLoginService {
 		Assert.hasText(smsCode, "验证码不能为空");
 		String cacheKey = userPhone.concat(SYS_SMS_LOGIN_KEY);
 		String cacheSmsCode = redisCache.getCacheObject(cacheKey);
-		if(!StringUtils.equalsIgnoreCase(smsCode, cacheSmsCode)) {
+		if(!StrUtil.equalsIgnoreCase(smsCode, cacheSmsCode)) {
 			AsyncManager.me().execute(AsyncFactory.recordLogininfor(userPhone, Constants.LOGIN_FAIL,
 					MessageUtils.message("user.jcaptcha.error")));
 			throw new CaptchaException();
@@ -163,7 +163,7 @@ public class SysLoginService {
 	 * @return 结果
 	 */
 	public void validateCaptcha(String username, String code, String uuid) {
-		String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
+		String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StrUtil.nullToDefault(uuid, "");
 		String captcha = redisCache.getCacheObject(verifyKey);
 		redisCache.deleteObject(verifyKey);
 		if (captcha == null) {
@@ -209,7 +209,7 @@ public class SysLoginService {
 		}
 		String cacheKey = userPhone.concat(SYS_SMS_LOGIN_KEY);
 		String smsCode = redisCache.getCacheObject(cacheKey);
-		if(StringUtils.isEmpty(smsCode)) {
+		if(StrUtil.isEmpty(smsCode)) {
 			smsCode = RandomUtil.randomNumbers(6);
 			String content = "您正在进行身份认证，您的验证码是" + smsCode + "，验证码" + Constants.CAPTCHA_EXPIRATION + "分钟之内有效。如非本人操作，请忽略本短信";
 			smsFactory.sendSms(userPhone, content);

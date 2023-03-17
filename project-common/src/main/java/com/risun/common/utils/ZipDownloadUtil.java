@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import com.risun.common.constant.Constants;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ZipUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +32,7 @@ public class ZipDownloadUtil {
 		for (int i = 0; i < len; i++) {
 			fileNameArr[i] = FileUtil.getName(resourceArr[i]);
 			insArr[i] = getFileInputStream(
-					baseUrl + StringUtils.substringAfter(resourceArr[i], Constants.RESOURCE_PREFIX));
+					baseUrl + StrUtil.subAfter(resourceArr[i], Constants.RESOURCE_PREFIX, false));
 		}
 		ZipUtil.zip(outputStream, fileNameArr, insArr);
 	}

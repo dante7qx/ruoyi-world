@@ -1,6 +1,8 @@
 package com.risun.system.domain.vo;
 
-import com.risun.common.utils.StringUtils;
+import com.risun.common.constant.Constants;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 路由显示信息
@@ -58,7 +60,7 @@ public class MetaVo
         this.title = title;
         this.icon = icon;
         this.noCache = noCache;
-        if (StringUtils.ishttp(link))
+        if (StrUtil.startWithAny(link, Constants.HTTP, Constants.HTTPS))
         {
             this.link = link;
         }

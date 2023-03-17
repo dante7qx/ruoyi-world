@@ -3,7 +3,8 @@ package com.risun.common.core.domain;
 import java.util.HashMap;
 
 import com.risun.common.constant.HttpStatus;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 操作消息提醒
@@ -53,7 +54,7 @@ public class AjaxResult extends HashMap<String, Object>
     {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data))
+        if (ObjectUtil.isNotNull(data))
         {
             super.put(DATA_TAG, data);
         }

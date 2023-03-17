@@ -2,7 +2,9 @@ package com.risun.framework.config;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.DispatcherType;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.risun.common.filter.RepeatableFilter;
 import com.risun.common.filter.XssFilter;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * Filter配置
@@ -35,7 +38,7 @@ public class FilterConfig
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         registration.setFilter(new XssFilter());
-        registration.addUrlPatterns(StringUtils.split(urlPatterns, ","));
+        registration.addUrlPatterns(StrUtil.splitToArray(urlPatterns, ","));
         registration.setName("xssFilter");
         registration.setOrder(FilterRegistrationBean.HIGHEST_PRECEDENCE);
         Map<String, String> initParameters = new HashMap<String, String>();

@@ -1,6 +1,7 @@
 package com.risun.common.core.text;
 
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 字符串格式化
@@ -29,7 +30,7 @@ public class StrFormatter
      */
     public static String format(final String strPattern, final Object... argArray)
     {
-        if (StringUtils.isEmpty(strPattern) || StringUtils.isEmpty(argArray))
+        if (StrUtil.isEmpty(strPattern) || ObjectUtil.isEmpty(argArray))
         {
             return strPattern;
         }

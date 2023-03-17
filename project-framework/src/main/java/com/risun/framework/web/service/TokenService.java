@@ -3,7 +3,9 @@ package com.risun.framework.web.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,11 +15,12 @@ import com.risun.common.constant.Constants;
 import com.risun.common.core.domain.model.LoginUser;
 import com.risun.common.core.redis.RedisCache;
 import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.ip.AddressUtils;
 import com.risun.common.utils.ip.IpUtils;
 import com.risun.common.utils.uuid.IdUtils;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -61,7 +64,7 @@ public class TokenService
     {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token))
+        if (StrUtil.isNotEmpty(token))
         {
             try
             {
@@ -84,7 +87,7 @@ public class TokenService
      */
     public void setLoginUser(LoginUser loginUser)
     {
-        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken()))
+        if (ObjectUtil.isNotNull(loginUser) && StrUtil.isNotEmpty(loginUser.getToken()))
         {
             refreshToken(loginUser);
         }
@@ -95,7 +98,7 @@ public class TokenService
      */
     public void delLoginUser(String token)
     {
-        if (StringUtils.isNotEmpty(token))
+        if (StrUtil.isNotEmpty(token))
         {
             String userKey = getTokenKey(token);
             redisCache.deleteObject(userKey);
@@ -214,7 +217,7 @@ public class TokenService
     private String getToken(HttpServletRequest request)
     {
         String token = request.getHeader(header);
-        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
+        if (StrUtil.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
         {
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }

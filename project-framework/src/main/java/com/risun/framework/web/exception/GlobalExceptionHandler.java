@@ -1,6 +1,7 @@
 package com.risun.framework.web.exception;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -14,7 +15,8 @@ import com.risun.common.constant.HttpStatus;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.exception.DemoModeException;
 import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.StringUtils;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 全局异常处理器
@@ -57,7 +59,7 @@ public class GlobalExceptionHandler
     {
         log.error(e.getMessage(), e);
         Integer code = e.getCode();
-        return StringUtils.isNotNull(code) ? AjaxResult.error(code, e.getMessage()) : AjaxResult.error(e.getMessage());
+        return ObjectUtil.isNotNull(code) ? AjaxResult.error(code, e.getMessage()) : AjaxResult.error(e.getMessage());
     }
 
     /**

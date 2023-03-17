@@ -1,13 +1,13 @@
 package com.risun.framework.manager.factory;
 
 import java.util.TimerTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.risun.common.constant.Constants;
 import com.risun.common.utils.LogUtils;
 import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.ip.AddressUtils;
 import com.risun.common.utils.ip.IpUtils;
 import com.risun.common.utils.spring.SpringUtils;
@@ -16,6 +16,7 @@ import com.risun.system.domain.SysOperLog;
 import com.risun.system.service.ISysLogininforService;
 import com.risun.system.service.ISysOperLogService;
 
+import cn.hutool.core.util.StrUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
@@ -68,7 +69,7 @@ public class AsyncFactory
                 logininfor.setOs(os);
                 logininfor.setMsg(message);
                 // 日志状态
-                if (StringUtils.equalsAny(status, Constants.LOGIN_SUCCESS, Constants.LOGOUT, Constants.REGISTER))
+                if (StrUtil.equalsAny(status, Constants.LOGIN_SUCCESS, Constants.LOGOUT, Constants.REGISTER))
                 {
                     logininfor.setStatus(Constants.SUCCESS);
                 }

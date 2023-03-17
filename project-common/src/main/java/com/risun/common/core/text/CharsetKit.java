@@ -3,7 +3,7 @@ package com.risun.common.core.text;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 字符集工具类
@@ -34,7 +34,7 @@ public class CharsetKit
      */
     public static Charset charset(String charset)
     {
-        return StringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
+        return StrUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CharsetKit
             destCharset = StandardCharsets.UTF_8;
         }
 
-        if (StringUtils.isEmpty(source) || srcCharset.equals(destCharset))
+        if (StrUtil.isEmpty(source) || srcCharset.equals(destCharset))
         {
             return source;
         }

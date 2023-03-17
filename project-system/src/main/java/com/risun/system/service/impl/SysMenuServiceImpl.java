@@ -18,13 +18,17 @@ import com.risun.common.core.domain.entity.SysMenu;
 import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.risun.system.domain.vo.MetaVo;
 import com.risun.system.domain.vo.RouterVo;
 import com.risun.system.mapper.SysMenuMapper;
 import com.risun.system.mapper.SysRoleMapper;
 import com.risun.system.mapper.SysRoleMenuMapper;
 import com.risun.system.service.ISysMenuService;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 菜单 业务层处理
@@ -93,7 +97,7 @@ public class SysMenuServiceImpl implements ISysMenuService
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms)
         {
-            if (StringUtils.isNotEmpty(perm))
+            if (StrUtil.isNotEmpty(perm))
             {
                 permsSet.addAll(Arrays.asList(perm.trim().split(",")));
             }
@@ -114,7 +118,7 @@ public class SysMenuServiceImpl implements ISysMenuService
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms)
         {
-            if (StringUtils.isNotEmpty(perm))
+            if (StrUtil.isNotEmpty(perm))
             {
                 permsSet.addAll(Arrays.asList(perm.trim().split(",")));
             }
@@ -174,9 +178,9 @@ public class SysMenuServiceImpl implements ISysMenuService
             router.setPath(getRouterPath(menu));
             router.setComponent(getComponent(menu));
             router.setQuery(menu.getQuery());
-            router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getPath()));
+            router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StrUtil.equals("1", menu.getIsCache()), menu.getPath()));
             List<SysMenu> cMenus = menu.getChildren();
-        	if (StringUtils.isNotEmpty(cMenus) && UserConstants.TYPE_DIR.equals(menu.getMenuType()))
+        	if (CollUtil.isNotEmpty(cMenus) && UserConstants.TYPE_DIR.equals(menu.getMenuType()))
             {
                 router.setAlwaysShow(true);
                 router.setRedirect("noRedirect");
@@ -189,8 +193,8 @@ public class SysMenuServiceImpl implements ISysMenuService
                 RouterVo children = new RouterVo();
                 children.setPath(menu.getPath());
                 children.setComponent(menu.getComponent());
-                children.setName(StringUtils.capitalize(menu.getPath()));
-                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getPath()));
+                children.setName(StrUtil.upperFirst(menu.getPath()));
+                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StrUtil.equals("1", menu.getIsCache()), menu.getPath()));
                 children.setQuery(menu.getQuery());
                 childrenList.add(children);
                 router.setChildren(childrenList);
@@ -204,7 +208,7 @@ public class SysMenuServiceImpl implements ISysMenuService
                 String routerPath = innerLinkReplaceEach(menu.getPath());
                 children.setPath(routerPath);
                 children.setComponent(UserConstants.INNER_LINK);
-                children.setName(StringUtils.capitalize(routerPath));
+                children.setName(StrUtil.upperFirst(routerPath));
                 children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), menu.getPath()));
                 childrenList.add(children);
                 router.setChildren(childrenList);
@@ -342,9 +346,9 @@ public class SysMenuServiceImpl implements ISysMenuService
     @Override
     public boolean checkMenuNameUnique(SysMenu menu)
     {
-        Long menuId = StringUtils.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
+        Long menuId = ObjectUtil.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
         SysMenu info = menuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
-        if (StringUtils.isNotNull(info) && info.getMenuId().longValue() != menuId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getMenuId().longValue() != menuId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -359,11 +363,11 @@ public class SysMenuServiceImpl implements ISysMenuService
      */
     public String getRouteName(SysMenu menu)
     {
-        String routerName = StringUtils.capitalize(menu.getPath());
+        String routerName = StrUtil.upperFirst(menu.getPath());
         // 非外链并且是一级目录（类型为目录）
         if (isMenuFrame(menu))
         {
-            routerName = StringUtils.EMPTY;
+            routerName = StrUtil.EMPTY;
         }
         return routerName;
     }
@@ -405,15 +409,15 @@ public class SysMenuServiceImpl implements ISysMenuService
     public String getComponent(SysMenu menu)
     {
         String component = UserConstants.LAYOUT;
-        if (StringUtils.isNotEmpty(menu.getComponent()) && !isMenuFrame(menu))
+        if (StrUtil.isNotEmpty(menu.getComponent()) && !isMenuFrame(menu))
         {
             component = menu.getComponent();
         }
-        else if (StringUtils.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0 && isInnerLink(menu))
+        else if (StrUtil.isEmpty(menu.getComponent()) && menu.getParentId().intValue() != 0 && isInnerLink(menu))
         {
             component = UserConstants.INNER_LINK;
         }
-        else if (StringUtils.isEmpty(menu.getComponent()) && isParentView(menu))
+        else if (StrUtil.isEmpty(menu.getComponent()) && isParentView(menu))
         {
             component = UserConstants.PARENT_VIEW;
         }
@@ -440,7 +444,7 @@ public class SysMenuServiceImpl implements ISysMenuService
      */
     public boolean isInnerLink(SysMenu menu)
     {
-        return menu.getIsFrame().equals(UserConstants.NO_FRAME) && StringUtils.ishttp(menu.getPath());
+        return menu.getIsFrame().equals(UserConstants.NO_FRAME) && StrUtil.startWithAny(menu.getPath(), Constants.HTTP, Constants.HTTPS);
     }
 
     /**

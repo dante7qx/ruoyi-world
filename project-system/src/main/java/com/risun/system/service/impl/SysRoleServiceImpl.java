@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.exception.ServiceException;
 import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.StringUtils;
 import com.risun.common.utils.spring.SpringUtils;
 import com.risun.system.domain.SysRoleDept;
 import com.risun.system.domain.SysRoleMenu;
@@ -25,6 +25,9 @@ import com.risun.system.mapper.SysRoleMapper;
 import com.risun.system.mapper.SysRoleMenuMapper;
 import com.risun.system.mapper.SysUserRoleMapper;
 import com.risun.system.service.ISysRoleService;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 角色 业务层处理
@@ -97,7 +100,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         Set<String> permsSet = new HashSet<>();
         for (SysRole perm : perms)
         {
-            if (StringUtils.isNotNull(perm))
+            if (ObjectUtil.isNotNull(perm))
             {
                 permsSet.addAll(Arrays.asList(perm.getRoleKey().trim().split(",")));
             }
@@ -149,9 +152,9 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public boolean checkRoleNameUnique(SysRole role)
     {
-        Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        Long roleId = ObjectUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleNameUnique(role.getRoleName());
-        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -167,9 +170,9 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public boolean checkRoleKeyUnique(SysRole role)
     {
-        Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        Long roleId = ObjectUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
-        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        if (ObjectUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
         }
@@ -184,7 +187,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public void checkRoleAllowed(SysRole role)
     {
-        if (StringUtils.isNotNull(role.getRoleId()) && role.isAdmin())
+        if (ObjectUtil.isNotNull(role.getRoleId()) && role.isAdmin())
         {
             throw new ServiceException("不允许操作超级管理员角色");
         }
@@ -203,7 +206,7 @@ public class SysRoleServiceImpl implements ISysRoleService
             SysRole role = new SysRole();
             role.setRoleId(roleId);
             List<SysRole> roles = SpringUtils.getAopProxy(this).selectRoleList(role);
-            if (StringUtils.isEmpty(roles))
+            if (CollUtil.isEmpty(roles))
             {
                 throw new ServiceException("没有权限访问角色数据！");
             }

@@ -2,11 +2,18 @@ package com.risun.common.utils;
 
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.alibaba.fastjson2.JSONArray;
 import com.risun.common.constant.CacheConstants;
 import com.risun.common.core.domain.entity.SysDictData;
 import com.risun.common.core.redis.RedisCache;
 import com.risun.common.utils.spring.SpringUtils;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 字典工具类
@@ -40,7 +47,7 @@ public class DictUtils
     public static List<SysDictData> getDictCache(String key)
     {
         JSONArray arrayCache = SpringUtils.getBean(RedisCache.class).getCacheObject(getCacheKey(key));
-        if (StringUtils.isNotNull(arrayCache))
+        if (ObjectUtil.isNotNull(arrayCache))
         {
             return arrayCache.toList(SysDictData.class);
         }
@@ -84,9 +91,9 @@ public class DictUtils
         StringBuilder propertyString = new StringBuilder();
         List<SysDictData> datas = getDictCache(dictType);
 
-        if (StringUtils.isNotNull(datas))
+        if (CollUtil.isNotEmpty(datas))
         {
-            if (StringUtils.containsAny(separator, dictValue))
+            if (StrUtil.containsAny(separator, dictValue))
             {
                 for (SysDictData dict : datas)
                 {
@@ -127,7 +134,7 @@ public class DictUtils
         StringBuilder propertyString = new StringBuilder();
         List<SysDictData> datas = getDictCache(dictType);
 
-        if (StringUtils.containsAny(separator, dictLabel) && StringUtils.isNotEmpty(datas))
+        if (StrUtil.containsAny(separator, dictLabel) && CollUtil.isNotEmpty(datas))
         {
             for (SysDictData dict : datas)
             {

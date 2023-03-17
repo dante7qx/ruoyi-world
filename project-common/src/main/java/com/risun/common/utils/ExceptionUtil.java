@@ -2,7 +2,10 @@ package com.risun.common.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 错误信息处理类。
@@ -34,6 +37,7 @@ public class ExceptionUtil
         {
             return "null";
         }
-        return StringUtils.defaultString(msg);
+        
+        return StrUtil.emptyIfNull(msg);
     }
 }

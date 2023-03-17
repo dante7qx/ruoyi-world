@@ -1,6 +1,7 @@
 package com.risun.framework.aspectj;
 
 import java.util.Objects;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,8 +14,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.risun.common.annotation.DataSource;
-import com.risun.common.utils.StringUtils;
 import com.risun.framework.datasource.DynamicDataSourceContextHolder;
+
+import cn.hutool.core.util.ObjectUtil;
 
 /**
  * 多数据源处理
@@ -40,7 +42,7 @@ public class DataSourceAspect
     {
         DataSource dataSource = getDataSource(point);
 
-        if (StringUtils.isNotNull(dataSource))
+        if (ObjectUtil.isNotNull(dataSource))
         {
             DynamicDataSourceContextHolder.setDataSourceType(dataSource.value().name());
         }
