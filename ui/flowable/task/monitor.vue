@@ -98,7 +98,7 @@
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-    <el-table v-loading="loading" :data="flowList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="flowList" @selection-change="handleSelectionChange" v-adaptive height="100">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="序号" align="center" prop="flowNum" width="80"/>
       <el-table-column label="流程类型" align="center" prop="flowType" width="90">

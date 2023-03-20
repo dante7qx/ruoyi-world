@@ -75,7 +75,8 @@
       :data="groupList" 
       row-key="rowKey"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-      @selection-change="handleSelectionChange">
+      @selection-change="handleSelectionChange"
+      v-adaptive height="100">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="组名称" align="center" prop="groupName" />
