@@ -99,7 +99,68 @@
 #end
 #end
 #end
-	</el-form>
+
+#if($table.sub)
+      <el-divider content-position="center">${subTable.functionName}信息</el-divider>
+      <el-row :gutter="10" class="mb8" v-if="!disabled">
+        <el-col :span="1.5">
+          <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd${subClassName}">添加</el-button>
+        </el-col>
+        <el-col :span="1.5">
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDelete${subClassName}">删除</el-button>
+        </el-col>
+      </el-row>
+      <el-table :data="${subclassName}List" :row-class-name="row${subClassName}Index" @selection-change="handle${subClassName}SelectionChange" ref="${subclassName}">
+        <el-table-column type="selection" width="50" align="center" />
+        <el-table-column label="序号" align="center" prop="index" width="50"/>
+#foreach($column in $subTable.columns)
+#set($javaField=$column.javaField)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($column.pk || $javaField == ${subTableFkclassName})
+#elseif($column.list && $column.htmlType == "input")
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-input v-model="scope.row.$javaField" placeholder="请输入$comment" #if(${column.columnLength})maxlength="${column.columnLength}" show-word-limit#end :disabled="disabled"/>
+          </template>
+        </el-table-column>
+#elseif($column.list && $column.htmlType == "datetime")
+        <el-table-column label="$comment" prop="${javaField}" width="240">
+          <template v-slot="scope">
+            <el-date-picker clearable v-model="scope.row.$javaField" type="date" value-format="yyyy-MM-dd" placeholder="请选择$comment" :disabled="disabled"/>
+          </template>
+        </el-table-column>
+#elseif($column.list && ($column.htmlType == "select" || $column.htmlType == "radio") && "" != $column.dictType)
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-select v-model="scope.row.$javaField" placeholder="请选择$comment" :disabled="disabled">
+              <el-option
+                v-for="dict in dict.type.$column.dictType"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+#elseif($column.list && ($column.htmlType == "select" || $column.htmlType == "radio") && "" == $column.dictType)
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-select v-model="scope.row.$javaField" placeholder="请选择$comment" :disabled="disabled">
+              <el-option label="请选择字典生成" value="" />
+            </el-select>
+          </template>
+        </el-table-column>
+#end
+#end
+      </el-table>
+#end
+
+    </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
       <el-button @click="cancel">取 消</el-button>
@@ -144,7 +205,11 @@ export default {
         ]#if($foreach.count != $columns.size()),#end
 #end
 #end
-      }
+      },
+#if($table.sub)
+      checked${subClassName}: [],
+      ${subclassName}List: []
+#end
     };
   },
   created() {
@@ -161,9 +226,45 @@ export default {
           this.form.$column.javaField = this.form.${column.javaField}.split(",");
 #end
 #end
+#if($table.sub)
+        this.${subclassName}List = response.data.${subclassName}List;
+#end
         });
       }
     },
+#if($table.sub)
+    /** ${subTable.functionName}序号 */
+    row${subClassName}Index({ row, rowIndex }) {
+      row.index = rowIndex + 1;
+    },
+    /** ${subTable.functionName}添加按钮操作 */
+    handleAdd${subClassName}() {
+      let obj = {};
+#foreach($column in $subTable.columns)
+#if($column.pk || $column.javaField == ${subTableFkclassName})
+#elseif($column.list && "" != $javaField)
+      obj.$column.javaField = "";
+#end
+#end
+      this.${subclassName}List.push(obj);
+    },
+    /** ${subTable.functionName}删除按钮操作 */
+    handleDelete${subClassName}() {
+      if (this.checked${subClassName}.length == 0) {
+        this.#[[$modal]]#.msgError("请先选择要删除的${subTable.functionName}数据");
+      } else {
+        const ${subclassName}List = this.${subclassName}List;
+        const checked${subClassName} = this.checked${subClassName};
+        this.${subclassName}List = ${subclassName}List.filter(function(item) {
+          return checked${subClassName}.indexOf(item.index) == -1
+        });
+      }
+    },
+    /** 复选框选中数据 */
+    handle${subClassName}SelectionChange(selection) {
+      this.checked${subClassName} = selection.map(item => item.index)
+    },
+#end
     reset() {
       this.form = {
 #foreach ($column in $columns)
