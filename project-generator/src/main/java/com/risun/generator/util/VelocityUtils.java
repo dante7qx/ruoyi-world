@@ -155,6 +155,7 @@ public class VelocityUtils
         else if (GenConstants.TPL_SUB.equals(tplCategory))
         {
             templates.add("vm/vue/index.vue.vm");
+            templates.add("vm/vue/detail.vue.vm");
             templates.add("vm/java/sub-domain.java.vm");
         }
         return templates;
