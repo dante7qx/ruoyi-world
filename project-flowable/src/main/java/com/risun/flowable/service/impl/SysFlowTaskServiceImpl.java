@@ -68,6 +68,7 @@ import com.risun.system.service.ISysDeptService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -219,14 +220,8 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 				.processInstanceId(procInst.getId())
 				.singleResult();
 			taskService.setAssignee(task.getId(), starterId.toString());
-			// 设置审批人
-			if (ArrayUtil.isNotEmpty(startFlowVo.getApprovalUserId()) && startFlowVo.getApprovalUserId().length == 1) {
-				startFlowVo.add(ProcessConstants.PROCESS_APPROVAL, startFlowVo.getApprovalUserId()[0]);
-			} else if (ArrayUtil.isNotEmpty(startFlowVo.getApprovalUserId())) {
-				startFlowVo.add(ProcessConstants.PROCESS_MULTI_INSTANCE_USER,
-						Arrays.stream(startFlowVo.getApprovalUserId())
-							.collect(toList()));
-			}
+			// 设置下一步审批人
+			setNextApprovalUser(startFlowVo, startFlowVo.getApprovalUserId());
 			if (CollUtil.isEmpty(startFlowVo.getVariable())) {
 				taskService.complete(task.getId());
 			} else {
@@ -273,37 +268,21 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 		Boolean agree = taskVo.getAgree();
 		taskVo.setHandleUserId(SecurityUtils.getUserId());
 		if (agree == null) {
-			if (ArrayUtil.isNotEmpty(approvalUserId) && approvalUserId.length == 1) {
-				taskVo.add(ProcessConstants.PROCESS_APPROVAL, approvalUserId[0]);
-			} else {
-				taskVo.add(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Arrays.stream(approvalUserId)
-					.collect(toList()));
-			}
+			// 设置下一步审批人
+			setNextApprovalUser(taskVo, approvalUserId);
 			taskService.setAssignee(task.getId(), taskVo.getHandleUserId() .toString());
 			completeTask(task, taskVo);
 		} else if (agree) {
-			if (ArrayUtil.isNotEmpty(approvalUserId) && approvalUserId.length == 1) {
-				taskVo.add(ProcessConstants.PROCESS_APPROVAL, approvalUserId[0]);
-			} else if (ArrayUtil.isNotEmpty(approvalUserId)) {
-				taskVo.add(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Arrays.stream(approvalUserId)
-					.collect(toList()));
-			}
+			// 设置下一步审批人
+			setNextApprovalUser(taskVo, approvalUserId);
 			// 通过
 			taskVo.add(ProcessConstants.PROCESS_ARG_AGREE, agree);
 			taskService.setAssignee(task.getId(), taskVo.getHandleUserId() .toString());
 			completeTask(task, taskVo);
 		} else if (!agree) {
 			// 驳回
+			taskVo.clearVariable();
 			taskVo.add(ProcessConstants.PROCESS_ARG_AGREE, agree);
-			// 获取上一步的审批人
-			Long[] prevApprover = this.getPrevTaskApprover(taskVo, task);
-			taskVo.setApprovalUserId(prevApprover);
-			if (ArrayUtil.isNotEmpty(prevApprover) && prevApprover.length == 1) {
-				taskVo.add(ProcessConstants.PROCESS_APPROVAL, prevApprover[0]);
-			} else {
-				taskVo.add(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Arrays.stream(prevApprover)
-					.collect(toList()));
-			}
 			// 会签驳回
 			if (ObjectUtil.isNotNull(userTask.getLoopCharacteristics())) {
 				this.rejectMultiTask(taskVo, task);
@@ -318,6 +297,12 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 			.processInstanceId(task.getProcessInstanceId())
 			.active()
 			.list();
+		
+		if(BooleanUtil.isFalse(agree) && CollUtil.isNotEmpty(curTasks)) {
+			// 获取退回后目标任务的处理人
+			Long[] targetApprovalUserId = this.getRejectTaskApprover(taskVo, curTasks.get(0));
+			taskVo.setApprovalUserId(targetApprovalUserId);
+		}
 		// 流程跟踪记录
 		result = sysFlowTraceService.updateSysFlowTrace(taskVo, curTasks);
 		// 流程历史记录
@@ -325,6 +310,22 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 		// 发布流程事件消息
 		sysFlowEventPublisher.publish(buildEvent(taskVo, curTasks));
 		return result;
+	}
+	
+	/**
+	 * 设置下一步审批人
+	 * 
+	 * @param multi
+	 * @param approvalUserId
+	 */
+	private void setNextApprovalUser(SysFlowVo flowVo, Long[] approvalUserId) {
+		if(ArrayUtil.isNotEmpty(approvalUserId)) {
+			if(BooleanUtil.isTrue(flowVo.getMulti())) {
+				flowVo.add(ProcessConstants.PROCESS_MULTI_INSTANCE_USER, Arrays.stream(approvalUserId).collect(toList()));
+			} else {
+				flowVo.add(ProcessConstants.PROCESS_APPROVAL, approvalUserId[0]);
+			}
+		}
 	}
 
 	/**
@@ -334,7 +335,6 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	 * @param approvalUserId
 	 */
 	private void rejectMultiTask(SysApprovalFlowVo taskVo, Task curTask) {
-		taskVo.add(ProcessConstants.PROCESS_APPROVAL, taskVo.getApprovalUserId()[0]);
 		List<Task> tasks = taskService.createTaskQuery()
 			.processInstanceId(curTask.getProcessInstanceId())
 			.active()
@@ -378,16 +378,16 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	
 
 	/**
-	 * 获取上一步任务的审批人
+	 * 获取退回后，目标任务及处理人
 	 * 
 	 * @param taskVo
 	 * @param task
 	 * @return
 	 */
-	private Long[] getPrevTaskApprover(SysApprovalFlowVo taskVo, Task task) {
+	private Long[] getRejectTaskApprover(SysApprovalFlowVo taskVo, Task task) {
 		List<SysFlowRecord> records = sysFlowRecordService.selectSysFlowRecordByBizUid(taskVo.getBizUid());
-		String prevTaskDefId = getPrevTaskDefId(task.getTaskDefinitionKey(), records);
-		
+//		String prevTaskDefId = getPrevTaskDefId(task.getTaskDefinitionKey(), records);
+		String prevTaskDefId = task.getTaskDefinitionKey();
 		if (StrUtil.isEmpty(prevTaskDefId)) {
 			throw new CustomWorkflowException("未找到上一步审批人");
 		}
@@ -409,25 +409,6 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 		return prevApprover.stream().toArray(Long[]::new);
 	}
 	
-	/**
-	 * 获取流程定义中指定taskDefId的上一个用户任务定义Id
-	 * 
-	 * @param curTaskDefId
-	 * @param records
-	 * @return
-	 */
-	private String getPrevTaskDefId(String curTaskDefId, List<SysFlowRecord> records) {
-		String prevTaskDefId = null;
-		records.sort((r1, r2) -> Long.compare(r1.getRecordId(), r2.getRecordId()));
-		for (SysFlowRecord record : records) {
-			if(record.getTaskDefId().equals(curTaskDefId)) {
-				break;
-			}
-			prevTaskDefId = record.getTaskDefId();
-		}
-		return prevTaskDefId;
-	}
-
 	private List<SysFlowGroupUser> selectUserByDeptAndGroupKey(String deptKey, String groupKey) {
 		SysFlowGroupUser groupUser = new SysFlowGroupUser();
 		groupUser.setDeptKey(deptKey);
@@ -607,7 +588,7 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 		List<String> highLightedNodes = new ArrayList<>();
 		// 高亮线
 		for (HistoricActivityInstance tempActivity : highLightedFlowList) {
-			if ("sequenceFlow".equals(tempActivity.getActivityType())) {
+			if (ProcessConstants.SEQUENCE_FLOW.equals(tempActivity.getActivityType())) {
 				// 高亮线
 				highLightedFlows.add(tempActivity.getActivityId());
 			} else {

@@ -103,6 +103,7 @@ public class FlowDemoServiceImpl implements IFlowDemoService {
 			approvalVo.setBizUid(flowDemo.getUid());
 			approvalVo.setBizDesc(this.buildBizDetail(flowDemo));
 			approvalVo.setComment(trace.getTaskDefName());
+			approvalVo.setMulti(trace.getMulti());
 			approvalVo.setApprovalUserId(trace.getApprovalUserId());
 			approvalVo.setCommitDate(DateUtils.getNowDate());
 			approvalVo.add(DAYS, DateUtil.betweenDay(flowDemo.getStartTime(), flowDemo.getEndTime(), true));
@@ -111,10 +112,11 @@ public class FlowDemoServiceImpl implements IFlowDemoService {
 			// 启动流程
 			SysStartFlowVo startVo = new SysStartFlowVo();
 			startVo.setBizUid(flowDemo.getUid());
+			startVo.setBizDesc(this.buildBizDetail(flowDemo));
 			startVo.setProcDefKey(trace.getProcDefKey());
 			startVo.setFlowType(trace.getFlowType());
+			startVo.setMulti(trace.getMulti());
 			startVo.setApprovalUserId(trace.getApprovalUserId());
-			startVo.setBizDesc(this.buildBizDetail(flowDemo));
 			startVo.add(DAYS, DateUtil.betweenDay(flowDemo.getStartTime(), flowDemo.getEndTime(), true));
 			sysFlowTaskService.startFlowTask(startVo);
 		}

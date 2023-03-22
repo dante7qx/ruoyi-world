@@ -85,6 +85,9 @@ public class SysFlowTrace extends BaseEntity {
 	@Excel(name = "第一个任务", readConverterExp = "1,是,0,否")
 	private Boolean firstTask;
 	
+	/** 多选 */
+	private Boolean multi = Boolean.FALSE;
+	
 	/** 审批候选人 */
 	private Long[] approvalUserId;
 	
@@ -238,6 +241,14 @@ public class SysFlowTrace extends BaseEntity {
 
 	public Boolean getFirstTask() {
 		return firstTask;
+	}
+
+	public Boolean getMulti() {
+		return multi;
+	}
+
+	public void setMulti(Boolean multi) {
+		this.multi = multi;
 	}
 
 	public Long[] getApprovalUserId() {

@@ -5,12 +5,12 @@
         <FlowDemo :key="key" :uid="bizUid" :pageCtl="pageCtl" :taskId="taskId" :procDef="procDef" @closeWindow="closeWindow" v-if="flowType == 'leave' && loadBizDetail" />
         <span v-else>无相关业务</span>
       </el-tab-pane>
-      <el-tab-pane label="流程记录" name="record" lazy style="height: 700px; overflow: auto;" v-if="procInstId">
+      <el-tab-pane label="流程记录" name="record" lazy :style="{height: tabHeight, overflow: 'auto'}" v-if="procInstId">
         <flow-record :key="bizUid" :bizUid="bizUid" />
       </el-tab-pane>
       <el-tab-pane label="转办记录" name="assign" lazy v-if="false">
       </el-tab-pane>
-      <el-tab-pane label="流程监控" name="monitor" lazy style="height: 700px;">
+      <el-tab-pane label="流程监控" name="monitor" lazy :style="{height: tabHeight}">
         <flow-diagram :key="deployId" :deployId="deployId" :procInstId="procInstId"/>
       </el-tab-pane>
     </el-tabs>
@@ -71,6 +71,8 @@ export default {
       key: '',
       procDef: {}, // 流程定义,
       deployId: null, // 流程部署Id
+      tabHeight: "0px",
+
     }
   },
   computed: {
@@ -80,6 +82,11 @@ export default {
   },
   async created() {
     await this.initPage()
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.tabHeight = (window.innerHeight - 350) + "px";
+    })
   },
   methods: {
     async initPage() {

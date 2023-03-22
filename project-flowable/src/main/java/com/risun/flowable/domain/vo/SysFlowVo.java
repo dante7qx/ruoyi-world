@@ -28,6 +28,9 @@ public class SysFlowVo implements Serializable {
 	/** 业务描述 */
 	private String bizDesc;
 	
+	/** 多选 */
+	private Boolean multi = Boolean.FALSE;
+	
 	/** 候选审批用户（<= 1 单实例, > 1 多实例） */
 	private Long[] approvalUserId;
 	
@@ -49,6 +52,12 @@ public class SysFlowVo implements Serializable {
 		}
 		this.variable.put(key, val);
 		return this.variable;
+	}
+	
+	public void clearVariable() {
+		if(CollUtil.isNotEmpty(variable)) {
+			this.variable.clear();
+		}
 	}
 	
 }

@@ -8,23 +8,76 @@
     <userTask id="Activity_1ydzl5w" name="请假申请" flowable:dataType="dynamic" flowable:userType="assignee" flowable:assignee="${INITIATOR}">
       <documentation>G_GK_TGLD</documentation>
       <incoming>Flow_1vd4zia</incoming>
+      <incoming>Flow_0g2wxcu</incoming>
+      <incoming>Flow_1awn3jr</incoming>
       <outgoing>Flow_0eo1lhr</outgoing>
     </userTask>
     <sequenceFlow id="Flow_0eo1lhr" sourceRef="Activity_1ydzl5w" targetRef="Activity_0b43v0d" />
-    <endEvent id="Event_1vm5m4h" name="结束">
-      <incoming>Flow_15kpgp0</incoming>
-    </endEvent>
-    <sequenceFlow id="Flow_15kpgp0" sourceRef="Activity_0b43v0d" targetRef="Event_1vm5m4h" />
     <userTask id="Activity_0b43v0d" name="领导审批" flowable:dataType="dynamic" flowable:userType="candidateUsers" flowable:candidateUsers="#{approval}">
       <incoming>Flow_0eo1lhr</incoming>
-      <outgoing>Flow_15kpgp0</outgoing>
+      <outgoing>Flow_1qhlsml</outgoing>
     </userTask>
+    <exclusiveGateway id="Gateway_0p42kw5">
+      <incoming>Flow_1qhlsml</incoming>
+      <outgoing>Flow_1vkumno</outgoing>
+      <outgoing>Flow_0g2wxcu</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_1qhlsml" sourceRef="Activity_0b43v0d" targetRef="Gateway_0p42kw5" />
+    <sequenceFlow id="Flow_1vkumno" sourceRef="Gateway_0p42kw5" targetRef="Activity_06txmgf">
+      <conditionExpression xsi:type="tFormalExpression">${agree}</conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="Gateway_026v61w">
+      <incoming>Flow_0q8escm</incoming>
+      <outgoing>Flow_0rvsrta</outgoing>
+      <outgoing>Flow_1awn3jr</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_0q8escm" sourceRef="Activity_06txmgf" targetRef="Gateway_026v61w" />
+    <endEvent id="Event_0qw6jvt" name="结束">
+      <incoming>Flow_0rvsrta</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_0rvsrta" sourceRef="Gateway_026v61w" targetRef="Event_0qw6jvt">
+      <conditionExpression xsi:type="tFormalExpression">${agree}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_0g2wxcu" sourceRef="Gateway_0p42kw5" targetRef="Activity_1ydzl5w">
+      <conditionExpression xsi:type="tFormalExpression">${!agree}</conditionExpression>
+    </sequenceFlow>
+    <userTask id="Activity_06txmgf" name="BOOS审批" flowable:candidateGroups="14" flowable:dataType="fixed">
+      <incoming>Flow_1vkumno</incoming>
+      <outgoing>Flow_0q8escm</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_1awn3jr" sourceRef="Gateway_026v61w" targetRef="Activity_1ydzl5w">
+      <conditionExpression xsi:type="tFormalExpression">${!agree}</conditionExpression>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
     <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="rsfk_ld_leave">
-      <bpmndi:BPMNEdge id="Flow_15kpgp0_di" bpmnElement="Flow_15kpgp0">
+      <bpmndi:BPMNEdge id="Flow_1awn3jr_di" bpmnElement="Flow_1awn3jr">
+        <di:waypoint x="710" y="65" />
+        <di:waypoint x="710" y="150" />
+        <di:waypoint x="130" y="150" />
+        <di:waypoint x="130" y="80" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g2wxcu_di" bpmnElement="Flow_0g2wxcu">
+        <di:waypoint x="430" y="15" />
+        <di:waypoint x="430" y="-60" />
+        <di:waypoint x="130" y="-60" />
+        <di:waypoint x="130" y="0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rvsrta_di" bpmnElement="Flow_0rvsrta">
+        <di:waypoint x="735" y="40" />
+        <di:waypoint x="802" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q8escm_di" bpmnElement="Flow_0q8escm">
+        <di:waypoint x="620" y="40" />
+        <di:waypoint x="685" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vkumno_di" bpmnElement="Flow_1vkumno">
+        <di:waypoint x="455" y="40" />
+        <di:waypoint x="520" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qhlsml_di" bpmnElement="Flow_1qhlsml">
         <di:waypoint x="340" y="40" />
-        <di:waypoint x="402" y="40" />
+        <di:waypoint x="405" y="40" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0eo1lhr_di" bpmnElement="Flow_0eo1lhr">
         <di:waypoint x="180" y="40" />
@@ -43,14 +96,23 @@
       <bpmndi:BPMNShape id="Activity_1v7w3uo_di" bpmnElement="Activity_1ydzl5w">
         <omgdc:Bounds x="80" y="0" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1vm5m4h_di" bpmnElement="Event_1vm5m4h">
-        <omgdc:Bounds x="402" y="22" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="409" y="62" width="22" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1jtbkj9_di" bpmnElement="Activity_0b43v0d">
         <omgdc:Bounds x="240" y="0" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0p42kw5_di" bpmnElement="Gateway_0p42kw5" isMarkerVisible="true">
+        <omgdc:Bounds x="405" y="15" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_026v61w_di" bpmnElement="Gateway_026v61w" isMarkerVisible="true">
+        <omgdc:Bounds x="685" y="15" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qw6jvt_di" bpmnElement="Event_0qw6jvt">
+        <omgdc:Bounds x="802" y="22" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="809" y="65" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nkrywn_di" bpmnElement="Activity_06txmgf">
+        <omgdc:Bounds x="520" y="0" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

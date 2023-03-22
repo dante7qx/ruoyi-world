@@ -2,9 +2,9 @@
   <div class="app-container">
     <el-timeline v-if="recordList.length > 0">
       <el-timeline-item 
-        v-for="record in recordList" :key="record.recordId"
-        :timestamp="record.taskDefName" 
-        :color="`${record.endTime != null ? '#11ce65' : '#1990ff'}`" 
+        v-for="(record, index) in recordList" :key="index"
+        :timestamp="(index + 1) + '. ' + record.taskDefName" 
+        :color="`${record.endTime != null ? (record.flowResult != null && !record.flowResult ? '#ff8482' : '#11ce65') : '#1990ff'}`" 
         icon="el-icon-video-play"
         size="large" 
         type="primary" 
@@ -17,6 +17,7 @@
           <el-link :underline="false" style="float: right;" v-if="record.flowResult == null"></el-link>
           <el-link type="success" :underline="false" style="float: right;" v-else-if="record.flowResult">通过</el-link>
           <el-link type="danger" :underline="false" style="float: right;" v-else>退回</el-link>
+          <el-link type="primary" :underline="false" style="float: right;" v-if="record.endTime == null">待处理</el-link>
           <span v-if="record.comment"> <br/>审批意见： <span v-html="record.comment"></span></span>
           <span v-if="record.attachment"><br/>审批附件： <file-upload v-model="record.attachment" :bizModel="'SysFlowTask'" :disabled="true"/></span>
         </el-card>

@@ -199,6 +199,7 @@ export default {
     loadApprover(flowDefId, taskDefId, startUserId) {
       flowApprover(flowDefId, taskDefId, startUserId).then(res => {
           this.approver = res.data
+          this.form.trace['multi'] = this.approver.multi
           if(this.approver.users && this.approver.users.length == 1) {
             this.form.approvalUserId = this.approver.users[0].userId
           } 
@@ -296,6 +297,7 @@ export default {
             bizUid: this.form.uid,
             taskId: this.form.trace.taskId,
             taskDefId: this.form.trace.taskDefId,
+            multi: this.form.trace.multi,
             approvalUserId: agree ? convertApprovalUserId(this.form.approvalUserId) : null,
             comment: this.form.approvalComment,
             attachment: this.needAddAttachment() ?  this.form.applAttachment : null,
