@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDemoVo"/>
         <where>  
             <if test="demoName != null  and demoName != ''"> and demo_name like concat('%', #{demoName}, '%')</if>
-            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and demo_time between #{params.beginDemoTime} and #{params.endDemoTime}</if>
+            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and demo_time &gt;= #{params.beginDemoTime} and demo_time &lt;= #{params.endDemoTime}</if>
             <if test="demoImage != null  and demoImage != ''"> and demo_image = #{demoImage}</if>
             <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
         </where>
