@@ -111,9 +111,11 @@ create table sys_flow_trace (
   flow_result 		tinyint(1) 		default 1              	   comment '审批结果（1 通过 0 驳回）',
   first_task 		tinyint(1) 		default 0 				   comment '第一个任务（1 是 0 否）',
   
-  primary key (trace_id)
+  primary key (trace_id),
+  key idx_sys_flow_trace_bu (biz_uid),
+  key idx_sys_flow_trace_ft (flow_type),
+  key idx_sys_flow_trace_ct (commit_time)
 ) engine=innodb auto_increment=1 comment = '流程跟踪表';
-create index idx_biz_uid on sys_flow_trace (biz_uid);
 
 -- 流程序号表
 drop table if exists sys_flow_seq;
@@ -143,9 +145,11 @@ create table sys_flow_record (
   comment 			varchar(200)    default ''                 comment '审批意见',
   attachment 		varchar(2048)   null 					   comment '审批附件',
  
-  primary key (record_id)
+  primary key (record_id),
+  key idx_sys_flow_record_bu (biz_uid),
+  key idx_sys_flow_record_user (user_id),
+  key idx_sys_flow_record_st (start_time)
 ) engine=innodb auto_increment=1 comment = '流程记录表';
-create index idx_biz_uid on sys_flow_record (biz_uid);
 
 -- ----------------------------
 -- 流程任务转办表
