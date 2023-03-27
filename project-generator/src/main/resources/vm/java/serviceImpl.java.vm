@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 #if($table.sub)
 import java.util.ArrayList;
-import com.risun.common.utils.StringUtils;
+import cn.hutool.core.collection.CollUtil;
 import org.springframework.transaction.annotation.Transactional;
 import ${packageName}.domain.${subClassName};
 #end
@@ -150,7 +150,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     public void insert${subClassName}(${ClassName} ${className}) {
         List<${subClassName}> ${subclassName}List = ${className}.get${subClassName}List();
         ${pkColumn.javaType} ${pkColumn.javaField} = ${className}.get${pkColumn.capJavaField}();
-        if (StringUtils.isNotNull(${subclassName}List)) {
+        if (CollUtil.isNotEmpty(${subclassName}List)) {
             List<${subClassName}> list = new ArrayList<${subClassName}>();
             for (${subClassName} ${subclassName} : ${subclassName}List) {
                 ${subclassName}.set${subTableFkClassName}(${pkColumn.javaField});
