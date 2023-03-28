@@ -40,7 +40,8 @@ export default {
       top: 0,
       left: 0,
       selectedTag: {},
-      affixTags: []
+      affixTags: [],
+      selectedDelIndex: 0
     }
   },
   computed: {
@@ -155,6 +156,7 @@ export default {
       this.$tab.refreshPage(view);
     },
     closeSelectedTag(view) {
+      this.selectedDelIndex = this.visitedViews.indexOf(view)
       this.$tab.closePage(view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           this.toLastView(visitedViews, view)
@@ -190,7 +192,7 @@ export default {
       })
     },
     toLastView(visitedViews, view) {
-      const latestView = visitedViews.slice(-1)[0]
+      const latestView = visitedViews[this.selectedDelIndex] ? visitedViews[this.selectedDelIndex] : visitedViews[this.selectedDelIndex - 1]
       if (latestView) {
         this.$router.push(latestView.fullPath)
       } else {
