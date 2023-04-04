@@ -142,7 +142,7 @@ public class DemoController extends BaseController {
 		Demo data = demoService.selectDemoByDemoId(demo.getDemoId());
 		map.put("data", data);
 		
-		// 图片多张
+		// 多张图片
 		String demoImage = data.getDemoImage();
 		if(StrUtil.isNotEmpty(demoImage)) {
 			List<PictureRenderData> images = Lists.newLinkedList();
