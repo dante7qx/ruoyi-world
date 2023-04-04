@@ -25,6 +25,7 @@
       </el-form-item>
 	  </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
+      <el-button type="primary" @click="exportWord" v-show="disabled">导 出</el-button>
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
       <el-button @click="cancel">取 消</el-button>
     </div>
@@ -102,6 +103,14 @@ export default {
     cancel() {
       this.reset();
       this.$emit('closeWindow');
+    },
+    exportWord() {
+      const id = this.demoId
+      this.download(
+        "biz/demo/exportDoc", {
+          demoId: id
+        },`业务示例(${this.form.demoTime}).docx`
+      );
     }
   }
 };
