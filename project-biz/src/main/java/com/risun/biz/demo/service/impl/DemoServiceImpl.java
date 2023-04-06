@@ -17,6 +17,7 @@ import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.constant.Constants;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.file.FileUtils;
@@ -24,6 +25,7 @@ import com.risun.common.utils.file.ImageUtils;
 import com.risun.common.utils.poitl.WordExportUtil;
 import com.risun.system.service.ISysConfigService;
 
+import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -149,15 +151,19 @@ public class DemoServiceImpl implements IDemoService
 		}
 		
 		// 附件（支持Word、Excel）
+		AttachmentRenderData attach = null;
 		String attachment = data.getAttachment();
 		if(StrUtil.isNotEmpty(attachment)) {
-			String localPath = FileUtils.getLocalPath(attachment);
-			AttachmentRenderData attach = Attachments.ofLocal(localPath, AttachmentType.DOCX).create();
 			data.setAttachment(FileUtils.getNameNotDateSuffix(attachment));
-			map.put(WordExportUtil.ATTACHMENT_WORD, attach);
-		} else {
-			map.put(WordExportUtil.ATTACHMENT_WORD, null);
+			String localPath = FileUtils.getLocalPath(attachment);
+			String suffix = FileNameUtil.getSuffix(localPath);
+			if(Constants.DOCX_SUFFIX.equals(suffix)) {
+				attach = Attachments.ofLocal(localPath, AttachmentType.DOCX).create();
+			} else if(Constants.XLSX_SUFFIX.equals(suffix)) {
+				attach = Attachments.ofLocal(localPath, AttachmentType.XLSX).create();
+			}
 		}
+		map.put(WordExportUtil.ATTACHMENT_WORD, attach);
 		
 		// 表格行循环
 		List<Demo> demos = demoMapper.selectDemoList(new Demo());
