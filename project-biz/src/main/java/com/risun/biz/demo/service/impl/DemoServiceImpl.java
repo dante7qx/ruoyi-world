@@ -138,17 +138,16 @@ public class DemoServiceImpl implements IDemoService
 		}
 		
 		// 多张图片
+		List<PictureRenderData> images = null;
 		String demoImage = data.getDemoImage();
 		if(StrUtil.isNotEmpty(demoImage)) {
-			List<PictureRenderData> images = Lists.newLinkedList();
+			images = Lists.newLinkedList();
 			List<String> imageArr = StrUtil.split(demoImage, ",");
 			for (String imgPath : imageArr) {
 				images.add(Pictures.ofStream(ImageUtils.getFile(imgPath), PictureType.JPEG).size(100, 100).create());
 			}
-			map.put("demoImg", images);
-		} else {
-			map.put("demoImg", null);
-		}
+		} 
+		map.put("demoImg", images);
 		
 		// 附件（支持Word、Excel）
 		AttachmentRenderData attach = null;
