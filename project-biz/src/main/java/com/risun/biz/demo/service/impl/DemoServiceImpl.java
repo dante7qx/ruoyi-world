@@ -131,6 +131,8 @@ public class DemoServiceImpl implements IDemoService
 		// 富文本内容，系统访问地址请在系统参数中进行设置，参数键为 sys.visit.baseurl
 		if(StrUtil.isNotEmpty(data.getDemoContent())) {
 			map.put(WordExportUtil.HTML_CONTENT, ImageUtils.replaceImgSrc(data.getDemoContent(), sysConfigService.selectConfigByKey("sys.visit.baseurl")));
+		} else {
+			map.put(WordExportUtil.HTML_CONTENT, "");
 		}
 		
 		// 多张图片
@@ -142,6 +144,8 @@ public class DemoServiceImpl implements IDemoService
 				images.add(Pictures.ofStream(ImageUtils.getFile(imgPath), PictureType.JPEG).size(100, 100).create());
 			}
 			map.put("demoImg", images);
+		} else {
+			map.put("demoImg", null);
 		}
 		
 		// 附件（支持Word、Excel）
@@ -151,6 +155,8 @@ public class DemoServiceImpl implements IDemoService
 			AttachmentRenderData attach = Attachments.ofLocal(localPath, AttachmentType.DOCX).create();
 			data.setAttachment(FileUtils.getNameNotDateSuffix(attachment));
 			map.put(WordExportUtil.ATTACHMENT_WORD, attach);
+		} else {
+			map.put(WordExportUtil.ATTACHMENT_WORD, null);
 		}
 		
 		// 表格行循环
