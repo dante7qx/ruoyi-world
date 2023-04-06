@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.risun.common.utils.poitl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,11 +9,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.ddr.poi.html.HtmlRenderPolicy;
 import org.springframework.util.StringUtils;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.plugin.table.LoopRowTableRenderPolicy;
+import com.deepoove.poi.policy.AttachmentRenderPolicy;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.risun.common.config.RisunConfig;
 
@@ -26,9 +28,13 @@ import com.risun.common.config.RisunConfig;
  */
 public class WordExportUtil {
 	
-	/** 表格行循环 */
-	public static final String LOOP_TABLE_ROW = "loopRows";
-	private static final String DOC_TEMPLATE_DIR = "doc_template";
+	private static final String DOC_TEMPLATE_DIR = "doc_template";	// 模板根目录
+	
+	public static final String LOOP_TABLE_ROW = "loopRows";	// 表格行循环
+	public static final String HTML_CONTENT = "html4Word"; // HTML内容
+	public static final String ATTACHMENT_WORD = "attachment4Word"; // 附件 - Word
+	public static final String ATTACHMENT_EXCEL = "attachment4Excel"; // 附件 - Excel
+	
 	
 	/**
 	 * 导出Word
@@ -63,14 +69,15 @@ public class WordExportUtil {
 		// 定义输出类型
 		response.setContentType("application/octet-stream");
 		
-		// 添加插件
-		// 表格行循环
-		LoopRowTableRenderPolicy loopRowTablePolicy = new LoopRowTableRenderPolicy();
 		Configure config = Configure.builder()
 				.useSpringEL()
-				.bind(WordExportUtil.LOOP_TABLE_ROW, loopRowTablePolicy)
+				.bind(LOOP_TABLE_ROW, new LoopRowTableRenderPolicy())	// 表格行循环
+				.bind(HTML_CONTENT, new HtmlRenderPolicy())	// HTML渲染
+				.bind(ATTACHMENT_WORD, new AttachmentRenderPolicy())	// 附件渲染
+				.bind(ATTACHMENT_EXCEL, new AttachmentRenderPolicy())	// 附件渲染
 				.build();
-
+		
+		
 		String templatePath = StringUtils.hasText(filePath) ? templateDir.concat(filePath).concat(templateName) : templateDir.concat(templateName);
 		XWPFTemplate template = XWPFTemplate.compile(templatePath, config).render(dataMap);
 

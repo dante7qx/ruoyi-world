@@ -22,8 +22,8 @@ import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.WordExportUtil;
 import com.risun.common.utils.poi.ExcelUtil;
+import com.risun.common.utils.poitl.WordExportUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
 
 /**

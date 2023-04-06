@@ -3,23 +3,28 @@ package com.risun.biz.demo.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.risun.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.WordExportUtil;
-import com.risun.common.utils.file.ImageUtils;
 
-import cn.hutool.core.util.StrUtil;
-
-import com.risun.biz.demo.mapper.DemoMapper;
+import com.deepoove.poi.data.AttachmentRenderData;
+import com.deepoove.poi.data.AttachmentType;
+import com.deepoove.poi.data.Attachments;
 import com.deepoove.poi.data.PictureRenderData;
 import com.deepoove.poi.data.PictureType;
 import com.deepoove.poi.data.Pictures;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
+import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.utils.DateUtils;
+import com.risun.common.utils.SecurityUtils;
+import com.risun.common.utils.file.FileUtils;
+import com.risun.common.utils.file.ImageUtils;
+import com.risun.common.utils.poitl.WordExportUtil;
+import com.risun.system.service.ISysConfigService;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 业务Service业务层处理
@@ -32,6 +37,8 @@ public class DemoServiceImpl implements IDemoService
 {
     @Autowired
     private DemoMapper demoMapper;
+    @Autowired
+    private ISysConfigService sysConfigService;
 
     /**
      * 查询业务
@@ -121,6 +128,11 @@ public class DemoServiceImpl implements IDemoService
 		Demo data = demoMapper.selectDemoByDemoId(demoId);
 		map.put("data", data);
 		
+		// 富文本内容，系统访问地址请在系统参数中进行设置，参数键为 sys.visit.baseurl
+		if(StrUtil.isNotEmpty(data.getDemoContent())) {
+			map.put(WordExportUtil.HTML_CONTENT, ImageUtils.replaceImgSrc(data.getDemoContent(), sysConfigService.selectConfigByKey("sys.visit.baseurl")));
+		}
+		
 		// 多张图片
 		String demoImage = data.getDemoImage();
 		if(StrUtil.isNotEmpty(demoImage)) {
@@ -130,6 +142,15 @@ public class DemoServiceImpl implements IDemoService
 				images.add(Pictures.ofStream(ImageUtils.getFile(imgPath), PictureType.JPEG).size(100, 100).create());
 			}
 			map.put("demoImg", images);
+		}
+		
+		// 附件（支持Word、Excel）
+		String attachment = data.getAttachment();
+		if(StrUtil.isNotEmpty(attachment)) {
+			String localPath = FileUtils.getLocalPath(attachment);
+			AttachmentRenderData attach = Attachments.ofLocal(localPath, AttachmentType.DOCX).create();
+			data.setAttachment(FileUtils.getNameNotDateSuffix(attachment));
+			map.put(WordExportUtil.ATTACHMENT_WORD, attach);
 		}
 		
 		// 表格行循环
