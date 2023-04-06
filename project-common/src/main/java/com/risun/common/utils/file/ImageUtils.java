@@ -98,4 +98,18 @@ public class ImageUtils
             IOUtils.closeQuietly(in);
         }
     }
+    
+    /**
+     * 替换富文本中Img的src属性，添加指定Url
+     * 
+     * @param html
+     * @param baseUrl
+     * @return
+     */
+    public static String replaceImgSrc(String html, String baseUrl) {
+    	if(StrUtil.isEmpty(baseUrl)) return html;
+        String imgRegex = "<img\\s+[^>]*?src\\s*=\\s*['\"]([^'\"]*?)['\"][^>]*?>";
+        String replacedHtml = html.replaceAll(imgRegex, "<img src=\"" + baseUrl + "$1\" />");
+        return replacedHtml;
+    }
 }

@@ -31,6 +31,7 @@
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
         <poi-tl.version>1.10.4</poi-tl.version>
+        <poi-tl-ext.version>0.4.2</poi-tl-ext.version>
         <aspose-word.version>15.8.0</aspose-word.version>
         <hutool.version>5.8.15</hutool.version>
         <guava.version>31.1-jre</guava.version>
@@ -105,6 +106,11 @@
 			  <groupId>com.deepoove</groupId>
 			  <artifactId>poi-tl</artifactId>
 			  <version>${poi-tl.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>io.github.draco1023</groupId>
+			    <artifactId>poi-tl-ext</artifactId>
+			    <version>${poi-tl-ext.version}</version>
 			</dependency>
 			
 			<!-- word2pdf工具 -->

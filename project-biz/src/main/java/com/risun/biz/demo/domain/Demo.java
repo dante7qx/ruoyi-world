@@ -98,4 +98,5 @@ public class Demo extends BaseEntity {
 				.append("createTime", getCreateTime()).append("updateBy", getUpdateBy())
 				.append("updateTime", getUpdateTime()).toString();
 	}
+	
 }

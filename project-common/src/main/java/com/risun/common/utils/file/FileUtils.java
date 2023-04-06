@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.risun.common.config.RisunConfig;
+import com.risun.common.constant.Constants;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.uuid.IdUtils;
 
@@ -292,6 +293,40 @@ public class FileUtils
         }
         String baseName = FilenameUtils.getBaseName(fileName);
         return baseName;
+    }
+    
+    /**
+     * 获取不带日期后缀的文件名称
+     * 
+     * @param fileName
+     * @return
+     */
+    public static String getNameNotDateSuffix(String fileName) {
+    	if (fileName == null)
+        {
+            return null;
+        }
+        int lastUnixPos = fileName.lastIndexOf('/');
+        int lastWindowsPos = fileName.lastIndexOf('\\');
+        int index = Math.max(lastUnixPos, lastWindowsPos);
+        String filePath = fileName.substring(index + 1);
+        int idx = filePath.lastIndexOf("_");
+        int ldx = filePath.lastIndexOf(".");
+        return StrUtil.replace(filePath, idx, ldx, "");
+    }
+    
+    /**
+     * 获取文件的本地路径
+     * 
+     * @param dbPath
+     * @return
+     */
+    public static String getLocalPath(String dbPath) {
+    	String localPath = "";
+    	if(StrUtil.isNotEmpty(dbPath)) {
+    		localPath = RisunConfig.getProfile() + "/" + StrUtil.removePrefix(dbPath, Constants.RESOURCE_PREFIX);
+    	}
+    	return localPath;
     }
 
 }

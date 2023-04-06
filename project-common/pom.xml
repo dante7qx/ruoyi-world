@@ -93,6 +93,10 @@
 			<groupId>com.deepoove</groupId>
 			<artifactId>poi-tl</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>io.github.draco1023</groupId>
+		    <artifactId>poi-tl-ext</artifactId>
+		</dependency>
 		
 		<!-- word2pdf工具 -->
 		<dependency>
