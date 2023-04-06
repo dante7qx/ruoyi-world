@@ -2,7 +2,6 @@ package com.risun.biz.demo.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deepoove.poi.data.PictureRenderData;
-import com.deepoove.poi.data.PictureType;
-import com.deepoove.poi.data.Pictures;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.Log;
@@ -29,11 +23,8 @@ import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.WordExportUtil;
-import com.risun.common.utils.file.ImageUtils;
 import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
-
-import cn.hutool.core.util.StrUtil;
 
 /**
  * 业务Controller
@@ -138,24 +129,6 @@ public class DemoController extends BaseController {
 	@PostMapping("/exportDoc")
 	public void exportWord(HttpServletResponse response, Demo demo) throws IOException {
 		Assert.notNull(demo.getDemoId(), "业务Id不能为空！");
-		final Map<String, Object> map = Maps.newHashMap();
-		Demo data = demoService.selectDemoByDemoId(demo.getDemoId());
-		map.put("data", data);
-		
-		// 多张图片
-		String demoImage = data.getDemoImage();
-		if(StrUtil.isNotEmpty(demoImage)) {
-			List<PictureRenderData> images = Lists.newLinkedList();
-			List<String> imageArr = StrUtil.split(demoImage, ",");
-			for (String imgPath : imageArr) {
-				images.add(Pictures.ofStream(ImageUtils.getFile(imgPath), PictureType.JPEG).size(100, 100).create());
-			}
-			map.put("demoImg", images);
-		}
-		
-		// 表格行循环
-		List<Demo> demos = demoService.selectDemoList(new Demo());
-		map.put(WordExportUtil.LOOP_TABLE_ROW, demos);
-		WordExportUtil.createWord(map, "demo.docx", response);
+		WordExportUtil.createWord(demoService.export4Word(demo.getDemoId()), "demo.docx", response);
 	}
 }

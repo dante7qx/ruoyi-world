@@ -1,6 +1,8 @@
 package com.risun.biz.demo.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.risun.biz.demo.domain.Demo;
 
 /**
@@ -58,4 +60,12 @@ public interface IDemoService
      * @return 结果
      */
     public int deleteDemoByDemoId(Long demoId);
+    
+    /**
+     * 导出Word
+     * 
+     * @param demoId
+     * @return
+     */
+    public Map<String, Object> export4Word(Long demoId);
 }
