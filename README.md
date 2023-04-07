@@ -1,4 +1,4 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Risun Java v3.0.1</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Risun Java v3.0.2</h1>
 <h4 align="center">基于Ruoyi v3.8.4 前后端分离的Java快速开发框架</h4>
 
 
