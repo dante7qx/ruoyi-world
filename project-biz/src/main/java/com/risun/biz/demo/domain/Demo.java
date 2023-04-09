@@ -42,6 +42,9 @@ public class Demo extends BaseEntity {
 	@Excel(name = "业务内容")
 	private String demoContent;
 	
+	/** 删除标识 0 未删除 1 已删除 */
+    private Integer delFlag;
+	
 	public void setDemoId(Long demoId) {
 		this.demoId = demoId;
 	}
@@ -88,6 +91,14 @@ public class Demo extends BaseEntity {
 
 	public void setDemoContent(String demoContent) {
 		this.demoContent = demoContent;
+	}
+
+	public Integer getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	@Override

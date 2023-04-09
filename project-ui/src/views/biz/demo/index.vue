@@ -44,7 +44,7 @@
           icon="el-icon-edit"
           size="mini"
           :disabled="single"
-          @click="handleUpdate(null, true)"
+          @click="handleUpdate(null, false)"
           v-hasPermi="['biz:demo:edit']"
         >修改</el-button>
       </el-col>

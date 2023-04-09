@@ -1,4 +1,11 @@
 package ${packageName}.service.impl;
+#set ($existDelFlag = false)
+#foreach ($column in $columns)
+	#if ($column.columnName == 'del_flag')
+		#set ($existDelFlag = true)
+    	#break
+	#end
+#end
 
 import java.util.List;
 #foreach ($column in $columns)
@@ -121,7 +128,11 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #if($table.sub)
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}s(${pkColumn.javaField}s);
 #end
+#if($existDelFlag)
+        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s, SecurityUtils.getUsername());
+#else
         return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s);
+#end
     }
 
     /**
@@ -138,7 +149,11 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #if($table.sub)
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
 #end
+#if($existDelFlag)
+        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}, SecurityUtils.getUsername());
+#else
         return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+#end
     }
 #if($table.sub)
 
