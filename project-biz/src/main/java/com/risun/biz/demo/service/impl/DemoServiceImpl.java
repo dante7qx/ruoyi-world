@@ -101,9 +101,8 @@ public class DemoServiceImpl implements IDemoService
      * @return 结果
      */
     @Override
-    public int deleteDemoByDemoIds(Long[] demoIds)
-    {
-        return demoMapper.deleteDemoByDemoIds(demoIds);
+    public int deleteDemoByDemoIds(Long[] demoIds) {
+        return demoMapper.deleteDemoByDemoIds(demoIds, SecurityUtils.getUsername());
     }
 
     /**
@@ -113,9 +112,8 @@ public class DemoServiceImpl implements IDemoService
      * @return 结果
      */
     @Override
-    public int deleteDemoByDemoId(Long demoId)
-    {
-        return demoMapper.deleteDemoByDemoId(demoId);
+    public int deleteDemoByDemoId(Long demoId) {
+        return demoMapper.deleteDemoByDemoId(demoId, SecurityUtils.getUsername());
     }
     
     /**

@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="demoImage"    column="demo_image"    />
         <result property="attachment"    column="attachment"    />
         <result property="demoContent"    column="demo_content"    />
+        <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -18,22 +19,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDemoVo">
-        select demo_id, demo_name, demo_time, demo_image, attachment, demo_content, create_by, create_time, update_by, update_time from t_demo
+        select t.demo_id, t.demo_name, t.demo_time, t.demo_image, t.attachment, t.demo_content, t.del_flag, t.create_by, t.create_time, t.update_by, t.update_time from t_demo t
     </sql>
 
     <select id="selectDemoList" parameterType="Demo" resultMap="DemoResult">
         <include refid="selectDemoVo"/>
         <where>  
-            <if test="demoName != null  and demoName != ''"> and demo_name like concat('%', #{demoName}, '%')</if>
-            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and demo_time &gt;= #{params.beginDemoTime} and demo_time &lt;= #{params.endDemoTime}</if>
-            <if test="demoImage != null  and demoImage != ''"> and demo_image = #{demoImage}</if>
-            <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
+	    del_flag = 0
+            <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
+            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and t.demo_time &gt;= #{params.beginDemoTime} and t.demo_time &lt;= #{params.endDemoTime}</if>
+            <if test="demoContent != null  and demoContent != ''"> and t.demo_content = #{demoContent}</if>
         </where>
     </select>
     
     <select id="selectDemoByDemoId" parameterType="Long" resultMap="DemoResult">
         <include refid="selectDemoVo"/>
-        where demo_id = #{demoId}
+        where t.demo_id = #{demoId}
     </select>
         
     <insert id="insertDemo" parameterType="Demo" useGeneratedKeys="true" keyProperty="demoId">
@@ -44,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="demoImage != null">demo_image,</if>
             <if test="attachment != null">attachment,</if>
             <if test="demoContent != null">demo_content,</if>
+            <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -55,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="demoImage != null">#{demoImage},</if>
             <if test="attachment != null">#{attachment},</if>
             <if test="demoContent != null">#{demoContent},</if>
+            <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -70,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="demoImage != null">demo_image = #{demoImage},</if>
             <if test="attachment != null">attachment = #{attachment},</if>
             <if test="demoContent != null">demo_content = #{demoContent},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
@@ -77,14 +81,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         where demo_id = #{demoId}
     </update>
-
-    <delete id="deleteDemoByDemoId" parameterType="Long">
-        delete from t_demo where demo_id = #{demoId}
+    
+    <delete id="deleteDemoByDemoId">
+	    update t_demo set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where demo_id = #{demoId}
     </delete>
 
-    <delete id="deleteDemoByDemoIds" parameterType="String">
-        delete from t_demo where demo_id in 
-        <foreach item="demoId" collection="array" open="(" separator="," close=")">
+    <delete id="deleteDemoByDemoIds">
+        update t_demo set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where demo_id in 
+        <foreach item="demoId" collection="demoIds" open="(" separator="," close=")">
             #{demoId}
         </foreach>
     </delete>
