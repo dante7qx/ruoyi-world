@@ -42,6 +42,12 @@ public class SysDictDataController extends BaseController
     @Autowired
     private ISysDictTypeService dictTypeService;
 
+    /**
+     * 获取数据字典分页列表
+     * 
+     * @param dictData
+     * @return
+     */
     @PreAuthorize("@ss.hasPermi('system:dict:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysDictData dictData)
@@ -49,6 +55,19 @@ public class SysDictDataController extends BaseController
         startPage();
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
         return getDataTable(list);
+    }
+    
+    /**
+     * 获取数据字典列表
+     * 
+     * @param dictData
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('system:dict:list')")
+    @GetMapping("/list_all")
+    public AjaxResult listAll(SysDictData dictData)
+    {
+        return AjaxResult.success(dictDataService.selectDictDataList(dictData));
     }
 
     @Log(title = "字典数据", businessType = BusinessType.EXPORT)

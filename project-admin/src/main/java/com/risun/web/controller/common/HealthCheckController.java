@@ -36,6 +36,11 @@ public class HealthCheckController {
 		SensitiveWordUtil.loadWordFromFile(path);
 	}
 	
+	/**
+	 * 健康检查
+	 * 
+	 * @return
+	 */
 	@Anonymous
 	@GetMapping("/health_check")
 	public String healthCheck() {
