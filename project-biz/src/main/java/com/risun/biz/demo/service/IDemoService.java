@@ -62,6 +62,21 @@ public interface IDemoService
     public int deleteDemoByDemoId(Long demoId);
     
     /**
+     * 批量新增
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchInsertDemo(List<Demo> demos);
+    
+    /**
+     * 清空数据
+     * 
+     * @return
+     */
+    public int clearDemoData();
+    
+    /**
      * 导出Word
      * 
      * @param demoId

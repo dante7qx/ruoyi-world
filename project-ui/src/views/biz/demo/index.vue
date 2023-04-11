@@ -79,6 +79,16 @@
           v-hasPermi="['biz:demo:add']"
         >批量新增</el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          @click="clearData"
+          v-hasPermi="['biz:demo:remove']"
+        >清空数据</el-button>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -157,7 +167,7 @@
 </template>
 
 <script>
-import { listDemo, delDemo, addBatchDemo } from "@/api/biz/demo"
+import { listDemo, delDemo, addBatchDemo, clearDemoData } from "@/api/biz/demo"
 import Detail from "./detail"
 
 export default {
@@ -268,8 +278,16 @@ export default {
       this.handleQuery();
     },
     batchAdd() {
+      this.$modal.loading('数据处理中...');
       addBatchDemo().then(res => {
         this.$modal.msgSuccess("新增成功");
+        this.$modal.closeLoading();
+        this.getList();
+      })
+    },
+    clearData() {
+      clearDemoData().then(res => {
+        this.$modal.msgSuccess("数据已清空");
         this.getList();
       })
     },
