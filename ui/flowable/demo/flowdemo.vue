@@ -321,14 +321,9 @@ export default {
       })
     },
     approval(data) {
-      const loading = this.$loading({
-        lock: true,
-        text: '处理中...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
+      this.$modal.loading('处理中...');
       approvalFlow(data).then(res => {
-        loading.close()
+        this.$modal.closeLoading()
         this.cancel()
       }) 
     },
