@@ -50,3 +50,11 @@ export function addBatchDemo() {
     method: 'post'
   })
 }
+
+// 清空业务数据
+export function clearDemoData() {
+  return request({
+    url: '/biz/demo/clearData',
+    method: 'post'
+  })
+}

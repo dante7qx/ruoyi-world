@@ -117,6 +117,29 @@ public class DemoServiceImpl implements IDemoService
     }
     
     /**
+     * 批量新增
+     * 
+     * @param demos
+     * @return
+     */
+    @Override
+    public int batchInsertDemo(List<Demo> demos) {
+    	return demoMapper.batchInsertDemo(demos);
+    }
+    
+    /**
+     * 清空数据
+     * 
+     * @return
+     */
+    @Override
+    public int clearDemoData() {
+    	int result = 1;
+    	demoMapper.clearDemoData();
+    	return result;
+    }
+    
+    /**
      * 导出Word
      * 
      * @param demoId

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.Log;
@@ -25,6 +26,8 @@ import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.common.utils.poitl.WordExportUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 业务Controller
@@ -113,12 +116,26 @@ public class DemoController extends BaseController {
 	@Log(title = "批量新增业务", businessType = BusinessType.INSERT)
 	@PostMapping("/insertBatch")
 	public AjaxResult addBatch() {
+		List<Demo> demos = Lists.newArrayList();
 		for (int i = 0; i < 200; i++) {
 			Demo demo = new Demo();
 			demo.setDemoName("测试数据" + i);
-			demoService.insertDemo(demo);
+			demo.setDemoTime(DateUtil.date());
+			demo.setCreateBy(getUsername());
+			demo.setCreateTime(DateUtil.date());
+			demos.add(demo);
 		}
-		return AjaxResult.success();
+		return toAjax(demoService.batchInsertDemo(demos));
+	}
+	
+	/**
+	 * 清空业务数据
+	 */
+	@PreAuthorize("@ss.hasPermi('biz:demo:remove')")
+	@Log(title = "清空业务数据", businessType = BusinessType.DELETE)
+	@PostMapping("/clearData")
+	public AjaxResult clearData() {
+		return toAjax(demoService.clearDemoData());
 	}
 
 	/**
