@@ -87,8 +87,7 @@ export default {
             },
             forceCalculation: true,//强制计算公式
             data: exportJson.sheets,
-            title: exportJson.info.name,
-            userInfo: exportJson.info.name.creator
+            title: exportJson.info.name
           });
         })
       });

@@ -19,6 +19,8 @@ import com.deepoove.poi.policy.AttachmentRenderPolicy;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.risun.common.config.RisunConfig;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * 导出Word工具类
@@ -26,6 +28,7 @@ import com.risun.common.config.RisunConfig;
  * @author dante
  *
  */
+@Slf4j
 public class WordExportUtil {
 	
 	private static final String DOC_TEMPLATE_DIR = "doc_template";	// 模板根目录
@@ -84,12 +87,18 @@ public class WordExportUtil {
 		OutputStream out = null;
 		try {
 			out = response.getOutputStream();
-			template.write(out);
+			if(out != null) {
+				template.write(out);
+			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		} finally {
-			out.flush();
-			PoitlIOUtils.closeQuietlyMulti(template, out);
+			if(out != null) {
+				out.flush();
+				PoitlIOUtils.closeQuietlyMulti(template, out);
+				out = null;
+			}
+			
 		}
 	}
 	/**
@@ -132,10 +141,13 @@ public class WordExportUtil {
 			out = response.getOutputStream();
 			template.write(out);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		} finally {
-			out.flush();
-			PoitlIOUtils.closeQuietlyMulti(template, out);
+			if(out != null) {
+				out.flush();
+				PoitlIOUtils.closeQuietlyMulti(template, out);
+				out = null;
+			}
 		}
 	}
 	

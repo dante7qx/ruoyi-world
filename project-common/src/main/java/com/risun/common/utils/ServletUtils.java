@@ -22,12 +22,14 @@ import com.risun.common.core.text.Convert;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 客户端工具类
  * 
  * @author ruoyi
  */
+@Slf4j
 public class ServletUtils
 {
     /**
@@ -153,7 +155,7 @@ public class ServletUtils
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 

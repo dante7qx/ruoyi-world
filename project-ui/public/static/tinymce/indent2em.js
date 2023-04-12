@@ -55,7 +55,7 @@ tinymce.PluginManager.add('indent2em', function(editor, url) {
         getMetadata: function () {
             return  {
                 name: pluginName,
-                url: "http://tinymce.ax-z.cn/more-plugins/indent2em.php",
+                url: "",
             };
         }
     };

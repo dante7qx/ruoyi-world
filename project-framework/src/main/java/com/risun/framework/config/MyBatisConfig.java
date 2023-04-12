@@ -26,12 +26,14 @@ import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.util.ClassUtils;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Mybatis支持*匹配扫描包
  * 
  * @author ruoyi
  */
+@Slf4j
 @Configuration
 public class MyBatisConfig
 {
@@ -67,7 +69,7 @@ public class MyBatisConfig
                             }
                             catch (ClassNotFoundException e)
                             {
-                                e.printStackTrace();
+                            	log.error(e.getMessage(), e);
                             }
                         }
                     }
@@ -89,7 +91,7 @@ public class MyBatisConfig
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return typeAliasesPackage;
     }
@@ -109,7 +111,7 @@ public class MyBatisConfig
                 }
                 catch (IOException e)
                 {
-                    // ignore
+                	log.error(e.getMessage(), e);
                 }
             }
         }

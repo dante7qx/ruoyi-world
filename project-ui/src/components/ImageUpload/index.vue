@@ -38,6 +38,7 @@
     >
       <img
         :src="dialogImageUrl"
+        alt=""
         style="display: block; max-width: 100%; margin: 0 auto"
       />
     </el-dialog>

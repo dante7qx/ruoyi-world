@@ -13,6 +13,9 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RsaUtils {
 	
 	// Rsa 公钥
@@ -48,7 +51,7 @@ public class RsaUtils {
 		try {
 			return decryptByPrivateKey(privateKey, text);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return null;
 	}
@@ -115,7 +118,7 @@ public class RsaUtils {
 		try {
 			return encryptByPublicKey(publicKey, text);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return null;
 	}

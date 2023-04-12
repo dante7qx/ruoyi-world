@@ -35,6 +35,7 @@ export default {
   mounted() {
     var self = this
     window.addEventListener('message', function(event) {
+      if(!event) return false
       // 对于无法识别的地址，直接返回无法选择
       var loc = event.data
       if (loc.poiname === '我的位置' || loc.poiaddress === '') {

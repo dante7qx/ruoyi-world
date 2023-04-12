@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
+import com.risun.common.exception.ServiceException;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -48,6 +50,9 @@ public class ImageUtils
         try
         {
             byte[] result = readFile(imagePath);
+            if(ArrayUtil.isEmpty(result)) {
+				throw new ServiceException("图片" + imagePath + "不存在");
+            }
             result = Arrays.copyOf(result, result.length);
             return new ByteArrayInputStream(result);
         }

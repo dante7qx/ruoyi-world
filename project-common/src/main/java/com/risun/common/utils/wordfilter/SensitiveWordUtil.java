@@ -66,7 +66,7 @@ public final class SensitiveWordUtil {
 				if (word != null && word.next == null) {
 					flag = true;
 				}
-				if(flag) {
+				if (flag) {
 					return Boolean.FALSE;
 				}
 			}
@@ -142,7 +142,7 @@ public final class SensitiveWordUtil {
 		}
 		return new String(__char__);
 	}
-	
+
 	/**
 	 * 敏感词替换
 	 * 
@@ -192,16 +192,13 @@ public final class SensitiveWordUtil {
 	 */
 	public static void loadWordFromFile(String path) {
 		String encoding = "UTF-8";
-		try {
-			InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), encoding);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), encoding);
+			 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);) {
 			String line;
 			ArrayList<String> list = new ArrayList<>();
 			while ((line = bufferedReader.readLine()) != null) {
 				list.add(line);
 			}
-			bufferedReader.close();
-			inputStreamReader.close();
 			loadWord(list);
 		} catch (Exception e) {
 			log.warn("敏感词文件不存在或格式有问题", e.getMessage());

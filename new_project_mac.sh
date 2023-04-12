@@ -34,6 +34,8 @@ createNewProject() {
     sed -i '' "s/risun_project/<数据库>/g" ./project-admin/src/main/resources/application-druid.yml
     sed -i '' "s/root/<数据库账号>/g" ./project-admin/src/main/resources/application-druid.yml
     sed -i '' "s/iamdante/<数据库密码>/g" ./project-admin/src/main/resources/application-druid.yml
+    sed -i '' "s/risun-rsp/${projectName}/g" ./sonar-project.properties
+    sed -i '' "s/project-/${projectName}-/g" ./sonar-project.properties
 
     ## 重命名目录
     echo "3. 重命名目录"

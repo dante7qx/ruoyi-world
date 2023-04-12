@@ -18,7 +18,7 @@
 			</el-cascader>
 			</el-form-item>
 			<el-form-item label="表单数据">
-				<span v-html="formData" />
+				<span v-text="formData" />
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="submitCascade">提交</el-button>
