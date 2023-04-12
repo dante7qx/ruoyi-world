@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.hutool.core.util.StrUtil;
+
 /**
  * Md5加密方法
  * 
@@ -56,6 +58,9 @@ public class Md5Utils
     {
         try
         {
+        	if(StrUtil.isEmpty(s)) {
+        		return "";
+        	}
             return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         }
         catch (Exception e)

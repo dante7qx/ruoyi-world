@@ -19,7 +19,7 @@
         <el-input v-model="form.content" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" resize="none" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="发送时间" prop="sendDate">
-        <span v-html="form.sendDate" />
+        <span v-text="form.sendDate" />
       </el-form-item>
 	</el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">

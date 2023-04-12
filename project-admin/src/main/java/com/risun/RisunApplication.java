@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 public class RisunApplication {
 	public static void main(String[] args) {
-		// System.setProperty("spring.devtools.restart.enabled", "false");
 		SpringApplication.run(RisunApplication.class, args);
 		System.out.println("XX项目启动成功");
 	}

@@ -62,6 +62,9 @@ public class IpUtils {
 	 */
 	public static boolean internalIp(String ip) {
 		byte[] addr = textToNumericFormatV4(ip);
+		if(ArrayUtil.isEmpty(addr)) {
+			return true;
+		}
 		return internalIp(addr) || "127.0.0.1".equals(ip);
 	}
 
@@ -72,7 +75,7 @@ public class IpUtils {
 	 * @return 结果
 	 */
 	private static boolean internalIp(byte[] addr) {
-		if (ArrayUtil.isEmpty(addr) || addr.length < 2) {
+		if (ArrayUtil.isEmpty(addr) || (ArrayUtil.isNotEmpty(addr) && addr.length < 2)) {
 			return true;
 		}
 		final byte b0 = addr[0];

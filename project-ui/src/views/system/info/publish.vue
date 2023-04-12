@@ -24,7 +24,7 @@
 					</div>
 				</dl>
 			</div>
-			<div class="ui-wb" v-html="infoData.content" v-if="hasAcl"></div>
+			<div class="ui-wb" v-if="hasAcl">{{ infoData.content }}</div>
 		</div>
 	</div>
 </template>

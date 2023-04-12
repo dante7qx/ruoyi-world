@@ -144,10 +144,10 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * 计算两个时间差（天、时、分、秒）
 	 */
 	public static String timeDistance(Date startDate, Date endDate) {
-		long nd = 1000 * 24 * 60 * 60;
-		long nh = 1000 * 60 * 60;
-		long nm = 1000 * 60;
-		long ns = 1000;
+		long nd = 1000L * 24 * 60 * 60;
+		long nh = 1000L * 60 * 60;
+		long nm = 1000L * 60;
+		long ns = 1000L;
 		// 获得两个时间的毫秒时间差异
 		long diff = endDate.getTime() - startDate.getTime();
 		// 计算差多少天
@@ -170,10 +170,10 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * 计算两个时间差（年、月、天、时、分、秒）
 	 */
 	public static String getFullDatePoor(Date startDate, Date endDate) {
-		long nd = 1000 * 24 * 60 * 60;
-		long nh = 1000 * 60 * 60;
-		long nm = 1000 * 60;
-		long ns = 1000;
+		long nd = 1000L * 24 * 60 * 60;
+		long nh = 1000L * 60 * 60;
+		long nm = 1000L * 60;
+		long ns = 1000L;
 		Period between = Period.between(toLocalDate(startDate), toLocalDate(endDate));
 		long diff = endDate.getTime() - startDate.getTime();
 		// 计算差多少小时

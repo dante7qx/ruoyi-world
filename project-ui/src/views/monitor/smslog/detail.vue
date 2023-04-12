@@ -8,7 +8,7 @@
         <el-input v-model="form.content" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" resize="none" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="发送时间" prop="sendDate">
-        <span v-html="form.sendDate" />
+        <span v-text="form.sendDate" />
       </el-form-item>
       <el-form-item label="发送日志" prop="sendLog">
         <el-input v-model="form.sendLog" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" placeholder="请输入内容" :disabled="disabled"/>

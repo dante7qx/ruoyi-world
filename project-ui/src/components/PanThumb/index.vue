@@ -113,7 +113,6 @@ export default {
   height: 80px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  color: #fff;
   font-style: normal;
   font-weight: 700;
   text-transform: uppercase;

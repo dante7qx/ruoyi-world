@@ -118,7 +118,6 @@ public class LogAspect {
 			// 记录本地异常日志
 			log.error("==前置通知异常==");
 			log.error("异常信息:{}", exp.getMessage());
-			exp.printStackTrace();
 		}
 	}
 

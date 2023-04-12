@@ -30,7 +30,7 @@ public class FileUploadUtils
     /**
      * 默认大小 50M
      */
-    public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;
+    public static final long DEFAULT_MAX_SIZE = 50L * 1024 * 1024;
 
     /**
      * 默认的文件名最大长度 100
@@ -252,19 +252,19 @@ public class FileUploadUtils
           return fileSize + "B";
        } else if (fileSize < 1024 * 1024) {
           float size = Float.parseFloat(String.valueOf(fileSize)) / 1024;
-          BigDecimal b = new BigDecimal(size);
+          BigDecimal b = BigDecimal.valueOf(size);
           // 2表示2位 ROUND_HALF_UP表明四舍五入，
           size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
           return size + "KB";
        } else if (fileSize < 1024 * 1024 * 1024) {
           float size = Float.parseFloat(String.valueOf(fileSize)) / (1024 * 1024);
-          BigDecimal b = new BigDecimal(size);
+          BigDecimal b = BigDecimal.valueOf(size);
           // 2表示2位 ROUND_HALF_UP表明四舍五入，
           size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
           return size + "MB";
        } else {
           float size = Float.parseFloat(String.valueOf(fileSize)) / (1024 * 1024 * 1024);
-          BigDecimal b = new BigDecimal(size);
+          BigDecimal b = BigDecimal.valueOf(size);
           // 2表示2位 ROUND_HALF_UP表明四舍五入，
           size = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
           return size + "GB";
