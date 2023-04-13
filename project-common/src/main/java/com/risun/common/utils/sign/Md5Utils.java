@@ -58,8 +58,9 @@ public class Md5Utils
     {
         try
         {
-        	if(StrUtil.isNotEmpty(s)) {
-        		return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+        	String hex = toHex(md5(s));
+        	if(StrUtil.isNotEmpty(hex)) {
+        		return new String(hex.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         	}
         }
         catch (Exception e)

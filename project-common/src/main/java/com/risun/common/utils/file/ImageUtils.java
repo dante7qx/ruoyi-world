@@ -15,7 +15,6 @@ import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
 import com.risun.common.exception.ServiceException;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -50,13 +49,11 @@ public class ImageUtils
         try
         {
             byte[] result = readFile(imagePath);
-            if(ArrayUtil.isEmpty(result)) {
+            if(result == null) {
 				throw new ServiceException("图片" + imagePath + "不存在");
-            } else {
-            	result = Arrays.copyOf(result, result.length);
-                return new ByteArrayInputStream(result);
-            }
-            
+            } 
+            result = Arrays.copyOf(result, result.length);
+            return new ByteArrayInputStream(result);
         }
         catch (Exception e)
         {
