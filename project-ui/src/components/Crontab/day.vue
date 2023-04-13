@@ -71,7 +71,6 @@ export default {
 	methods: {
 		// 单选按钮值变化时
 		radioChange() {
-			('day rachange');
 			if (this.radioValue !== 2 && this.cron.week !== '?') {
 				this.$emit('update', 'week', '?', 'day')
 			}
@@ -99,7 +98,6 @@ export default {
 					this.$emit('update', 'day', this.checkboxString);
 					break;
 			}
-			('day rachange end');
 		},
 		// 周期两个值变化时
 		cycleChange() {

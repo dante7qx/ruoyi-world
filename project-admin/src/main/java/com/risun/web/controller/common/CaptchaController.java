@@ -7,17 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.code.kaptcha.Producer;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.utils.sign.Base64;
-import com.risun.common.utils.uuid.IdUtils;
-import com.risun.framework.web.service.SysLoginService;
-import com.risun.system.service.ISysConfigService;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
@@ -25,6 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.code.kaptcha.Producer;
+import com.risun.common.config.RisunConfig;
+import com.risun.common.constant.CacheConstants;
+import com.risun.common.constant.Constants;
+import com.risun.common.core.domain.AjaxResult;
+import com.risun.common.core.redis.RedisCache;
+import com.risun.common.utils.uuid.IdUtils;
+import com.risun.framework.web.service.SysLoginService;
+import com.risun.system.service.ISysConfigService;
 
 /**
  * 验证码操作处理
@@ -92,7 +92,7 @@ public class CaptchaController {
 		}
 
 		ajax.put("uuid", uuid);
-		ajax.put("img", Base64.encode(os.toByteArray()));
+		ajax.put("img", DatatypeConverter.printBase64Binary(os.toByteArray()));
 		return ajax;
 	}
 	

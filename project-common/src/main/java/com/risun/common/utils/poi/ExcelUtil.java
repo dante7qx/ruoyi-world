@@ -686,7 +686,7 @@ public class ExcelUtil<T>
      * @param row 单元格行
      */
     @SuppressWarnings("unchecked")
-    public void fillExcelData(int index, Row row)
+    public void fillExcelData(int index, Row rowObj)
     {
         int startNo = index * sheetSize;
         int endNo = Math.min(startNo + sheetSize, list.size());
@@ -694,7 +694,7 @@ public class ExcelUtil<T>
         for (int i = startNo; i < endNo; i++)
         {
             rowNo = i > 1 ? rowNo + 1 : rowNo + i;
-            row = sheet.createRow(rowNo);
+            Row row = sheet.createRow(rowNo);
             // 得到导出对象.
             T vo = (T) list.get(i);
             Collection<?> subList = null;
@@ -724,7 +724,7 @@ public class ExcelUtil<T>
                         if (subFirst)
                         {
                             rowNo++;
-                            row = sheet.createRow(rowNo);
+                            sheet.createRow(rowNo);
                         }
                         List<Field> subFields = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), Excel.class);
                         int subIndex = 0;
@@ -740,7 +740,7 @@ public class ExcelUtil<T>
                         }
                         subFirst = true;
                     }
-                    this.subMergedFirstRowNum = this.subMergedFirstRowNum + subList.size();
+                    this.subMergedFirstRowNum = this.subMergedFirstRowNum + (CollUtil.isNotEmpty(subList) ? subList.size() : 0);
                 }
                 else
                 {

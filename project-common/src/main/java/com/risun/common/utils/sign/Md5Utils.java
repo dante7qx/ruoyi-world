@@ -58,15 +58,15 @@ public class Md5Utils
     {
         try
         {
-        	if(StrUtil.isEmpty(s)) {
-        		return "";
+        	if(StrUtil.isNotEmpty(s)) {
+        		return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         	}
-            return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         }
         catch (Exception e)
         {
             log.error("not supported charset...{}", e);
             return s;
         }
+        return "";
     }
 }

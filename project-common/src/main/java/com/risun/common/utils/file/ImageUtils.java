@@ -52,9 +52,11 @@ public class ImageUtils
             byte[] result = readFile(imagePath);
             if(ArrayUtil.isEmpty(result)) {
 				throw new ServiceException("图片" + imagePath + "不存在");
+            } else {
+            	result = Arrays.copyOf(result, result.length);
+                return new ByteArrayInputStream(result);
             }
-            result = Arrays.copyOf(result, result.length);
-            return new ByteArrayInputStream(result);
+            
         }
         catch (Exception e)
         {

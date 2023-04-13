@@ -12,6 +12,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
+import javax.xml.bind.DatatypeConverter;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -81,22 +82,6 @@ public class RsaUtils {
 		return null;
 	}
 	
-	public static void main(String[] args) throws Exception {
-//		String str = decryptByPrivateKey(privateKey, "hiINoicchx+KOKN7RgmkT2MqvcjDlt285YXM//nVL9XHwO79iC7sSIl2dIQTPZPVa7LY6OLrCtcbRXnq7p6ZB/HahLHeSqSApP74MUCGRM9VvfARjTK2qucp/Nf55U6T/xFcpgbHql8tOtEr9rd41FSI2fhJoHhNTRWkEmXK+Rrntynuo6Rf1bj8/7TrzenzC4dJGXuB19gq85k+7QyWckHN853KGavaHESfAMH/8QHTdVVOfPHH+UYA1LLwym7hjSP1madepXLEQqpLfZMoLukMf1RXhEhY033CqptombF8otMm07Y9I7k5ND44f/swDGfJzYw8uwGfVcJF1LrFWA==");
-//		System.out.println(str);
-//		Provider[] providers = Security.getProviders();
-//		for (Provider provider : providers) {
-//			System.out.println(provider.getName());
-//		}
-		
-//		String xx = "gzxqj1028#";
-//		String ens = encryptByPublicKey(xx);
-//		System.out.println(ens);
-//		String des = decryptByPrivateKey("Yt1wmMi9EvoXrmq7cmBj2woAIY9dltwFfCIzrGlfbht6yitj7KEZR5THh/lv45xpLyQn31fRXIJauZTzv37ogJbEp2/U1IDvvf6hBkb1kVX/KOpFBdHIMBwL5P5bqJtRE8MpJiNDZlfCHMVTrwqGEHT5L4aAjXH1kcTLZ0Kb8yHXv8bsgQNsgDhZzqIF5u6YnEekP1wppQbIbf+H8yNjGQJPPzP6Yl9v8vK82BtMqAmam7UKC5yWthK14O2JTBJr5weNN5hhB+vvHf1Gd+eCH0lf8oDBJYj4cO9PyZRzzNrNh8QLNvSRt4r2L90tWLpNoIbenQWvKtxkShDeD7zXoQ==");
-//		System.out.println(des);
-		
-	}
-
 	/**
 	 * 公钥解密
 	 *
@@ -105,15 +90,15 @@ public class RsaUtils {
 	 * @return 解密后的文本
 	 */
 	public static String decryptByPublicKey(String publicKeyString, String text) throws Exception {
-		X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64.decode(publicKeyString));
+		X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(DatatypeConverter.parseBase64Binary(publicKeyString));
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_KEY);
 		PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
 		Cipher cipher = Cipher.getInstance(ALGORITHM_MODE);
 		cipher.init(Cipher.DECRYPT_MODE, publicKey);
-		byte[] result = cipher.doFinal(Base64.decode(text));
+		byte[] result = cipher.doFinal(DatatypeConverter.parseBase64Binary(text));
 		return new String(result);
 	}
-
+	
 	/**
 	 * 私钥加密
 	 *
@@ -122,13 +107,13 @@ public class RsaUtils {
 	 * @return 加密后的文本
 	 */
 	public static String encryptByPrivateKey(String privateKeyString, String text) throws Exception {
-		PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(Base64.decode(privateKeyString));
+		PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(DatatypeConverter.parseBase64Binary(privateKeyString));
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_KEY);
 		PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
 		Cipher cipher = Cipher.getInstance(ALGORITHM_MODE);
 		cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 		byte[] result = cipher.doFinal(text.getBytes());
-		return Base64.encode(result);
+		return DatatypeConverter.printBase64Binary(result);
 	}
 
 	/**
@@ -139,12 +124,12 @@ public class RsaUtils {
 	 * @return 解密后的文本
 	 */
 	public static String decryptByPrivateKey(String privateKeyString, String text) throws Exception {
-		PKCS8EncodedKeySpec pkcs8EncodedKeySpec5 = new PKCS8EncodedKeySpec(Base64.decode(privateKeyString));
+		PKCS8EncodedKeySpec pkcs8EncodedKeySpec5 = new PKCS8EncodedKeySpec(DatatypeConverter.parseBase64Binary(privateKeyString));
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_KEY);
 		PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec5);
 		Cipher cipher = Cipher.getInstance(ALGORITHM_MODE, new BouncyCastleProvider());
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-		byte[] result = cipher.doFinal(Base64.decode(text));
+		byte[] result = cipher.doFinal(DatatypeConverter.parseBase64Binary(text));
 		return new String(result);
 	}
 	
@@ -172,13 +157,13 @@ public class RsaUtils {
 	 * @return 加密后的文本
 	 */
 	public static String encryptByPublicKey(String publicKeyString, String text) throws Exception {
-		X509EncodedKeySpec x509EncodedKeySpec2 = new X509EncodedKeySpec(Base64.decode(publicKeyString));
+		X509EncodedKeySpec x509EncodedKeySpec2 = new X509EncodedKeySpec(DatatypeConverter.parseBase64Binary(publicKeyString));
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_KEY);
 		PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec2);
 		Cipher cipher = Cipher.getInstance(ALGORITHM_MODE, new BouncyCastleProvider());
 		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 		byte[] result = cipher.doFinal(text.getBytes());
-		return Base64.encode(result);
+		return DatatypeConverter.printBase64Binary(result);
 	}
 
 	/**
@@ -192,8 +177,8 @@ public class RsaUtils {
 		KeyPair keyPair = keyPairGenerator.generateKeyPair();
 		RSAPublicKey rsaPublicKey = (RSAPublicKey) keyPair.getPublic();
 		RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) keyPair.getPrivate();
-		String publicKeyString = Base64.encode(rsaPublicKey.getEncoded());
-		String privateKeyString = Base64.encode(rsaPrivateKey.getEncoded());
+		String publicKeyString = DatatypeConverter.printBase64Binary(rsaPublicKey.getEncoded());
+		String privateKeyString = DatatypeConverter.printBase64Binary(rsaPrivateKey.getEncoded());
 		return new RsaKeyPair(publicKeyString, privateKeyString);
 	}
 
