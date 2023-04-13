@@ -170,11 +170,11 @@
         	<optional>true</optional>
         </dependency>
         
+        <!-- 加密算法应与安全模式和填充方案一起使用 -->
         <dependency>
-    <groupId>org.bouncycastle</groupId>
-    <artifactId>bcprov-jdk15on</artifactId>
-    <version>1.70</version>
-</dependency>
+		    <groupId>org.bouncycastle</groupId>
+		    <artifactId>bcprov-jdk15on</artifactId>
+		</dependency>
         
     </dependencies>
 

@@ -37,6 +37,7 @@
         <guava.version>31.1-jre</guava.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <zxing.version>3.5.1</zxing.version>
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -181,6 +182,13 @@
 			    <groupId>com.google.zxing</groupId>
 			    <artifactId>core</artifactId>
 			    <version>${zxing.version}</version>
+			</dependency>
+			
+			<!-- 加密算法应与安全模式和填充方案一起使用 -->
+	        <dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcprov-jdk15on</artifactId>
+			    <version>${bcprov-jdk15on.version}</version>
 			</dependency>
 
             <!-- 定时任务-->
