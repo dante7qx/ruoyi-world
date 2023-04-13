@@ -1,5 +1,7 @@
 package com.risun.common.utils.ip;
 
+import java.nio.charset.Charset;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,9 +9,9 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.risun.common.config.RisunConfig;
 import com.risun.common.constant.Constants;
-import com.risun.common.utils.http.HttpUtils;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
 
 /**
  * 获取地址类
@@ -37,7 +39,7 @@ public class AddressUtils
         {
             try
             {
-                String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
+            	String rspStr = HttpUtil.get(IP_URL + "?ip=" + ip + "&json=true", Charset.forName(Constants.GBK));
                 if (StrUtil.isEmpty(rspStr))
                 {
                     log.error("获取地理位置异常 {}", ip);
@@ -55,4 +57,5 @@ public class AddressUtils
         }
         return UNKNOWN;
     }
+    
 }

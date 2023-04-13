@@ -36,7 +36,7 @@ public class CacheController
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    private final static List<SysCache> CACHES = new ArrayList<SysCache>();
+    private static final List<SysCache> CACHES = new ArrayList<SysCache>();
     {
     	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.LOGIN_TOKEN_KEY, "用户信息"));
     	CACHES.add(new SysCache(CacheConstants.SYS_KEY + CacheConstants.SYS_CONFIG_KEY, "配置信息"));
