@@ -41,7 +41,7 @@ create table sys_user (
   phonenumber       varchar(11)     default ''                 comment '手机号码',
   sex               char(1)         default '0'                comment '用户性别（0男 1女 2未知）',
   avatar            varchar(100)    default ''                 comment '头像地址',
-  password          varchar(200)    default ''                 comment '密码',
+  password          varchar(400)    default ''                 comment '密码',
   py_name	        varchar(200)    default ''                 comment '用户名拼音',
   first_spell_name	varchar(16)     default ''                 comment '用户名拼音首字母',
   status            char(1)         default '0'                comment '帐号状态（0正常 1停用）',
@@ -59,7 +59,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'fFkaUuxwx9ICnqBXDYBZXnHZ1zJU5gVzdssxJJuSf+idRQZl2ELxBSaAp6HGh1hJVNOa3xcqeBUOzy/fEobZmDG7jsW8PhTKyfs4kkywQqAtHMs1A72o36WxR6H9M88+LDz9+3a7YFm44JzPUCxdhhR8yvzZbjWVAM24ee2DMtI=', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表

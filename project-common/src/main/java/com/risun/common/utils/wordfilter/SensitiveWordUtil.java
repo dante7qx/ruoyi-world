@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class SensitiveWordUtil {
 	public static SensitiveWordList wordList;
-	private final static char replace = '*'; // 替代字符
-	private final static char[] skip = new char[] { // 遇到这些字符就会跳过，例如,如果"AB"是敏感词，那么"A B","A=B"也会被屏蔽
+	private static final char replace = '*'; // 替代字符
+	private static final char[] skip = new char[] { // 遇到这些字符就会跳过，例如,如果"AB"是敏感词，那么"A B","A=B"也会被屏蔽
 			'!', '*', '-', '+', '_', '=', ',', '.', '@' };
 
 	/**

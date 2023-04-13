@@ -118,4 +118,8 @@ public class SecurityUtils
     {
         return userId != null && 1L == userId;
     }
+    
+    public static void main(String[] args) {
+		System.out.println(encryptPassword("gzxqj1028#"));
+	}
 }

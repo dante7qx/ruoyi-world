@@ -7,21 +7,26 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 获取IP方法
  * 
  * @author ruoyi
  */
+@Slf4j
 public class IpUtils {
 	
-	public final static String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
+	public static final String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
     // 匹配 ip
-    public final static String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
-    public final static String REGX_IP_WILDCARD = "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}" + "|((" + REGX_0_255 + "\\.){3}\\*))";
+    public static final String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
+    public static final  String REGX_IP_WILDCARD = "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}" + "|((" + REGX_0_255 + "\\.){3}\\*))";
     // 匹配网段
-    public final static String REGX_IP_SEG = "(" + REGX_IP + "\\-" + REGX_IP + ")";
-
+    public static final String REGX_IP_SEG = "(" + REGX_IP + "\\-" + REGX_IP + ")";
+    
+    private static final String UNKNOWN = "unknown";
+    
+    private static final String LOCAL_IP = "127.0.0.1";
 	
 	/**
 	 * 获取客户端IP
@@ -31,27 +36,27 @@ public class IpUtils {
 	 */
 	public static String getIpAddr(HttpServletRequest request) {
 		if (request == null) {
-			return "unknown";
+			return UNKNOWN;
 		}
 		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("X-Forwarded-For");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("X-Real-IP");
 		}
 
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
 
-		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : getMultistageReverseProxyIp(ip);
+		return "0:0:0:0:0:0:0:1".equals(ip) ? LOCAL_IP : getMultistageReverseProxyIp(ip);
 	}
 
 	/**
@@ -62,10 +67,10 @@ public class IpUtils {
 	 */
 	public static boolean internalIp(String ip) {
 		byte[] addr = textToNumericFormatV4(ip);
-		if(ArrayUtil.isEmpty(addr)) {
-			return true;
+		if(ArrayUtil.isNotEmpty(addr)) {
+			return internalIp(addr) || LOCAL_IP.equals(ip);
 		}
-		return internalIp(addr) || "127.0.0.1".equals(ip);
+		return false;
 	}
 
 	/**
@@ -113,8 +118,9 @@ public class IpUtils {
 	 * @return byte 字节
 	 */
 	public static byte[] textToNumericFormatV4(String text) {
+		byte[] empty = new byte[0];
 		if (text.length() == 0) {
-			return null;
+			return empty;
 		}
 
 		byte[] bytes = new byte[4];
@@ -126,7 +132,7 @@ public class IpUtils {
 			case 1:
 				l = Long.parseLong(elements[0]);
 				if ((l < 0L) || (l > 4294967295L)) {
-					return null;
+					return empty;
 				}
 				bytes[0] = (byte) (int) (l >> 24 & 0xFF);
 				bytes[1] = (byte) (int) ((l & 0xFFFFFF) >> 16 & 0xFF);
@@ -136,12 +142,12 @@ public class IpUtils {
 			case 2:
 				l = Integer.parseInt(elements[0]);
 				if ((l < 0L) || (l > 255L)) {
-					return null;
+					return empty;
 				}
 				bytes[0] = (byte) (int) (l & 0xFF);
 				l = Integer.parseInt(elements[1]);
 				if ((l < 0L) || (l > 16777215L)) {
-					return null;
+					return empty;
 				}
 				bytes[1] = (byte) (int) (l >> 16 & 0xFF);
 				bytes[2] = (byte) (int) ((l & 0xFFFF) >> 8 & 0xFF);
@@ -151,13 +157,13 @@ public class IpUtils {
 				for (i = 0; i < 2; ++i) {
 					l = Integer.parseInt(elements[i]);
 					if ((l < 0L) || (l > 255L)) {
-						return null;
+						return empty;
 					}
 					bytes[i] = (byte) (int) (l & 0xFF);
 				}
 				l = Integer.parseInt(elements[2]);
 				if ((l < 0L) || (l > 65535L)) {
-					return null;
+					return empty;
 				}
 				bytes[2] = (byte) (int) (l >> 8 & 0xFF);
 				bytes[3] = (byte) (int) (l & 0xFF);
@@ -166,19 +172,20 @@ public class IpUtils {
 				for (i = 0; i < 4; ++i) {
 					l = Integer.parseInt(elements[i]);
 					if ((l < 0L) || (l > 255L)) {
-						return null;
+						return empty;
 					}
 					bytes[i] = (byte) (int) (l & 0xFF);
 				}
 				break;
 			default:
-				return null;
+				return empty;
 			}
 		} catch (NumberFormatException e) {
-			return null;
+			log.error(e.getMessage(), e);
 		}
 		return bytes;
 	}
+	
 
 	/**
 	 * 获取IP地址
@@ -190,8 +197,9 @@ public class IpUtils {
 			return InetAddress.getLocalHost()
 				.getHostAddress();
 		} catch (UnknownHostException e) {
+			log.error(e.getMessage(), e);
 		}
-		return "127.0.0.1";
+		return LOCAL_IP;
 	}
 
 	/**
@@ -204,6 +212,7 @@ public class IpUtils {
 			return InetAddress.getLocalHost()
 				.getHostName();
 		} catch (UnknownHostException e) {
+			log.error(e.getMessage(), e);
 		}
 		return "未知";
 	}
@@ -216,11 +225,11 @@ public class IpUtils {
 	 */
 	public static String getMultistageReverseProxyIp(String ip) {
 		// 多级反向代理检测
-		if (ip != null && ip.indexOf(",") > 0) {
+		if (ip != null && ip.indexOf(",") > -1) {
 			final String[] ips = ip.trim()
 				.split(",");
 			for (String subIp : ips) {
-				if (false == isUnknown(subIp)) {
+				if (!isUnknown(subIp)) {
 					ip = subIp;
 					break;
 				}
@@ -236,7 +245,7 @@ public class IpUtils {
 	 * @return 是否未知
 	 */
 	public static boolean isUnknown(String checkString) {
-		return StrUtil.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
+		return StrUtil.isBlank(checkString) || UNKNOWN.equalsIgnoreCase(checkString);
 	}
 
 	/**
@@ -286,7 +295,9 @@ public class IpUtils {
 		String[] sipe = iparea.substring(idx + 1)
 			.split("\\.");
 		String[] sipt = ip.split("\\.");
-		long ips = 0L, ipe = 0L, ipt = 0L;
+		long ips = 0L;
+		long ipe = 0L;
+		long ipt = 0L;
 		for (int i = 0; i < 4; ++i) {
 			ips = ips << 8 | Integer.parseInt(sips[i]);
 			ipe = ipe << 8 | Integer.parseInt(sipe[i]);
@@ -313,11 +324,8 @@ public class IpUtils {
 		}
 		String[] ips = filter.split(";");
 		for (String iStr : ips) {
-			if (isIP(iStr) && iStr.equals(ip)) {
-				return true;
-			} else if (isIpWildCard(iStr) && ipIsInWildCardNoCheck(iStr, ip)) {
-				return true;
-			} else if (isIPSegment(iStr) && ipIsInNetNoCheck(iStr, ip)) {
+			if ((isIP(iStr) && iStr.equals(ip)) || ((isIpWildCard(iStr) && ipIsInWildCardNoCheck(iStr, ip))
+					|| (isIPSegment(iStr) && ipIsInNetNoCheck(iStr, ip)))) {
 				return true;
 			}
 		}
