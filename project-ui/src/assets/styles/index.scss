@@ -195,3 +195,10 @@ aside {
   color: #5f6266 !important;
   background-color: #ffffff;
 }
+
+// form label 过长，需要换行时设置行高
+.long-form-label {
+  .el-form-item__label{
+    line-height: 20px !important;
+  }
+}
