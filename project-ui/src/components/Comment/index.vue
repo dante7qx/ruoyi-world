@@ -2,7 +2,7 @@
   <div class="container">
     <div class="comment" v-for="item in comments" :key="item.commentId">
       <div class="info">
-        <img class="avatar" :src="item.fromAvatar ? baseUrl + item.fromAvatar : defaultAvatar" alt="avatar" width="36" height="36"/>
+        <img class="avatar" :src="item.fromAvatar ? baseUrl + item.fromAvatar : defaultAvatar" alt="" width="36" height="36"/>
         <div class="right">
           <div class="name">{{item.fromName}}</div>
           <div class="date">{{item.commentDate}}</div>

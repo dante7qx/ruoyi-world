@@ -3,7 +3,7 @@
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
-          <img :src="logo" alt="logo"> Form Generator
+          <img :src="logo" alt=""> Form Generator
         </div>
       </div>
       <el-scrollbar class="left-scrollbar">
