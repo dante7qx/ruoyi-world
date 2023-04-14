@@ -51,6 +51,8 @@ import VideoPlayer from '@/components/Video/play'
 import LongTableCol from '@/components/LongTableCol'
 // 部门人员选择
 import DeptUserSelect from '@/components/DeptUserSelect'
+// 部门树选择
+import DeptTreeSelect from '@/components/DeptTree'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -82,6 +84,7 @@ Vue.component('VideoMonitor', VideoMonitor)
 Vue.component('VideoPlayer', VideoPlayer)
 Vue.component('LongTableCol', LongTableCol)
 Vue.component('SysDeptUserSelect', DeptUserSelect)
+Vue.component('SysDeptTree', DeptTreeSelect)
 
 Vue.use(directive)
 Vue.use(plugins)
