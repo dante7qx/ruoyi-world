@@ -8,6 +8,7 @@
   		text-color="#fff"
   		active-text-color="#3b8be0"
 			@select="handleSelect">
+			<el-menu-item index="sysDeptTree">部门树</el-menu-item>
 			<el-menu-item index="sysUserSel">用户选择</el-menu-item>
 			<el-submenu index="1">
 				<template slot="title">下拉框</template>
@@ -37,6 +38,7 @@
 		<gen-qrcode v-else-if="activeIndex=='qrcode'" />
 		<comment-page v-else-if="activeIndex=='comment'" />
 		<iframe-page v-else-if="activeIndex=='iframe'" />
+		<sys-dept-tree-sel v-else-if="activeIndex=='sysDeptTree'" />
 	</div>
 </template>
 
@@ -52,6 +54,7 @@ import SysUserSel from './sysUserSel'
 import QrCode from './qrcode'
 import Comment from './comment'
 import Iframe from './iframe'
+import SysDeptTreeSel from './deptTree'
 
 export default {
   name: "CodeExample",
@@ -66,11 +69,12 @@ export default {
 		'sys-user-sel': SysUserSel,
 		'gen-qrcode': QrCode,
 		'comment-page': Comment,
-		'iframe-page': Iframe
+		'iframe-page': Iframe,
+		'sys-dept-tree-sel': SysDeptTreeSel
 	},
 	data() {
     return {
-			activeIndex: 'sysUserSel'
+			activeIndex: 'sysDeptTree'
 		}
 	},
 	methods: {

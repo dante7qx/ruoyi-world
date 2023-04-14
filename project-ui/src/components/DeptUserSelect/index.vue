@@ -103,7 +103,7 @@ import { deptTree4UserSel, listDeptUser } from '@/api/system/user'
 export default {
 	name: 'SysDeptUserSelect',
   props: {
-    // 部门层级 0: 全部 1: 部门及下级 2: 本部门 4: 部门及上级
+    // 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级
     level: {
       type: Number,
       required: false,
