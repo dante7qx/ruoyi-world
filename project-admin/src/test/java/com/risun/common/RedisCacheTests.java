@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.risun.RisunApplicationTests;
 import com.risun.common.core.redis.RedisCache;
 
-public class RedisCacheTests extends RisunApplicationTests {
+class RedisCacheTests extends RisunApplicationTests {
 	
 	@Autowired
 	private RedisCache redisCache;
@@ -17,7 +17,7 @@ public class RedisCacheTests extends RisunApplicationTests {
 	String key = "test_key";
 	
 	@Test
-	public void operCache() {
+	void operCache() {
 		String val = "你好，Redis！";
 		redisCache.setCacheObject(key, val);
 		Object cacheObject = redisCache.getCacheObject(key);
@@ -25,7 +25,7 @@ public class RedisCacheTests extends RisunApplicationTests {
 	}
 	
 	@Test
-	public void delCache() {
+	void delCache() {
 		boolean result = redisCache.deleteObject(key);
 		assertTrue(result, key+"不存在！");
 	}

@@ -12,13 +12,13 @@ import com.risun.system.domain.SysCommentReply;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SysCommentReplyMapperTests extends RisunApplicationTests {
+class SysCommentReplyMapperTests extends RisunApplicationTests {
 
 	@Autowired
 	private SysCommentReplyMapper sysCommentReplyMapper;
 	
 	@Test
-	public void selectSysCommentReplyByCommentIds() {
+	void selectSysCommentReplyByCommentIds() {
 		List<SysCommentReply> list = sysCommentReplyMapper.selectSysCommentReplyByCommentIds(Lists.newArrayList(10L, 20L, 30L));
 		log.info("{}", list);
 	}

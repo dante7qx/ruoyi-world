@@ -2,12 +2,12 @@ package com.risun.framework;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.alibaba.fastjson2.JSONObject;
 import com.risun.RisunApplicationTests;
 import com.risun.framework.sms.SmsFactory;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -15,7 +15,7 @@ import cn.hutool.http.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SmsFactoryTests extends RisunApplicationTests {
+class SmsFactoryTests extends RisunApplicationTests {
 	
 	private final String phoneNumber = "您的手机号码";
 
@@ -23,7 +23,7 @@ public class SmsFactoryTests extends RisunApplicationTests {
 	private SmsFactory smsFactory;
 	
 	@Test
-	public void sendSms() {
+	void sendSms() {
 		log.info("开始发送短信。。。");
 		String content = "测试短信（同步）";
 		smsFactory.sendSms(phoneNumber, content);
@@ -32,7 +32,7 @@ public class SmsFactoryTests extends RisunApplicationTests {
 	}
 	
 	@Test
-	public void sendSmsAsync() {
+	void sendSmsAsync() {
 		log.info("开始发送短信。。。");
 		String content = "测试短信（异步）";
 		smsFactory.sendSmsAsync(phoneNumber, content);
@@ -41,7 +41,7 @@ public class SmsFactoryTests extends RisunApplicationTests {
 	}
 	
 	@Test
-	public void invokeExternalSmsInc() {
+	void invokeExternalSmsInc() {
 		String url = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
 		String code = RandomUtil.randomNumbers(6);
 		System.out.println(code);
@@ -51,7 +51,7 @@ public class SmsFactoryTests extends RisunApplicationTests {
 	    json.put("modelID", "225130XXX");
 	    json.put("content", "#info#=您正在进行身份认证，您的验证码是"+code+"，验证码5分钟之内有效。如非本人操作，请忽略本短信");
 		String result = HttpUtil.post(url, json.toString(), 5000);
-		System.out.println(result);
+		log.info(result);
 	}
 	
 	
