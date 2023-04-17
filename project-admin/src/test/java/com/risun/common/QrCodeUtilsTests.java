@@ -15,7 +15,7 @@ import cn.hutool.core.util.ClassUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class QrCodeUtilsTests extends RisunApplicationTests {
+class QrCodeUtilsTests extends RisunApplicationTests {
 	
 	private Demo demo;
 	
@@ -29,27 +29,27 @@ public class QrCodeUtilsTests extends RisunApplicationTests {
 	}
 	
 	@Test
-	public void generate() {
+	void generate() {
 		String qrCodeUrl = QrCodeUtils.generate(JSON.toJSONString(demo));
 		log.info("二维码：{}", qrCodeUrl);
 	}
 	
 	@Test
-	public void generateWithLogo() {
+	void generateWithLogo() {
 		String logoPath = ClassUtil.getLocationPath(QrCodeUtils.class).replaceAll("common.*", "ui/src/assets/logo/logo.png");
 		String qrCodeUrl = QrCodeUtils.generate(JSON.toJSONString(demo), logoPath);
 		log.info("Logo二维码：{}", qrCodeUrl);
 	}
 	
 	@Test
-	public void generateWithLogo2() {
+	void generateWithLogo2() {
 		String logoPath = ClassUtil.getLocationPath(QrCodeUtils.class).replaceAll("common.*", "ui/src/assets/logo/logo.png");
 		String qrCodeUrl = QrCodeUtils.generate(JSON.toJSONString(demo), 200, 200, logoPath);
 		log.info("Logo二维码：{}", qrCodeUrl);
 	}
 	
 	@Test
-	public void generateWithLogo3() {
+	void generateWithLogo3() {
 		String logoPath = ClassUtil.getLocationPath(QrCodeUtils.class).replaceAll("common.*", "ui/src/assets/logo/logo.png");
 		String qrCodeUrl = QrCodeUtils.generate(JSON.toJSONString(demo), 200, 200, new Color(52, 105, 29), logoPath);
 		log.info("Logo二维码：{}", qrCodeUrl);
