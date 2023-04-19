@@ -24,7 +24,7 @@ create table sys_dept (
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-insert into sys_dept values(100,  0,   '0',          '睿阳科技',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', 'fqyczadmin', sysdate(), '', null);
+insert into sys_dept values(100,  0,   '0',          '睿阳科技',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', '', 'fqyczadmin', sysdate(), '', null);
 
 
 -- ----------------------------
