@@ -96,4 +96,16 @@ public class DemoServiceImpl implements IDemoService
     {
         return demoMapper.deleteDemoByDemoId(demoId);
     }
+    
+    /**
+     * 批量新增
+     * 
+     * @param demos
+     * @return
+     */
+    @Override
+    public int batchInsertDemo(List<Demo> demos) {
+    	return demoMapper.batchInsertDemo(demos);
+    }
+
 }

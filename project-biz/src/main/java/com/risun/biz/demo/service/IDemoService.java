@@ -58,4 +58,13 @@ public interface IDemoService
      * @return 结果
      */
     public int deleteDemoByDemoId(Long demoId);
+    
+    /**
+     * 批量新增
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchInsertDemo(List<Demo> demos);
+
 }

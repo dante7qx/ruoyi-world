@@ -259,6 +259,11 @@ export default {
         query: {fileUrl: fileUrl, fileName: fileName}
       });
       window.open(routeUrl.href)
+    },
+    filePreview2(fileUrl) {
+      const url = 'http://192.168.1.130:1024/' + this.baseUrl + fileUrl
+      const encode = Buffer.from(url).toString('base64')
+      window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(encode));
     }
   }
 };

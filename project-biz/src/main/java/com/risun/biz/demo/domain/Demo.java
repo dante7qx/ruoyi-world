@@ -31,11 +31,9 @@ public class Demo extends BaseEntity {
 	private Date demoTime;
 
 	/** 业务图片 */
-	@Excel(name = "业务图片")
 	private String demoImage;
 
 	/** 业务附件 */
-	@Excel(name = "业务附件")
 	private String attachment;
 
 	/** 业务内容 */

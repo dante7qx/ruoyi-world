@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.Log;
@@ -22,6 +23,8 @@ import com.risun.common.core.page.TableDataInfo;
 import com.risun.common.enums.BusinessType;
 import com.risun.common.utils.poi.ExcelUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 业务Controller
@@ -57,8 +60,8 @@ public class DemoController extends BaseController
     public void export(HttpServletResponse response, Demo demo)
     {
         List<Demo> list = demoService.selectDemoList(demo);
-        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
-        util.exportExcel(response, list, "业务数据");
+        ExcelUtil<Demo> util = new ExcelUtil<>(Demo.class);
+        util.exportExcel(response, list, "业务数据", "业务数据报表");
     }
 
     /**
@@ -111,19 +114,22 @@ public class DemoController extends BaseController
     }
     
     /**
-     * 批量新增业务
-     */
-    @PreAuthorize("@ss.hasPermi('biz:demo:add')")
-    @Log(title = "业务", businessType = BusinessType.INSERT)
-    @PostMapping("/insertBatch")
-    public AjaxResult addBatch()
-    {
-    	for (int i = 0; i < 200; i++) {
-    		Demo demo = new Demo();
-    		demo.setDemoName("测试数据" + i);
-    		demoService.insertDemo(demo);
+	 * 批量新增业务
+	 */
+	@PreAuthorize("@ss.hasPermi('biz:demo:add')")
+	@Log(title = "批量新增业务", businessType = BusinessType.INSERT)
+	@PostMapping("/insertBatch")
+	public AjaxResult addBatch() {
+		List<Demo> demos = Lists.newArrayList();
+		for (int i = 0; i < 200; i++) {
+			Demo demo = new Demo();
+			demo.setDemoName("测试数据" + i);
+			demo.setDemoTime(DateUtil.date());
+			demo.setCreateBy(getUsername());
+			demo.setCreateTime(DateUtil.date());
+			demos.add(demo);
 		}
-    	return AjaxResult.success();
-        
-    }
+		return toAjax(demoService.batchInsertDemo(demos));
+	}
+
 }

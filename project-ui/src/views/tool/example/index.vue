@@ -13,8 +13,11 @@
 				<template slot="title">下拉框</template>
 				<el-menu-item index="area">地区</el-menu-item>
 			</el-submenu>
-			<el-menu-item index="addressMap">地址地图</el-menu-item>
 			<el-submenu index="2">
+				<template slot="title">地址地图</template>
+				<el-menu-item index="addressMap">腾讯地图</el-menu-item>
+			</el-submenu>
+			<el-submenu index="3">
 				<template slot="title">表格表单</template>
 				<el-menu-item index="dynaForm">动态表单</el-menu-item>
 				<el-menu-item index="longTableCol">长表格字段</el-menu-item>

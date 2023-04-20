@@ -68,4 +68,13 @@ public interface DemoMapper
      */
     @Select("select count(demo_id) from t_demo")
     public int selectDemoCount();
+    
+    /**
+     * 批量新增
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchInsertDemo(List<Demo> demos);
+
 }
