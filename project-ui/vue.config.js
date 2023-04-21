@@ -47,7 +47,14 @@ module.exports = {
         pathRewrite: {
           ['^' + process.env.VUE_SOCKET_BASE_API]: ''
         }
-      }
+      },
+      [process.env.VUE_FILE_PREVIEW]: {
+        target: `http://localhost:8012`,  // kkFilePreview 服务
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_FILE_PREVIEW]: ''
+        }
+      },
     },
     disableHostCheck: true
   },

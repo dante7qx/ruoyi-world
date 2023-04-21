@@ -319,3 +319,13 @@ export function desensitizeMobilePhone(mobilePhone) {
     return '';
   }
 }
+
+// Base64编码
+export function encodeBase64(str) {
+  return Buffer.from(str).toString('base64')
+}
+
+// Base64解码
+export function decodeBase64(str) {
+  return Buffer.from(str.replace(/\s/g, '+'), 'base64').toString()
+}

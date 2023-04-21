@@ -34,9 +34,16 @@
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
         -->
+        <!--
         <el-link @click="filePreview(file.url)" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
+        -->
+        <!-- -->
+        <el-link @click="filePreviewEnhance(file.url, true)" :underline="false" target="_blank">
+          <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
+        </el-link>
+        
         <div class="ele-upload-list__item-content-action" >
           <el-tooltip class="item" effect="dark" content="下载" placement="top">
             <el-link :underline="false" @click="fileDownload(file.url, file.name)" type="success"><i class="el-icon-download"></i></el-link>
@@ -260,10 +267,14 @@ export default {
       });
       window.open(routeUrl.href)
     },
-    filePreview2(fileUrl) {
-      const url = 'http://192.168.1.130:1024/' + this.baseUrl + fileUrl
-      const encode = Buffer.from(url).toString('base64')
-      window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(encode));
+    // 加强版预览，几乎支持所有类型文件
+    filePreviewEnhance(fileUrl, watermark = false) {
+      const prefix = window.location.protocol+"//"+window.location.host
+      let url = encodeURIComponent(this.encodeBase64(prefix + this.baseUrl + fileUrl))
+      if(watermark) {
+        url += '&watermarkTxt=' + encodeURIComponent(this.$store.state.user.nickName)
+      }
+      window.open('/file-preview/onlinePreview?url=' + url);
     }
   }
 };
