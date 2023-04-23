@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="user-info-head" @click="editCropper()"><img v-bind:src="options.img" title="点击上传头像" class="img-circle img-lg" /></div>
+    <div class="user-info-head" @click="editCropper()"><img v-bind:src="options.img" alt="" title="点击上传头像" class="img-circle img-lg" /></div>
     <el-dialog :title="title" :visible.sync="open" width="800px" v-dialog-drag append-to-body @opened="modalOpened"  @close="closeDialog">
       <el-row>
         <el-col :xs="24" :md="12" :style="{height: '350px'}">
@@ -12,13 +12,14 @@
             :autoCropWidth="options.autoCropWidth"
             :autoCropHeight="options.autoCropHeight"
             :fixedBox="options.fixedBox"
+            :outputType="options.outputType"
             @realTime="realTime"
             v-if="visible"
           />
         </el-col>
         <el-col :xs="24" :md="12" :style="{height: '350px'}">
           <div class="avatar-upload-preview">
-            <img :src="previews.url" :style="previews.img" />
+            <img :src="previews.url" alt="" :style="previews.img" />
           </div>
         </el-col>
       </el-row>
@@ -78,7 +79,8 @@ export default {
         autoCrop: true, // 是否默认生成截图框
         autoCropWidth: 200, // 默认生成截图框宽度
         autoCropHeight: 200, // 默认生成截图框高度
-        fixedBox: true // 固定截图框大小 不允许改变
+        fixedBox: true, // 固定截图框大小 不允许改变
+        outputType:"png" // 默认生成截图为PNG格式
       },
       previews: {},
       resizeHandler: null
