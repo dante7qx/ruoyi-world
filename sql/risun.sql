@@ -594,14 +594,13 @@ create table sys_config (
   primary key (config_id)
 ) engine=innodb auto_increment=100 comment = '参数配置表';
 
-insert into sys_config values(1, '主框架页-默认皮肤样式名称',     'sys.index.skinName',            'skin-blue',     '1', 'fqyczadmin', sysdate(), '', null, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
-insert into sys_config values(2, '主框架页-侧边栏主题',           'sys.index.sideTheme',           'theme-dark',   '1', 'fqyczadmin', sysdate(), '', null, '深色主题theme-dark，浅色主题theme-light' );
-insert into sys_config values(3, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
-insert into sys_config values(4, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
-insert into sys_config values(5, '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'fqyczadmin', sysdate(), '', null, '短信发送标识（向领导申请）');
-insert into sys_config values(6, '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'fqyczadmin', sysdate(), '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
-insert into sys_config values(7, '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'fqyczadmin', sysdate(), '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
-insert into sys_config values(8, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'fqyczadmin', sysdate(), '', null, '初始化密码 rs@123!' );
+insert into sys_config values(1, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
+insert into sys_config values(2, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
+insert into sys_config values(3, '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'fqyczadmin', sysdate(), '', null, '短信发送标识（向领导申请）');
+insert into sys_config values(4, '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'fqyczadmin', sysdate(), '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
+insert into sys_config values(5, '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'fqyczadmin', sysdate(), '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
+insert into sys_config values(6, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'fqyczadmin', sysdate(), '', null, '初始化密码 rs@123!' );
+insert into sys_config values(7, '系统访问地址',         		   'sys.visit.baseurl',             'http://localhost:1024',      '0', 'fqyczadmin', sysdate(), '', null, '系统访问地址' );
 
 -- ----------------------------
 -- 14、系统访问记录
