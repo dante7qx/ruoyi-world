@@ -21,6 +21,7 @@ import 'tinymce/skins/ui/oxide/content.inline.min.css'
 import '../../../public/static/tinymce/langs/zh_CN.js'
 // 插件
 import '../../../public/static/tinymce/indent2em.js'  // 首行缩进插件
+import '../../../public/static/tinymce/tpLayout.js'  // 一键排版
 import '../../../public/static/tinymce/media.js'  // 插入视频插件
 import 'tinymce/plugins/image'  // 插入上传图片插件
 import 'tinymce/plugins/table'  // 插入表格插件
@@ -68,11 +69,11 @@ export default {
     },
     plugins: {
       type: [String, Array],
-      default: 'lists image media table textcolor wordcount link hr searchreplace autoresize preview fullscreen code indent2em'
+      default: 'lists image media table textcolor wordcount link hr searchreplace autoresize preview fullscreen code indent2em tpLayout'
     },
     toolbar: {
       type: [String, Array, Boolean],
-      default: 'styleselect | bold italic underline strikethrough fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify | hr bullist numlist indent2em blockquote subscript superscript | removeformat undo redo | image media link table | searchreplace preview fullscreen code'
+      default: 'styleselect | bold italic underline strikethrough fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify | hr bullist numlist indent2em blockquote subscript superscript | removeformat undo redo | image media link table | tpLayout searchreplace preview fullscreen code'
     },
     menubar: {
       type: [String, Boolean],
@@ -116,6 +117,16 @@ export default {
         branding: false,
         resize: false,
         default_link_target: '_blank',
+        tp_layout_options: {
+          style: {
+            'font-size': '12pt',
+            'text-align':'justify',
+            'text-indent':'2em',
+            'line-height': '25px'
+          },
+          filterTags: ['table>*','tbody'],
+          clearStyle: ['text-indent'],
+        },
         init_instance_callback: editor => {
           editor.on('paste', (evt) => {
             this.onPaste(evt)
