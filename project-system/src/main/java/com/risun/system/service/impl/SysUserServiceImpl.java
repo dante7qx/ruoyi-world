@@ -17,6 +17,7 @@ import com.risun.common.annotation.DataScope;
 import com.risun.common.constant.UserConstants;
 import com.risun.common.core.domain.entity.SysRole;
 import com.risun.common.core.domain.entity.SysUser;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.exception.ServiceException;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.PinyinUtil;
@@ -524,7 +525,7 @@ public class SysUserServiceImpl implements ISysUserService
         {
             throw new ServiceException("导入用户数据不能为空！");
         }
-        String password = configService.selectConfigByKey("sys.user.initPassword");
+        String password = configService.selectConfigByKey(GlobalArgConfigEnum.INIT_PASSWORD.key());
         checkPasswordValid(password);
         int successNum = 0;
         int failureNum = 0;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.risun.RisunApplicationTests;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.system.service.ISysConfigService;
 
 import cn.hutool.core.lang.Console;
@@ -19,7 +20,7 @@ class DemoMapperTests extends RisunApplicationTests {
 	
 	@Test
 	void selectDemoCount() {
-		Console.log(sysConfigService.selectConfigByKey("sys.sms.sendModelID"));
+		Console.log(sysConfigService.selectConfigByKey(GlobalArgConfigEnum.SEND_MODEL_ID.key()));
 		int count = demoMapper.selectDemoCount();
 		assertTrue(count >= 0);
 		

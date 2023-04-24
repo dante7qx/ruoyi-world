@@ -18,6 +18,7 @@ import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.constant.Constants;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.file.FileUtils;
@@ -153,7 +154,7 @@ public class DemoServiceImpl implements IDemoService
 		
 		// 富文本内容，系统访问地址请在系统参数中进行设置，参数键为 sys.visit.baseurl
 		if(StrUtil.isNotEmpty(data.getDemoContent())) {
-			map.put(WordExportUtil.HTML_CONTENT, ImageUtils.replaceImgSrc(data.getDemoContent(), sysConfigService.selectConfigByKey("sys.visit.baseurl")));
+			map.put(WordExportUtil.HTML_CONTENT, ImageUtils.replaceImgSrc(data.getDemoContent(), sysConfigService.selectConfigByKey(GlobalArgConfigEnum.BASE_URL.key())));
 		} else {
 			map.put(WordExportUtil.HTML_CONTENT, "");
 		}

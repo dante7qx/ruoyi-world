@@ -2,6 +2,7 @@ package com.risun.framework.sms;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.risun.common.constant.Constants;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.system.domain.SysSmsLog;
@@ -34,9 +35,6 @@ public class SmsFactory {
 	/** 短信内容前缀 */
 	private static final String SMS_PREFIX = "#info#=";
 	
-	/** 短信发送标识码 */
-	private static final String SMS_SEND_MODDEL_ID = "sys.sms.sendModelID";
-	
 	/** 短信发送成功编码 */
 	private static final String SMS_SEND_SUCCESS_CODE = "200";
 	
@@ -47,7 +45,7 @@ public class SmsFactory {
 	 * @param content
 	 */
 	public void sendSms(String phoneNumber, String content) {
-		String modelID = sysConfigService.selectConfigByKey(SMS_SEND_MODDEL_ID);
+		String modelID = sysConfigService.selectConfigByKey(GlobalArgConfigEnum.SEND_MODEL_ID.key());
 		Assert.hasText(modelID, "短信发送标识码不可为空");
 		Assert.hasText(phoneNumber, "短信接收手机号不可为空");
 		Assert.hasText(content, "短信发送内容不可为空");

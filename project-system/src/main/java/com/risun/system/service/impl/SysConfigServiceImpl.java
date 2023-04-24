@@ -14,6 +14,7 @@ import com.risun.common.constant.UserConstants;
 import com.risun.common.core.redis.RedisCache;
 import com.risun.common.core.text.Convert;
 import com.risun.common.enums.DataSourceType;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.exception.ServiceException;
 import com.risun.system.domain.SysConfig;
 import com.risun.system.mapper.SysConfigMapper;
@@ -93,7 +94,7 @@ public class SysConfigServiceImpl implements ISysConfigService
     @Override
     public boolean selectCaptchaEnabled()
     {
-        String captchaEnabled = selectConfigByKey("sys.account.captchaEnabled");
+        String captchaEnabled = selectConfigByKey(GlobalArgConfigEnum.CAPTCHA_ENABLED.key());
         if (StrUtil.isEmpty(captchaEnabled))
         {
             return true;

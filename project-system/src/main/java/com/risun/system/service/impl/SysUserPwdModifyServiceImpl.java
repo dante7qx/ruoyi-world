@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 import com.risun.common.constant.UserConstants;
 import com.risun.common.core.domain.entity.SysUser;
+import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.system.domain.SysUserPwdModify;
@@ -51,12 +52,12 @@ public class SysUserPwdModifyServiceImpl implements ISysUserPwdModifyService {
 		
 		SysUserPwdModify upm = sysUserPwdModifyMapper.selectSysUserPwdModifyByUserId(user.getUserId());
 		// 账号初始密码修改
-		String needModifyFlag = configService.selectConfigByKey("sys.user.modifyInitPassword");
+		String needModifyFlag = configService.selectConfigByKey(GlobalArgConfigEnum.MODIFY_INIT_PASSWORD.key());
 		if(!UserConstants.NORMAL.equals(needModifyFlag) && ObjectUtil.isNull(upm)) {
 			result.put(UserConstants.MODIFY_PASSWORD, Boolean.TRUE);
 		}
 		// 账号密码更新周期
-		String period = configService.selectConfigByKey("sys.user.modifyPasswordPeriod");
+		String period = configService.selectConfigByKey(GlobalArgConfigEnum.MODIFY_PASSWORD_PERIOD.key());
 		try {
 			int modifyPeriod = Integer.parseInt(period);
 			Date lastUpdatePwdDate = upm != null ? upm.getModifyTime() : user.getCreateTime();
