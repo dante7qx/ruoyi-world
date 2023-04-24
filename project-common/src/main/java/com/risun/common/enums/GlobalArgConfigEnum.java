@@ -25,10 +25,6 @@ public enum GlobalArgConfigEnum {
 	private final String key;
 	private final String name;
 
-	public static void main(String[] args) {
-		System.out.println(GlobalArgConfigEnum.CAPTCHA_ENABLED.key());
-	}
-
 	public String key() {
 		return this.key;
 	}
