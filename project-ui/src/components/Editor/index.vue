@@ -125,7 +125,7 @@ export default {
             'line-height': '25px'
           },
           filterTags: ['table>*','tbody'],
-          clearStyle: ['text-indent'],
+          // clearStyle: ['text-indent'],
         },
         init_instance_callback: editor => {
           editor.on('paste', (evt) => {
