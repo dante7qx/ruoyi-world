@@ -30,14 +30,12 @@
       </el-form-item>
 #elseif($column.htmlType == "select" && "" != $dictType)
       <el-form-item label="${comment}" prop="${field}">
-        <el-select v-model="form.${field}" placeholder="请选择${comment}" :disabled="disabled">
+        <el-select v-model="form.${field}" placeholder="请选择${comment}" :disabled="disabled" style="width: 100%;">
           <el-option
             v-for="dict in dict.type.${dictType}"
             :key="dict.value"
             :label="dict.label"
 #if($column.javaType == "Integer" || $column.javaType == "Long"):value="parseInt(dict.value)"#else            :value="dict.value"#end
-            
-            style="width: 100%;"
           ></el-option>
         </el-select>
       </el-form-item>
