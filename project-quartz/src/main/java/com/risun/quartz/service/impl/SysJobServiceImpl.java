@@ -1,7 +1,7 @@
 package com.risun.quartz.service.impl;
 
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import org.quartz.JobDataMap;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -32,19 +32,6 @@ public class SysJobServiceImpl implements ISysJobService
     @Autowired
     private SysJobMapper jobMapper;
 
-    /**
-     * 项目启动时，初始化定时器 主要是防止手动修改数据库导致未同步到定时任务处理（注：不能手动修改数据库ID和任务组名，否则会导致脏数据）
-     */
-    @PostConstruct
-    public void init() throws SchedulerException, TaskException
-    {
-        scheduler.clear();
-        List<SysJob> jobList = jobMapper.selectJobAll();
-        for (SysJob job : jobList)
-        {
-            ScheduleUtils.createScheduleJob(scheduler, job);
-        }
-    }
 
     /**
      * 获取quartz调度器的计划任务列表
@@ -251,5 +238,20 @@ public class SysJobServiceImpl implements ISysJobService
     public boolean checkCronExpressionIsValid(String cronExpression)
     {
         return CronUtils.isValid(cronExpression);
+    }
+    
+    /**
+     * 初始化系统定时任务
+     * @throws SchedulerException 
+     * @throws TaskException 
+     */
+    @Override
+    public void loadingSysJobCache() throws SchedulerException, TaskException {
+    	scheduler.clear();
+        List<SysJob> jobList = jobMapper.selectJobAll();
+        for (SysJob job : jobList)
+        {
+            ScheduleUtils.createScheduleJob(scheduler, job);
+        }
     }
 }

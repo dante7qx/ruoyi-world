@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <druid.version>1.2.11</druid.version>
+        <druid.version>1.2.16</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
@@ -183,6 +183,13 @@
 			    <groupId>com.google.zxing</groupId>
 			    <artifactId>core</artifactId>
 			    <version>${zxing.version}</version>
+			</dependency>
+			
+			<!-- 数据库脚本版本 -->
+			<dependency>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-core</artifactId>
+				<version>7.15.0</version><!--$NO-MVN-MAN-VER$-->
 			</dependency>
 
             <!-- 定时任务-->

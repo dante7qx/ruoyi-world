@@ -9,6 +9,7 @@ import com.risun.framework.sms.SmsFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpUtil;
@@ -44,14 +45,14 @@ public class SmsFactoryTests extends RisunApplicationTests {
 	public void invokeExternalSmsInc() {
 		String url = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
 		String code = RandomUtil.randomNumbers(6);
-		System.out.println(code);
+		Console.log(code);
 		JSONObject json = new JSONObject();
 	    //手机号
 	    json.put("phone", "18211011254");
 	    json.put("modelID", "225130XXX");
 	    json.put("content", "#info#=您正在进行身份认证，您的验证码是"+code+"，验证码5分钟之内有效。如非本人操作，请忽略本短信");
 		String result = HttpUtil.post(url, json.toString(), 5000);
-		System.out.println(result);
+		Console.log(result);
 	}
 	
 	

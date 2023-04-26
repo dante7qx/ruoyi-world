@@ -1,6 +1,7 @@
 package com.risun.quartz.service;
 
 import java.util.List;
+
 import org.quartz.SchedulerException;
 
 import com.risun.common.exception.job.TaskException;
@@ -100,4 +101,9 @@ public interface ISysJobService
      * @return 结果
      */
     public boolean checkCronExpressionIsValid(String cronExpression);
+    
+    /**
+     * 初始化系统定时任务
+     */
+    public void loadingSysJobCache() throws SchedulerException, TaskException;
 }

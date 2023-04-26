@@ -28,6 +28,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- 数据库脚本版本 -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		
          <!-- Mysql驱动包 -->
         <dependency>
             <groupId>mysql</groupId>

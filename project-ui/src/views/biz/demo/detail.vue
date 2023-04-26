@@ -18,7 +18,7 @@
         <image-upload v-model="form.demoImage" :disabled="disabled" />
       </el-form-item>
       <el-form-item label="业务附件" prop="attachment">
-        <file-upload v-model="form.attachment" :bizModel="'demo'" :disabled="disabled"/>
+        <file-upload v-model="form.attachment" :bizModel="'demo'" :limit="6" :disabled="disabled"/>
       </el-form-item>
       <el-form-item label="业务内容">
         <editor v-model="form.demoContent" :disabled="disabled" :max-height="400"/>

@@ -59,6 +59,9 @@ spring:
     restart:
       # 热部署开关
       enabled: true
+  # flyway 配置
+  flyway:
+    baseline-on-migrate: true
   # redis 配置
   redis:
     # 地址

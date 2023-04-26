@@ -2,11 +2,13 @@ package com.risun.biz.demo.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.risun.RisunApplicationTests;
 import com.risun.system.service.ISysConfigService;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.hutool.core.lang.Console;
 
 public class DemoMapperTests extends RisunApplicationTests {
 	
@@ -17,7 +19,7 @@ public class DemoMapperTests extends RisunApplicationTests {
 	
 	@Test
 	public void selectDemoCount() {
-		System.out.println(sysConfigService.selectConfigByKey("sys.sms.sendModelID"));
+		Console.log(sysConfigService.selectConfigByKey("sys.sms.sendModelID"));
 		int count = demoMapper.selectDemoCount();
 		assertTrue(count >= 0);
 		
