@@ -9,6 +9,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.risun.RisunApplicationTests;
 import com.risun.framework.sms.SmsFactory;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpUtil;
@@ -44,7 +45,7 @@ class SmsFactoryTests extends RisunApplicationTests {
 	void invokeExternalSmsInc() {
 		String url = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
 		String code = RandomUtil.randomNumbers(6);
-		System.out.println(code);
+		Console.log(code);
 		JSONObject json = new JSONObject();
 	    //手机号
 	    json.put("phone", "18211011254");
