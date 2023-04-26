@@ -100,4 +100,10 @@ public interface ISysJobService
      * @return 结果
      */
     public boolean checkCronExpressionIsValid(String cronExpression);
+    
+    /**
+     * 初始化系统定时任务 
+     */
+    public void loadingSysJobCache() throws SchedulerException, TaskException;
+
 }

@@ -10,17 +10,19 @@
         style="margin-bottom: 20px;width: 90%;"
         />
     </div>
-    <el-tree
-      node-key="id"
-      highlight-current
-      :data="deptOptions"
-      :props="defaultProps"
-      :expand-on-click-node="false"
-      :filter-node-method="filterNode"
-      ref="deptTree"
-      default-expand-all
-      @node-click="handleNodeClick"
-    />
+    <div :style="{ height: deptTreeHeight + 'px', overflow: 'auto'}">
+      <el-tree
+        node-key="id"
+        highlight-current
+        :data="deptOptions"
+        :props="defaultProps"
+        :expand-on-click-node="false"
+        :filter-node-method="filterNode"
+        ref="deptTree"
+        default-expand-all
+        @node-click="handleNodeClick"
+      />
+    </div>
   </div>
 </template>
 
@@ -47,6 +49,12 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    // 部门树高度
+    maxHeight: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   data() {
@@ -55,6 +63,11 @@ export default {
       deptName: '',
       deptOptions: [],
       defaultProps: []
+    }
+  },
+  computed: {
+    deptTreeHeight() {
+      return this.maxHeight > 0 ? this.maxHeight : `${document.documentElement.clientHeight}` - 176;
     }
   },
   created() {
