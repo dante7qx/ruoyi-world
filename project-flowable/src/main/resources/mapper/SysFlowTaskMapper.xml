@@ -77,7 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	t1.first_task as firstTask
 		from
 			act_ru_task t
-		inner join sys_flow_trace t1 on t1.proc_inst_id = t.proc_inst_id_
+		inner join sys_flow_trace t1 on t1.proc_inst_id = t.proc_inst_id_ 
+		inner join sys_flow_record r on r.task_id = t.id_ and r.end_time is null
 		inner join act_re_procdef p on t1.proc_def_id = p.id_
 		left join sys_user u on u.user_id = t1.commit_user_id
 		left join sys_dept d on d.dept_id = u.dept_id
@@ -95,9 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							link.task_id_ = t.id_
 							and link.type_ = 'candidate'
 							and (
-								link.user_id_ = #{handledUserId}
+								(link.user_id_ = #{handledUserId} and r.user_id = #{handledUserId})
 								or 
-								exists(select 1 from sys_flow_group_user ur where ur.user_id = #{handledUserId} and ur.group_id = link.group_id_)
+								(r.group_id is not null and exists(select 1 from sys_flow_group_user ur where ur.user_id = #{handledUserId} and ur.group_id = link.group_id_))
 							)
 					)
 		 )
