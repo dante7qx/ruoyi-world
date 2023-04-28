@@ -21,7 +21,8 @@
         <druid.version>1.2.17</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
+        <mybatis-plus-spring-boot.version>3.5.3.1</mybatis-plus-spring-boot.version>
+        <p6spy.version>3.9.1</p6spy.version>
         <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <fastjson.version>2.0.27</fastjson.version>
         <oshi.version>6.4.0</oshi.version>
@@ -68,19 +69,36 @@
                 <version>${bitwalker.version}</version>
             </dependency>
 
-            <!-- SpringBoot集成mybatis框架 -->
+            <!-- SpringBoot集成mybatis-plus框架 -->
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-spring-boot.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-spring-boot.version}</version>
+            </dependency>
+            
+            <!-- sql性能分析插件 -->
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
             </dependency>
 
             <!-- pagehelper 分页插件 -->
             <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
-            </dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${pagehelper.boot.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>mybatis-spring</artifactId>
+						<groupId>org.mybatis</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>mybatis</artifactId>
+						<groupId>org.mybatis</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 
             <!-- 获取系统信息 -->
             <dependency>
