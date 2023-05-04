@@ -22,7 +22,6 @@
         <bitwalker.version>1.21</bitwalker.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <mybatis-plus-spring-boot.version>3.5.3.1</mybatis-plus-spring-boot.version>
-        <p6spy.version>3.9.1</p6spy.version>
         <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <fastjson.version>2.0.27</fastjson.version>
         <oshi.version>6.4.0</oshi.version>
@@ -76,13 +75,6 @@
                 <version>${mybatis-plus-spring-boot.version}</version>
             </dependency>
             
-            <!-- sql性能分析插件 -->
-            <dependency>
-                <groupId>p6spy</groupId>
-                <artifactId>p6spy</artifactId>
-                <version>${p6spy.version}</version>
-            </dependency>
-
             <!-- pagehelper 分页插件 -->
             <dependency>
 				<groupId>com.github.pagehelper</groupId>

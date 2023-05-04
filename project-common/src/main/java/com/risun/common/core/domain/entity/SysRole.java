@@ -56,6 +56,9 @@ public class SysRole extends BaseEntity
 
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
+    
+    /** 备注 */
+    private String remark;
 
     /** 菜单组 */
     private Long[] menuIds;
@@ -220,6 +223,14 @@ public class SysRole extends BaseEntity
     {
         this.permissions = permissions;
     }
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
     
     @Override
     public String toString() {

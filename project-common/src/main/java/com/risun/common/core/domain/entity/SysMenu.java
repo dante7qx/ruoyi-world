@@ -64,6 +64,9 @@ public class SysMenu extends BaseEntity
     /** 菜单图标 */
     private String icon;
 
+    /** 备注 */
+    private String remark;
+    
     /** 子菜单 */
     private List<SysMenu> children = new ArrayList<SysMenu>();
 
@@ -233,6 +236,14 @@ public class SysMenu extends BaseEntity
     {
         this.children = children;
     }
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
     
     @Override
     public String toString() {

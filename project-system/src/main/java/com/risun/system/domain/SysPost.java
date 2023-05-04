@@ -37,6 +37,9 @@ public class SysPost extends BaseEntity
     /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
+    
+    /** 备注 */
+    private String remark;
 
     /** 用户是否存在此岗位标识 默认不存在 */
     private boolean flag = false;
@@ -105,6 +108,14 @@ public class SysPost extends BaseEntity
     {
         this.flag = flag;
     }
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
     
     @Override
     public String toString() {

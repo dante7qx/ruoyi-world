@@ -95,6 +95,9 @@ public class SysUser extends BaseEntity
 
     /** 角色ID */
     private Long roleId;
+    
+    /** 备注 */
+    private String remark;
 
     public SysUser()
     {
@@ -319,6 +322,14 @@ public class SysUser extends BaseEntity
     {
         this.roleId = roleId;
     }
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
     @Override
     public String toString() {

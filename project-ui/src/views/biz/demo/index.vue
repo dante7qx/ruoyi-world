@@ -275,7 +275,7 @@ export default {
     closeFlowWin() {
       this.title = "";
       this.open = false;
-      this.handleQuery();
+      this.getList();
     },
     batchAdd() {
       this.$modal.loading('数据处理中...');

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.risun.biz.demo.domain.Demo;
 
 /**
@@ -13,7 +14,7 @@ import com.risun.biz.demo.domain.Demo;
  * @author sunchao
  * @date 2022-07-30
  */
-public interface DemoMapper 
+public interface DemoMapper extends BaseMapper<Demo>
 {
     /**
      * 查询业务

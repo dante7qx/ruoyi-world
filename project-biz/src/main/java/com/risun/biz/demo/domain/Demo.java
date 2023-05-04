@@ -5,6 +5,9 @@ import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.risun.common.annotation.Excel;
 import com.risun.common.core.domain.BaseEntity;
@@ -15,10 +18,12 @@ import com.risun.common.core.domain.BaseEntity;
  * @author sunchao
  * @date 2022-07-30
  */
+@TableName("t_demo")
 public class Demo extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 业务主键ID */
+	@TableId(type=IdType.AUTO)
 	private Long demoId;
 
 	/** 业务名称 */

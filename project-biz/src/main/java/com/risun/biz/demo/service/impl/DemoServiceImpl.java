@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deepoove.poi.data.AttachmentRenderData;
 import com.deepoove.poi.data.AttachmentType;
 import com.deepoove.poi.data.Attachments;
@@ -52,7 +54,8 @@ public class DemoServiceImpl implements IDemoService
     @Override
     public Demo selectDemoByDemoId(Long demoId)
     {
-        return demoMapper.selectDemoByDemoId(demoId);
+    	return demoMapper.selectById(demoId);
+//        return demoMapper.selectDemoByDemoId(demoId);
     }
 
     /**
@@ -64,7 +67,14 @@ public class DemoServiceImpl implements IDemoService
     @Override
     public List<Demo> selectDemoList(Demo demo)
     {
-        return demoMapper.selectDemoList(demo);
+		LambdaQueryWrapper<Demo> lqw = new QueryWrapper<Demo>().lambda()
+			.eq(Demo::getDelFlag, 0)
+			.like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
+			.ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
+			.le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"))
+			.like(StrUtil.isNotEmpty(demo.getDemoContent()), Demo::getDemoContent, demo.getDemoContent());
+    	return demoMapper.selectList(lqw);
+//        return demoMapper.selectDemoList(demo);
     }
 
     /**
@@ -78,7 +88,8 @@ public class DemoServiceImpl implements IDemoService
     {
         demo.setCreateBy(SecurityUtils.getUsername());
         demo.setCreateTime(DateUtils.getNowDate());
-        return demoMapper.insertDemo(demo);
+//        return demoMapper.insertDemo(demo);
+        return demoMapper.insert(demo);
     }
 
     /**
@@ -92,7 +103,8 @@ public class DemoServiceImpl implements IDemoService
     {
         demo.setUpdateBy(SecurityUtils.getUsername());
         demo.setUpdateTime(DateUtils.getNowDate());
-        return demoMapper.updateDemo(demo);
+//        return demoMapper.updateDemo(demo);
+        return demoMapper.updateById(demo);
     }
 
     /**

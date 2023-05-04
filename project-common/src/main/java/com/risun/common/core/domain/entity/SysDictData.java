@@ -53,6 +53,9 @@ public class SysDictData extends BaseEntity
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /** 备注 */
+    private String remark;
+    
     public Long getDictCode()
     {
         return dictCode;
@@ -155,7 +158,15 @@ public class SysDictData extends BaseEntity
         this.status = status;
     }
     
-    @Override
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("dictCode", getDictCode())

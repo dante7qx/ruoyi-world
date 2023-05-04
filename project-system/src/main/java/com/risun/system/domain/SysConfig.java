@@ -37,6 +37,9 @@ public class SysConfig extends BaseEntity
     /** 系统内置（Y是 N否） */
     @Excel(name = "系统内置", readConverterExp = "Y=是,N=否")
     private String configType;
+    
+    /** 备注 */
+    private String remark;
 
     public Long getConfigId()
     {
@@ -93,6 +96,14 @@ public class SysConfig extends BaseEntity
     {
         this.configType = configType;
     }
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
     
     @Override
     public String toString() {
