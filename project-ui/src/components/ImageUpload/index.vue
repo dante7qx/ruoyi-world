@@ -179,6 +179,11 @@ export default {
           return false;
         }
       }
+      // 校验文件名是否含有非法字符
+      if(file.name.indexOf(",") >= 0) {
+        this.$modal.msgError(`文件名含有非法字符 , `);
+        return false;
+      }
       this.$modal.loading("正在上传图片，请稍候...");
       this.number++;
     },
