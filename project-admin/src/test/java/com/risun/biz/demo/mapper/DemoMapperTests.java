@@ -22,6 +22,8 @@ class DemoMapperTests extends RisunApplicationTests {
 	void selectDemoCount() {
 		Console.log(sysConfigService.selectConfigByKey(GlobalArgConfigEnum.SEND_MODEL_ID.key()));
 		int count = demoMapper.selectDemoCount();
+		Long countPlus = demoMapper.selectCount(null);
+		Console.log(count + " == " + countPlus);
 		assertTrue(count >= 0);
 		
 	}

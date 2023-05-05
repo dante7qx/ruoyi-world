@@ -7,7 +7,7 @@ package ${packageName}.mapper;
 	#end
 #end
 
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${packageName}.domain.${ClassName};
 #if($existDelFlag)
 import org.apache.ibatis.annotations.Param;
@@ -22,61 +22,26 @@ import ${packageName}.domain.${subClassName};
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${ClassName}Mapper {
-    /**
-     * 查询${functionName}
-     * 
-     * @param ${pkColumn.javaField} ${functionName}主键
-     * @return ${functionName}
-     */
-    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
+public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
 
-    /**
-     * 查询${functionName}列表
-     * 
-     * @param ${className} ${functionName}
-     * @return ${functionName}集合
-     */
-    public List<${ClassName}> select${ClassName}List(${ClassName} ${className});
-
-    /**
-     * 新增${functionName}
-     * 
-     * @param ${className} ${functionName}
-     * @return 结果
-     */
-    public int insert${ClassName}(${ClassName} ${className});
-
-    /**
-     * 修改${functionName}
-     * 
-     * @param ${className} ${functionName}
-     * @return 结果
-     */
-    public int update${ClassName}(${ClassName} ${className});
-
+#if($existDelFlag)
     /**
      * 删除${functionName}
      * 
      * @param ${pkColumn.javaField} ${functionName}主键
      * @return 结果
      */
-#if($existDelFlag)
     public int delete${ClassName}By${pkColumn.capJavaField}(@Param("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}, @Param("deleteBy") String deleteBy);
-#else
-    public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 #end
 
+#if($existDelFlag)
     /**
      * 批量删除${functionName}
      * 
      * @param ${pkColumn.javaField}s 需要删除的数据主键集合
      * @return 结果
      */
-#if($existDelFlag)
     public int delete${ClassName}By${pkColumn.capJavaField}s(@Param("${pkColumn.javaField}s") ${pkColumn.javaType}[] ${pkColumn.javaField}s, @Param("deleteBy") String deleteBy);
-#else
-    public int delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaType}[] ${pkColumn.javaField}s);
 #end
 #if($table.sub)
 

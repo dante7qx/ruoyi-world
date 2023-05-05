@@ -212,6 +212,11 @@ public class GenTableServiceImpl implements IGenTableService
 
         // 获取模板列表
         List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        
+        if(table.getColumns().stream().filter(c -> GenConstants.DEL_FLAG.equals(c.getColumnName())).count() == 0) {
+        	templates.remove("vm/xml/mapper.xml.vm");
+        }
+        templates.add("vm/xml/sql-mapper.xml.vm");
         for (String template : templates)
         {
             // 渲染模板
@@ -373,6 +378,9 @@ public class GenTableServiceImpl implements IGenTableService
 
         // 获取模板列表
         List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        if(table.getColumns().stream().filter(c -> GenConstants.DEL_FLAG.equals(c.getColumnName())).count() == 0) {
+        	templates.remove("vm/xml/mapper.xml.vm");
+        }
         for (String template : templates)
         {
             // 渲染模板

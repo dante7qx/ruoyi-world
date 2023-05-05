@@ -1,8 +1,15 @@
 package ${packageName}.service.impl;
 #set ($existDelFlag = false)
+#set ($existQuery = false)
 #foreach ($column in $columns)
 	#if ($column.columnName == 'del_flag')
 		#set ($existDelFlag = true)
+    	#break
+	#end
+#end
+#foreach ($column in $columns)
+	#if ($column.query)
+		#set ($existQuery = true)
     	#break
 	#end
 #end
@@ -16,6 +23,10 @@ import com.risun.common.utils.DateUtils;
 #end
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+#if($existQuery)
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+#end
 #if($table.sub)
 import java.util.ArrayList;
 import cn.hutool.core.collection.CollUtil;
@@ -26,6 +37,7 @@ import com.risun.common.utils.SecurityUtils;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * ${functionName}Service业务层处理
@@ -46,7 +58,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
      */
     @Override
     public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField}) {
-        return ${className}Mapper.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+        return ${className}Mapper.selectById(${pkColumn.javaField});
     }
 
     /**
@@ -57,7 +69,48 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
      */
     @Override
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
-        return ${className}Mapper.select${ClassName}List(${className});
+#if($existQuery)
+        LambdaQueryWrapper<${ClassName}> lqw = new QueryWrapper<${ClassName}>().lambda()
+#end
+#if($existDelFlag)
+            .eq(${ClassName}::getDelFlag, 0)
+#end
+#foreach($column in $columns)
+#if($column.query)
+#if($column.javaField.length() > 2 && $column.javaField.substring(1,2).matches("[A-Z]"))
+#set($AttrName=$column.javaField)
+#else
+#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+#end
+#set($queryType=$column.queryType)
+#set($javaField=$column.javaField)
+#set($javaType=$column.javaType)
+#if($queryType == "EQ")
+            .eq(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "NE")
+            .ne(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "GT")
+            .gt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "GTE")
+            .ge(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "LT")
+            .lt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "LTE")
+            .le(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "LIKE")
+            .like(StrUtil.isNotEmpty(${className}.get${AttrName}()), ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+#elseif($queryType == "BETWEEN")
+            .ge(${className}.getParams().get("begin${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("begin${AttrName}"))
+            .le(${className}.getParams().get("end${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("end${AttrName}"))
+#end
+#end
+#end
+        ;
+#if($existQuery)
+        return ${className}Mapper.selectList(lqw);
+#else
+        return ${className}Mapper.selectList(null);
+#end
     }
 
     /**
@@ -84,7 +137,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
         insert${subClassName}(${className});
         return rows;
 #else
-        return ${className}Mapper.insert${ClassName}(${className});
+        return ${className}Mapper.insert(${className});
 #end
     }
 
@@ -111,7 +164,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
         insert${subClassName}(${className});
 #end
-        return ${className}Mapper.update${ClassName}(${className});
+        return ${className}Mapper.updateById(${className});
     }
 
     /**
@@ -131,7 +184,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #if($existDelFlag)
         return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s, SecurityUtils.getUsername());
 #else
-        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s);
+        return ${className}Mapper.deleteBatchIds(Arrays.asList(${pkColumn.javaField}s));
 #end
     }
 
@@ -152,7 +205,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #if($existDelFlag)
         return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}, SecurityUtils.getUsername());
 #else
-        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+        return ${className}Mapper.deleteById(${pkColumn.javaField});
 #end
     }
 #if($table.sub)

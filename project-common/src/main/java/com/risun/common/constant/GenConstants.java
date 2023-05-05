@@ -56,7 +56,7 @@ public class GenConstants
             "update_time", "remark" };
 
     /** Entity基类字段 */
-    public static final String[] BASE_ENTITY = { "createBy", "createTime", "updateBy", "updateTime", "remark" };
+    public static final String[] BASE_ENTITY = { "createBy", "createTime", "updateBy", "updateTime" }; // , "remark"
 
     /** Tree基类字段 */
     public static final String[] TREE_ENTITY = { "parentName", "parentId", "orderNum", "ancestors", "children" };
@@ -114,4 +114,7 @@ public class GenConstants
 
     /** 需要 */
     public static final String REQUIRE = "1";
+    
+    /** 删除标识 */
+    public static final String DEL_FLAG = "del_flag";
 }

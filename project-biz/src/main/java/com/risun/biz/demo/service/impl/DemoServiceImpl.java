@@ -37,9 +37,14 @@ import cn.hutool.core.util.StrUtil;
  * @author sunchao
  * @date 2022-07-30
  */
+/**
+ * 业务Service业务层处理
+ * 
+ * @author sunchao
+ * @date 2023-05-04
+ */
 @Service
-public class DemoServiceImpl implements IDemoService 
-{
+public class DemoServiceImpl implements IDemoService {
     @Autowired
     private DemoMapper demoMapper;
     @Autowired
@@ -52,10 +57,8 @@ public class DemoServiceImpl implements IDemoService
      * @return 业务
      */
     @Override
-    public Demo selectDemoByDemoId(Long demoId)
-    {
-    	return demoMapper.selectById(demoId);
-//        return demoMapper.selectDemoByDemoId(demoId);
+    public Demo selectDemoByDemoId(Long demoId) {
+        return demoMapper.selectById(demoId);
     }
 
     /**
@@ -65,16 +68,13 @@ public class DemoServiceImpl implements IDemoService
      * @return 业务
      */
     @Override
-    public List<Demo> selectDemoList(Demo demo)
-    {
-		LambdaQueryWrapper<Demo> lqw = new QueryWrapper<Demo>().lambda()
-			.eq(Demo::getDelFlag, 0)
-			.like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
-			.ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
-			.le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"))
-			.like(StrUtil.isNotEmpty(demo.getDemoContent()), Demo::getDemoContent, demo.getDemoContent());
-    	return demoMapper.selectList(lqw);
-//        return demoMapper.selectDemoList(demo);
+    public List<Demo> selectDemoList(Demo demo) {
+    	LambdaQueryWrapper<Demo> lqw = new QueryWrapper<Demo>().lambda()
+            .eq(Demo::getDelFlag, 0)
+            .like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
+            .ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
+            .le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"));
+        return demoMapper.selectList(lqw);
     }
 
     /**
@@ -84,11 +84,9 @@ public class DemoServiceImpl implements IDemoService
      * @return 结果
      */
     @Override
-    public int insertDemo(Demo demo)
-    {
+    public int insertDemo(Demo demo) {
         demo.setCreateBy(SecurityUtils.getUsername());
         demo.setCreateTime(DateUtils.getNowDate());
-//        return demoMapper.insertDemo(demo);
         return demoMapper.insert(demo);
     }
 
@@ -99,11 +97,9 @@ public class DemoServiceImpl implements IDemoService
      * @return 结果
      */
     @Override
-    public int updateDemo(Demo demo)
-    {
+    public int updateDemo(Demo demo) {
         demo.setUpdateBy(SecurityUtils.getUsername());
         demo.setUpdateTime(DateUtils.getNowDate());
-//        return demoMapper.updateDemo(demo);
         return demoMapper.updateById(demo);
     }
 
@@ -161,7 +157,7 @@ public class DemoServiceImpl implements IDemoService
     @Override
     public Map<String, Object> export4Word(Long demoId) {
     	final Map<String, Object> map = Maps.newHashMap();
-		Demo data = demoMapper.selectDemoByDemoId(demoId);
+		Demo data = demoMapper.selectById(demoId);
 		map.put("data", data);
 		
 		// 富文本内容，系统访问地址请在系统参数中进行设置，参数键为 sys.visit.baseurl
@@ -199,8 +195,9 @@ public class DemoServiceImpl implements IDemoService
 		map.put(WordExportUtil.ATTACHMENT_WORD, attach);
 		
 		// 表格行循环
-		List<Demo> demos = demoMapper.selectDemoList(new Demo());
+		List<Demo> demos = demoMapper.selectList(null);
 		map.put(WordExportUtil.LOOP_TABLE_ROW, demos);
 		return map;
     }
+    
 }

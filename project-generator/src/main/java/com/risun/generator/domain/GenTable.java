@@ -98,6 +98,9 @@ public class GenTable extends BaseEntity
 
     /** 上级菜单名称字段 */
     private String parentMenuName;
+    
+    /** 备注 */
+    private String remark;
 
     public Long getTableId()
     {
@@ -373,4 +376,13 @@ public class GenTable extends BaseEntity
         }
         return StrUtil.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
     }
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+    
 }
