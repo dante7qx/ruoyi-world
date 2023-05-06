@@ -39,6 +39,7 @@
         <zxing.version>3.5.1</zxing.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
         <flyway.version>7.15.0</flyway.version>
+        <redisson.version>3.17.7</redisson.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -207,6 +208,13 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-core</artifactId>
 				<version>${flyway.version}</version><!--$NO-MVN-MAN-VER$-->
+			</dependency>
+			
+			<!-- Redisson 分布式锁 -->
+			<dependency>
+			    <groupId>org.redisson</groupId>
+			    <artifactId>redisson-spring-boot-starter</artifactId>
+			    <version>${redisson.version}</version>
 			</dependency>
 
             <!-- 定时任务-->
