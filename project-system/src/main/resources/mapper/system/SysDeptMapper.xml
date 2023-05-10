@@ -172,7 +172,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 部门及下级部门 -->
 	<select id="selectLowerCascadeDeptList" parameterType="SysDept" resultMap="SysDeptResult">
 		<include refid="selectDeptVo"/>
-        where d.del_flag = '0' and d.dept_id = #{deptId} or find_in_set( #{deptId} , d.ancestors )
+        where d.del_flag = '0' and (d.dept_id = #{deptId} or find_in_set( #{deptId} , d.ancestors ))
 		order by d.parent_id, d.order_num
 	</select>
 	
