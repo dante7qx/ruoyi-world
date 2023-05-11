@@ -31,7 +31,6 @@ import org.springframework.util.Assert;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDept;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
@@ -64,7 +63,6 @@ import com.risun.flowable.service.ISysFlowRecordService;
 import com.risun.flowable.service.ISysFlowTaskService;
 import com.risun.flowable.service.ISysFlowTraceService;
 import com.risun.system.mapper.SysUserMapper;
-import com.risun.system.service.ISysDeptService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -87,8 +85,6 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	private ISysFlowBpmnModelService sysFlowBpmnModelService;
 	@Autowired
 	private ISysFlowGroupUserService sysFlowGroupUserService;
-	@Autowired
-	private ISysDeptService sysDeptService;
 	@Autowired
     private SysUserMapper userMapper;
 	@Autowired
@@ -139,9 +135,7 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 				return flowApprover;
 			}
 			if (taskDefDesc.startsWith(SEL_GROUP)) {
-				String groupKey = StrUtil.replaceFirst(taskDefDesc, SEL_GROUP, "")
-					.replace(MULTI_SEL, "")
-					.trim();
+				String groupKey = StrUtil.replaceFirst(taskDefDesc, SEL_GROUP, "") .replace(MULTI_SEL, "").trim();
 				groupUsers.addAll(sysFlowGroupUserService.selectSysFlowGroupUserByGroupKey(groupKey));
 			} else if (taskDefDesc.startsWith(SEL_DEPT) || taskDefDesc.startsWith(SEL_DEPT_GROUP)) {
 				if (taskDefDesc.startsWith(SEL_DEPT)) {
@@ -155,12 +149,8 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 						groupUsers.addAll(this.selectUserByDeptAndGroupKey(deptKeyArr[i], groupKeyArr[i]));
 					}
 				} else {
-					SysDept sysDept = sysDeptService.selectDeptById(SecurityUtils.getDeptId());
-					String deptKey = sysDept.getDeptKey();
-					String groupKey = StrUtil.replaceFirst(taskDefDesc, SEL_DEPT_GROUP, "")
-						.replace(MULTI_SEL, "")
-						.trim();
-					groupUsers.addAll(this.selectUserByDeptAndGroupKey(deptKey, groupKey));
+					String groupKey = StrUtil.replaceFirst(taskDefDesc, SEL_DEPT_GROUP, "").replace(MULTI_SEL, "").trim();
+					groupUsers.addAll(this.selectUserByDeptIdAndGroupKey(SecurityUtils.getDeptId(), groupKey));
 				}
 			} else if (taskDefDesc.startsWith(STARTER)) {
 				SysFlowGroupUser user = new SysFlowGroupUser();
@@ -386,7 +376,6 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	 */
 	private Long[] getRejectTaskApprover(SysApprovalFlowVo taskVo, Task task) {
 		List<SysFlowRecord> records = sysFlowRecordService.selectSysFlowRecordByBizUid(taskVo.getBizUid());
-//		String prevTaskDefId = getPrevTaskDefId(task.getTaskDefinitionKey(), records);
 		String prevTaskDefId = task.getTaskDefinitionKey();
 		if (StrUtil.isEmpty(prevTaskDefId)) {
 			throw new CustomWorkflowException("未找到上一步审批人");
@@ -412,6 +401,13 @@ public class SysFlowTaskServiceImpl extends FlowServiceFactory implements ISysFl
 	private List<SysFlowGroupUser> selectUserByDeptAndGroupKey(String deptKey, String groupKey) {
 		SysFlowGroupUser groupUser = new SysFlowGroupUser();
 		groupUser.setDeptKey(deptKey);
+		groupUser.setGroupKey(groupKey);
+		return sysFlowGroupUserService.selectSysFlowGroupUserList(groupUser);
+	}
+	
+	private List<SysFlowGroupUser> selectUserByDeptIdAndGroupKey(Long deptId, String groupKey) {
+		SysFlowGroupUser groupUser = new SysFlowGroupUser();
+		groupUser.setDeptId(deptId);
 		groupUser.setGroupKey(groupKey);
 		return sysFlowGroupUserService.selectSysFlowGroupUserList(groupUser);
 	}
