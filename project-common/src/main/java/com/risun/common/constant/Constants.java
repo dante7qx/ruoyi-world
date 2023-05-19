@@ -83,7 +83,7 @@ public class Constants
      * 令牌
      */
     public static final String TOKEN = "token";
-
+    
     /**
      * 令牌前缀
      */
@@ -149,4 +149,12 @@ public class Constants
      */
     public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
             "org.springframework", "org.apache", "com.risun.common.utils.file" };
+    
+    /** 
+     * 积木报表
+     */
+    public static final String JIMU_TOKEN = "X-Access-Token";
+    public static final String JIMU_PREFIX = "jmreport";
+    public static final String JIMU_STATIC = "desreport_";
+    
 }

@@ -19,7 +19,7 @@ export default {
     str: {
       type: String,
       default: '',
-      required: true
+      required: false
     },
     // 列表上显示的字段长度
     len: {

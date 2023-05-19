@@ -65,6 +65,12 @@
             <artifactId>project-mq</artifactId>
         </dependency>
         
+        <!-- 积木报表 -->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-jimu-report</artifactId>
+        </dependency>
+        
         <!-- 业务管理-->
         <dependency>
             <groupId>com.risun</groupId>

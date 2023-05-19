@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.risun</groupId>
+        <artifactId>project</artifactId>
+        <version>4.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>project-jimu-report</artifactId>
+
+    <description>积木报表组件</description>
+    
+    <properties>
+    	<jimureport.version>1.5.8</jimureport.version>
+    </properties>
+
+    <dependencies>
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-framework</artifactId>
+        </dependency>
+        
+        <!-- 积木报表 -->
+		<dependency>
+			<groupId>org.jeecgframework.jimureport</groupId>
+			<artifactId>jimureport-spring-boot-starter</artifactId>
+            <version>${jimureport.version}</version>
+		</dependency>
+    </dependencies>
+
+</project>

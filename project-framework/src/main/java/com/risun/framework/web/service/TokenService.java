@@ -3,7 +3,9 @@ package com.risun.framework.web.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import com.risun.common.utils.ip.AddressUtils;
 import com.risun.common.utils.ip.IpUtils;
 import com.risun.common.utils.uuid.IdUtils;
 
+import cn.hutool.core.util.StrUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -64,6 +67,31 @@ public class TokenService
         if (StringUtils.isNotEmpty(token))
         {
             try
+            {
+                Claims claims = parseToken(token);
+                // 解析对应的权限以及用户信息
+                String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+                String userKey = getTokenKey(uuid);
+                LoginUser user = redisCache.getCacheObject(userKey);
+                return user;
+            }
+            catch (Exception e)
+            {
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * 获取用户身份信息
+     *
+     * @return 用户信息
+     */
+    public LoginUser getLoginUser(String token)
+    {
+        if (StringUtils.isNotEmpty(token))
+        {
+        	try
             {
                 Claims claims = parseToken(token);
                 // 解析对应的权限以及用户信息
@@ -194,18 +222,6 @@ public class TokenService
     }
 
     /**
-     * 从令牌中获取用户名
-     *
-     * @param token 令牌
-     * @return 用户名
-     */
-    public String getUsernameFromToken(String token)
-    {
-        Claims claims = parseToken(token);
-        return claims.getSubject();
-    }
-
-    /**
      * 获取请求token
      *
      * @param request
@@ -213,12 +229,31 @@ public class TokenService
      */
     private String getToken(HttpServletRequest request)
     {
-        String token = request.getHeader(header);
+    	String token = StrUtil.isNotEmpty(request.getHeader(header)) ? request.getHeader(header) : getJimuReportToken(request);
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
         {
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;
+    }
+    
+    /**
+     * 获取积木报表请求token
+     * 
+     * @param request
+     * @return
+     */
+    private String getJimuReportToken(HttpServletRequest request) {
+    	String token = "";
+    	String uri = request.getRequestURI();
+    	
+    	if(StrUtil.startWith(uri, "/".concat(Constants.JIMU_PREFIX)) && !StrUtil.contains(uri, Constants.JIMU_STATIC)) {
+    		token = request.getParameter(Constants.TOKEN);
+    		if(StrUtil.isEmpty(token)) {
+    			token = request.getHeader(Constants.JIMU_TOKEN);
+    		}
+    	}
+    	return token;
     }
 
     private String getTokenKey(String uuid)

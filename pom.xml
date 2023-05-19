@@ -191,7 +191,7 @@
 				<artifactId>flyway-core</artifactId>
 				<version>7.15.0</version><!--$NO-MVN-MAN-VER$-->
 			</dependency>
-
+			
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.risun</groupId>
@@ -217,6 +217,13 @@
             <dependency>
 		       <groupId>com.risun</groupId>
 			   <artifactId>project-mq</artifactId>
+			   <version>${project.version}</version>
+		   </dependency>
+		   
+		   <!-- 积木报表模块 -->
+            <dependency>
+		       <groupId>com.risun</groupId>
+			   <artifactId>project-jimu-report</artifactId>
 			   <version>${project.version}</version>
 		   </dependency>
 
@@ -252,6 +259,7 @@
         <module>project-generator</module>
         <module>project-common</module>
         <module>project-mq</module>
+        <module>project-jimu-report</module>
         <module>project-biz</module>
     </modules>
     
@@ -283,7 +291,7 @@
         <repository>
             <id>maven-risun</id>
             <name>maven-risun</name>
-            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
+            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
             <releases>
             <enabled>true</enabled>
             </releases>
@@ -294,7 +302,7 @@
         <pluginRepository>
             <id>maven-risun</id>
             <name>maven-risun</name>
-            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
+            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

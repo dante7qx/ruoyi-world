@@ -141,3 +141,16 @@ management:
   health:
     mail:
       enabled: false
+## 积木报表配置
+jeecg: 
+  jmreport: 
+    pageSize:
+      - 10
+      - 20
+      - 30
+      - 40
+      - 50
+    customPrePath: /dev-api
+  uploadType: local
+  path: 
+    upload: files/report

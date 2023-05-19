@@ -1,0 +1,159 @@
+package com.risun.report.service.impl;
+
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.risun.common.core.domain.entity.SysMenu;
+import com.risun.common.utils.DateUtils;
+import com.risun.common.utils.SecurityUtils;
+import com.risun.report.domain.RiJmReport;
+import com.risun.report.domain.RiJmReportMenu;
+import com.risun.report.mapper.RiJmReportMapper;
+import com.risun.report.service.IRiJmReportService;
+import com.risun.system.mapper.SysMenuMapper;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.json.JSONUtil;
+
+/**
+ * 报表列表Service业务层处理
+ * 
+ * @author sunchao
+ * @date 2023-05-18
+ */
+@Service
+public class RiJmReportServiceImpl implements IRiJmReportService {
+	@Autowired
+	private RiJmReportMapper jimuReportMapper;
+	@Autowired
+	private SysMenuMapper sysMenuMapper;
+	
+	private static final String MENU_PATH_PREFIX = "jmview";
+	private static final String MENU_PATH_COMPONENT = "jimureport/view";
+
+	/**
+	 * 查询报表列表
+	 * 
+	 * @param id 报表列表主键
+	 * @return 报表列表
+	 */
+	@Override
+	public RiJmReport selectJimuReportById(String id) {
+		return jimuReportMapper.selectRiJmReportById(id);
+	}
+
+	/**
+	 * 查询报表列表列表
+	 * 
+	 * @param jimuReport 报表列表
+	 * @return 报表列表
+	 */
+	@Override
+	public List<RiJmReport> selectJimuReportList(RiJmReport jimuReport) {
+		return jimuReportMapper.selectRiJmReportList(jimuReport);
+	}
+
+	/**
+	 * 新增报表菜单
+	 * 
+	 * @param reportIds
+	 * @return 结果
+	 */
+	@Override
+	@Transactional
+	public int insertJimuReportMenu(RiJmReport jimuReport) {
+		String[] reportIds = jimuReport.getIds();
+		List<RiJmReportMenu> reportMenus = jimuReportMapper.selectRiJmReportMenuByReportId(reportIds);
+		if(CollUtil.isNotEmpty(reportMenus)) {
+			for (RiJmReportMenu reportMenu : reportMenus) {
+				sysMenuMapper.deleteMenuById(reportMenu.getMenuId());
+			}
+			List<Long> reportMenuIds = reportMenus.stream().map(RiJmReportMenu::getId).collect(toList());
+			jimuReportMapper.deleteRiJmReportMenuByReportId(reportMenuIds);
+		}
+		int i = 10;
+		for (String reportId : reportIds) {
+			RiJmReport report = jimuReportMapper.selectRiJmReportById(reportId);
+			SysMenu menu = new SysMenu();
+			menu.setMenuName(report.getName());
+			menu.setParentId(jimuReport.getParentMenuId());
+			menu.setOrderNum(++i);
+			menu.setPath(MENU_PATH_PREFIX.concat(report.getCode()));
+			menu.setComponent(MENU_PATH_COMPONENT);
+			menu.setIsFrame("1");
+			menu.setIsCache("0");
+			menu.setMenuType("C");
+			menu.setVisible("0");
+			menu.setStatus("0");
+			menu.setIcon("documentation");
+			menu.setQuery(JSONUtil.toJsonStr(MapUtil.of("id", report.getId())));
+			menu.setRemark(report.getName());
+			menu.setCreateBy(SecurityUtils.getUsername());
+			jimuReportMapper.insertMenuByReport(menu);
+			RiJmReportMenu reportMenu = new RiJmReportMenu();
+			reportMenu.setMenuId(menu.getMenuId());
+			reportMenu.setReportId(reportId);
+			jimuReportMapper.insertRiJmReportMenu(reportMenu);
+		}
+		return i;
+	}
+	
+	/**
+     * 取消报表菜单
+     * 
+     * @param jimuReport
+     * @return
+     */
+	@Override
+	@Transactional
+    public int cancelJimuReportMenu(String[] ids) {
+    	List<RiJmReportMenu> reportMenus = jimuReportMapper.selectRiJmReportMenuByReportId(ids);
+    	if(CollUtil.isNotEmpty(reportMenus)) {
+    		for (RiJmReportMenu reportMenu : reportMenus) {
+        		sysMenuMapper.deleteMenuById(reportMenu.getMenuId());
+    		}
+        	List<Long> reportMenuIds = reportMenus.stream().map(RiJmReportMenu::getId).collect(toList());
+        	jimuReportMapper.deleteRiJmReportMenuByReportId(reportMenuIds);
+    	}
+    	return ids.length;
+    }
+	
+	/**
+	 * 修改报表列表
+	 * 
+	 * @param jimuReport 报表列表
+	 * @return 结果
+	 */
+	@Override
+	public int updateJimuReport(RiJmReport jimuReport) {
+		jimuReport.setUpdateBy(SecurityUtils.getUsername());
+		jimuReport.setUpdateTime(DateUtils.getNowDate());
+		return jimuReportMapper.updateRiJmReport(jimuReport);
+	}
+
+	/**
+	 * 批量删除报表列表
+	 * 
+	 * @param ids 需要删除的报表列表主键
+	 * @return 结果
+	 */
+	@Override
+	@Transactional
+	public int deleteJimuReportByIds(String[] ids) {
+		for (String reportId : ids) {
+			jimuReportMapper.deleteRiJmReportDbFieldByReportId(reportId);
+			jimuReportMapper.deleteRiJmReportDbByReportId(reportId);
+			jimuReportMapper.deleteRiJmReportShareByReportId(reportId);
+		}
+		
+		return jimuReportMapper.deleteRiJmReportByIds(ids);
+	}
+
+	
+}
