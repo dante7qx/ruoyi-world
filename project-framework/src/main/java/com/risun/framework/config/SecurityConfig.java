@@ -117,6 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", Constants.RESOURCE_PREFIX.concat("/**")).permitAll()
                 .antMatchers("/webjars/**", "/druid/**").permitAll()
+                .antMatchers("/jmreport/desreport_/**", "/jmreport/shareView/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()
