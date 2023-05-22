@@ -7,7 +7,7 @@ package ${packageName}.mapper;
 	#end
 #end
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import ${packageName}.domain.${ClassName};
 #if($existDelFlag)
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +22,7 @@ import ${packageName}.domain.${subClassName};
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
+public interface ${ClassName}Mapper extends MPJBaseMapper<${ClassName}> {
 
 #if($existDelFlag)
     /**

@@ -24,8 +24,7 @@ import com.risun.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 #if($existQuery)
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 #end
 #if($table.sub)
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     @Override
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
 #if($existQuery)
-        LambdaQueryWrapper<${ClassName}> lqw = new QueryWrapper<${ClassName}>().lambda()
+        MPJLambdaWrapper<${ClassName}> lqw = new MPJLambdaWrapper<${ClassName}>()
 #end
 #if($existDelFlag)
             .eq(${ClassName}::getDelFlag, 0)

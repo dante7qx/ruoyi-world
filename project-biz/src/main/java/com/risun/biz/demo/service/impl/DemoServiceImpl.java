@@ -6,14 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.deepoove.poi.data.AttachmentRenderData;
 import com.deepoove.poi.data.AttachmentType;
 import com.deepoove.poi.data.Attachments;
 import com.deepoove.poi.data.PictureRenderData;
 import com.deepoove.poi.data.PictureType;
 import com.deepoove.poi.data.Pictures;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
@@ -69,12 +68,22 @@ public class DemoServiceImpl implements IDemoService {
      */
     @Override
     public List<Demo> selectDemoList(Demo demo) {
+    	/*
     	LambdaQueryWrapper<Demo> lqw = new QueryWrapper<Demo>().lambda()
             .eq(Demo::getDelFlag, 0)
             .like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
             .ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
             .le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"));
         return demoMapper.selectList(lqw);
+        */
+        
+        MPJLambdaWrapper<Demo> mpj = new MPJLambdaWrapper<Demo>()
+    			.eq(Demo::getDelFlag, 0)
+                .like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
+                .ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
+                .le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"));
+        
+        return demoMapper.selectList(mpj);
     }
 
     /**
