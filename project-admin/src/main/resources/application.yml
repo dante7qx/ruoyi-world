@@ -153,4 +153,4 @@ jeecg:
     customPrePath: /dev-api
   uploadType: local
   path: 
-    upload: files/report
+    upload: ${risun.profile}/report
