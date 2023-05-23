@@ -55,3 +55,8 @@ spring:
           wall:
             config:
               multi-statement-allow: true
+# PageHelper分页插件
+pagehelper: 
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
