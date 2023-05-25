@@ -46,7 +46,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles: 
-    active: mysql
+    active: dameng
   # 文件上传
   servlet:
      multipart:
@@ -59,10 +59,6 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-  ## Flyway 配置
-  flyway:
-    enabled: true
-    baseline-on-migrate: true
   # redis 配置
   redis:
     # 地址

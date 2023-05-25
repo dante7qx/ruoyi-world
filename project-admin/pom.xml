@@ -29,17 +29,18 @@
 		</dependency>
 		
          <!-- Mysql驱动包 -->
+         <!--  
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        -->
+        <!-- 达梦数据库驱动 -->
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+        </dependency>
         
-        <!-- 数据库脚本版本 -->
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-
         <!-- 核心模块-->
         <dependency>
             <groupId>com.risun</groupId>
