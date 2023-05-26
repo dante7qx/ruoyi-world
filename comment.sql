@@ -3,7 +3,7 @@
 -- ----------------------------
 drop table if exists sys_comment;
 create table sys_comment ( 
-  comment_id    bigint(20)      not null	auto_increment   comment '评论id',
+  comment_id    bigint          not null	auto_increment   comment '评论id',
   biz_model			varchar(64)     default ''                	 comment '业务模块',
   biz_id     		bigint(20)      not null				     comment '业务id',
   from_id		    varchar(64)     default ''                   comment '评论者id',
@@ -21,8 +21,8 @@ create table sys_comment (
 -- ----------------------------
 drop table if exists sys_comment_reply;
 create table sys_comment_reply ( 
-  reply_id       	bigint(20)      not null 	auto_increment   comment '回复id',
-  comment_id        bigint(20)      not null    			     comment '父评论id',
+  reply_id      bigint          not null 	auto_increment   comment '回复id',
+  comment_id    bigint          not null    			     comment '父评论id',
   from_id		    varchar(64)     default ''                   comment '评论者id',
   to_id		    	varchar(64)     default ''                   comment '被评论者id',
   comment_date 		datetime    	null             		     comment '评论时间',
@@ -39,8 +39,8 @@ create table sys_comment_reply (
 -- ----------------------------
 drop table if exists sys_comment_like;
 create table sys_comment_like ( 
-  like_id        	bigint(20)      not null	auto_increment   comment '点赞id',
-  comment_id        bigint(20)      not null    			     comment '评论id',
+  like_id       bigint            not null	auto_increment   comment '点赞id',
+  comment_id    bigint       not null    			     comment '评论id',
   user_id		    varchar(64)     default ''                   comment '评论者id',
   like_date 		datetime    	null             		  	 comment '点赞时间',
   
