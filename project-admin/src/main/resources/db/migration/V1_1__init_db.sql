@@ -122,7 +122,7 @@ create table sys_role (
   remark               varchar(500)    default null               comment '备注',
   primary key (role_id)
 );
-COMMENT ON TABLE sys_post IS '角色信息表';
+COMMENT ON TABLE sys_role IS '角色信息表';
 
 -- ----------------------------
 -- 初始化-角色信息表数据

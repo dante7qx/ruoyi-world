@@ -163,7 +163,7 @@ public class GenTableColumn extends BaseEntity
 
     public String getIsPk()
     {
-        return isPk;
+    	return StrUtil.emptyToDefault(this.isPk, "0");
     }
 
     public boolean isPk()

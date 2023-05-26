@@ -1,6 +1,6 @@
 drop table if exists t_demo;
 create table t_demo (
-  demo_id bigint not null auto_increment comment '业务主键ID',
+  demo_id bigint not null identity(1, 2) comment '业务主键ID',
   demo_name varchar(30) default '' comment '业务名称',
   demo_time datetime comment '业务时间',
   demo_image varchar(2048) comment '业务图片',
