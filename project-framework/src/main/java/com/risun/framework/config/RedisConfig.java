@@ -4,9 +4,13 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 /**
  * redis配置
@@ -36,6 +40,17 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         template.afterPropertiesSet();
         return template;
+    }
+	
+	@Bean
+	@SuppressWarnings(value = { "unchecked", "rawtypes" })
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory, RedisKeySerializer redisKeySerializer) {
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+        FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
+        redisCacheConfiguration.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisKeySerializer));
+        return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 
     @Bean
