@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.report.mapper.RiJmDictItemMapper">
+    
+    <resultMap type="RiJmDictItem" id="RiJmDictItemResult">
+        <result property="id"    column="id"    />
+        <result property="dictId"    column="dict_id"    />
+        <result property="itemText"    column="item_text"    />
+        <result property="itemValue"    column="item_value"    />
+        <result property="description"    column="description"    />
+        <result property="sortOrder"    column="sort_order"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectRiJmDictItemVo">
+        select t.id, t.dict_id, t.item_text, t.item_value, t.description, t.sort_order, t.status, t.create_by, t.create_time, t.update_by, t.update_time from jimu_dict_item t
+    </sql>
+
+    <select id="selectRiJmDictItemList" parameterType="RiJmDictItem" resultMap="RiJmDictItemResult">
+        <include refid="selectRiJmDictItemVo"/>
+        <where>  
+            <if test="dictId != null  and dictId != ''"> and t.dict_id = #{dictId}</if>
+            <if test="itemText != null  and itemText != ''"> and t.item_text like concat('%', #{itemText}, '%')</if>
+            <if test="itemValue != null  and itemValue != ''"> and t.item_value like concat('%', #{itemValue}, '%')</if>
+            <if test="description != null  and description != ''"> and t.description = #{description}</if>
+            <if test="sortOrder != null "> and t.sort_order = #{sortOrder}</if>
+            <if test="status != null "> and t.status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectRiJmDictItemById" parameterType="String" resultMap="RiJmDictItemResult">
+        <include refid="selectRiJmDictItemVo"/>
+        where t.id = #{id}
+    </select>
+        
+    <insert id="insertRiJmDictItem" parameterType="RiJmDictItem">
+        insert into jimu_dict_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="dictId != null">dict_id,</if>
+            <if test="itemText != null">item_text,</if>
+            <if test="itemValue != null">item_value,</if>
+            <if test="description != null">description,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="dictId != null">#{dictId},</if>
+            <if test="itemText != null">#{itemText},</if>
+            <if test="itemValue != null">#{itemValue},</if>
+            <if test="description != null">#{description},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRiJmDictItem" parameterType="RiJmDictItem">
+        update jimu_dict_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dictId != null">dict_id = #{dictId},</if>
+            <if test="itemText != null">item_text = #{itemText},</if>
+            <if test="itemValue != null">item_value = #{itemValue},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRiJmDictItemById" parameterType="String">
+        delete from jimu_dict_item where id = #{id}
+    </delete>
+
+    <delete id="deleteRiJmDictItemByIds" parameterType="String">
+        delete from jimu_dict_item where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteRiJmDictItemByDictId" parameterType="String">
+        delete from jimu_dict_item where dict_id = #{dictId}
+    </delete>
+</mapper>

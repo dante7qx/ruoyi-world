@@ -29,6 +29,14 @@ public interface RiJmReportMapper
      * @return 报表列表集合
      */
     public List<RiJmReport> selectRiJmReportList(RiJmReport jimuReport);
+    
+    /**
+     * 查询报表设计列表
+     * 
+     * @param jimuReport
+     * @return
+     */
+    public List<RiJmReport> selectRiJmReportExcel(RiJmReport jimuReport);
 
     /**
      * 新增报表列表

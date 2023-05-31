@@ -12,7 +12,9 @@ import com.risun.common.core.domain.entity.SysMenu;
 import com.risun.common.utils.DateUtils;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.report.domain.RiJmReport;
+import com.risun.report.domain.RiJmReportDeptAcl;
 import com.risun.report.domain.RiJmReportMenu;
+import com.risun.report.mapper.RiJmReportDeptAclMapper;
 import com.risun.report.mapper.RiJmReportMapper;
 import com.risun.report.service.IRiJmReportService;
 import com.risun.system.mapper.SysMenuMapper;
@@ -33,6 +35,8 @@ public class RiJmReportServiceImpl implements IRiJmReportService {
 	private RiJmReportMapper jimuReportMapper;
 	@Autowired
 	private SysMenuMapper sysMenuMapper;
+	@Autowired
+	private RiJmReportDeptAclMapper jmReportDeptAclMapper;
 	
 	private static final String MENU_PATH_PREFIX = "jmview";
 	private static final String MENU_PATH_COMPONENT = "jimureport/view";
@@ -150,10 +154,39 @@ public class RiJmReportServiceImpl implements IRiJmReportService {
 			jimuReportMapper.deleteRiJmReportDbFieldByReportId(reportId);
 			jimuReportMapper.deleteRiJmReportDbByReportId(reportId);
 			jimuReportMapper.deleteRiJmReportShareByReportId(reportId);
+			jmReportDeptAclMapper.deleteRiJmReportDeptAclByReportId(reportId);
 		}
 		
 		return jimuReportMapper.deleteRiJmReportByIds(ids);
 	}
 
+	/**
+     * 设置部门报表权限
+     * 
+     * @param deptId
+     * @param reportIds
+     * @return
+     */
+	@Override
+    public int setupDeptAcl(Long deptId, String[] reportIds) {
+		for (String reportId : reportIds) {
+			RiJmReportDeptAcl deptAcl = new RiJmReportDeptAcl();
+			deptAcl.setDeptId(deptId);
+			deptAcl.setReportId(reportId);
+			jmReportDeptAclMapper.insertRiJmReportDeptAcl(deptAcl);
+		}
+		return reportIds.length;
+    }
+	
+	/**
+     * 移除部门报表权限
+     * 
+     * @param deptId
+     * @param reportIds
+     * @return
+     */
+    public int removeDeptAcl(Long deptId, String[] reportIds) {
+    	return jmReportDeptAclMapper.deleteRiJmReportDeptAclByDeptId(deptId, reportIds);
+    }
 	
 }

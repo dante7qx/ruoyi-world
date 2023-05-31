@@ -27,11 +27,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="jsStr"    column="js_str"    />
         <result property="tenantId"    column="tenant_id"    />
         <result property="menuId"    column="menu_id"    />
+        <result property="setupAcl"    column="setupAcl"    />
     </resultMap>
 
     <sql id="selectRiJmReportVo">
         select 
-        	t.id, t.code, t.name, t.note, t.status, t.type, t.json_str, t.api_url, t.thumb, t.create_by, t.create_time, t.update_by, t.update_time, t.del_flag, t.api_method, t.api_code, t.template, t.view_count, t.css_str, t.js_str, t.tenant_id, m.menu_id
+        	t.id, t.code, t.name, t.note, t.status, t.type, t.json_str, t.api_url, t.thumb, t.create_by, t.create_time, t.update_by, t.update_time, t.del_flag, t.api_method, t.api_code, t.template, t.view_count, t.css_str, t.js_str, t.tenant_id, m.menu_id,
+        	(select count(0) from  jimu_report_dept_acl d 
+        	 where d.report_id = t.id 
+        	 <if test="deptId != null  and deptId != ''"> and d.dept_id = #{deptId}</if> limit 1
+			) as setupAcl
        	from jimu_report t
        	left join jimu_report_menu m on m.report_id = t.id
     </sql>
@@ -56,11 +61,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="jsStr != null  and jsStr != ''"> and t.js_str = #{jsStr}</if>
             <if test="tenantId != null  and tenantId != ''"> and t.tenant_id = #{tenantId}</if>
         </where>
+        order by t.create_time desc
     </select>
     
     <select id="selectRiJmReportById" parameterType="String" resultMap="JimuReportResult">
         <include refid="selectRiJmReportVo"/>
         where t.id = #{id}
+    </select>
+    
+    <select id="selectRiJmReportExcel" parameterType="RiJmReport" resultMap="JimuReportResult">
+        select distinct t.id,t.name,t.code,t.type,t.template,t.thumb
+		from jimu_report t 
+		left join jimu_report_dept_acl d on d.report_id = t.id
+		<where> 
+			t.del_flag = 0
+			<if test="type != null and type != ''"> and t.type = #{type}</if>
+			<if test="name != null and name != ''"> and t.name like concat('%', #{name}, '%')</if>
+			<if test="template != null"> and t.template = #{template}</if>
+			<if test="deptId != null"> and d.dept_id = #{deptId}</if>
+			<if test="createBy != null and createBy != '' and template != null"> or (t.template = #{template} and t.create_by = #{createBy})</if>
+		</where>
+		order by t.create_time desc
     </select>
         
     <insert id="insertRiJmReport" parameterType="RiJmReport">

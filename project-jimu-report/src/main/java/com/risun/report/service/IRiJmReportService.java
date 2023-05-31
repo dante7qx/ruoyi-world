@@ -58,5 +58,23 @@ public interface IRiJmReportService
      * @return 结果
      */
     public int deleteJimuReportByIds(String[] ids);
+    
+    /**
+     * 添加部门报表权限
+     * 
+     * @param deptId
+     * @param reportIds
+     * @return
+     */
+    public int setupDeptAcl(Long deptId, String[] reportIds);
+    
+    /**
+     * 移除部门报表权限
+     * 
+     * @param deptId
+     * @param reportIds
+     * @return
+     */
+    public int removeDeptAcl(Long deptId, String[] reportIds);
 
 }

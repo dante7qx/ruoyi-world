@@ -32,6 +32,7 @@ public class RiJmReport extends BaseEntity
 
     /** 类型 */
     private String type;
+    private String reportType;
 
     /** json字符串 */
     private String jsonStr;
@@ -74,6 +75,10 @@ public class RiJmReport extends BaseEntity
     
     /** 上级菜单Id */
     private Long parentMenuId;
+    
+    /** 设置部门权限 */
+    private Long deptId;
+    private Integer setupAcl;
 
     public void setId(String id) 
     {
@@ -129,7 +134,16 @@ public class RiJmReport extends BaseEntity
     {
         return type;
     }
-    public void setJsonStr(String jsonStr) 
+    
+    public String getReportType() {
+		return reportType;
+	}
+
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+
+	public void setJsonStr(String jsonStr) 
     {
         this.jsonStr = jsonStr;
     }
@@ -251,6 +265,22 @@ public class RiJmReport extends BaseEntity
 
 	public void setParentMenuId(Long parentMenuId) {
 		this.parentMenuId = parentMenuId;
+	}
+	
+	public Long getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
+	}
+
+	public Integer getSetupAcl() {
+		return setupAcl;
+	}
+
+	public void setSetupAcl(Integer setupAcl) {
+		this.setupAcl = setupAcl;
 	}
 
 	@Override
