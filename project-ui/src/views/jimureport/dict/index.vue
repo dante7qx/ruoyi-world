@@ -39,7 +39,6 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['jimureport:dict:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -50,7 +49,6 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate(null, true)"
-          v-hasPermi="['jimureport:dict:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -61,7 +59,6 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['jimureport:dict:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -71,7 +68,6 @@
           icon="el-icon-refresh-right"
           size="mini"
           @click="handleSync"
-          v-hasPermi="['jimureport:dict:add']"
         >同步系统数据字典</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -94,21 +90,18 @@
             type="text"
             icon="el-icon-view"
             @click="handleUpdate(scope.row, true)"
-            v-hasPermi="['jimureport:dict:query']"
           >查看</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row, false)"
-            v-hasPermi="['jimureport:dict:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['jimureport:dict:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -163,7 +156,7 @@
           <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
         </el-form-item>
       </el-form>
-      <el-table v-loading="loadingSys" :data="sysDictList" @selection-change="handleSysDictSelectionChange">
+      <el-table v-loading="loadingSys" :data="sysDictList" :maxHeight="600" @selection-change="handleSysDictSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="字典名称" align="center" prop="dictName" :show-overflow-tooltip="true" />
         <el-table-column label="字典类型" align="center" prop="dictType" :show-overflow-tooltip="true"/>

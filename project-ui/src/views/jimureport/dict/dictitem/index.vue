@@ -75,21 +75,18 @@
             type="text"
             icon="el-icon-view"
             @click="handleUpdate(scope.row, true)"
-            v-hasPermi="['jimureport:dictitem:query']"
           >查看</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row, false)"
-            v-hasPermi="['jimureport:dictitem:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['jimureport:dictitem:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
