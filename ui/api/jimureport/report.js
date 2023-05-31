@@ -42,6 +42,22 @@ export function cancelJimureportMenu(id) {
   })
 }
 
+// 添加设置部门报表权限
+export function setupDeptAcl(deptId, ids) {
+  return request({
+    url: '/jimureport/jimureport/setupDeptAcl/'+deptId+'/'+ids,
+    method: 'post'
+  })
+}
+
+// 移除设置部门报表权限
+export function removeDeptAcl(deptId, ids) {
+  return request({
+    url: '/jimureport/jimureport/removeDeptAcl/'+deptId+'/'+ids,
+    method: 'post'
+  })
+}
+
 
 
 // 修改报表列表

@@ -3,6 +3,7 @@ package com.risun.report.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -104,5 +105,29 @@ public class RiJmReportController extends BaseController
     public AjaxResult remove(@PathVariable String[] ids)
     {
         return toAjax(jimuReportService.deleteJimuReportByIds(ids));
+    }
+    
+    /**
+     * 设置部门权限
+     */
+    @Log(title = "报表列表", businessType = BusinessType.UPDATE)
+    @PostMapping("/setupDeptAcl/{deptId}/{ids}")
+    public AjaxResult setupDeptAcl(@PathVariable Long deptId, @PathVariable String[] ids)
+    {
+    	Assert.notNull(deptId, "部门Id不能为空！");
+    	Assert.noNullElements(ids, "报表不能为空！");
+        return toAjax(jimuReportService.setupDeptAcl(deptId, ids));
+    }
+    
+    /**
+     * 移除部门权限
+     */
+    @Log(title = "报表列表", businessType = BusinessType.UPDATE)
+    @PostMapping("/removeDeptAcl/{deptId}/{ids}")
+    public AjaxResult removeDeptAcl(@PathVariable Long deptId, @PathVariable String[] ids)
+    {
+    	Assert.notNull(deptId, "部门Id不能为空！");
+    	Assert.noNullElements(ids, "报表不能为空！");
+        return toAjax(jimuReportService.removeDeptAcl(deptId, ids));
     }
 }
