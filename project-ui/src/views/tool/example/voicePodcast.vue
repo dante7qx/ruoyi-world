@@ -65,7 +65,7 @@ export default {
       this.supportSpeechSynthesis = true;
       this.synth = window.speechSynthesis;
       this.utterance = new SpeechSynthesisUtterance();
-      this.voiceOptions = this.synth.getVoices();
+      this.loadVoices();
 
       this.utterance.onboundary = (event) => {
         console.log(event)
@@ -89,6 +89,15 @@ export default {
     }
   },
   methods: {
+    loadVoices() {
+      const that = this
+      this.voiceOptions = this.synth.getVoices();
+      setTimeout(function() {
+        if(that.voiceOptions.length == 0) {
+          that.loadVoices()
+        }
+      }, 10)
+    },
     playVoice() {
       if(this.paused) {
         this.synth.resume();    // 播放
