@@ -26,6 +26,7 @@
 			<el-menu-item index="calendar">日历</el-menu-item>
 			<el-menu-item index="qrcode">二维码</el-menu-item>
 			<el-menu-item index="comment">留言板</el-menu-item>
+			<el-menu-item index="voicepodcast">语音播报</el-menu-item>
 		</el-menu>
 		<code-area v-if="activeIndex=='area'" />
 		<address-map v-else-if="activeIndex=='addressMap'" />
@@ -39,6 +40,7 @@
 		<comment-page v-else-if="activeIndex=='comment'" />
 		<iframe-page v-else-if="activeIndex=='iframe'" />
 		<sys-dept-tree-sel v-else-if="activeIndex=='sysDeptTree'" />
+		<voice-podcast :key="nanoid()" v-else-if="activeIndex=='voicepodcast'" />
 	</div>
 </template>
 
@@ -55,6 +57,7 @@ import QrCode from './qrcode'
 import Comment from './comment'
 import Iframe from './iframe'
 import SysDeptTreeSel from './deptTree'
+import VoicePodcast from './voicePodcast'
 
 export default {
   name: "CodeExample",
@@ -70,7 +73,8 @@ export default {
 		'gen-qrcode': QrCode,
 		'comment-page': Comment,
 		'iframe-page': Iframe,
-		'sys-dept-tree-sel': SysDeptTreeSel
+		'sys-dept-tree-sel': SysDeptTreeSel,
+		'voice-podcast': VoicePodcast,
 	},
 	data() {
     return {
