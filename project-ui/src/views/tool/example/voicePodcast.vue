@@ -15,7 +15,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <div style="text-align: center">
+      <div style="text-align: center" v-if="supportSpeechSynthesis">
         <el-button type="success" icon="el-icon-video-play" @click="playVoice" v-if="!speaking">播放</el-button>
         <el-button type="danger" icon="el-icon-video-pause" @click="pauseVoice" v-else="speaking">暂停</el-button>
         <el-button type="info" icon="el-icon-refresh" @click="cancelVoice">停止</el-button>
@@ -65,8 +65,7 @@ export default {
       this.supportSpeechSynthesis = true;
       this.synth = window.speechSynthesis;
       this.utterance = new SpeechSynthesisUtterance();
-      this.voiceOptions = this.synth.getVoices();
-
+      this.loadVoices();
       this.utterance.onboundary = (event) => {
         console.log(event)
       };
@@ -89,6 +88,15 @@ export default {
     }
   },
   methods: {
+    loadVoices() {
+      const that = this
+      this.voiceOptions = this.synth.getVoices();
+      setTimeout(function() {
+        if(that.voiceOptions.length == 0) {
+          that.loadVoices()
+        }
+      }, 10)
+    },
     playVoice() {
       if(this.paused) {
         this.synth.resume();    // 播放
