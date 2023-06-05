@@ -1,89 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
-    <groupId>com.risun</groupId>
-    <artifactId>project</artifactId>
-    <version>4.0.0</version>
-    <packaging>pom</packaging>
 
-    <name>Risun Project With Java</name>
-    <description>睿阳RSP开发框架</description>
-    
-    <properties>
-        <project.version>4.0.0</project.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <druid.version>1.2.17</druid.version>
-        <bitwalker.version>1.21</bitwalker.version>
-        <kaptcha.version>2.3.3</kaptcha.version>
-        <mybatis-plus-spring-boot.version>3.5.3.1</mybatis-plus-spring-boot.version>
-        <mybatis-join.version>1.4.5</mybatis-join.version>
-        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
-        <fastjson.version>2.0.27</fastjson.version>
-        <oshi.version>6.4.0</oshi.version>
-        <commons.io.version>2.11.0</commons.io.version>
-        <commons.collections.version>3.2.2</commons.collections.version>
-        <poi.version>4.1.2</poi.version>
-        <velocity.version>2.3</velocity.version>
-        <jwt.version>0.9.1</jwt.version>
-        <poi-tl.version>1.10.5</poi-tl.version>
-        <poi-tl-ext.version>0.4.2</poi-tl-ext.version>
-        <aspose-word.version>15.8.0</aspose-word.version>
-        <hutool.version>5.8.17</hutool.version>
-        <guava.version>31.1-jre</guava.version>
-        <pinyin4j.version>2.5.1</pinyin4j.version>
-        <zxing.version>3.5.1</zxing.version>
-        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
-        <flyway.version>7.15.0</flyway.version>
-        <redisson.version>3.17.7</redisson.version>
-    </properties>
-	
-    <!-- 依赖声明 -->
-    <dependencyManagement>
-        <dependencies>
+	<groupId>com.risun</groupId>
+	<artifactId>project</artifactId>
+	<version>4.0.0</version>
+	<packaging>pom</packaging>
 
-            <!-- SpringBoot的依赖配置-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.5.14</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+	<name>Risun Project With Java</name>
+	<description>睿阳RSP开发框架</description>
 
-            <!-- 阿里数据库连接池 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
+	<properties>
+		<project.version>4.0.0</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<druid.version>1.2.17</druid.version>
+		<bitwalker.version>1.21</bitwalker.version>
+		<kaptcha.version>2.3.3</kaptcha.version>
+		<mybatis-plus-spring-boot.version>3.5.3.1</mybatis-plus-spring-boot.version>
+		<mybatis-join.version>1.4.5</mybatis-join.version>
+		<pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+		<fastjson.version>2.0.27</fastjson.version>
+		<oshi.version>6.4.0</oshi.version>
+		<commons.io.version>2.11.0</commons.io.version>
+		<commons.collections.version>3.2.2</commons.collections.version>
+		<poi.version>4.1.2</poi.version>
+		<velocity.version>2.3</velocity.version>
+		<jwt.version>0.9.1</jwt.version>
+		<poi-tl.version>1.10.5</poi-tl.version>
+		<poi-tl-ext.version>0.4.2</poi-tl-ext.version>
+		<latex-mathml-ooxml.version>1.0.0</latex-mathml-ooxml.version>
+		<jdom2.version>2.0.6.1</jdom2.version>
+		<aspose-word.version>15.8.0</aspose-word.version>
+		<hutool.version>5.8.17</hutool.version>
+		<guava.version>31.1-jre</guava.version>
+		<pinyin4j.version>2.5.1</pinyin4j.version>
+		<zxing.version>3.5.1</zxing.version>
+		<bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
+		<flyway.version>7.15.0</flyway.version>
+		<redisson.version>3.17.7</redisson.version>
+	</properties>
 
-            <!-- 解析客户端操作系统、浏览器等 -->
-            <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
-            </dependency>
+	<!-- 依赖声明 -->
+	<dependencyManagement>
+		<dependencies>
 
-            <!-- SpringBoot集成mybatis-plus框架 -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-spring-boot.version}</version>
-            </dependency>
-            <dependency>
-			    <groupId>com.github.yulichang</groupId>
-			    <artifactId>mybatis-plus-join-boot-starter</artifactId>
-			    <version>${mybatis-join.version}</version>
+			<!-- SpringBoot的依赖配置 -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.5.14</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
-            
-            <!-- pagehelper 分页插件 -->
-            <dependency>
+
+			<!-- 阿里数据库连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+
+			<!-- 解析客户端操作系统、浏览器等 -->
+			<dependency>
+				<groupId>eu.bitwalker</groupId>
+				<artifactId>UserAgentUtils</artifactId>
+				<version>${bitwalker.version}</version>
+			</dependency>
+
+			<!-- SpringBoot集成mybatis-plus框架 -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.yulichang</groupId>
+				<artifactId>mybatis-plus-join-boot-starter</artifactId>
+				<version>${mybatis-join.version}</version>
+			</dependency>
+
+			<!-- pagehelper 分页插件 -->
+			<dependency>
 				<groupId>com.github.pagehelper</groupId>
 				<artifactId>pagehelper-spring-boot-starter</artifactId>
 				<version>${pagehelper.boot.version}</version>
@@ -99,232 +101,243 @@
 				</exclusions>
 			</dependency>
 
-            <!-- 获取系统信息 -->
-            <dependency>
-                <groupId>com.github.oshi</groupId>
-                <artifactId>oshi-core</artifactId>
-                <version>${oshi.version}</version>
-            </dependency>
+			<!-- 获取系统信息 -->
+			<dependency>
+				<groupId>com.github.oshi</groupId>
+				<artifactId>oshi-core</artifactId>
+				<version>${oshi.version}</version>
+			</dependency>
 
-            <!-- io常用工具类 -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
+			<!-- io常用工具类 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
+			</dependency>
 
-            <!-- excel工具 -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
-            
-            <!-- word工具 -->
-            <dependency>
-			  <groupId>com.deepoove</groupId>
-			  <artifactId>poi-tl</artifactId>
-			  <version>${poi-tl.version}</version>
+			<!-- excel工具 -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+
+			<!-- word工具 -->
+			<dependency>
+				<groupId>com.deepoove</groupId>
+				<artifactId>poi-tl</artifactId>
+				<version>${poi-tl.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>io.github.draco1023</groupId>
-			    <artifactId>poi-tl-ext</artifactId>
-			    <version>${poi-tl-ext.version}</version>
+				<groupId>io.github.draco1023</groupId>
+				<artifactId>poi-tl-ext</artifactId>
+				<version>${poi-tl-ext.version}</version>
 			</dependency>
-			
+			<!-- 数学公式 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>latex-mathml-ooxml</artifactId>
+				<version>${latex-mathml-ooxml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom2</artifactId>
+				<version>${jdom2.version}</version>
+			</dependency>
+
 			<!-- word2pdf工具 -->
 			<dependency>
-			  <groupId>com.risun</groupId>
-			  <artifactId>aspose-word</artifactId>
-			  <version>${aspose-word.version}</version>
+				<groupId>com.risun</groupId>
+				<artifactId>aspose-word</artifactId>
+				<version>${aspose-word.version}</version>
 			</dependency>
 
-            <!-- velocity代码生成使用模板 -->
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
-            <!-- collections工具类 -->
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>${commons.collections.version}</version>
-            </dependency>
-            
-            <!-- Hutool 工具类 -->
-            <dependency>
-			    <groupId>cn.hutool</groupId>
-			    <artifactId>hutool-all</artifactId>
-			    <version>${hutool.version}</version>
+			<!-- velocity代码生成使用模板 -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-engine-core</artifactId>
+				<version>${velocity.version}</version>
 			</dependency>
-			
+
+			<!-- collections工具类 -->
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons.collections.version}</version>
+			</dependency>
+
+			<!-- Hutool 工具类 -->
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
+
 			<!-- Google Guava 工具类 -->
 			<dependency>
-			    <groupId>com.google.guava</groupId>
-			    <artifactId>guava</artifactId>
-			    <version>${guava.version}</version>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
 			</dependency>
-			
+
 			<!-- 中文转拼音 -->
 			<dependency>
-	            <groupId>com.belerweb</groupId>
-	            <artifactId>pinyin4j</artifactId>
-	            <version>${pinyin4j.version}</version>
-	        </dependency>
-
-            <!-- 阿里JSON解析器 -->
-            <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-
-            <!-- Token生成与解析-->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jwt.version}</version>
-            </dependency>
-            
-            <!-- 验证码 -->
-            <dependency>
-                <groupId>pro.fessional</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-            
-            <!-- 二维码 -->
-            <dependency>
-			    <groupId>com.google.zxing</groupId>
-			    <artifactId>core</artifactId>
-			    <version>${zxing.version}</version>
+				<groupId>com.belerweb</groupId>
+				<artifactId>pinyin4j</artifactId>
+				<version>${pinyin4j.version}</version>
 			</dependency>
-			
+
+			<!-- 阿里JSON解析器 -->
+			<dependency>
+				<groupId>com.alibaba.fastjson2</groupId>
+				<artifactId>fastjson2</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<!-- Token生成与解析 -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+
+			<!-- 验证码 -->
+			<dependency>
+				<groupId>pro.fessional</groupId>
+				<artifactId>kaptcha</artifactId>
+				<version>${kaptcha.version}</version>
+			</dependency>
+
+			<!-- 二维码 -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>${zxing.version}</version>
+			</dependency>
+
 			<!-- 加密算法应与安全模式和填充方案一起使用 -->
-	        <dependency>
-			    <groupId>org.bouncycastle</groupId>
-			    <artifactId>bcprov-jdk15on</artifactId>
-			    <version>${bcprov-jdk15on.version}</version>
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<version>${bcprov-jdk15on.version}</version>
 			</dependency>
-			
+
 			<!-- 数据库脚本版本 -->
 			<dependency>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-core</artifactId>
-				<version>${flyway.version}</version><!--$NO-MVN-MAN-VER$-->
+				<version>${flyway.version}</version><!--$NO-MVN-MAN-VER$ -->
 			</dependency>
-			
+
 			<!-- Redisson 分布式锁 -->
 			<dependency>
-			    <groupId>org.redisson</groupId>
-			    <artifactId>redisson-spring-boot-starter</artifactId>
-			    <version>${redisson.version}</version>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson-spring-boot-starter</artifactId>
+				<version>${redisson.version}</version>
 			</dependency>
 
-            <!-- 定时任务-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-quartz</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+			<!-- 定时任务 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-quartz</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-            <!-- 代码生成-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-generator</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+			<!-- 代码生成 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-generator</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-            <!-- 核心模块-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-framework</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+			<!-- 核心模块 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-framework</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-            <!-- 系统模块-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-system</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+			<!-- 系统模块 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-system</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-            <!-- 通用工具-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            
-            <!-- 业务管理-->
-            <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-biz</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+			<!-- 通用工具 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-        </dependencies>
-    </dependencyManagement>
+			<!-- 业务管理 -->
+			<dependency>
+				<groupId>com.risun</groupId>
+				<artifactId>project-biz</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
-    <modules>
-        <module>project-admin</module>
-        <module>project-framework</module>
-        <module>project-system</module>
-        <module>project-quartz</module>
-        <module>project-generator</module>
-        <module>project-common</module>
-        <module>project-biz</module>
-    </modules>
-    
+		</dependencies>
+	</dependencyManagement>
 
-    <dependencies>
-    	<dependency>
+	<modules>
+		<module>project-admin</module>
+		<module>project-framework</module>
+		<module>project-system</module>
+		<module>project-quartz</module>
+		<module>project-generator</module>
+		<module>project-common</module>
+		<module>project-biz</module>
+	</modules>
+
+
+	<dependencies>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-    </dependencies>
+	</dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-    <repositories>
-        <repository>
-            <id>maven-risun</id>
-            <name>maven-risun</name>
-            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
-            <releases>
-            <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>maven-risun</id>
+			<name>maven-risun</name>
+			<url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven-risun</id>
-            <name>maven-risun</name>
-            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven-risun</id>
+			<name>maven-risun</name>
+			<url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
