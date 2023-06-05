@@ -32,6 +32,8 @@
         <jwt.version>0.9.1</jwt.version>
         <poi-tl.version>1.10.5</poi-tl.version>
         <poi-tl-ext.version>0.4.2</poi-tl-ext.version>
+        <latex-mathml-ooxml.version>1.0.0</latex-mathml-ooxml.version>
+        <jdom2.version>2.0.6.1</jdom2.version>
         <aspose-word.version>15.8.0</aspose-word.version>
         <hutool.version>5.8.17</hutool.version>
         <guava.version>31.1-jre</guava.version>
@@ -114,6 +116,17 @@
 			    <groupId>io.github.draco1023</groupId>
 			    <artifactId>poi-tl-ext</artifactId>
 			    <version>${poi-tl-ext.version}</version>
+			</dependency>
+			<!-- 数学公式 -->
+			<dependency>
+			 	<groupId>com.risun</groupId>
+			  	<artifactId>latex-mathml-ooxml</artifactId>
+			  <version>${latex-mathml-ooxml.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.jdom</groupId>
+			    <artifactId>jdom2</artifactId>
+			    <version>${jdom2.version}</version>
 			</dependency>
 			
 			<!-- word2pdf工具 -->

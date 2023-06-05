@@ -97,7 +97,15 @@
 		    <groupId>io.github.draco1023</groupId>
 		    <artifactId>poi-tl-ext</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.risun</groupId>
+			<artifactId>latex-mathml-ooxml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+		</dependency>
+	
 		<!-- word2pdf工具 -->
 		<dependency>
 			<groupId>com.risun</groupId>
