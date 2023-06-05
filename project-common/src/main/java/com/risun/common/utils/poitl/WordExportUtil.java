@@ -18,6 +18,7 @@ import com.deepoove.poi.plugin.table.LoopRowTableRenderPolicy;
 import com.deepoove.poi.policy.AttachmentRenderPolicy;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.risun.common.config.RisunConfig;
+import com.risun.common.utils.poitl.plugin.LaTeXPolicy;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -78,6 +79,7 @@ public class WordExportUtil {
 				.bind(HTML_CONTENT, new HtmlRenderPolicy())	// HTML渲染
 				.bind(ATTACHMENT_WORD, new AttachmentRenderPolicy())	// 附件渲染
 				.bind(ATTACHMENT_EXCEL, new AttachmentRenderPolicy())	// 附件渲染
+				.addPlugin('%', new LaTeXPolicy())	// 添加全局数学公式插件
 				.build();
 		
 		
