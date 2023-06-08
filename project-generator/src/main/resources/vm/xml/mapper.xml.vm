@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update ${tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $pkColumn.columnName)
+#if($column.columnName != $pkColumn.columnName && $column.columnName != "create_by" && $column.columnName != "create_time")
             <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">$column.columnName = #{$column.javaField},</if>
 #end
 #end
