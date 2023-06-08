@@ -50,7 +50,7 @@ export default {
         <tr style="height: 432px;">
         <td style="width: 99.7372%; height: 432px;">
         <div style="color: #d4d4d4; background-color: #1e1e1e; font-family: Menlo, Monaco, 'Courier New', monospace; font-size: 12px; line-height: 18px; white-space: pre;">
-        <div><span style="color: #6a9955; font-size: 10pt;"> // 部门层级 0: 全部 1: 部门及下级 2: 本部门 4: 部门及上级</span></div>
+        <div><span style="color: #6a9955; font-size: 10pt;"> // 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级</span></div>
         <div><span style="font-size: 10pt;"><span style="color: #9cdcfe;">level</span><span style="color: #9cdcfe;">:</span> {</span></div>
         <div style="text-indent: 2em;"><span style="font-size: 10pt;"><span style="color: #4ec9b0;">type</span><span style="color: #9cdcfe;">:</span> <span style="color: #4ec9b0;">Number</span>,</span></div>
         <div style="text-indent: 2em;"><span style="font-size: 10pt;"><span style="color: #9cdcfe;">required</span><span style="color: #9cdcfe;">:</span> <span style="color: #569cd6;">false</span>,</span></div>
