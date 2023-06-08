@@ -54,12 +54,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSysInfoList4View" parameterType="SysInfo" resultMap="SysInfoResult">
     	<include refid="selectSysInfo4ViewVo"/>
     	<where>
-    		t.status = 2 and t.disabled = 0 
+    		t.status = '2' 
+    		and 
+    		t.disabled = 0 
 			and
 			(
-				t.anonymous = 1 or 
+				t.anonymous = 1 
+				or 
 				(
-					t.anonymous = 0 and exists (select 1 from sys_dept d where d.dept_id = #{loginDeptId} and (d.dept_id = t1.dept_id or find_in_set(t1.dept_id, d.ancestors))) 
+					t.anonymous = 0 
+					and 
+					exists (
+						select 1 from sys_dept d where d.dept_id = #{loginDeptId}
+						and 
+						(d.dept_id = t1.dept_id or CAST(t1.dept_id AS VARCHAR) = ANY (string_to_array(d.ancestors, ',')))
+						
+					) 
 				)
 			)
 			<if test="title != null  and title != ''"> and t.title like concat('%', #{title}, '%')</if>
@@ -77,13 +87,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSysInfo4ViewByInfoId" parameterType="Long" resultMap="SysInfoResult">
         <include refid="selectSysInfo4ViewVo"/>
         where t.info_id = #{infoId}
-        	 and t.status = 2 
+        	 and t.status = '2' 
         	 and t.disabled = 0 
         	 and
 			(
-				t.anonymous = 1 or 
+				t.anonymous = 1 
+				or 
 				(
-					t.anonymous = 0 and exists (select 1 from sys_dept d where d.dept_id = #{loginDeptId} and (d.dept_id = t1.dept_id or find_in_set(t1.dept_id, d.ancestors))) 
+					t.anonymous = 0 
+					and 
+					exists 
+					(
+						select 1 from sys_dept d where d.dept_id = #{loginDeptId} 
+						and 
+						(d.dept_id = t1.dept_id or CAST(t1.dept_id AS VARCHAR) = ANY (string_to_array(d.ancestors, ',')))
+					) 
 				)
 			)
     </select>

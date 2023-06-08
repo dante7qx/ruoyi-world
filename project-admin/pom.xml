@@ -28,11 +28,19 @@
 			<scope>test</scope>
 		</dependency>
 		
-         <!-- Mysql驱动包 -->
+         <!-- Mysql驱动包 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        -->
+        
+        <!-- PostgreSQL驱动包 -->
+        <dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
         
         <!-- 数据库脚本版本 -->
 		<dependency>

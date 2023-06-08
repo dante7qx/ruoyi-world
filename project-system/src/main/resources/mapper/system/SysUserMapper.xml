@@ -81,17 +81,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 		</if>
 		<if test="deptId != null and deptId != 0">
-			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{deptId}, ancestors) ))
+			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE CAST(#{deptId} AS VARCHAR) = ANY (string_to_array(t.ancestors, ','))))
 		</if>
 		<!-- 根据部门树查询用户列表 (level 部门层级 0: 全部 1: 部门及下级 2: 本部门 3: 部门及上级) -->
 		<if test="(0 == params.level or 1 == params.level)">
-			AND u.user_id > 1 AND (u.dept_id = #{params.deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{params.deptId}, ancestors) ))
+			AND u.user_id > 1 AND (u.dept_id = CAST(#{params.deptId} AS bigint) OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE CAST(#{params.deptId} AS VARCHAR) = ANY (string_to_array(t.ancestors, ','))))
 		</if>
 		<if test="2 == params.level">
-			AND u.user_id > 1 AND u.dept_id = #{params.deptId}
+			AND u.user_id > 1 AND u.dept_id = CAST(#{params.deptId} AS bigint)
 		</if>
 		<if test="3 == params.level">
-			AND u.user_id > 1 AND find_in_set (u.dept_id, (select concat(dp.ancestors, ',', dp.dept_id) from sys_dept dp where dp.dept_id = #{params.deptId}))
+			AND u.user_id > 1 AND CAST(u.dept_id AS VARCHAR) = ANY (string_to_array((select concat(dp.ancestors, ',', dp.dept_id) from sys_dept dp where dp.dept_id = CAST(#{params.deptId} AS bigint)), ','))
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
@@ -191,7 +191,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
- 			sysdate()
+ 			CURRENT_TIMESTAMP
  		)
 	</insert>
 	
@@ -213,7 +213,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null">remark = #{remark},</if>
- 			update_time = sysdate()
+ 			update_time = CURRENT_TIMESTAMP
  		</set>
  		where user_id = #{userId}
 	</update>

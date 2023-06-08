@@ -76,11 +76,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectChildrenDeptById" parameterType="Long" resultMap="SysDeptResult">
+		<!--  
 		select * from sys_dept where find_in_set(#{deptId}, ancestors)
+		-->
+		select * from sys_dept where CAST(#{deptId} AS VARCHAR) = ANY (string_to_array(ancestors, ','))
 	</select>
 	
 	<select id="selectNormalChildrenDeptById" parameterType="Long" resultType="int">
-		select count(*) from sys_dept where status = 0 and del_flag = '0' and find_in_set(#{deptId}, ancestors)
+		select count(*) from sys_dept where status = 0 and del_flag = '0' and CAST(#{deptId} AS VARCHAR) = ANY (string_to_array(ancestors, ','))
 	</select>
 	
 	<select id="checkDeptNameUnique" resultMap="SysDeptResult">
@@ -114,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="deptKey != null">#{deptKey},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
- 			sysdate()
+ 			CURRENT_TIMESTAMP
  		)
 	</insert>
 	
@@ -131,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status = #{status},</if>
  			<if test="deptKey != null">dept_key = #{deptKey},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			update_time = CURRENT_TIMESTAMP
  		</set>
  		where dept_id = #{deptId}
 	</update>
@@ -165,14 +168,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDeptVo"/>
        	where 
        		d.del_flag = '0'  
-       		and find_in_set (d.dept_id,  (select concat(t.ancestors, ',', t.dept_id) from sys_dept t where t.dept_id = #{deptId}))
+       		and CAST(d.dept_id AS VARCHAR) = ANY (string_to_array((select concat(t.ancestors, ',', t.dept_id) from sys_dept t where t.dept_id = #{deptId}), ','))
+       	
  		order BY d.parent_id, d.order_num
 	</select>
 	
 	<!-- 部门及下级部门 -->
 	<select id="selectLowerCascadeDeptList" parameterType="SysDept" resultMap="SysDeptResult">
 		<include refid="selectDeptVo"/>
-        where d.del_flag = '0' and (d.dept_id = #{deptId} or find_in_set( #{deptId} , d.ancestors ))
+        where 
+        	d.del_flag = '0' 
+        	and 
+        	(d.dept_id = #{deptId} or CAST(#{deptId} AS VARCHAR) = ANY (string_to_array(d.ancestors, ',')) )
 		order by d.parent_id, d.order_num
 	</select>
 	

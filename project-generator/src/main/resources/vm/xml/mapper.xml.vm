@@ -66,6 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #end
 #end
         </where>
+        order by t.${pkColumn.columnName} asc
     </select>
     
     <select id="select${ClassName}By${pkColumn.capJavaField}" parameterType="${pkColumn.javaType}" resultMap="#if($table.sub)${ClassName}${subClassName}Result#else${ClassName}Result#end">
@@ -104,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update ${tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $pkColumn.columnName)
+#if($column.columnName != $pkColumn.columnName && $column.columnName != "create_by" && $column.columnName != "create_time")
             <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">$column.columnName = #{$column.javaField},</if>
 #end
 #end
@@ -114,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 #if($existDelFlag)
     <delete id="delete${ClassName}By${pkColumn.capJavaField}">
-	update ${tableName} set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where ${pkColumn.columnName} = #{${pkColumn.javaField}}
+	update ${tableName} set del_flag = 1, update_by = #{deleteBy}, update_time = CURRENT_TIMESTAMP where ${pkColumn.columnName} = #{${pkColumn.javaField}}
     </delete>
 #else
     <delete id="delete${ClassName}By${pkColumn.capJavaField}" parameterType="${pkColumn.javaType}">
@@ -124,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 #if($existDelFlag)
     <delete id="delete${ClassName}By${pkColumn.capJavaField}s">
-        update ${tableName} set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where ${pkColumn.columnName} in 
+        update ${tableName} set del_flag = 1, update_by = #{deleteBy}, update_time = CURRENT_TIMESTAMP where ${pkColumn.columnName} in 
         <foreach item="${pkColumn.javaField}" collection="${pkColumn.javaField}s" open="(" separator="," close=")">
             #{${pkColumn.javaField}}
         </foreach>
