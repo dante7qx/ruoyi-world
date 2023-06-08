@@ -323,7 +323,7 @@ public class GenTableColumn extends BaseEntity
 
     public String getDictType()
     {
-        return dictType;
+        return StrUtil.emptyToDefault(dictType, "");
     }
 
     public void setSort(Integer sort)
