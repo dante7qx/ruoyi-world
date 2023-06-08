@@ -28,26 +28,14 @@
 			<scope>test</scope>
 		</dependency>
 		
-         <!-- Mysql驱动包 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        -->
-        
-        <!-- PostgreSQL驱动包 -->
-        <dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-        
-        <!-- 数据库脚本版本 -->
+		<!-- OpenGauss驱动包 -->
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
+		    <groupId>com.huaweicloud.dws</groupId>
+		    <artifactId>huaweicloud-dws-jdbc</artifactId>
+		    <version>8.2.1.1</version>
+		    <scope>runtime</scope>
 		</dependency>
-
+        
         <!-- 核心模块-->
         <dependency>
             <groupId>com.risun</groupId>

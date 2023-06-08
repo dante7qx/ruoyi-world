@@ -40,7 +40,6 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <zxing.version>3.5.1</zxing.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
-        <flyway.version>7.15.0</flyway.version>
         <redisson.version>3.17.7</redisson.version>
     </properties>
 	
@@ -204,13 +203,6 @@
 			    <groupId>org.bouncycastle</groupId>
 			    <artifactId>bcprov-jdk15on</artifactId>
 			    <version>${bcprov-jdk15on.version}</version>
-			</dependency>
-			
-			<!-- 数据库脚本版本 -->
-			<dependency>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-core</artifactId>
-				<version>${flyway.version}</version><!--$NO-MVN-MAN-VER$-->
 			</dependency>
 			
 			<!-- Redisson 分布式锁 -->

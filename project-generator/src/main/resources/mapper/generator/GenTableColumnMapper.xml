@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				when cols.column_default like 'nextval(%' then '1'
 				else '0'
 			end) as is_increment,
-			(
+			replace((
 		       case
 				when cols.data_type = 'character varying' then 'varchar'
 				when cols.data_type = 'character' then 'char'
@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				else cols.data_type
 			end
 		       ) || coalesce('(' || cols.character_maximum_length || ')',
-			'') as column_type
+			''), '()', '') as column_type
 		from
 			information_schema.columns as cols
 		where

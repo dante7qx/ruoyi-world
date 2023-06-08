@@ -2,13 +2,13 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
     druid:
       # 主库数据源
       master:
-        url: jdbc:postgresql://192.168.1.30/risun_project?currentSchema=public&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:postgresql://192.168.1.30:15432/risun_project?currentSchema=public&useUnicode=true&characterEncoding=UTF-8
         username: root
-        password: iamdante
+        password: risun@123#!
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
