@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					exists (
 						select 1 from sys_dept d where d.dept_id = #{loginDeptId}
 						and 
-						(d.dept_id = t1.dept_id or CAST(t1.dept_id AS VARCHAR) = ANY (string_to_array(d.ancestors, ',')))
+						(d.dept_id = t1.dept_id or t1.dept_id::VARCHAR = ANY (string_to_array(d.ancestors, ',')))
 						
 					) 
 				)
@@ -100,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					(
 						select 1 from sys_dept d where d.dept_id = #{loginDeptId} 
 						and 
-						(d.dept_id = t1.dept_id or CAST(t1.dept_id AS VARCHAR) = ANY (string_to_array(d.ancestors, ',')))
+						(d.dept_id = t1.dept_id or t1.dept_id::VARCHAR = ANY (string_to_array(d.ancestors, ',')))
 					) 
 				)
 			)
