@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.risun.RisunApplicationTests;
+import com.risun.common.enums.DataSourceType;
+import com.risun.framework.datasource.DynamicDataSourceContextHolder;
 import com.risun.system.service.ISysConfigService;
 
 import cn.hutool.core.lang.Console;
@@ -23,6 +25,19 @@ public class DemoMapperTests extends RisunApplicationTests {
 		int count = demoMapper.selectDemoCount();
 		assertTrue(count >= 0);
 		
+	}
+	
+	/**
+	 * 测试手动切换数据源
+	 */
+	@Test
+	public void dynaSelectDemoCount() {
+		int masterCount = demoMapper.selectDemoCount();
+		Console.log("Master 数据源：{}", masterCount);
+		// 手动切换数据源
+		DynamicDataSourceContextHolder.setDataSourceType(DataSourceType.SLAVE.name());
+		int slaveCount = demoMapper.selectDemoCount();
+		Console.log("Slave 数据源：{}", slaveCount);
 	}
 	
 }
