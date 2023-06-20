@@ -3,7 +3,7 @@ package com.risun.framework;
 import com.risun.RisunApplicationTests;
 import com.risun.framework.email.EmailFactory;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
