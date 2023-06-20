@@ -36,7 +36,7 @@
 		<latex-mathml-ooxml.version>1.0.0</latex-mathml-ooxml.version>
 		<jdom2.version>2.0.6.1</jdom2.version>
 		<aspose-word.version>15.8.0</aspose-word.version>
-		<hutool.version>5.8.17</hutool.version>
+		<hutool.version>5.8.20</hutool.version>
 		<guava.version>31.1-jre</guava.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 		<zxing.version>3.5.1</zxing.version>
