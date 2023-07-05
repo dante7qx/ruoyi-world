@@ -146,7 +146,7 @@ management:
 jeecg: 
   jmreport: 
     export-excel-pattern: primary
-    page-size-number: 50
+    page-size-number: 10
     pageSize: 
       - 10
       - 20
