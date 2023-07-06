@@ -172,7 +172,10 @@ public class DemoServiceImpl implements IDemoService
 		map.put("demoImg", images);
 		
 		// 数学公式
-		map.put("fnTrig", "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">  <msup>    <mtext>cos</mtext>    <mrow>      <mn>2</mn>    </mrow>  </msup>  <mfrac>    <mi>&#x3B1;</mi>    <mn>2</mn>  </mfrac>  <mo>=</mo>  <mfrac>    <mrow>      <mn>1</mn>      <mo>+</mo>      <mtext>cos</mtext>      <mi>&#x3B1;</mi>    </mrow>    <mn>2</mn>  </mfrac>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mi>&#x3B1;</mi>  <mo>+</mo>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mi>&#x3B2;</mi>  <mo>=</mo>  <mn>2</mn>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mfrac>    <mrow>      <mi>&#x3B1;</mi>      <mo>+</mo>      <mi>&#x3B2;</mi>    </mrow>    <mn>2</mn>  </mfrac>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mfrac>    <mrow>      <mi>&#x3B1;</mi>      <mo>&#x2212;</mo>      <mi>&#x3B2;</mi>    </mrow>    <mn>2</mn>  </mfrac></math>");
+//		map.put("fnTrig", "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">  <msup>    <mtext>cos</mtext>    <mrow>      <mn>2</mn>    </mrow>  </msup>  <mfrac>    <mi>&#x3B1;</mi>    <mn>2</mn>  </mfrac>  <mo>=</mo>  <mfrac>    <mrow>      <mn>1</mn>      <mo>+</mo>      <mtext>cos</mtext>      <mi>&#x3B1;</mi>    </mrow>    <mn>2</mn>  </mfrac>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mi>&#x3B1;</mi>  <mo>+</mo>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mi>&#x3B2;</mi>  <mo>=</mo>  <mn>2</mn>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mfrac>    <mrow>      <mi>&#x3B1;</mi>      <mo>+</mo>      <mi>&#x3B2;</mi>    </mrow>    <mn>2</mn>  </mfrac>  <mi>cos</mi>  <mo data-mjx-texclass=\"NONE\">&#x2061;</mo>  <mfrac>    <mrow>      <mi>&#x3B1;</mi>      <mo>&#x2212;</mo>      <mi>&#x3B2;</mi>    </mrow>    <mn>2</mn>  </mfrac></math>");
+		map.put("fnTrig", null);
+		map.put("fnText", "我是文本，不是公式");
+		
 		
 		// 附件（支持Word、Excel）
 		AttachmentRenderData attach = null;
