@@ -12,6 +12,8 @@
         <el-divider></el-divider>
       </el-col>
     </el-row>
+    <!-- 无面板分割-->
+    <!--
     <el-row :gutter="20">
       <el-col :span="5">
         <sys-dept-tree :key="deptLevel" :level="deptLevel" :maxHeight="700" :deptSelected="listDeptInfo"/>
@@ -24,13 +26,29 @@
         </div>
       </el-col>
     </el-row>
-    
+    -->
+    <splitpanes vertical>
+      <pane size="20" min-size="20">
+        <sys-dept-tree :key="deptLevel" :level="deptLevel" :maxHeight="700" :deptSelected="listDeptInfo"/>
+      </pane>
+      <pane>
+        已选部门：{{ `${deptTreeNodeId} - ${JSON.stringify(deptTreeNode)}` }}
+        <div>
+          <el-divider></el-divider>
+          <editor v-model="summary" :disabled="true"/>
+        </div>
+      </pane>
+    </splitpanes>
   </div>
 </template>
 
 <script>
+import { Splitpanes, Pane } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
+
 export default {
 	name: 'DeptTreeDemo',
+  components: { Splitpanes, Pane },
   data() {
 		return {
       summary: `

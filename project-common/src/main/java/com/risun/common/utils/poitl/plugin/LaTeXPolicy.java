@@ -32,6 +32,7 @@ public class LaTeXPolicy implements RenderPolicy {
 		// 将 data 转成 OMath 格式
 		String mathMlContent = String.valueOf(data);
 		if(StrUtil.isEmpty(mathMlContent)) {
+			run.setText("", 0);
 			return;
 		}
 	    CTOMath math = CTOMath.Factory.newInstance();
