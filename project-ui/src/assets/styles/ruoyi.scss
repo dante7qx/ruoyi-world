@@ -276,3 +276,17 @@
 	position: relative;
 	float: right;
 }
+
+.splitpanes--vertical > .splitpanes__splitter {
+  width: 4px;
+  min-width: 4px;
+  background-color: #9e9e9e;
+  margin-right: 2px;
+}
+
+/* 面板分割样式 */
+.splitpanes--horizontal > .splitpanes__splitter {
+  width: 4px;
+  min-width: 4px;
+  background-color: #9e9e9e;
+}
