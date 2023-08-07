@@ -80,8 +80,8 @@ public class SysCustAdvQueryCondServiceImpl implements ISysCustAdvQueryCondServi
     private List<SysCustAdvQueryCond> dbCol2QueryCond(List<SysCustAdvQueryCond> dbCols) {
     	List<SysCustAdvQueryCond> conds = Lists.newArrayList();
 		for (SysCustAdvQueryCond col : dbCols) {
-			// 去除主键、富文本、关联外键
-			if(col.getPkFlag() || "text".equals(col.getColType()) || StrUtil.endWith(col.getColName(), "id")) {
+			// 去除主键、富文本、关联外键、删除标识
+			if(col.getPkFlag() || "text".equals(col.getColType()) || StrUtil.endWith(col.getColName(), "id") || StrUtil.contains(col.getColName(), "del_")) {
 				continue;
 			}
 			col.setJavaField(StrUtil.toCamelCase(col.getColName()));
