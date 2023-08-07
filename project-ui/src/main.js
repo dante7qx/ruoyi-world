@@ -49,8 +49,10 @@ import VideoMonitor from '@/components/Video'
 import VideoPlayer from '@/components/Video/play' 
 // 列表长字段展示组件
 import LongTableCol from '@/components/LongTableCol'
-// 部门人员选择
+// 部门人员选择组件
 import DeptUserSelect from '@/components/DeptUserSelect'
+// 自定义高级查询组件
+import CustAdvSearch from '@/components/CustAdvSearch'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -84,6 +86,7 @@ Vue.component('VideoMonitor', VideoMonitor)
 Vue.component('VideoPlayer', VideoPlayer)
 Vue.component('LongTableCol', LongTableCol)
 Vue.component('SysDeptUserSelect', DeptUserSelect)
+Vue.component('CustAdvSearch', CustAdvSearch)
 
 Vue.use(directive)
 Vue.use(plugins)

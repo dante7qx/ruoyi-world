@@ -18,22 +18,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDemoVo">
-        select demo_id, demo_name, demo_time, demo_image, attachment, demo_content, create_by, create_time, update_by, update_time from t_demo
+        select t.demo_id, t.demo_name, t.demo_time, t.demo_image, t.attachment, t.demo_content, t.create_by, t.create_time, t.update_by, t.update_time from t_demo t
     </sql>
 
     <select id="selectDemoList" parameterType="Demo" resultMap="DemoResult">
         <include refid="selectDemoVo"/>
         <where>  
-            <if test="demoName != null  and demoName != ''"> and demo_name like concat('%', #{demoName}, '%')</if>
-            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and demo_time between #{params.beginDemoTime} and #{params.endDemoTime}</if>
-            <if test="demoImage != null  and demoImage != ''"> and demo_image = #{demoImage}</if>
-            <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
+            <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
+            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and t.demo_time between #{params.beginDemoTime} and #{params.endDemoTime}</if>
+            <if test="demoImage != null  and demoImage != ''"> and t.demo_image = #{demoImage}</if>
+            <if test="attachment != null  and attachment != ''"> and t.attachment = #{attachment}</if>
+            
+            <!-- 自定义高级查询 -->
+            <if test="params.customizeAdvanced != null and params.customizeAdvanced != ''"> 
+            	${params.customizeAdvanced} 
+            </if>
+            
         </where>
     </select>
     
     <select id="selectDemoByDemoId" parameterType="Long" resultMap="DemoResult">
         <include refid="selectDemoVo"/>
-        where demo_id = #{demoId}
+        where t.demo_id = #{demoId}
     </select>
         
     <insert id="insertDemo" parameterType="Demo" useGeneratedKeys="true" keyProperty="demoId">

@@ -23,6 +23,7 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
       </el-form-item>
     </el-form>
 
@@ -153,6 +154,9 @@
     <el-dialog :title="title" :visible.sync="open" width="1000px" v-dialog-drag append-to-body>
       <detail :key="key" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
+
+    <!--自定义高级查询-->
+    <cust-adv-search v-if="showCustAdvSearch" :tableName="'t_demo'" :tableAlias="'t'" :searchFunc="customSearch"/>
   </div>
 </template>
 
@@ -195,10 +199,13 @@ export default {
         demoTime: null,
         demoImage: null,
         attachment: null,
+        params: {}
       },
       demoId: 0,
       disabled: false,
-      key: ''
+      key: '',
+      // 打开自定义查询
+      showCustAdvSearch: false
     };
   },
   created() {
@@ -207,7 +214,6 @@ export default {
   methods: {
     getList() {
       this.loading = true;
-      this.queryParams.params = {};
       if (null != this.daterangeDemoTime && '' != this.daterangeDemoTime) {
         this.queryParams.params["beginDemoTime"] = this.daterangeDemoTime[0];
         this.queryParams.params["endDemoTime"] = this.daterangeDemoTime[1];
@@ -224,6 +230,7 @@ export default {
     },
     resetQuery() {
       this.daterangeDemoTime = [];
+      this.queryParams.params = {};
       this.resetForm("queryForm");
       this.handleQuery();
     },
@@ -278,7 +285,16 @@ export default {
     },
     downloadZip(row) {
       this.$download.resource2zip({ resource: row.demoImage, fileName: "示例图片.zip"})
-    }
+    },
+    openCustAdvSearch() {
+      this.showCustAdvSearch = false;
+      setTimeout(() => { this.showCustAdvSearch = true; }, 0)
+    },
+    customSearch(key, params) {
+      this.queryParams.pageNum = 1;
+      this.queryParams.params[key] = params;
+      this.getList();
+    },
   }
 };
 </script>
