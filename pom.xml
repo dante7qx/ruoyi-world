@@ -37,7 +37,7 @@
 		<jdom2.version>2.0.6.1</jdom2.version>
 		<aspose-word.version>15.8.0</aspose-word.version>
 		<hutool.version>5.8.20</hutool.version>
-		<guava.version>31.1-jre</guava.version>
+		<guava.version>32.1.2-jre</guava.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 		<zxing.version>3.5.1</zxing.version>
 		<bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>

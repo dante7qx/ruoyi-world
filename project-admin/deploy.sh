@@ -1,27 +1,27 @@
 #! /bin/bash
 
-# 全局将testapp修改为自己项目的名字
-# <项目名> 替换成自己的项目名，和init.sh中保持一致
-APP_NAME=testapp*.jar
-JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m"
-LOG_HOME=/data/deploy/logs/<项目名>
-UPLOAD_PATH=/data/deploy/upload/<项目名>
-APIKEY_PATH=/data/deploy/apikey/<项目名>
-GREP_APP="testapp.*.jar"
-## 启动端口号
-SERVER_PORT=9001
-## 健康检查的URI
+## 修改启动端口号SERVER_PORT、运行jar包所在目录APP_HOME、jar包名称RUN_JAR
+SERVER_PORT=8100
+RUN_JAR="risun-rsp.jar"
+APP_HOME="/home/risun-app/rsp"
+APP_NAME="${APP_HOME}/${RUN_JAR}"
+LOG_HOME="${APP_HOME}/logs"
+UPLOAD_PATH="${APP_HOME}/files"
+APIKEY_PATH="${APP_HOME}/apikey"
 HEALTH_CHECK="health_check"
+
+JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 
 # 使用说明，用来提示输入参数
 usage() {
-    echo "Usage: sh deploy.sh [start|stop|restart|status]"
+    echo "Usage: ./run.sh [start|stop|restart|status]"
     exit 1
 }
 
 #检查程序是否在运行
 is_exist() {
-    pid=`ps -ef | grep $GREP_APP | grep -v grep | awk '{print $2}' `
+    pid=`ps -ef | grep ${RUN_JAR} | grep -v grep | awk '{print $2}' `
+    #pid=`jps | grep ${RUN_JAR} | awk '{print $1}'`
     #如果不存在返回1，存在返回0
     if [ -z "${pid}" ]; then
       return 1
@@ -34,18 +34,23 @@ is_exist() {
 start() {
    is_exist
    if [ $? -eq "0" ]; then
-     echo "${APP_NAME} is already running. pid=${pid}."
+     echo "${APP_NAME} is already running. listening to ${SERVER_PORT}. pid=${pid}."
    else
      echo "${APP_NAME} begin to start, listening to ${SERVER_PORT}"
      nohup java $JAVA_OPTS \
      	-Dfile.encoding=utf-8 \
      	-Djava.security.egd=file:/dev/./urandom \
-     	-jar $APP_NAME \
+		-jar $APP_NAME \
+		--risun.profile=${UPLOAD_PATH} \
+        --risun.apiKey=${APIKEY_PATH} \
      	--server.port=${SERVER_PORT} \
-     	--spring.redis.database=0 \
-     	--ruoyi.profile=$UPLOAD_PATH \
-     	--ruoyi.apiKey=$APIKEY_PATH \
-     	> /dev/null 2>&1 &
+		--spring.redis.host="127.0.0.1" \
+	    --spring.redis.port=6379 \
+		--spring.redis.database=0 \
+        --spring.redis.password=123456 \
+        --spring.datasource.druid.master.url="jdbc:postgresql://127.0.0.1:5432/testdb?currentSchema=public&useUnicode=true&characterEncoding=UTF-8" \
+		--spring.datasource.druid.master.username="testuser" \
+		--spring.datasource.druid.master.password="Nxltxcy_123" > /dev/null 2>&1 &
    fi
 }
 
@@ -63,7 +68,7 @@ stop() {
 status() {
    is_exist
    if [ $? -eq "0" ]; then
-     echo "${APP_NAME} is running. Pid is ${pid}"
+     echo "${APP_NAME} is running. Listening to ${SERVER_PORT}. Pid is ${pid}"
    else
      echo "${APP_NAME} is not running."
    fi
