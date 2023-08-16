@@ -34,19 +34,19 @@ create table sys_cust_adv_query_cond (
 COMMENT ON TABLE sys_cust_adv_query_cond IS '自定义高级查询条件表';
 
 -- 添加菜单
-insert into sys_menu (menu_id, menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values(121, '查询模板管理', '1', '11', 'caq', 'system/caq/index', 1, 0, 'C', '0', '0', 'system:caq:list', 'icon', 'fqyczadmin', sysdate(), '', null, '自定义高级查询模板菜单');
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('查询模板管理', '1', '11', 'caq', 'system/caq/index', 1, 0, 'C', '0', '0', 'system:caq:list', 'icon', 'fqyczadmin', sysdate(), '', null, '自定义高级查询模板菜单');
 
 
 -- 按钮 SQL
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('查询模板查询', 121, '1',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:query',        '#', 'fqyczadmin', sysdate(), '', null, '');
+values('查询模板查询', (select menu_id from sys_menu where menu_name='查询模板管理'), '1',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:query',        '#', 'fqyczadmin', sysdate(), '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('查询模板新增', 121, '2',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:add',          '#', 'fqyczadmin', sysdate(), '', null, '');
+values('查询模板新增', (select menu_id from sys_menu where menu_name='查询模板管理'), '2',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:add',          '#', 'fqyczadmin', sysdate(), '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('查询模板修改', 121, '3',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:edit',         '#', 'fqyczadmin', sysdate(), '', null, '');
+values('查询模板修改', (select menu_id from sys_menu where menu_name='查询模板管理'), '3',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:edit',         '#', 'fqyczadmin', sysdate(), '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('查询模板删除', 121, '4',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:remove',       '#', 'fqyczadmin', sysdate(), '', null, '');
+values('查询模板删除', (select menu_id from sys_menu where menu_name='查询模板管理'), '4',  '#', '', 1, 0, 'F', '0', '0', 'system:caq:remove',       '#', 'fqyczadmin', sysdate(), '', null, '');
