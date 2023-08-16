@@ -246,6 +246,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        params: {},
 #foreach ($column in $columns)
 #if($column.query)
         $column.javaField: null#if($foreach.count != $columns.size()),#end
@@ -262,12 +263,6 @@ export default {
   methods: {
     getList() {
       this.loading = true;
-#foreach ($column in $columns)
-#if($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
-      this.queryParams.params = {};
-#break
-#end
-#end
 #foreach ($column in $columns)
 #if($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
 #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
@@ -294,6 +289,7 @@ export default {
       this.daterange${AttrName} = [];
 #end
 #end
+      this.queryParams.params = {};
       this.resetForm("queryForm");
       this.handleQuery();
     },
