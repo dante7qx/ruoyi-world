@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					WHEN cols.data_type = 'character' THEN
 					'char' 
 					WHEN cols.data_type LIKE'timestamp%' THEN
-					'datatime' ELSE cols.data_type 
+					'datetime' ELSE cols.data_type 
 				END 
 				) || COALESCE ( '(' || cols.character_maximum_length || ')', '' ) AS colType,
 				(
