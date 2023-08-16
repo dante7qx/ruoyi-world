@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.annotation.CustomizeAdvancedSearch;
 import com.risun.common.annotation.Log;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
@@ -46,6 +47,7 @@ public class DemoController extends BaseController {
 	 */
 	@PreAuthorize("@ss.hasPermi('biz:demo:list')")
 	@GetMapping("/list")
+	@CustomizeAdvancedSearch
 	public TableDataInfo list(Demo demo) {
 		startPage();
 		List<Demo> list = demoService.selectDemoList(demo);

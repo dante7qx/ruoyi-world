@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysCustAdvQueryCondMapper">
+    
+    <resultMap type="SysCustAdvQueryCond" id="SysCustAdvQueryCondResult">
+        <result property="condId"    column="cond_id"    />
+        <result property="queryId"    column="query_id"    />
+        <result property="colName"    column="col_name"    />
+        <result property="colDesc"    column="col_desc"    />
+        <result property="javaField"    column="java_field"    />
+        <result property="javaType"    column="java_type"    />
+        <result property="dictType"    column="dict_type"    />
+        <result property="queryFlag"    column="query_flag"    />
+        <result property="queryType"    column="query_type"    />
+    </resultMap>
+
+    <sql id="selectSysCustAdvQueryCondVo">
+        select t.cond_id, t.query_id, t.col_name, t.col_desc, t.java_field, t.java_type, t.dict_type, t.query_flag, t.query_type from sys_cust_adv_query_cond t
+    </sql>
+
+    <select id="selectSysCustAdvQueryCondList" parameterType="SysCustAdvQueryCond" resultMap="SysCustAdvQueryCondResult">
+        <include refid="selectSysCustAdvQueryCondVo"/>
+        <where>  
+            <if test="queryId != null "> and t.query_id = #{queryId}</if>
+            <if test="colName != null  and colName != ''"> and t.col_name like concat('%', #{colName}, '%')</if>
+            <if test="colDesc != null  and colDesc != ''"> and t.col_desc = #{colDesc}</if>
+            <if test="javaField != null  and javaField != ''"> and t.java_field = #{javaField}</if>
+            <if test="javaType != null  and javaType != ''"> and t.java_type = #{javaType}</if>
+            <if test="dictType != null  and dictType != ''"> and t.dict_type = #{dictType}</if>
+            <if test="queryFlag != null "> and t.query_flag = #{queryFlag}</if>
+            <if test="queryType != null "> and t.query_type = #{queryType}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysCustAdvQueryCondByCondId" parameterType="Long" resultMap="SysCustAdvQueryCondResult">
+        <include refid="selectSysCustAdvQueryCondVo"/>
+        where t.cond_id = #{condId}
+    </select>
+    
+    <select id="selectSysCustAdvQueryCondByQueryId" parameterType="Long" resultMap="SysCustAdvQueryCondResult">
+        <include refid="selectSysCustAdvQueryCondVo"/>
+        where t.query_id = #{queryId}
+    </select>
+        
+    <insert id="insertSysCustAdvQueryCond" parameterType="SysCustAdvQueryCond" useGeneratedKeys="true" keyProperty="condId">
+        insert into sys_cust_adv_query_cond
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="queryId != null">query_id,</if>
+            <if test="colName != null and colName != ''">col_name,</if>
+            <if test="colDesc != null and colDesc != ''">col_desc,</if>
+            <if test="javaField != null and javaField != ''">java_field,</if>
+            <if test="javaType != null and javaType != ''">java_type,</if>
+            <if test="dictType != null">dict_type,</if>
+            <if test="queryFlag != null">query_flag,</if>
+            <if test="queryType != null">query_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="queryId != null">#{queryId},</if>
+            <if test="colName != null and colName != ''">#{colName},</if>
+            <if test="colDesc != null and colDesc != ''">#{colDesc},</if>
+            <if test="javaField != null and javaField != ''">#{javaField},</if>
+            <if test="javaType != null and javaType != ''">#{javaType},</if>
+            <if test="dictType != null">#{dictType},</if>
+            <if test="queryFlag != null">CASE WHEN #{queryFlag} THEN 1 ELSE 0 END,</if>
+            <if test="queryType != null">#{queryType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCustAdvQueryCond" parameterType="SysCustAdvQueryCond">
+        update sys_cust_adv_query_cond
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="queryId != null">query_id = #{queryId},</if>
+            <if test="colName != null and colName != ''">col_name = #{colName},</if>
+            <if test="colDesc != null and colDesc != ''">col_desc = #{colDesc},</if>
+            <if test="javaField != null and javaField != ''">java_field = #{javaField},</if>
+            <if test="javaType != null and javaType != ''">java_type = #{javaType},</if>
+            <if test="dictType != null">dict_type = #{dictType},</if>
+            <if test="queryFlag != null">query_flag = CASE WHEN #{queryFlag} THEN 1 ELSE 0 END,</if>
+            <if test="queryType != null">query_type = #{queryType},</if>
+        </trim>
+        where cond_id = #{condId}
+    </update>
+
+    <delete id="deleteSysCustAdvQueryCondByCondId" parameterType="Long">
+        delete from sys_cust_adv_query_cond where cond_id = #{condId}
+    </delete>
+
+    <delete id="deleteSysCustAdvQueryCondByCondIds" parameterType="String">
+        delete from sys_cust_adv_query_cond where cond_id in 
+        <foreach item="condId" collection="array" open="(" separator="," close=")">
+            #{condId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteSysCustAdvQueryCondByQueryId" parameterType="Long">
+        delete from sys_cust_adv_query_cond where query_id = #{queryId}
+    </delete>
+    
+  	<!-- 系统数据库相关查询 -->
+  	<select id="selectSysDBTableColByTableName" parameterType="String" resultType="SysCustAdvQueryCond">
+		SELECT
+			cols.COLUMN_NAME AS colName,
+			(
+			SELECT
+				pgd.description 
+			FROM
+				pg_description pgd 
+			WHERE
+				pgd.objoid = (
+				SELECT C
+					.oid 
+				FROM
+					pg_class C 
+				WHERE
+					C.relname = cols.TABLE_NAME 
+					AND C.relnamespace = (
+					SELECT
+						n.oid 
+					FROM
+						pg_namespace n 
+					WHERE
+						n.nspname = cols.table_schema 
+					) 
+				) 
+				AND pgd.objsubid = cols.ordinal_position 
+			) AS colDesc,
+			(
+			CASE
+					
+					WHEN cols.data_type = 'character varying' THEN
+					'varchar' 
+					WHEN cols.data_type = 'character' THEN
+					'char' 
+					WHEN cols.data_type LIKE'timestamp%' THEN
+					'datetime' ELSE cols.data_type 
+				END 
+				) || COALESCE ( '(' || cols.character_maximum_length || ')', '' ) AS colType,
+				(
+				CASE
+						
+						WHEN cols.COLUMN_NAME IN (
+						SELECT
+							ccu.COLUMN_NAME 
+						FROM
+							information_schema.constraint_column_usage AS ccu 
+						WHERE
+							ccu.table_schema = cols.table_schema 
+							AND ccu.TABLE_NAME = cols.TABLE_NAME 
+							) THEN
+							1 ELSE 0 
+						END 
+				) AS pkFlag 
+				FROM
+					information_schema.COLUMNS AS cols 
+				WHERE
+					cols.table_schema = CURRENT_SCHEMA ( ) 
+					AND cols.TABLE_NAME = #{tableName}
+			ORDER BY
+		cols.ordinal_position
+  	</select>
+</mapper>

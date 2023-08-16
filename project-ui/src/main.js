@@ -53,6 +53,8 @@ import LongTableCol from '@/components/LongTableCol'
 import DeptUserSelect from '@/components/DeptUserSelect'
 // 部门树选择
 import DeptTreeSelect from '@/components/DeptTree'
+// 自定义高级查询组件
+import CustAdvSearch from '@/components/CustAdvSearch'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -87,6 +89,7 @@ Vue.component('VideoPlayer', VideoPlayer)
 Vue.component('LongTableCol', LongTableCol)
 Vue.component('SysDeptUserSelect', DeptUserSelect)
 Vue.component('SysDeptTree', DeptTreeSelect)
+Vue.component('CustAdvSearch', CustAdvSearch)
 
 Vue.use(directive)
 Vue.use(plugins)
