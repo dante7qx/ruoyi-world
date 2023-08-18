@@ -9,6 +9,9 @@ public class GenConstants
 {
     /** 单表（增删改查） */
     public static final String TPL_CRUD = "crud";
+    
+    /** 左部门树单表（增删改查） */
+    public static final String TPL_LEFT_DEPT_TREE_CRUD = "depttreecrud";
 
     /** 树表（增删改查） */
     public static final String TPL_TREE = "tree";
