@@ -51,7 +51,6 @@ public class CustAdvSearchAspect {
 	 * @param customizeAdvancedSearch
 	 */
 	protected void handleAdvanceSearch(final JoinPoint joinPoint, CustomizeAdvancedSearch customizeAdvancedSearch) {
-		log.info("AOP切面处理自定义高级查询");
 		Object params = joinPoint.getArgs()[0];
 		if (ObjectUtil.isNotNull(params) && params instanceof BaseEntity) {
 			BaseEntity baseEntity = (BaseEntity) params;
@@ -74,6 +73,7 @@ public class CustAdvSearchAspect {
 		if (ObjectUtil.isEmpty(searchCondition)) {
 			return builder.toString();
 		}
+		log.info("AOP切面处理自定义高级查询");
 		CustAdvTemplate cusAdvance = JSON.parseObject(searchCondition.toString(), CustAdvTemplate.class);
 		List<CustAdvCond> conditions = cusAdvance.getConditions();
 		String table = cusAdvance.getTableName();
