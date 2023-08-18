@@ -91,7 +91,12 @@
           <el-radio v-model="info.genType" label="1">自定义路径</el-radio>
         </el-form-item>
       </el-col>
-
+      <el-col :span="12">
+        <el-form-item prop="genCustAdv" label="生成自定义高级查询">
+          <el-switch v-model="info.genCustAdv" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+        </el-form-item>
+      </el-col>
+  
       <el-col :span="24" v-if="info.genType == '1'">
         <el-form-item prop="genPath">
           <span slot="label">

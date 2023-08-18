@@ -25,6 +25,7 @@
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
             <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+            <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
           </el-form-item>
         </el-form>
 
@@ -91,7 +92,7 @@
             </template>
           </el-table-column>
           <el-table-column label="业务附件" align="center" prop="attachment" />
-          <el-table-column label="业务名称" align="center" prop="demoContent" />
+          <el-table-column label="业务内容" align="center" prop="demoContent" />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template v-slot="scope">
               <el-button
@@ -133,6 +134,10 @@
     <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
       <detail v-if="open" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
+    
+    <!--自定义高级查询组件 -->
+    <cust-adv-search v-if="showCustAdvSearch" :tableName="'t_demo'" :tableAlias="'t'" :searchFunc="customSearch"/>
+
   </div>
 </template>
 
@@ -143,7 +148,7 @@ import { listDemo, delDemo } from "@/api/biz/demo"
 import Detail from "./detail"
 
 export default {
-  name: "DemoDeptTree",
+  name: "Demo",
   components: {
     Splitpanes, Pane,
     "detail": Detail
@@ -183,6 +188,7 @@ export default {
       disabled: false,
       // 当前登录部门及下级部门
       deptLevel: 1,
+      showCustAdvSearch: false	// 打开自定义查询
     };
   },
   created() {
@@ -251,6 +257,15 @@ export default {
     getListByDept(deptId, deptNode) {
       this.queryParams.pageNum = 1;
       this.queryParams.deptId = deptId;
+      this.getList();
+    },
+    openCustAdvSearch() {
+      this.showCustAdvSearch = false;
+      setTimeout(() => { this.showCustAdvSearch = true; }, 0)
+    },
+    customSearch(key, params) {
+      this.queryParams.pageNum = 1;
+      this.queryParams.params[key] = params;
       this.getList();
     }
   }

@@ -64,6 +64,9 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+#if(${genCustAdv})
+        <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
+#end
       </el-form-item>
     </el-form>
 
@@ -192,6 +195,12 @@
     <el-dialog :title="title" :visible.sync="open" width="900px" v-dialog-drag append-to-body>
       <detail v-if="open" :${pkColumn.javaField}="${pkColumn.javaField}" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
+
+#if(${genCustAdv})
+    <!--自定义高级查询组件 -->
+    <cust-adv-search v-if="showCustAdvSearch" :tableName="'${tableName}'" :tableAlias="'t'" :searchFunc="customSearch"/>
+#end    
+    
   </div>
 </template>
 
@@ -254,7 +263,12 @@ export default {
 #end
       },
       ${pkColumn.javaField}: 0,
+#if(${genCustAdv})
+      disabled: false,
+      showCustAdvSearch: false	// 打开自定义查询
+#else
       disabled: false
+#end
     };
   },
   created() {
@@ -366,7 +380,18 @@ export default {
       this.title = "";
       this.open = false;
       this.handleQuery();
+    },
+#if(${genCustAdv})
+    openCustAdvSearch() {
+      this.showCustAdvSearch = false;
+      setTimeout(() => { this.showCustAdvSearch = true; }, 0)
+    },
+    customSearch(key, params) {
+      this.queryParams.pageNum = 1;
+      this.queryParams.params[key] = params;
+      this.getList();
     }
+#end
   }
 };
 </script>

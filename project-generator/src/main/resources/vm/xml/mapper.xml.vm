@@ -65,6 +65,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #end
 #end
 #end
+#if($table.genCustAdv)
+            <!-- 自定义高级查询 -->
+            <if test="params.customizeAdvanced != null and params.customizeAdvanced != ''"> 
+                ${params.customizeAdvanced} 
+            </if>
+            <!-- 自定义高级查询 -->
+#end
         </where>
     </select>
     
