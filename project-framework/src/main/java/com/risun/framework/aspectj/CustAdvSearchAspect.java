@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Component
 @Slf4j
-public class CustoAdvSearchAspect {
+public class CustAdvSearchAspect {
 
 	/** 查询参数Key */
 	private static final String SEARCH_PARAM_KEY = "customizeAdvancedSearch";
