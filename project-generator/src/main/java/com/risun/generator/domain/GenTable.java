@@ -99,6 +99,9 @@ public class GenTable extends BaseEntity
     /** 上级菜单名称字段 */
     private String parentMenuName;
 
+    /** 生成自定义高级查询 */
+    private Boolean genCustAdv = Boolean.FALSE;
+
     public Long getTableId()
     {
         return tableId;
@@ -373,4 +376,13 @@ public class GenTable extends BaseEntity
         }
         return StrUtil.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
     }
+    
+    public Boolean getGenCustAdv() {
+		return genCustAdv;
+	}
+
+	public void setGenCustAdv(Boolean genCustAdv) {
+		this.genCustAdv = genCustAdv;
+	}
+
 }

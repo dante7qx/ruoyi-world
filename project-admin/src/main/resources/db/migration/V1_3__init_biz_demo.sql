@@ -18,7 +18,7 @@ COMMENT ON COLUMN t_demo.demo_name is '业务名称';
 COMMENT ON COLUMN t_demo.demo_time is '业务时间';
 COMMENT ON COLUMN t_demo.demo_image is '业务图片';
 COMMENT ON COLUMN t_demo.attachment is '业务附件';
-COMMENT ON COLUMN t_demo.demo_content is '业务名称';
+COMMENT ON COLUMN t_demo.demo_content is '业务内容';
 COMMENT ON COLUMN t_demo.del_flag is '删除标识 0 未删除 1 已删除';
 COMMENT ON COLUMN t_demo.create_by is '创建者';
 COMMENT ON COLUMN t_demo.create_time is '创建时间';
