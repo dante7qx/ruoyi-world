@@ -463,7 +463,7 @@ public class ExcelUtil<T>
                         {
                             propertyName = field.getName() + "." + attr.targetAttr();
                         }
-                        else if (StrUtil.isNotEmpty(attr.readConverterExp()))
+                        if (StrUtil.isNotEmpty(attr.readConverterExp()))
                         {
                             val = reverseByExp(Convert.toStr(val), attr.readConverterExp(), attr.separator());
                         }
