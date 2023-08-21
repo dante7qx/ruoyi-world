@@ -25,12 +25,14 @@ import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * token验证处理
  *
  * @author ruoyi
  */
+@Slf4j
 @Component
 public class TokenService
 {
@@ -77,6 +79,7 @@ public class TokenService
             }
             catch (Exception e)
             {
+            	log.error("获取用户信息异常'{}'", e.getMessage());
             }
         }
         return null;
