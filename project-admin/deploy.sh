@@ -10,7 +10,7 @@ UPLOAD_PATH="${APP_HOME}/files"
 APIKEY_PATH="${APP_HOME}/apikey"
 HEALTH_CHECK="health_check"
 
-JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+JAVA_OPTS="-Xmn256m -Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 
 # 使用说明，用来提示输入参数
 usage() {
