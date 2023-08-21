@@ -305,8 +305,11 @@
             <name>maven-risun</name>
             <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
             <releases>
-            <enabled>true</enabled>
+            	<enabled>true</enabled>
             </releases>
+            <snapshots>
+	            <enabled>false</enabled>
+	        </snapshots>
         </repository>
     </repositories>
 
