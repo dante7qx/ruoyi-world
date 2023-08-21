@@ -5,7 +5,7 @@ create table t_demo (
   demo_time datetime comment '业务时间',
   demo_image varchar(2048) comment '业务图片',
   attachment varchar(2048) comment '业务附件',
-  demo_content clob comment '业务名称',
+  demo_content clob comment '业务内容',
   del_flag tinyint default 0 comment '删除标识 0 未删除 1 已删除',
   create_by varchar(64) default '' comment '创建者',
   create_time datetime comment '创建时间',
