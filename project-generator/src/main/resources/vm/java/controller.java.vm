@@ -42,10 +42,14 @@ public class ${ClassName}Controller extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:list')")
     @GetMapping("/list")
-#if($table.genCustAdv)
-    @CustomizeAdvancedSearch
-#end
 #if($table.crud || $table.sub)
+    public TableDataInfo list(${ClassName} ${className}) {
+        startPage();
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return getDataTable(list);
+    }
+#elseif($table.genCustAdv)
+    @CustomizeAdvancedSearch
     public TableDataInfo list(${ClassName} ${className}) {
         startPage();
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
