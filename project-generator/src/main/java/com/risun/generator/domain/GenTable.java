@@ -359,7 +359,7 @@ public class GenTable extends BaseEntity
 
     public static boolean isCrud(String tplCategory)
     {
-        return tplCategory != null && StrUtil.equals(GenConstants.TPL_CRUD, tplCategory);
+    	return tplCategory != null && (StrUtil.equals(GenConstants.TPL_CRUD, tplCategory) || StrUtil.equals(GenConstants.TPL_LEFT_DEPT_TREE_CRUD, tplCategory));
     }
 
     public boolean isSuperColumn(String javaField)
