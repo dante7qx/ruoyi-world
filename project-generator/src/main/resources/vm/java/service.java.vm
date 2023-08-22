@@ -57,4 +57,12 @@ public interface I${ClassName}Service {
      * @return 结果
      */
     public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
+    
+    /**
+     * 导入${functionName}
+     * 
+     * @param ${className}List 待导入数据
+     * @return 结果
+     */
+    public String import${ClassName}(List<${ClassName}> ${className}List);
 }

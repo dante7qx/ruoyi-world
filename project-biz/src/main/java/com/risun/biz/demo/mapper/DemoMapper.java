@@ -72,12 +72,20 @@ public interface DemoMapper
     public int selectDemoCount();
     
     /**
-     * 批量新增
+     * 批量新增业务
      * 
      * @param demos
      * @return
      */
     public int batchInsertDemo(List<Demo> demos);
+    
+    /**
+     * 批量更新业务
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchUpdateDemo(List<Demo> demos);
     
     /**
      * 清空数据

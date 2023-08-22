@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
@@ -140,6 +141,35 @@ public class DemoController extends BaseController {
 		return toAjax(demoService.clearDemoData());
 	}
 
+	/**
+     * 导入业务
+     * 
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @PreAuthorize("@ss.hasPermi('biz:demo:import')")
+    @Log(title = "业务", businessType = BusinessType.IMPORT)
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file) throws Exception
+    {
+        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
+        List<Demo> demoList = util.importExcel(file.getInputStream());
+        String message = demoService.importDemo(demoList);
+        return AjaxResult.success(message);
+    }
+    
+    /**
+     * 下载导入模板
+     * 
+     * @param response
+     */
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response) {
+        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
+        util.importTemplateExcel(response, "业务模板");
+    }
+	
 	/**
 	 * 导出业务列表Word
 	 */

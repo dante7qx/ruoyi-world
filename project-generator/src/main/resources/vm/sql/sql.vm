@@ -19,4 +19,7 @@ insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame
 values('${functionName}删除', @parentId, '4',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:remove',       '#', 'fqyczadmin', sysdate(), '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('${functionName}导出', @parentId, '5',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:export',       '#', 'fqyczadmin', sysdate(), '', null, '');
+values('${functionName}导入', @parentId, '5',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:import',       '#', 'fqyczadmin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导出', @parentId, '6',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:export',       '#', 'fqyczadmin', sysdate(), '', null, '');
