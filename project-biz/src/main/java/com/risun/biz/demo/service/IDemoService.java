@@ -83,4 +83,12 @@ public interface IDemoService
      * @return
      */
     public Map<String, Object> export4Word(Long demoId);
+    
+    /**
+     * 导入业务
+     * 
+     * @param demoList 待导入数据
+     * @return 结果
+     */
+    public String importDemo(List<Demo> demoList);
 }

@@ -34,15 +34,13 @@ public class Demo extends BaseEntity {
     private Date demoTime;
 
     /** 业务图片 */
-    @Excel(name = "业务图片")
     private String demoImage;
 
     /** 业务附件 */
-    @Excel(name = "业务附件")
     private String attachment;
 
-    /** 业务名称 */
-    @Excel(name = "业务名称")
+    /** 业务内容 */
+    @Excel(name = "业务内容")
     private String demoContent;
 
     /** 删除标识 0 未删除 1 已删除 */

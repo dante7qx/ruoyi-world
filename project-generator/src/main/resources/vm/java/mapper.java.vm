@@ -70,4 +70,21 @@ public interface ${ClassName}Mapper extends MPJBaseMapper<${ClassName}> {
      */
     public int delete${subClassName}By${subTableFkClassName}(${pkColumn.javaType} ${pkColumn.javaField});
 #end
+
+    /**
+     * 批量新增${functionName}
+     * 
+     * @param ${className}s
+     * @return
+     */
+    public int batchInsert${ClassName}(List<${ClassName}> ${className}s);
+    
+    /**
+     * 批量更新${functionName}
+     * 
+     * @param ${className}s
+     * @return
+     */
+    public int batchUpdate${ClassName}(List<${ClassName}> ${className}s);
+
 }
