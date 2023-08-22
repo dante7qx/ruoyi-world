@@ -84,6 +84,14 @@ public class SysUserController extends BaseController
         util.exportExcel(response, list, "用户数据");
     }
 
+    /**
+     * 用户数据导入
+     * 
+     * @param file
+     * @param updateSupport
+     * @return
+     * @throws Exception
+     */
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @PreAuthorize("@ss.hasPermi('system:user:import')")
     @PostMapping("/importData")
@@ -96,6 +104,11 @@ public class SysUserController extends BaseController
         return AjaxResult.success(message);
     }
 
+    /**
+     * 用户导入模板下载
+     * 
+     * @param response
+     */
     @PostMapping("/importTemplate")
     public void importTemplate(HttpServletResponse response)
     {

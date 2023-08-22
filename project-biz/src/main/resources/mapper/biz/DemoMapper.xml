@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectDemoList" parameterType="Demo" resultMap="DemoResult">
         <include refid="selectDemoVo"/>
         <where>  
-	    del_flag = 0
+	    t.del_flag = 0
             <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
             <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and t.demo_time &gt;= #{params.beginDemoTime} and t.demo_time &lt;= #{params.endDemoTime}</if>
             <if test="demoContent != null  and demoContent != ''"> and t.demo_content = #{demoContent}</if>
