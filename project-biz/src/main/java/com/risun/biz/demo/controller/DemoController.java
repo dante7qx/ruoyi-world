@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
@@ -52,18 +53,6 @@ public class DemoController extends BaseController {
 		startPage();
 		List<Demo> list = demoService.selectDemoList(demo);
 		return getDataTable(list);
-	}
-
-	/**
-	 * 导出业务列表
-	 */
-	@PreAuthorize("@ss.hasPermi('biz:demo:export')")
-	@Log(title = "业务", businessType = BusinessType.EXPORT)
-	@PostMapping("/export")
-	public void export(HttpServletResponse response, Demo demo) {
-		List<Demo> list = demoService.selectDemoList(demo);
-		ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
-		util.exportExcel(response, list, "业务数据");
 	}
 
 	/**
@@ -119,7 +108,7 @@ public class DemoController extends BaseController {
 	@PostMapping("/insertBatch")
 	public AjaxResult addBatch() {
 		List<Demo> demos = Lists.newArrayList();
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 1000; i++) {
 			Demo demo = new Demo();
 			demo.setDemoName("测试数据" + i);
 			demo.setDemoTime(DateUtil.date());
@@ -150,4 +139,45 @@ public class DemoController extends BaseController {
 		Assert.notNull(demo.getDemoId(), "业务Id不能为空！");
 		WordExportUtil.createWord(demoService.export4Word(demo.getDemoId()), "demo.docx", response);
 	}
+	
+	/**
+     * 导入业务
+     * 
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @PreAuthorize("@ss.hasPermi('biz:demo:import')")
+    @Log(title = "业务", businessType = BusinessType.IMPORT)
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file) throws Exception
+    {
+        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
+        List<Demo> demoList = util.importExcel(file.getInputStream());
+        String message = demoService.importDemo(demoList);
+        return AjaxResult.success(message);
+    }
+    
+    /**
+     * 下载导入模板
+     * 
+     * @param response
+     */
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response) {
+        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
+        util.importTemplateExcel(response, "业务模板");
+    }
+    
+    /**
+     * 导出业务
+     */
+    @PreAuthorize("@ss.hasPermi('biz:demo:export')")
+    @Log(title = "业务", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, Demo demo) {
+        List<Demo> list = demoService.selectDemoList(demo);
+        ExcelUtil<Demo> util = new ExcelUtil<Demo>(Demo.class);
+        util.exportExcel(response, list, "业务数据");
+    }
 }

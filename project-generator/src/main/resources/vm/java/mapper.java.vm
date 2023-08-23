@@ -46,6 +46,14 @@ public interface ${ClassName}Mapper {
      * @return 结果
      */
     public int insert${ClassName}(${ClassName} ${className});
+    
+    /**
+     * 批量新增${functionName}
+     * 
+     * @param ${className}s
+     * @return
+     */
+    public int batchInsert${ClassName}(List<${ClassName}> ${className}s);
 
     /**
      * 修改${functionName}
@@ -54,6 +62,14 @@ public interface ${ClassName}Mapper {
      * @return 结果
      */
     public int update${ClassName}(${ClassName} ${className});
+    
+    /**
+     * 批量更新${functionName}
+     * 
+     * @param ${className}s
+     * @return
+     */
+    public int batchUpdate${ClassName}(List<${ClassName}> ${className}s);
 
     /**
      * 删除${functionName}

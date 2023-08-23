@@ -165,4 +165,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </insert>
 #end
+
+    <insert id="batchInsert${ClassName}" parameterType="java.util.List">
+        insert into ${tableName} (#foreach($column in $columns)#if($column.columnName != $pkColumn.columnName && $column.columnName != "del_flag" && $column.columnName != "update_by" && $column.columnName != "update_time")$column.columnName#if($column.columnName != "create_time"), #end#end#end)
+        values
+        <foreach item="item" collection="list" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+				#foreach($column in $columns) #if($column.columnName != $pkColumn.columnName && $column.columnName != "del_flag" && $column.columnName != "update_by" && $column.columnName != "update_time")#{item.$column.javaField}#if($column.columnName != "create_time"),#end#end#end 
+
+            </trim>
+        </foreach>
+    </insert>
+
+#set($uniqueCol=$!$columns.get(1).columnName)
+#set($uniqueField=$!$columns.get(1).javaField)
+    <update id="batchUpdate${ClassName}" parameterType="java.util.List">
+        update ${tableName}
+        <trim prefix="SET" suffixOverrides=",">
+#foreach($column in $columns)
+#if($column.columnName != $pkColumn.columnName && $column.columnName != "create_by" && $column.columnName != "create_time" && $column.columnName != "del_flag")
+            $column.columnName = 
+            <foreach collection="list" item="item" separator=" " open="CASE ${uniqueCol}" close="END">
+                WHEN #{item.${uniqueField}} THEN #{item.$column.javaField}#if(#$column.columnType == 'date')::date#elseif(#$column.columnType == 'datetime')::timestamp#end
+            </foreach>#if($column.columnName != "update_time"),#end
+#end
+#end
+            where ${uniqueCol} in
+            <foreach collection="list" item="item" separator="," open="(" close=")">
+                #{item.${uniqueField}}
+            </foreach>
+        </trim>
+    </update>
+
 </mapper>

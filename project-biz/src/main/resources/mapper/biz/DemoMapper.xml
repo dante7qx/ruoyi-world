@@ -97,17 +97,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
     
-    <insert id="batchInsertDemo" parameterType="List">
-   		insert into t_demo (demo_name, demo_time, demo_image, attachment, demo_content, create_by, create_time)
-   		values
-   		<foreach item="demo" collection="list" separator=",">
-   			<trim prefix="(" suffix=")" suffixOverrides=",">
-	   			#{demo.demoName}, #{demo.demoTime}, #{demo.demoImage}, #{demo.attachment}, #{demo.demoContent}, #{demo.createBy}, #{demo.createTime}
-   			</trim>
-    	</foreach>
-    </insert>
-    
     <delete id="clearDemoData">
     	truncate table t_demo
     </delete>
+    
+    <insert id="batchInsertDemo" parameterType="java.util.List">
+        insert into t_demo (demo_name, demo_time, demo_image, attachment, demo_content, create_by, create_time)
+        values
+        <foreach item="item" collection="list" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+  				#{item.demoName}, #{item.demoTime}, #{item.demoImage}, #{item.attachment}, #{item.demoContent},  #{item.createBy}, #{item.createTime}  
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="batchUpdateDemo" parameterType="java.util.List">
+        update t_demo
+        <trim prefix="SET" suffixOverrides=",">
+            demo_name = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.demoName}
+            </foreach>,
+            demo_time = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.demoTime}::date
+            </foreach>,
+            demo_image = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.demoImage}
+            </foreach>,
+            attachment = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.attachment}
+            </foreach>,
+            demo_content = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.demoContent}
+            </foreach>,
+            update_by = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.updateBy}
+            </foreach>,
+            update_time = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.updateTime}::timestamp
+            </foreach>
+            where demo_name in
+            <foreach collection="list" item="item" separator="," open="(" close=")">
+                #{item.demoName}
+            </foreach>
+        </trim>
+    </update>
 </mapper>

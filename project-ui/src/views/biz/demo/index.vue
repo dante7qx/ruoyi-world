@@ -62,6 +62,17 @@
       </el-col>
       <el-col :span="1.5">
         <el-button
+          type="info"
+          plain
+          icon="el-icon-upload"
+          size="mini"
+          @click="handleImport"
+          v-hasPermi="['biz:demo:import']"
+          v-show="true"
+        >导入</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
           type="warning"
           plain
           icon="el-icon-download"
@@ -165,12 +176,39 @@
       <detail v-if="open" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
     </el-dialog>
 
+    <!-- 导入对话框 -->
+    <el-dialog title="业务导入" :visible.sync="upload.open" width="400px" v-dialog-drag append-to-body>
+      <el-upload
+        ref="uploadImport"
+        :limit="1"
+        accept=".xlsx, .xls"
+        :headers="upload.headers"
+        :action="upload.url"
+        :disabled="upload.isUploading"
+        :on-progress="handleFileUploadProgress"
+        :on-success="handleFileSuccess"
+        :auto-upload="false"
+        drag>
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip text-center" slot="tip">
+          <span>仅允许导入xls、xlsx格式文件。</span>
+          <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;" @click="importTemplate">下载模板</el-link>
+        </div>
+      </el-upload>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitFileForm">确 定</el-button>
+        <el-button @click="upload.open = false">取 消</el-button>
+      </div>
+    </el-dialog>
+
     <!--自定义高级查询组件 -->
     <cust-adv-search v-if="showCustAdvSearch" :tableName="'t_demo'" :tableAlias="'t'" :searchFunc="customSearch"/>
   </div>
 </template>
 
 <script>
+import { getToken } from "@/utils/auth"
 import { listDemo, delDemo, addBatchDemo, clearDemoData } from "@/api/biz/demo"
 import Detail from "./detail"
 
@@ -210,6 +248,16 @@ export default {
         demoImage: null,
         attachment: null,
         params: {}
+      },
+      // 导入参数
+      upload: {
+        open: false,
+        // 是否禁用上传
+        isUploading: false,
+        // 设置上传的请求头部
+        headers: { Authorization: "Bearer " + getToken() },
+        // 上传的地址
+        url: process.env.VUE_APP_BASE_API + "/biz/demo/importData"
       },
       demoId: 0,
       disabled: false,
@@ -272,11 +320,32 @@ export default {
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
     },
+    /** 导入按钮操作 */
+    handleImport() {
+      this.upload.open = true;
+    },
+    importTemplate() {
+      this.download('biz/demo/importTemplate', {
+      }, `业务模板.xlsx`)
+    },
+    handleFileUploadProgress(event, file, fileList) {
+      this.upload.isUploading = true;
+    },
+    handleFileSuccess(response, file, fileList) {
+      this.upload.open = false;
+      this.upload.isUploading = false;
+      this.$refs.uploadImport.clearFiles();
+      this.$alert("<div style='overflow: auto;overflow-x: hidden;max-height: 70vh;padding: 10px 20px 0;'>" + response.msg + "</div>", "导入结果", { dangerouslyUseHTMLString: true });
+      this.getList();
+    },
+    submitFileForm() {
+      this.$refs.uploadImport.submit();
+    },
     /** 导出按钮操作 */
     handleExport() {
       this.download('biz/demo/export', {
         ...this.queryParams
-      }, `demo_${new Date().getTime()}.xlsx`)
+      }, `业务_${new Date().getTime()}.xlsx`)
     },
     closeFlowWin() {
       this.title = "";
