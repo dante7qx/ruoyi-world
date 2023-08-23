@@ -183,7 +183,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="functionAuthor != null and functionAuthor != ''">function_author = #{functionAuthor},</if>
             <if test="genType != null and genType != ''">gen_type = #{genType},</if>
             <if test="genPath != null and genPath != ''">gen_path = #{genPath},</if>
-            <if test="genCustAdv != null and genCustAdv != ''">gen_cust_adv = #{genCustAdv},</if>
+            <if test="genCustAdv != null">gen_cust_adv = #{genCustAdv},</if>
             <if test="tplCategory != null and tplCategory != ''">tpl_category = #{tplCategory},</if>
             <if test="packageName != null and packageName != ''">package_name = #{packageName},</if>
             <if test="moduleName != null and moduleName != ''">module_name = #{moduleName},</if>
