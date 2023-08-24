@@ -70,7 +70,18 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     @Override
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
 #if($existQuery)
-        MPJLambdaWrapper<${ClassName}> lqw = new MPJLambdaWrapper<${ClassName}>()
+        MPJLambdaWrapper<${ClassName}> mpj = new MPJLambdaWrapper<${ClassName}>()
+            .selectAll(${ClassName}.class)
+#end
+#foreach($column in $columns)
+#if($column.relTableName)
+            .select("${column.relTableName.replace("_", "")}.${column.relColumnName}")
+#end
+#end
+#foreach($column in $columns)
+#if($column.relTableName)
+            .leftJoin("${column.relTableName} ${column.relTableName.replace("_", "")} on ${column.relTableName.replace("_", "")}.${column.columnName} = t.${column.columnName}")
+#end
 #end
 #if($existDelFlag)
             .eq(${ClassName}::getDelFlag, 0)
@@ -85,20 +96,44 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #set($queryType=$column.queryType)
 #set($javaField=$column.javaField)
 #set($javaType=$column.javaType)
+#set($relJavaField=$column.relJavaField.substring(0,1).toUpperCase() + ${column.relJavaField.substring(1)})
+#set($relJavaType=$column.relJavaType)
+#set($relColumnName=$column.relColumnName)
 #if($queryType == "EQ")
             .eq(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+	#if($column.relTableName)
+            .eq(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "NE")
             .ne(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+	#if($column.relTableName)
+            .ne(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "GT")
             .gt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .gt(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "GTE")
             .ge(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .ge(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "LT")
             .lt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .lt(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "LTE")
             .le(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .le(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "LIKE")
-            .like(StrUtil.isNotEmpty(${className}.get${AttrName}()), ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+            .like(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .like(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
 #elseif($queryType == "BETWEEN")
             .ge(${className}.getParams().get("begin${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("begin${AttrName}"))
             .le(${className}.getParams().get("end${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("end${AttrName}"))
@@ -107,7 +142,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #end
         ;
 #if($existQuery)
-        return ${className}Mapper.selectList(lqw);
+        return ${className}Mapper.selectList(mpj);
 #else
         return ${className}Mapper.selectList(null);
 #end

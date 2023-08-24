@@ -84,6 +84,16 @@ public class GenController extends BaseController
         List<GenTable> list = genTableService.selectDbTableList(genTable);
         return getDataTable(list);
     }
+    
+    /**
+     * 查询数据库列表
+     */
+    @PreAuthorize("@ss.hasPermi('tool:gen:list')")
+    @PostMapping("/db/col/{tableName}")
+    public AjaxResult dbTableColumn(@PathVariable String tableName) {
+    	return AjaxResult.success(genTableColumnService.selectDbTableColumnsByName(tableName));
+    }
+
 
     /**
      * 查询数据表字段列表

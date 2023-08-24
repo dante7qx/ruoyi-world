@@ -23,6 +23,7 @@
             prop="columnType"
             min-width="10%"
             :show-overflow-tooltip="true"
+            v-if="false"
           />
           <el-table-column label="Java类型" min-width="11%">
             <template slot-scope="scope">
@@ -37,28 +38,28 @@
               </el-select>
             </template>
           </el-table-column>
-          <el-table-column label="java属性" min-width="10%">
+          <el-table-column label="java属性" min-width="12%">
             <template slot-scope="scope">
               <el-input v-model="scope.row.javaField"></el-input>
             </template>
           </el-table-column>
 
-          <el-table-column label="插入" min-width="5%">
+          <el-table-column label="插入" min-width="5%" width="50px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isInsert"></el-checkbox>
             </template>
           </el-table-column>
-          <el-table-column label="编辑" min-width="5%">
+          <el-table-column label="编辑" min-width="5%" width="50px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isEdit"></el-checkbox>
             </template>
           </el-table-column>
-          <el-table-column label="列表" min-width="5%">
+          <el-table-column label="列表" min-width="5%" width="50px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isList"></el-checkbox>
             </template>
           </el-table-column>
-          <el-table-column label="查询" min-width="5%">
+          <el-table-column label="查询" min-width="5%" width="50px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isQuery"></el-checkbox>
             </template>
@@ -77,7 +78,7 @@
               </el-select>
             </template>
           </el-table-column>
-          <el-table-column label="必填" min-width="5%">
+          <el-table-column label="必填" min-width="5%" width="50px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isRequired"></el-checkbox>
             </template>
@@ -111,6 +112,36 @@
               </el-select>
             </template>
           </el-table-column>
+          <el-table-column label="关联表" min-width="12%">
+            <template slot-scope="scope">
+              <el-select v-model="scope.row.relTableName" clearable filterable placeholder="请选择" @change="changeRelTable">
+                <el-option
+                  v-for="(item, index) in dbTables"
+                  :key="index"
+                  :label="item.tableName"
+                  :value="item.tableName">
+                </el-option>
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column label="关联字段" min-width="12%">
+            <template slot-scope="scope">
+              <el-select v-model="scope.row.relColumnName" clearable filterable placeholder="请选择">
+                <el-option
+                  v-for="(item, index) in dbTableCols[`${scope.row.relTableName}`]"
+                  :key="index"
+                  :label="item.columnName"
+                  :value="item.columnName">
+                </el-option>
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column label="关联字段描述" min-width="12%">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.relColumnComment"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="relColumnType" v-if="false" ></el-table-column>
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="生成信息" name="genInfo">
@@ -127,7 +158,7 @@
 </template>
 
 <script>
-import { getGenTable, updateGenTable } from "@/api/tool/gen";
+import { getGenTable, updateGenTable, listDbTable, listDbTableCol } from "@/api/tool/gen";
 import { optionselect as getDictOptionselect } from "@/api/system/dict/type";
 import { listMenu as getMenuTreeselect } from "@/api/system/menu";
 import basicInfoForm from "./basicInfoForm";
@@ -155,7 +186,11 @@ export default {
       // 菜单信息
       menus: [],
       // 表详细信息
-      info: {}
+      info: {},
+      // 数据库表信息
+      dbTables: [],
+      // 数据库表列信息
+      dbTableCols: {}
     };
   },
   created() {
@@ -175,6 +210,10 @@ export default {
       getMenuTreeselect().then(response => {
         this.menus = this.handleTree(response.data, "menuId");
       });
+      /** 查询数据库表信息 */
+      listDbTable({pageSize: 200}).then(response => {
+        this.dbTables = response.rows;
+      });
     }
   },
   methods: {
@@ -186,7 +225,7 @@ export default {
         const validateResult = res.every(item => !!item);
         if (validateResult) {
           const genTable = Object.assign({}, basicForm.model, genForm.model);
-          genTable.columns = this.columns;
+          genTable.columns = this.reFillGenTableColumn(this.columns);
           genTable.params = {
             treeCode: genTable.treeCode,
             treeName: genTable.treeName,
@@ -211,10 +250,35 @@ export default {
         });
       });
     },
+    reFillGenTableColumn(columns) {
+      console.log(this.dbTableCols)
+      for(const column of columns) {
+        if(column.relTableName && column.relColumnName) {
+          const tableCols = this.dbTableCols[column.relTableName]
+          if(tableCols && tableCols.length > 0) {
+            const dbCol = tableCols.find(col => col.columnName == column.relColumnName);
+            if(dbCol) {
+              column.relColumnComment = column.relColumnComment ? column.relColumnComment : col.columnComment
+              column.relColumnType = dbCol.columnType
+              column.relJavaField = dbCol.javaField
+              column.relJavaType = dbCol.javaType
+            }
+          }
+        }
+      }
+      return columns
+    },
     /** 关闭按钮 */
     close() {
       const obj = { path: "/tool/gen", query: { t: Date.now(), pageNum: this.$route.query.pageNum } };
       this.$tab.closeOpenPage(obj);
+    },
+    changeRelTable(selTable) {
+      if(selTable) {
+        listDbTableCol(selTable).then(res => {
+          this.$set(this.dbTableCols, selTable, res.data);
+        })
+      }
     }
   },
   mounted() {

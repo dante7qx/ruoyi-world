@@ -20,8 +20,25 @@
                 v-model="queryParams.demoTime"
                 type="date"
                 value-format="yyyy-MM-dd"
-                placeholder="请选择业务时间">
+                placeholder="请选择业务时间"
+                style="width: 200px;">
               </el-date-picker>
+            </el-form-item>
+            <el-form-item label="角色名" prop="roleName">
+              <el-input
+                v-model="queryParams.roleName"
+                placeholder="请输入角色名"
+                clearable
+                @keyup.enter.native="handleQuery"
+              />
+            </el-form-item>
+            <el-form-item label="岗位名" prop="postName">
+              <el-input
+                v-model="queryParams.postName"
+                placeholder="请输入岗位名"
+                clearable
+                @keyup.enter.native="handleQuery"
+              />
             </el-form-item>
             <el-form-item>
               <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -81,7 +98,7 @@
                 size="mini"
                 @click="handleExport"
                 v-hasPermi="['biz:demo:export']"
-                v-show="false"
+                v-show="true"
               >导出</el-button>
             </el-col>
             <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -105,6 +122,8 @@
           </el-table-column>
           <el-table-column label="业务附件" align="center" prop="attachment" />
           <el-table-column label="业务内容" align="center" prop="demoContent" />
+          <el-table-column label="角色名" align="center" prop="roleName" />
+          <el-table-column label="岗位名" align="center" prop="postName" />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template v-slot="scope">
               <el-button
@@ -218,6 +237,8 @@ export default {
         demoImage: null,
         attachment: null,
         demoContent: null,
+        roleName: null,
+        postName: null,
       },
       // 导入参数
       upload: {
@@ -311,7 +332,7 @@ export default {
     handleExport() {
       this.download('biz/demo/export', {
         ...this.queryParams
-      }, `demo_${new Date().getTime()}.xlsx`)
+      }, `业务_${new Date().getTime()}.xlsx`)
     },
     closeFlowWin() {
       this.title = "";

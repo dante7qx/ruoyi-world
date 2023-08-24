@@ -6,6 +6,7 @@ import ${import};
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.risun.common.annotation.Excel;
@@ -40,6 +41,7 @@ public class ${ClassName} extends ${Entity} {
 #else
 #set($comment=$column.columnComment)
 #end
+#if(!$column.relTableName)
 #if($parentheseIndex != -1)
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
 #elseif($column.javaType == 'Date')
@@ -49,10 +51,18 @@ public class ${ClassName} extends ${Entity} {
     @Excel(name = "${comment}")
 #end
 #end
+#end
 #if(${column.isPk.indexOf("1")} != -1)
     @TableId(type = IdType.AUTO)
 #end
     private $column.javaType $column.javaField;
+#if($column.relTableName)
+    
+    /** $column.relColumnComment */
+    @Excel(name = "${column.relColumnComment}")
+    @TableField(exist = false)
+    private $column.relJavaType $column.relJavaField;
+#end
 
 #end
 #end
@@ -74,6 +84,16 @@ public class ${ClassName} extends ${Entity} {
 
     public $column.javaType get${AttrName}() {
         return $column.javaField;
+    }
+#end
+#if($column.relTableName)
+#set($RelAttrName=$column.relJavaField.substring(0,1).toUpperCase() + ${column.relJavaField.substring(1)})
+    public void set${RelAttrName}($column.relJavaType $column.relJavaField) {
+        this.$column.relJavaField = $column.relJavaField;
+    }
+
+    public $column.relJavaType get${RelAttrName}() {
+        return $column.relJavaField;
     }
 #end
 #end

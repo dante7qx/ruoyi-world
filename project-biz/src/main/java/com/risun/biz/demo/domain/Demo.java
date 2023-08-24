@@ -3,6 +3,7 @@ package com.risun.biz.demo.domain;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -44,7 +45,23 @@ public class Demo extends BaseEntity {
     private String demoContent;
 
     /** 删除标识 0 未删除 1 已删除 */
-    private Integer delFlag;
+    private Boolean delFlag;
+
+    /** 角色ID */
+    private Long roleId;
+    
+    /** 角色名 */
+    @Excel(name = "角色名")
+    @TableField(exist = false)
+    private String roleName;
+
+    /** 岗位ID */
+    private Long postId;
+    
+    /** 岗位名 */
+    @Excel(name = "岗位名")
+    @TableField(exist = false)
+    private String postName;
 
     public void setDemoId(Long demoId) {
         this.demoId = demoId;
@@ -88,12 +105,40 @@ public class Demo extends BaseEntity {
     public String getDemoContent() {
         return demoContent;
     }
-    public void setDelFlag(Integer delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 
-    public Integer getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
+    }
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+
+    public String getPostName() {
+        return postName;
     }
 
     @Override

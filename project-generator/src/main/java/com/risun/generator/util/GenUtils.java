@@ -127,6 +127,33 @@ public class GenUtils
             column.setHtmlType(GenConstants.HTML_EDITOR);
         }
     }
+    
+    public static void dbColumn2Java(GenTableColumn column) {
+    	String dataType = getDbType(column.getColumnType());
+    	// 设置java字段名
+        column.setJavaField(StrUtil.toCamelCase(column.getColumnName()));
+    	// 设置默认类型
+        column.setJavaType(GenConstants.TYPE_STRING);
+        if (arraysContains(GenConstants.COLUMNTYPE_TIME, dataType)) {
+            column.setJavaType(GenConstants.TYPE_DATE);
+        }
+        else if (arraysContains(GenConstants.COLUMNTYPE_NUMBER, dataType)) {
+
+            // 如果是浮点型 统一用BigDecimal
+            String[] str = StrUtil.splitToArray(StrUtil.subBetween(column.getColumnType(), "(", ")"), ",");
+            if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0) {
+                column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
+            }
+            // 如果是整形
+            else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10) {
+                column.setJavaType(GenConstants.TYPE_INTEGER);
+            }
+            // 长整形
+            else {
+                column.setJavaType(GenConstants.TYPE_LONG);
+            }
+        }
+    }
 
     /**
      * 校验数组是否包含指定值

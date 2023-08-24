@@ -23,6 +23,12 @@
       <el-form-item label="业务内容">
         <editor v-model="form.demoContent" :disabled="disabled" :max-height="400"/>
       </el-form-item>
+      <el-form-item label="角色ID" prop="roleId">
+        <el-input v-model="form.roleId" placeholder="请输入角色ID"  :disabled="disabled"/>
+      </el-form-item>
+      <el-form-item label="岗位ID" prop="postId">
+        <el-input v-model="form.postId" placeholder="请输入岗位ID"  :disabled="disabled"/>
+      </el-form-item>
 	  </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="exportWord" v-show="disabled">导 出</el-button>
@@ -76,6 +82,8 @@ export default {
         demoImage: null,
         demoContent: null,
         attachment: null,
+        roleId: null,
+        postId: null,
         createBy: null,
         createTime: null,
         updateBy: null,

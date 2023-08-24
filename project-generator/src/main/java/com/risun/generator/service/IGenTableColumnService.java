@@ -18,6 +18,14 @@ public interface IGenTableColumnService
      * @return 业务字段集合
      */
     public List<GenTableColumn> selectGenTableColumnListByTableId(Long tableId);
+    
+    /**
+     * 根据表名称查询列信息
+     * 
+     * @param tableName 表名称
+     * @return 列信息
+     */
+    public List<GenTableColumn> selectDbTableColumnsByName(String tableName);
 
     /**
      * 新增业务字段

@@ -72,22 +72,24 @@ public class DemoServiceImpl implements IDemoService {
      */
     @Override
     public List<Demo> selectDemoList(Demo demo) {
-    	/*
-    	LambdaQueryWrapper<Demo> lqw = new QueryWrapper<Demo>().lambda()
-            .eq(Demo::getDelFlag, 0)
-            .like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
-            .ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
-            .le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"));
-        return demoMapper.selectList(lqw);
-        */
-        
-        MPJLambdaWrapper<Demo> mpj = new MPJLambdaWrapper<Demo>()
-    			.eq(Demo::getDelFlag, 0)
+    	MPJLambdaWrapper<Demo> mpj = new MPJLambdaWrapper<Demo>()
+                .selectAll(Demo.class)
+                .select("sysrole.role_name")
+                .select("syspost.post_name")
+                .leftJoin("sys_role sysrole on sysrole.role_id = t.role_id")
+                .leftJoin("sys_post syspost on syspost.post_id = t.post_id")
+                .eq(Demo::getDelFlag, 0)
                 .like(StrUtil.isNotEmpty(demo.getDemoName()), Demo::getDemoName, demo.getDemoName())
-                .ge(demo.getParams().get("beginDemoTime") != null, Demo::getDemoTime, demo.getParams().get("beginDemoTime"))
-                .le(demo.getParams().get("endDemoTime") != null, Demo::getDemoTime, demo.getParams().get("endDemoTime"));
-        
-        return demoMapper.selectList(mpj);
+                .eq(demo.getDemoTime() != null, Demo::getDemoTime, demo.getDemoTime())
+                .eq(StrUtil.isNotEmpty(demo.getDemoImage()), Demo::getDemoImage, demo.getDemoImage())
+                .eq(StrUtil.isNotEmpty(demo.getAttachment()), Demo::getAttachment, demo.getAttachment())
+                .eq(StrUtil.isNotEmpty(demo.getDemoContent()), Demo::getDemoContent, demo.getDemoContent())
+                .like(demo.getRoleId() != null, Demo::getRoleId, demo.getRoleId())
+                .like(StrUtil.isNotEmpty(demo.getRoleName()), "sysrole.role_name", demo.getRoleName())
+                .like(demo.getPostId() != null, Demo::getPostId, demo.getPostId())
+                .like(StrUtil.isNotEmpty(demo.getPostName()), "syspost.post_name", demo.getPostName())
+            ;
+            return demoMapper.selectList(mpj);
     }
 
     /**
