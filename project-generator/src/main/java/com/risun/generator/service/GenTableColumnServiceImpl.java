@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.risun.common.core.text.Convert;
 import com.risun.generator.domain.GenTableColumn;
 import com.risun.generator.mapper.GenTableColumnMapper;
+import com.risun.generator.util.GenUtils;
 
 /**
  * 业务字段 服务层实现
@@ -30,6 +31,21 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	{
 	    return genTableColumnMapper.selectGenTableColumnListByTableId(tableId);
 	}
+	
+	/**
+     * 根据表名称查询列信息
+     * 
+     * @param tableName 表名称
+     * @return 列信息
+     */
+	@Override
+    public List<GenTableColumn> selectDbTableColumnsByName(String tableName) {
+		List<GenTableColumn> columns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
+		for (GenTableColumn genTableColumn : columns) {
+			GenUtils.dbColumn2Java(genTableColumn);
+		}
+		return columns;
+    }
 	
     /**
      * 新增业务字段

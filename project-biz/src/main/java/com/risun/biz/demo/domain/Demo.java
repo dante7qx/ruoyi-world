@@ -41,7 +41,21 @@ public class Demo extends BaseEntity {
 	private String demoContent;
 	
 	/** 删除标识 0 未删除 1 已删除 */
-    private Integer delFlag;
+    private Boolean delFlag;
+    
+    /** 角色ID */
+    private Long roleId;
+    
+    /** 角色名 */
+    @Excel(name = "角色名")
+    private String roleName;
+
+    /** 岗位ID */
+    private Long postId;
+    
+    /** 岗位名称 */
+    @Excel(name = "岗位名称")
+    private String postName;
 	
 	public void setDemoId(Long demoId) {
 		this.demoId = demoId;
@@ -91,13 +105,41 @@ public class Demo extends BaseEntity {
 		this.demoContent = demoContent;
 	}
 
-	public Integer getDelFlag() {
-		return delFlag;
-	}
+	public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
 
 	@Override
 	public String toString() {

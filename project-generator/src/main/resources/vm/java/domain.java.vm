@@ -36,6 +36,7 @@ public class ${ClassName} extends ${Entity} {
 #else
 #set($comment=$column.columnComment)
 #end
+#if(!$column.relTableName)
 #if($parentheseIndex != -1)
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
 #elseif($column.javaType == 'Date')
@@ -45,7 +46,14 @@ public class ${ClassName} extends ${Entity} {
     @Excel(name = "${comment}")
 #end
 #end
+#end
     private $column.javaType $column.javaField;
+#if($column.relTableName)
+    
+    /** $column.relColumnComment */
+    @Excel(name = "${column.relColumnComment}")
+    private $column.relJavaType $column.relJavaField;
+#end
 
 #end
 #end
@@ -67,6 +75,16 @@ public class ${ClassName} extends ${Entity} {
 
     public $column.javaType get${AttrName}() {
         return $column.javaField;
+    }
+#end
+#if($column.relTableName)
+#set($RelAttrName=$column.relJavaField.substring(0,1).toUpperCase() + ${column.relJavaField.substring(1)})
+    public void set${RelAttrName}($column.relJavaType $column.relJavaField) {
+        this.$column.relJavaField = $column.relJavaField;
+    }
+
+    public $column.relJavaType get${RelAttrName}() {
+        return $column.relJavaField;
     }
 #end
 #end

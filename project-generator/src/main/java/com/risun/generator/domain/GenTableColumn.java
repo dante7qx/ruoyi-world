@@ -72,6 +72,24 @@ public class GenTableColumn extends BaseEntity
 
     /** 排序 */
     private Integer sort;
+    
+    /** 关联表名称 */
+    private String relTableName;
+    
+    /** 关联列名称 */
+    private String relColumnName;
+    
+    /** 关联列描述 */
+    private String relColumnComment;
+    
+    /** 关联列类型 */
+    private String relColumnType;
+    
+    /** 关联JAVA类型 */
+    private String relJavaType;
+    
+    /** 关联JAVA字段名 */
+    private String relJavaField;
 
     public void setColumnId(Long columnId)
     {
@@ -336,7 +354,55 @@ public class GenTableColumn extends BaseEntity
         return sort;
     }
 
-    public boolean isSuperColumn()
+    public String getRelTableName() {
+		return relTableName;
+	}
+
+	public void setRelTableName(String relTableName) {
+		this.relTableName = relTableName;
+	}
+
+	public String getRelColumnName() {
+		return relColumnName;
+	}
+
+	public void setRelColumnName(String relColumnName) {
+		this.relColumnName = relColumnName;
+	}
+
+	public String getRelColumnComment() {
+		return relColumnComment;
+	}
+
+	public void setRelColumnComment(String relColumnComment) {
+		this.relColumnComment = relColumnComment;
+	}
+
+	public String getRelColumnType() {
+		return relColumnType;
+	}
+
+	public void setRelColumnType(String relColumnType) {
+		this.relColumnType = relColumnType;
+	}
+
+	public String getRelJavaType() {
+		return relJavaType;
+	}
+
+	public void setRelJavaType(String relJavaType) {
+		this.relJavaType = relJavaType;
+	}
+
+	public String getRelJavaField() {
+		return relJavaField;
+	}
+
+	public void setRelJavaField(String relJavaField) {
+		this.relJavaField = relJavaField;
+	}
+
+	public boolean isSuperColumn()
     {
         return isSuperColumn(this.javaField);
     }

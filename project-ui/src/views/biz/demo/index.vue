@@ -20,6 +20,22 @@
           end-placeholder="结束日期"
         ></el-date-picker>
       </el-form-item>
+      <el-form-item label="角色名" prop="roleName">
+        <el-input
+          v-model="queryParams.roleName"
+          placeholder="请输入角色名"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="岗位名称" prop="postName">
+        <el-input
+          v-model="queryParams.postName"
+          placeholder="请输入岗位名称"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -123,6 +139,8 @@
           <label class="unpack" @click="downloadZip(scope.row)">打包下载</label>
         </template>
       </el-table-column>
+      <el-table-column label="角色名" align="center" prop="roleName" />
+      <el-table-column label="岗位名称" align="center" prop="postName" />
       <el-table-column label="创建人" align="center" prop="createBy" width="100"></el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template v-slot="scope">
@@ -135,7 +153,6 @@
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template v-slot="scope">
           <el-button
@@ -248,6 +265,8 @@ export default {
         demoTime: null,
         demoImage: null,
         attachment: null,
+        roleName: null,
+        postName: null,
       },
       // 导入参数
       upload: {

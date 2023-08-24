@@ -23,6 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="queryType"      column="query_type"     />
         <result property="htmlType"       column="html_type"      />
         <result property="dictType"       column="dict_type"      />
+        <result property="relTableName"      column="rel_table_name"    />
+        <result property="relColumnName"  	 column="rel_column_name" />
+        <result property="relColumnComment"  column="rel_column_comment"    />
+        <result property="relColumnType"     column="rel_column_type"    />
+        <result property="relJavaType"       column="rel_java_type"      />
+        <result property="relJavaField"      column="rel_java_field"     />
         <result property="sort"           column="sort"           />
         <result property="createBy"       column="create_by"      />
         <result property="createTime"     column="create_time"    />
@@ -31,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectGenTableColumnVo">
-        select column_id, table_id, column_name, column_comment, column_type, column_length, java_type, java_field, is_pk, is_increment, is_required, is_insert, is_edit, is_list, is_query, query_type, html_type, dict_type, sort, create_by, create_time, update_by, update_time from gen_table_column
+        select column_id, table_id, column_name, column_comment, column_type, column_length, java_type, java_field, is_pk, is_increment, is_required, is_insert, is_edit, is_list, is_query, query_type, html_type, dict_type, rel_table_name, rel_column_name, rel_column_comment, rel_column_type, rel_java_type, rel_java_field, sort, create_by, create_time, update_by, update_time from gen_table_column
     </sql>
 	
     <select id="selectGenTableColumnListByTableId" parameterType="Long" resultMap="GenTableColumnResult">
@@ -106,6 +112,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="queryType != null">query_type = #{queryType},</if>
             <if test="htmlType != null">html_type = #{htmlType},</if>
             <if test="dictType != null">dict_type = #{dictType},</if>
+            <if test="relTableName != null">rel_table_name = #{relTableName},</if>
+            <if test="relColumnName != null">rel_column_name = #{relColumnName},</if>
+            <if test="relColumnComment != null">rel_column_comment = #{relColumnComment},</if>
+            <if test="relColumnType != null">rel_column_type = #{relColumnType},</if>
+            <if test="relJavaType != null">rel_java_type = #{relJavaType},</if>
+            <if test="relJavaField != null">rel_java_field = #{relJavaField},</if>
             <if test="sort != null">sort = #{sort},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             update_time = sysdate()
