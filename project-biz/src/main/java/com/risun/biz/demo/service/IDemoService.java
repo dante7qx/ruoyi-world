@@ -19,7 +19,7 @@ public interface IDemoService
      * @param demoId 业务主键
      * @return 业务
      */
-    public Demo selectDemoByDemoId(Long demoId);
+    Demo selectDemoByDemoId(Long demoId);
 
     /**
      * 查询业务列表
@@ -27,7 +27,7 @@ public interface IDemoService
      * @param demo 业务
      * @return 业务集合
      */
-    public List<Demo> selectDemoList(Demo demo);
+    List<Demo> selectDemoList(Demo demo);
 
     /**
      * 新增业务
@@ -35,7 +35,7 @@ public interface IDemoService
      * @param demo 业务
      * @return 结果
      */
-    public int insertDemo(Demo demo);
+    int insertDemo(Demo demo);
 
     /**
      * 修改业务
@@ -43,7 +43,7 @@ public interface IDemoService
      * @param demo 业务
      * @return 结果
      */
-    public int updateDemo(Demo demo);
+    int updateDemo(Demo demo);
 
     /**
      * 批量删除业务
@@ -51,7 +51,7 @@ public interface IDemoService
      * @param demoIds 需要删除的业务主键集合
      * @return 结果
      */
-    public int deleteDemoByDemoIds(Long[] demoIds);
+    int deleteDemoByDemoIds(Long[] demoIds);
 
     /**
      * 删除业务信息
@@ -59,7 +59,7 @@ public interface IDemoService
      * @param demoId 业务主键
      * @return 结果
      */
-    public int deleteDemoByDemoId(Long demoId);
+    int deleteDemoByDemoId(Long demoId);
     
     /**
      * 批量新增
@@ -67,14 +67,14 @@ public interface IDemoService
      * @param demos
      * @return
      */
-    public int batchInsertDemo(List<Demo> demos);
+    int batchInsertDemo(List<Demo> demos);
     
     /**
      * 清空数据
      * 
      * @return
      */
-    public int clearDemoData();
+    int clearDemoData();
     
     /**
      * 导出Word
@@ -82,7 +82,7 @@ public interface IDemoService
      * @param demoId
      * @return
      */
-    public Map<String, Object> export4Word(Long demoId);
+    Map<String, Object> export4Word(Long demoId);
     
     /**
      * 导入业务
@@ -90,5 +90,5 @@ public interface IDemoService
      * @param demoList 待导入数据
      * @return 结果
      */
-    public String importDemo(List<Demo> demoList);
+    String importDemo(List<Demo> demoList);
 }
