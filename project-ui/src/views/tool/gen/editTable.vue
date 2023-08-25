@@ -251,7 +251,6 @@ export default {
       });
     },
     reFillGenTableColumn(columns) {
-      console.log(this.dbTableCols)
       for(const column of columns) {
         if(column.relTableName && column.relColumnName) {
           const tableCols = this.dbTableCols[column.relTableName]
