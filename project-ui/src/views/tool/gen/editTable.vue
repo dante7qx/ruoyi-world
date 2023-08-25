@@ -251,10 +251,10 @@ export default {
       });
     },
     reFillGenTableColumn(columns) {
-      if(this.dbTableCols && this.dbTableCols.length > 0) {
-        for(const column of columns) {
-          if(column.relTableName && column.relColumnName) {
-            const tableCols = this.dbTableCols[column.relTableName]
+      for(const column of columns) {
+        if(column.relTableName && column.relColumnName) {
+          const tableCols = this.dbTableCols[column.relTableName]
+          if(tableCols && tableCols.length > 0) {
             const dbCol = tableCols.find(col => col.columnName == column.relColumnName);
             if(dbCol) {
               column.relColumnComment = column.relColumnComment ? column.relColumnComment : col.columnComment
