@@ -18,6 +18,7 @@
       #set($comment=$column.columnComment)
       #end
       #if($column.htmlType == "input")
+      		#if(!$column.relTableName)
             <el-form-item label="${comment}" prop="${column.javaField}">
               <el-input
                 v-model="queryParams.${column.javaField}"
@@ -26,6 +27,16 @@
                 @keyup.enter.native="handleQuery"
               />
             </el-form-item>
+        	#else
+            <el-form-item label="${column.relColumnComment}" prop="${column.relJavaField}">
+              <el-input
+                v-model="queryParams.${column.relJavaField}"
+                placeholder="请输入${column.relColumnComment}"
+                clearable
+                @keyup.enter.native="handleQuery"
+              />
+            </el-form-item>
+    		#end
       #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
             <el-form-item label="${comment}" prop="${column.javaField}">
               <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable>
@@ -171,7 +182,11 @@
             </template>
           </el-table-column>
     #elseif($column.list && "" != $javaField)
+    	#if(!$column.relTableName)
           <el-table-column label="${comment}" align="center" prop="${javaField}" />
+    	#else
+          <el-table-column label="${column.relColumnComment}" align="center" prop="${column.relJavaField}" />
+        #end
     #end
     #end
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -307,7 +322,11 @@ export default {
         params: {},
 #foreach ($column in $columns)
 #if($column.query)
+	#if(!$column.relTableName)
         $column.javaField: null#if($foreach.count != $columns.size()),#end
+	#else
+        $column.relJavaField: null#if($foreach.count != $columns.size()),#end
+	#end
 #end
 #end
       },

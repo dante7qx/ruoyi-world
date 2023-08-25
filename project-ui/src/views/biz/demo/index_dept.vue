@@ -15,6 +15,22 @@
                 @keyup.enter.native="handleQuery"
               />
             </el-form-item>
+            <el-form-item label="角色名" prop="roleName">
+              <el-input
+                v-model="queryParams.roleName"
+                placeholder="请输入角色名"
+                clearable
+                @keyup.enter.native="handleQuery"
+              />
+            </el-form-item>
+            <el-form-item label="岗位码" prop="postCode">
+              <el-input
+                v-model="queryParams.postCode"
+                placeholder="请输入岗位码"
+                clearable
+                @keyup.enter.native="handleQuery"
+              />
+            </el-form-item>
             <el-form-item>
               <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
               <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -84,9 +100,12 @@
         <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange" v-adaptive height="100">
           <el-table-column type="selection" width="55" align="center" />
           <el-table-column type="index" label="序号" width="50" align="center" />
-          <el-table-column label="业务主键ID" align="center" prop="demoId" />
           <el-table-column label="业务名称" align="center" prop="demoName" />
-          <el-table-column label="业务时间" align="center" prop="demoTime" />
+          <el-table-column label="业务时间" align="center" prop="demoTime" width="180">
+            <template v-slot="scope">
+              <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>
+            </template>
+          </el-table-column>
           <el-table-column label="业务图片" align="center" prop="demoImage" width="100">
             <template v-slot="scope">
               <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
@@ -94,6 +113,8 @@
           </el-table-column>
           <el-table-column label="业务附件" align="center" prop="attachment" />
           <el-table-column label="业务内容" align="center" prop="demoContent" />
+          <el-table-column label="角色名" align="center" prop="roleName" />
+          <el-table-column label="岗位码" align="center" prop="postCode" />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template v-slot="scope">
               <el-button
@@ -210,6 +231,8 @@ export default {
         demoImage: null,
         attachment: null,
         demoContent: null,
+        roleName: null,
+        postCode: null,
       },
       // 导入参数
       upload: {
