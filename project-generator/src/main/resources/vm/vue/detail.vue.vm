@@ -97,7 +97,6 @@
 #end
 #end
 #end
-
 #if($table.sub)
       <el-divider content-position="center">${subTable.functionName}信息</el-divider>
       <el-row :gutter="10" class="mb8" v-if="!disabled">
@@ -157,7 +156,6 @@
 #end
       </el-table>
 #end
-
     </el-form>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
