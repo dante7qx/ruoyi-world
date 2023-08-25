@@ -17,6 +17,14 @@ export function listDbTable(query) {
   })
 }
 
+// 查询db数据库列表
+export function listDbTableCol(tableName) {
+  return request({
+    url: '/tool/gen/db/col/' + tableName,
+    method: 'post'
+  })
+}
+
 // 查询表详细信息
 export function getGenTable(tableId) {
   return request({

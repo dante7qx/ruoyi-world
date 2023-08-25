@@ -7,6 +7,8 @@ create table t_demo (
   attachment varchar(2048),
   demo_content text,
   del_flag smallint default 0,
+  role_id bigint,
+  post_id bigint default 1,
   create_by varchar(64) default '',
   create_time timestamp,
   update_by varchar(64) default '',
@@ -20,6 +22,8 @@ COMMENT ON COLUMN t_demo.demo_image is '业务图片';
 COMMENT ON COLUMN t_demo.attachment is '业务附件';
 COMMENT ON COLUMN t_demo.demo_content is '业务内容';
 COMMENT ON COLUMN t_demo.del_flag is '删除标识 0 未删除 1 已删除';
+COMMENT ON COLUMN t_demo.role_id is '角色ID';
+COMMENT ON COLUMN t_demo.post_id is '岗位ID';
 COMMENT ON COLUMN t_demo.create_by is '创建者';
 COMMENT ON COLUMN t_demo.create_time is '创建时间';
 COMMENT ON COLUMN t_demo.update_by is '更新者';
@@ -28,4 +32,6 @@ COMMENT ON TABLE t_demo is '业务表';
 
 -- 菜单 SQL
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('业务', '4', '1', 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单');
+values
+('业务', 4, 1, 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单'),
+('业务部门树', 4, 2, 'demodept', 'biz/demo/index_dept', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单');

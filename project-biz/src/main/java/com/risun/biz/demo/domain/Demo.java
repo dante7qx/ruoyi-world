@@ -41,71 +41,137 @@ public class Demo extends BaseEntity {
 	private String demoContent;
 	
 	/** 删除标识 0 未删除 1 已删除 */
-    private Integer delFlag;
+    private Boolean delFlag;
+
+    /** 角色ID */
+    private Long roleId;
+    
+    /** 角色名 */
+    @Excel(name = "角色名")
+    private String roleName;
+
+    /** 岗位ID */
+    private Long postId;
+    
+    /** 岗位编码 */
+    @Excel(name = "岗位编码")
+    private String postCode;
 	
-	public void setDemoId(Long demoId) {
-		this.demoId = demoId;
-	}
+    public void setDemoId(Long demoId) {
+        this.demoId = demoId;
+    }
 
-	public Long getDemoId() {
-		return demoId;
-	}
+    public Long getDemoId() {
+        return demoId;
+    }
+    
 
-	public void setDemoName(String demoName) {
-		this.demoName = demoName;
-	}
+    public void setDemoName(String demoName) {
+        this.demoName = demoName;
+    }
 
-	public String getDemoName() {
-		return demoName;
-	}
+    public String getDemoName() {
+        return demoName;
+    }
+    
 
-	public void setDemoTime(Date demoTime) {
-		this.demoTime = demoTime;
-	}
+    public void setDemoTime(Date demoTime) {
+        this.demoTime = demoTime;
+    }
 
-	public Date getDemoTime() {
-		return demoTime;
-	}
+    public Date getDemoTime() {
+        return demoTime;
+    }
+    
 
-	public void setDemoImage(String demoImage) {
-		this.demoImage = demoImage;
-	}
+    public void setDemoImage(String demoImage) {
+        this.demoImage = demoImage;
+    }
 
-	public String getDemoImage() {
-		return demoImage;
-	}
+    public String getDemoImage() {
+        return demoImage;
+    }
+    
 
-	public void setAttachment(String attachment) {
-		this.attachment = attachment;
-	}
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
 
-	public String getAttachment() {
-		return attachment;
-	}
+    public String getAttachment() {
+        return attachment;
+    }
+    
 
-	public String getDemoContent() {
-		return demoContent;
-	}
+    public void setDemoContent(String demoContent) {
+        this.demoContent = demoContent;
+    }
 
-	public void setDemoContent(String demoContent) {
-		this.demoContent = demoContent;
-	}
+    public String getDemoContent() {
+        return demoContent;
+    }
+    
 
-	public Integer getDelFlag() {
-		return delFlag;
-	}
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+    
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("demoId", getDemoId())
-				.append("demoName", getDemoName()).append("demoTime", getDemoTime()).append("demoImage", getDemoImage())
-				.append("attachment", getAttachment()).append("createBy", getCreateBy())
-				.append("createTime", getCreateTime()).append("updateBy", getUpdateBy())
-				.append("updateTime", getUpdateTime()).toString();
-	}
-	
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+    
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+    
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+    
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+    
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("demoId", getDemoId())
+            .append("demoName", getDemoName())
+            .append("demoTime", getDemoTime())
+            .append("demoImage", getDemoImage())
+            .append("attachment", getAttachment())
+            .append("demoContent", getDemoContent())
+            .append("delFlag", getDelFlag())
+            .append("roleId", getRoleId())
+            .append("postId", getPostId())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .toString();
+    }
 }

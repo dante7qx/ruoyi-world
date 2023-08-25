@@ -14,6 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="${ClassName}" id="${ClassName}Result">
 #foreach ($column in $columns)
         <result property="${column.javaField}"    column="${column.columnName}"    />
+#if($column.relTableName)
+        <result property="${column.relJavaField}"    column="${column.relColumnName}"    />
+#end
 #end
     </resultMap>
 #if($table.sub)
@@ -25,41 +28,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="${subClassName}" id="${subClassName}Result">
 #foreach ($column in $subTable.columns)
         <result property="${column.javaField}"    column="sub_${column.columnName}"    />
+#if($column.relTableName)
+        <result property="${column.relJavaField}"    column="${column.relColumnName}"    />
+#end
 #end
     </resultMap>
 #end
 
     <sql id="select${ClassName}Vo">
-        select#foreach($column in $columns) t.$column.columnName#if($foreach.count != $columns.size()),#end#end from ${tableName} t
+        select#foreach($column in $columns) t.$column.columnName#if($foreach.count != $columns.size()),#end#if($column.relTableName) ${column.relTableName.replace("_", "")}.${column.relColumnName},#end#end from ${tableName} t
+    #foreach($column in $columns)
+    	#if($column.relTableName)
+    	left join $column.relTableName ${column.relTableName.replace("_", "")} on ${column.relTableName.replace("_", "")}.$column.columnName = t.$column.columnName
+    	#end
+    #end
+        
     </sql>
 
     <select id="select${ClassName}List" parameterType="${ClassName}" resultMap="${ClassName}Result">
         <include refid="select${ClassName}Vo"/>
         <where>  
 #if($existDelFlag)
-	    del_flag = 0
+	    t.del_flag = 0
 #end
 #foreach($column in $columns)
 #set($queryType=$column.queryType)
 #set($javaField=$column.javaField)
 #set($javaType=$column.javaType)
 #set($columnName=$column.columnName)
+#set($relJavaField=$column.relJavaField)
+#set($relJavaType=$column.relJavaType)
+#set($relColumnName=$column.relColumnName)
 #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
 #if($column.query)
 #if($column.queryType == "EQ")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName = #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName = #{$relJavaField}</if>
+	#end
 #elseif($queryType == "NE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName != #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName != #{$relJavaField}</if>
+    #end
 #elseif($queryType == "GT")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName &gt; #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName &gt; #{$relJavaField}</if>
+    #end
 #elseif($queryType == "GTE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName &gt;= #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName &gt;= #{$relJavaField}</if>
+    #end
 #elseif($queryType == "LT")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName &lt; #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName &lt; #{$relJavaField}</if>
+    #end
 #elseif($queryType == "LTE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName &lt;= #{$javaField}</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName &lt;= #{$relJavaField}</if>
+    #end
 #elseif($queryType == "LIKE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and t.$columnName like concat('%', #{$javaField}, '%')</if>
+    #if($column.relTableName)
+            <if test="$relJavaField != null #if($relJavaType == 'String' ) and $relJavaField.trim() != ''#end"> and ${column.relTableName.replace("_", "")}.$relColumnName like concat('%', #{$relJavaField}, '%')</if>
+    #end
 #elseif($queryType == "BETWEEN")
             <if test="params.begin$AttrName != null and params.begin$AttrName != '' and params.end$AttrName != null and params.end$AttrName != ''"> and t.$columnName &gt;= #{params.begin$AttrName} and t.$columnName &lt;= #{params.end$AttrName}</if>
 #end

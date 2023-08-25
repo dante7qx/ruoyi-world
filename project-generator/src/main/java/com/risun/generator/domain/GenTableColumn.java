@@ -69,6 +69,24 @@ public class GenTableColumn extends BaseEntity
 
     /** 字典类型 */
     private String dictType;
+    
+    /** 关联表名称 */
+    private String relTableName;
+    
+    /** 关联列名称 */
+    private String relColumnName;
+    
+    /** 关联列描述 */
+    private String relColumnComment;
+    
+    /** 关联列类型 */
+    private String relColumnType;
+    
+    /** 关联JAVA类型 */
+    private String relJavaType;
+    
+    /** 关联JAVA字段名 */
+    private String relJavaField;
 
     /** 排序 */
     private Integer sort;
@@ -326,7 +344,55 @@ public class GenTableColumn extends BaseEntity
         return StrUtil.emptyToDefault(dictType, "");
     }
 
-    public void setSort(Integer sort)
+    public String getRelTableName() {
+		return relTableName;
+	}
+
+	public void setRelTableName(String relTableName) {
+		this.relTableName = relTableName;
+	}
+
+	public String getRelColumnName() {
+		return relColumnName;
+	}
+
+	public void setRelColumnName(String relColumnName) {
+		this.relColumnName = relColumnName;
+	}
+
+	public String getRelColumnComment() {
+		return relColumnComment;
+	}
+
+	public void setRelColumnComment(String relColumnComment) {
+		this.relColumnComment = relColumnComment;
+	}
+
+	public String getRelColumnType() {
+		return relColumnType;
+	}
+
+	public void setRelColumnType(String relColumnType) {
+		this.relColumnType = relColumnType;
+	}
+
+	public String getRelJavaType() {
+		return relJavaType;
+	}
+
+	public void setRelJavaType(String relJavaType) {
+		this.relJavaType = relJavaType;
+	}
+
+	public String getRelJavaField() {
+		return relJavaField;
+	}
+
+	public void setRelJavaField(String relJavaField) {
+		this.relJavaField = relJavaField;
+	}
+
+	public void setSort(Integer sort)
     {
         this.sort = sort;
     }

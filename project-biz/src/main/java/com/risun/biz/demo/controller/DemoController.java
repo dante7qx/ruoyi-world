@@ -108,10 +108,11 @@ public class DemoController extends BaseController {
 	@PostMapping("/insertBatch")
 	public AjaxResult addBatch() {
 		List<Demo> demos = Lists.newArrayList();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 2000; i++) {
 			Demo demo = new Demo();
 			demo.setDemoName("测试数据" + i);
 			demo.setDemoTime(DateUtil.date());
+			demo.setRoleId(2L);
 			demo.setCreateBy(getUsername());
 			demo.setCreateTime(DateUtil.date());
 			demos.add(demo);

@@ -7,29 +7,56 @@
       <pane>
         <div style="margin-top: 5px; margin-right: 5px;">
           <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-            <el-form-item label="业务名称" prop="demoName">
-              <el-input
-                v-model="queryParams.demoName"
-                placeholder="请输入业务名称"
-                clearable
-                @keyup.enter.native="handleQuery"
-              />
-            </el-form-item>
-            <el-form-item label="业务时间" prop="demoTime">
-              <el-date-picker clearable
-                v-model="queryParams.demoTime"
-                type="date"
-                value-format="yyyy-MM-dd"
-                placeholder="请选择业务时间">
-              </el-date-picker>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-              <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-              <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
-            </el-form-item>
+            <el-row>
+              <el-col :span="8">
+                <el-form-item label="业务名称" prop="demoName">
+                  <el-input
+                    v-model="queryParams.demoName"
+                    placeholder="请输入业务名称"
+                    clearable
+                    @keyup.enter.native="handleQuery"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="业务时间" prop="demoTime">
+                  <el-date-picker clearable
+                    v-model="queryParams.demoTime"
+                    type="date"
+                    value-format="yyyy-MM-dd"
+                    placeholder="请选择业务时间">
+                  </el-date-picker>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="角色名" prop="roleName">
+                  <el-input
+                    v-model="queryParams.roleName"
+                    placeholder="请输入角色名"
+                    clearable
+                    @keyup.enter.native="handleQuery"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="岗位编码" prop="postCode">
+                  <el-input
+                    v-model="queryParams.postCode"
+                    placeholder="请输入岗位编码"
+                    clearable
+                    @keyup.enter.native="handleQuery"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item>
+                    <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+                    <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+                    <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
+                  </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
-
           <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
               <el-button
@@ -106,6 +133,8 @@
           </el-table-column>
           <el-table-column label="业务附件" align="center" prop="attachment" />
           <el-table-column label="业务内容" align="center" prop="demoContent" />
+          <el-table-column label="角色名" align="center" prop="roleName" />
+          <el-table-column label="岗位编码" align="center" prop="postCode" />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template v-slot="scope">
               <el-button
@@ -222,6 +251,8 @@ export default {
         demoImage: null,
         attachment: null,
         demoContent: null,
+        roleName: null,
+        postCode: null,
       },
       // 导入参数
       upload: {
