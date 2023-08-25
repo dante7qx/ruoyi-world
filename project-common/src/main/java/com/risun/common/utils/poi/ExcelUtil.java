@@ -783,7 +783,7 @@ public class ExcelUtil<T>
         style.setBottomBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
         Font dataFont = wb.createFont();
         dataFont.setFontName("Arial");
-        dataFont.setFontHeightInPoints((short) 10);
+        dataFont.setFontHeightInPoints((short) 12);
         style.setFont(dataFont);
         styles.put("data", style);
 
@@ -792,7 +792,7 @@ public class ExcelUtil<T>
         style.setVerticalAlignment(VerticalAlignment.CENTER);
         Font totalFont = wb.createFont();
         totalFont.setFontName("Arial");
-        totalFont.setFontHeightInPoints((short) 10);
+        totalFont.setFontHeightInPoints((short) 12);
         style.setFont(totalFont);
         styles.put("total", style);
 
@@ -826,7 +826,7 @@ public class ExcelUtil<T>
                 style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                 Font headerFont = wb.createFont();
                 headerFont.setFontName("Arial");
-                headerFont.setFontHeightInPoints((short) 10);
+                headerFont.setFontHeightInPoints((short) 12);
                 headerFont.setBold(true);
                 headerFont.setColor(excel.headerColor().index);
                 style.setFont(headerFont);
@@ -866,7 +866,7 @@ public class ExcelUtil<T>
                 style.setFillForegroundColor(excel.backgroundColor().getIndex());
                 Font dataFont = wb.createFont();
                 dataFont.setFontName("Arial");
-                dataFont.setFontHeightInPoints((short) 10);
+                dataFont.setFontHeightInPoints((short) 12);
                 dataFont.setColor(excel.color().index);
                 style.setFont(dataFont);
                 styles.put(key, style);

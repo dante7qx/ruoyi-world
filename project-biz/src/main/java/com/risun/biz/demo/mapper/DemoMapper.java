@@ -40,12 +40,28 @@ public interface DemoMapper
     public int insertDemo(Demo demo);
 
     /**
+     * 批量新增业务
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchInsertDemo(List<Demo> demos);
+    
+    /**
      * 修改业务
      * 
      * @param demo 业务
      * @return 结果
      */
     public int updateDemo(Demo demo);
+    
+    /**
+     * 批量更新业务
+     * 
+     * @param demos
+     * @return
+     */
+    public int batchUpdateDemo(List<Demo> demos);
 
    /**
     * 删除业务
@@ -70,14 +86,6 @@ public interface DemoMapper
      */
     @Select("select count(demo_id) from t_demo")
     public int selectDemoCount();
-    
-    /**
-     * 批量新增
-     * 
-     * @param demos
-     * @return
-     */
-    public int batchInsertDemo(List<Demo> demos);
     
     /**
      * 清空数据

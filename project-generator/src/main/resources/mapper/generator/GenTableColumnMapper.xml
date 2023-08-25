@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       case
 				when cols.data_type = 'character varying' then 'varchar'
 				when cols.data_type = 'character' then 'char'
-				when cols.data_type like 'timestamp%' then 'datatime'
+				when cols.data_type like 'timestamp%' then 'datetime'
 				else cols.data_type
 			end
 		       ) || coalesce('(' || cols.character_maximum_length || ')',

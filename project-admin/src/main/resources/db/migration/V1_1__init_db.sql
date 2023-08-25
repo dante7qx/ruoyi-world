@@ -877,6 +877,12 @@ create table gen_table_column (
   query_type        varchar(200)    default 'EQ',
   html_type         varchar(200),
   dict_type         varchar(200)    default '',
+  rel_table_name        varchar(200),
+  rel_column_name       varchar(200),
+  rel_column_comment    varchar(500),
+  rel_column_type       varchar(100),
+  rel_java_type         varchar(500),
+  rel_java_field        varchar(200),
   sort              integer,
   create_by         varchar(64)     default '',
   create_time 	    timestamp,
@@ -901,6 +907,12 @@ COMMENT ON COLUMN gen_table_column.is_query IS '是否查询字段（1是）';
 COMMENT ON COLUMN gen_table_column.query_type IS '查询方式（等于、不等于、大于、小于、范围）';
 COMMENT ON COLUMN gen_table_column.html_type IS '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）';
 COMMENT ON COLUMN gen_table_column.dict_type IS '字典类型';
+COMMENT ON COLUMN gen_table_column.rel_table_name IS '关联表名称';
+COMMENT ON COLUMN gen_table_column.rel_column_name IS '关联列名称';
+COMMENT ON COLUMN gen_table_column.rel_column_comment IS '关联列描述';
+COMMENT ON COLUMN gen_table_column.rel_column_type IS '关联列类型';
+COMMENT ON COLUMN gen_table_column.rel_java_type IS '关联JAVA类型';
+COMMENT ON COLUMN gen_table_column.rel_java_field IS '关联JAVA字段名';
 COMMENT ON COLUMN gen_table_column.sort IS '排序';
 COMMENT ON COLUMN gen_table_column.create_by IS '创建者';
 COMMENT ON COLUMN gen_table_column.create_time IS '创建时间';

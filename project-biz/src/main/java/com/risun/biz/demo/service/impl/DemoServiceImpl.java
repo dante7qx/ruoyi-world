@@ -1,10 +1,12 @@
 package com.risun.biz.demo.service.impl;
 
+import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.deepoove.poi.data.AttachmentRenderData;
 import com.deepoove.poi.data.AttachmentType;
@@ -20,6 +22,7 @@ import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.constant.Constants;
 import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
+import cn.hutool.core.collection.CollUtil;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.file.FileUtils;
 import com.risun.common.utils.file.ImageUtils;
@@ -193,5 +196,65 @@ public class DemoServiceImpl implements IDemoService
 		List<Demo> demos = demoMapper.selectDemoList(new Demo());
 		map.put(WordExportUtil.LOOP_TABLE_ROW, demos);
 		return map;
+    }
+    
+    /**
+     * 导入业务
+     * 
+     * @param demoList 待导入数据
+     * @return 结果
+     */
+    @Override
+    @Transactional
+    public String importDemo(List<Demo> demoList) {
+    	StringBuilder result = new StringBuilder();
+    	if(CollUtil.isEmpty(demoList)) {
+    		result.append("导入数据为空！");
+    		return result.toString();
+    	}
+    	
+    	// 找出合规的数据
+    	List<Demo> validDemos = demoList
+    			.stream()
+    			.filter(t -> StrUtil.isNotBlank(t.getDemoName()))
+    			.collect(toList());
+    	int invalidSize = demoList.size() - validDemos.size();
+    	
+    	
+    	// 找出所有已存在的数据（此方法可根据业务进行优化）
+    	List<Demo> allDemos = demoMapper.selectDemoList(new Demo());
+    	// 找出要更新的数据
+    	List<Demo> updateDemos = validDemos.stream()
+                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .peek(t -> {
+                	t.setUpdateBy(SecurityUtils.getUsername());
+                    t.setUpdateTime(DateUtils.getNowDate());
+                })
+                .collect(toList());
+    	// 找出新增数据
+        List<Demo> insertDemos = validDemos.stream()
+                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .peek(t -> {
+                	t.setCreateBy(SecurityUtils.getUsername());
+                    t.setCreateTime(DateUtils.getNowDate());
+                })
+                .collect(toList());
+        
+        if(CollUtil.isNotEmpty(insertDemos)) {
+        	demoMapper.batchInsertDemo(insertDemos);
+        }
+        if(CollUtil.isNotEmpty(updateDemos)) {
+        	demoMapper.batchUpdateDemo(updateDemos);
+        }
+        
+        result.append("待导入数据: ").append(demoList.size()).append("条数据，");
+        if(invalidSize > 0) {
+        	result.append("<br/>无效数据: ").append(invalidSize).append("条数据，");
+        }
+        
+    	result.append("<br/>新增数据: ").append(insertDemos.size()).append("条数据，")
+    		.append("<br/>更新数据: ").append(updateDemos.size()).append("条数据。");
+        
+    	return result.toString();
     }
 }
