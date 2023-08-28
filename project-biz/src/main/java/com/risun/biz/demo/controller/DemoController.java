@@ -111,7 +111,7 @@ public class DemoController extends BaseController {
 		for (int i = 0; i < 2000; i++) {
 			Demo demo = new Demo();
 			demo.setDemoName("测试数据" + i);
-			demo.setDemoTime(DateUtil.date());
+			demo.setDemoTime(DateUtil.beginOfDay(DateUtil.date()));
 			demo.setRoleId(2L);
 			demo.setCreateBy(getUsername());
 			demo.setCreateTime(DateUtil.date());
