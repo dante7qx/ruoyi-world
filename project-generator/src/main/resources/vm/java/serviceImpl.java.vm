@@ -20,9 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 #if($table.sub)
 import java.util.ArrayList;
-import cn.hutool.core.collection.CollUtil;
 import ${packageName}.domain.${subClassName};
 #end
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.risun.common.utils.SecurityUtils;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
@@ -179,7 +180,12 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     }
 #end
 
-#set($uniqueCol=$!$columns.get(1).javaField.substring(0,1).toUpperCase() + $!$columns.get(1).javaField.substring(1))
+#set($uniqueColStr = "")
+#set($uniqueColEqStr = "")
+#foreach ($column in $unqiueColumns) 
+#set($uniqueColStr=$uniqueColStr+"ObjectUtil.isNotEmpty(t.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}()) #if($foreach.count != $unqiueColumns.size())&&#end ")
+#set($uniqueColEqStr=$uniqueColEqStr+"t1.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}().equals(t2.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}()) #if($foreach.count != $unqiueColumns.size())&&#end ") 
+#end
     /**
      * 导入${functionName}
      * 
@@ -195,11 +201,13 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     		return result.toString();
     	}
     	
-    	// 找出合规的数据
-    	List<${ClassName}> valid${ClassName}s = ${className}List
-    			.stream()
-    			.filter(t -> StrUtil.isNotBlank(t.get${uniqueCol}()))
+    	// 找出合规的数据 
+    	List<${ClassName}> valid${ClassName}s = ${className}List;
+#if(${uniqueColStr} != "")
+        valid${ClassName}s = ${className}List.stream()
+    			.filter(t -> $uniqueColStr)
     			.collect(toList());
+#end
     	int invalidSize = ${className}List.size() - valid${ClassName}s.size();
     	
     	
@@ -207,17 +215,21 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     	List<Demo> all${ClassName}s = ${className}Mapper.select${ClassName}List(new ${ClassName}());
     	// 找出要更新的数据
     	List<${ClassName}> update${ClassName}s = valid${ClassName}s.stream()
-                .filter(t1 -> all${ClassName}s.stream().anyMatch(t2 -> t1.get${uniqueCol}().equals(t2.get${uniqueCol}())))
+#if($uniqueColEqStr != "")
+                .filter(t1 -> all${ClassName}s.stream().anyMatch(t2 -> $uniqueColEqStr))
+#end
                 .peek(t -> {
-                	t.setUpdateBy(SecurityUtils.getUsername());
+                    t.setUpdateBy(SecurityUtils.getUsername());
                     t.setUpdateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
     	// 找出新增数据
         List<${ClassName}> insert${ClassName}s = valid${ClassName}s.stream()
-                .filter(t1 -> all${ClassName}s.stream().noneMatch(t2 -> t1.get${uniqueCol}().equals(t2.get${uniqueCol}())))
+#if($uniqueColEqStr != "")
+                .filter(t1 -> all${ClassName}s.stream().noneMatch(t2 -> $uniqueColEqStr))
+#end
                 .peek(t -> {
-                	t.setCreateBy(SecurityUtils.getUsername());
+                    t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());

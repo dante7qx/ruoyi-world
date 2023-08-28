@@ -31,6 +31,7 @@ import com.risun.system.service.ISysConfigService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.file.FileNameUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -217,10 +218,10 @@ public class DemoServiceImpl implements IDemoService
     		return result.toString();
     	}
     	
-    	// 找出合规的数据
-    	List<Demo> validDemos = demoList
-    			.stream()
-    			.filter(t -> StrUtil.isNotBlank(t.getDemoName()))
+    	// 找出合规的数据 
+    	List<Demo> validDemos = demoList;
+        validDemos = demoList.stream()
+    			.filter(t -> ObjectUtil.isNotEmpty(t.getDemoName()) && ObjectUtil.isNotEmpty(t.getDemoTime())  )
     			.collect(toList());
     	int invalidSize = demoList.size() - validDemos.size();
     	
@@ -229,17 +230,17 @@ public class DemoServiceImpl implements IDemoService
     	List<Demo> allDemos = demoMapper.selectDemoList(new Demo());
     	// 找出要更新的数据
     	List<Demo> updateDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
                 .peek(t -> {
-                	t.setUpdateBy(SecurityUtils.getUsername());
+                    t.setUpdateBy(SecurityUtils.getUsername());
                     t.setUpdateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
     	// 找出新增数据
         List<Demo> insertDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
                 .peek(t -> {
-                	t.setCreateBy(SecurityUtils.getUsername());
+                    t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
