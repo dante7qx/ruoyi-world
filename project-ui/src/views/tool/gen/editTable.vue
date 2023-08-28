@@ -77,7 +77,7 @@
               </el-select>
             </template>
           </el-table-column>
-          <el-table-column label="必填" min-width="5%" width="50px" align="center">
+          <el-table-column label="必填(导入)" min-width="5%" width="100px" align="center">
             <template slot-scope="scope">
               <el-checkbox true-label="1" false-label="0" v-model="scope.row.isRequired"></el-checkbox>
             </template>

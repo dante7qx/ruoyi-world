@@ -146,14 +146,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
                 WHEN #{item.demoName} THEN #{item.demoContent}
             </foreach>,
-            role_id = 
-            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
-                WHEN #{item.demoName} THEN #{item.roleId}
-            </foreach>,
-            post_id = 
-            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
-                WHEN #{item.demoName} THEN #{item.postId}
-            </foreach>,
             update_by = 
             <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
                 WHEN #{item.demoName} THEN #{item.updateBy}

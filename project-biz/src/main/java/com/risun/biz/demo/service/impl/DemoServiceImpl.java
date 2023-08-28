@@ -22,6 +22,7 @@ import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.constant.Constants;
 import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.collection.CollUtil;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.file.FileUtils;
@@ -213,29 +214,28 @@ public class DemoServiceImpl implements IDemoService
     		return result.toString();
     	}
     	
-    	// 找出合规的数据
-    	List<Demo> validDemos = demoList
-    			.stream()
-    			.filter(t -> StrUtil.isNotBlank(t.getDemoName()))
+    	// 找出合规的数据 
+    	List<Demo> validDemos = demoList;
+        validDemos = demoList.stream()
+    			.filter(t -> ObjectUtil.isNotEmpty(t.getDemoName()) && ObjectUtil.isNotEmpty(t.getDemoTime())  )
     			.collect(toList());
     	int invalidSize = demoList.size() - validDemos.size();
-    	
     	
     	// 找出所有已存在的数据（此方法可根据业务进行优化）
     	List<Demo> allDemos = demoMapper.selectDemoList(new Demo());
     	// 找出要更新的数据
     	List<Demo> updateDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
                 .peek(t -> {
-                	t.setUpdateBy(SecurityUtils.getUsername());
+                    t.setUpdateBy(SecurityUtils.getUsername());
                     t.setUpdateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
     	// 找出新增数据
         List<Demo> insertDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName())))
+                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
                 .peek(t -> {
-                	t.setCreateBy(SecurityUtils.getUsername());
+                    t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
