@@ -1,5 +1,7 @@
 package com.risun.generator.util;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -64,6 +66,7 @@ public class VelocityUtils
         velocityContext.put("importList", getImportList(genTable));
         velocityContext.put("permissionPrefix", getPermissionPrefix(moduleName, businessName));
         velocityContext.put("columns", genTable.getColumns());
+        velocityContext.put("unqiueColumns", getUniqueColumns(genTable.getColumns()));
         velocityContext.put("table", genTable);
         velocityContext.put("dicts", getDicts(genTable));
         setMenuVelocityContext(velocityContext, genTable);
@@ -420,4 +423,15 @@ public class VelocityUtils
         }
         return num;
     }
+    
+    /**
+     * 获取必填列List
+     * 
+     * @param columns
+     * @return
+     */
+    private static List<GenTableColumn> getUniqueColumns(List<GenTableColumn> columns) {
+    	return columns.stream().filter(c -> c.isRequired()).collect(toList());
+    }
+
 }
