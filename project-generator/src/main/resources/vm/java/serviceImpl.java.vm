@@ -223,9 +223,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
                 .collect(toList());
     	// 找出新增数据
         List<${ClassName}> insert${ClassName}s = valid${ClassName}s.stream()
-#if($uniqueColEqStr != "")
                 .filter(t1 -> all${ClassName}s.stream().noneMatch(t2 -> $uniqueColEqStr))
-#end
                 .peek(t -> {
                     t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
