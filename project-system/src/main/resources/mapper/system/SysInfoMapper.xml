@@ -9,13 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="title"    column="title"    />
         <result property="subTitle"    column="sub_title"    />
         <result property="cover"    column="cover"    />
+        <result property="summary"    column="summary"    />
         <result property="content"    column="content"    />
-        <result property="type"    column="type"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="categoryName"    column="category_name"    />
         <result property="source"    column="source"    />
         <result property="author"    column="author"    />
         <result property="setTop"    column="set_top"    />
         <result property="anonymous"    column="anonymous"    />
         <result property="publishTime"    column="publish_time"    />
+        <result property="commentable"    column="commentable"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="praiseCount"    column="praise_count"    />
+        <result property="favorCount"    column="favor_count"    />
         <result property="status"    column="status"    />
         <result property="disabled"    column="disabled"    />
         <result property="createBy"    column="create_by"    />
@@ -25,30 +31,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysInfoVo">
-        select info_id, title, sub_title, cover, content, type, source, author, set_top, anonymous, publish_time, status, disabled, create_by, create_time, update_by, update_time from sys_info
+        select 
+        	t.info_id, t.title, t.sub_title, t.cover, t.summary, t.content, t.category_id, c.category_name, t.source, t.author, t.set_top, t.anonymous, t.publish_time, 
+        	t.commentable, t.view_count, t.praise_count, t.favor_count, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
+        from sys_info t
+        left join sys_info_category c on c.category_id = t.category_id
     </sql>
     
      <sql id="selectSysInfo4ViewVo">
-        select t.info_id, t.title, t.sub_title, t.cover, t.content, t.type, t.set_top, t.source, t.author, t.anonymous, t.publish_time, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
+        select t.info_id, t.title, t.sub_title, t.cover, t.summary, t.content, t.category_id, c.category_name, t.set_top, t.source, t.author, t.anonymous, t.publish_time, 
+        t.commentable, t.view_count, t.praise_count, t.favor_count, t.status, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time 
         from sys_info t
         left join sys_info_range t1 on t1.info_id = t.info_id 
+        left join sys_info_category c on c.category_id = t.category_id
     </sql>
 
     <select id="selectSysInfoList" parameterType="SysInfo" resultMap="SysInfoResult">
         <include refid="selectSysInfoVo"/>
         <where>  
-            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
-            <if test="subTitle != null  and subTitle != ''"> and sub_title like concat('%', #{subTitle}, '%')</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
-            <if test="source != null  and source != ''"> and source like concat('%', #{source}, '%')</if>
-            <if test="author != null  and author != ''"> and author like concat('%', #{author}, '%')</if>
-            <if test="setTop != null "> and set_top = #{setTop}</if>
-            <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
-            <if test="disabled != null"> and disabled = #{disabled}</if>
-            <if test="anonymous != null"> and anonymous = #{anonymous}</if>
+            <if test="title != null  and title != ''"> and t.title like concat('%', #{title}, '%')</if>
+            <if test="subTitle != null  and subTitle != ''"> and t.sub_title like concat('%', #{subTitle}, '%')</if>
+            <if test="summary != null  and summary != ''"> and t.summary like concat('%', #{summary}, '%')</if>
+            <if test="categoryId != null  and categoryId != ''"> and (t.category_id = #{categoryId} or CAST(#{categoryId} AS VARCHAR) = ANY (string_to_array(c.ancestors, ',')))</if>
+            <if test="source != null  and source != ''"> and t.source like concat('%', #{source}, '%')</if>
+            <if test="author != null  and author != ''"> and t.author like concat('%', #{author}, '%')</if>
+            <if test="setTop != null "> and t.set_top = #{setTop}</if>
+            <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and t.publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
+            <if test="status != null  and status != ''"> and t.status = #{status}</if>
+            <if test="disabled != null"> and t.disabled = #{disabled}</if>
+            <if test="anonymous != null"> and t.anonymous = #{anonymous}</if>
+            <if test="commentable != null"> and t.commentable = #{commentable}</if>
         </where>
-        order by disabled asc, set_top desc, publish_time desc
+        order by t.disabled asc, t.set_top desc, t.publish_time desc
     </select>
     
     <select id="selectSysInfoList4View" parameterType="SysInfo" resultMap="SysInfoResult">
@@ -73,7 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 			)
 			<if test="title != null  and title != ''"> and t.title like concat('%', #{title}, '%')</if>
-            <if test="type != null  and type != ''"> and t.type = #{type}</if>
+            <if test="categoryId != null  and categoryId != ''"> and (t.category_id = #{categoryId} or CAST(#{categoryId} AS VARCHAR) = ANY (string_to_array(c.ancestors, ',')))</if>
+            <if test="anonymous != null"> and t.anonymous = #{anonymous}</if>
+            <if test="commentable != null"> and t.commentable = #{commentable}</if>
             <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and t.publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
     	</where>
     	order by disabled asc, set_top desc, publish_time desc
@@ -81,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectSysInfoByInfoId" parameterType="Long" resultMap="SysInfoResult">
         <include refid="selectSysInfoVo"/>
-        where info_id = #{infoId}
+        where t.info_id = #{infoId}
     </select>
     
     <select id="selectSysInfo4ViewByInfoId" parameterType="Long" resultMap="SysInfoResult">
@@ -90,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	 and t.status = '2' 
         	 and t.disabled = 0 
         	 and
-			(
+			 (
 				t.anonymous = 1 
 				or 
 				(
@@ -105,6 +121,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 			)
     </select>
+    
+    <select id="hasSysInfoByCategoryId" parameterType="Long" resultType="Boolean">    
+    	select case count(info_id) when 0 then false else true end from sys_info where category_id = #{categoryId}
+    </select>
         
     <insert id="insertSysInfo" parameterType="SysInfo" useGeneratedKeys="true" keyProperty="infoId">
         insert into sys_info
@@ -112,8 +132,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title != null">title,</if>
             <if test="subTitle != null">sub_title,</if>
             <if test="cover != null">cover,</if>
+            <if test="summary != null">summary,</if>
             <if test="content != null">content,</if>
-            <if test="type != null">type,</if>
+            <if test="categoryId != null">category_id,</if>
             <if test="source != null">source,</if>
             <if test="author != null">author,</if>
             <if test="setTop != null">set_top,</if>
@@ -130,8 +151,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title != null">#{title},</if>
             <if test="subTitle != null">#{subTitle},</if>
             <if test="cover != null">#{cover},</if>
+            <if test="summary != null">#{summary},</if>
             <if test="content != null">#{content},</if>
-            <if test="type != null">#{type},</if>
+            <if test="categoryId != null">#{categoryId},</if>
             <if test="source != null">#{source},</if>
             <if test="author != null">#{author},</if>
             <if test="setTop != null">#{setTop},</if>
@@ -152,8 +174,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title != null">title = #{title},</if>
             <if test="subTitle != null">sub_title = #{subTitle},</if>
             <if test="cover != null">cover = #{cover},</if>
+            <if test="summary != null">summary = #{summary},</if>
             <if test="content != null">content = #{content},</if>
-            <if test="type != null">type = #{type},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
             <if test="source != null">source = #{source},</if>
             <if test="author != null">author = #{author},</if>
             <if test="setTop != null">set_top = #{setTop},</if>
@@ -176,6 +199,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="setAnonymousSysInfo" parameterType="SysInfo">
         update sys_info set anonymous = #{anonymous}, update_by = #{updateBy}, update_time = #{updateTime} where info_id = #{infoId} 
     </update>
+    
+    <update id="cancelSysInfoTop">
+    	update sys_info set set_top = 0 where set_top = 1
+    </update>
 
     <delete id="deleteSysInfoByInfoId" parameterType="Long">
         delete from sys_info where info_id = #{infoId}
@@ -187,7 +214,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{infoId}
         </foreach>
     </delete>
-    <update id="cancelSysInfoTop">
-    	update sys_info set set_top = 0 where set_top = 1
+    
+    <delete id="deletePrevSysInfoView" parameterType="String">
+        delete from sys_info_view where DATE(view_date) <![CDATA[<>]]> TO_DATE(#{viewDate},'YYYY-MM-DD')
+    </delete>
+    
+    <update id="updateSysInfoViewCount" parameterType="Long">
+    	update sys_info set view_count = view_count + 1 where info_id = #{infoId}
+    </update>
+    
+    <select id="selectSysInfoViewByInfoView" parameterType="com.risun.system.domain.SysInfoView" resultType="com.risun.system.domain.SysInfoView">
+    	select t.view_id as viewId, t.info_id as infoId, t.view_date as viewDate, t.view_ip as viewIp from sys_info_view t where t.info_id = #{infoId} and t.view_date = #{viewDate} and t.view_ip = #{viewIp}
+    </select>
+    
+    <insert id="insertSysInfoView" parameterType="com.risun.system.domain.SysInfoView" useGeneratedKeys="true" keyProperty="viewId">
+        insert into sys_info_view
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">info_id,</if>
+            <if test="viewDate != null">view_date,</if>
+            <if test="viewIp != null and viewIp != ''">view_ip,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">#{infoId},</if>
+            <if test="viewDate != null">#{viewDate},</if>
+            <if test="viewIp != null and viewIp != ''">#{viewIp},</if>
+         </trim>
+    </insert>
+    
+    <update id="updateSysInfoCommentable">
+    	update sys_info set commentable = #{commentable} where info_id in 
+    	<foreach item="infoId" collection="infoIds" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </update>
+    
+    <update id="updateSysInfoFavorCount" parameterType="Long">
+    	update sys_info set favor_count = favor_count + 1 where info_id = #{infoId}
+    </update>
+    
+    <update id="updateSysInfoIncreasePraiseCount" parameterType="Long">
+    	update sys_info set praise_count = praise_count + 1 where info_id = #{infoId}
+    </update>
+    
+    <update id="updateSysInfoDecreasePraiseCount" parameterType="Long">
+    	update sys_info set praise_count = praise_count - 1 where info_id = #{infoId}
     </update>
 </mapper>

@@ -17,7 +17,7 @@ public interface ISysInfoService
      * @param infoId 信息发布主键
      * @return 信息发布
      */
-    public SysInfo selectSysInfoByInfoId(Long infoId);
+    SysInfo selectSysInfoByInfoId(Long infoId);
     
     /**
      * 查询信息发布4浏览详情
@@ -25,7 +25,7 @@ public interface ISysInfoService
      * @param infoId 信息发布主键
      * @return 信息发布
      */
-    public SysInfo selectSysInfo4ViewByInfoId(Long infoId);
+    SysInfo selectSysInfo4ViewByInfoId(Long infoId);
 
     /**
      * 查询信息发布列表
@@ -33,7 +33,7 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 信息发布集合
      */
-    public List<SysInfo> selectSysInfoList(SysInfo sysInfo);
+    List<SysInfo> selectSysInfoList(SysInfo sysInfo);
     
     /**
      * 查询信息发布浏览列表
@@ -41,7 +41,7 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 信息发布集合
      */
-    public List<SysInfo> selectSysInfoList4View(SysInfo sysInfo);
+    List<SysInfo> selectSysInfoList4View(SysInfo sysInfo);
 
     /**
      * 新增信息发布
@@ -49,7 +49,7 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 结果
      */
-    public int insertSysInfo(SysInfo sysInfo);
+    int insertSysInfo(SysInfo sysInfo);
 
     /**
      * 修改信息发布
@@ -57,7 +57,7 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 结果
      */
-    public int updateSysInfo(SysInfo sysInfo);
+    int updateSysInfo(SysInfo sysInfo);
 
     /**
      * 批量删除信息发布
@@ -65,7 +65,7 @@ public interface ISysInfoService
      * @param infoIds 需要删除的信息发布主键集合
      * @return 结果
      */
-    public int deleteSysInfoByInfoIds(Long[] infoIds);
+    int deleteSysInfoByInfoIds(Long[] infoIds);
 
     /**
      * 删除信息发布信息
@@ -73,7 +73,7 @@ public interface ISysInfoService
      * @param infoId 信息发布主键
      * @return 结果
      */
-    public int deleteSysInfoByInfoId(Long infoId);
+    int deleteSysInfoByInfoId(Long infoId);
     
     /**
      * 批量审批
@@ -81,7 +81,7 @@ public interface ISysInfoService
      * @param sysInfo
      * @return
      */
-    public int batchApproval(SysInfo sysInfo);
+    int batchApproval(SysInfo sysInfo);
     
     /**
      * 置顶信息发布
@@ -89,7 +89,7 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 结果
      */
-    public int setInfoTop(SysInfo sysInfo);
+    int setInfoTop(SysInfo sysInfo);
     
     /**
      * 停用（启用）信息发布
@@ -97,7 +97,15 @@ public interface ISysInfoService
      * @param sysInfo 信息发布
      * @return 结果
      */
-    public int setInfoDisabled(SysInfo sysInfo);
+    int setInfoDisabled(SysInfo sysInfo);
+    
+    /**
+     * 设置（取消）评论信息发布
+     * 
+     * @param sysInfo
+     * @return
+     */
+    int setCommentSysInfo(SysInfo sysInfo);
     
     /**
      * 设置（取消）匿名访问信息发布
@@ -105,7 +113,7 @@ public interface ISysInfoService
      * @param sysInfo
      * @return
      */
-    public int setAnonymousSysInfo(SysInfo sysInfo);
+    int setAnonymousSysInfo(SysInfo sysInfo);
     
     /**
      * 设置访问范围信息发布
@@ -113,7 +121,7 @@ public interface ISysInfoService
      * @param sysInfo
      * @return
      */
-    public int setRangeSysInfo(SysInfo sysInfo);
+    int setRangeSysInfo(SysInfo sysInfo);
     
     /**
      * 根据信息Id获取访问范围
@@ -121,5 +129,46 @@ public interface ISysInfoService
      * @param infoId
      * @return
      */
-    public Long[] selectInfoRangeByInfoId(Long infoId);
+    Long[] selectInfoRangeByInfoId(Long infoId);
+    
+    /**
+     * 指定栏目Id下是否有信息发布
+     * 
+     * @param categoryId
+     * @return
+     */
+    boolean hasSysInfoByCategoryId(Long categoryId);
+    
+    /**
+     * 更新信息发布浏览量
+     * 
+     * @param infoId
+     * @param viewIP
+     * @return
+     */
+    void updateSysInfoViewCount(Long infoId, String viewIP);
+    
+    /**
+     * 收藏
+     * 
+     * @param infoId
+     * @return
+     */
+    int updateSysInfoFavorCount(Long infoId);
+    
+    /**
+     * 点赞
+     * 
+     * @param infoId
+     * @return
+     */
+    int updateSysInfoIncreasePraiseCount(Long infoId);
+    
+    /**
+     * 取消点赞
+     * 
+     * @param infoId
+     * @return
+     */
+    int updateSysInfoDecreasePraiseCount(Long infoId);
 }

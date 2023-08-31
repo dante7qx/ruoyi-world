@@ -14,45 +14,60 @@
 					<dt>发布日期：{{infoData.publishTime}}</dt>
 					<dt>来源：{{infoData.source}}</dt>
           <dt>作者：{{infoData.author}}</dt>
-          <!--
-					<dt>浏览量：{{infoData.viewes}}</dt>
-          -->
-					<div class="wz_wai">
+					<dt>浏览量：{{infoData.viewCount}}</dt>
+					<div class="wz_wai noprint">
 						<div class="wz_font">
 							<a href="javascript:void(0)" @click="print">打印</a>
+						</div>
+						<div class="wz_font" style="width: 70px;">
+							<a href="javascript:void(0)" @click="doPraise" style="width: 70px;">{{ praise }}: {{ infoData.praiseCount }}</a>
+						</div>
+						<div class="wz_font" style="width: 70px;">
+							<a href="javascript:void(0)" @click="doFavor" style="width: 70px;">{{ favorite }}: {{ infoData.favorCount }}</a>
 						</div>
 					</div>
 				</dl>
 			</div>
-			<div class="ui-wb" v-if="hasAcl">{{ infoData.content }}</div>
+			<div class="ui-wb" v-if="hasAcl" v-html="infoData.content"></div>
+		</div>
+		<div class="comment" v-if="token && infoData.commentable == 1">
+			<comment :key="infoId" bizModel="'SysInfo'" :bizId="infoId" :showImg="true" :showVideo="true"/>
 		</div>
 	</div>
 </template>
 
 <script>
-import { getInfo4View } from "@/api/system/info";
+import store from "@/store";
+import { getInfo4View, favorInfo, praiseInfo } from "@/api/system/info";
+import Comment from '@/components/Comment';
 
 export default {
   name: 'InfoPublishPage',
+	components: { Comment },
   data() {
     return {
+			infoId: 0,
+			token: store.getters.token,
       hasAcl: false,
       infoData: {
         title: null,
         subTitle: null,
         publishTime: null,
         content: null,
-      }
+				commentable: 0
+      },
+			favorite: '收藏',
+			praise: '点赞'
     }
   },
   created() {
+		this.infoId = this.$route.query && this.$route.query.id;
     this.loadData()
   },
   methods: {
     loadData() {
-      const id = this.$route.query && this.$route.query.id;
-      if(id != null) {
-        getInfo4View(id).then(res => {
+      if(this.infoId != null) {
+        getInfo4View(this.infoId).then(res => {
           if(res.data !== undefined) {
             this.hasAcl = true;
             this.infoData = res.data
@@ -63,6 +78,28 @@ export default {
     print() {
       window.print()
     },
+		doPraise() {
+			if(this.praise == '点赞') {
+				praiseInfo(this.infoId, true).then(res => {
+					this.praise = '已点赞';
+					this.infoData.praiseCount += 1;
+				})
+			}	else {
+				praiseInfo(this.infoId, false).then(res => {
+					this.praise = '点赞';
+					this.infoData.praiseCount -= 1;
+				})
+			}
+		},
+		doFavor() {
+			if(this.favorite == '收藏') {
+				this.$modal.msgSuccess("加入收藏夹请使用 Ctrl+D ");
+				favorInfo(this.infoId).then(res => {
+					this.favorite = '已收藏';
+					this.infoData.favorCount += 1;
+				})
+			}
+		},
     closeWindow() {
       window.close()
     }
@@ -140,8 +177,7 @@ export default {
 	}
 
 	.wz_font {
-		margin-right: 24px;
-		width: 45px;
+		width: 55px;
 		float: right;
 		height: 40px;
 		line-height: 40px;
@@ -201,11 +237,16 @@ export default {
   }
 
   @media print {
-  @page {
-    margin: 0;
-  }
-  body {
-    margin: 1cm;
-  }
-}
+		.noprint { display: none }
+		@page {
+			margin: 0;
+		}
+		body {
+			margin: 1cm;
+		}
+	}
+	.comment {
+		width: 1060px;
+		margin: 50px auto 0px;
+	}
 </style>

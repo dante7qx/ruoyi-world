@@ -96,6 +96,15 @@ export function setDisabledInfo(data) {
   })
 }
 
+// 设置（取消）评论信息发布
+export function setCommentInfo(data) {
+  return request({
+    url: '/system/info/set_commantable',
+    method: 'post',
+    data: data
+  })
+}
+
 // 设置（取消）匿名访问信息发布
 export function setAnonymousInfo(data) {
   return request({
@@ -118,6 +127,65 @@ export function setRangeInfo(data) {
 export function getInfoRange(infoId) {
   return request({
     url: '/system/info/info_range/' + infoId,
+    method: 'post'
+  })
+}
+
+// 收藏
+export function favorInfo(infoId) {
+  return request({
+    url: '/system/info/favor_info/' + infoId,
+    method: 'post'
+  })
+}
+
+// 点赞（取消点赞）
+export function praiseInfo(infoId, isPraise) {
+  return request({
+    url: '/system/info/praise_info/' + infoId + '/' + isPraise,
+    method: 'post'
+  })
+}
+
+// 查询信息属性列表
+export function listProp(query) {
+  return request({
+    url: '/system/info/list_prop',
+    method: 'get',
+    params: query
+  })
+}
+
+// 查询信息属性详细
+export function getProp(propId) {
+  return request({
+    url: '/system/info/prop/' + propId,
+    method: 'get'
+  })
+}
+
+// 新增信息属性
+export function addProp(data) {
+  return request({
+    url: '/system/info/insert_prop',
+    method: 'post',
+    data: data
+  })
+}
+
+// 修改信息属性
+export function updateProp(data) {
+  return request({
+    url: '/system/info/update_prop',
+    method: 'post',
+    data: data
+  })
+}
+
+// 删除信息属性
+export function delProp(propId) {
+  return request({
+    url: '/system/info/del_prop/' + propId,
     method: 'post'
   })
 }
