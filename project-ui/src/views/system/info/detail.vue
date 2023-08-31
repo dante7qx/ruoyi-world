@@ -1,52 +1,58 @@
 <template>
   <div>
-    <el-row>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-        <el-col :span="24">
-          <el-form-item label="标题" prop="title">
-            <el-input v-model="form.title" placeholder="请输入标题" maxlength="128" show-word-limit :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="副标题" prop="subTitle">
-            <el-input v-model="form.subTitle" placeholder="请输入副标题" maxlength="64" show-word-limit :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="类型" prop="type">
-            <el-select v-model="form.type" placeholder="请选择类型" :disabled="disabled">
-              <el-option
-                v-for="dict in dict.type.sys_info_type"
-                :key="dict.value"
-                :label="dict.label"
-                :value="dict.value"            
-                style="width: 100%;"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="封面">
-            <image-upload v-model="form.cover" :limit="1" :fileSize="1" :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="来源" prop="source">
-            <el-input v-model="form.source" placeholder="请输入来源" maxlength="24" show-word-limit :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="作者" prop="author">
-            <el-input v-model="form.author" placeholder="请输入作者" maxlength="12" show-word-limit :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="内容" prop="content">
-            <editor v-model="form.content" :disabled="disabled"/>
-          </el-form-item>
-        </el-col>
-      </el-form>
-    </el-row>
+    <div style="height: 750px; overflow: auto;">
+      <el-row>
+        <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+          <el-col :span="24">
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="form.title" placeholder="请输入标题" maxlength="128" show-word-limit :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="副标题" prop="subTitle">
+              <el-input v-model="form.subTitle" placeholder="请输入副标题" maxlength="64" show-word-limit :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="栏目" prop="categoryId">
+              <treeselect 
+                v-model="form.categoryId" 
+                :options="categoryOptions" 
+                :normalizer="normalizer" 
+                :default-expand-level="2" 
+                :max-height="460"
+                placeholder="选择栏目" 
+                :disabled="disabled" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="封面">
+              <image-upload v-model="form.cover" :limit="1" :fileSize="1" :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="来源" prop="source">
+              <el-input v-model="form.source" placeholder="请输入来源" maxlength="24" show-word-limit :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="作者" prop="author">
+              <el-input v-model="form.author" placeholder="请输入作者" maxlength="12" show-word-limit :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="简介" prop="summary">
+              <el-input v-model="form.summary" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="500"  placeholder="请输入简介" :readonly="disabled"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="内容" prop="content">
+              <editor v-model="form.content" :disabled="disabled"/>
+            </el-form-item>
+          </el-col>
+        </el-form>
+      </el-row>
+    </div>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="submitForm('0')" v-show="!disabled && !showApproval">确 定</el-button>
       <el-button type="success" @click="submitForm('1')" v-show="!disabled && !showApproval">提 交</el-button>
@@ -82,14 +88,23 @@
 </template>
 
 <script>
+import { listCategory } from "@/api/system/infocategory";
 import { getInfo, addInfo, updateInfo, batchApproval } from "@/api/system/info";
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
   name: "InfoDetail",
+  components: { Treeselect },
   props: {
     infoId: {
       type: Number,
       required: true,
+      default: 0
+    },
+    categoryId: {
+      type: Number,
+      required: false,
       default: 0
     },
     disabled: {
@@ -98,9 +113,9 @@ export default {
       default: false
     }
   },
-  dicts: ['sys_info_type'],
   data() {
     return {
+      categoryOptions: [],
       form: {},
       rules: {
         title: [
@@ -109,14 +124,16 @@ export default {
         content: [
           { required: true, message: "内容不能为空", trigger: "blur" }
         ],
-        type: [
-          { required: true, message: "类型不能为空", trigger: "change" }
+        categoryId: [
+          { required: true, message: "栏目不能为空", trigger: "change" }
         ]
       },
       showApproval: false,
       // 审批窗口
       openApproval: false,
-      formApproval: {},
+      formApproval: {
+        comment: '同意'
+      },
       rulesApproval: {
         publishTime: [
           { required: true, message: "发布时间不能为空", trigger: "change" }
@@ -129,9 +146,25 @@ export default {
     };
   },
   created() {
+    this.loadTree()
     this.loadForm()
   },
   methods: {
+    loadTree() {
+      listCategory({}).then(response => {
+        this.categoryOptions = this.handleTree(response.data, "categoryId");
+      });
+    },
+    normalizer(node) {
+      if (node.children && !node.children.length) {
+        delete node.children;
+      }
+      return {
+        id: node.categoryId,
+        label: node.categoryName,
+        children: node.children,
+      };
+    },
     loadForm() {
       this.reset();
       if(this.infoId > 0) {
@@ -141,6 +174,8 @@ export default {
             this.showApproval = true
           }
         });
+      } else {
+        this.form.categoryId = this.categoryId > 0 ? this.categoryId : null
       }
     },
     reset() {
@@ -149,7 +184,7 @@ export default {
         title: null,
         subTitle: null,
         content: null,
-        type: null,
+        categoryId: null,
         setTop: 0,
         anonymous: null,
         publishTime: null,

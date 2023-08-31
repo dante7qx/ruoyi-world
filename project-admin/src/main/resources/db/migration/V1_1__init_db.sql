@@ -186,8 +186,9 @@ insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      't
 insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'fqyczadmin', sysdate(), '', null, '代码生成菜单');
 insert into sys_menu values('118',  '代码示例', '3',   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'fqyczadmin', sysdate(), '', null, '代码示例菜单');
 -- 三级菜单
-insert into sys_menu values('498',  '信息发布', '107', '1', 'infomgr',    'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',        'message',       'fqyczadmin', sysdate(), '', null, '信息发布菜单');
-insert into sys_menu values('499',  '信息浏览', '107', '2', 'infoview',   'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',         'eye-open',      'fqyczadmin', sysdate(), '', null, '信息浏览菜单');
+insert into sys_menu values('497',  '栏目分类', '107', '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'fqyczadmin', sysdate(), '', null, '信息栏目菜单');
+insert into sys_menu values('498',  '信息发布', '107', '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'fqyczadmin', sysdate(), '', null, '信息发布菜单');
+insert into sys_menu values('499',  '信息浏览', '107', '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'fqyczadmin', sysdate(), '', null, '信息浏览菜单');
 
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'fqyczadmin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'fqyczadmin', sysdate(), '', null, '登录日志菜单');
@@ -417,6 +418,7 @@ insert into sys_role_menu values ('3', '1036');
 insert into sys_role_menu values ('3', '1037');
 insert into sys_role_menu values ('3', '1038');
 insert into sys_role_menu values ('4', '107');
+insert into sys_role_menu values ('4', '497');
 insert into sys_role_menu values ('4', '498');
 insert into sys_role_menu values ('4', '499');
 insert into sys_role_menu values ('4', '1035');
@@ -669,25 +671,41 @@ create table sys_job_log (
 -- ----------------------------
 drop table if exists sys_info;
 create table sys_info (
-  info_id     		bigint       not null auto_increment   comment '信息id',
+  info_id     		bigint       	not null auto_increment   	   comment '信息id',
   title             varchar(128)     default ''                comment '标题',
   sub_title         varchar(64)      default ''                comment '副标题',
   cover				varchar(256)     default ''                comment '封面',
+  summary			varchar(500)     default ''                comment '简介',
   content           text             		               	   comment '内容',
-  type           	varchar(24)      default ''                comment '类型',
+  category_id     	bigint       	 not null                  comment '栏目id',
   source			varchar(24)      default ''                comment '来源',
   author			varchar(16)      default ''                comment '作者',
-  set_top			tinyint       default 0                 comment '是否置顶',
-  anonymous			tinyint       default 0                 comment '是否匿名访问',
+  set_top			tinyint          default 0                 comment '是否置顶',
+  anonymous			tinyint          default 0                 comment '是否匿名访问',
   publish_time 	    datetime                                   comment '发布时间',
   status			varchar(2)		 default '0'		       comment '状态（0: 草稿，1: 待发布审批，2:已发布）',
-  disabled			tinyint       default 0				   comment '停用（0: 否，1: 是）',
+  commentable		tinyint          default 0                 comment '是否可评论',
+  view_count	    int              default 0                 comment '浏览数',
+  praise_count	    int              default 0                 comment '点赞数',
+  favor_count	    int              default 0                 comment '收藏数',
+  disabled			tinyint          default 0				   comment '停用（0: 否，1: 是）',
   create_by         varchar(64)      default ''                comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)      default ''                comment '更新者',
   update_time       datetime                                   comment '更新时间',
   primary key (info_id)
 ) engine=innodb auto_increment=1 comment = '信息发布表';
+
+-- 信息属性
+drop table if exists sys_info_prop;
+create table sys_info_prop ( 
+  prop_id           	bigint      	not null auto_increment   comment '信息属性id',
+  info_id     			bigint      	not null				  comment '信息发布id',
+  category_prop_id 		bigint      	not null				  comment '栏目属性id',
+  prop_val           	text             		              	  comment '属性值',
+  remark            	varchar(500)  	default ''                comment '备注信息',
+  primary key (prop_id)
+) engine=innodb auto_increment=1 comment = '信息属性'; 
 
 -- 信息访问范围
 drop table if exists sys_info_range;
@@ -697,6 +715,50 @@ create table sys_info_range (
   dept_id 			bigint      not null				  comment '部门id',
   primary key (range_id)
 ) engine=innodb auto_increment=1 comment = '信息访问范围'; 
+
+-- 信息栏目
+drop table if exists sys_info_category;
+create table sys_info_category (
+  category_id     	bigint       	not null auto_increment   comment '栏目id',
+  parent_id         bigint      	default 0                 comment '父栏目id',
+  ancestors         varchar(50)     default ''                comment '祖级列表',
+  category_name     varchar(64)     default ''                comment '栏目名称',
+  order_num         int          	default 0                 comment '显示顺序',
+  disabled			tinyint       	default 0				  comment '停用',
+  create_by         varchar(64)     default ''                comment '创建者',
+  create_time 	    datetime                                  comment '创建时间',
+  update_by         varchar(64)     default ''                comment '更新者',
+  update_time       datetime                                  comment '更新时间',
+  primary key (category_id)
+) engine=innodb auto_increment=1 comment = '信息栏目';
+
+-- 信息栏目属性
+drop table if exists sys_info_category_prop;
+create table sys_info_category_prop (
+  prop_id     		bigint       	not null auto_increment   comment '属性id',
+  category_id       bigint      	not null                  comment '栏目id',
+  prop_name     	varchar(64)     default ''                comment '属性名称',
+  prop_type     	varchar(20)     default ''                comment '属性类型',
+  prop_type_val     varchar(32)     default ''                comment '属性字典类型值',
+  remark            varchar(500)  	default ''                comment '备注信息',
+  create_by         varchar(64)     default ''                comment '创建者',
+  create_time 	    datetime                                  comment '创建时间',
+  update_by         varchar(64)     default ''                comment '更新者',
+  update_time       datetime                                  comment '更新时间',
+  
+  primary key (prop_id)
+) engine=innodb auto_increment=1 comment = '信息栏目属性';
+
+-- 信息发布浏览记录（只记录当天信息）
+drop table if exists sys_info_view;
+create table sys_info_view (
+  view_id          bigint      	not null auto_increment   comment '访问id',
+  info_id     	   bigint      	not null				  comment '信息发布id',
+  view_date		   date        	not null                  comment '访问日期',
+  view_ip		   varchar(15)  not null               	  comment '访问IP',
+  
+  primary key (view_id)
+) engine=innodb auto_increment=1 comment = '信息发布浏览记录';
 
 -- ----------------------------
 -- 18、代码生成业务表
