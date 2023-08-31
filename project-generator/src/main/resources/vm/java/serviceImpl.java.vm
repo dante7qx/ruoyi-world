@@ -284,8 +284,8 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
     public String import${ClassName}(List<${ClassName}> ${className}List) {
     	StringBuilder result = new StringBuilder();
     	if(CollUtil.isEmpty(${className}List)) {
-    		result.append("导入数据为空！");
-    		return result.toString();
+            result.append("导入数据为空！");
+            return result.toString();
     	}
     	
     	// 找出合规的数据 
@@ -297,14 +297,12 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
 #end
     	int invalidSize = ${className}List.size() - valid${ClassName}s.size();
     	
-    	
+#if($uniqueColEqStr != "")
     	// 找出所有已存在的数据（此方法可根据业务进行优化）
-    	List<Demo> all${ClassName}s = this.select${ClassName}List(new ${ClassName}());
+    	List<${ClassName}> all${ClassName}s = this.select${ClassName}List(new ${ClassName}());
     	// 找出要更新的数据
     	List<${ClassName}> update${ClassName}s = valid${ClassName}s.stream()
-#if($uniqueColEqStr != "")
                 .filter(t1 -> all${ClassName}s.stream().anyMatch(t2 -> $uniqueColEqStr))
-#end
                 .peek(t -> {
                     t.setUpdateBy(SecurityUtils.getUsername());
                     t.setUpdateTime(DateUtils.getNowDate());
@@ -312,29 +310,30 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service {
                 .collect(toList());
     	// 找出新增数据
         List<${ClassName}> insert${ClassName}s = valid${ClassName}s.stream()
-#if($uniqueColEqStr != "")
                 .filter(t1 -> all${ClassName}s.stream().noneMatch(t2 -> $uniqueColEqStr))
-#end
                 .peek(t -> {
                     t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
                 })
                 .collect(toList());
-        
+#else
+        List<${ClassName}> insert${ClassName}s = valid${ClassName}s;
+        List<${ClassName}> update${ClassName}s = new ArrayList<>();
+#end        
         if(CollUtil.isNotEmpty(insert${ClassName}s)) {
-        	${className}Mapper.batchInsert${ClassName}(insert${ClassName}s);
+            ${className}Mapper.batchInsert${ClassName}(insert${ClassName}s);
         }
         if(CollUtil.isNotEmpty(update${ClassName}s)) {
-        	${className}Mapper.batchUpdate${ClassName}(update${ClassName}s);
+            ${className}Mapper.batchUpdate${ClassName}(update${ClassName}s);
         }
         
         result.append("待导入数据: ").append(${className}List.size()).append("条数据，");
         if(invalidSize > 0) {
-        	result.append("<br/>无效数据: ").append(invalidSize).append("条数据，");
+            result.append("<br/>无效数据: ").append(invalidSize).append("条数据，");
         }
         
-    	result.append("<br/>新增数据: ").append(insert${ClassName}s.size()).append("条数据，")
-    		.append("<br/>更新数据: ").append(update${ClassName}s.size()).append("条数据。");
+        result.append("<br/>新增数据: ").append(insert${ClassName}s.size()).append("条数据，")
+            .append("<br/>更新数据: ").append(update${ClassName}s.size()).append("条数据。");
         
     	return result.toString();
     }

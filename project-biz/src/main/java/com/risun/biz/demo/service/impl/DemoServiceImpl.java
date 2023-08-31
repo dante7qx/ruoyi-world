@@ -236,7 +236,7 @@ public class DemoServiceImpl implements IDemoService {
     	// 找出合规的数据 
     	List<Demo> validDemos = demoList;
         validDemos = demoList.stream()
-    			.filter(t -> ObjectUtil.isNotEmpty(t.getDemoName()) && ObjectUtil.isNotEmpty(t.getDemoTime())  )
+    			.filter(t -> ObjectUtil.isNotEmpty(t.getDemoName()) && ObjectUtil.isNotEmpty(t.getDemoTime()))
     			.collect(toList());
     	int invalidSize = demoList.size() - validDemos.size();
     	
@@ -245,7 +245,7 @@ public class DemoServiceImpl implements IDemoService {
     	List<Demo> allDemos = this.selectDemoList(new Demo());
     	// 找出要更新的数据
     	List<Demo> updateDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
+                .filter(t1 -> allDemos.stream().anyMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())))
                 .peek(t -> {
                     t.setUpdateBy(SecurityUtils.getUsername());
                     t.setUpdateTime(DateUtils.getNowDate());
@@ -253,7 +253,7 @@ public class DemoServiceImpl implements IDemoService {
                 .collect(toList());
     	// 找出新增数据
         List<Demo> insertDemos = validDemos.stream()
-                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())  ))
+                .filter(t1 -> allDemos.stream().noneMatch(t2 -> t1.getDemoName().equals(t2.getDemoName()) && t1.getDemoTime().equals(t2.getDemoTime())))
                 .peek(t -> {
                     t.setCreateBy(SecurityUtils.getUsername());
                     t.setCreateTime(DateUtils.getNowDate());
