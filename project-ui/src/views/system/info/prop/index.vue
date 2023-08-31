@@ -83,7 +83,7 @@
       </el-table-column>
       <el-table-column label="属性值" header-align="center" align="left" prop="propVal">
         <template v-slot="scope">
-          <long-table-col :str="scope.row.propVal" :len="15" v-if="scope.row.propType == 'textarea'"/>
+          <long-table-col :str="scope.row.propVal" :len="43" v-if="scope.row.propType == 'textarea'"/>
           <image-preview :src="scope.row.propVal" :width="50" :height="50" v-else-if="scope.row.propType == 'img'"/>
           <file-upload v-model="scope.row.propVal" :bizModel="'SysInfo'" :disabled="true" v-else-if="scope.row.propType == 'file' || scope.row.propType == 'video'" />
           <span v-text="scope.row.propDictLabel" v-else-if="scope.row.propType == 'dict'" />
