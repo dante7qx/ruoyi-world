@@ -14,7 +14,7 @@
 					<dt>发布日期：{{infoData.publishTime}}</dt>
 					<dt>来源：{{infoData.source}}</dt>
           <dt>作者：{{infoData.author}}</dt>
-					<dt>浏览量：{{infoData.viewCount}}</dt>
+					<dt class="noprint">浏览量：{{infoData.viewCount}}</dt>
 					<div class="wz_wai noprint">
 						<div class="wz_font">
 							<a href="javascript:void(0)" @click="print">打印</a>
