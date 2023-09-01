@@ -199,7 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <delete id="deletePrevSysInfoView" parameterType="String">
-        delete from sys_info_view where DATE(view_date) != #{viewDate}
+        delete from sys_info_view where DATE(view_date) <![CDATA[<>]]> #{viewDate}
     </delete>
     
     <update id="updateSysInfoViewCount" parameterType="Long">

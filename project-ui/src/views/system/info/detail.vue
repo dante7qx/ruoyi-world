@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height: 750px; overflow: auto;">
+    <div :style="{ height: dialogHeight + 'px', paddingRight: '10px', overflow: 'auto'}">
       <el-row>
         <el-form ref="form" :model="form" :rules="rules" label-width="100px">
           <el-col :span="24">
@@ -144,6 +144,11 @@ export default {
       },
       pass: false
     };
+  },
+  computed: {
+    dialogHeight() {
+      return `${document.documentElement.clientHeight}` - 280;
+    }
   },
   created() {
     this.loadTree()
