@@ -16,78 +16,83 @@ import com.risun.common.core.domain.BaseEntity;
  * @date 2023-08-29
  */
 public class SysInfoCategory extends BaseEntity {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /** 栏目id */
-    private Long categoryId;
+	/** 栏目id */
+	private Long categoryId;
 
-    /** 父栏目id */
-    @Excel(name = "父栏目id")
-    private Long parentId;
+	/** 父栏目id */
+	@Excel(name = "父栏目id")
+	private Long parentId;
 
-    /** 祖级列表 */
-    @Excel(name = "祖级列表")
-    private String ancestors;
+	/** 祖级列表 */
+	@Excel(name = "祖级列表")
+	private String ancestors;
 
-    /** 栏目名称 */
-    @Excel(name = "栏目名称")
-    private String categoryName;
+	/** 栏目名称 */
+	@Excel(name = "栏目名称")
+	private String categoryName;
 
-    /** 显示顺序 */
-    @Excel(name = "显示顺序")
-    private Long orderNum;
+	/** 显示顺序 */
+	@Excel(name = "显示顺序")
+	private Long orderNum;
 
-    /** 停用 */
-    @Excel(name = "停用")
-    private Boolean disabled;
-    
-    /** 子栏目 */
-    private List<SysInfoCategory> children = Lists.newArrayList();
+	/** 停用 */
+	@Excel(name = "停用")
+	private Boolean disabled;
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
+	/** 子栏目 */
+	private List<SysInfoCategory> children = Lists.newArrayList();
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public Long getParentId() {
-        return parentId;
-    }
-    public void setAncestors(String ancestors) {
-        this.ancestors = ancestors;
-    }
+	public Long getCategoryId() {
+		return categoryId;
+	}
 
-    public String getAncestors() {
-        return ancestors;
-    }
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-    public void setOrderNum(Long orderNum) {
-        this.orderNum = orderNum;
-    }
+	public Long getParentId() {
+		return parentId;
+	}
 
-    public Long getOrderNum() {
-        return orderNum;
-    }
-    public void setDisabled(Boolean disabled) {
-        this.disabled = disabled;
-    }
+	public void setAncestors(String ancestors) {
+		this.ancestors = ancestors;
+	}
 
-    public Boolean getDisabled() {
-        return disabled;
-    }
-    
-    public List<SysInfoCategory> getChildren() {
+	public String getAncestors() {
+		return ancestors;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setOrderNum(Long orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public Long getOrderNum() {
+		return orderNum;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public List<SysInfoCategory> getChildren() {
 		return children;
 	}
 
@@ -96,18 +101,17 @@ public class SysInfoCategory extends BaseEntity {
 	}
 
 	@Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("categoryId", getCategoryId())
-            .append("parentId", getParentId())
-            .append("ancestors", getAncestors())
-            .append("categoryName", getCategoryName())
-            .append("orderNum", getOrderNum())
-            .append("disabled", getDisabled())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("categoryId", getCategoryId())
+			.append("parentId", getParentId())
+			.append("ancestors", getAncestors())
+			.append("categoryName", getCategoryName())
+			.append("orderNum", getOrderNum())
+			.append("disabled", getDisabled())
+			.append("createBy", getCreateBy())
+			.append("createTime", getCreateTime())
+			.append("updateBy", getUpdateBy())
+			.append("updateTime", getUpdateTime())
+			.toString();
+	}
 }
