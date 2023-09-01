@@ -14,7 +14,7 @@ import com.risun.system.domain.SysInfoView;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Console;
 
-public class SysInfoMapperTests extends RisunApplicationTests {
+class SysInfoMapperTests extends RisunApplicationTests {
 
 	@Autowired
 	private SysInfoMapper sysInfoMapper;

@@ -21,7 +21,7 @@ import cn.hutool.core.collection.CollUtil;
  * @author dante
  *
  */
-public class IDemoServiceTests extends RisunApplicationTests {
+class IDemoServiceTests extends RisunApplicationTests {
 
 	@Autowired
 	private IDemoService demoService;
