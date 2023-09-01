@@ -265,8 +265,10 @@ insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '表单构建', (s
 insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码生成', (select menu_id from sys_menu where menu_name = '系统工具'),   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '代码生成菜单');
 insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码示例', (select menu_id from sys_menu where menu_name = '系统工具'),   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '代码示例菜单');
 -- 三级菜单
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息发布', (select menu_id from sys_menu where menu_name = '信息管理'), '1', 'infomgr',    'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',        'message',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息发布菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息浏览', (select menu_id from sys_menu where menu_name = '信息管理'), '2', 'infoview',   'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',         'eye-open',      'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息浏览菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '栏目分类', (select menu_id from sys_menu where menu_name = '信息管理'), '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息栏目菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息发布', (select menu_id from sys_menu where menu_name = '信息管理'), '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息发布菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息浏览', (select menu_id from sys_menu where menu_name = '信息管理'), '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息浏览菜单');
+
 insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '操作日志', (select menu_id from sys_menu where menu_name = '日志管理'), '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '操作日志菜单');
 insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '登录日志', (select menu_id from sys_menu where menu_name = '日志管理'), '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'fqyczadmin', CURRENT_TIMESTAMP, '', null, '登录日志菜单');
 insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '邮件日志', (select menu_id from sys_menu where menu_name = '日志管理'), '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'fqyczadmin', CURRENT_TIMESTAMP, '', null, '邮件日志菜单');
@@ -401,7 +403,7 @@ where menu_name in ('信息管理', '信息发布', '信息浏览', '信息查�
 
 insert into sys_role_menu (role_id, menu_id)
 select (select role_id from sys_role where role_key = 'info_mgr'), menu_id from sys_menu 
-where menu_name in ('信息管理', '信息发布', '信息浏览', '信息查询', '信息新增', '信息修改', '信息删除');
+where menu_name in ('信息管理', '栏目分类', '信息发布', '信息浏览', '信息查询', '信息新增', '信息修改', '信息删除');
 
 
 -- ----------------------------
@@ -758,15 +760,20 @@ create table sys_info (
   title             varchar(128)     default '',
   sub_title         varchar(64)      default '',
   cover				varchar(256)     default '',
+  summary			varchar(500)     default '',
   content           text,
-  type           	varchar(24)      default '',
+  category_id     	bigint       	 not null,
   source			varchar(24)      default '',
   author			varchar(16)      default '',
-  set_top			smallint       default 0,
-  anonymous			smallint       default 0,
+  set_top			smallint         default 0,
+  anonymous			smallint         default 0,
   publish_time 	    timestamp,
   status			varchar(2)		 default '0',
-  disabled			smallint       default 0,
+  commentable		smallint         default 0,
+  view_count		integer          default 0,
+  praise_count		integer          default 0,
+  favor_count		integer          default 0,
+  disabled			smallint         default 0,
   create_by         varchar(64)      default '',
   create_time 	    timestamp,
   update_by         varchar(64)      default '',
@@ -776,14 +783,19 @@ COMMENT ON COLUMN sys_info.info_id IS '信息id';
 COMMENT ON COLUMN sys_info.title IS '标题';
 COMMENT ON COLUMN sys_info.sub_title IS '副标题';
 COMMENT ON COLUMN sys_info.cover IS '封面';
+COMMENT ON COLUMN sys_info.summary IS '简介';
 COMMENT ON COLUMN sys_info.content IS '内容';
-COMMENT ON COLUMN sys_info.type IS '类型';
+COMMENT ON COLUMN sys_info.category_id IS '栏目id';
 COMMENT ON COLUMN sys_info.source IS '来源';
 COMMENT ON COLUMN sys_info.author IS '作者';
 COMMENT ON COLUMN sys_info.set_top IS '是否置顶';
 COMMENT ON COLUMN sys_info.anonymous IS '是否匿名访问';
 COMMENT ON COLUMN sys_info.publish_time IS '发布时间';
 COMMENT ON COLUMN sys_info.status IS '状态（0: 草稿，1: 待发布审批，2:已发布）';
+COMMENT ON COLUMN sys_info.commentable IS '是否可评论';
+COMMENT ON COLUMN sys_info.view_count IS '浏览数';
+COMMENT ON COLUMN sys_info.praise_count IS '点赞数';
+COMMENT ON COLUMN sys_info.favor_count IS '收藏数';
 COMMENT ON COLUMN sys_info.disabled IS '停用（0: 否，1: 是）';
 COMMENT ON COLUMN sys_info.create_by IS '创建者';
 COMMENT ON COLUMN sys_info.create_time IS '创建时间';
@@ -791,10 +803,26 @@ COMMENT ON COLUMN sys_info.update_by IS '更新者';
 COMMENT ON COLUMN sys_info.update_time IS '更新时间';
 COMMENT ON TABLE sys_info IS '信息发布表';
 
+-- 信息属性
+drop table if exists sys_info_prop;
+create table sys_info_prop ( 
+  prop_id           	bigserial      	not null primary key,
+  info_id     			bigint      	not null,
+  category_prop_id 		bigint      	not null,
+  prop_val           	text,
+  remark            	varchar(500)  	default ''
+);
+COMMENT ON COLUMN sys_info_prop.prop_id IS '信息属性id';
+COMMENT ON COLUMN sys_info_prop.info_id IS '信息发布id';
+COMMENT ON COLUMN sys_info_prop.category_prop_id IS '栏目属性id';
+COMMENT ON COLUMN sys_info_prop.prop_val IS '属性值';
+COMMENT ON COLUMN sys_info_prop.remark IS '备注信息';
+COMMENT ON TABLE  sys_info_prop IS '信息属性';
+
 -- 信息访问范围
 drop table if exists sys_info_range;
 create table sys_info_range ( 
-  range_id          bigserial      not null primary key,
+  range_id          bigserial   not null primary key,
   info_id     		bigint      not null,
   dept_id 			bigint      not null
 ); 
@@ -802,6 +830,72 @@ COMMENT ON COLUMN sys_info_range.range_id IS '访问范围id';
 COMMENT ON COLUMN sys_info_range.info_id IS '信息发布id';
 COMMENT ON COLUMN sys_info_range.dept_id IS '部门id';
 COMMENT ON TABLE sys_info_range IS '信息访问范围';
+
+-- 信息栏目
+drop table if exists sys_info_category;
+create table sys_info_category (
+  category_id     	bigserial       not null primary key,
+  parent_id         bigint      	default 0,
+  ancestors         varchar(50)     default '',
+  category_name     varchar(64)     default '',
+  order_num         integer         default 0,
+  disabled			smallint       	default 0,
+  create_by         varchar(64)     default '',
+  create_time 	    timestamp,
+  update_by         varchar(64)     default '',
+  update_time       timestamp
+);
+COMMENT ON COLUMN sys_info_category.category_id IS '栏目id';
+COMMENT ON COLUMN sys_info_category.parent_id IS '父栏目id';
+COMMENT ON COLUMN sys_info_category.ancestors IS '祖级列表';
+COMMENT ON COLUMN sys_info_category.category_name IS '栏目名称';
+COMMENT ON COLUMN sys_info_category.order_num IS '显示顺序';
+COMMENT ON COLUMN sys_info_category.disabled IS '停用';
+COMMENT ON COLUMN sys_info_category.create_by IS '创建者';
+COMMENT ON COLUMN sys_info_category.create_time IS '创建时间';
+COMMENT ON COLUMN sys_info_category.update_by IS '更新者';
+COMMENT ON COLUMN sys_info_category.update_time IS '更新时间';
+COMMENT ON TABLE  sys_info_category IS '信息栏目';
+
+-- 信息栏目属性
+drop table if exists sys_info_category_prop;
+create table sys_info_category_prop (
+  prop_id     		bigserial       not null primary key,
+  category_id       bigint      	not null,
+  prop_name     	varchar(64)     default '',
+  prop_type     	varchar(20)     default '',
+  prop_type_val     varchar(32)     default '',
+  remark            varchar(500)  	default '',
+  create_by         varchar(64)     default '',
+  create_time 	    timestamp,
+  update_by         varchar(64)     default '',
+  update_time       timestamp
+);
+COMMENT ON COLUMN sys_info_category_prop.prop_id IS '属性id';
+COMMENT ON COLUMN sys_info_category_prop.category_id IS '栏目id';
+COMMENT ON COLUMN sys_info_category_prop.prop_name IS '属性名称';
+COMMENT ON COLUMN sys_info_category_prop.prop_type IS '属性类型';
+COMMENT ON COLUMN sys_info_category_prop.prop_type_val IS '属性字典类型值';
+COMMENT ON COLUMN sys_info_category_prop.remark IS '备注信息';
+COMMENT ON COLUMN sys_info_category_prop.create_by IS '创建者';
+COMMENT ON COLUMN sys_info_category_prop.create_time IS '创建时间';
+COMMENT ON COLUMN sys_info_category_prop.update_by IS '更新者';
+COMMENT ON COLUMN sys_info_category_prop.update_time IS '更新时间';
+COMMENT ON TABLE  sys_info_category_prop IS '信息栏目属性';
+
+-- 信息发布浏览记录（只记录当天信息）
+drop table if exists sys_info_view;
+create table sys_info_view (
+  view_id          bigserial    not null primary key,
+  info_id     	   bigint      	not null,
+  view_date		   date        	not null,
+  view_ip		   varchar(15)  not null
+);
+COMMENT ON COLUMN sys_info_view.view_id IS '访问id';
+COMMENT ON COLUMN sys_info_view.info_id IS '信息发布id';
+COMMENT ON COLUMN sys_info_view.view_date IS '访问日期';
+COMMENT ON COLUMN sys_info_view.view_ip IS '访问IP';
+COMMENT ON TABLE  sys_info_view IS '信息发布浏览记录';
 
 -- ----------------------------
 -- 18、代码生成业务表
