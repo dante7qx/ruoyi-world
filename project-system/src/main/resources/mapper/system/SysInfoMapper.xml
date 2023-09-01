@@ -88,6 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 			<if test="title != null  and title != ''"> and t.title like concat('%', #{title}, '%')</if>
             <if test="categoryId != null  and categoryId != ''"> and (t.category_id = #{categoryId} or CAST(#{categoryId} AS VARCHAR) = ANY (string_to_array(c.ancestors, ',')))</if>
+            <if test="setTop != null "> and t.set_top = #{setTop}</if>
             <if test="anonymous != null"> and t.anonymous = #{anonymous}</if>
             <if test="commentable != null"> and t.commentable = #{commentable}</if>
             <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and t.publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
@@ -216,7 +217,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <delete id="deletePrevSysInfoView" parameterType="String">
-        delete from sys_info_view where DATE(view_date) <![CDATA[<>]]> TO_DATE(#{viewDate},'YYYY-MM-DD')
+        delete from sys_info_view where view_date <![CDATA[<>]]> TO_DATE(#{viewDate},'YYYY-MM-DD')
     </delete>
     
     <update id="updateSysInfoViewCount" parameterType="Long">
