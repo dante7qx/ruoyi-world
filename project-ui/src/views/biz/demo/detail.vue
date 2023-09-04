@@ -14,6 +14,9 @@
           style="width: 100%">
         </el-date-picker>
       </el-form-item>
+      <el-form-item label="业务手机" prop="demoPhone">
+        <el-input v-model="form.demoPhone" placeholder="请输入业务手机" maxlength="11" show-word-limit :disabled="disabled"/>
+      </el-form-item>
       <el-form-item label="业务图片">
         <image-upload v-model="form.demoImage" :disabled="disabled" />
       </el-form-item>
@@ -59,6 +62,17 @@ export default {
     return {
       form: {},
       rules: {
+        demoName: [
+          { required: true, message: "业务名称不能为空", trigger: "blur" }
+        ],
+        demoPhone: [
+          { required: true, message: "业务手机不能为空", trigger: "blur" },
+          {
+            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            message: "请输入正确的手机号码",
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
@@ -79,6 +93,7 @@ export default {
         demoId: null,
         demoName: null,
         demoTime: null,
+        demoPhone: null,
         demoImage: null,
         demoContent: null,
         attachment: null,
@@ -94,6 +109,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.demoPhoneSearch = this.form.demoPhone.substring(this.form.demoPhone.length - 4);
           if (this.form.demoId != null) {
             updateDemo(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

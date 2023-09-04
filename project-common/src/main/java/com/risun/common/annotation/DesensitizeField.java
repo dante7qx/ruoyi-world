@@ -35,4 +35,5 @@ public @interface DesensitizeField {
      * 默认隐藏字符
      */
     String symbol() default "*";
+    
 }

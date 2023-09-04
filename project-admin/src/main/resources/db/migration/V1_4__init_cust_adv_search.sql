@@ -32,6 +32,10 @@ create table sys_cust_adv_query_cond (
 ) engine=innodb comment = '自定义高级查询条件表';
 
 -- 添加菜单
+select @menu_id := menu_id from sys_menu where menu_name = '查询模板管理';
+delete from sys_menu where parent_id = @menu_id;
+delete from sys_menu where menu_name = '查询模板管理';
+
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values('查询模板管理', '1', '11', 'caq', 'system/caq/index', 1, 0, 'C', '0', '0', 'system:caq:list', 'icon', 'fqyczadmin', sysdate(), '', null, '自定义高级查询模板菜单');
 

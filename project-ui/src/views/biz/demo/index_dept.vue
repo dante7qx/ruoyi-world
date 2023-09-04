@@ -6,43 +6,68 @@
       </pane>
       <pane>
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-          <el-form-item label="业务名称" prop="demoName">
-            <el-input
-              v-model="queryParams.demoName"
-              placeholder="请输入业务名称"
-              clearable
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
-          <el-form-item label="业务时间" prop="demoTime">
-            <el-date-picker clearable
-              v-model="queryParams.demoTime"
-              type="date"
-              value-format="yyyy-MM-dd"
-              placeholder="请选择业务时间">
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="角色名" prop="roleName">
-            <el-input
-              v-model="queryParams.roleName"
-              placeholder="请输入角色名"
-              clearable
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
-          <el-form-item label="岗位名称" prop="postName">
-            <el-input
-              v-model="queryParams.postName"
-              placeholder="请输入岗位名称"
-              clearable
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-            <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
-          </el-form-item>
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="业务名称" prop="demoName">
+                <el-input
+                  v-model="queryParams.demoName"
+                  placeholder="请输入业务名称"
+                  clearable
+                  @keyup.enter.native="handleQuery"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="业务时间">
+                <el-date-picker
+                  v-model="daterangeDemoTime"
+                  style="width: 220px"
+                  value-format="yyyy-MM-dd"
+                  type="daterange"
+                  range-separator="-"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="角色名" prop="roleName">
+                <el-input
+                  v-model="queryParams.roleName"
+                  placeholder="请输入角色名"
+                  clearable
+                  @keyup.enter.native="handleQuery"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="岗位名称" prop="postName">
+                <el-input
+                  v-model="queryParams.postName"
+                  placeholder="请输入岗位名称"
+                  clearable
+                  @keyup.enter.native="handleQuery"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="业务手机" prop="demoPhoneSearch">
+                <el-input
+                  v-model="queryParams.demoPhoneSearch"
+                  placeholder="请输入业务手机后4位"
+                  clearable
+                  @keyup.enter.native="handleQuery"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item>
+                <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+                <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+                <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="openCustAdvSearch">高级查询</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
 
         <el-row :gutter="10" class="mb8">
@@ -198,6 +223,7 @@ export default {
         params: {},
         demoName: null,
         demoTime: null,
+        demoPhoneSearch: null,
         demoImage: null,
         attachment: null,
         demoContent: null,

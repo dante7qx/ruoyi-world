@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.service.IDemoService;
 import com.risun.common.annotation.CustomizeAdvancedSearch;
+import com.risun.common.annotation.DesensitizeMethod;
 import com.risun.common.annotation.Log;
 import com.risun.common.core.controller.BaseController;
 import com.risun.common.core.domain.AjaxResult;
@@ -30,6 +31,7 @@ import com.risun.common.utils.poitl.WordExportUtil;
 import com.risun.common.utils.wordfilter.SensitiveWordUtil;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
 
 /**
  * 业务Controller
@@ -48,6 +50,7 @@ public class DemoController extends BaseController {
 	 */
 	@PreAuthorize("@ss.hasPermi('biz:demo:list')")
 	@GetMapping("/list")
+	@DesensitizeMethod
 	@CustomizeAdvancedSearch
 	public TableDataInfo list(Demo demo) {
 		startPage();
@@ -72,6 +75,7 @@ public class DemoController extends BaseController {
 	 */
 	@PreAuthorize("@ss.hasPermi('biz:demo:query')")
 	@GetMapping(value = "/{demoId}")
+	@DesensitizeMethod
 	public AjaxResult getInfo(@PathVariable("demoId") Long demoId) {
 		return AjaxResult.success(demoService.selectDemoByDemoId(demoId));
 	}
@@ -82,6 +86,7 @@ public class DemoController extends BaseController {
 	@PreAuthorize("@ss.hasPermi('biz:demo:add')")
 	@Log(title = "新增业务", businessType = BusinessType.INSERT)
 	@PostMapping("/insert")
+	@DesensitizeMethod
 	public AjaxResult add(@RequestBody Demo demo) {
 		if (SensitiveWordUtil.allowed(demo)) {
 			return toAjax(demoService.insertDemo(demo));
@@ -97,6 +102,7 @@ public class DemoController extends BaseController {
 	@PreAuthorize("@ss.hasPermi('biz:demo:edit')")
 	@Log(title = "修改业务", businessType = BusinessType.UPDATE)
 	@PostMapping("/update")
+	@DesensitizeMethod
 	public AjaxResult edit(@RequestBody Demo demo) {
 		demo.setDemoName(SensitiveWordUtil.filter(demo.getDemoName()));
 		return toAjax(demoService.updateDemo(demo));
@@ -121,9 +127,12 @@ public class DemoController extends BaseController {
 	public AjaxResult addBatch() {
 		List<Demo> demos = Lists.newArrayList();
 		for (int i = 0; i < 2000; i++) {
+			int randomNumber = RandomUtil.randomInt(1000, 9999);
 			Demo demo = new Demo();
 			demo.setDemoName("测试数据" + i);
 			demo.setDemoTime(DateUtil.beginOfDay(DateUtil.date()));
+			demo.setDemoPhone("1392020" + randomNumber);
+			demo.setDemoPhoneSearch(randomNumber + "");
 			demo.setRoleId(2L);
 			demo.setCreateBy(getUsername());
 			demo.setCreateTime(DateUtil.date());

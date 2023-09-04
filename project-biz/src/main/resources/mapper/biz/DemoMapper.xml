@@ -8,6 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="demoId"    column="demo_id"    />
         <result property="demoName"    column="demo_name"    />
         <result property="demoTime"    column="demo_time"    />
+        <result property="demoPhone"    column="demo_phone"    />
+        <result property="demoPhoneSearch"    column="demo_phone_search"    />
         <result property="demoImage"    column="demo_image"    />
         <result property="attachment"    column="attachment"    />
         <result property="demoContent"    column="demo_content"    />
@@ -23,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDemoVo">
-        select t.demo_id, t.demo_name, t.demo_time, t.demo_image, t.attachment, t.demo_content, t.del_flag, t.role_id, sysrole.role_name, t.post_id, syspost.post_name, t.create_by, t.create_time, t.update_by, t.update_time from t_demo t
+        select t.demo_id, t.demo_name, t.demo_time, t.demo_phone, t.demo_phone_search, t.demo_image, t.attachment, t.demo_content, t.del_flag, t.role_id, sysrole.role_name, t.post_id, syspost.post_name, t.create_by, t.create_time, t.update_by, t.update_time from t_demo t
     	left join sys_role sysrole on sysrole.role_id = t.role_id
     	left join sys_post syspost on syspost.post_id = t.post_id
     </sql>
@@ -34,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    t.del_flag = 0
             <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
             <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and t.demo_time &gt;= #{params.beginDemoTime} and t.demo_time &lt;= #{params.endDemoTime}</if>
+            <if test="demoPhoneSearch != null  and demoPhoneSearch != ''"> and t.demo_phone_search = #{demoPhoneSearch}</if>
             <if test="demoContent != null  and demoContent != ''"> and t.demo_content = #{demoContent}</if>
             <if test="roleId != null "> and t.role_id = #{roleId}</if>
             <if test="roleName != null  and roleName != ''"> and sysrole.role_name like concat('%', #{roleName}, '%')</if>
@@ -57,6 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="demoName != null">demo_name,</if>
             <if test="demoTime != null">demo_time,</if>
+            <if test="demoPhone != null">demo_phone,</if>
+            <if test="demoPhoneSearch != null">demo_phone_search,</if>
             <if test="demoImage != null">demo_image,</if>
             <if test="attachment != null">attachment,</if>
             <if test="demoContent != null">demo_content,</if>
@@ -71,6 +76,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="demoName != null">#{demoName},</if>
             <if test="demoTime != null">#{demoTime},</if>
+            <if test="demoPhone != null">#{demoPhone},</if>
+            <if test="demoPhoneSearch != null">#{demoPhoneSearch},</if>
             <if test="demoImage != null">#{demoImage},</if>
             <if test="attachment != null">#{attachment},</if>
             <if test="demoContent != null">#{demoContent},</if>
@@ -89,6 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="demoName != null">demo_name = #{demoName},</if>
             <if test="demoTime != null">demo_time = #{demoTime},</if>
+            <if test="demoPhone != null">demo_phone = #{demoPhone},</if>
+            <if test="demoPhoneSearch != null">demo_phone_search = #{demoPhoneSearch},</if>
             <if test="demoImage != null">demo_image = #{demoImage},</if>
             <if test="attachment != null">attachment = #{attachment},</if>
             <if test="demoContent != null">demo_content = #{demoContent},</if>
@@ -115,11 +124,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
 	<insert id="batchInsertDemo" parameterType="List">
-        insert into t_demo (demo_name, demo_time, demo_image, attachment, demo_content, role_id, create_by, create_time)
+        insert into t_demo (demo_name, demo_time, demo_phone, demo_phone_search, demo_image, attachment, demo_content, role_id, create_by, create_time)
         values
         <foreach item="item" collection="list" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-  				#{item.demoName}, #{item.demoTime}, #{item.demoImage}, #{item.attachment}, #{item.demoContent}, #{item.roleId}, #{item.createBy}, #{item.createTime}  
+  				#{item.demoName}, #{item.demoTime}, #{item.demoPhone}, #{item.demoPhoneSearch}, #{item.demoImage}, #{item.attachment}, #{item.demoContent}, #{item.roleId}, #{item.createBy}, #{item.createTime}  
             </trim>
         </foreach>
     </insert>

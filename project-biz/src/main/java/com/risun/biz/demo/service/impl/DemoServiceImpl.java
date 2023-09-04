@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.annotation.DesensitizeMethod;
 import com.risun.common.constant.Constants;
 import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
@@ -129,6 +130,7 @@ public class DemoServiceImpl implements IDemoService
      * @return
      */
     @Override
+    @DesensitizeMethod
     public int batchInsertDemo(List<Demo> demos) {
     	return demoMapper.batchInsertDemo(demos);
     }

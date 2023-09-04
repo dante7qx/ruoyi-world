@@ -2,6 +2,8 @@ drop table if exists t_demo;
 create table t_demo (
   demo_id bigint not null auto_increment comment '业务主键ID',
   demo_name varchar(30) default '' comment '业务名称',
+  demo_phone varchar(64) default '' comment '业务手机',
+  demo_phone_search varchar(4) default '' comment '业务手机后四位',
   demo_time datetime comment '业务时间',
   demo_image varchar(2048) comment '业务图片',
   attachment varchar(2048) comment '业务附件',
@@ -16,7 +18,10 @@ create table t_demo (
   primary key (demo_id)
 ) engine=innodb comment = '业务表';
 
+
 -- 菜单 SQL
+DELETE FROM sys_menu WHERE parent_id = 4;
+
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 VALUES
 ('业务', '4', '1', 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', sysdate(), '', null, '业务菜单'),

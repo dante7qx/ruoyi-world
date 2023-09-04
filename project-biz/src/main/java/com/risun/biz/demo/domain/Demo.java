@@ -6,8 +6,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.risun.common.annotation.DesensitizeField;
 import com.risun.common.annotation.Excel;
 import com.risun.common.core.domain.BaseEntity;
+import com.risun.common.enums.DesensitizeType;
 
 /**
  * 业务对象 t_demo
@@ -29,6 +31,14 @@ public class Demo extends BaseEntity {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Excel(name = "业务时间", width = 30, dateFormat = "yyyy-MM-dd")
 	private Date demoTime;
+	
+	/** 业务手机 */
+    @Excel(name = "业务手机")
+    @DesensitizeField(type = DesensitizeType.DB)
+    private String demoPhone;
+
+    /** 业务手机后四位 */
+    private String demoPhoneSearch;
 
 	/** 业务图片 */
 	private String demoImage;
@@ -79,6 +89,22 @@ public class Demo extends BaseEntity {
 
 	public Date getDemoTime() {
 		return demoTime;
+	}
+
+	public String getDemoPhone() {
+		return demoPhone;
+	}
+
+	public void setDemoPhone(String demoPhone) {
+		this.demoPhone = demoPhone;
+	}
+
+	public String getDemoPhoneSearch() {
+		return demoPhoneSearch;
+	}
+
+	public void setDemoPhoneSearch(String demoPhoneSearch) {
+		this.demoPhoneSearch = demoPhoneSearch;
 	}
 
 	public void setDemoImage(String demoImage) {
