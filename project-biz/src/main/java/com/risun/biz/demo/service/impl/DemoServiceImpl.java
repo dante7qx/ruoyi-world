@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.annotation.DesensitizeMethod;
 import com.risun.common.constant.Constants;
 import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
@@ -32,8 +33,8 @@ import com.risun.system.service.ISysConfigService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.file.FileNameUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 业务Service业务层处理
@@ -148,6 +149,7 @@ public class DemoServiceImpl implements IDemoService {
      * @return
      */
     @Override
+    @DesensitizeMethod
     public int batchInsertDemo(List<Demo> demos) {
     	return demoMapper.batchInsertDemo(demos);
     }

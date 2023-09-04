@@ -8,6 +8,9 @@ import lombok.Getter;
 @Getter
 public enum DesensitizeType {
 
+	/** 加密入库 */
+	DB,
+	
 	/** 姓名 */
     NAME,
     
