@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="78px">
       <el-row>
         <el-col :span="6">
           <el-form-item label="业务名称" prop="demoName">
@@ -46,10 +46,20 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="业务手机" prop="demoPhoneSearch">
+          <el-form-item label="手机后4位" prop="demoPhoneSearch">
             <el-input
               v-model="queryParams.demoPhoneSearch"
               placeholder="请输入业务手机后4位"
+              clearable
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="业务手机" prop="demoPhone">
+            <el-input
+              v-model="queryParams.demoPhone"
+              placeholder="请输入业务手机"
               clearable
               @keyup.enter.native="handleQuery"
             />
@@ -286,6 +296,7 @@ export default {
         params: {},
         demoName: null,
         demoTime: null,
+        demoPhone: null,
         demoPhoneSearch: null,
         demoImage: null,
         attachment: null,
