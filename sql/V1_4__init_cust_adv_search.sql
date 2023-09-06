@@ -26,12 +26,17 @@ create table sys_cust_adv_query_cond (
   java_field varchar(64) not null default '' comment 'Java字段名',
   java_type varchar(64) not null default '' comment 'Java字段类型',
   dict_type varchar(64) default '' comment '字典类型',
+  cipher_flag tinyint not null default 0 comment '密文标识',
   query_flag tinyint not null default 0 comment '查询标识',
   query_type varchar(16) not null default '' comment '查询类型',
   primary key (cond_id)
 ) engine=innodb comment = '自定义高级查询条件表';
 
 -- 添加菜单
+select @menu_id := menu_id from sys_menu where menu_name = '查询模板管理';
+delete from sys_menu where parent_id = @menu_id;
+delete from sys_menu where menu_name = '查询模板管理';
+
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values('查询模板管理', '1', '11', 'caq', 'system/caq/index', 1, 0, 'C', '0', '0', 'system:caq:list', 'icon', 'fqyczadmin', sysdate(), '', null, '自定义高级查询模板菜单');
 

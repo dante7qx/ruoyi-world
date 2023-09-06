@@ -12,8 +12,9 @@ import com.alibaba.fastjson2.JSONArray;
 import com.risun.common.annotation.CustomizeAdvancedSearch;
 import com.risun.common.constant.GenConstants;
 import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.core.domain.model.CustAdvTemplate;
 import com.risun.common.core.domain.model.CustAdvCond;
+import com.risun.common.core.domain.model.CustAdvTemplate;
+import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -21,7 +22,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 自定义高级查询
+ * 自定义高级查询切面
  * 
  * @author dante
  *
@@ -38,6 +39,8 @@ public class CustAdvSearchAspect {
 
 	/** 数据库参数Key */
 	private static final String DB_TABLE_ALIAS = "cads";
+	
+	private static ChinaCipher chinaCipher = new ChinaCipher();
 
 	@Before("@annotation(customizeAdvancedSearch)")
 	public void doBefore(JoinPoint point, CustomizeAdvancedSearch customizeAdvancedSearch) throws Throwable {
@@ -51,7 +54,6 @@ public class CustAdvSearchAspect {
 	 * @param customizeAdvancedSearch
 	 */
 	protected void handleAdvanceSearch(final JoinPoint joinPoint, CustomizeAdvancedSearch customizeAdvancedSearch) {
-		log.info("AOP切面处理自定义高级查询");
 		Object params = joinPoint.getArgs()[0];
 		if (ObjectUtil.isNotNull(params) && params instanceof BaseEntity) {
 			BaseEntity baseEntity = (BaseEntity) params;
@@ -74,6 +76,7 @@ public class CustAdvSearchAspect {
 		if (ObjectUtil.isEmpty(searchCondition)) {
 			return builder.toString();
 		}
+		log.info("AOP切面处理自定义高级查询");
 		CustAdvTemplate cusAdvance = JSON.parseObject(searchCondition.toString(), CustAdvTemplate.class);
 		List<CustAdvCond> conditions = cusAdvance.getConditions();
 		String table = cusAdvance.getTableName();
@@ -103,12 +106,13 @@ public class CustAdvSearchAspect {
 			String col = condition.getCol();
 			String javaType = condition.getJavaType();
 			String queryType = condition.getQueryType();
+			Boolean cipherFlag = condition.getCipherFlag();
 			Object value = condition.getValue();
 			if (ObjectUtil.isEmpty(value)) {
 				continue;
 			}
 			if (GenConstants.TYPE_STRING.equalsIgnoreCase(javaType)) {
-				assembleStringTypeSQL(builder, col, javaType, queryType, value);
+				assembleStringTypeSQL(builder, col, javaType, queryType, cipherFlag, value);
 			} else if (GenConstants.TYPE_INTEGER.equalsIgnoreCase(javaType)) {
 				assembleNumberTypeSQL(builder, col, javaType, queryType, value);
 			} else if (GenConstants.TYPE_DATE.equalsIgnoreCase(javaType)) {
@@ -128,8 +132,7 @@ public class CustAdvSearchAspect {
 	 * @param operType
 	 * @param value
 	 */
-	private void assembleStringTypeSQL(StringBuilder builder, String col, String javaType, String queryType,
-			Object value) {
+	private void assembleStringTypeSQL(StringBuilder builder, String col, String javaType, String queryType, Boolean cipherFlag, Object value) {
 		if ("LIKE".equalsIgnoreCase(queryType)) {
 			builder.append(" and ")
 				.append(DB_TABLE_ALIAS)
@@ -150,7 +153,7 @@ public class CustAdvSearchAspect {
 				.append(transfer(queryType))
 				.append(" ")
 				.append("'")
-				.append(value)
+				.append(cipherFlag && ObjectUtil.isNotEmpty(value) ? chinaCipher.SM4EncDefault(value.toString()) : value)
 				.append("'");
 		}
 	}

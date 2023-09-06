@@ -30,6 +30,11 @@
                     <el-input v-model="scope.row.javaField"></el-input>
                   </template>
                 </el-table-column>
+                <el-table-column label="密文" min-width="3%" align="center">
+                  <template slot-scope="scope">
+                    <el-checkbox :true-label="1" :false-label="0" v-model="scope.row.cipherFlag"></el-checkbox>
+                  </template>
+                </el-table-column>
                 <el-table-column label="查询" min-width="5%" align="center">
                   <template slot-scope="scope">
                     <el-checkbox :true-label="1" :false-label="0" v-model="scope.row.queryFlag"></el-checkbox>
@@ -420,6 +425,7 @@ export default {
             col: column.colName,
             queryType: column.queryType,
             javaType: column.javaType,
+            cipherFlag: column.cipherFlag,
             value: val
           })
         }
