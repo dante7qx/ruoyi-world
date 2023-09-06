@@ -136,7 +136,7 @@
           v-show="false"
         >导出</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="${businessName}Columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange" v-adaptive height="100">
@@ -150,22 +150,22 @@
 #else
 #set($comment=$column.columnComment)
 #end
-#if($column.pk)
-      <el-table-column label="${comment}" align="center" prop="${javaField}" />
+#if($column.list && $column.pk)
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${foreach.index}].visible" />
 #elseif($column.list && $column.htmlType == "datetime")
-      <el-table-column label="${comment}" align="center" prop="${javaField}" width="180">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" width="180" v-if="${businessName}Columns[${foreach.index}].visible">
         <template v-slot="scope">
           <span>{{ parseTime(scope.row.${javaField}, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
 #elseif($column.list && $column.htmlType == "imageUpload")
-      <el-table-column label="${comment}" align="center" prop="${javaField}" width="100">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" width="100" v-if="${businessName}Columns[${foreach.index}].visible">
         <template v-slot="scope">
           <image-preview :src="scope.row.${javaField}" :width="50" :height="50"/>
         </template>
       </el-table-column>
 #elseif($column.list && "" != $column.dictType)
-      <el-table-column label="${comment}" align="center" prop="${javaField}">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${foreach.index}].visible">
         <template v-slot="scope">
 #if($column.htmlType == "checkbox")
           <dict-tag :options="dict.type.${column.dictType}" :value="scope.row.${javaField} ? scope.row.${javaField}.split(',') : []"/>
@@ -176,9 +176,9 @@
       </el-table-column>
 #elseif($column.list && "" != $javaField)
 #if(!$column.relTableName)
-      <el-table-column label="${comment}" align="center" prop="${javaField}" />
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${foreach.index}].visible" />
 #else
-      <el-table-column label="${column.relColumnComment}" align="center" prop="${column.relJavaField}" />
+      <el-table-column label="${column.relColumnComment}" align="center" prop="${column.relJavaField}" v-if="${businessName}Columns[${foreach.index}].visible" />
 #end
 #end
 #end
@@ -289,6 +289,17 @@ export default {
       total: 0,
       // ${functionName}表格数据
       ${businessName}List: [],
+      ${businessName}Columns: [
+#foreach($column in $columns)
+#if($column.list && "" != $column.javaField)
+#if(!$column.relTableName)
+        { key: ${foreach.index}, label: `${column.columnComment}`, visible: true },
+#else
+        { key: ${foreach.index}, label: `${column.relColumnComment}`, visible: true },
+#end
+#end
+#end
+      ],
 #if($table.sub)
       // ${subTable.functionName}表格数据
       ${subclassName}List: [],
