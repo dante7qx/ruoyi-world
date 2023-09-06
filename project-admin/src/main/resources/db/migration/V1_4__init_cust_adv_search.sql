@@ -26,6 +26,7 @@ create table sys_cust_adv_query_cond (
   java_field varchar(64) not null default '' comment 'Java字段名',
   java_type varchar(64) not null default '' comment 'Java字段类型',
   dict_type varchar(64) default '' comment '字典类型',
+  cipher_flag tinyint not null default 0 comment '密文标识',
   query_flag tinyint not null default 0 comment '查询标识',
   query_type varchar(16) not null default '' comment '查询类型',
   primary key (cond_id)
