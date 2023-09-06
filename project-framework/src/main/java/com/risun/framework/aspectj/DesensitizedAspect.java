@@ -268,43 +268,10 @@ public class DesensitizedAspect {
 			return fieldVal;
 		}
 		DesensitizeType type = annotation.type();
-		switch (type) {
-			case DB:
-				desensitiveVal = isString(field.getType()) ? chinaCipher.SM4DecDefault(fieldVal.toString()) : fieldVal;
-				break;
-			case NAME:
-				desensitiveVal = DesensitizedUtil.chineseName(fieldVal.toString());
-				break;
-			case USER_ID:
-				desensitiveVal = DesensitizedUtil.userId();
-				break;
-			case ID_CARD:
-				desensitiveVal = DesensitizedUtil.idCardNum(fieldVal.toString(), 3, 3);
-				break;
-			case PHONE:
-				desensitiveVal = DesensitizedUtil.mobilePhone(fieldVal.toString());
-				break;
-			case FIX_PHONE:
-				desensitiveVal = DesensitizedUtil.fixedPhone(fieldVal.toString());
-				break;
-			case EMAIL:
-				desensitiveVal = DesensitizedUtil.email(fieldVal.toString());
-				break;
-			case ACCOUNT:
-				desensitiveVal = StrUtil.hide(fieldVal.toString(), 2, fieldVal.toString().length());
-				break;
-			case PASSWORD:
-				desensitiveVal = DesensitizedUtil.password(fieldVal.toString());
-				break;
-			case CUSTOMER:
-				int len = fieldVal.toString().length();
-				int prefixLen = annotation.prefixLen();
-				int suffixLen = annotation.suffixLen();
-				String symbol = annotation.symbol();
-				desensitiveVal = CharSequenceUtil.hide(fieldVal.toString(), prefixLen, len - suffixLen).replaceAll("\\*", symbol);
-				break;
-			default:
-				break;
+		if(DesensitizeType.DB.equals(type)) {
+			desensitiveVal = isString(field.getType()) ? chinaCipher.SM4DecDefault(fieldVal.toString()) : fieldVal;
+		} else {
+			desensitiveVal = DesensitizeType.valueOf(type.name()).desensitive(fieldVal.toString(), annotation);
 		}
 		return desensitiveVal;
 	}
