@@ -1,7 +1,7 @@
 drop table if exists t_demo;
 create table t_demo (
   demo_id bigserial not null primary key,
-  demo_name varchar(30) default '',
+  demo_name varchar(64) default '',
   demo_time date,
   demo_image varchar(2048),
   attachment varchar(2048),
@@ -31,6 +31,7 @@ COMMENT ON COLUMN t_demo.update_time is '更新时间';
 COMMENT ON TABLE t_demo is '业务表';
 
 -- 菜单 SQL
+delete from sys_menu where parent_id = 4;
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values
 ('业务', 4, 1, 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单'),

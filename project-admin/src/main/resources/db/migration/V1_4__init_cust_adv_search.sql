@@ -36,6 +36,7 @@ create table sys_cust_adv_query_cond (
   java_field varchar(64) not null default '',
   java_type varchar(64) not null default '',
   dict_type varchar(64) default '',
+  cipher_flag smallint not null default 0,
   query_flag smallint not null default 0,
   query_type varchar(16) not null default ''
 );
@@ -47,11 +48,15 @@ COMMENT ON COLUMN sys_cust_adv_query_cond.col_desc is '列描述';
 COMMENT ON COLUMN sys_cust_adv_query_cond.java_field is 'Java字段名';
 COMMENT ON COLUMN sys_cust_adv_query_cond.java_type is 'Java字段类型';
 COMMENT ON COLUMN sys_cust_adv_query_cond.dict_type is '字典类型';
+COMMENT ON COLUMN sys_cust_adv_query_cond.cipher_flag is '密文标识';
 COMMENT ON COLUMN sys_cust_adv_query_cond.query_flag is '查询标识';
 COMMENT ON COLUMN sys_cust_adv_query_cond.query_type is '查询类型';
 COMMENT ON TABLE sys_cust_adv_query_cond is '自定义高级查询条件表';
 
 -- 添加菜单
+delete from sys_menu where parent_id = (select menu_id from sys_menu where menu_name = '查询模板管理');
+delete from sys_menu where menu_name = '查询模板管理';
+
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values('查询模板管理', '1', '11', 'caq', 'system/caq/index', 1, 0, 'C', '0', '0', 'system:caq:list', 'icon', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '自定义高级查询模板菜单');
 

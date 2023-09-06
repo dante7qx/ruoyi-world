@@ -41,6 +41,7 @@
         <zxing.version>3.5.1</zxing.version>
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
         <redisson.version>3.17.7</redisson.version>
+        <chinacipher-encryption.version>1.0.0</chinacipher-encryption.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -210,6 +211,13 @@
 			    <groupId>org.redisson</groupId>
 			    <artifactId>redisson-spring-boot-starter</artifactId>
 			    <version>${redisson.version}</version>
+			</dependency>
+			
+			<!-- 国密算法 -->
+			<dependency>
+			  <groupId>com.risun</groupId>
+			  <artifactId>chinacipher-encryption</artifactId>
+			  <version>${chinacipher-encryption.version}</version>
 			</dependency>
 
             <!-- 定时任务-->

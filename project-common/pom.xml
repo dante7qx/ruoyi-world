@@ -188,6 +188,12 @@
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcprov-jdk15on</artifactId>
 		</dependency>
+		
+		<!-- 国密算法 -->
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>chinacipher-encryption</artifactId>
+		</dependency>
         
     </dependencies>
 
