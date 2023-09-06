@@ -288,8 +288,8 @@ export default {
         { key: 2, label: `业务时间`, visible: true },
         { key: 3, label: `业务手机`, visible: true },
         { key: 4, label: `业务图片`, visible: true },
-        { key: 5, label: `角色名称`, visible: true },
-        { key: 6, label: `岗位名称`, visible: true },
+        { key: 5, label: `角色名`, visible: true },
+        { key: 6, label: `岗位名`, visible: true },
       ],
       // 弹出层标题
       title: "",
