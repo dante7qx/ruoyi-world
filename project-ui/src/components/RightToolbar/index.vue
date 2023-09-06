@@ -12,7 +12,7 @@
           <el-button size="mini" circle icon="el-icon-menu" />
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item v-for="column in columns">
-              <el-checkbox v-model="column.visible">{{column.label}}</el-checkbox>
+              <el-checkbox :key="column.key" v-model="column.visible">{{column.label}}</el-checkbox>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
