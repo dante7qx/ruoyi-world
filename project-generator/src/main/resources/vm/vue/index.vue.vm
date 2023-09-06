@@ -136,12 +136,13 @@
           v-show="false"
         >导出</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="${businessName}Columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange" v-adaptive height="100">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
+#set($keyIndex = 0)
 #foreach($column in $columns)
 #set($javaField=$column.javaField)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
@@ -150,22 +151,25 @@
 #else
 #set($comment=$column.columnComment)
 #end
-#if($column.pk)
-      <el-table-column label="${comment}" align="center" prop="${javaField}" />
+#if($column.list && $column.pk)
+      <el-table-column label="${comment}" align="center" prop="${javaField}"  v-if="${businessName}Columns[${keyIndex}].visible" />
+      #set($keyIndex = $keyIndex + 1)
 #elseif($column.list && $column.htmlType == "datetime")
-      <el-table-column label="${comment}" align="center" prop="${javaField}" width="180">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" width="180" v-if="${businessName}Columns[${keyIndex}].visible">
         <template v-slot="scope">
           <span>{{ parseTime(scope.row.${javaField}, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
+      #set($keyIndex = $keyIndex + 1)
 #elseif($column.list && $column.htmlType == "imageUpload")
-      <el-table-column label="${comment}" align="center" prop="${javaField}" width="100">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" width="100" v-if="${businessName}Columns[${keyIndex}].visible">
         <template v-slot="scope">
           <image-preview :src="scope.row.${javaField}" :width="50" :height="50"/>
         </template>
       </el-table-column>
+      #set($keyIndex = $keyIndex + 1)
 #elseif($column.list && "" != $column.dictType)
-      <el-table-column label="${comment}" align="center" prop="${javaField}">
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${keyIndex}].visible">
         <template v-slot="scope">
 #if($column.htmlType == "checkbox")
           <dict-tag :options="dict.type.${column.dictType}" :value="scope.row.${javaField} ? scope.row.${javaField}.split(',') : []"/>
@@ -174,12 +178,14 @@
 #end
         </template>
       </el-table-column>
+	  #set($keyIndex = $keyIndex + 1)
 #elseif($column.list && "" != $javaField)
 #if(!$column.relTableName)
-      <el-table-column label="${comment}" align="center" prop="${javaField}" />
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${keyIndex}].visible" />
 #else
-      <el-table-column label="${column.relColumnComment}" align="center" prop="${column.relJavaField}" />
+      <el-table-column label="${column.relColumnComment}" align="center" prop="${column.relJavaField}" v-if="${businessName}Columns[${keyIndex}].visible" />
 #end
+	  #set($keyIndex = $keyIndex + 1)
 #end
 #end
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -288,6 +294,18 @@ export default {
       total: 0,
       // ${functionName}表格数据
       ${businessName}List: [],
+      ${businessName}Columns: [
+#set($keyIndex = 0)
+#foreach($column in $columns)
+#if($column.list && "" != $column.javaField)
+#if(!$column.relTableName) #set($keyIndex = $keyIndex + 1)
+        { key: $keyIndex, label: `${column.columnComment}`, visible: true },
+#else #set($keyIndex = $keyIndex + 1)
+        { key: $keyIndex, label: `${column.relColumnComment}`, visible: true },
+#end
+#end
+#end
+      ],
 #if($table.sub)
       // ${subTable.functionName}表格数据
       ${subclassName}List: [],
@@ -467,8 +485,7 @@ export default {
       this.title = "";
       this.open = false;
       this.handleQuery();
-    }
-  },
+    },
 #if(${genCustAdv})
     openCustAdvSearch() {
       this.showCustAdvSearch = false;
@@ -480,5 +497,6 @@ export default {
       this.getList();
     }
 #end
+  }
 };
 </script>
