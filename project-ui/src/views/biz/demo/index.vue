@@ -117,30 +117,30 @@
           v-hasPermi="['biz:demo:remove']"
         >清空数据</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="demoColumns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="demoList" @selection-change="handleSelectionChange" v-adaptive height="100">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" label="序号" width="50" align="center" />
-      <el-table-column label="业务名称" align="center" prop="demoName">
+      <el-table-column label="业务名称" align="center" prop="demoName" v-if="demoColumns[0].visible">
         <template v-slot="scope">
           <long-table-col :str="scope.row.demoName" :len="5"/>
         </template>
       </el-table-column>
-      <el-table-column label="业务时间" align="center" prop="demoTime" width="110">
+      <el-table-column label="业务时间" align="center" prop="demoTime" width="110" v-if="demoColumns[1].visible">
         <template v-slot="scope">
           <span>{{ parseTime(scope.row.demoTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="业务图片" align="center" prop="demoImage" width="180">
+      <el-table-column label="业务图片" align="center" prop="demoImage" width="180" v-if="demoColumns[2].visible">
         <template v-slot="scope">
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
           <label class="unpack" @click="downloadZip(scope.row)">打包下载</label>
         </template>
       </el-table-column>
-      <el-table-column label="角色名" align="center" prop="roleName" />
-      <el-table-column label="岗位编码" align="center" prop="postCode" />
+      <el-table-column label="角色名" align="center" prop="roleName" v-if="demoColumns[3].visible" />
+      <el-table-column label="岗位编码" align="center" prop="postCode" v-if="demoColumns[4].visible" />
       <el-table-column label="创建人" align="center" prop="createBy" width="100"></el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template v-slot="scope">
@@ -251,6 +251,13 @@ export default {
       total: 0,
       // 业务表格数据
       demoList: [],
+      demoColumns: [
+        { key: 1, label: `业务名称`, visible: true },
+        { key: 2, label: `业务时间`, visible: true },
+        { key: 3, label: `业务图片`, visible: true },
+        { key: 4, label: `角色名`, visible: true },
+        { key: 5, label: `岗位编码`, visible: true },
+      ],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
