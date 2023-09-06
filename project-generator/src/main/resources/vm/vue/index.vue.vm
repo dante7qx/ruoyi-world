@@ -152,7 +152,8 @@
 #set($comment=$column.columnComment)
 #end
 #if($column.list && $column.pk)
-      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${foreach.index}].visible" />
+      <el-table-column label="${comment}" align="center" prop="${javaField}" v-if="${businessName}Columns[${keyIndex}].visible" />
+      #set($keyIndex = $keyIndex + 1)
 #elseif($column.list && $column.htmlType == "datetime")
       <el-table-column label="${comment}" align="center" prop="${javaField}" width="180" v-if="${businessName}Columns[${keyIndex}].visible">
         <template v-slot="scope">
