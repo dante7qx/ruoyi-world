@@ -6,8 +6,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.risun.common.annotation.DesensitizeField;
 import com.risun.common.annotation.Excel;
 import com.risun.common.core.domain.BaseEntity;
+import com.risun.common.enums.DesensitizeType;
 
 /**
  * 业务对象 t_demo
@@ -23,6 +25,7 @@ public class Demo extends BaseEntity {
 
 	/** 业务名称 */
 	@Excel(name = "业务名称")
+	@DesensitizeField(type = DesensitizeType.DB)
 	private String demoName;
 
 	/** 业务时间 */

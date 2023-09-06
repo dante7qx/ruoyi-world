@@ -43,6 +43,10 @@ public class SysCustAdvQueryCond extends BaseEntity {
 	/** 字典类型 */
 	@Excel(name = "字典类型")
 	private String dictType;
+	
+	/** 密文标识 */
+	@Excel(name = "密文标识")
+	private Boolean cipherFlag = Boolean.FALSE;
 
 	/** 查询标识 */
 	@Excel(name = "查询标识")
@@ -117,6 +121,14 @@ public class SysCustAdvQueryCond extends BaseEntity {
 
 	public String getDictType() {
 		return dictType;
+	}
+
+	public Boolean getCipherFlag() {
+		return cipherFlag;
+	}
+
+	public void setCipherFlag(Boolean cipherFlag) {
+		this.cipherFlag = cipherFlag;
 	}
 
 	public void setQueryFlag(Boolean queryFlag) {

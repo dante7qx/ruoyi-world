@@ -1,6 +1,7 @@
 package com.risun.biz.demo.service.impl;
 
 import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +20,19 @@ import com.google.common.collect.Maps;
 import com.risun.biz.demo.domain.Demo;
 import com.risun.biz.demo.mapper.DemoMapper;
 import com.risun.biz.demo.service.IDemoService;
+import com.risun.common.annotation.DesensitizeMethod;
 import com.risun.common.constant.Constants;
 import com.risun.common.enums.GlobalArgConfigEnum;
 import com.risun.common.utils.DateUtils;
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.collection.CollUtil;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.file.FileUtils;
 import com.risun.common.utils.file.ImageUtils;
 import com.risun.common.utils.poitl.WordExportUtil;
 import com.risun.system.service.ISysConfigService;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.file.FileNameUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -128,6 +130,7 @@ public class DemoServiceImpl implements IDemoService
      * @return
      */
     @Override
+    @DesensitizeMethod
     public int batchInsertDemo(List<Demo> demos) {
     	return demoMapper.batchInsertDemo(demos);
     }

@@ -14,6 +14,7 @@ public class CustAdvCond {
 	private String col;
 	private String queryType;
 	private String javaType;
+	private Boolean cipherFlag;
 	private Object value;
 	
 	
