@@ -33,6 +33,14 @@ public class SysInfoCategory extends BaseEntity {
 	@Excel(name = "栏目名称")
 	private String categoryName;
 
+	/** 栏目键 */
+	@Excel(name = "栏目键")
+	private String categoryKey;
+
+	/** 栏目类型 */
+	@Excel(name = "栏目类型")
+	private String categoryType;
+
 	/** 显示顺序 */
 	@Excel(name = "显示顺序")
 	private Long orderNum;
@@ -74,6 +82,22 @@ public class SysInfoCategory extends BaseEntity {
 
 	public String getCategoryName() {
 		return categoryName;
+	}
+
+	public String getCategoryKey() {
+		return categoryKey;
+	}
+
+	public void setCategoryKey(String categoryKey) {
+		this.categoryKey = categoryKey;
+	}
+
+	public String getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
 	}
 
 	public void setOrderNum(Long orderNum) {
