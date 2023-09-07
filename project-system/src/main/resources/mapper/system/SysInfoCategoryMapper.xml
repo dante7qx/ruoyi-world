@@ -9,6 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="parentId"    column="parent_id"    />
         <result property="ancestors"    column="ancestors"    />
         <result property="categoryName"    column="category_name"    />
+        <result property="categoryKey"    column="category_key"    />
+        <result property="categoryType"    column="category_type"    />
         <result property="orderNum"    column="order_num"    />
         <result property="disabled"    column="disabled"    />
         <result property="createBy"    column="create_by"    />
@@ -18,13 +20,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSysInfoCategoryVo">
-        select t.category_id, t.parent_id, t.ancestors, t.category_name, t.order_num, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time from sys_info_category t
+        select t.category_id, t.parent_id, t.ancestors, t.category_name, t.category_key, t.category_type, t.order_num, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time from sys_info_category t
     </sql>
 
     <select id="selectSysInfoCategoryList" parameterType="SysInfoCategory" resultMap="SysInfoCategoryResult">
         <include refid="selectSysInfoCategoryVo"/>
         <where>  
             <if test="categoryName != null  and categoryName != ''"> and t.category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categoryKey != null  and categoryKey != ''"> and t.category_key = #{categoryKey}</if>
+            <if test="categoryType != null  and categoryType != ''"> and t.category_type = #{categoryType}</if>
             <if test="disabled != null "> and t.disabled = #{disabled}</if>
         </where>
         order by t.parent_id, t.order_num
@@ -41,6 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="parentId != null">parent_id,</if>
             <if test="ancestors != null">ancestors,</if>
             <if test="categoryName != null">category_name,</if>
+            <if test="categoryKey != null">category_key,</if>
+            <if test="categoryType != null">category_type,</if>
             <if test="orderNum != null">order_num,</if>
             <if test="disabled != null">disabled,</if>
             <if test="createBy != null">create_by,</if>
@@ -52,6 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="parentId != null">#{parentId},</if>
             <if test="ancestors != null">#{ancestors},</if>
             <if test="categoryName != null">#{categoryName},</if>
+            <if test="categoryKey != null">#{categoryKey},</if>
+            <if test="categoryType != null">#{categoryType},</if>
             <if test="orderNum != null">#{orderNum},</if>
             <if test="disabled != null">#{disabled},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -67,6 +75,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="ancestors != null">ancestors = #{ancestors},</if>
             <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="categoryKey != null">category_key = #{categoryKey},</if>
+            <if test="categoryType != null">category_type = #{categoryType},</if>
             <if test="orderNum != null">order_num = #{orderNum},</if>
             <if test="disabled != null">disabled = #{disabled},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

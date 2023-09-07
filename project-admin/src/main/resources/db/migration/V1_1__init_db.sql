@@ -516,7 +516,7 @@ insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  '0',
 insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      '0', 'fqyczadmin', sysdate(), '', null, '任务状态列表');
 insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       '0', 'fqyczadmin', sysdate(), '', null, '任务分组列表');
 insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          '0', 'fqyczadmin', sysdate(), '', null, '系统是否列表');
-insert into sys_dict_type values(7,  '信息类型', 'sys_info_type',       '0', 'fqyczadmin', sysdate(), '', null, '信息类型列表');
+insert into sys_dict_type values(7,  '栏目类型', 'sys_info_type',       '0', 'fqyczadmin', sysdate(), '', null, '栏目类型列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'fqyczadmin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'fqyczadmin', sysdate(), '', null, '登录状态列表');
 insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'fqyczadmin', sysdate(), '', null, '业务模块列表');
@@ -724,13 +724,16 @@ create table sys_info_category (
   parent_id         bigint      	default 0                 comment '父栏目id',
   ancestors         varchar(50)     default ''                comment '祖级列表',
   category_name     varchar(64)     default ''                comment '栏目名称',
+  category_key      varchar(32)     		                  comment '栏目键',
+  category_type     varchar(20)     default ''                comment '栏目类型',
   order_num         int          	default 0                 comment '显示顺序',
   disabled			tinyint       	default 0				  comment '停用',
   create_by         varchar(64)     default ''                comment '创建者',
   create_time 	    datetime                                  comment '创建时间',
   update_by         varchar(64)     default ''                comment '更新者',
   update_time       datetime                                  comment '更新时间',
-  primary key (category_id)
+  primary key (category_id),
+  constraint uni_sys_info_category_key UNIQUE(category_key)
 ) engine=innodb auto_increment=1 comment = '信息栏目';
 
 -- 信息栏目属性

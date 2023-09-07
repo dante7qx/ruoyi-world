@@ -14,6 +14,19 @@
       <el-form-item label="栏目名称" prop="categoryName">
         <el-input v-model="form.categoryName" placeholder="请输入栏目名称" maxlength="64" show-word-limit :disabled="disabled"/>
       </el-form-item>
+      <el-form-item label="栏目键" prop="categoryKey">
+        <el-input v-model="form.categoryKey" placeholder="请输入栏目键" maxlength="32" show-word-limit :disabled="disabled"/>
+      </el-form-item>
+      <el-form-item label="栏目类型" prop="categoryType">
+        <el-select v-model="form.categoryType" placeholder="请选择栏目类型" :disabled="disabled" style="width: 100%;">
+          <el-option
+            v-for="dict in dict.type.sys_info_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="显示顺序" prop="orderNum">
         <el-input v-model="form.orderNum" placeholder="请输入显示顺序"  :disabled="disabled"/>
       </el-form-item>
@@ -53,7 +66,7 @@ export default {
       default: false
     }
   },
-  dicts: ['sys_normal_disable'],
+  dicts: ['sys_info_type', 'sys_normal_disable'],
   
   data() {
     return {
@@ -69,6 +82,9 @@ export default {
         ],
         categoryName: [
           { required: true, message: "栏目名称不能为空", trigger: "blur" }
+        ],
+        categoryType: [
+          { required: true, message: "栏目类型不能为空", trigger: ["blur", "change"] }
         ],
         orderNum: [
           { required: true, message: "显示顺序不能为空", trigger: "blur" }
@@ -115,6 +131,8 @@ export default {
         parentId: null,
         ancestors: null,
         categoryName: null,
+        categoryKey: null,
+        categoryType: null,
         orderNum: null,
         disabled: null,
         createBy: null,
