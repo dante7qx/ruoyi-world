@@ -70,7 +70,12 @@ public class SysInfoCategoryController extends BaseController {
     @Log(title = "信息栏目", businessType = BusinessType.INSERT)
     @PostMapping("/insert")
     public AjaxResult add(@RequestBody SysInfoCategory sysInfoCategory) {
-        return toAjax(sysInfoCategoryService.insertSysInfoCategory(sysInfoCategory));
+    	try {
+    		return toAjax(sysInfoCategoryService.insertSysInfoCategory(sysInfoCategory));
+    	} catch (Exception e) {
+			return error("栏目键是惟一的，不允许重复！");
+		}
+
     }
 
     /**
@@ -80,7 +85,11 @@ public class SysInfoCategoryController extends BaseController {
     @Log(title = "信息栏目", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     public AjaxResult edit(@RequestBody SysInfoCategory sysInfoCategory) {
-        return toAjax(sysInfoCategoryService.updateSysInfoCategory(sysInfoCategory));
+    	try {
+    		return toAjax(sysInfoCategoryService.insertSysInfoCategory(sysInfoCategory));
+    	} catch (Exception e) {
+			return error("栏目键是惟一的，不允许重复！");
+		}
     }
 
     /**
