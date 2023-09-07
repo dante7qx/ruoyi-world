@@ -86,7 +86,7 @@ public class SysInfoCategoryController extends BaseController {
     @PostMapping("/update")
     public AjaxResult edit(@RequestBody SysInfoCategory sysInfoCategory) {
     	try {
-    		return toAjax(sysInfoCategoryService.insertSysInfoCategory(sysInfoCategory));
+    		return toAjax(sysInfoCategoryService.updateSysInfoCategory(sysInfoCategory));
     	} catch (Exception e) {
 			return error("栏目键是惟一的，不允许重复！");
 		}
