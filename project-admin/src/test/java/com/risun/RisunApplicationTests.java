@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.lang.Console;
+import cn.hutool.crypto.SmUtil;
+import cn.hutool.crypto.symmetric.SM4;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RisunApplicationTests {
@@ -18,12 +20,18 @@ public class RisunApplicationTests {
 	@Test
 	void chinacipherTest() {
 		ChinaCipher chinaCipher = new ChinaCipher();
-		String str = "13922225566";
+//		String str = "hello world world ";
+		String str = "620502198501290117";
+		Console.log(str.length(), str.getBytes().length);
 		String enc = chinaCipher.SM4EncDefault(str);
-	    Console.log(enc);
+	    Console.log(enc, enc.length());
 	    String dec = chinaCipher.SM4DecDefault(enc);
 	    Console.log(dec);
-	    
+	    SM4 sm4 = SmUtil.sm4();
+	    String enc2 = sm4.encryptHex(str);
+	    String dec2 = sm4.decryptStr(enc2);
+	    Console.log(enc2, enc2.length());
+	    Console.log(dec2);
 	    assertEquals(str, dec);
 
 	}
