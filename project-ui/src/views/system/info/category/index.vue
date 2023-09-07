@@ -9,6 +9,16 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="栏目类型" prop="categoryType">
+        <el-select v-model="queryParams.categoryType" placeholder="请选择栏目类型" clearable>
+          <el-option
+            v-for="dict in dict.type.sys_info_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="状态" prop="disabled">
         <el-select v-model="queryParams.disabled" placeholder="请选择" clearable>
           <el-option
@@ -69,13 +79,18 @@
       :max-height="780">
       <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="栏目名称" header-align="center" align="left" prop="categoryName" />
-      <el-table-column label="显示顺序" align="center" prop="orderNum" width="90" />
-      <el-table-column label="状态" align="center" prop="disabled" width="80">
+      <el-table-column label="栏目类型" align="center" prop="categoryType" width="200">
+        <template v-slot="scope">
+          <dict-tag :options="dict.type.sys_info_type" :value="scope.row.categoryType"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="显示顺序" align="center" prop="orderNum" width="100" />
+      <el-table-column label="状态" align="center" prop="disabled" width="100">
         <template v-slot="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.disabled ? '1' : '0'"/>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="280">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="320">
         <template v-slot="scope">
           <el-button
             size="mini"
@@ -140,7 +155,7 @@ export default {
     "detail": Detail,
     "category-prop": CategoryProp
   },
-  dicts: ['sys_normal_disable'],
+  dicts: ['sys_info_type','sys_normal_disable'],
   data() {
     return {
       // 遮罩层
@@ -168,6 +183,7 @@ export default {
       queryParams: {
         params: {},
         categoryName: null,
+        categoryType: null,
         disabled: null,
       },
       categoryId: 0,

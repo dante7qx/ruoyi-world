@@ -539,7 +539,7 @@ insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统�
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务状态', 'sys_job_status',      '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '任务状态列表');
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务分组', 'sys_job_group',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '任务分组列表');
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统是否', 'sys_yes_no',          '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统是否列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '信息类型', 'sys_info_type',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息类型列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '栏目类型', 'sys_info_type',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '栏目类型列表');
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '操作类型', 'sys_oper_type',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '操作类型列表');
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '系统状态', 'sys_common_status',   '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '登录状态列表');
 insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '业务模块', 'sys_biz_model',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务模块列表');
@@ -838,6 +838,8 @@ create table sys_info_category (
   parent_id         bigint      	default 0,
   ancestors         varchar(50)     default '',
   category_name     varchar(64)     default '',
+  category_key      varchar(32),
+  category_type     varchar(20)     default '',
   order_num         integer         default 0,
   disabled			smallint       	default 0,
   create_by         varchar(64)     default '',
@@ -849,6 +851,8 @@ COMMENT ON COLUMN sys_info_category.category_id IS '栏目id';
 COMMENT ON COLUMN sys_info_category.parent_id IS '父栏目id';
 COMMENT ON COLUMN sys_info_category.ancestors IS '祖级列表';
 COMMENT ON COLUMN sys_info_category.category_name IS '栏目名称';
+COMMENT ON COLUMN sys_info_category.category_key IS '栏目键';
+COMMENT ON COLUMN sys_info_category.category_type IS '栏目类型';
 COMMENT ON COLUMN sys_info_category.order_num IS '显示顺序';
 COMMENT ON COLUMN sys_info_category.disabled IS '停用';
 COMMENT ON COLUMN sys_info_category.create_by IS '创建者';
@@ -856,6 +860,8 @@ COMMENT ON COLUMN sys_info_category.create_time IS '创建时间';
 COMMENT ON COLUMN sys_info_category.update_by IS '更新者';
 COMMENT ON COLUMN sys_info_category.update_time IS '更新时间';
 COMMENT ON TABLE  sys_info_category IS '信息栏目';
+
+ALTER TABLE sys_info_category ADD CONSTRAINT sys_info_category_uni_type UNIQUE (category_key);
 
 -- 信息栏目属性
 drop table if exists sys_info_category_prop;
