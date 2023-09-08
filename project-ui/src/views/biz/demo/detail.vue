@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { getDemo, addDemo, updateDemo } from "@/api/biz/demo";
+import { getDemo, addDemo, updateDemo } from "@/api/biz/demo/demo";
 
 export default {
   name: "DemoDetail",

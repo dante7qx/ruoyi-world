@@ -259,7 +259,7 @@
 
 <script>
 import { getToken } from "@/utils/auth"
-import { listDemo, delDemo, addBatchDemo, clearDemoData } from "@/api/biz/demo"
+import { listDemo, delDemo, addBatchDemo, clearDemoData } from "@/api/biz/demo/demo"
 import Detail from "./detail"
 
 export default {

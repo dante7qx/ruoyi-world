@@ -187,7 +187,7 @@
 <script>
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { listDemo, delDemo } from "@/api/biz/demo"
+import { listDemo, delDemo } from "@/api/biz/demo/demo"
 import Detail from "./detail"
 
 export default {

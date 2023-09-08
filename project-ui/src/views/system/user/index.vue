@@ -214,7 +214,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="归属部门" prop="deptId">
-              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="请选择归属部门" />
+              <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" :default-expand-level="1" placeholder="请选择归属部门" />
             </el-form-item>
           </el-col>
         </el-row>
