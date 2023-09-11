@@ -42,6 +42,7 @@ import cn.hutool.core.util.StrUtil;
  * @date 2022-07-30
  */
 @Service
+//@CacheConfig(cacheNames=CacheConstants.SYS_KEY + "t_demo")
 public class DemoServiceImpl implements IDemoService 
 {
     @Autowired
@@ -56,6 +57,7 @@ public class DemoServiceImpl implements IDemoService
      * @return 业务
      */
     @Override
+//    @Cacheable(key="#demoId", unless = "#result == null")
     public Demo selectDemoByDemoId(Long demoId)
     {
         return demoMapper.selectDemoByDemoId(demoId);
@@ -108,6 +110,7 @@ public class DemoServiceImpl implements IDemoService
      * @return 结果
      */
     @Override
+//    @CacheEvict(key="#demoIds[0]")
     public int deleteDemoByDemoIds(Long[] demoIds) {
         return demoMapper.deleteDemoByDemoIds(demoIds, SecurityUtils.getUsername());
     }

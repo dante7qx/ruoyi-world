@@ -1,12 +1,15 @@
 package com.risun.common.constant;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * 缓存的key 常量
  * 
  * @author ruoyi
  */
-public class CacheConstants
-{
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class CacheConstants {
 	/**
 	 * 项目 redis key
 	 */
