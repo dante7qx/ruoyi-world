@@ -23,14 +23,15 @@ export default {
   },
 	methods: {
 		loadData() {
+			this.videoSrc = 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8'
+			/*
 			fetchData('http://36.137.3.207:9000/index?name=bwg').then(res => {
         const result = res.data
         if(result.error == 200) {
           // this.videoSrc = result.data[0].url
-          this.videoSrc = 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8'
-					// this.videoSrc = '/aaa/video/1.m3u8'
         }
       })
+			*/
 		}
 	}
 }
