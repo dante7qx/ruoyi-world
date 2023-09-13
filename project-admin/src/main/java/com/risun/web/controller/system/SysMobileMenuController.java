@@ -112,7 +112,7 @@ public class SysMobileMenuController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('system:mobile:menu:remove')")
     @Log(title = "移动菜单权限", businessType = BusinessType.DELETE)
-    @PostMapping("/del/{menuIds}")
+    @PostMapping("/del/{menuId}")
     public AjaxResult remove(@PathVariable Long menuId) {
     	if (sysMobileMenuService.hasChildByMenuId(menuId))
         {

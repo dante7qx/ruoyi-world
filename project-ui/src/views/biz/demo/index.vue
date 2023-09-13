@@ -169,7 +169,7 @@
       <el-table-column label="业务图片" align="center" prop="demoImage" width="180" v-if="demoColumns[3].visible">
         <template v-slot="scope">
           <image-preview :src="scope.row.demoImage" :width="50" :height="50"/>
-          <label class="unpack" @click="downloadZip(scope.row)">打包下载</label>
+          <label class="unpack" @click="downloadZip(scope.row)" v-if="scope.row.demoImage != null">打包下载</label>
         </template>
       </el-table-column>
       <el-table-column label="角色名" align="center" prop="roleName" v-if="demoColumns[4].visible"/>
