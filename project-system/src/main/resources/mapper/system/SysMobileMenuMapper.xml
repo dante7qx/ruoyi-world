@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysMobileMenuMapper">
+
+    <resultMap type="SysMobileMenu" id="SysMobileMenuResult">
+        <result property="menuId"    column="menu_id"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="menuType"    column="menu_type"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="pagePath"    column="page_path"    />
+        <result property="iconPath"    column="icon_path"    />
+        <result property="selectedIconPath"    column="selected_icon_path"    />
+        <result property="queryParam"    column="query_param"    />
+        <result property="iconType"    column="icon_type"    />
+        <result property="iconSize"    column="icon_size"    />
+        <result property="viewClass"    column="view_class"    />
+        <result property="imgSrc"    column="img_src"    />
+        <result property="isFrame"    column="is_frame"    />
+        <result property="menuType"    column="menu_type"    />
+        <result property="status"    column="status"    />
+        <result property="perms"    column="perms"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysMobileMenuVo">
+        select t.menu_id, t.menu_name, t.menu_type, t.parent_id, t.order_num, t.page_path, t.icon_path, t.selected_icon_path, t.query_param, t.icon_type, t.icon_size, t.view_class, t.img_src, t.is_frame, t.menu_type, t.status, ifnull(t.perms,'') as perms, t.create_by, t.create_time, t.update_by, t.update_time, t.remark from sys_mobile_menu t
+    </sql>
+
+    <select id="selectSysMobileMenuList" parameterType="SysMobileMenu" resultMap="SysMobileMenuResult">
+        <include refid="selectSysMobileMenuVo"/>
+        <where>  
+            <if test="menuName != null  and menuName != ''"> and t.menu_name like concat('%', #{menuName}, '%')</if>
+            <if test="menuType != null  and menuType != ''"> and t.menu_type = #{menuType}</if>
+            <if test="status != null  and status != ''"> and t.status = #{status}</if>
+            <if test="perms != null  and perms != ''"> and t.perms = #{perms}</if>
+        </where>
+        order by t.parent_id, t.order_num
+    </select>
+    
+    <select id="selectSysMobileMenuTreeAll" resultMap="SysMobileMenuResult">
+    	select distinct t.menu_id, t.menu_name, t.menu_type, t.parent_id, t.order_num, t.page_path, t.icon_path, t.selected_icon_path, t.query_param, t.icon_type, t.icon_size, t.view_class, t.img_src, t.is_frame, t.status, ifnull(t.perms,'') as perms, t.create_by, t.create_time, t.update_by, t.update_time, t.remark 
+    	from sys_mobile_menu t where t.status = 0
+    	order by t.parent_id, t.order_num
+    </select>
+    
+    <select id="selectSysMobileMenuByMenuId" parameterType="Long" resultMap="SysMobileMenuResult">
+        <include refid="selectSysMobileMenuVo"/>
+        where t.menu_id = #{menuId}
+    </select>
+    
+    
+    <select id="selectSysMobileMenuListByUserId" parameterType="SysMobileMenu" resultMap="SysMobileMenuResult">
+		select distinct t.menu_id, t.menu_name, t.menu_type, t.parent_id, t.order_num, t.page_path, t.icon_path, t.selected_icon_path, t.query_param, t.icon_type, t.icon_size, t.view_class, t.img_src, t.is_frame, t.status, ifnull(t.perms,'') as perms, t.create_by, t.create_time, t.update_by, t.update_time, t.remark
+		from sys_mobile_menu t
+		left join sys_role_mobile_menu rm on t.menu_id = rm.menu_id
+		left join sys_user_role ur on rm.role_id = ur.role_id
+		left join sys_role ro on ur.role_id = ro.role_id
+		where ur.user_id = #{params.userId}
+		<if test="menuName != null and menuName != ''">
+            AND t.menu_name like concat('%', #{menuName}, '%')
+		</if>
+		<if test="status != null and status != ''">
+            AND t.status = #{status}
+		</if>
+		order by t.parent_id, t.order_num
+	</select>
+	
+	<select id="selectSysMobileMenuTreeByUserId" parameterType="Long" resultMap="SysMobileMenuResult">
+		select distinct t.menu_id, t.menu_name, t.menu_type, t.parent_id, t.order_num, t.page_path, t.icon_path, t.selected_icon_path, t.query_param, t.icon_type, t.icon_size, t.view_class, t.img_src, t.is_frame, t.status, ifnull(t.perms,'') as perms, t.create_by, t.create_time, t.update_by, t.update_time, t.remark
+		from sys_mobile_menu t
+		left join sys_role_mobile_menu rm on t.menu_id = rm.menu_id
+		left join sys_user_role ur on rm.role_id = ur.role_id
+		left join sys_role ro on ur.role_id = ro.role_id
+		left join sys_user u on ur.user_id = u.user_id
+		where u.user_id = #{userId} and t.status = 0 AND ro.status = '0'
+		order by t.parent_id, t.order_num
+	</select>
+	
+	<select id="selectSysMobileMenuListByRoleId" resultType="Long">
+		select m.menu_id from sys_mobile_menu m
+        left join sys_role_mobile_menu rm on m.menu_id = rm.menu_id
+        where rm.role_id = #{roleId}
+        <if test="menuCheckStrictly">
+          and m.menu_id not in (select m.parent_id from sys_mobile_menu m inner join sys_role_mobile_menu rm on m.menu_id = rm.menu_id and rm.role_id = #{roleId})
+        </if>
+		order by m.parent_id, m.order_num
+	</select>
+	
+	<select id="selectSysMobileMenuPerms" resultType="String">
+		select distinct m.perms from sys_mobile_menu m
+			 left join sys_role_mobile_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+	</select>
+	
+	<select id="selectSysMobileMenuPermsByUserId" parameterType="Long" resultType="String">
+		select distinct m.perms
+		from sys_mobile_menu m
+			 left join sys_role_mobile_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+			 left join sys_role r on r.role_id = ur.role_id
+		where m.status = 0 and r.status = '0' and ur.user_id = #{userId}
+	</select>
+	
+	<select id="selectSysMobileMenuPermsByRoleId" parameterType="Long" resultType="String">
+		select distinct m.perms
+		from sys_mobile_menu m
+			 left join sys_role_mobile_menu rm on m.menu_id = rm.menu_id
+		where m.status = 0 and rm.role_id = #{roleId}
+	</select>
+    
+    <select id="hasChildByMobileMenuId" resultType="Integer">
+	    select count(1) from sys_mobile_menu where parent_id = #{menuId}  
+	</select>
+        
+    <insert id="insertSysMobileMenu" parameterType="SysMobileMenu" useGeneratedKeys="true" keyProperty="menuId">
+        insert into sys_mobile_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">menu_name,</if>
+            <if test="menuType != null">menu_type,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="pagePath != null">page_path,</if>
+            <if test="iconPath != null">icon_path,</if>
+            <if test="selectedIconPath != null">selected_icon_path,</if>
+            <if test="queryParam != null">query_param,</if>
+            <if test="iconType != null">icon_type,</if>
+            <if test="iconSize != null">icon_size,</if>
+            <if test="viewClass != null">view_class,</if>
+            <if test="imgSrc != null">img_src,</if>
+            <if test="isFrame != null">is_frame,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="perms != null">perms,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">#{menuName},</if>
+            <if test="menuType != null">#{menuType},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="pagePath != null">#{pagePath},</if>
+            <if test="iconPath != null">#{iconPath},</if>
+            <if test="selectedIconPath != null">#{selectedIconPath},</if>
+            <if test="queryParam != null">#{queryParam},</if>
+            <if test="iconType != null">#{iconType},</if>
+            <if test="iconSize != null">#{iconSize},</if>
+            <if test="viewClass != null">#{viewClass},</if>
+            <if test="imgSrc != null">#{imgSrc},</if>
+            <if test="isFrame != null">#{isFrame},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="perms != null">#{perms},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysMobileMenu" parameterType="SysMobileMenu">
+        update sys_mobile_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+            <if test="menuType != null">menu_type = #{menuType},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="pagePath != null">page_path = #{pagePath},</if>
+            <if test="iconPath != null">icon_path = #{iconPath},</if>
+            <if test="selectedIconPath != null">selected_icon_path = #{selectedIconPath},</if>
+            <if test="queryParam != null">query_param = #{queryParam},</if>
+            <if test="iconType != null">icon_type = #{iconType},</if>
+            <if test="iconSize != null">icon_size = #{iconSize},</if>
+            <if test="viewClass != null">view_class = #{viewClass},</if>
+            <if test="imgSrc != null">img_src = #{imgSrc},</if>
+            <if test="isFrame != null">is_frame = #{isFrame},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="perms != null">perms = #{perms},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where menu_id = #{menuId}
+    </update>
+
+    <delete id="deleteSysMobileMenuByMenuId" parameterType="Long">
+        delete from sys_mobile_menu where menu_id = #{menuId}
+    </delete>
+
+</mapper>

@@ -2,6 +2,7 @@ package com.risun.web.controller.system;
 
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.risun.common.constant.Constants;
 import com.risun.common.core.domain.AjaxResult;
 import com.risun.common.core.domain.entity.SysMenu;
+import com.risun.common.core.domain.entity.SysMobileMenu;
 import com.risun.common.core.domain.entity.SysUser;
 import com.risun.common.core.domain.model.LoginBody;
 import com.risun.common.utils.SecurityUtils;
 import com.risun.framework.web.service.SysLoginService;
 import com.risun.framework.web.service.SysPermissionService;
 import com.risun.system.service.ISysMenuService;
+import com.risun.system.service.ISysMobileMenuService;
 
 /**
  * 登录验证
@@ -31,6 +34,9 @@ public class SysLoginController
 
     @Autowired
     private ISysMenuService menuService;
+    
+    @Autowired
+    private ISysMobileMenuService mobileMenuService;
 
     @Autowired
     private SysPermissionService permissionService;
@@ -83,5 +89,16 @@ public class SysLoginController
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return AjaxResult.success(menuService.buildMenus(menus));
+    }
+    
+    /**
+     * 获取登录用户移动端菜单
+     * 
+     * @return 路由信息
+     */
+    @PostMapping("/getMobileMemus")
+    public AjaxResult getMobileMenus() {
+        List<SysMobileMenu> menus = mobileMenuService.selectMenuTreeByUserId(SecurityUtils.getUserId());
+        return AjaxResult.success(menus);
     }
 }

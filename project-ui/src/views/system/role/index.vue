@@ -158,51 +158,70 @@
     />
 
     <!-- 添加或修改角色配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" v-dialog-drag append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-        <el-form-item label="角色名称" prop="roleName">
-          <el-input v-model="form.roleName" placeholder="请输入角色名称" />
-        </el-form-item>
-        <el-form-item prop="roleKey">
-          <span slot="label">
-            <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
-              <i class="el-icon-question"></i>
-            </el-tooltip>
-            权限字符
-          </span>
-          <el-input v-model="form.roleKey" placeholder="请输入权限字符" />
-        </el-form-item>
-        <el-form-item label="角色顺序" prop="roleSort">
-          <el-input-number v-model="form.roleSort" controls-position="right" :min="0" />
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-radio-group v-model="form.status">
-            <el-radio
-              v-for="dict in dict.type.sys_normal_disable"
-              :key="dict.value"
-              :label="dict.value"
-            >{{dict.label}}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="菜单权限">
-          <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
-          <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
-          <el-checkbox v-model="form.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">父子联动</el-checkbox>
-          <el-tree
-            class="tree-border"
-            :data="menuOptions"
-            show-checkbox
-            ref="menu"
-            node-key="id"
-            :check-strictly="!form.menuCheckStrictly"
-            empty-text="加载中，请稍候"
-            :props="defaultProps"
-          ></el-tree>
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
-        </el-form-item>
-      </el-form>
+    <el-dialog :title="title" :visible.sync="open" width="750px" v-dialog-drag append-to-body>
+      <div :style="{ height: dialogHeight + 'px', margin: '0', paddingRight: '10px', overflow: 'auto'}">
+        <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+          <el-form-item label="角色名称" prop="roleName">
+            <el-input v-model="form.roleName" placeholder="请输入角色名称" />
+          </el-form-item>
+          <el-form-item prop="roleKey">
+            <span slot="label">
+              <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
+                <i class="el-icon-question"></i>
+              </el-tooltip>
+              权限字符
+            </span>
+            <el-input v-model="form.roleKey" placeholder="请输入权限字符" />
+          </el-form-item>
+          <el-form-item label="角色顺序" prop="roleSort">
+            <el-input-number v-model="form.roleSort" controls-position="right" :min="0" />
+          </el-form-item>
+          <el-form-item label="状态">
+            <el-radio-group v-model="form.status">
+              <el-radio
+                v-for="dict in dict.type.sys_normal_disable"
+                :key="dict.value"
+                :label="dict.value"
+              >{{dict.label}}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="菜单权限">
+            <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
+            <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
+            <el-checkbox v-model="form.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">父子联动</el-checkbox>
+            <el-tree
+              class="tree-border"
+              :data="menuOptions"
+              show-checkbox
+              ref="menu"
+              node-key="id"
+              :check-strictly="!form.menuCheckStrictly"
+              empty-text="加载中，请稍候"
+              :props="defaultProps"
+              style="height: 200px; overflow: auto;"
+            ></el-tree>
+          </el-form-item>
+          <el-form-item label="移动菜单权限">
+            <el-checkbox v-model="mobileMenuExpand" @change="handleCheckedTreeExpand($event, 'mbmenu')">展开/折叠</el-checkbox>
+            <el-checkbox v-model="mobileMenuNodeAll" @change="handleCheckedTreeNodeAll($event, 'mbmenu')">全选/全不选</el-checkbox>
+            <el-checkbox v-model="form.mobileMenuCheckStrictly" @change="handleCheckedTreeConnect($event, 'mbmenu')">父子联动</el-checkbox>
+            <el-tree
+              class="tree-border"
+              :data="mobileMenuOptions"
+              show-checkbox
+              ref="mobilemenu"
+              node-key="id"
+              :check-strictly="!form.mobileMenuCheckStrictly"
+              empty-text="加载中，请稍候"
+              :props="defaultProps"
+              style="height: 200px; overflow: auto;"
+            ></el-tree>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
@@ -256,6 +275,7 @@
 <script>
 import { listRole, getRole, delRole, addRole, updateRole, dataScope, changeRoleStatus, deptTreeSelect } from "@/api/system/role";
 import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/api/system/menu";
+import { treeselect as mobileMenuTreeselect, roleMobileMenuTreeselect } from "@/api/system/mobile/menu";
 
 export default {
   name: "Role",
@@ -284,6 +304,8 @@ export default {
       openDataScope: false,
       menuExpand: false,
       menuNodeAll: false,
+      mobileMenuExpand: false,
+      mobileMenuNodeAll: false,
       deptExpand: true,
       deptNodeAll: false,
       // 日期范围
@@ -313,6 +335,8 @@ export default {
       ],
       // 菜单列表
       menuOptions: [],
+      // 移动菜单列表
+      mobileMenuOptions: [],
       // 部门列表
       deptOptions: [],
       // 查询参数
@@ -343,6 +367,11 @@ export default {
       }
     };
   },
+  computed: {
+    dialogHeight() {
+      return `${document.documentElement.clientHeight}` - 280;
+    }
+  },
   created() {
     this.getList();
   },
@@ -362,6 +391,10 @@ export default {
       menuTreeselect().then(response => {
         this.menuOptions = response.data;
       });
+      mobileMenuTreeselect().then(response => {
+        this.mobileMenuOptions = response.data;
+        console.log(this.mobileMenuOptions)
+      });
     },
     // 所有菜单节点数据
     getMenuAllCheckedKeys() {
@@ -369,6 +402,15 @@ export default {
       let checkedKeys = this.$refs.menu.getCheckedKeys();
       // 半选中的菜单节点
       let halfCheckedKeys = this.$refs.menu.getHalfCheckedKeys();
+      checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys);
+      return checkedKeys;
+    },
+    // 所有移动菜单节点数据
+    getMobileMenuAllCheckedKeys() {
+      // 目前被选中的菜单节点
+      let checkedKeys = this.$refs.mobilemenu.getCheckedKeys();
+      // 半选中的菜单节点
+      let halfCheckedKeys = this.$refs.mobilemenu.getHalfCheckedKeys();
       checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys);
       return checkedKeys;
     },
@@ -385,6 +427,13 @@ export default {
     getRoleMenuTreeselect(roleId) {
       return roleMenuTreeselect(roleId).then(response => {
         this.menuOptions = response.menus;
+        return response;
+      });
+    },
+    /** 根据角色ID查询移动菜单树结构 */
+     getRoleMobileMenuTreeselect(roleId) {
+      return roleMobileMenuTreeselect(roleId).then(response => {
+        this.mobileMenuOptions = response.menus;
         return response;
       });
     },
@@ -432,8 +481,10 @@ export default {
         roleSort: 0,
         status: "0",
         menuIds: [],
+        mobileMenuIds: [],
         deptIds: [],
         menuCheckStrictly: true,
+        mobileMenuCheckStrictly: true,
         deptCheckStrictly: true,
         remark: undefined
       };
@@ -476,6 +527,11 @@ export default {
         for (let i = 0; i < treeList.length; i++) {
           this.$refs.menu.store.nodesMap[treeList[i].id].expanded = value;
         }
+      } else if (type == 'mbmenu') {
+        let treeList = this.mobileMenuOptions;
+        for (let i = 0; i < treeList.length; i++) {
+          this.$refs.mobilemenu.store.nodesMap[treeList[i].id].expanded = value;
+        }
       } else if (type == 'dept') {
         let treeList = this.deptOptions;
         for (let i = 0; i < treeList.length; i++) {
@@ -487,6 +543,8 @@ export default {
     handleCheckedTreeNodeAll(value, type) {
       if (type == 'menu') {
         this.$refs.menu.setCheckedNodes(value ? this.menuOptions: []);
+      } else if (type == 'mbmenu') {
+        this.$refs.mobilemenu.setCheckedNodes(value ? this.mobileMenuOptions: []);
       } else if (type == 'dept') {
         this.$refs.dept.setCheckedNodes(value ? this.deptOptions: []);
       }
@@ -495,6 +553,8 @@ export default {
     handleCheckedTreeConnect(value, type) {
       if (type == 'menu') {
         this.form.menuCheckStrictly = value ? true: false;
+      } else if (type == 'mbmenu') {
+        this.form.mobileMenuCheckStrictly = value ? true: false;
       } else if (type == 'dept') {
         this.form.deptCheckStrictly = value ? true: false;
       }
@@ -511,6 +571,7 @@ export default {
       this.reset();
       const roleId = row.roleId || this.ids
       const roleMenu = this.getRoleMenuTreeselect(roleId);
+      const roleMobileMenu = this.getRoleMobileMenuTreeselect(roleId);
       getRole(roleId).then(response => {
         this.form = response.data;
         this.open = true;
@@ -520,6 +581,14 @@ export default {
             checkedKeys.forEach((v) => {
                 this.$nextTick(()=>{
                     this.$refs.menu.setChecked(v, true ,false);
+                })
+            })
+          });
+          roleMobileMenu.then(res => {
+            let checkedKeys = res.checkedKeys
+            checkedKeys.forEach((v) => {
+                this.$nextTick(()=>{
+                    this.$refs.mobilemenu.setChecked(v, true ,false);
                 })
             })
           });
@@ -557,15 +626,15 @@ export default {
     submitForm: function() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.menuIds = this.getMenuAllCheckedKeys();
+          this.form.mobileMenuIds = this.getMobileMenuAllCheckedKeys();
           if (this.form.roleId != undefined) {
-            this.form.menuIds = this.getMenuAllCheckedKeys();
             updateRole(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            this.form.menuIds = this.getMenuAllCheckedKeys();
             addRole(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;

@@ -43,6 +43,9 @@ public class SysRole extends BaseEntity
 
     /** 菜单树选择项是否关联显示（ 0：父子不互相关联显示 1：父子互相关联显示） */
     private boolean menuCheckStrictly;
+    
+    /** 移动菜单树选择项是否关联显示（ 0：父子不互相关联显示 1：父子互相关联显示） */
+    private boolean mobileMenuCheckStrictly;
 
     /** 部门树选择项是否关联显示（0：父子不互相关联显示 1：父子互相关联显示 ） */
     private boolean deptCheckStrictly;
@@ -59,6 +62,9 @@ public class SysRole extends BaseEntity
 
     /** 菜单组 */
     private Long[] menuIds;
+    
+    /** 移动菜单组 */
+    private Long[] mobileMenuIds;
 
     /** 部门组（数据权限） */
     private Long[] deptIds;
@@ -150,6 +156,16 @@ public class SysRole extends BaseEntity
     {
         this.menuCheckStrictly = menuCheckStrictly;
     }
+    
+    public boolean isMobileMenuCheckStrictly()
+    {
+        return mobileMenuCheckStrictly;
+    }
+
+    public void setMobileMenuCheckStrictly(boolean mobileMenuCheckStrictly)
+    {
+        this.mobileMenuCheckStrictly = mobileMenuCheckStrictly;
+    }
 
     public boolean isDeptCheckStrictly()
     {
@@ -201,7 +217,15 @@ public class SysRole extends BaseEntity
         this.menuIds = menuIds;
     }
 
-    public Long[] getDeptIds()
+    public Long[] getMobileMenuIds() {
+		return mobileMenuIds;
+	}
+
+	public void setMobileMenuIds(Long[] mobileMenuIds) {
+		this.mobileMenuIds = mobileMenuIds;
+	}
+
+	public Long[] getDeptIds()
     {
         return deptIds;
     }
@@ -230,6 +254,7 @@ public class SysRole extends BaseEntity
             .append("roleSort", getRoleSort())
             .append("dataScope", getDataScope())
             .append("menuCheckStrictly", isMenuCheckStrictly())
+            .append("mobileMenuCheckStrictly", isMobileMenuCheckStrictly())
             .append("deptCheckStrictly", isDeptCheckStrictly())
             .append("status", getStatus())
             .append("delFlag", getDelFlag())

@@ -1,6 +1,7 @@
 package com.risun.system.service;
 
 import java.util.List;
+
 import com.risun.system.domain.SysInfoProp;
 
 /**

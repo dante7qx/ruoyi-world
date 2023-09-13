@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,12 @@ import com.risun.common.utils.SecurityUtils;
 import com.risun.common.utils.spring.SpringUtils;
 import com.risun.system.domain.SysRoleDept;
 import com.risun.system.domain.SysRoleMenu;
+import com.risun.system.domain.SysRoleMobileMenu;
 import com.risun.system.domain.SysUserRole;
 import com.risun.system.mapper.SysRoleDeptMapper;
 import com.risun.system.mapper.SysRoleMapper;
 import com.risun.system.mapper.SysRoleMenuMapper;
+import com.risun.system.mapper.SysRoleMobileMenuMapper;
 import com.risun.system.mapper.SysUserRoleMapper;
 import com.risun.system.service.ISysRoleService;
 
@@ -42,6 +45,9 @@ public class SysRoleServiceImpl implements ISysRoleService
 
     @Autowired
     private SysRoleMenuMapper roleMenuMapper;
+    
+    @Autowired
+    private SysRoleMobileMenuMapper roleMobileMenuMapper;
 
     @Autowired
     private SysUserRoleMapper userRoleMapper;
@@ -254,6 +260,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         roleMapper.updateRole(role);
         // 删除角色与菜单关联
         roleMenuMapper.deleteRoleMenuByRoleId(role.getRoleId());
+        roleMobileMenuMapper.deleteSysRoleMobileMenuByRoleId(role.getRoleId());
         return insertRoleMenu(role);
     }
 
@@ -296,18 +303,26 @@ public class SysRoleServiceImpl implements ISysRoleService
     {
         int rows = 1;
         // 新增用户与角色管理
-        List<SysRoleMenu> list = new ArrayList<SysRoleMenu>();
-        for (Long menuId : role.getMenuIds())
-        {
-            SysRoleMenu rm = new SysRoleMenu();
-            rm.setRoleId(role.getRoleId());
-            rm.setMenuId(menuId);
-            list.add(rm);
-        }
-        if (list.size() > 0)
-        {
-            rows = roleMenuMapper.batchRoleMenu(list);
-        }
+        List<SysRoleMenu> list = new ArrayList<>();
+		for (Long menuId : role.getMenuIds()) {
+			SysRoleMenu rm = new SysRoleMenu();
+			rm.setRoleId(role.getRoleId());
+			rm.setMenuId(menuId);
+			list.add(rm);
+		}
+		List<SysRoleMobileMenu> mbMenus = Lists.newArrayList();
+		for(Long menuId : role.getMobileMenuIds()) {
+			SysRoleMobileMenu rmm = new SysRoleMobileMenu();
+			rmm.setRoleId(role.getRoleId());
+			rmm.setMenuId(menuId);
+			mbMenus.add(rmm);
+		}
+		if (!mbMenus.isEmpty()) {
+			roleMobileMenuMapper.batchInsertSysRoleMobileMenu(mbMenus);
+		}
+		if (!list.isEmpty()) {
+			rows = roleMenuMapper.batchRoleMenu(list);
+		}
         return rows;
     }
 
@@ -347,6 +362,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     {
         // 删除角色与菜单关联
         roleMenuMapper.deleteRoleMenuByRoleId(roleId);
+        roleMobileMenuMapper.deleteSysRoleMobileMenuByRoleId(roleId);
         // 删除角色与部门关联
         roleDeptMapper.deleteRoleDeptByRoleId(roleId);
         return roleMapper.deleteRoleById(roleId);
@@ -374,6 +390,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         }
         // 删除角色与菜单关联
         roleMenuMapper.deleteRoleMenu(roleIds);
+        roleMobileMenuMapper.deleteSysRoleMobileMenuByRoleIds(roleIds);
         // 删除角色与部门关联
         roleDeptMapper.deleteRoleDept(roleIds);
         return roleMapper.deleteRoleByIds(roleIds);

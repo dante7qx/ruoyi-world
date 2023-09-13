@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.risun.common.core.domain.entity.SysDept;
 import com.risun.common.core.domain.entity.SysMenu;
+import com.risun.common.core.domain.entity.SysMobileMenu;
 
 /**
  * Treeselect树结构实体类
@@ -43,6 +44,13 @@ public class TreeSelect implements Serializable
         this.id = menu.getMenuId();
         this.label = menu.getMenuName();
         this.children = menu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
+    }
+    
+    public TreeSelect(SysMobileMenu mobileMenu)
+    {
+        this.id = mobileMenu.getMenuId();
+        this.label = mobileMenu.getMenuName();
+        this.children = mobileMenu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
     public Long getId()
