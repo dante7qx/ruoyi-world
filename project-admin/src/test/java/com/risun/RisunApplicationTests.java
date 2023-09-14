@@ -1,6 +1,7 @@
 package com.risun;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.symmetric.SM4;
 
@@ -21,7 +23,7 @@ public class RisunApplicationTests {
 	void chinacipherTest() {
 		ChinaCipher chinaCipher = new ChinaCipher();
 //		String str = "hello world world ";
-		String str = "620502198501290117";
+		String str = "62050219840119010X";
 		Console.log(str.length(), str.getBytes().length);
 		String enc = chinaCipher.SM4EncDefault(str);
 	    Console.log(enc, enc.length());
@@ -33,6 +35,20 @@ public class RisunApplicationTests {
 	    Console.log(enc2, enc2.length());
 	    Console.log(dec2);
 	    assertEquals(str, dec);
+
+	}
+	
+	/**
+	 * 国密算法并发测试
+	 */
+	@Test
+	void chinacipherConCurrentTest() {
+		final ChinaCipher chinaCipher = new ChinaCipher();
+		String str = "62050219840119010X";
+		ThreadUtil.concurrencyTest(10, () -> {
+			Console.log("{} -> {}", Thread.currentThread().getName(), chinaCipher.SM4EncDefault(str));
+		});
+	    assertTrue(true);
 
 	}
 	
