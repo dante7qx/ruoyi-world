@@ -19,7 +19,7 @@ import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
-import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree, printLongTableColumn, desensitizeIdCard, desensitizeMobilePhone, encodeBase64, decodeBase64 } from "@/utils/risun";
+import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree, printLongTableColumn, desensitizeIdCard, desensitizeMobilePhone, encodeBase64, decodeBase64, loadJS } from "@/utils/risun";
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import vueAwesomeCountdown from 'vue-awesome-countdown'
@@ -72,6 +72,7 @@ Vue.prototype.desensitizeIdCard = desensitizeIdCard
 Vue.prototype.desensitizeMobilePhone = desensitizeMobilePhone
 Vue.prototype.encodeBase64 = encodeBase64
 Vue.prototype.decodeBase64 = decodeBase64
+Vue.prototype.loadJS = loadJS
 Vue.prototype.$moment = moment
 Vue.prototype.nanoid = nanoid
 
