@@ -35,6 +35,11 @@ public class Constants
     public static final String HTTPS = "https://";
     
     /**
+     * websocket请求
+     */
+    public static final String WEBSCOKET = "ws://";
+    
+    /**
      * 通用删除标识
      */
     public static final String DEL_FLAG = "1";
