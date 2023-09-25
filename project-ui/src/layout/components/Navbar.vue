@@ -111,7 +111,7 @@ export default {
         return;
       }
       const { host } = location
-      const wsuri = `ws://${host}${process.env.VUE_APP_BASE_API}/websocket/message/${user.name}`;
+      const wsuri = `ws://${host}${process.env.VUE_APP_SOCKET_BASE_API}/websocket/message/${user.name}`;
       this.ws = new WebSocket(wsuri);
       const self = this;
       this.ws.onopen = function (event) {

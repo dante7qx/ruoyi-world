@@ -731,7 +731,7 @@ create table sys_info_category (
   create_time 	    datetime                                  comment '创建时间',
   update_by         varchar(64)     default ''                comment '更新者',
   update_time       datetime                                  comment '更新时间',
-  primary key (category_id)
+  primary key (category_id),
   constraint uni_sys_info_category_key UNIQUE(category_key)
 ) engine=innodb auto_increment=1 comment = '信息栏目';
 
