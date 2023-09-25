@@ -89,6 +89,7 @@ export default {
   mounted() {
     // 建立WebSocket连接，进行消息提醒（若项目有此需求，放开该行代码）
     // this.connWS()
+    console.log(process.env)
   },
   methods: {
     toggleSideBar() {
@@ -115,7 +116,7 @@ export default {
         return;
       }
       const { host } = location
-      const wsuri = `ws://${host}${process.env.VUE_APP_BASE_API}/websocket/message/${user.name}`;
+      const wsuri = `ws://${host}${process.env.VUE_APP_SOCKET_BASE_API}/websocket/message/${user.name}`;
       this.ws = new WebSocket(wsuri);
       const self = this;
       this.ws.onopen = function (event) {

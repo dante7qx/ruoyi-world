@@ -1,12 +1,15 @@
 package com.risun.common.constant;
 
 import io.jsonwebtoken.Claims;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * 通用常量信息
  * 
  * @author ruoyi
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants
 {
     /**
@@ -33,6 +36,11 @@ public class Constants
      * https请求
      */
     public static final String HTTPS = "https://";
+    
+    /**
+     * wobsocket请求
+     */
+    public static final String WEBSCOKET = "ws://";
     
     /**
      * 通用删除标识

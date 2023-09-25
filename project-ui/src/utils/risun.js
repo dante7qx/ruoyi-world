@@ -329,3 +329,20 @@ export function encodeBase64(str) {
 export function decodeBase64(str) {
   return Buffer.from(str.replace(/\s/g, '+'), 'base64').toString()
 }
+
+// 加载第三方js
+export function loadJS(src) {
+  return new Promise((resolve,reject)=>{
+    let script = document.createElement('script');
+    script.type = "text/javascript";
+    script.src= src;
+    document.body.appendChild(script);
+      
+    script.onload = ()=>{
+      resolve();
+    }
+    script.onerror = ()=>{
+      reject();
+    }
+  })
+}

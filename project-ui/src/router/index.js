@@ -176,6 +176,20 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
+  },
+  {
+    path: '/survey',
+    component: Layout,
+    hidden: true,
+    permissions: ['monitor:job:list'],
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/survey/add'),
+        name: 'AddSurvey',
+        meta: { title: '新建问卷', activeMenu: '/biz/survey' }
+      }
+    ]
   }
 ]
 

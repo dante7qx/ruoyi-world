@@ -23,7 +23,11 @@
 				<el-menu-item index="longTableCol">长表格字段</el-menu-item>
 				<el-menu-item index="iframe">iframe标签</el-menu-item>
 			</el-submenu>
-			<el-menu-item index="videoMonitor">视频监控</el-menu-item>
+			<el-submenu index="4">
+				<template slot="title">视频</template>
+				<el-menu-item index="videoMonitor">视频播放</el-menu-item>
+				<el-menu-item index="cameraVideo">视频监控</el-menu-item>
+			</el-submenu>
 			<el-menu-item index="watermark">页面水印</el-menu-item>
 			<el-menu-item index="calendar">日历</el-menu-item>
 			<el-menu-item index="qrcode">二维码</el-menu-item>
@@ -34,6 +38,7 @@
 		<dyna-form v-else-if="activeIndex=='dynaForm'" />
 		<long-tab-col v-else-if="activeIndex=='longTableCol'" />
 		<code-video v-else-if="activeIndex=='videoMonitor'" />
+		<camera-video v-else-if="activeIndex=='cameraVideo'" />
 		<water-mark v-else-if="activeIndex=='watermark'" />
 		<code-calendar v-else-if="activeIndex=='calendar'" />
 		<sys-user-sel v-else-if="activeIndex=='sysUserSel'" />
@@ -49,6 +54,7 @@ import AddressMap from './addressMap'
 import DynaForm from './dynaForm'
 import LongTabCol from './longTableCol'
 import Video from './video'
+import CameraVideo from './camera'
 import Watermark from './watermark'
 import Calendar from './calendar'
 import SysUserSel from './sysUserSel'
@@ -64,6 +70,7 @@ export default {
 		'dyna-form': DynaForm,
 		'long-tab-col': LongTabCol,
 		'code-video': Video,
+		'camera-video': CameraVideo,
 		'water-mark': Watermark,
 		'code-calendar': Calendar,
 		'sys-user-sel': SysUserSel,

@@ -76,6 +76,12 @@
             <groupId>com.risun</groupId>
             <artifactId>project-biz</artifactId>
         </dependency>
+        
+        <!-- 问卷调查 -->
+        <dependency>
+            <groupId>com.risun</groupId>
+            <artifactId>project-survey</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -40,21 +40,21 @@ module.exports = {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
-      [process.env.VUE_SOCKET_BASE_API]: {
-        target: 'http://localhost:9080',
+      [process.env.VUE_APP_SOCKET_BASE_API]: {
+        target: 'http://localhost:3000',
         ws: true, // 开启websocket代理
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_SOCKET_BASE_API]: ''
+          ['^' + process.env.VUE_APP_SOCKET_BASE_API]: ''
         }
       },
-      [process.env.VUE_FILE_PREVIEW]: {
+      [process.env.VUE_APP_FILE_PREVIEW]: {
         target: `http://localhost:8012`,  // kkFilePreview 服务
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_FILE_PREVIEW]: ''
+          ['^' + process.env.VUE_APP_FILE_PREVIEW]: ''
         }
-      },
+      }
     },
     disableHostCheck: true
   },

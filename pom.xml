@@ -247,6 +247,13 @@
                 <artifactId>project-biz</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <!-- 问卷调查 -->
+            <dependency>
+                <groupId>com.risun</groupId>
+                <artifactId>project-survey</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -261,6 +268,7 @@
         <module>project-mq</module>
         <module>project-jimu-report</module>
         <module>project-biz</module>
+        <module>project-survey</module>
     </modules>
     
 

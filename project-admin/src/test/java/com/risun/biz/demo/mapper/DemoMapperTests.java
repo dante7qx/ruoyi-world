@@ -12,7 +12,7 @@ import com.risun.system.service.ISysConfigService;
 
 import cn.hutool.core.lang.Console;
 
-public class DemoMapperTests extends RisunApplicationTests {
+class DemoMapperTests extends RisunApplicationTests {
 	
 	@Autowired
 	private DemoMapper demoMapper;
@@ -20,7 +20,7 @@ public class DemoMapperTests extends RisunApplicationTests {
 	private ISysConfigService sysConfigService;
 	
 	@Test
-	public void selectDemoCount() {
+	void selectDemoCount() {
 		Console.log(sysConfigService.selectConfigByKey("sys.sms.sendModelID"));
 		int count = demoMapper.selectDemoCount();
 		assertTrue(count >= 0);
@@ -31,13 +31,14 @@ public class DemoMapperTests extends RisunApplicationTests {
 	 * 测试手动切换数据源
 	 */
 	@Test
-	public void dynaSelectDemoCount() {
+	void dynaSelectDemoCount() {
 		int masterCount = demoMapper.selectDemoCount();
 		Console.log("Master 数据源：{}", masterCount);
 		// 手动切换数据源
 		DynamicDataSourceContextHolder.setDataSourceType(DataSourceType.SLAVE.name());
 		int slaveCount = demoMapper.selectDemoCount();
 		Console.log("Slave 数据源：{}", slaveCount);
+		assertTrue(masterCount >= 0);
 	}
 	
 }

@@ -34,16 +34,16 @@
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
         -->
-        <!--
+        <!-- -->
         <el-link @click="filePreview(file.url)" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
-        -->
-        <!-- -->
+        
+        <!-- 
         <el-link @click="filePreviewEnhance(file.url, true)" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
-        
+        -->
         <div class="ele-upload-list__item-content-action" >
           <el-tooltip class="item" effect="dark" content="下载" placement="top">
             <el-link :underline="false" @click="fileDownload(file.url, file.name)" type="success"><i class="el-icon-download"></i></el-link>
