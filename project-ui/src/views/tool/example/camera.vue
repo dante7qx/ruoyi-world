@@ -17,15 +17,15 @@
           />
         </div>
       </el-col>
-      <el-col :span="12">
-        <canvas ref="videoCanvas" @dblclick="fullscreen"></canvas>
+      <el-col :span="12" v-loading="loading">
+        <canvas ref="videoCanvas" @dblclick="fullscreen" style="background-color: #000;" ></canvas>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import { listCamera } from "@/api/monitor/camera"
+import { listCamera, playCamera } from "@/api/monitor/camera"
 
 export default {
 	name: 'CameraPage',
@@ -36,12 +36,11 @@ export default {
         label: 'monitorName',
         children: 'children',
       },
-      monitorServer: '',
+      loading: true,
       currentNodeId: null,
       currentCamera: '',
       jsMpegPlayer: null,
-			isFullScreen: false,
-
+			isFullScreen: false
 		}
 	},
   created() {
@@ -51,22 +50,28 @@ export default {
     loadTree() {
       listCamera({}).then(response => {
         const result = response.data
-        this.monitorServer = result.server;
         this.treeData = this.handleTree(result.data, "monitorId");
         this.loadJS('/static/camera/jsmpeg.js').then(() => {
-          this.currentNodeId = this.treeData[0].monitorId
-          this.currentCamera = this.treeData[0].monitorName
-          this.jsMpegPlayer = new JSMpeg.Player(this.monitorServer + this.treeData[0].playUri, {canvas: this.$refs.videoCanvas, audio: false});
+          this.playMonitor(this.treeData[0])
 		    })
       })
     },
-    handleNodeClick(node) {
+    playMonitor(node) {
       if(node.monitorId != this.currentNodeId) {
+        this.loading = true;
         this.currentNodeId = node.monitorId
         this.currentCamera = node.monitorName
-        this.jsMpegPlayer.destroy();
-        this.jsMpegPlayer = new JSMpeg.Player(this.monitorServer +  node.playUri, {canvas: this.$refs.videoCanvas, audio: false});
+        playCamera(node).then(res => {
+          if(this.jsMpegPlayer != null) {
+            this.jsMpegPlayer.destroy();
+          }
+          this.jsMpegPlayer = new JSMpeg.Player(res.data.wsUrl, {canvas: this.$refs.videoCanvas, audio: false});
+          this.loading = false;
+        })
       }
+    },
+    handleNodeClick(node) {
+      this.playMonitor(node)
     },
 		fullscreen() {
       let canvas = this.$refs.videoCanvas;
@@ -80,24 +85,24 @@ export default {
     // 进入全屏
     enterFullscreen(element) {
       if (element.requestFullscreen) {
-        element.requestFullscreen();
+          element.requestFullscreen();
       } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
+          element.mozRequestFullScreen();
       } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
+          element.webkitRequestFullscreen();
       } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
+          element.msRequestFullscreen();
       }
     },
     exitFullscreen() {
       if (document.exitFullscreen) {
-        document.exitFullscreen();
+          document.exitFullscreen();
       } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
+          document.mozCancelFullScreen();
       } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
+          document.webkitExitFullscreen();
       } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
+          document.msExitFullscreen();
       }
     }
 	}
