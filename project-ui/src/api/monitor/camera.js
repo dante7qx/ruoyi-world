@@ -45,9 +45,10 @@ export function delCamera(monitorId) {
 
 // 视频解析
 export function playCamera(data) {
+  const param = { rtspUrl: data.rtspUrl }
   return request({
     url: '/monitor/camera/play',
     method: 'post',
-    data: data
+    data: param
   })
 }

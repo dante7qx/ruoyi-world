@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
 import com.google.common.collect.Maps;
 import com.risun.common.annotation.Log;
@@ -126,11 +127,16 @@ public class SysCameraMonitorController extends BaseController {
 		Assert.hasText(sysCameraMonitor.getRtspUrl(), "RTSP地址不能为空！");
 		Assert.hasText(monitorServer, "视频监控服务器地址不能为空！");
 		String resultJSON = HttpUtil.post(Constants.HTTP.concat(monitorServer)
-			.concat("/stream/play"), MapUtil.of("url", sysCameraMonitor.getRtspUrl()), 2000);
+			.concat("/stream/play"), MapUtil.of("url", sysCameraMonitor.getRtspUrl()), 1000);
 		Map<String, Object> result = JSON.parseObject(resultJSON, new TypeReference<Map<String, Object>>(){});
 		int code = Integer.parseInt(result.get("code").toString());
 		if(code == 0) {
-			return AjaxResult.success(result.get("data"));
+			Map<String, String> dataMap = Maps.newHashMap();
+			JSONObject obj = (JSONObject) result.get("data");
+			dataMap.put("path", obj.getString("path"));
+			dataMap.put("wsUrl", Constants.WEBSCOKET.concat(monitorServer).concat(obj.getString("path")));
+			
+			return AjaxResult.success(dataMap);
 		} else {
 			return AjaxResult.error(result.get("msg").toString());
 		}
