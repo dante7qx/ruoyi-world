@@ -34,14 +34,14 @@ module.exports = {
     proxy: {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        target: `http://localhost:9080`,
+        target: `http://[::1]:9080`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       [process.env.VUE_APP_SOCKET_BASE_API]: {
-        target: 'http://localhost:3000',
+        target: 'http://[::1]:3000',
         ws: true, // 开启websocket代理
         changeOrigin: true,
         pathRewrite: {
@@ -49,7 +49,7 @@ module.exports = {
         }
       },
       [process.env.VUE_APP_FILE_PREVIEW]: {
-        target: `http://localhost:8012`,  // kkFilePreview 服务
+        target: `http://[::1]:8012`,  // kkFilePreview 服务
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_FILE_PREVIEW]: ''
