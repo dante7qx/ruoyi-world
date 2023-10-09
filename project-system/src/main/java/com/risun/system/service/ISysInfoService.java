@@ -101,6 +101,14 @@ public interface ISysInfoService
     int setInfoDisabled(SysInfo sysInfo);
     
     /**
+     * 撤销已发布信息
+     * 
+     * @param sysInfo
+     * @return
+     */
+    int withdrawSysInfo(SysInfo sysInfo);
+    
+    /**
      * 设置（取消）评论信息发布
      * 
      * @param sysInfo
