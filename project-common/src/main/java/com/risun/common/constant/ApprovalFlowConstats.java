@@ -19,4 +19,8 @@ public class ApprovalFlowConstats {
 	
 	/** 审批驳回 */
 	public static final String ACTION_REJECT = "REJECT";
+	
+	/** 撤销发布 */
+	public static final String ACTION_WITHDRAW = "WITHDRAW";
+
 }
