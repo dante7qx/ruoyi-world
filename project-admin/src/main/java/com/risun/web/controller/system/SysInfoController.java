@@ -159,6 +159,16 @@ public class SysInfoController extends BaseController {
 	public AjaxResult setInfoTop(@RequestBody SysInfo sysInfo) {
 		return toAjax(sysInfoService.setInfoTop(sysInfo));
 	}
+	
+	/**
+	 * 撤销已发布信息
+	 */
+	@PreAuthorize("@ss.hasPermi('system:info:edit')")
+	@Log(title = "撤销已发布信息", businessType = BusinessType.UPDATE)
+	@PostMapping("/batch_withdraw")
+	public AjaxResult batchWithdraw(@RequestBody SysInfo sysInfo) {
+		return toAjax(sysInfoService.withdrawSysInfo(sysInfo));
+	}
 
 	/**
 	 * 停用（启用）信息发布

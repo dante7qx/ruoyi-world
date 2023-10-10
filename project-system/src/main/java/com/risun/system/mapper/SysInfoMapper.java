@@ -145,6 +145,15 @@ public interface SysInfoMapper
     public SysInfoView selectSysInfoViewByInfoView(SysInfoView sysInfoView);
     
     /**
+     * 撤销已发布信息
+     * 
+     * @param infoIds
+     * @param status
+     * @return
+     */
+    public int updateSysInfoWithdraw(@Param("infoIds") Long[] infoIds, @Param("status") String status);
+    
+    /**
      * 评论设置
      * 
      * @param infoIds

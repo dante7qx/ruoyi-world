@@ -50,8 +50,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="approvallogList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+    <el-table v-loading="loading" :data="approvallogList">
       <el-table-column type="index" label="序号" width="50" align="center" />
       <el-table-column label="业务模块" align="center" prop="bizModel">
         <template slot-scope="scope">
@@ -67,7 +66,7 @@
       <el-table-column label="操作人" align="center" prop="operator" />
       <el-table-column label="操作时间" align="center" prop="operateTime" width="180" />
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"

@@ -576,7 +576,7 @@ insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_mo
 insert into sys_dict_data values(30, 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '提交');
 insert into sys_dict_data values(31, 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '审批通过');
 insert into sys_dict_data values(32, 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '审批驳回');
-
+insert into sys_dict_data values(33, 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '已发布的信息被撤销');
 
 -- ----------------------------
 -- 13、参数配置表

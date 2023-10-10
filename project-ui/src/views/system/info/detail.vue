@@ -15,13 +15,13 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="栏目" prop="categoryId">
-              <treeselect 
-                v-model="form.categoryId" 
-                :options="categoryOptions" 
-                :normalizer="normalizer" 
-                :default-expand-level="2" 
+              <treeselect
+                v-model="form.categoryId"
+                :options="categoryOptions"
+                :normalizer="normalizer"
+                :default-expand-level="2"
                 :max-height="460"
-                placeholder="选择栏目" 
+                placeholder="选择栏目"
                 :disabled="disabled" />
             </el-form-item>
           </el-col>
@@ -66,17 +66,20 @@
       <el-form ref="formApproval" :model="formApproval" :rules="rulesApproval" label-width="100px">
         <el-form-item label="发布时间" prop="publishTime" v-if="pass">
           <el-date-picker clearable
-            v-model="formApproval.publishTime"
-            type="datetime"
-            format="yyyy-MM-dd HH:mm"
-            value-format="yyyy-MM-dd HH:mm"
-            placeholder="请选择发布时间"
-            @input="changePublishTime($event)"
-            style="width: 100%;">
+                          v-model="formApproval.publishTime"
+                          type="datetime"
+                          format="yyyy-MM-dd HH:mm"
+                          value-format="yyyy-MM-dd HH:mm"
+                          placeholder="请选择发布时间"
+                          @input="changePublishTime($event)"
+                          style="width: 100%;">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="审批意见" prop="comment">
           <el-input v-model="formApproval.comment" type="textarea" :autosize="{ minRows: 4, maxRows: 6}" resize="none" show-word-limit maxlength="200"  placeholder="请输入审批意见" />
+        </el-form-item>
+        <el-form-item label="匿名访问" prop="anonymous" v-if="pass">
+          <el-switch v-model="formApproval.anonymous" :active-value="1" :inactive-value="0" active-color="#13ce66" inactive-color="#ff4949" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer" style="text-align: right;">
@@ -131,9 +134,7 @@ export default {
       showApproval: false,
       // 审批窗口
       openApproval: false,
-      formApproval: {
-        comment: '同意'
-      },
+      formApproval: {},
       rulesApproval: {
         publishTime: [
           { required: true, message: "发布时间不能为空", trigger: "change" }
@@ -175,7 +176,7 @@ export default {
       if(this.infoId > 0) {
         getInfo(this.infoId).then(response => {
           this.form = response.data;
-          if(this.form.status == '1') {
+          if(this.form.status === '1') {
             this.showApproval = true
           }
         });
@@ -207,7 +208,7 @@ export default {
           this.form.status = status
           if (this.form.infoId != null) {
             updateInfo(this.form).then(response => {
-              this.$modal.msgSuccess(status == '0' ? "修改成功" : status == '1' ? '提交成功' : '发布成功');
+              this.$modal.msgSuccess(status === '0' ? "修改成功" : status === '1' ? '提交成功' : '发布成功');
               this.cancel();
             });
           } else {
@@ -224,14 +225,19 @@ export default {
       this.$emit('closeWindow');
     },
     changePublishTime(e){
-			this.$forceUpdate()
-			this.formApproval.publishTime = e
-		},
+      this.$forceUpdate()
+      this.formApproval.publishTime = e
+    },
     approval(pass) {
       this.openApproval = true;
       this.pass = pass;
       if(this.pass) {
         this.formApproval.publishTime = this.$moment(new Date()).format("YYYY-MM-DD HH:mm")
+        this.formApproval.comment = '同意'
+        this.formApproval.anonymous = 1
+      } else {
+        this.formApproval.comment = '退回'
+        this.formApproval.anonymous = null
       }
     },
     approvalSubmit() {

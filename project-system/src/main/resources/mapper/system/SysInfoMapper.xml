@@ -224,6 +224,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
     
+     <!-- 撤销发布 -->
+    <update id="updateSysInfoWithdraw">
+    	update sys_info set status = #{status} where info_id in 
+    	<foreach item="infoId" collection="infoIds" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </update>
+    
     <update id="updateSysInfoCommentable">
     	update sys_info set commentable = #{commentable} where info_id in 
     	<foreach item="infoId" collection="infoIds" open="(" separator="," close=")">
