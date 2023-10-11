@@ -134,7 +134,11 @@ export default {
       showApproval: false,
       // 审批窗口
       openApproval: false,
-      formApproval: {},
+      formApproval: {
+        publishTime: null,
+        comment: null,
+        anonymous: null
+      },
       rulesApproval: {
         publishTime: [
           { required: true, message: "发布时间不能为空", trigger: "change" }
