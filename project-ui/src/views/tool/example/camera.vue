@@ -57,7 +57,7 @@ export default {
       })
     },
     playMonitor(node) {
-      if(node.monitorId != this.currentNodeId) {
+      if(node.monitorId !== this.currentNodeId) {
         this.loading = true;
         this.currentNodeId = node.monitorId
         this.currentCamera = node.monitorName

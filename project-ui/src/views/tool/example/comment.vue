@@ -3,7 +3,7 @@
     <h2>留言组件 - views/tool/example/comment.vue</h2>
 
     <el-descriptions title="业务信息" :column="1" border>
-      <template slot="extra">
+      <template v-slot="extra">
         <el-button type="primary" size="small" @click="clear">清空</el-button>
       </template>
       <el-descriptions-item label="业务模块">{{ bizModel }}</el-descriptions-item>
