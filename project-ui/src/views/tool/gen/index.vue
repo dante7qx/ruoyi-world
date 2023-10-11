@@ -92,7 +92,7 @@
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" align="center" width="55"></el-table-column>
       <el-table-column label="序号" type="index" width="50" align="center">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <span>{{(queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1}}</span>
         </template>
       </el-table-column>
@@ -120,7 +120,7 @@
       <el-table-column label="创建时间" align="center" prop="createTime" width="160" />
       <el-table-column label="更新时间" align="center" prop="updateTime" width="160" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             type="text"
             size="small"
@@ -187,7 +187,7 @@
 <script>
 import { listTable, previewTable, delTable, genCode, synchDb, refreshSensitiveWord } from "@/api/tool/gen";
 import importTable from "./importTable";
-import hljs from "highlight.js/lib/highlight";
+import hljs from "highlight.js/lib/core";
 import "highlight.js/styles/github-gist.css";
 hljs.registerLanguage("java", require("highlight.js/lib/languages/java"));
 hljs.registerLanguage("xml", require("highlight.js/lib/languages/xml"));
@@ -242,7 +242,7 @@ export default {
   },
   activated() {
     const time = this.$route.query.t;
-    if (time != null && time != this.uniqueId) {
+    if (time != null && time !== this.uniqueId) {
       this.uniqueId = time;
       this.queryParams.pageNum = Number(this.$route.query.pageNum);
       this.getList();
@@ -267,7 +267,7 @@ export default {
     /** 生成代码操作 */
     handleGenTable(row) {
       const tableNames = row.tableName || this.tableNames;
-      if (tableNames == "") {
+      if (tableNames === "") {
         this.$modal.msgError("请选择要生成的数据");
         return;
       }
@@ -276,7 +276,7 @@ export default {
           this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
         });
       } else {
-        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi");
+        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "risun");
       }
     },
     /** 同步数据库操作 */
@@ -309,8 +309,9 @@ export default {
     /** 高亮显示 */
     highlightedCode(code, key) {
       const vmName = key.substring(key.lastIndexOf("/") + 1, key.indexOf(".vm"));
-      var language = vmName.substring(vmName.indexOf(".") + 1, vmName.length);
-      const result = hljs.highlight(language, code || "", true);
+      const language = vmName.substring(vmName.indexOf(".") + 1, vmName.length);
+      // const result = hljs.highlight(language, code || "", true);
+      const result = hljs.highlight(code || "", {language: language, ignoreIllegals: true});
       return result.value || '&nbsp;';
     },
     /** 复制代码成功 */
@@ -321,7 +322,7 @@ export default {
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.tableId);
       this.tableNames = selection.map(item => item.tableName);
-      this.single = selection.length != 1;
+      this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
     /** 修改按钮操作 */
