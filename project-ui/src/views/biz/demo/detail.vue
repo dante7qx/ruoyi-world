@@ -1,38 +1,56 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="业务名称123业务名称456业务名称" prop="demoName" class="long-form-label">
-        <el-input v-model="form.demoName" placeholder="请输入业务名称" maxlength="30" show-word-limit :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="业务时间" prop="demoTime">
-        <el-date-picker clearable
-          v-model="form.demoTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择业务时间"
-          :disabled="disabled"
-          style="width: 100%">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="业务手机" prop="demoPhone">
-        <el-input v-model="form.demoPhone" placeholder="请输入业务手机" maxlength="11" show-word-limit :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="业务图片">
-        <image-upload v-model="form.demoImage" :disabled="disabled" />
-      </el-form-item>
-      <el-form-item label="业务附件" prop="attachment">
-        <file-upload v-model="form.attachment" :bizModel="'demo'" :fileSize="10" :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="业务内容">
-        <editor v-model="form.demoContent" :disabled="disabled" :max-height="400"/>
-      </el-form-item>
-      <el-form-item label="角色ID" prop="roleId">
-        <el-input v-model="form.roleId" placeholder="请输入角色ID"  :disabled="disabled"/>
-      </el-form-item>
-      <el-form-item label="岗位ID" prop="postId">
-        <el-input v-model="form.postId" placeholder="请输入岗位ID"  :disabled="disabled"/>
-      </el-form-item>
-	  </el-form>
+    <el-row>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-col :span="12">
+          <el-form-item label="业务名称123业务名称456业务名称" prop="demoName" class="long-form-label">
+            <el-input v-model="form.demoName" placeholder="请输入业务名称" maxlength="30" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="业务时间" prop="demoTime">
+            <el-date-picker clearable
+              v-model="form.demoTime"
+              type="date"
+              value-format="yyyy-MM-dd"
+              placeholder="请选择业务时间"
+              :disabled="disabled"
+              style="width: 100%">
+            </el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="业务手机" prop="demoPhone">
+            <el-input v-model="form.demoPhone" placeholder="请输入业务手机" maxlength="11" show-word-limit :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="业务图片">
+            <image-upload v-model="form.demoImage" :disabled="disabled" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="业务附件" prop="attachment">
+            <file-upload v-model="form.attachment" :bizModel="'demo'" :fileSize="10" :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="业务内容">
+            <editor v-model="form.demoContent" :disabled="disabled" :max-height="400"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="角色ID" prop="roleId">
+            <el-input v-model="form.roleId" placeholder="请输入角色ID"  :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="岗位ID" prop="postId">
+            <el-input v-model="form.postId" placeholder="请输入岗位ID"  :disabled="disabled"/>
+          </el-form-item>
+        </el-col>
+      </el-form>
+    </el-row>
     <div slot="footer" class="dialog-footer" style="text-align: right;">
       <el-button type="primary" @click="exportWord" v-show="disabled">导 出</el-button>
       <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>

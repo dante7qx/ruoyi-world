@@ -212,7 +212,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -220,7 +220,7 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
-    
+
     <!-- 添加或修改业务对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="1000px" v-dialog-drag append-to-body>
       <detail v-if="open" :demoId="demoId" :disabled="disabled"  @closeWindow="closeFlowWin" />
@@ -333,7 +333,7 @@ export default {
   methods: {
     getList() {
       this.loading = true;
-      if (null != this.daterangeDemoTime && '' != this.daterangeDemoTime) {
+      if (null != this.daterangeDemoTime && this.daterangeDemoTime.length > 0) {
         this.queryParams.params["beginDemoTime"] = this.daterangeDemoTime[0];
         this.queryParams.params["endDemoTime"] = this.daterangeDemoTime[1];
       }
@@ -344,8 +344,6 @@ export default {
       });
     },
     handleQuery() {
-      console.log(this.columns)
-      return false
       this.queryParams.pageNum = 1;
       this.getList();
     },
@@ -449,9 +447,9 @@ export default {
 
 <style scoped>
 .unpack {
-  position: absolute; 
+  position: absolute;
   top: 28px;
-  margin-left: 5px;  
+  margin-left: 5px;
   cursor: pointer;
 }
 </style>

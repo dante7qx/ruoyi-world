@@ -101,6 +101,9 @@ public class GenTable extends BaseEntity
     
     /** 生成自定义高级查询 */
     private Boolean genCustAdv = Boolean.FALSE;
+    
+    /** 每行显示字段数量（默认：1行2列） */
+    private Integer rowFieldCount = 2;
 
     public Long getTableId()
     {
@@ -383,6 +386,14 @@ public class GenTable extends BaseEntity
 
 	public void setGenCustAdv(Boolean genCustAdv) {
 		this.genCustAdv = genCustAdv;
+	}
+
+	public Integer getRowFieldCount() {
+		return rowFieldCount;
+	}
+
+	public void setRowFieldCount(Integer rowFieldCount) {
+		this.rowFieldCount = rowFieldCount;
 	}
     
 }

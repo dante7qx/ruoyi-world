@@ -310,7 +310,6 @@ export default {
     highlightedCode(code, key) {
       const vmName = key.substring(key.lastIndexOf("/") + 1, key.indexOf(".vm"));
       const language = vmName.substring(vmName.indexOf(".") + 1, vmName.length);
-      // const result = hljs.highlight(language, code || "", true);
       const result = hljs.highlight(code || "", {language: language, ignoreIllegals: true});
       return result.value || '&nbsp;';
     },

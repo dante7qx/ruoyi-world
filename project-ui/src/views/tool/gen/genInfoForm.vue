@@ -78,7 +78,16 @@
           />
         </el-form-item>
       </el-col>
-
+      <el-col :span="24">
+        <el-form-item prop="rowFieldCount" label="每行显示字段数量">
+          <el-select v-model="info.rowFieldCount">
+            <el-option label="1" value="1" />
+            <el-option label="2" value="2" />
+            <el-option label="3" value="3" />
+            <el-option label="4" value="4" />
+          </el-select>
+        </el-form-item>
+      </el-col>
       <el-col :span="12">
         <el-form-item prop="genType">
           <span slot="label">
@@ -96,7 +105,7 @@
           <el-switch v-model="info.genCustAdv" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
         </el-form-item>
       </el-col>
-  
+
       <el-col :span="24" v-if="info.genType == '1'">
         <el-form-item prop="genPath">
           <span slot="label">
