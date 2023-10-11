@@ -87,6 +87,15 @@ export function setTopInfo(data) {
   })
 }
 
+// 撤销已发布信息
+export function batchWithdraw(data) {
+  return request({
+    url: '/system/info/batch_withdraw',
+    method: 'post',
+    data: data
+  })
+}
+
 // 停用（启用）信息发布
 export function setDisabledInfo(data) {
   return request({

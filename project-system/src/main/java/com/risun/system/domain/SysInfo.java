@@ -91,7 +91,7 @@ public class SysInfo extends BaseEntity {
 	
 
 	/** 状态（0: 草稿，1: 待发布审批，2:已发布） */
-	@Excel(name = "状态", readConverterExp = "0=草稿，1=待发布审批，2=已发布，3=关闭")
+	@Excel(name = "状态", readConverterExp = "0=草稿，1=待发布审批，2=已发布")
 	private String status;
 
 	/** 是否停用 */

@@ -173,8 +173,7 @@ public class SysInfoServiceImpl implements ISysInfoService {
 	@Transactional
 	public int batchApproval(SysInfo sysInfo) {
 		Long[] ids = sysInfo.getIds();
-		boolean approval = sysInfo.getApproval()
-			.booleanValue();
+		boolean approval = sysInfo.getApproval().booleanValue();
 		int result = 0;
 		for (Long id : ids) {
 			SysInfo info = new SysInfo();
@@ -183,6 +182,7 @@ public class SysInfoServiceImpl implements ISysInfoService {
 			info.setStatus(approval ? SysInfo.PUBLISH_STATUS : SysInfo.DRAFT_STATUS);
 			info.setComment(sysInfo.getComment());
 			info.setPublishTime(sysInfo.getPublishTime());
+			info.setAnonymous(sysInfo.getAnonymous());
 			info.setUpdateBy(SecurityUtils.getUsername());
 			info.setUpdateTime(DateUtils.getNowDate());
 			result += sysInfoMapper.updateSysInfo(info);
@@ -210,6 +210,21 @@ public class SysInfoServiceImpl implements ISysInfoService {
 			approvalLog.setOperateType(ApprovalFlowConstats.ACTION_REJECT);
 		}
 
+		return approvalLog;
+	}
+	
+	/**
+	 * 审批日志
+	 * 
+	 * @param sysInfo
+	 * @return
+	 */
+	private SysApprovalLog convert2ApprovalLog(Long infoId) {
+		SysApprovalLog approvalLog = new SysApprovalLog();
+		approvalLog.setBizModel(BizModelConstants.SYS_INFO);
+		approvalLog.setBizId(infoId);
+		approvalLog.setOperator(SecurityUtils.getLoginUser().getUser().getNickName());
+		approvalLog.setOperateTime(DateUtils.getNowDate());
 		return approvalLog;
 	}
 
@@ -250,6 +265,25 @@ public class SysInfoServiceImpl implements ISysInfoService {
 		}
 		return result;
 	}
+	
+	/**
+     * 撤销已发布信息
+     * 
+     * @param sysInfo
+     * @return
+     */
+	@Override
+	@Transactional
+	public int withdrawSysInfo(SysInfo sysInfo) {
+		int result = sysInfoMapper.updateSysInfoWithdraw(sysInfo.getIds(), sysInfo.getStatus());
+    	for (Long infoId : sysInfo.getIds()) {
+    		SysApprovalLog log = this.convert2ApprovalLog(infoId);
+			log.setComment("撤销发布");
+			log.setOperateType(ApprovalFlowConstats.ACTION_WITHDRAW);
+			sysApprovalLogService.insertSysApprovalLog(log);
+		}
+		return result;
+    }
 
 	/**
 	 * 设置（取消）评论信息发布

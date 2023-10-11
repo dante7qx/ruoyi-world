@@ -613,6 +613,7 @@ insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '�
 insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '提交');
 insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批通过');
 insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批驳回');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '已发布的信息被撤销');
 
 -- ----------------------------
 -- 13、参数配置表
