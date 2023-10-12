@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="genInfoForm" :model="info" :rules="rules" label-width="150px">
+  <el-form ref="genInfoForm" :model="info" :rules="rules" label-width="170px">
     <el-row>
       <el-col :span="12">
         <el-form-item prop="tplCategory">
@@ -78,50 +78,57 @@
           />
         </el-form-item>
       </el-col>
-
       <el-col :span="12">
-        <el-form-item prop="genType">
-          <span slot="label">
-            生成代码方式
-            <el-tooltip content="默认为zip压缩包下载，也可以自定义生成路径" placement="top">
-              <i class="el-icon-question"></i>
-            </el-tooltip>
-          </span>
-          <el-radio v-model="info.genType" label="0">zip压缩包</el-radio>
-          <el-radio v-model="info.genType" label="1">自定义路径</el-radio>
+        <el-form-item prop="rowFieldCount" label="每行显示字段数量">
+          <el-select v-model="info.rowFieldCount">
+            <el-option label="1" value="1" />
+            <el-option label="2" value="2" />
+            <el-option label="3" value="3" />
+            <el-option label="4" value="4" />
+          </el-select>
         </el-form-item>
       </el-col>
-
-      <el-col :span="24" v-if="info.genType == '1'">
-        <el-form-item prop="genPath">
-          <span slot="label">
-            自定义路径
-            <el-tooltip content="填写磁盘绝对路径，若不填写，则生成到当前Web项目下" placement="top">
-              <i class="el-icon-question"></i>
-            </el-tooltip>
-          </span>
-          <el-input v-model="info.genPath">
-            <el-dropdown slot="append">
-              <el-button type="primary">
-                最近路径快速选择
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="info.genPath = '/'">恢复默认的生成基础路径</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </el-input>
-        </el-form-item>
-      </el-col>
-
       <el-col :span="12">
         <el-form-item prop="genCustAdv" label="生成自定义高级查询">
           <el-switch v-model="info.genCustAdv" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
         </el-form-item>
       </el-col>
     </el-row>
+    <el-col :span="12">
+      <el-form-item prop="genType">
+          <span slot="label">
+            生成代码方式
+            <el-tooltip content="默认为zip压缩包下载，也可以自定义生成路径" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
+        <el-radio v-model="info.genType" label="0">zip压缩包</el-radio>
+        <el-radio v-model="info.genType" label="1">自定义路径</el-radio>
+      </el-form-item>
+    </el-col>
+    <el-col :span="24" v-if="info.genType === '1'">
+      <el-form-item prop="genPath">
+          <span slot="label">
+            自定义路径
+            <el-tooltip content="填写磁盘绝对路径，若不填写，则生成到当前Web项目下" placement="top">
+              <i class="el-icon-question"></i>
+            </el-tooltip>
+          </span>
+        <el-input v-model="info.genPath">
+          <el-dropdown slot="append">
+            <el-button type="primary">
+              最近路径快速选择
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu v-slot="dropdown">
+              <el-dropdown-item @click.native="info.genPath = '/'">恢复默认的生成基础路径</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-input>
+      </el-form-item>
+    </el-col>
 
-    <el-row v-show="info.tplCategory == 'tree'">
+    <el-row v-show="info.tplCategory === 'tree'">
       <h4 class="form-header">其他信息</h4>
       <el-col :span="12">
         <el-form-item>
@@ -178,7 +185,7 @@
         </el-form-item>
       </el-col>
     </el-row>
-    <el-row v-show="info.tplCategory == 'sub'">
+    <el-row v-show="info.tplCategory === 'sub'">
       <h4 class="form-header">关联信息</h4>
       <el-col :span="12">
         <el-form-item>
@@ -293,7 +300,7 @@ export default {
     },
     /** 设置关联外键 */
     setSubTableColumns(value) {
-      for (var item in this.tables) {
+      for (const item in this.tables) {
         const name = this.tables[item].tableName;
         if (value === name) {
           this.subColumns = this.tables[item].columns;

@@ -29,7 +29,7 @@ COMMENT ON COLUMN sys_camera_monitor.monitor_id is '创建者';
 COMMENT ON COLUMN sys_camera_monitor.monitor_id is '创建时间';
 COMMENT ON COLUMN sys_camera_monitor.monitor_id is '更新者';
 COMMENT ON COLUMN sys_camera_monitor.monitor_id is '更新时间';
-COMMENT ON TABLE t_demo is '视频监控表';
+COMMENT ON TABLE sys_camera_monitor is '视频监控表';
 
 
 -- 菜单相关

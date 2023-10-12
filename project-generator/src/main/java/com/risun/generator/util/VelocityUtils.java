@@ -17,6 +17,7 @@ import com.risun.generator.domain.GenTable;
 import com.risun.generator.domain.GenTableColumn;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -70,6 +71,7 @@ public class VelocityUtils
         velocityContext.put("table", genTable);
         velocityContext.put("dicts", getDicts(genTable));
         velocityContext.put("genCustAdv", genTable.getGenCustAdv());
+        velocityContext.put("rowFieldCount", NumberUtil.div("24", genTable.getRowFieldCount() + "", 0));
         setMenuVelocityContext(velocityContext, genTable);
         if (GenConstants.TPL_TREE.equals(tplCategory))
         {

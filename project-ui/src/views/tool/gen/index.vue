@@ -92,7 +92,7 @@
     <el-table v-loading="loading" :data="tableList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" align="center" width="55"></el-table-column>
       <el-table-column label="序号" type="index" width="50" align="center">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <span>{{(queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1}}</span>
         </template>
       </el-table-column>
@@ -120,7 +120,7 @@
       <el-table-column label="创建时间" align="center" prop="createTime" width="160" />
       <el-table-column label="更新时间" align="center" prop="updateTime" width="160" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button
             type="text"
             size="small"
@@ -267,7 +267,7 @@ export default {
     /** 生成代码操作 */
     handleGenTable(row) {
       const tableNames = row.tableName || this.tableNames;
-      if (tableNames == "") {
+      if (tableNames === "") {
         this.$modal.msgError("请选择要生成的数据");
         return;
       }
@@ -276,7 +276,7 @@ export default {
           this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
         });
       } else {
-        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi");
+        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "risun");
       }
     },
     /** 同步数据库操作 */
@@ -321,7 +321,7 @@ export default {
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.tableId);
       this.tableNames = selection.map(item => item.tableName);
-      this.single = selection.length != 1;
+      this.single = selection.length !== 1;
       this.multiple = !selection.length;
     },
     /** 修改按钮操作 */

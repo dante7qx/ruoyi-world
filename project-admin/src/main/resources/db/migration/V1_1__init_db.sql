@@ -1031,6 +1031,7 @@ create table gen_table (
   gen_type          char(1)         default '0',
   gen_path          varchar(200)    default '/',
   gen_cust_adv      smallint         default 0,
+  row_field_count   smallint         default 2,
   options           varchar(1000),
   create_by         varchar(64)     default '',
   create_time 	    timestamp,
@@ -1053,6 +1054,7 @@ COMMENT ON COLUMN gen_table.function_author IS '生成功能作者';
 COMMENT ON COLUMN gen_table.gen_type IS '生成代码方式（0zip压缩包 1自定义路径）';
 COMMENT ON COLUMN gen_table.gen_path IS '生成路径（不填默认项目路径）';
 COMMENT ON COLUMN gen_table.gen_cust_adv IS '生成自定义高级查询';
+COMMENT ON COLUMN gen_table.row_field_count IS '每行显示字段数量';
 COMMENT ON COLUMN gen_table.options IS '其它生成选项';
 COMMENT ON COLUMN gen_table.create_by IS '创建者';
 COMMENT ON COLUMN gen_table.create_time IS '创建时间';
