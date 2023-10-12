@@ -94,6 +94,7 @@ export default {
       },
 			//初始化配置
       init: {
+        deprecation_warnings: false,
         placeholder: "在这里输入文字",
         convert_urls: false,  //禁用URL自动转换
         language: 'zh_CN',
@@ -105,7 +106,7 @@ export default {
           /\<\/?(if|endif)\>/g, //<if> & </endif>
           /\<xsl\:[^>]+\>/g, //<xsl:...>
           /<\?php.*?\?>/g, //php代码
-        ], 
+        ],
         min_height: this.minHeight,
         max_height: this.maxHeight,
         autoresize_bottom_margin: 50,
@@ -139,7 +140,7 @@ export default {
             let input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', '.doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf');
-            input.onchange = function() { 
+            input.onchange = function() {
               that.handleFileUpload(this.files[0], cb, 'file')
             }
             input.click();
@@ -152,7 +153,7 @@ export default {
               this.handleFileUpload(e.path[0].files[0], cb, 'image')
             }
             */
-            input.onchange = function() { 
+            input.onchange = function() {
               that.handleFileUpload(this.files[0], cb, 'image')
             }
             input.click();
@@ -160,7 +161,7 @@ export default {
             let input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'video/*');
-            input.onchange = function() { 
+            input.onchange = function() {
               that.handleFileUpload(this.files[0], cb, 'media')
             }
             input.click();
@@ -207,7 +208,7 @@ export default {
             cb(process.env.VUE_APP_BASE_API + res.fileName, {alt: file.name})
           } else if(fileType == 'media') {
             cb(process.env.VUE_APP_BASE_API + res.fileName, {title: file.name})
-          } 
+          }
         })
       }
     },
