@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.biz.demo.mapper.DemoSelfMapper">
+
+    <resultMap type="DemoSelf" id="DemoSelfResult">
+        <result property="demoId"    column="demo_id"    />
+        <result property="demoName"    column="demo_name"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDemoSelfVo">
+        select t.demo_id, t.demo_name, t.dept_id, sysdept.dept_name, t.create_by, t.create_time, t.update_by, t.update_time from t_demo_self t
+    	left join sys_dept sysdept on sysdept.dept_id = t.dept_id
+    </sql>
+
+    <select id="selectDemoSelfList" parameterType="DemoSelf" resultMap="DemoSelfResult">
+        <include refid="selectDemoSelfVo"/>
+        <where>  
+            <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
+            <if test="deptId != null "> and t.dept_id = #{deptId}</if>
+            <if test="deptName != null  and deptName != ''"> and sysdept.dept_name = like concat('%', #{deptName}, '%')</if>
+            <!-- 数据范围过滤 -->
+    		${params.dataScope}
+        </where>
+    </select>
+    
+    <select id="selectDemoSelfByDemoId" parameterType="Long" resultMap="DemoSelfResult">
+        <include refid="selectDemoSelfVo"/>
+        where t.demo_id = #{demoId}
+    </select>
+        
+    <insert id="insertDemoSelf" parameterType="DemoSelf" useGeneratedKeys="true" keyProperty="demoId">
+        insert into t_demo_self
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="demoName != null and demoName != ''">demo_name,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="demoName != null and demoName != ''">#{demoName},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDemoSelf" parameterType="DemoSelf">
+        update t_demo_self
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="demoName != null and demoName != ''">demo_name = #{demoName},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where demo_id = #{demoId}
+    </update>
+
+    <delete id="deleteDemoSelfByDemoId" parameterType="Long">
+        delete from t_demo_self where demo_id = #{demoId}
+    </delete>
+
+    <delete id="deleteDemoSelfByDemoIds" parameterType="String">
+        delete from t_demo_self where demo_id in 
+        <foreach item="demoId" collection="array" open="(" separator="," close=")">
+            #{demoId}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsertDemoSelf" parameterType="java.util.List">
+        insert into t_demo_self (demo_name, dept_id, create_by, create_time)
+        values
+        <foreach item="item" collection="list" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+  #{item.demoName}, #{item.deptId}, #{item.createBy}, #{item.createTime}  
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="batchUpdateDemoSelf" parameterType="java.util.List">
+        update t_demo_self
+        <trim prefix="SET" suffixOverrides=",">
+            demo_name = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.demoName}
+            </foreach>,
+            dept_id = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.deptId}
+            </foreach>,
+            update_by = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.updateBy}
+            </foreach>,
+            update_time = 
+            <foreach collection="list" item="item" separator=" " open="CASE demo_name" close="END">
+                WHEN #{item.demoName} THEN #{item.updateTime}
+            </foreach>
+            where demo_name in
+            <foreach collection="list" item="item" separator="," open="(" close=")">
+                #{item.demoName}
+            </foreach>
+        </trim>
+    </update>
+    
+</mapper>
