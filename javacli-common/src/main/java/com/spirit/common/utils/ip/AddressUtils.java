@@ -39,13 +39,13 @@ public class AddressUtils
         {
             try
             {
-            	String rspStr = HttpUtil.get(IP_URL + "?ip=" + ip + "&json=true", Charset.forName(Constants.GBK));
-                if (StrUtil.isEmpty(rspStr))
+            	String str = HttpUtil.get(IP_URL + "?ip=" + ip + "&json=true", Charset.forName(Constants.GBK));
+                if (StrUtil.isEmpty(str))
                 {
                     log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }
-                JSONObject obj = JSON.parseObject(rspStr);
+                JSONObject obj = JSON.parseObject(str);
                 String region = obj.getString("pro");
                 String city = obj.getString("city");
                 return String.format("%s %s", region, city);
