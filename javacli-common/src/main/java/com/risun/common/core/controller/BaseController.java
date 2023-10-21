@@ -1,4 +1,4 @@
-package com.risun.common.core.controller;
+package com.spirit.common.core.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.risun.common.constant.HttpStatus;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.page.PageDomain;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.core.page.TableSupport;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.PageUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.sql.SqlUtil;
+import com.spirit.common.constant.HttpStatus;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.page.PageDomain;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.core.page.TableSupport;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.PageUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.sql.SqlUtil;
 
 import cn.hutool.core.util.StrUtil;
 

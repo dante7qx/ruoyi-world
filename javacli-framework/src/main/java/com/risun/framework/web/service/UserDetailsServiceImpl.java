@@ -1,4 +1,4 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.enums.UserStatus;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.MessageUtils;
-import com.risun.system.service.ISysUserService;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.enums.UserStatus;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.MessageUtils;
+import com.spirit.system.service.ISysUserService;
 
 import cn.hutool.core.util.ObjectUtil;
 

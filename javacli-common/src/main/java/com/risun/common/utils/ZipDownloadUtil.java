@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.risun.common.constant.Constants;
+import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;

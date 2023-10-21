@@ -1,4 +1,4 @@
-package com.risun.framework.interceptor;
+package com.spirit.framework.interceptor;
 
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import com.alibaba.fastjson2.JSON;
-import com.risun.common.annotation.RepeatSubmit;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.ServletUtils;
+import com.spirit.common.annotation.RepeatSubmit;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.utils.ServletUtils;
 
 /**
  * 防止重复提交拦截器

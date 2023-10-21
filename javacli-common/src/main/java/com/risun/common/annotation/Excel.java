@@ -1,4 +1,4 @@
-package com.risun.common.annotation;
+package com.spirit.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
-import com.risun.common.utils.poi.ExcelHandlerAdapter;
+import com.spirit.common.utils.poi.ExcelHandlerAdapter;
 
 /**
  * 自定义导出Excel数据注解

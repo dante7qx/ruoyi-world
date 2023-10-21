@@ -1,4 +1,4 @@
-package com.risun.web.controller.common;
+package com.spirit.web.controller.common;
 
 import javax.annotation.PostConstruct;
 
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Anonymous;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.wordfilter.SensitiveWordUtil;
+import com.spirit.common.annotation.Anonymous;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.utils.wordfilter.SensitiveWordUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,12 +26,12 @@ import lombok.extern.slf4j.Slf4j;
 public class HealthCheckController {
 	
 	@Autowired
-	private RisunConfig risunConfig;
+	private RisunConfig spiritConfig;
 	
 	@PostConstruct
 	@SuppressWarnings("static-access")
 	public void init() {
-		String path = risunConfig.getProfile() + "/SensitiveWord1.txt";
+		String path = spiritConfig.getProfile() + "/SensitiveWord1.txt";
 		log.info("加载敏感词文件 - {}", path);
 		SensitiveWordUtil.loadWordFromFile(path);
 	}

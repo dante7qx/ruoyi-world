@@ -1,9 +1,9 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.awt.Color;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;

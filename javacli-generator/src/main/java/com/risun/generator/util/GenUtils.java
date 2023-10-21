@@ -1,13 +1,13 @@
-package com.risun.generator.util;
+package com.spirit.generator.util;
 
 import java.util.Arrays;
 
 import org.apache.commons.lang3.RegExUtils;
 
-import com.risun.common.constant.GenConstants;
-import com.risun.generator.config.GenConfig;
-import com.risun.generator.domain.GenTable;
-import com.risun.generator.domain.GenTableColumn;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.generator.config.GenConfig;
+import com.spirit.generator.domain.GenTable;
+import com.spirit.generator.domain.GenTableColumn;
 
 import cn.hutool.core.util.StrUtil;
 

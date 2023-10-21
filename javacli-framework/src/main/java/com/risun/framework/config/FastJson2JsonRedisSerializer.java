@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import java.nio.charset.Charset;
 
@@ -9,7 +9,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
 import com.alibaba.fastjson2.JSONWriter;
 import com.alibaba.fastjson2.filter.Filter;
-import com.risun.common.constant.Constants;
+import com.spirit.common.constant.Constants;
 
 /**
  * Redis使用FastJson序列化

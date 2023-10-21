@@ -1,10 +1,10 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 import java.util.Set;
 
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.system.domain.SysUserRole;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.system.domain.SysUserRole;
 
 /**
  * 角色业务层

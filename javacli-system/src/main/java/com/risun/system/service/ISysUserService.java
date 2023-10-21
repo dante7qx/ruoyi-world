@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.entity.SysUser;
 
 /**
  * 用户 业务层

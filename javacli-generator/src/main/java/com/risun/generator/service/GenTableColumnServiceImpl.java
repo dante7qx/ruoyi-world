@@ -1,14 +1,14 @@
-package com.risun.generator.service;
+package com.spirit.generator.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.core.text.Convert;
-import com.risun.generator.domain.GenTableColumn;
-import com.risun.generator.mapper.GenTableColumnMapper;
-import com.risun.generator.util.GenUtils;
+import com.spirit.common.core.text.Convert;
+import com.spirit.generator.domain.GenTableColumn;
+import com.spirit.generator.mapper.GenTableColumnMapper;
+import com.spirit.generator.util.GenUtils;
 
 /**
  * 业务字段 服务层实现

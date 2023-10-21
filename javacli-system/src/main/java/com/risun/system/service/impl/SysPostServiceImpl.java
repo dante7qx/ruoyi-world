@@ -1,16 +1,16 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.constant.UserConstants;
-import com.risun.common.exception.ServiceException;
-import com.risun.system.domain.SysPost;
-import com.risun.system.mapper.SysPostMapper;
-import com.risun.system.mapper.SysUserPostMapper;
-import com.risun.system.service.ISysPostService;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.system.domain.SysPost;
+import com.spirit.system.mapper.SysPostMapper;
+import com.spirit.system.mapper.SysUserPostMapper;
+import com.spirit.system.service.ISysPostService;
 
 import cn.hutool.core.util.ObjectUtil;
 

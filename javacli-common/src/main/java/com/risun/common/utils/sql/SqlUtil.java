@@ -1,6 +1,6 @@
-package com.risun.common.utils.sql;
+package com.spirit.common.utils.sql;
 
-import com.risun.common.exception.UtilException;
+import com.spirit.common.exception.UtilException;
 
 import cn.hutool.core.util.StrUtil;
 

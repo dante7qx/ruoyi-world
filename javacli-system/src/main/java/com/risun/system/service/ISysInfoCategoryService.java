@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysInfoCategory;
+import com.spirit.system.domain.SysInfoCategory;
 
 /**
  * 信息栏目Service接口

@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 import java.util.Set;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysMenu;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginBody;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.web.service.SysLoginService;
-import com.risun.framework.web.service.SysPermissionService;
-import com.risun.system.service.ISysMenuService;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.entity.SysMenu;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginBody;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.web.service.SysLoginService;
+import com.spirit.framework.web.service.SysPermissionService;
+import com.spirit.system.service.ISysMenuService;
 
 /**
  * 登录验证

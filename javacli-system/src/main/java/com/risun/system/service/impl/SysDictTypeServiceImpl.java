@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.entity.SysDictData;
-import com.risun.common.core.domain.entity.SysDictType;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.DictUtils;
-import com.risun.system.mapper.SysDictDataMapper;
-import com.risun.system.mapper.SysDictTypeMapper;
-import com.risun.system.service.ISysDictTypeService;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.entity.SysDictData;
+import com.spirit.common.core.domain.entity.SysDictType;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.DictUtils;
+import com.spirit.system.mapper.SysDictDataMapper;
+import com.spirit.system.mapper.SysDictTypeMapper;
+import com.spirit.system.service.ISysDictTypeService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

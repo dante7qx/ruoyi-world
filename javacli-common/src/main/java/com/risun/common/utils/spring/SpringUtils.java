@@ -1,4 +1,4 @@
-package com.risun.common.utils.spring;
+package com.spirit.common.utils.spring;
 
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;

@@ -1,4 +1,4 @@
-package com.risun.generator.util;
+package com.spirit.generator.util;
 
 import static java.util.stream.Collectors.toList;
 
@@ -11,10 +11,10 @@ import org.apache.velocity.VelocityContext;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.risun.common.constant.GenConstants;
-import com.risun.common.utils.DateUtils;
-import com.risun.generator.domain.GenTable;
-import com.risun.generator.domain.GenTableColumn;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.generator.domain.GenTable;
+import com.spirit.generator.domain.GenTableColumn;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.NumberUtil;

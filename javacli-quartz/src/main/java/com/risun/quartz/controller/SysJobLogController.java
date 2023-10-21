@@ -1,17 +1,17 @@
-package com.risun.quartz.controller;
+package com.spirit.quartz.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.quartz.domain.SysJobLog;
-import com.risun.quartz.service.ISysJobLogService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.quartz.domain.SysJobLog;
+import com.spirit.quartz.service.ISysJobLogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

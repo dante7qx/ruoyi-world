@@ -1,9 +1,9 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import com.github.pagehelper.PageHelper;
-import com.risun.common.core.page.PageDomain;
-import com.risun.common.core.page.TableSupport;
-import com.risun.common.utils.sql.SqlUtil;
+import com.spirit.common.core.page.PageDomain;
+import com.spirit.common.core.page.TableSupport;
+import com.spirit.common.utils.sql.SqlUtil;
 
 /**
  * 分页工具类

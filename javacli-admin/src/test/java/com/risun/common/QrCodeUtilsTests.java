@@ -1,4 +1,4 @@
-package com.risun.common;
+package com.spirit.common;
 
 import java.awt.Color;
 
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.alibaba.fastjson2.JSON;
-import com.risun.RisunApplicationTests;
-import com.risun.biz.demo.domain.Demo;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.QrCodeUtils;
+import com.spirit.RisunApplicationTests;
+import com.spirit.biz.demo.domain.Demo;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.QrCodeUtils;
 
 import cn.hutool.core.util.ClassUtil;
 import lombok.extern.slf4j.Slf4j;

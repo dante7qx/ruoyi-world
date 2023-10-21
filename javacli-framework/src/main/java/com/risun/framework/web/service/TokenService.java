@@ -1,4 +1,4 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.ip.AddressUtils;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.common.utils.uuid.IdUtils;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.common.utils.ip.AddressUtils;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.common.utils.uuid.IdUtils;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

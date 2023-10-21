@@ -1,4 +1,4 @@
-package com.risun.web.controller.monitor;
+package com.spirit.web.controller.monitor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.enums.BusinessType;
-import com.risun.system.domain.SysUserOnline;
-import com.risun.system.service.ISysUserOnlineService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.system.domain.SysUserOnline;
+import com.spirit.system.service.ISysUserOnlineService;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

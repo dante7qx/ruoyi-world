@@ -1,4 +1,4 @@
-package com.risun.common.core.domain.entity;
+package com.spirit.common.core.domain.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 部门表 sys_dept

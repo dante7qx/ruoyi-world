@@ -1,4 +1,4 @@
-package com.risun.generator.service;
+package com.spirit.generator.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,18 +25,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.GenConstants;
-import com.risun.common.core.text.CharsetKit;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.generator.domain.GenTable;
-import com.risun.generator.domain.GenTableColumn;
-import com.risun.generator.mapper.GenTableColumnMapper;
-import com.risun.generator.mapper.GenTableMapper;
-import com.risun.generator.util.GenUtils;
-import com.risun.generator.util.VelocityInitializer;
-import com.risun.generator.util.VelocityUtils;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.common.core.text.CharsetKit;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.generator.domain.GenTable;
+import com.spirit.generator.domain.GenTableColumn;
+import com.spirit.generator.mapper.GenTableColumnMapper;
+import com.spirit.generator.mapper.GenTableMapper;
+import com.spirit.generator.util.GenUtils;
+import com.spirit.generator.util.VelocityInitializer;
+import com.spirit.generator.util.VelocityUtils;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

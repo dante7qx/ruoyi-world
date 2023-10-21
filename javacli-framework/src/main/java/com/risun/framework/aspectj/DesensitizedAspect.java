@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.annotation.DesensitizeField;
-import com.risun.common.annotation.DesensitizeMethod;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.DesensitizeType;
-import com.risun.common.exception.ServiceException;
+import com.spirit.common.annotation.DesensitizeField;
+import com.spirit.common.annotation.DesensitizeMethod;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.DesensitizeType;
+import com.spirit.common.exception.ServiceException;
 import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.collection.CollUtil;

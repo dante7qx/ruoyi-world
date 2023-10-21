@@ -1,6 +1,6 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
-import com.risun.system.domain.SysUserPwdModify;
+import com.spirit.system.domain.SysUserPwdModify;
 
 /**
  * 用户密码修改记录Mapper接口

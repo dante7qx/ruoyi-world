@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 /**
  * 处理并记录日志文件

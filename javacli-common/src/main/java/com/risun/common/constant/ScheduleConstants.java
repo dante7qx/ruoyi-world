@@ -1,4 +1,4 @@
-package com.risun.common.constant;
+package com.spirit.common.constant;
 
 /**
  * 任务调度通用常量

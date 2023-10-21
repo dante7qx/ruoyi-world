@@ -1,4 +1,4 @@
-package com.risun.common.core.text;
+package com.spirit.common.core.text;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,9 +1,9 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.io.IOException;
 import java.util.List;
 
-import com.risun.system.domain.SysAttachment;
+import com.spirit.system.domain.SysAttachment;
 
 import org.springframework.web.multipart.MultipartFile;
 

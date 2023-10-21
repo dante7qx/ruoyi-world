@@ -1,4 +1,4 @@
-package com.risun.web.controller.monitor;
+package com.spirit.web.controller.monitor;
 
 import java.util.List;
 import java.util.Map;
@@ -19,15 +19,15 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
 import com.google.common.collect.Maps;
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.system.domain.SysCameraMonitor;
-import com.risun.system.service.ISysCameraMonitorService;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.system.domain.SysCameraMonitor;
+import com.spirit.system.service.ISysCameraMonitorService;
+import com.spirit.system.service.ISysConfigService;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.http.HttpUtil;

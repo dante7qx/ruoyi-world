@@ -1,20 +1,20 @@
-package com.risun.framework.manager.factory;
+package com.spirit.framework.manager.factory;
 
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.utils.LogUtils;
-import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.ip.AddressUtils;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.system.domain.SysLogininfor;
-import com.risun.system.domain.SysOperLog;
-import com.risun.system.service.ISysLogininforService;
-import com.risun.system.service.ISysOperLogService;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.utils.LogUtils;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.common.utils.ip.AddressUtils;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.system.domain.SysLogininfor;
+import com.spirit.system.domain.SysOperLog;
+import com.spirit.system.service.ISysLogininforService;
+import com.spirit.system.service.ISysOperLogService;
 
 import cn.hutool.core.util.StrUtil;
 import eu.bitwalker.useragentutils.UserAgent;

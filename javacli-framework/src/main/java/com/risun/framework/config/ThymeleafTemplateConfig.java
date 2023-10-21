@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import java.nio.charset.StandardCharsets;
 

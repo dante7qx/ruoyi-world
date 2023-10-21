@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.system.domain.SysRoleMenu;
+import com.spirit.system.domain.SysRoleMenu;
 
 /**
  * 角色与菜单关联表 数据层

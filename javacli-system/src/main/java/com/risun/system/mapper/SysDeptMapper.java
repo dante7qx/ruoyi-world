@@ -1,9 +1,9 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import com.risun.common.core.domain.entity.SysDept;
+import com.spirit.common.core.domain.entity.SysDept;
 
 /**
  * 部门管理 数据层

@@ -1,4 +1,4 @@
-package com.risun.quartz.util;
+package com.spirit.quartz.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronScheduleBuilder;
@@ -12,12 +12,12 @@ import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.ScheduleConstants;
-import com.risun.common.exception.job.TaskException;
-import com.risun.common.exception.job.TaskException.Code;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.quartz.domain.SysJob;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.ScheduleConstants;
+import com.spirit.common.exception.job.TaskException;
+import com.spirit.common.exception.job.TaskException.Code;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.quartz.domain.SysJob;
 
 import cn.hutool.core.util.StrUtil;
 

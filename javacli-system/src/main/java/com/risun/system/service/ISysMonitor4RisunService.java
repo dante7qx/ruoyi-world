@@ -1,4 +1,4 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 /**
  * 项目健康指数和客户活跃度感知

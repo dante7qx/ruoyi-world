@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import static java.util.stream.Collectors.toList;
 
@@ -12,19 +12,19 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.annotation.DataScope;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.TreeSelect;
-import com.risun.common.core.domain.entity.SysDept;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.text.Convert;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.system.mapper.SysDeptMapper;
-import com.risun.system.mapper.SysRoleMapper;
-import com.risun.system.service.ISysDeptService;
+import com.spirit.common.annotation.DataScope;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.TreeSelect;
+import com.spirit.common.core.domain.entity.SysDept;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.system.mapper.SysDeptMapper;
+import com.spirit.system.mapper.SysRoleMapper;
+import com.spirit.system.service.ISysDeptService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

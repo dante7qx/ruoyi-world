@@ -1,9 +1,9 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.BaseEntity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

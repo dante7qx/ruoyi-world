@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.util.Objects;
 
@@ -13,8 +13,8 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.annotation.DataSource;
-import com.risun.framework.datasource.DynamicDataSourceContextHolder;
+import com.spirit.common.annotation.DataSource;
+import com.spirit.framework.datasource.DynamicDataSourceContextHolder;
 
 import cn.hutool.core.util.ObjectUtil;
 
@@ -30,8 +30,8 @@ public class DataSourceAspect
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.risun.common.annotation.DataSource)"
-            + "|| @within(com.risun.common.annotation.DataSource)")
+    @Pointcut("@annotation(com.spirit.common.annotation.DataSource)"
+            + "|| @within(com.spirit.common.annotation.DataSource)")
     public void dsPointCut()
     {
 

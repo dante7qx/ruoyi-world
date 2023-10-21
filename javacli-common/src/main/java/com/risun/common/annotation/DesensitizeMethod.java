@@ -1,4 +1,4 @@
-package com.risun.common.annotation;
+package com.spirit.common.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

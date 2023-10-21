@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysRole;
 
 /**
  * 角色表 数据层

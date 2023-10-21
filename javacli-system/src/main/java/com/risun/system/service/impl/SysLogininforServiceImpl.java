@@ -1,12 +1,12 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.system.domain.SysLogininfor;
-import com.risun.system.mapper.SysLogininforMapper;
-import com.risun.system.service.ISysLogininforService;
+import com.spirit.system.domain.SysLogininfor;
+import com.spirit.system.mapper.SysLogininforMapper;
+import com.spirit.system.service.ISysLogininforService;
 
 /**
  * 系统访问日志情况信息 服务层处理

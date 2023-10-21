@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,20 +11,20 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.TreeSelect;
-import com.risun.common.core.domain.entity.SysMenu;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.utils.SecurityUtils;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.TreeSelect;
+import com.spirit.common.core.domain.entity.SysMenu;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.utils.SecurityUtils;
 import org.apache.commons.lang3.StringUtils;
-import com.risun.system.domain.vo.MetaVo;
-import com.risun.system.domain.vo.RouterVo;
-import com.risun.system.mapper.SysMenuMapper;
-import com.risun.system.mapper.SysRoleMapper;
-import com.risun.system.mapper.SysRoleMenuMapper;
-import com.risun.system.service.ISysMenuService;
+import com.spirit.system.domain.vo.MetaVo;
+import com.spirit.system.domain.vo.RouterVo;
+import com.spirit.system.mapper.SysMenuMapper;
+import com.spirit.system.mapper.SysRoleMapper;
+import com.spirit.system.mapper.SysRoleMenuMapper;
+import com.spirit.system.service.ISysMenuService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

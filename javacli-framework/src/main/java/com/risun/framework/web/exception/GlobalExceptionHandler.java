@@ -1,4 +1,4 @@
-package com.risun.framework.web.exception;
+package com.spirit.framework.web.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.risun.common.constant.HttpStatus;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.exception.DemoModeException;
-import com.risun.common.exception.ServiceException;
+import com.spirit.common.constant.HttpStatus;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.exception.DemoModeException;
+import com.spirit.common.exception.ServiceException;
 
 import cn.hutool.core.util.ObjectUtil;
 

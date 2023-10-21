@@ -1,17 +1,17 @@
-package com.risun.framework.web.domain;
+package com.spirit.framework.web.domain;
 
 import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-import com.risun.common.utils.Arith;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.framework.web.domain.server.Cpu;
-import com.risun.framework.web.domain.server.Jvm;
-import com.risun.framework.web.domain.server.Mem;
-import com.risun.framework.web.domain.server.Sys;
-import com.risun.framework.web.domain.server.SysFile;
+import com.spirit.common.utils.Arith;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.framework.web.domain.server.Cpu;
+import com.spirit.framework.web.domain.server.Jvm;
+import com.spirit.framework.web.domain.server.Mem;
+import com.spirit.framework.web.domain.server.Sys;
+import com.spirit.framework.web.domain.server.SysFile;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;

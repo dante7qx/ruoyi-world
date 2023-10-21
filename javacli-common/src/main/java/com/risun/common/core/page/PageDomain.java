@@ -1,4 +1,4 @@
-package com.risun.common.core.page;
+package com.spirit.common.core.page;
 
 
 import cn.hutool.core.util.ObjectUtil;

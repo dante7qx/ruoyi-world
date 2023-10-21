@@ -1,4 +1,4 @@
-package com.risun.generator.domain;
+package com.spirit.generator.domain;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.risun.common.constant.GenConstants;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.common.core.domain.BaseEntity;
 
 import cn.hutool.core.util.StrUtil;
 

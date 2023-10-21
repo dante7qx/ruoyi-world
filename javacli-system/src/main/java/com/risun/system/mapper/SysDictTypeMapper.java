@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.common.core.domain.entity.SysDictType;
+import com.spirit.common.core.domain.entity.SysDictType;
 
 /**
  * 字典表 数据层

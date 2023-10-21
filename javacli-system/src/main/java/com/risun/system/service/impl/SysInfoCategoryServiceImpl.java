@@ -1,16 +1,16 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysInfoCategory;
-import com.risun.system.mapper.SysInfoCategoryMapper;
-import com.risun.system.service.ISysInfoCategoryService;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysInfoCategory;
+import com.spirit.system.mapper.SysInfoCategoryMapper;
+import com.spirit.system.service.ISysInfoCategoryService;
 
 import cn.hutool.core.util.StrUtil;
 

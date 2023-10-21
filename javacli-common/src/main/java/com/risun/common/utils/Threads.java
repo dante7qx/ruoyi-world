@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;

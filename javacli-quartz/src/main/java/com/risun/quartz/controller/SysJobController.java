@@ -1,4 +1,4 @@
-package com.risun.quartz.controller;
+package com.spirit.quartz.controller;
 
 import java.util.List;
 
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.exception.job.TaskException;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.quartz.domain.SysJob;
-import com.risun.quartz.service.ISysJobService;
-import com.risun.quartz.util.CronUtils;
-import com.risun.quartz.util.ScheduleUtils;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.exception.job.TaskException;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.quartz.domain.SysJob;
+import com.spirit.quartz.service.ISysJobService;
+import com.spirit.quartz.util.CronUtils;
+import com.spirit.quartz.util.ScheduleUtils;
 
 import cn.hutool.core.util.StrUtil;
 

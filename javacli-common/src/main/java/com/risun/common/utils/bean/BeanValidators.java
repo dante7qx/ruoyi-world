@@ -1,4 +1,4 @@
-package com.risun.common.utils.bean;
+package com.spirit.common.utils.bean;
 
 import java.util.Set;
 import javax.validation.ConstraintViolation;

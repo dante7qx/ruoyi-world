@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { parseStrEmpty } from "@/utils/risun";
+import { parseStrEmpty } from "@/utils/spirit";
 
 // 查询用户列表
 export function listUser(query) {

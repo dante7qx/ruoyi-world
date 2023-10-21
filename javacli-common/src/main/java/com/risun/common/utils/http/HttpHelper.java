@@ -1,4 +1,4 @@
-package com.risun.common.utils.http;
+package com.spirit.common.utils.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;

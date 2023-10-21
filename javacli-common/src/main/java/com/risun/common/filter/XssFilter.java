@@ -1,4 +1,4 @@
-package com.risun.common.filter;
+package com.spirit.common.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.AntPathMatcher;
 
-import com.risun.common.enums.HttpMethod;
+import com.spirit.common.enums.HttpMethod;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

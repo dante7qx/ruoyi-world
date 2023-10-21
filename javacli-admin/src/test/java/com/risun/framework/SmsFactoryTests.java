@@ -1,4 +1,4 @@
-package com.risun.framework;
+package com.spirit.framework;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.risun.RisunApplicationTests;
-import com.risun.framework.sms.SmsFactory;
+import com.spirit.RisunApplicationTests;
+import com.spirit.framework.sms.SmsFactory;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
@@ -43,7 +43,7 @@ class SmsFactoryTests extends RisunApplicationTests {
 	
 	@Test
 	void invokeExternalSmsInc() {
-		String url = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
+		String url = "http://ccgp-ts.spirit-tec.cn/ccgp-ts/biz/app/sendMsg";
 		String code = RandomUtil.randomNumbers(6);
 		Console.log(code);
 		JSONObject json = new JSONObject();
@@ -57,7 +57,7 @@ class SmsFactoryTests extends RisunApplicationTests {
 	
 	
 	/**
-	String urls = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
+	String urls = "http://ccgp-ts.spirit-tec.cn/ccgp-ts/biz/app/sendMsg";
     JSONObject json = new JSONObject();
     //手机号
     json.put("phone", imptPerPhone);

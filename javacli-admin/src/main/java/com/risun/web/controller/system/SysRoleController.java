@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 
@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDept;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.framework.web.service.SysPermissionService;
-import com.risun.framework.web.service.TokenService;
-import com.risun.system.domain.SysUserRole;
-import com.risun.system.service.ISysDeptService;
-import com.risun.system.service.ISysRoleService;
-import com.risun.system.service.ISysUserService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.entity.SysDept;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.framework.web.service.SysPermissionService;
+import com.spirit.framework.web.service.TokenService;
+import com.spirit.system.domain.SysUserRole;
+import com.spirit.system.service.ISysDeptService;
+import com.spirit.system.service.ISysRoleService;
+import com.spirit.system.service.ISysUserService;
 
 import cn.hutool.core.util.ObjectUtil;
 

@@ -1,18 +1,18 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import java.util.concurrent.TimeUnit;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.exception.user.UserPasswordNotMatchException;
-import com.risun.common.exception.user.UserPasswordRetryLimitExceedException;
-import com.risun.common.utils.MessageUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.manager.AsyncManager;
-import com.risun.framework.manager.factory.AsyncFactory;
-import com.risun.framework.security.context.AuthenticationContextHolder;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.exception.user.UserPasswordNotMatchException;
+import com.spirit.common.exception.user.UserPasswordRetryLimitExceedException;
+import com.spirit.common.utils.MessageUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.manager.AsyncManager;
+import com.spirit.framework.manager.factory.AsyncFactory;
+import com.spirit.framework.security.context.AuthenticationContextHolder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

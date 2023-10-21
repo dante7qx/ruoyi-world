@@ -1,18 +1,18 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.Date;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.enums.GlobalArgConfigEnum;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysUserPwdModify;
-import com.risun.system.mapper.SysUserPwdModifyMapper;
-import com.risun.system.service.ISysConfigService;
-import com.risun.system.service.ISysUserPwdModifyService;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.enums.GlobalArgConfigEnum;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysUserPwdModify;
+import com.spirit.system.mapper.SysUserPwdModifyMapper;
+import com.spirit.system.service.ISysConfigService;
+import com.spirit.system.service.ISysUserPwdModifyService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

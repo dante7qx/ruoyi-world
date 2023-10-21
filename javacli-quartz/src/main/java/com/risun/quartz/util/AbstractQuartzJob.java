@@ -1,4 +1,4 @@
-package com.risun.quartz.util;
+package com.spirit.quartz.util;
 
 import java.util.Date;
 
@@ -8,14 +8,14 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.ScheduleConstants;
-import com.risun.common.utils.ExceptionUtil;
-import com.risun.common.utils.bean.BeanUtils;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.quartz.domain.SysJob;
-import com.risun.quartz.domain.SysJobLog;
-import com.risun.quartz.service.ISysJobLogService;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.ScheduleConstants;
+import com.spirit.common.utils.ExceptionUtil;
+import com.spirit.common.utils.bean.BeanUtils;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.quartz.domain.SysJob;
+import com.spirit.quartz.domain.SysJobLog;
+import com.spirit.quartz.service.ISysJobLogService;
 
 import cn.hutool.core.util.StrUtil;
 

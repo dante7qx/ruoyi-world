@@ -1,14 +1,14 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDept;
-import com.risun.common.enums.BusinessType;
-import com.risun.system.service.ISysDeptService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.entity.SysDept;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.system.service.ISysDeptService;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

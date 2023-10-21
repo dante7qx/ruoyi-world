@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.system.domain.SysOperLog;
+import com.spirit.system.domain.SysOperLog;
 
 /**
  * 操作日志 服务层

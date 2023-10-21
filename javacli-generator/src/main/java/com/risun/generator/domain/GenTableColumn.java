@@ -1,8 +1,8 @@
-package com.risun.generator.domain;
+package com.spirit.generator.domain;
 
 import javax.validation.constraints.NotBlank;
 
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.BaseEntity;
 
 import cn.hutool.core.util.StrUtil;
 

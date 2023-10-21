@@ -1,9 +1,9 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import com.risun.common.core.domain.entity.SysMenu;
+import com.spirit.common.core.domain.entity.SysMenu;
 
 /**
  * 菜单表 数据层

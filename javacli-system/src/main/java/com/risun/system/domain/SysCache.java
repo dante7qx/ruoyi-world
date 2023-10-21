@@ -1,4 +1,4 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 import cn.hutool.core.util.StrUtil;
 

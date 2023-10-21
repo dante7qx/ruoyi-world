@@ -1,4 +1,4 @@
-package com.risun.common.utils.wordfilter;
+package com.spirit.common.utils.wordfilter;
 
 public class SensitiveWord implements Comparable<SensitiveWord>{
     public char c;

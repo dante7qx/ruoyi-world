@@ -1,13 +1,13 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.mapper.SysSmsLogMapper;
-import com.risun.system.domain.SysSmsLog;
-import com.risun.system.service.ISysSmsLogService;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.mapper.SysSmsLogMapper;
+import com.spirit.system.domain.SysSmsLog;
+import com.spirit.system.service.ISysSmsLogService;
 
 /**
  * 短信日志Service业务层处理

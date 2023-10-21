@@ -1,6 +1,6 @@
-package com.risun.common.exception.base;
+package com.spirit.common.exception.base;
 
-import com.risun.common.utils.MessageUtils;
+import com.spirit.common.utils.MessageUtils;
 
 import cn.hutool.core.util.StrUtil;
 

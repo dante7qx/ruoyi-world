@@ -1,12 +1,12 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.system.domain.SysOperLog;
-import com.risun.system.mapper.SysOperLogMapper;
-import com.risun.system.service.ISysOperLogService;
+import com.spirit.system.domain.SysOperLog;
+import com.spirit.system.mapper.SysOperLogMapper;
+import com.spirit.system.service.ISysOperLogService;
 
 /**
  * 操作日志 服务层处理

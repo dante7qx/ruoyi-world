@@ -1,9 +1,9 @@
-package com.risun.common.core.domain;
+package com.spirit.common.core.domain;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-import com.risun.common.constant.HttpStatus;
+import com.spirit.common.constant.HttpStatus;
 
 import cn.hutool.core.util.ObjectUtil;
 

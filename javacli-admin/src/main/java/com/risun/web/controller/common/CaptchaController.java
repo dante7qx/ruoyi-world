@@ -1,4 +1,4 @@
-package com.risun.web.controller.common;
+package com.spirit.web.controller.common;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.code.kaptcha.Producer;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.utils.uuid.IdUtils;
-import com.risun.framework.web.service.SysLoginService;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.utils.uuid.IdUtils;
+import com.spirit.framework.web.service.SysLoginService;
+import com.spirit.system.service.ISysConfigService;
 
 /**
  * 验证码操作处理

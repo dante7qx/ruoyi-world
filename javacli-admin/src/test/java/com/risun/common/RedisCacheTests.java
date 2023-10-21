@@ -1,4 +1,4 @@
-package com.risun.common;
+package com.spirit.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.risun.RisunApplicationTests;
-import com.risun.common.core.redis.RedisCache;
+import com.spirit.RisunApplicationTests;
+import com.spirit.common.core.redis.RedisCache;
 
 class RedisCacheTests extends RisunApplicationTests {
 	

@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

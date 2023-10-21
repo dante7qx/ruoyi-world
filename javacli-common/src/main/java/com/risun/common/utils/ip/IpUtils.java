@@ -1,4 +1,4 @@
-package com.risun.common.utils.ip;
+package com.spirit.common.utils.ip;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

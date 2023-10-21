@@ -1,4 +1,4 @@
-package com.risun.biz.demo.controller;
+package com.spirit.biz.demo.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
-import com.risun.biz.demo.domain.Demo;
-import com.risun.biz.demo.service.IDemoService;
-import com.risun.common.annotation.DesensitizeMethod;
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.common.utils.poitl.WordExportUtil;
-import com.risun.common.utils.wordfilter.SensitiveWordUtil;
+import com.spirit.biz.demo.domain.Demo;
+import com.spirit.biz.demo.service.IDemoService;
+import com.spirit.common.annotation.DesensitizeMethod;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.common.utils.poitl.WordExportUtil;
+import com.spirit.common.utils.wordfilter.SensitiveWordUtil;
 
 import cn.hutool.core.date.DateUtil;
 

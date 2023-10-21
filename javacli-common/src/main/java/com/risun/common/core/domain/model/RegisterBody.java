@@ -1,4 +1,4 @@
-package com.risun.common.core.domain.model;
+package com.spirit.common.core.domain.model;
 
 /**
  * 用户注册对象

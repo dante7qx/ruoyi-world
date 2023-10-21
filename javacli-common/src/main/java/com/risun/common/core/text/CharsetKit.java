@@ -1,4 +1,4 @@
-package com.risun.common.core.text;
+package com.spirit.common.core.text;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

@@ -1,6 +1,6 @@
-package com.risun.common.exception.user;
+package com.spirit.common.exception.user;
 
-import com.risun.common.exception.base.BaseException;
+import com.spirit.common.exception.base.BaseException;
 
 /**
  * 用户信息异常类

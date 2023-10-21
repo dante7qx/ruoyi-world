@@ -1,4 +1,4 @@
-package com.risun.common.exception.user;
+package com.spirit.common.exception.user;
 
 /**
  * 验证码失效异常类

@@ -1,11 +1,11 @@
-package com.risun.quartz.domain;
+package com.spirit.quartz.domain;
 
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 定时任务调度日志表 sys_job_log

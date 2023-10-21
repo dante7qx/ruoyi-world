@@ -1,4 +1,4 @@
-package com.risun.common.constant;
+package com.spirit.common.constant;
 
 import io.jsonwebtoken.Claims;
 
@@ -147,12 +147,12 @@ public class Constants
     /**
      * 定时任务白名单配置（仅允许访问的包名，如其他需要可以自行添加）
      */
-    public static final String[] JOB_WHITELIST_STR = { "com.risun" };
+    public static final String[] JOB_WHITELIST_STR = { "com.spirit" };
     
     /**
      * 自动识别json对象白名单配置（仅允许解析的包名，范围越小越安全）
      */
-    public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.risun" };
+    public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.spirit" };
 
     /**
      * Word文件
@@ -168,7 +168,7 @@ public class Constants
      * 定时任务违规的字符
      */
     public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
-            "org.springframework", "org.apache", "com.risun.common.utils.file" };
+            "org.springframework", "org.apache", "com.spirit.common.utils.file" };
     
     /** 
      * 积木报表

@@ -1,4 +1,4 @@
-package com.risun.common.exception.file;
+package com.spirit.common.exception.file;
 
 /**
  * 文件名含有非法字符

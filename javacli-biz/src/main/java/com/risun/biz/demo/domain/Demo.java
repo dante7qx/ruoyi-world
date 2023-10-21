@@ -1,4 +1,4 @@
-package com.risun.biz.demo.domain;
+package com.spirit.biz.demo.domain;
 
 import java.util.Date;
 
@@ -10,10 +10,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.risun.common.annotation.DesensitizeField;
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.enums.DesensitizeType;
+import com.spirit.common.annotation.DesensitizeField;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.core.domain.BaseEntity;
+import com.spirit.common.enums.DesensitizeType;
 
 /**
  * 业务对象 t_demo

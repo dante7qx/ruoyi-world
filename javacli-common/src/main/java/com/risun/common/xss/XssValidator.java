@@ -1,4 +1,4 @@
-package com.risun.common.xss;
+package com.spirit.common.xss;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

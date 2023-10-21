@@ -1,4 +1,4 @@
-package com.risun.common.utils.file;
+package com.spirit.common.utils.file;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +9,14 @@ import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.common.exception.file.FileNameInvalidException;
-import com.risun.common.exception.file.FileNameLengthLimitExceededException;
-import com.risun.common.exception.file.FileSizeLimitExceededException;
-import com.risun.common.exception.file.InvalidExtensionException;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.uuid.Seq;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.exception.file.FileNameInvalidException;
+import com.spirit.common.exception.file.FileNameLengthLimitExceededException;
+import com.spirit.common.exception.file.FileSizeLimitExceededException;
+import com.spirit.common.exception.file.InvalidExtensionException;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.uuid.Seq;
 
 import cn.hutool.core.util.StrUtil;
 

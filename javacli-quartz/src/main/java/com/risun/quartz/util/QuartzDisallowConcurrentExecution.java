@@ -1,9 +1,9 @@
-package com.risun.quartz.util;
+package com.spirit.quartz.util;
 
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 
-import com.risun.quartz.domain.SysJob;
+import com.spirit.quartz.domain.SysJob;
 
 /**
  * 定时任务处理（禁止并发执行）

@@ -1,4 +1,4 @@
-package com.risun.common.utils.reflect;
+package com.spirit.common.utils.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,8 +14,8 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.risun.common.core.text.Convert;
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.utils.DateUtils;
 
 import cn.hutool.core.util.StrUtil;
 

@@ -1,4 +1,4 @@
-package com.risun.common.exception.job;
+package com.spirit.common.exception.job;
 
 /**
  * 计划策略异常

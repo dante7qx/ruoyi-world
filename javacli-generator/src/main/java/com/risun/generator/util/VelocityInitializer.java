@@ -1,9 +1,9 @@
-package com.risun.generator.util;
+package com.spirit.generator.util;
 
 import java.util.Properties;
 import org.apache.velocity.app.Velocity;
 
-import com.risun.common.constant.Constants;
+import com.spirit.common.constant.Constants;
 
 /**
  * VelocityEngine工厂

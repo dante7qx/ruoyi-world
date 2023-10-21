@@ -1,4 +1,4 @@
-package com.risun.common.utils.file;
+package com.spirit.common.utils.file;
 
 /**
  * 媒体类型工具类

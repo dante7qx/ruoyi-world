@@ -1,4 +1,4 @@
-package com.risun.framework.websocket;
+package com.spirit.framework.websocket;
 
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;

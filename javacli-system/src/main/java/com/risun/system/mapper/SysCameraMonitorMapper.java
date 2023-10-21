@@ -1,7 +1,7 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
-import com.risun.system.domain.SysCameraMonitor;
+import com.spirit.system.domain.SysCameraMonitor;
 
 /**
  * 视频监控Mapper接口

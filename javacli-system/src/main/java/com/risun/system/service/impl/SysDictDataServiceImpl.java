@@ -1,13 +1,13 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.core.domain.entity.SysDictData;
-import com.risun.common.utils.DictUtils;
-import com.risun.system.mapper.SysDictDataMapper;
-import com.risun.system.service.ISysDictDataService;
+import com.spirit.common.core.domain.entity.SysDictData;
+import com.spirit.common.utils.DictUtils;
+import com.spirit.system.mapper.SysDictDataMapper;
+import com.spirit.system.service.ISysDictDataService;
 
 /**
  * 字典 业务层处理

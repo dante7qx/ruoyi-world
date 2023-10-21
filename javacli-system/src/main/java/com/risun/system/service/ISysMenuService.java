@@ -1,11 +1,11 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 import java.util.Set;
 
-import com.risun.common.core.domain.TreeSelect;
-import com.risun.common.core.domain.entity.SysMenu;
-import com.risun.system.domain.vo.RouterVo;
+import com.spirit.common.core.domain.TreeSelect;
+import com.spirit.common.core.domain.entity.SysMenu;
+import com.spirit.system.domain.vo.RouterVo;
 
 /**
  * 菜单 业务层

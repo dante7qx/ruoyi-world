@@ -1,9 +1,9 @@
-package com.risun.framework.web.domain.server;
+package com.spirit.framework.web.domain.server;
 
 import java.lang.management.ManagementFactory;
 
-import com.risun.common.utils.Arith;
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.utils.Arith;
+import com.spirit.common.utils.DateUtils;
 
 /**
  * JVM相关信息

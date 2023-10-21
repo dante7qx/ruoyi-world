@@ -1,4 +1,4 @@
-package com.risun;
+package com.spirit;
 
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +6,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.exception.job.TaskException;
-import com.risun.quartz.service.ISysJobService;
-import com.risun.system.service.ISysConfigService;
-import com.risun.system.service.ISysDictTypeService;
+import com.spirit.common.exception.job.TaskException;
+import com.spirit.quartz.service.ISysJobService;
+import com.spirit.system.service.ISysConfigService;
+import com.spirit.system.service.ISysDictTypeService;
 
 import lombok.extern.slf4j.Slf4j;
 

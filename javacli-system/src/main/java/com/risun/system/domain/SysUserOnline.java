@@ -1,4 +1,4 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 /**
  * 当前在线会话

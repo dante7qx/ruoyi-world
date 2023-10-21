@@ -1,4 +1,4 @@
-package com.risun.web.controller.common;
+package com.spirit.web.controller.common;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysDownload;
-import com.risun.common.utils.ZipDownloadUtil;
-import com.risun.common.utils.file.FileUploadUtils;
-import com.risun.common.utils.file.FileUtils;
-import com.risun.framework.config.ServerConfig;
-import com.risun.system.service.ISysAttachmentService;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.entity.SysDownload;
+import com.spirit.common.utils.ZipDownloadUtil;
+import com.spirit.common.utils.file.FileUploadUtils;
+import com.spirit.common.utils.file.FileUtils;
+import com.spirit.framework.config.ServerConfig;
+import com.spirit.system.service.ISysAttachmentService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.img.ImgUtil;

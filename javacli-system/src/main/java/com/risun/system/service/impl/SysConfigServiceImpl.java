@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,17 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.annotation.DataSource;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.core.text.Convert;
-import com.risun.common.enums.DataSourceType;
-import com.risun.common.enums.GlobalArgConfigEnum;
-import com.risun.common.exception.ServiceException;
-import com.risun.system.domain.SysConfig;
-import com.risun.system.mapper.SysConfigMapper;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.common.annotation.DataSource;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.enums.DataSourceType;
+import com.spirit.common.enums.GlobalArgConfigEnum;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.system.domain.SysConfig;
+import com.spirit.system.mapper.SysConfigMapper;
+import com.spirit.system.service.ISysConfigService;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

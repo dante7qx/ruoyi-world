@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.system.domain.SysUserOnline;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.system.domain.SysUserOnline;
 
 /**
  * 在线用户 服务层

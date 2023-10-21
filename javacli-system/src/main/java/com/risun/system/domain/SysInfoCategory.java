@@ -1,4 +1,4 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 信息栏目对象 sys_info_category

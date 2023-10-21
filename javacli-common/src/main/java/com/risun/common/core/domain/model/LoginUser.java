@@ -1,11 +1,11 @@
-package com.risun.common.core.domain.model;
+package com.spirit.common.core.domain.model;
 
 import java.util.Collection;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.alibaba.fastjson2.annotation.JSONField;
-import com.risun.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.entity.SysUser;
 
 /**
  * 登录用户身份权限

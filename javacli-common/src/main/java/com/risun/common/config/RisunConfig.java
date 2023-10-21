@@ -1,4 +1,4 @@
-package com.risun.common.config;
+package com.spirit.common.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author ruoyi
  */
 @Component
-@ConfigurationProperties(prefix = "risun")
+@ConfigurationProperties(prefix = "spirit")
 public class RisunConfig {
 	/** 项目名称 */
 	private String name;

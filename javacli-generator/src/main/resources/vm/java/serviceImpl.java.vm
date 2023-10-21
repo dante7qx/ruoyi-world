@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 #foreach ($column in $columns)
 #if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.utils.DateUtils;
 #break
 #end
 #end
@@ -32,7 +32,7 @@ import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import java.util.ArrayList;
 import ${packageName}.domain.${subClassName};
 #end
-import com.risun.common.utils.SecurityUtils;
+import com.spirit.common.utils.SecurityUtils;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;

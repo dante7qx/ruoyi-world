@@ -1,11 +1,11 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.utils.sign.RisunRASPasswordEncoder;
-import com.risun.framework.config.properties.PermitAllUrlProperties;
-import com.risun.framework.security.filter.JwtAuthenticationTokenFilter;
-import com.risun.framework.security.handle.AuthenticationEntryPointImpl;
-import com.risun.framework.security.handle.LogoutSuccessHandlerImpl;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.utils.sign.RisunRASPasswordEncoder;
+import com.spirit.framework.config.properties.PermitAllUrlProperties;
+import com.spirit.framework.security.filter.JwtAuthenticationTokenFilter;
+import com.spirit.framework.security.handle.AuthenticationEntryPointImpl;
+import com.spirit.framework.security.handle.LogoutSuccessHandlerImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -143,7 +143,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     */
     
     @Bean
-    public RisunRASPasswordEncoder risunRASPasswordEncoder() {
+    public RisunRASPasswordEncoder spiritRASPasswordEncoder() {
     	return new RisunRASPasswordEncoder();
     }
 
@@ -153,6 +153,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.userDetailsService(userDetailsService).passwordEncoder(risunRASPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(spiritRASPasswordEncoder());
     }
 }

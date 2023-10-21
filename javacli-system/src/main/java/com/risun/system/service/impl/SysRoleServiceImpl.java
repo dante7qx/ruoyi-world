@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,21 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.annotation.DataScope;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.system.domain.SysRoleDept;
-import com.risun.system.domain.SysRoleMenu;
-import com.risun.system.domain.SysUserRole;
-import com.risun.system.mapper.SysRoleDeptMapper;
-import com.risun.system.mapper.SysRoleMapper;
-import com.risun.system.mapper.SysRoleMenuMapper;
-import com.risun.system.mapper.SysUserRoleMapper;
-import com.risun.system.service.ISysRoleService;
+import com.spirit.common.annotation.DataScope;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.system.domain.SysRoleDept;
+import com.spirit.system.domain.SysRoleMenu;
+import com.spirit.system.domain.SysUserRole;
+import com.spirit.system.mapper.SysRoleDeptMapper;
+import com.spirit.system.mapper.SysRoleMapper;
+import com.spirit.system.mapper.SysRoleMenuMapper;
+import com.spirit.system.mapper.SysUserRoleMapper;
+import com.spirit.system.service.ISysRoleService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

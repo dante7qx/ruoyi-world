@@ -1,14 +1,14 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.security.context.PermissionContextHolder;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.security.context.PermissionContextHolder;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

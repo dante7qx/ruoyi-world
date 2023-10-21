@@ -1,4 +1,4 @@
-package com.risun;
+package com.spirit;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.entity.SysUser;
 
 import org.apache.ibatis.annotations.Param;
 

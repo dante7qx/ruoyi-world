@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.util.Collection;
 import java.util.Map;
@@ -20,17 +20,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson2.JSON;
-import com.risun.common.annotation.Log;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.enums.BusinessStatus;
-import com.risun.common.enums.HttpMethod;
-import com.risun.common.filter.PropertyPreExcludeFilter;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.framework.manager.AsyncManager;
-import com.risun.framework.manager.factory.AsyncFactory;
-import com.risun.system.domain.SysOperLog;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.enums.BusinessStatus;
+import com.spirit.common.enums.HttpMethod;
+import com.spirit.common.filter.PropertyPreExcludeFilter;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.framework.manager.AsyncManager;
+import com.spirit.framework.manager.factory.AsyncFactory;
+import com.spirit.system.domain.SysOperLog;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

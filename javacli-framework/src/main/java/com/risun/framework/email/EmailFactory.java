@@ -1,15 +1,15 @@
-package com.risun.framework.email;
+package com.spirit.framework.email;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysEmailLog;
-import com.risun.system.mapper.SysEmailLogMapper;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysEmailLog;
+import com.spirit.system.mapper.SysEmailLogMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;

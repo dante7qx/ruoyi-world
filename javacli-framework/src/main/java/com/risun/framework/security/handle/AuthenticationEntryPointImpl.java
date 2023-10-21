@@ -1,4 +1,4 @@
-package com.risun.framework.security.handle;
+package com.spirit.framework.security.handle;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,9 +11,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson2.JSON;
-import com.risun.common.constant.HttpStatus;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.ServletUtils;
+import com.spirit.common.constant.HttpStatus;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.utils.ServletUtils;
 
 import cn.hutool.core.util.StrUtil;
 

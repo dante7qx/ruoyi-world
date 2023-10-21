@@ -1,7 +1,7 @@
-package com.risun.common.core.page;
+package com.spirit.common.core.page;
 
-import com.risun.common.core.text.Convert;
-import com.risun.common.utils.ServletUtils;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.utils.ServletUtils;
 
 /**
  * 表格数据处理

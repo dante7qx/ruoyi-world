@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysEmailLog;
+import com.spirit.system.domain.SysEmailLog;
 
 /**
  * 邮件日志Service接口

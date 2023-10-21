@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import org.junit.jupiter.api.Test;
 

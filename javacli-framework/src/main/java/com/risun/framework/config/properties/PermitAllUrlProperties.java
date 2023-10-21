@@ -1,4 +1,4 @@
-package com.risun.framework.config.properties;
+package com.spirit.framework.config.properties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.risun.common.annotation.Anonymous;
+import com.spirit.common.annotation.Anonymous;
 
 /**
  * 设置Anonymous注解允许匿名访问的url

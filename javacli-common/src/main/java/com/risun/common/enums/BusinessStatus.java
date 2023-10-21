@@ -1,4 +1,4 @@
-package com.risun.common.enums;
+package com.spirit.common.enums;
 
 /**
  * 操作状态

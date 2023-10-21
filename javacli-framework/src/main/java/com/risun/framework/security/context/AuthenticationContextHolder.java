@@ -1,4 +1,4 @@
-package com.risun.framework.security.context;
+package com.spirit.framework.security.context;
 
 import org.springframework.security.core.Authentication;
 

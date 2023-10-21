@@ -1,13 +1,13 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.system.service.ISysMenuService;
-import com.risun.system.service.ISysRoleService;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.system.service.ISysMenuService;
+import com.spirit.system.service.ISysRoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

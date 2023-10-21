@@ -1,4 +1,4 @@
-package com.risun.common.utils.sign;
+package com.spirit.common.utils.sign;
 
 import java.security.KeyFactory;
 import java.security.KeyPair;

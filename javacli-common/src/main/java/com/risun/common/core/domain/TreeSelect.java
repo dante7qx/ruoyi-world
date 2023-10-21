@@ -1,11 +1,11 @@
-package com.risun.common.core.domain;
+package com.spirit.common.core.domain;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.risun.common.core.domain.entity.SysDept;
-import com.risun.common.core.domain.entity.SysMenu;
+import com.spirit.common.core.domain.entity.SysDept;
+import com.spirit.common.core.domain.entity.SysMenu;
 
 /**
  * Treeselect树结构实体类

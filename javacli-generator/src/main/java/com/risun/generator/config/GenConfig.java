@@ -1,4 +1,4 @@
-package com.risun.generator.config;
+package com.spirit.generator.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

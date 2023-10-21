@@ -1,7 +1,7 @@
-package com.risun.web.controller.monitor;
+package com.spirit.web.controller.monitor;
 
-import com.risun.common.annotation.Anonymous;
-import com.risun.system.service.ISysMonitor4RisunService;
+import com.spirit.common.annotation.Anonymous;
+import com.spirit.system.service.ISysMonitor4RisunService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -18,7 +18,7 @@ import cn.hutool.core.util.ReUtil;
  * @author dante
  */
 @RestController
-@RequestMapping("/risun/monitor")
+@RequestMapping("/spirit/monitor")
 public class SysMonitor4RisunController {
 	
 	@Autowired

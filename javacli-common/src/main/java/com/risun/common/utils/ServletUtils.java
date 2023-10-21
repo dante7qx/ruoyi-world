@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -17,8 +17,8 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.core.text.Convert;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.text.Convert;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

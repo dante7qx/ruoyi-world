@@ -1,8 +1,8 @@
-package com.risun.quartz.mapper;
+package com.spirit.quartz.mapper;
 
 import java.util.List;
 
-import com.risun.quartz.domain.SysJobLog;
+import com.spirit.quartz.domain.SysJobLog;
 
 /**
  * 调度任务日志信息 数据层

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.risun.biz.demo.mapper.DemoMapper">
+<mapper namespace="com.spirit.biz.demo.mapper.DemoMapper">
     
     <delete id="deleteDemoByDemoId">
 		update t_demo set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where demo_id = #{demoId}

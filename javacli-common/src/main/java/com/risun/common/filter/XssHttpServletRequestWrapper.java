@@ -1,4 +1,4 @@
-package com.risun.common.filter;
+package com.spirit.common.filter;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-import com.risun.common.utils.html.EscapeUtil;
+import com.spirit.common.utils.html.EscapeUtil;
 
 import cn.hutool.core.util.StrUtil;
 

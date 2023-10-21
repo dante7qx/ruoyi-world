@@ -1,11 +1,11 @@
-package com.risun.framework.manager;
+package com.spirit.framework.manager;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.risun.common.utils.Threads;
-import com.risun.common.utils.spring.SpringUtils;
+import com.spirit.common.utils.Threads;
+import com.spirit.common.utils.spring.SpringUtils;
 
 /**
  * 异步任务管理器

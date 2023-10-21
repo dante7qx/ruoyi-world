@@ -1,15 +1,15 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysInfoCategoryProp;
-import com.risun.system.mapper.SysInfoCategoryPropMapper;
-import com.risun.system.service.ISysInfoCategoryPropService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysInfoCategoryProp;
+import com.spirit.system.mapper.SysInfoCategoryPropMapper;
+import com.spirit.system.service.ISysInfoCategoryPropService;
 
 /**
  * 信息栏目属性Service业务层处理

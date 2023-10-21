@@ -1,4 +1,4 @@
-package com.risun.common.annotation;
+package com.spirit.common.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.risun.common.enums.DataSourceType;
+import com.spirit.common.enums.DataSourceType;
 
 /**
  * 自定义多数据源切换注解

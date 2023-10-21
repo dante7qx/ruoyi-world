@@ -1,4 +1,4 @@
-package com.risun.biz.demo.service.impl;
+package com.spirit.biz.demo.service.impl;
 
 import static java.util.stream.Collectors.toList;
 
@@ -18,18 +18,18 @@ import com.deepoove.poi.data.Pictures;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.risun.biz.demo.domain.Demo;
-import com.risun.biz.demo.mapper.DemoMapper;
-import com.risun.biz.demo.service.IDemoService;
-import com.risun.common.annotation.DesensitizeMethod;
-import com.risun.common.constant.Constants;
-import com.risun.common.enums.GlobalArgConfigEnum;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.file.FileUtils;
-import com.risun.common.utils.file.ImageUtils;
-import com.risun.common.utils.poitl.WordExportUtil;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.biz.demo.domain.Demo;
+import com.spirit.biz.demo.mapper.DemoMapper;
+import com.spirit.biz.demo.service.IDemoService;
+import com.spirit.common.annotation.DesensitizeMethod;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.enums.GlobalArgConfigEnum;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.file.FileUtils;
+import com.spirit.common.utils.file.ImageUtils;
+import com.spirit.common.utils.poitl.WordExportUtil;
+import com.spirit.system.service.ISysConfigService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.file.FileNameUtil;

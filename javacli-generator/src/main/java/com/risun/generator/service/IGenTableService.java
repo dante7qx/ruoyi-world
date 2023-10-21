@@ -1,9 +1,9 @@
-package com.risun.generator.service;
+package com.spirit.generator.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.risun.generator.domain.GenTable;
+import com.spirit.generator.domain.GenTable;
 
 /**
  * 业务 服务层

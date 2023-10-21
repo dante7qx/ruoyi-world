@@ -1,4 +1,4 @@
-package com.risun.framework.interceptor.impl;
+package com.spirit.framework.interceptor.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson2.JSON;
-import com.risun.common.annotation.RepeatSubmit;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.filter.RepeatedlyRequestWrapper;
-import com.risun.common.utils.http.HttpHelper;
-import com.risun.framework.interceptor.RepeatSubmitInterceptor;
+import com.spirit.common.annotation.RepeatSubmit;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.filter.RepeatedlyRequestWrapper;
+import com.spirit.common.utils.http.HttpHelper;
+import com.spirit.framework.interceptor.RepeatSubmitInterceptor;
 
 import cn.hutool.core.util.StrUtil;
 

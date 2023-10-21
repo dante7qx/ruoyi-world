@@ -1,11 +1,11 @@
-package com.risun.web.controller.monitor;
+package com.spirit.web.controller.monitor;
 
 import java.util.List;
 
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.system.domain.SysApprovalLog;
-import com.risun.system.service.ISysApprovalLogService;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.system.domain.SysApprovalLog;
+import com.spirit.system.service.ISysApprovalLogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package com.risun.framework.websocket;
+package com.spirit.framework.websocket;
 
 import java.util.Map;
 import java.util.Set;

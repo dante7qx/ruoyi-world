@@ -1,4 +1,4 @@
-package com.risun.biz.demo.service;
+package com.spirit.biz.demo.service;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.risun.RisunApplicationTests;
-import com.risun.biz.demo.domain.Demo;
-import com.risun.biz.demo.mapper.DemoMapper;
-import com.risun.common.core.redis.RedisLock;
+import com.spirit.RisunApplicationTests;
+import com.spirit.biz.demo.domain.Demo;
+import com.spirit.biz.demo.mapper.DemoMapper;
+import com.spirit.common.core.redis.RedisLock;
 
 import cn.hutool.core.collection.CollUtil;
 

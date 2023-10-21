@@ -1,4 +1,4 @@
-package com.risun.common.utils.html;
+package com.spirit.common.utils.html;
 
 import cn.hutool.core.util.StrUtil;
 

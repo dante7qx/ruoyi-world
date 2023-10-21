@@ -1,9 +1,9 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
-import com.risun.common.constant.HttpStatus;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.sign.RisunRASPasswordEncoder;
+import com.spirit.common.constant.HttpStatus;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.sign.RisunRASPasswordEncoder;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,29 +12,29 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginBody;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.exception.user.CaptchaException;
-import com.risun.common.exception.user.CaptchaExpireException;
-import com.risun.common.exception.user.UserException;
-import com.risun.common.exception.user.UserPasswordNotMatchException;
-import com.risun.common.exception.user.UserPhoneNotFoundException;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.MessageUtils;
-import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.common.utils.sign.RsaUtils;
-import com.risun.framework.manager.AsyncManager;
-import com.risun.framework.manager.factory.AsyncFactory;
-import com.risun.framework.security.context.AuthenticationContextHolder;
-import com.risun.framework.sms.SmsFactory;
-import com.risun.system.service.ISysConfigService;
-import com.risun.system.service.ISysUserService;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginBody;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.exception.user.CaptchaException;
+import com.spirit.common.exception.user.CaptchaExpireException;
+import com.spirit.common.exception.user.UserException;
+import com.spirit.common.exception.user.UserPasswordNotMatchException;
+import com.spirit.common.exception.user.UserPhoneNotFoundException;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.MessageUtils;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.common.utils.sign.RsaUtils;
+import com.spirit.framework.manager.AsyncManager;
+import com.spirit.framework.manager.factory.AsyncFactory;
+import com.spirit.framework.security.context.AuthenticationContextHolder;
+import com.spirit.framework.sms.SmsFactory;
+import com.spirit.system.service.ISysConfigService;
+import com.spirit.system.service.ISysUserService;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;

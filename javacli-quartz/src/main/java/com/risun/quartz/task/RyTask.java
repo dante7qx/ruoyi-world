@@ -1,4 +1,4 @@
-package com.risun.quartz.task;
+package com.spirit.quartz.task;
 
 import org.springframework.stereotype.Component;
 

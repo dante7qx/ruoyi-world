@@ -1,4 +1,4 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.Map;
 

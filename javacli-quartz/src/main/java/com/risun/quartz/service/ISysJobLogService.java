@@ -1,8 +1,8 @@
-package com.risun.quartz.service;
+package com.spirit.quartz.service;
 
 import java.util.List;
 
-import com.risun.quartz.domain.SysJobLog;
+import com.spirit.quartz.domain.SysJobLog;
 
 /**
  * 定时任务调度日志信息信息 服务层

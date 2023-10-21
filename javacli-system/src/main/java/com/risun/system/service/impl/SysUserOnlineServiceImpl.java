@@ -1,10 +1,10 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.system.domain.SysUserOnline;
-import com.risun.system.service.ISysUserOnlineService;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.system.domain.SysUserOnline;
+import com.spirit.system.service.ISysUserOnlineService;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

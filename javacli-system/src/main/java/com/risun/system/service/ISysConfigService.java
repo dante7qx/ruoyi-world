@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.system.domain.SysConfig;
+import com.spirit.system.domain.SysConfig;
 
 /**
  * 参数配置 服务层

@@ -1,6 +1,6 @@
-package com.risun.common.enums;
+package com.spirit.common.enums;
 
-import com.risun.common.annotation.DesensitizeField;
+import com.spirit.common.annotation.DesensitizeField;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.DesensitizedUtil;

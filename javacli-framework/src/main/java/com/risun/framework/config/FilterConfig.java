@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +11,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.risun.common.filter.RepeatableFilter;
-import com.risun.common.filter.XssFilter;
+import com.spirit.common.filter.RepeatableFilter;
+import com.spirit.common.filter.XssFilter;
 
 import cn.hutool.core.util.StrUtil;
 

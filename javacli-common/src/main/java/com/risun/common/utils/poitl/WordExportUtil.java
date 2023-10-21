@@ -1,4 +1,4 @@
-package com.risun.common.utils.poitl;
+package com.spirit.common.utils.poitl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.plugin.table.LoopRowTableRenderPolicy;
 import com.deepoove.poi.policy.AttachmentRenderPolicy;
 import com.deepoove.poi.util.PoitlIOUtils;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.utils.poitl.plugin.LaTeXPolicy;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.utils.poitl.plugin.LaTeXPolicy;
 
 import lombok.extern.slf4j.Slf4j;
 

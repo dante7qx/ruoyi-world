@@ -1,6 +1,6 @@
-package com.risun.framework.web.domain.server;
+package com.spirit.framework.web.domain.server;
 
-import com.risun.common.utils.Arith;
+import com.spirit.common.utils.Arith;
 
 /**
  * CPU相关信息

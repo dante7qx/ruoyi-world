@@ -1,10 +1,10 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.config.RisunConfig;
+import com.spirit.common.config.RisunConfig;
 
 import cn.hutool.core.util.StrUtil;
 

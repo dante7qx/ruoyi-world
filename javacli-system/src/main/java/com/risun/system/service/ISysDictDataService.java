@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.common.core.domain.entity.SysDictData;
+import com.spirit.common.core.domain.entity.SysDictData;
 
 /**
  * 字典 业务层

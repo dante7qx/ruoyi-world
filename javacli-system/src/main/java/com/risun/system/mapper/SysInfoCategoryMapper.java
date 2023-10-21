@@ -1,7 +1,7 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
-import com.risun.system.domain.SysInfoCategory;
+import com.spirit.system.domain.SysInfoCategory;
 
 /**
  * 信息栏目Mapper接口

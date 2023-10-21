@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -8,19 +8,19 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.constant.ApprovalFlowConstats;
-import com.risun.common.constant.BizModelConstants;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysApprovalLog;
-import com.risun.system.domain.SysInfo;
-import com.risun.system.domain.SysInfoRange;
-import com.risun.system.domain.SysInfoView;
-import com.risun.system.mapper.SysInfoMapper;
-import com.risun.system.mapper.SysInfoPropMapper;
-import com.risun.system.mapper.SysInfoRangeMapper;
-import com.risun.system.service.ISysApprovalLogService;
-import com.risun.system.service.ISysInfoService;
+import com.spirit.common.constant.ApprovalFlowConstats;
+import com.spirit.common.constant.BizModelConstants;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysApprovalLog;
+import com.spirit.system.domain.SysInfo;
+import com.spirit.system.domain.SysInfoRange;
+import com.spirit.system.domain.SysInfoView;
+import com.spirit.system.mapper.SysInfoMapper;
+import com.spirit.system.mapper.SysInfoPropMapper;
+import com.spirit.system.mapper.SysInfoRangeMapper;
+import com.spirit.system.service.ISysApprovalLogService;
+import com.spirit.system.service.ISysInfoService;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;

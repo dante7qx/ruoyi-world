@@ -1,4 +1,4 @@
-package com.risun.framework.websocket;
+package com.spirit.framework.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

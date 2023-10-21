@@ -1,9 +1,9 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.risun.common.utils.spring.SpringUtils;
+import com.spirit.common.utils.spring.SpringUtils;
 
 /**
  * 获取i18n资源文件

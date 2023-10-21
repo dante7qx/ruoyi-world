@@ -1,4 +1,4 @@
-package com.risun.common.utils.file;
+package com.spirit.common.utils.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,10 +17,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.uuid.IdUtils;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.uuid.IdUtils;
 
 import cn.hutool.core.util.StrUtil;
 

@@ -1,12 +1,12 @@
-package com.risun.quartz.service.impl;
+package com.spirit.quartz.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.quartz.domain.SysJobLog;
-import com.risun.quartz.mapper.SysJobLogMapper;
-import com.risun.quartz.service.ISysJobLogService;
+import com.spirit.quartz.domain.SysJobLog;
+import com.spirit.quartz.mapper.SysJobLogMapper;
+import com.spirit.quartz.service.ISysJobLogService;
 
 /**
  * 定时任务调度日志信息 服务层

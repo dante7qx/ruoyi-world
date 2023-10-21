@@ -1,15 +1,15 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysCommentReply;
-import com.risun.system.mapper.SysCommentReplyMapper;
-import com.risun.system.service.ISysCommentReplyService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysCommentReply;
+import com.spirit.system.mapper.SysCommentReplyMapper;
+import com.spirit.system.service.ISysCommentReplyService;
 
 /**
  * 留言评论回复Service业务层处理

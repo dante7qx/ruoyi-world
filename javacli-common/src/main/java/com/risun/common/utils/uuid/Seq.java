@@ -1,8 +1,8 @@
-package com.risun.common.utils.uuid;
+package com.spirit.common.utils.uuid;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.utils.DateUtils;
 
 import cn.hutool.core.util.StrUtil;
 

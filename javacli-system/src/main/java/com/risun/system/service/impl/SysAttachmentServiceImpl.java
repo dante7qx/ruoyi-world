@@ -1,14 +1,14 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.io.IOException;
 import java.util.List;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.file.FileUploadUtils;
-import com.risun.system.domain.SysAttachment;
-import com.risun.system.mapper.SysAttachmentMapper;
-import com.risun.system.service.ISysAttachmentService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.file.FileUploadUtils;
+import com.spirit.system.domain.SysAttachment;
+import com.spirit.system.mapper.SysAttachmentMapper;
+import com.spirit.system.service.ISysAttachmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

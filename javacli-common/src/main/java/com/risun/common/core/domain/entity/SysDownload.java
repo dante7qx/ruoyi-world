@@ -1,8 +1,8 @@
-package com.risun.common.core.domain.entity;
+package com.spirit.common.core.domain.entity;
 
 import javax.validation.constraints.NotBlank;
 
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 通用资源下载请求对象

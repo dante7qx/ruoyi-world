@@ -1,22 +1,22 @@
-package com.risun.framework.web.service;
+package com.spirit.framework.web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.RegisterBody;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.exception.user.CaptchaException;
-import com.risun.common.exception.user.CaptchaExpireException;
-import com.risun.common.utils.MessageUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.manager.AsyncManager;
-import com.risun.framework.manager.factory.AsyncFactory;
-import com.risun.system.service.ISysConfigService;
-import com.risun.system.service.ISysUserService;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.RegisterBody;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.exception.user.CaptchaException;
+import com.spirit.common.exception.user.CaptchaExpireException;
+import com.spirit.common.utils.MessageUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.manager.AsyncManager;
+import com.spirit.framework.manager.factory.AsyncFactory;
+import com.spirit.system.service.ISysConfigService;
+import com.spirit.system.service.ISysUserService;
 
 import cn.hutool.core.util.StrUtil;
 

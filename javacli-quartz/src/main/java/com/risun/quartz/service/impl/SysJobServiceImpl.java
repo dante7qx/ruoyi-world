@@ -1,4 +1,4 @@
-package com.risun.quartz.service.impl;
+package com.spirit.quartz.service.impl;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.constant.ScheduleConstants;
-import com.risun.common.exception.job.TaskException;
-import com.risun.quartz.domain.SysJob;
-import com.risun.quartz.mapper.SysJobMapper;
-import com.risun.quartz.service.ISysJobService;
-import com.risun.quartz.util.CronUtils;
-import com.risun.quartz.util.ScheduleUtils;
+import com.spirit.common.constant.ScheduleConstants;
+import com.spirit.common.exception.job.TaskException;
+import com.spirit.quartz.domain.SysJob;
+import com.spirit.quartz.mapper.SysJobMapper;
+import com.spirit.quartz.service.ISysJobService;
+import com.spirit.quartz.util.CronUtils;
+import com.spirit.quartz.util.ScheduleUtils;
 
 /**
  * 定时任务调度信息 服务层

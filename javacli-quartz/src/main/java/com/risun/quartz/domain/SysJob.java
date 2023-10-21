@@ -1,4 +1,4 @@
-package com.risun.quartz.domain;
+package com.spirit.quartz.domain;
 
 import java.util.Date;
 
@@ -9,11 +9,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.risun.common.annotation.Excel;
-import com.risun.common.annotation.Excel.ColumnType;
-import com.risun.common.constant.ScheduleConstants;
-import com.risun.common.core.domain.BaseEntity;
-import com.risun.quartz.util.CronUtils;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.annotation.Excel.ColumnType;
+import com.spirit.common.constant.ScheduleConstants;
+import com.spirit.common.core.domain.BaseEntity;
+import com.spirit.quartz.util.CronUtils;
 
 import cn.hutool.core.util.StrUtil;
 

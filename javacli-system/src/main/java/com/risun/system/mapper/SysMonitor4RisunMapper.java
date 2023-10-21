@@ -1,4 +1,4 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import org.apache.ibatis.annotations.Select;
 

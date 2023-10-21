@@ -1,4 +1,4 @@
-package com.risun.common.utils.ip;
+package com.spirit.common.utils.ip;
 
 import java.nio.charset.Charset;
 
@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;

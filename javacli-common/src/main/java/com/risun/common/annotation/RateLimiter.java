@@ -1,4 +1,4 @@
-package com.risun.common.annotation;
+package com.spirit.common.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -6,8 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.enums.LimitType;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.enums.LimitType;
 
 /**
  * 限流注解

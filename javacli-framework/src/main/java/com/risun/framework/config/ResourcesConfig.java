@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.framework.interceptor.RepeatSubmitInterceptor;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
+import com.spirit.framework.interceptor.RepeatSubmitInterceptor;
 
 /**
  * 通用配置

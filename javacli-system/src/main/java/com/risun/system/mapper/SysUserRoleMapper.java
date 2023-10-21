@@ -1,9 +1,9 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import com.risun.system.domain.SysUserRole;
+import com.spirit.system.domain.SysUserRole;
 
 /**
  * 用户与角色关联表 数据层

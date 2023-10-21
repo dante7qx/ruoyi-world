@@ -1,4 +1,4 @@
-package com.risun.common.enums;
+package com.spirit.common.enums;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.system.domain.SysComment;
-import com.risun.system.domain.SysCommentReply;
-import com.risun.system.service.ISysCommentReplyService;
-import com.risun.system.service.ISysCommentService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.system.domain.SysComment;
+import com.spirit.system.domain.SysCommentReply;
+import com.spirit.system.service.ISysCommentReplyService;
+import com.spirit.system.service.ISysCommentService;
 
 /**
  * 留言管理Controller

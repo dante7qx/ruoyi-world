@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.ip.IpUtils;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.system.domain.SysInfo;
-import com.risun.system.domain.SysInfoProp;
-import com.risun.system.service.ISysInfoPropService;
-import com.risun.system.service.ISysInfoService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.ip.IpUtils;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.system.domain.SysInfo;
+import com.spirit.system.domain.SysInfoProp;
+import com.spirit.system.service.ISysInfoPropService;
+import com.spirit.system.service.ISysInfoService;
 
 import cn.hutool.core.util.ObjectUtil;
 

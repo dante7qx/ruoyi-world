@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,10 +19,10 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
-import com.risun.common.enums.DataSourceType;
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.framework.config.properties.DruidProperties;
-import com.risun.framework.datasource.DynamicDataSource;
+import com.spirit.common.enums.DataSourceType;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.framework.config.properties.DruidProperties;
+import com.spirit.framework.datasource.DynamicDataSource;
 
 /**
  * druid 配置多数据源

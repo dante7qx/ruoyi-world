@@ -1,13 +1,13 @@
-package com.risun.framework.sms;
+package com.spirit.framework.sms;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.risun.common.constant.Constants;
-import com.risun.common.enums.GlobalArgConfigEnum;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysSmsLog;
-import com.risun.system.mapper.SysSmsLogMapper;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.enums.GlobalArgConfigEnum;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysSmsLog;
+import com.spirit.system.mapper.SysSmsLogMapper;
+import com.spirit.system.service.ISysConfigService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -30,7 +30,7 @@ public class SmsFactory {
     private SysSmsLogMapper sysSmsLogMapper;
 	
 	/** 外部短信接口URL */
-	private static final String EXTERNAL_SMS_URL = "http://ccgp-ts.risun-tec.cn/ccgp-ts/biz/app/sendMsg";
+	private static final String EXTERNAL_SMS_URL = "http://ccgp-ts.spirit-tec.cn/ccgp-ts/biz/app/sendMsg";
 	
 	/** 短信内容前缀 */
 	private static final String SMS_PREFIX = "#info#=";

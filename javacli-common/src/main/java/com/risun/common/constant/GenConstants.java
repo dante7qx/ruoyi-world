@@ -1,4 +1,4 @@
-package com.risun.common.constant;
+package com.spirit.common.constant;
 
 /**
  * 代码生成通用常量

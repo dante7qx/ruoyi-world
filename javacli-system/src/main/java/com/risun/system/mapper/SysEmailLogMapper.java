@@ -1,7 +1,7 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
-import com.risun.system.domain.SysEmailLog;
+import com.spirit.system.domain.SysEmailLog;
 
 /**
  * 邮件日志Mapper接口

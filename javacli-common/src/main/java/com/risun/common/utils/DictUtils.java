@@ -1,4 +1,4 @@
-package com.risun.common.utils;
+package com.spirit.common.utils;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.core.domain.entity.SysDictData;
-import com.risun.common.core.redis.RedisCache;
-import com.risun.common.utils.spring.SpringUtils;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.core.domain.entity.SysDictData;
+import com.spirit.common.core.redis.RedisCache;
+import com.spirit.common.utils.spring.SpringUtils;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;

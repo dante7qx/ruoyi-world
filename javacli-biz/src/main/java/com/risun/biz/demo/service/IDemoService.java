@@ -1,9 +1,9 @@
-package com.risun.biz.demo.service;
+package com.spirit.biz.demo.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.risun.biz.demo.domain.Demo;
+import com.spirit.biz.demo.domain.Demo;
 
 /**
  * 业务Service接口

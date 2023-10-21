@@ -1,4 +1,4 @@
-package com.risun.common.utils.uuid;
+package com.spirit.common.utils.uuid;
 
 /**
  * ID生成器工具类

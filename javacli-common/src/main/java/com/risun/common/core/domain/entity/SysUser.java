@@ -1,4 +1,4 @@
-package com.risun.common.core.domain.entity;
+package com.spirit.common.core.domain.entity;
 
 import java.util.Date;
 import java.util.List;
@@ -6,12 +6,12 @@ import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.annotation.Excels;
-import com.risun.common.annotation.Excel.ColumnType;
-import com.risun.common.annotation.Excel.Type;
-import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.xss.Xss;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.annotation.Excels;
+import com.spirit.common.annotation.Excel.ColumnType;
+import com.spirit.common.annotation.Excel.Type;
+import com.spirit.common.core.domain.BaseEntity;
+import com.spirit.common.xss.Xss;
 
 /**
  * 用户对象 sys_user

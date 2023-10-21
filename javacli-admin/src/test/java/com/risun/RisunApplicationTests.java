@@ -1,4 +1,4 @@
-package com.risun;
+package com.spirit;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

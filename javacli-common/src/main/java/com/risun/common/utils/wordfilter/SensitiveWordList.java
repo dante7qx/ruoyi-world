@@ -1,4 +1,4 @@
-package com.risun.common.utils.wordfilter;
+package com.spirit.common.utils.wordfilter;
 
 import java.util.ArrayList;
 

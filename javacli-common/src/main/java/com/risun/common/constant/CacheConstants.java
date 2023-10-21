@@ -1,4 +1,4 @@
-package com.risun.common.constant;
+package com.spirit.common.constant;
 
 /**
  * 缓存的key 常量

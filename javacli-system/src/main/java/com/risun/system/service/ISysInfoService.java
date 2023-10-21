@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysInfo;
+import com.spirit.system.domain.SysInfo;
 
 /**
  * 信息发布Service接口

@@ -1,9 +1,9 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.common.core.domain.TreeSelect;
-import com.risun.common.core.domain.entity.SysDept;
+import com.spirit.common.core.domain.TreeSelect;
+import com.spirit.common.core.domain.entity.SysDept;
 
 /**
  * 部门管理 服务层

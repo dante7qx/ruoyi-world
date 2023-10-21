@@ -1,4 +1,4 @@
-package com.risun.common.core.domain;
+package com.spirit.common.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;

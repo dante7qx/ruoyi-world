@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.system.domain.SysPost;
+import com.spirit.system.domain.SysPost;
 
 /**
  * 岗位信息 服务层

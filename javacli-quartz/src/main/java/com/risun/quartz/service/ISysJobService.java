@@ -1,10 +1,10 @@
-package com.risun.quartz.service;
+package com.spirit.quartz.service;
 
 import java.util.List;
 import org.quartz.SchedulerException;
 
-import com.risun.common.exception.job.TaskException;
-import com.risun.quartz.domain.SysJob;
+import com.spirit.common.exception.job.TaskException;
+import com.spirit.quartz.domain.SysJob;
 
 /**
  * 定时任务调度信息信息 服务层

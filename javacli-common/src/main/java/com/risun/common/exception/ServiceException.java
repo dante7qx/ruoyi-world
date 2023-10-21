@@ -1,4 +1,4 @@
-package com.risun.common.exception;
+package com.spirit.common.exception;
 
 /**
  * 业务异常

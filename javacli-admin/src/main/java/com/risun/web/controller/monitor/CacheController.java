@@ -1,4 +1,4 @@
-package com.risun.web.controller.monitor;
+package com.spirit.web.controller.monitor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.constant.CacheConstants;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.system.domain.SysCache;
+import com.spirit.common.constant.CacheConstants;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.system.domain.SysCache;
 
 import cn.hutool.core.util.StrUtil;
 

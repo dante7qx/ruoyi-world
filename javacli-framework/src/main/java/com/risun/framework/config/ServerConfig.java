@@ -1,9 +1,9 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.utils.ServletUtils;
+import com.spirit.common.utils.ServletUtils;
 
 /**
  * 服务相关配置

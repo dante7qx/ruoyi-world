@@ -1,4 +1,4 @@
-package com.risun.common.utils.file;
+package com.spirit.common.utils.file;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -11,9 +11,9 @@ import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.risun.common.config.RisunConfig;
-import com.risun.common.constant.Constants;
-import com.risun.common.exception.ServiceException;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.exception.ServiceException;
 
 import cn.hutool.core.util.StrUtil;
 

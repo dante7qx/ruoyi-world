@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.system.domain.SysRoleDept;
+import com.spirit.system.domain.SysRoleDept;
 
 /**
  * 角色与部门关联表 数据层

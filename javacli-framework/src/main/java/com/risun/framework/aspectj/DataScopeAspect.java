@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.annotation.DataScope;
-import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.core.domain.entity.SysRole;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.core.text.Convert;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.security.context.PermissionContextHolder;
+import com.spirit.common.annotation.DataScope;
+import com.spirit.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.entity.SysRole;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.security.context.PermissionContextHolder;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;

@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.system.domain.SysUserPost;
+import com.spirit.system.domain.SysUserPost;
 
 /**
  * 用户与岗位关联表 数据层

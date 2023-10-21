@@ -1,4 +1,4 @@
-package com.risun.quartz.util;
+package com.spirit.quartz.util;
 
 import java.text.ParseException;
 import java.util.Date;

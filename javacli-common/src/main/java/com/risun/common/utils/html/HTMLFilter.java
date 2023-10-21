@@ -1,4 +1,4 @@
-package com.risun.common.utils.html;
+package com.spirit.common.utils.html;
 
 import java.util.ArrayList;
 import java.util.Collections;

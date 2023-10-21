@@ -1,4 +1,4 @@
-package com.risun.framework;
+package com.spirit.framework;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -6,8 +6,8 @@ import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.risun.RisunApplicationTests;
-import com.risun.framework.email.EmailFactory;
+import com.spirit.RisunApplicationTests;
+import com.spirit.framework.email.EmailFactory;
 
 class EmailFactoryTests extends RisunApplicationTests {
 	

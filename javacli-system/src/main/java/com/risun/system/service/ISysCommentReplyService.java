@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysCommentReply;
+import com.spirit.system.domain.SysCommentReply;
 
 /**
  * 留言评论回复Service接口

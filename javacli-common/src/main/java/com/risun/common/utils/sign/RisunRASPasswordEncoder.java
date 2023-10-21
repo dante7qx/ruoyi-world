@@ -1,4 +1,4 @@
-package com.risun.common.utils.sign;
+package com.spirit.common.utils.sign;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

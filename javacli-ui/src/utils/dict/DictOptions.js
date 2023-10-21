@@ -1,4 +1,4 @@
-import { mergeRecursive } from "@/utils/risun";
+import { mergeRecursive } from "@/utils/spirit";
 import dictConverter from './DictConverter'
 
 export const options = {

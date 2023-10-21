@@ -1,4 +1,4 @@
-package com.risun.common.filter;
+package com.spirit.common.filter;
 
 import java.io.IOException;
 

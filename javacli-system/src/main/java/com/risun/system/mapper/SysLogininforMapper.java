@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.system.domain.SysLogininfor;
+import com.spirit.system.domain.SysLogininfor;
 
 /**
  * 系统访问日志情况信息 数据层

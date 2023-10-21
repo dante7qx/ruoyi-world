@@ -1,4 +1,4 @@
-package com.risun.web.controller.tool;
+package com.spirit.web.controller.tool;
 
 import java.awt.Color;
 import java.util.Map;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.Maps;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.utils.QrCodeUtils;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.utils.QrCodeUtils;
 
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.http.HttpUtil;

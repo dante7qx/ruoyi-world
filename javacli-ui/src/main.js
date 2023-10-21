@@ -19,7 +19,7 @@ import './assets/icons' // icon
 import './permission' // permission control
 import { getDicts } from "@/api/system/dict/data";
 import { getConfigKey } from "@/api/system/config";
-import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree, printLongTableColumn, desensitizeIdCard, desensitizeMobilePhone, encodeBase64, decodeBase64,loadJS } from "@/utils/risun";
+import { parseTime, parseIdCard, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree, printLongTableColumn, desensitizeIdCard, desensitizeMobilePhone, encodeBase64, decodeBase64,loadJS } from "@/utils/spirit";
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import vueAwesomeCountdown from 'vue-awesome-countdown'

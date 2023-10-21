@@ -1,10 +1,10 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.risun.common.annotation.Excel;
-import com.risun.common.annotation.Excel.ColumnType;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.annotation.Excel.ColumnType;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 操作日志记录表 oper_log

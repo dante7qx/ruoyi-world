@@ -1,4 +1,4 @@
-package com.risun.generator.controller;
+package com.spirit.generator.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,16 +7,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.core.text.Convert;
-import com.risun.common.enums.BusinessType;
-import com.risun.generator.domain.GenTable;
-import com.risun.generator.domain.GenTableColumn;
-import com.risun.generator.service.IGenTableColumnService;
-import com.risun.generator.service.IGenTableService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.core.text.Convert;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.generator.domain.GenTable;
+import com.spirit.generator.domain.GenTableColumn;
+import com.spirit.generator.service.IGenTableColumnService;
+import com.spirit.generator.service.IGenTableService;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,7 +217,7 @@ public class GenController extends BaseController
         response.reset();
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
-        response.setHeader("Content-Disposition", "attachment; filename=\"risun.zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"spirit.zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());

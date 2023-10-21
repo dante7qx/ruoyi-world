@@ -1,4 +1,4 @@
-package com.risun.common.exception;
+package com.spirit.common.exception;
 
 /**
  * 演示模式异常

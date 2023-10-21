@@ -1,4 +1,4 @@
-package com.risun.common.filter;
+package com.spirit.common.filter;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -10,8 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.risun.common.constant.Constants;
-import com.risun.common.utils.http.HttpHelper;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.utils.http.HttpHelper;
 
 /**
  * 构建可重复读取inputStream的request

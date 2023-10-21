@@ -1,4 +1,4 @@
-package com.risun.common.constant;
+package com.spirit.common.constant;
 
 /**
  * 用户常量信息

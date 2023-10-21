@@ -1,8 +1,8 @@
-package com.risun.generator.mapper;
+package com.spirit.generator.mapper;
 
 import java.util.List;
 
-import com.risun.generator.domain.GenTableColumn;
+import com.spirit.generator.domain.GenTableColumn;
 
 /**
  * 业务字段 数据层

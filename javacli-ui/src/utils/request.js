@@ -4,7 +4,7 @@ import store from '@/store'
 import router from '@/router'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
-import { tansParams, blobValidate } from "@/utils/risun";
+import { tansParams, blobValidate } from "@/utils/spirit";
 import cache from '@/plugins/cache'
 import { saveAs } from 'file-saver'
 

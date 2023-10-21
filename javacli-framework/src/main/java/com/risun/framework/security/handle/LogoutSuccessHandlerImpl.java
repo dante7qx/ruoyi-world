@@ -1,4 +1,4 @@
-package com.risun.framework.security.handle;
+package com.spirit.framework.security.handle;
 
 import java.io.IOException;
 
@@ -12,14 +12,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.alibaba.fastjson2.JSON;
-import com.risun.common.constant.Constants;
-import com.risun.common.constant.HttpStatus;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.utils.ServletUtils;
-import com.risun.framework.manager.AsyncManager;
-import com.risun.framework.manager.factory.AsyncFactory;
-import com.risun.framework.web.service.TokenService;
+import com.spirit.common.constant.Constants;
+import com.spirit.common.constant.HttpStatus;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.framework.manager.AsyncManager;
+import com.spirit.framework.manager.factory.AsyncFactory;
+import com.spirit.framework.web.service.TokenService;
 
 import cn.hutool.core.util.ObjectUtil;
 

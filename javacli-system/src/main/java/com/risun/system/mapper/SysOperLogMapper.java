@@ -1,8 +1,8 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
-import com.risun.system.domain.SysOperLog;
+import com.spirit.system.domain.SysOperLog;
 
 /**
  * 操作日志 数据层

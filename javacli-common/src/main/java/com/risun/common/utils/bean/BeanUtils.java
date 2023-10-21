@@ -1,4 +1,4 @@
-package com.risun.common.utils.bean;
+package com.spirit.common.utils.bean;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

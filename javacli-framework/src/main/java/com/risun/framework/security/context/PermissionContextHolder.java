@@ -1,6 +1,6 @@
-package com.risun.framework.security.context;
+package com.spirit.framework.security.context;
 
-import com.risun.common.core.text.Convert;
+import com.spirit.common.core.text.Convert;
 
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;

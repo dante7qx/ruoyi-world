@@ -1,10 +1,10 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
-import com.risun.system.domain.SysApprovalLog;
-import com.risun.system.mapper.SysApprovalLogMapper;
-import com.risun.system.service.ISysApprovalLogService;
+import com.spirit.system.domain.SysApprovalLog;
+import com.spirit.system.mapper.SysApprovalLogMapper;
+import com.spirit.system.service.ISysApprovalLogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

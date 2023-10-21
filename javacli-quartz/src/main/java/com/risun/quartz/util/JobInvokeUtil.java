@@ -1,4 +1,4 @@
-package com.risun.quartz.util;
+package com.spirit.quartz.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.risun.common.utils.spring.SpringUtils;
-import com.risun.quartz.domain.SysJob;
+import com.spirit.common.utils.spring.SpringUtils;
+import com.spirit.quartz.domain.SysJob;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

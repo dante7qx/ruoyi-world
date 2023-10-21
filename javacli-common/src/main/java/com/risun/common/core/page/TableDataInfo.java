@@ -1,4 +1,4 @@
-package com.risun.common.core.page;
+package com.spirit.common.core.page;
 
 import java.io.Serializable;
 import java.util.List;

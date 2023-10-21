@@ -1,15 +1,15 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysCameraMonitor;
-import com.risun.system.mapper.SysCameraMonitorMapper;
-import com.risun.system.service.ISysCameraMonitorService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysCameraMonitor;
+import com.spirit.system.mapper.SysCameraMonitorMapper;
+import com.spirit.system.service.ISysCameraMonitorService;
 
 import cn.hutool.core.util.StrUtil;
 

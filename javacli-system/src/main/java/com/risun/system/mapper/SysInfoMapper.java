@@ -1,12 +1,12 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
-import com.risun.system.domain.SysInfo;
-import com.risun.system.domain.SysInfoView;
+import com.spirit.system.domain.SysInfo;
+import com.spirit.system.domain.SysInfoView;
 
 /**
  * 信息发布Mapper接口

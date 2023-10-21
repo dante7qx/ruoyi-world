@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -15,11 +15,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
-import com.risun.common.annotation.RateLimiter;
-import com.risun.common.enums.LimitType;
-import com.risun.common.exception.ServiceException;
-import com.risun.common.utils.ServletUtils;
-import com.risun.common.utils.ip.IpUtils;
+import com.spirit.common.annotation.RateLimiter;
+import com.spirit.common.enums.LimitType;
+import com.spirit.common.exception.ServiceException;
+import com.spirit.common.utils.ServletUtils;
+import com.spirit.common.utils.ip.IpUtils;
 
 import cn.hutool.core.util.ObjectUtil;
 

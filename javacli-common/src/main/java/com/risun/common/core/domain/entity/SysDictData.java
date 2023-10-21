@@ -1,14 +1,14 @@
-package com.risun.common.core.domain.entity;
+package com.spirit.common.core.domain.entity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.annotation.Excel.ColumnType;
-import com.risun.common.constant.UserConstants;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.annotation.Excel.ColumnType;
+import com.spirit.common.constant.UserConstants;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 字典数据表 sys_dict_data

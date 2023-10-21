@@ -1,6 +1,6 @@
-package com.risun.system.domain.vo;
+package com.spirit.system.domain.vo;
 
-import com.risun.common.constant.Constants;
+import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.util.StrUtil;
 

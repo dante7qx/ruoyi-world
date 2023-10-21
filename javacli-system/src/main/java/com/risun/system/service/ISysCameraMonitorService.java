@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysCameraMonitor;
+import com.spirit.system.domain.SysCameraMonitor;
 
 /**
  * 视频监控Service接口

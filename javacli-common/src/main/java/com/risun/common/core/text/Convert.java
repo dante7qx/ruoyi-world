@@ -1,4 +1,4 @@
-package com.risun.common.core.text;
+package com.spirit.common.core.text;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

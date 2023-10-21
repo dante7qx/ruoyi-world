@@ -1,4 +1,4 @@
-package com.risun.system.domain.vo;
+package com.spirit.system.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;

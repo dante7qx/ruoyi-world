@@ -1,4 +1,4 @@
-package com.risun.framework.config.properties;
+package com.spirit.framework.config.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

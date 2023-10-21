@@ -1,4 +1,4 @@
-package com.risun.common.xss;
+package com.spirit.common.xss;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

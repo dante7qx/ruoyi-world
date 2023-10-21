@@ -1,16 +1,16 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.model.RegisterBody;
-import com.risun.common.enums.GlobalArgConfigEnum;
-import com.risun.framework.web.service.SysRegisterService;
-import com.risun.system.service.ISysConfigService;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.model.RegisterBody;
+import com.spirit.common.enums.GlobalArgConfigEnum;
+import com.spirit.framework.web.service.SysRegisterService;
+import com.spirit.system.service.ISysConfigService;
 
 import cn.hutool.core.util.StrUtil;
 

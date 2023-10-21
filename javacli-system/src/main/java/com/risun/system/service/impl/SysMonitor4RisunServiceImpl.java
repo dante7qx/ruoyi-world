@@ -1,7 +1,7 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
-import com.risun.system.mapper.SysMonitor4RisunMapper;
-import com.risun.system.service.ISysMonitor4RisunService;
+import com.spirit.system.mapper.SysMonitor4RisunMapper;
+import com.spirit.system.service.ISysMonitor4RisunService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.risun.system.mapper.SysCameraMonitorMapper">
+<mapper namespace="com.spirit.system.mapper.SysCameraMonitorMapper">
     
     <resultMap type="SysCameraMonitor" id="SysCameraMonitorResult">
         <result property="monitorId"    column="monitor_id"    />

@@ -1,13 +1,13 @@
-package com.risun.common.core.domain.entity;
+package com.spirit.common.core.domain.entity;
 
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.risun.common.annotation.Excel;
-import com.risun.common.annotation.Excel.ColumnType;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.annotation.Excel.ColumnType;
+import com.spirit.common.core.domain.BaseEntity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

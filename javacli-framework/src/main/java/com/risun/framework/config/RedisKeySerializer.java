@@ -1,4 +1,4 @@
-package com.risun.framework.config;
+package com.spirit.framework.config;
 
 import java.nio.charset.Charset;
 
@@ -7,7 +7,7 @@ import org.springframework.data.redis.serializer.SerializationException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.risun.common.constant.CacheConstants;
+import com.spirit.common.constant.CacheConstants;
 
 @Component
 public class RedisKeySerializer implements RedisSerializer<String> {

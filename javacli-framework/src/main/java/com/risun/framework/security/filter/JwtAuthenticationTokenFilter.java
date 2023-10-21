@@ -1,4 +1,4 @@
-package com.risun.framework.security.filter;
+package com.spirit.framework.security.filter;
 
 import java.io.IOException;
 
@@ -14,9 +14,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.framework.web.service.TokenService;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.framework.web.service.TokenService;
 
 import cn.hutool.core.util.ObjectUtil;
 

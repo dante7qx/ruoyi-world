@@ -1,13 +1,13 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.system.domain.SysInfoProp;
-import com.risun.system.mapper.SysInfoPropMapper;
-import com.risun.system.service.ISysInfoPropService;
+import com.spirit.system.domain.SysInfoProp;
+import com.spirit.system.mapper.SysInfoPropMapper;
+import com.spirit.system.service.ISysInfoPropService;
 
 /**
  * 信息属性Service业务层处理

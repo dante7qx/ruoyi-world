@@ -1,4 +1,4 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.collect.Lists;
-import com.risun.RisunApplicationTests;
-import com.risun.system.domain.SysCommentReply;
+import com.spirit.RisunApplicationTests;
+import com.spirit.system.domain.SysCommentReply;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.risun.framework.datasource;
+package com.spirit.framework.datasource;
 
 import java.util.Map;
 import javax.sql.DataSource;

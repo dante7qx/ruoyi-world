@@ -1,4 +1,4 @@
-package com.risun.common.exception.user;
+package com.spirit.common.exception.user;
 
 public class UserPasswordRetryLimitExceedException extends UserException {
 	private static final long serialVersionUID = 1L;

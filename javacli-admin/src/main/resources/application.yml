@@ -1,5 +1,5 @@
 # 项目相关配置
-risun:
+spirit:
   # 名称
   name: 精灵Spirit开发框架
   # 版本
@@ -28,7 +28,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.risun: debug
+    com.spirit: debug
     org.springframework: warn
 
 # 用户配置
@@ -116,7 +116,7 @@ token:
 # MyBatis-Plus 配置
 mybatis-plus:
   # 搜索指定包别名
-  typeAliasesPackage: com.risun.**.domain
+  typeAliasesPackage: com.spirit.**.domain
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件

@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.config.RisunConfig;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.domain.entity.SysUser;
-import com.risun.common.core.domain.model.LoginUser;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.common.utils.file.FileUploadUtils;
-import com.risun.common.utils.file.MimeTypeUtils;
-import com.risun.framework.web.service.TokenService;
-import com.risun.system.service.ISysUserService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.config.RisunConfig;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.domain.entity.SysUser;
+import com.spirit.common.core.domain.model.LoginUser;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.common.utils.file.FileUploadUtils;
+import com.spirit.common.utils.file.MimeTypeUtils;
+import com.spirit.framework.web.service.TokenService;
+import com.spirit.system.service.ISysUserService;
 
 import cn.hutool.core.util.StrUtil;
 

@@ -1,8 +1,8 @@
-package com.risun.common.core.domain;
+package com.spirit.common.core.domain;
 
 import java.io.Serializable;
 
-import com.risun.common.constant.HttpStatus;
+import com.spirit.common.constant.HttpStatus;
 
 /**
  * 响应信息主体

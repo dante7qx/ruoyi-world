@@ -1,4 +1,4 @@
-package com.risun.common.filter;
+package com.spirit.common.filter;
 
 import com.alibaba.fastjson2.filter.SimplePropertyPreFilter;
 
