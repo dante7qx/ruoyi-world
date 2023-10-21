@@ -1,0 +1,341 @@
+package ${packageName}.service.impl;
+#set ($existDelFlag = false)
+#set ($existQuery = false)
+#foreach ($column in $columns)
+	#if ($column.columnName == 'del_flag')
+		#set ($existDelFlag = true)
+    	#break
+	#end
+#end
+#foreach ($column in $columns)
+	#if ($column.query)
+		#set ($existQuery = true)
+    	#break
+	#end
+#end
+
+import static java.util.stream.Collectors.toList;
+import java.util.List;
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+import com.spirit.common.utils.DateUtils;
+#break
+#end
+#end
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+#if($existQuery)
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
+#end
+#if($table.sub)
+import java.util.ArrayList;
+import ${packageName}.domain.${subClassName};
+#end
+import com.spirit.common.utils.SecurityUtils;
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+
+/**
+ * ${functionName}Service业务层处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl implements I${ClassName}Service {
+    @Autowired
+    private ${ClassName}Mapper ${className}Mapper;
+
+    /**
+     * 查询${functionName}
+     * 
+     * @param ${pkColumn.javaField} ${functionName}主键
+     * @return ${functionName}
+     */
+    @Override
+    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField}) {
+        return ${className}Mapper.selectById(${pkColumn.javaField});
+    }
+
+    /**
+     * 查询${functionName}列表
+     * 
+     * @param ${className} ${functionName}
+     * @return ${functionName}
+     */
+    @Override
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
+#if($existQuery)
+        MPJLambdaWrapper<${ClassName}> mpj = new MPJLambdaWrapper<${ClassName}>()
+            .selectAll(${ClassName}.class)
+#end
+#foreach($column in $columns)
+#if($column.relTableName)
+            .select("${column.relTableName.replace("_", "")}.${column.relColumnName}")
+#end
+#end
+#foreach($column in $columns)
+#if($column.relTableName)
+            .leftJoin("${column.relTableName} ${column.relTableName.replace("_", "")} on ${column.relTableName.replace("_", "")}.${column.columnName} = t.${column.columnName}")
+#end
+#end
+#if($existDelFlag)
+            .eq(${ClassName}::getDelFlag, 0)
+#end
+#foreach($column in $columns)
+#if($column.query)
+#if($column.javaField.length() > 2 && $column.javaField.substring(1,2).matches("[A-Z]"))
+#set($AttrName=$column.javaField)
+#else
+#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+#end
+#set($queryType=$column.queryType)
+#set($javaField=$column.javaField)
+#set($javaType=$column.javaType)
+#set($relJavaField=$column.relJavaField.substring(0,1).toUpperCase() + ${column.relJavaField.substring(1)})
+#set($relJavaType=$column.relJavaType)
+#set($relColumnName=$column.relColumnName)
+#if($queryType == "EQ")
+            .eq(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+	#if($column.relTableName)
+            .eq(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "NE")
+            .ne(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+	#if($column.relTableName)
+            .ne(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "GT")
+            .gt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .gt(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "GTE")
+            .ge(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .ge(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "LT")
+            .lt(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .lt(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "LTE")
+            .le(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .le(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "LIKE")
+            .like(#if($javaType == 'String')StrUtil.isNotEmpty(${className}.get${AttrName}())#else${className}.get${AttrName}() != null#end, ${ClassName}::get${AttrName}, ${className}.get${AttrName}())
+    #if($column.relTableName)
+            .like(#if($relJavaType == 'String')StrUtil.isNotEmpty(${className}.get${relJavaField}())#else${className}.get${relJavaField}() != null#end, "${column.relTableName.replace("_", "")}.${relColumnName}", ${className}.get${relJavaField}())
+	#end
+#elseif($queryType == "BETWEEN")
+            .ge(${className}.getParams().get("begin${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("begin${AttrName}"))
+            .le(${className}.getParams().get("end${AttrName}") != null, ${ClassName}::get${AttrName}, ${className}.getParams().get("end${AttrName}"))
+#end
+#end
+#end
+        ;
+#if($existQuery)
+        return ${className}Mapper.selectList(mpj);
+#else
+        return ${className}Mapper.selectList(null);
+#end
+    }
+
+    /**
+     * 新增${functionName}
+     * 
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int insert${ClassName}(${ClassName} ${className}) {
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime')
+        ${className}.setCreateTime(DateUtils.getNowDate());
+#end
+#if($column.javaField == 'createBy')
+        ${className}.setCreateBy(SecurityUtils.getUsername());
+#end
+#end
+#if($table.sub)
+        int rows = ${className}Mapper.insert${ClassName}(${className});
+        insert${subClassName}(${className});
+        return rows;
+#else
+        return ${className}Mapper.insert(${className});
+#end
+    }
+
+    /**
+     * 修改${functionName}
+     * 
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int update${ClassName}(${ClassName} ${className}) {
+#foreach ($column in $columns)
+#if($column.javaField == 'updateTime')
+        ${className}.setUpdateTime(DateUtils.getNowDate());
+#end
+#if($column.javaField == 'updateBy')
+        ${className}.setUpdateBy(SecurityUtils.getUsername());
+#end
+#end
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
+        insert${subClassName}(${className});
+#end
+        return ${className}Mapper.updateById(${className});
+    }
+
+    /**
+     * 批量删除${functionName}
+     * 
+     * @param ${pkColumn.javaField}s 需要删除的${functionName}主键
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaType}[] ${pkColumn.javaField}s) {
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}s(${pkColumn.javaField}s);
+#end
+#if($existDelFlag)
+        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s, SecurityUtils.getUsername());
+#else
+        return ${className}Mapper.deleteBatchIds(Arrays.asList(${pkColumn.javaField}s));
+#end
+    }
+
+    /**
+     * 删除${functionName}信息
+     * 
+     * @param ${pkColumn.javaField} ${functionName}主键
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField}) {
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
+#end
+#if($existDelFlag)
+        return ${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}, SecurityUtils.getUsername());
+#else
+        return ${className}Mapper.deleteById(${pkColumn.javaField});
+#end
+    }
+#if($table.sub)
+
+    /**
+     * 新增${subTable.functionName}信息
+     * 
+     * @param ${className} ${functionName}对象
+     */
+    public void insert${subClassName}(${ClassName} ${className}) {
+        List<${subClassName}> ${subclassName}List = ${className}.get${subClassName}List();
+        ${pkColumn.javaType} ${pkColumn.javaField} = ${className}.get${pkColumn.capJavaField}();
+        if (CollUtil.isNotEmpty(${subclassName}List)) {
+            List<${subClassName}> list = new ArrayList<${subClassName}>();
+            for (${subClassName} ${subclassName} : ${subclassName}List) {
+                ${subclassName}.set${subTableFkClassName}(${pkColumn.javaField});
+                list.add(${subclassName});
+            }
+            if (list.size() > 0) {
+                ${className}Mapper.batch${subClassName}(list);
+            }
+        }
+    }
+#end
+
+#set($uniqueColStr = "")
+#set($uniqueColEqStr = "")
+#foreach ($column in $unqiueColumns) 
+#set($uniqueColStr=$uniqueColStr+"ObjectUtil.isNotEmpty(t.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}()) #if($foreach.count != $unqiueColumns.size())&&#end ")
+#set($uniqueColEqStr=$uniqueColEqStr+"t1.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}().equals(t2.get${column.javaField.substring(0,1).toUpperCase()}${column.javaField.substring(1)}()) #if($foreach.count != $unqiueColumns.size())&&#end ") 
+#end
+    /**
+     * 导入${functionName}
+     * 
+     * @param ${className}List 待导入数据
+     * @return 结果
+     */
+    @Override
+    @Transactional
+    public String import${ClassName}(List<${ClassName}> ${className}List) {
+    	StringBuilder result = new StringBuilder();
+    	if(CollUtil.isEmpty(${className}List)) {
+            result.append("导入数据为空！");
+            return result.toString();
+    	}
+    	
+    	// 找出合规的数据 
+    	List<${ClassName}> valid${ClassName}s = ${className}List;
+#if(${uniqueColStr} != "")
+        valid${ClassName}s = ${className}List.stream()
+    			.filter(t -> $uniqueColStr)
+    			.collect(toList());
+#end
+    	int invalidSize = ${className}List.size() - valid${ClassName}s.size();
+    	
+#if($uniqueColEqStr != "")
+    	// 找出所有已存在的数据（此方法可根据业务进行优化）
+    	List<${ClassName}> all${ClassName}s = this.select${ClassName}List(new ${ClassName}());
+    	// 找出要更新的数据
+    	List<${ClassName}> update${ClassName}s = valid${ClassName}s.stream()
+                .filter(t1 -> all${ClassName}s.stream().anyMatch(t2 -> $uniqueColEqStr))
+                .peek(t -> {
+                    t.setUpdateBy(SecurityUtils.getUsername());
+                    t.setUpdateTime(DateUtils.getNowDate());
+                })
+                .collect(toList());
+    	// 找出新增数据
+        List<${ClassName}> insert${ClassName}s = valid${ClassName}s.stream()
+                .filter(t1 -> all${ClassName}s.stream().noneMatch(t2 -> $uniqueColEqStr))
+                .peek(t -> {
+                    t.setCreateBy(SecurityUtils.getUsername());
+                    t.setCreateTime(DateUtils.getNowDate());
+                })
+                .collect(toList());
+#else
+        List<${ClassName}> insert${ClassName}s = valid${ClassName}s;
+        List<${ClassName}> update${ClassName}s = new ArrayList<>();
+#end        
+        if(CollUtil.isNotEmpty(insert${ClassName}s)) {
+            ${className}Mapper.batchInsert${ClassName}(insert${ClassName}s);
+        }
+        if(CollUtil.isNotEmpty(update${ClassName}s)) {
+            ${className}Mapper.batchUpdate${ClassName}(update${ClassName}s);
+        }
+        
+        result.append("待导入数据: ").append(${className}List.size()).append("条数据，");
+        if(invalidSize > 0) {
+            result.append("<br/>无效数据: ").append(invalidSize).append("条数据，");
+        }
+        
+        result.append("<br/>新增数据: ").append(insert${ClassName}s.size()).append("条数据，")
+            .append("<br/>更新数据: ").append(update${ClassName}s.size()).append("条数据。");
+        
+    	return result.toString();
+    }
+
+}
