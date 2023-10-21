@@ -24,7 +24,7 @@ create table sys_dept (
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-insert into sys_dept values(100,  0,   '0',          '精灵Spirit',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', '', 'fqyczadmin', sysdate(), '', null);
+insert into sys_dept values(100,  0,   '0',          '精灵Spirit',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', '', 'superadmin', sysdate(), '', null);
 
 
 -- ----------------------------
@@ -59,7 +59,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'fqyczadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'I75nbL6vrBvIljOAfD1nKWCq7o+4+2YZiDJmJ1KsBBs+P5u2DBBm25DoV5SFGtQ/FXscGCpfU+blwrzsn70gUKHF22F934Pett2k5KskrO4DcaJZhVrV6Rp/fw7loElRPXgIMmUQ7+8AaTwmWAT1xVE91Xp9HQQfwLLTFjctPP8EEvrzgNDG01NZbYubvRTDmWWy/V8F6T++tvsxv6FJz1KDOkMaCH2OUiCeGo7kMrTjmAaCuCiLbe6ny/f90kmOSTzcJFMj2x8UpFADjujTOnXKWX2sFE4S/+am4Ten6a4EjjfVq+N2UNighWDBBZ0DysKrjzlMXJSb2gOxmArpBA==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'superadmin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表
@@ -95,7 +95,7 @@ create table sys_post
 -- ----------------------------
 -- 初始化-岗位信息表数据
 -- ----------------------------
-insert into sys_post values(1, 'ceo',  '总负责人',    1, '0', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_post values(1, 'ceo',  '总负责人',    1, '0', 'superadmin', sysdate(), '', null, '');
 
 
 -- ----------------------------
@@ -123,10 +123,10 @@ create table sys_role (
 -- ----------------------------
 -- 初始化-角色信息表数据
 -- ----------------------------
-insert into sys_role values('1', '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'fqyczadmin', sysdate(), '', null, '超级管理员');
-insert into sys_role values('2', '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'fqyczadmin', sysdate(), '', null, '普通角色');
-insert into sys_role values('3', '信息录入员',  'info_record', 3, 2, 0, 0, '0', '0', 'fqyczadmin', sysdate(), '', null, '信息录入员');
-insert into sys_role values('4', '信息管理员',  'info_mgr', 4, 2, 0, 0, '0', '0', 'fqyczadmin', sysdate(), '', null, '信息管理员');
+insert into sys_role values('1', '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'superadmin', sysdate(), '', null, '超级管理员');
+insert into sys_role values('2', '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'superadmin', sysdate(), '', null, '普通角色');
+insert into sys_role values('3', '信息录入员',  'info_record', 3, 2, 0, 0, '0', '0', 'superadmin', sysdate(), '', null, '信息录入员');
+insert into sys_role values('4', '信息管理员',  'info_mgr', 4, 2, 0, 0, '0', '0', 'superadmin', sysdate(), '', null, '信息管理员');
 
 
 -- ----------------------------
@@ -160,127 +160,127 @@ create table sys_menu (
 -- 初始化-菜单信息表数据
 -- ----------------------------
 -- 一级菜单
-insert into sys_menu values('1', '系统管理', '0', '100', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'fqyczadmin', sysdate(), '', null, '系统管理目录');
-insert into sys_menu values('2', '系统监控', '0', '110', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'fqyczadmin', sysdate(), '', null, '系统监控目录');
-insert into sys_menu values('3', '系统工具', '0', '120', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'fqyczadmin', sysdate(), '', null, '系统工具目录');
-insert into sys_menu values('4', '业务逻辑', '0', '10', 'biz',               null, '', 1, 0, 'M', '0', '0', '', 'list',   'fqyczadmin', sysdate(), '', null, '业务逻辑目录');
+insert into sys_menu values('1', '系统管理', '0', '100', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'superadmin', sysdate(), '', null, '系统管理目录');
+insert into sys_menu values('2', '系统监控', '0', '110', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'superadmin', sysdate(), '', null, '系统监控目录');
+insert into sys_menu values('3', '系统工具', '0', '120', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'superadmin', sysdate(), '', null, '系统工具目录');
+insert into sys_menu values('4', '业务逻辑', '0', '10', 'biz',               null, '', 1, 0, 'M', '0', '0', '', 'list',   'superadmin', sysdate(), '', null, '业务逻辑目录');
 -- 二级菜单
-insert into sys_menu values('100',  '用户管理', '1',   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'fqyczadmin', sysdate(), '', null, '用户管理菜单');
-insert into sys_menu values('101',  '角色管理', '1',   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'fqyczadmin', sysdate(), '', null, '角色管理菜单');
-insert into sys_menu values('102',  '菜单管理', '1',   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'fqyczadmin', sysdate(), '', null, '菜单管理菜单');
-insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'fqyczadmin', sysdate(), '', null, '部门管理菜单');
-insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'fqyczadmin', sysdate(), '', null, '岗位管理菜单');
-insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'fqyczadmin', sysdate(), '', null, '字典管理菜单');
-insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'fqyczadmin', sysdate(), '', null, '参数设置菜单');
-insert into sys_menu values('107',  '信息管理', '1',   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'fqyczadmin', sysdate(), '', null, '信息管理菜单');
-insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'fqyczadmin', sysdate(), '', null, '系统业务附件菜单');
-insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                        '', 1, 0, 'M', '0', '0', '',                       'log',           'fqyczadmin', sysdate(), '', null, '日志管理菜单');
-insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'fqyczadmin', sysdate(), '', null, '在线用户菜单');
-insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'fqyczadmin', sysdate(), '', null, '定时任务菜单');
-insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'fqyczadmin', sysdate(), '', null, '数据监控菜单');
-insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'fqyczadmin', sysdate(), '', null, '服务监控菜单');
-insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'fqyczadmin', sysdate(), '', null, '缓存监控菜单');
-insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'fqyczadmin', sysdate(), '', null, '缓存列表菜单');
-insert into sys_menu values('120',  '审批记录', '2',   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'fqyczadmin', sysdate(), '', null, '审批记录菜单');
-insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'fqyczadmin', sysdate(), '', null, '表单构建菜单');
-insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'fqyczadmin', sysdate(), '', null, '代码生成菜单');
-insert into sys_menu values('118',  '代码示例', '3',   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'fqyczadmin', sysdate(), '', null, '代码示例菜单');
+insert into sys_menu values('100',  '用户管理', '1',   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'superadmin', sysdate(), '', null, '用户管理菜单');
+insert into sys_menu values('101',  '角色管理', '1',   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'superadmin', sysdate(), '', null, '角色管理菜单');
+insert into sys_menu values('102',  '菜单管理', '1',   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'superadmin', sysdate(), '', null, '菜单管理菜单');
+insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'superadmin', sysdate(), '', null, '部门管理菜单');
+insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'superadmin', sysdate(), '', null, '岗位管理菜单');
+insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'superadmin', sysdate(), '', null, '字典管理菜单');
+insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'superadmin', sysdate(), '', null, '参数设置菜单');
+insert into sys_menu values('107',  '信息管理', '1',   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'superadmin', sysdate(), '', null, '信息管理菜单');
+insert into sys_menu values('119',  '系统附件', '1',   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'superadmin', sysdate(), '', null, '系统业务附件菜单');
+insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                        '', 1, 0, 'M', '0', '0', '',                       'log',           'superadmin', sysdate(), '', null, '日志管理菜单');
+insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'superadmin', sysdate(), '', null, '在线用户菜单');
+insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'superadmin', sysdate(), '', null, '定时任务菜单');
+insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'superadmin', sysdate(), '', null, '数据监控菜单');
+insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'superadmin', sysdate(), '', null, '服务监控菜单');
+insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'superadmin', sysdate(), '', null, '缓存监控菜单');
+insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'superadmin', sysdate(), '', null, '缓存列表菜单');
+insert into sys_menu values('120',  '审批记录', '2',   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'superadmin', sysdate(), '', null, '审批记录菜单');
+insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'superadmin', sysdate(), '', null, '表单构建菜单');
+insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'superadmin', sysdate(), '', null, '代码生成菜单');
+insert into sys_menu values('118',  '代码示例', '3',   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'superadmin', sysdate(), '', null, '代码示例菜单');
 -- 三级菜单
-insert into sys_menu values('497',  '栏目分类', '107', '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'fqyczadmin', sysdate(), '', null, '信息栏目菜单');
-insert into sys_menu values('498',  '信息发布', '107', '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'fqyczadmin', sysdate(), '', null, '信息发布菜单');
-insert into sys_menu values('499',  '信息浏览', '107', '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'fqyczadmin', sysdate(), '', null, '信息浏览菜单');
+insert into sys_menu values('497',  '栏目分类', '107', '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'superadmin', sysdate(), '', null, '信息栏目菜单');
+insert into sys_menu values('498',  '信息发布', '107', '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'superadmin', sysdate(), '', null, '信息发布菜单');
+insert into sys_menu values('499',  '信息浏览', '107', '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'superadmin', sysdate(), '', null, '信息浏览菜单');
 
-insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'fqyczadmin', sysdate(), '', null, '操作日志菜单');
-insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'fqyczadmin', sysdate(), '', null, '登录日志菜单');
-insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'fqyczadmin', sysdate(), '', null, '邮件日志菜单');
-insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog',     'monitor/smslog/index',     '', 1, 0, 'C', '0', '0', 'monitor:smslog:list',     'message',       'fqyczadmin', sysdate(), '', null, '短信日志菜单');
+insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'superadmin', sysdate(), '', null, '操作日志菜单');
+insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'superadmin', sysdate(), '', null, '登录日志菜单');
+insert into sys_menu values('502',  '邮件日志', '108', '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'superadmin', sysdate(), '', null, '邮件日志菜单');
+insert into sys_menu values('503',  '短信日志', '108', '4', 'smslog',     'monitor/smslog/index',     '', 1, 0, 'C', '0', '0', 'monitor:smslog:list',     'message',       'superadmin', sysdate(), '', null, '短信日志菜单');
 
 -- 用户管理按钮
-insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1002', '用户修改', '100', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1003', '用户删除', '100', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1004', '用户导出', '100', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1005', '用户导入', '100', '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1006', '重置密码', '100', '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1002', '用户修改', '100', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1003', '用户删除', '100', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1004', '用户导出', '100', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1005', '用户导入', '100', '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1006', '重置密码', '100', '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'superadmin', sysdate(), '', null, '');
 -- 角色管理按钮
-insert into sys_menu values('1007', '角色查询', '101', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1008', '角色新增', '101', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1009', '角色修改', '101', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1010', '角色删除', '101', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1011', '角色导出', '101', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1007', '角色查询', '101', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1008', '角色新增', '101', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1009', '角色修改', '101', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1010', '角色删除', '101', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1011', '角色导出', '101', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'superadmin', sysdate(), '', null, '');
 -- 菜单管理按钮
-insert into sys_menu values('1012', '菜单查询', '102', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1013', '菜单新增', '102', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1014', '菜单修改', '102', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1015', '菜单删除', '102', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1012', '菜单查询', '102', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1013', '菜单新增', '102', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1014', '菜单修改', '102', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1015', '菜单删除', '102', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'superadmin', sysdate(), '', null, '');
 -- 部门管理按钮
-insert into sys_menu values('1016', '部门查询', '103', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1017', '部门新增', '103', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1018', '部门修改', '103', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1019', '部门删除', '103', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1016', '部门查询', '103', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1017', '部门新增', '103', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1018', '部门修改', '103', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1019', '部门删除', '103', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'superadmin', sysdate(), '', null, '');
 -- 岗位管理按钮
-insert into sys_menu values('1020', '岗位查询', '104', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1021', '岗位新增', '104', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1022', '岗位修改', '104', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1023', '岗位删除', '104', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1024', '岗位导出', '104', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1020', '岗位查询', '104', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1021', '岗位新增', '104', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1022', '岗位修改', '104', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1023', '岗位删除', '104', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1024', '岗位导出', '104', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'superadmin', sysdate(), '', null, '');
 -- 字典管理按钮
-insert into sys_menu values('1025', '字典查询', '105', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1026', '字典新增', '105', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1027', '字典修改', '105', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1028', '字典删除', '105', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1029', '字典导出', '105', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1025', '字典查询', '105', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1026', '字典新增', '105', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1027', '字典修改', '105', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1028', '字典删除', '105', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1029', '字典导出', '105', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'superadmin', sysdate(), '', null, '');
 -- 参数设置按钮
-insert into sys_menu values('1030', '参数查询', '106', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1031', '参数新增', '106', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1032', '参数修改', '106', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1033', '参数删除', '106', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1034', '参数导出', '106', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1030', '参数查询', '106', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1031', '参数新增', '106', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1032', '参数修改', '106', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1033', '参数删除', '106', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1034', '参数导出', '106', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'superadmin', sysdate(), '', null, '');
 -- 信息管理按钮
-insert into sys_menu values('1035', '信息查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:query',        '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1036', '信息新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:add',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1037', '信息修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:edit',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1038', '信息删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:remove',       '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1035', '信息查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:query',        '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1036', '信息新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:add',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1037', '信息修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:edit',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1038', '信息删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:remove',       '#', 'superadmin', sysdate(), '', null, '');
 -- 系统附件按钮
-insert into sys_menu values('1066', '系统附件查询', '119', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1067', '系统附件删除', '119', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1066', '系统附件查询', '119', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1067', '系统附件删除', '119', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'superadmin', sysdate(), '', null, '');
 -- 操作日志按钮
-insert into sys_menu values('1039', '操作查询', '500', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1040', '操作删除', '500', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1041', '日志导出', '500', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1039', '操作查询', '500', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1040', '操作删除', '500', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1041', '日志导出', '500', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'superadmin', sysdate(), '', null, '');
 -- 登录日志按钮
-insert into sys_menu values('1042', '登录查询', '501', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1043', '登录删除', '501', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1044', '日志导出', '501', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1042', '登录查询', '501', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1043', '登录删除', '501', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1044', '日志导出', '501', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'superadmin', sysdate(), '', null, '');
 -- 邮件日志按钮
-insert into sys_menu values('1060', '邮件日志查询', '502', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:query',   '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1061', '邮件日志删除', '502', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:remove',  '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1062', '邮件日志导出', '502', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:export',  '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1060', '邮件日志查询', '502', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:query',   '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1061', '邮件日志删除', '502', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:remove',  '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1062', '邮件日志导出', '502', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:export',  '#', 'superadmin', sysdate(), '', null, '');
 -- 短信日志按钮
-insert into sys_menu values('1063', '短信日志查询', '503', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1064', '短信日志删除', '503', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1065', '短信日志导出', '503', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1063', '短信日志查询', '503', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1064', '短信日志删除', '503', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1065', '短信日志导出', '503', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'superadmin', sysdate(), '', null, '');
 
 
 -- 在线用户按钮
-insert into sys_menu values('1045', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1046', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1047', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1045', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1046', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1047', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'superadmin', sysdate(), '', null, '');
 -- 定时任务按钮
-insert into sys_menu values('1048', '任务查询', '110', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1049', '任务新增', '110', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1050', '任务修改', '110', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1051', '任务删除', '110', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1052', '状态修改', '110', '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1053', '任务导出', '110', '7', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1048', '任务查询', '110', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1049', '任务新增', '110', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1050', '任务修改', '110', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1051', '任务删除', '110', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1052', '状态修改', '110', '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1053', '任务导出', '110', '7', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'superadmin', sysdate(), '', null, '');
 -- 代码生成按钮
-insert into sys_menu values('1054', '生成查询', '115', '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1055', '生成修改', '115', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1056', '生成删除', '115', '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1057', '导入代码', '115', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1058', '预览代码', '115', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_menu values('1059', '生成代码', '115', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_menu values('1054', '生成查询', '115', '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1055', '生成修改', '115', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1056', '生成删除', '115', '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1057', '导入代码', '115', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1058', '预览代码', '115', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'superadmin', sysdate(), '', null, '');
+insert into sys_menu values('1059', '生成代码', '115', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'superadmin', sysdate(), '', null, '');
 
 
 -- ----------------------------
@@ -510,17 +510,17 @@ create table sys_dict_type
   unique (dict_type)
 ) engine=innodb auto_increment=100 comment = '字典类型表';
 
-insert into sys_dict_type values(1,  '用户性别', 'sys_user_sex',        '0', 'fqyczadmin', sysdate(), '', null, '用户性别列表');
-insert into sys_dict_type values(2,  '菜单状态', 'sys_show_hide',       '0', 'fqyczadmin', sysdate(), '', null, '菜单状态列表');
-insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  '0', 'fqyczadmin', sysdate(), '', null, '系统开关列表');
-insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      '0', 'fqyczadmin', sysdate(), '', null, '任务状态列表');
-insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       '0', 'fqyczadmin', sysdate(), '', null, '任务分组列表');
-insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          '0', 'fqyczadmin', sysdate(), '', null, '系统是否列表');
-insert into sys_dict_type values(7,  '栏目类型', 'sys_info_type',       '0', 'fqyczadmin', sysdate(), '', null, '栏目类型列表');
-insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'fqyczadmin', sysdate(), '', null, '操作类型列表');
-insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'fqyczadmin', sysdate(), '', null, '登录状态列表');
-insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'fqyczadmin', sysdate(), '', null, '业务模块列表');
-insert into sys_dict_type values(12, '审批类型', 'sys_approval_type',   '0', 'fqyczadmin', sysdate(), '', null, '审批类型列表');
+insert into sys_dict_type values(1,  '用户性别', 'sys_user_sex',        '0', 'superadmin', sysdate(), '', null, '用户性别列表');
+insert into sys_dict_type values(2,  '菜单状态', 'sys_show_hide',       '0', 'superadmin', sysdate(), '', null, '菜单状态列表');
+insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  '0', 'superadmin', sysdate(), '', null, '系统开关列表');
+insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      '0', 'superadmin', sysdate(), '', null, '任务状态列表');
+insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       '0', 'superadmin', sysdate(), '', null, '任务分组列表');
+insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          '0', 'superadmin', sysdate(), '', null, '系统是否列表');
+insert into sys_dict_type values(7,  '栏目类型', 'sys_info_type',       '0', 'superadmin', sysdate(), '', null, '栏目类型列表');
+insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'superadmin', sysdate(), '', null, '操作类型列表');
+insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'superadmin', sysdate(), '', null, '登录状态列表');
+insert into sys_dict_type values(11, '业务模块', 'sys_biz_model',       '0', 'superadmin', sysdate(), '', null, '业务模块列表');
+insert into sys_dict_type values(12, '审批类型', 'sys_approval_type',   '0', 'superadmin', sysdate(), '', null, '审批类型列表');
 
 
 -- ----------------------------
@@ -546,37 +546,37 @@ create table sys_dict_data
   primary key (dict_code)
 ) engine=innodb auto_increment=100 comment = '字典数据表';
 
-insert into sys_dict_data values(1,  1,  '男',       '0',       'sys_user_sex',        '',   '',        'Y', '0', 'fqyczadmin', sysdate(), '', null, '性别男');
-insert into sys_dict_data values(2,  2,  '女',       '1',       'sys_user_sex',        '',   '',        'N', '0', 'fqyczadmin', sysdate(), '', null, '性别女');
-insert into sys_dict_data values(3,  3,  '未知',     '2',       'sys_user_sex',        '',   '',        'N', '0', 'fqyczadmin', sysdate(), '', null, '性别未知');
-insert into sys_dict_data values(4,  1,  '显示',     '0',       'sys_show_hide',       '',   'primary', 'Y', '0', 'fqyczadmin', sysdate(), '', null, '显示菜单');
-insert into sys_dict_data values(5,  2,  '隐藏',     '1',       'sys_show_hide',       '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '隐藏菜单');
-insert into sys_dict_data values(6,  1,  '正常',     '0',       'sys_normal_disable',  '',   'primary', 'Y', '0', 'fqyczadmin', sysdate(), '', null, '正常状态');
-insert into sys_dict_data values(7,  2,  '停用',     '1',       'sys_normal_disable',  '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '停用状态');
-insert into sys_dict_data values(8,  1,  '正常',     '0',       'sys_job_status',      '',   'primary', 'Y', '0', 'fqyczadmin', sysdate(), '', null, '正常状态');
-insert into sys_dict_data values(9,  2,  '暂停',     '1',       'sys_job_status',      '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '停用状态');
-insert into sys_dict_data values(10, 1,  '默认',     'DEFAULT', 'sys_job_group',       '',   '',        'Y', '0', 'fqyczadmin', sysdate(), '', null, '默认分组');
-insert into sys_dict_data values(11, 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'fqyczadmin', sysdate(), '', null, '系统分组');
-insert into sys_dict_data values(12, 1,  '是',       '1',       'sys_yes_no',          '',   'primary', 'Y', '0', 'fqyczadmin', sysdate(), '', null, '系统默认是');
-insert into sys_dict_data values(13, 2,  '否',       '0',       'sys_yes_no',          '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '系统默认否');
-insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'fqyczadmin', sysdate(), '', null, '新闻');
-insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'fqyczadmin', sysdate(), '', null, '公告');
-insert into sys_dict_data values(18, 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'fqyczadmin', sysdate(), '', null, '新增操作');
-insert into sys_dict_data values(19, 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'fqyczadmin', sysdate(), '', null, '修改操作');
-insert into sys_dict_data values(20, 3,  '删除',     '3',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '删除操作');
-insert into sys_dict_data values(21, 4,  '授权',     '4',       'sys_oper_type',       '',   'primary', 'N', '0', 'fqyczadmin', sysdate(), '', null, '授权操作');
-insert into sys_dict_data values(22, 5,  '导出',     '5',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', sysdate(), '', null, '导出操作');
-insert into sys_dict_data values(23, 6,  '导入',     '6',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', sysdate(), '', null, '导入操作');
-insert into sys_dict_data values(24, 7,  '强退',     '7',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '强退操作');
-insert into sys_dict_data values(25, 8,  '生成代码', '8',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', sysdate(), '', null, '生成操作');
-insert into sys_dict_data values(26, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '清空操作');
-insert into sys_dict_data values(27, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'fqyczadmin', sysdate(), '', null, '正常状态');
-insert into sys_dict_data values(28, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'fqyczadmin', sysdate(), '', null, '停用状态');
-insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_model',       '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '信息发布');
-insert into sys_dict_data values(30, 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '提交');
-insert into sys_dict_data values(31, 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '审批通过');
-insert into sys_dict_data values(32, 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '审批驳回');
-insert into sys_dict_data values(33, 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', sysdate(), '', null, '已发布的信息被撤销');
+insert into sys_dict_data values(1,  1,  '男',       '0',       'sys_user_sex',        '',   '',        'Y', '0', 'superadmin', sysdate(), '', null, '性别男');
+insert into sys_dict_data values(2,  2,  '女',       '1',       'sys_user_sex',        '',   '',        'N', '0', 'superadmin', sysdate(), '', null, '性别女');
+insert into sys_dict_data values(3,  3,  '未知',     '2',       'sys_user_sex',        '',   '',        'N', '0', 'superadmin', sysdate(), '', null, '性别未知');
+insert into sys_dict_data values(4,  1,  '显示',     '0',       'sys_show_hide',       '',   'primary', 'Y', '0', 'superadmin', sysdate(), '', null, '显示菜单');
+insert into sys_dict_data values(5,  2,  '隐藏',     '1',       'sys_show_hide',       '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '隐藏菜单');
+insert into sys_dict_data values(6,  1,  '正常',     '0',       'sys_normal_disable',  '',   'primary', 'Y', '0', 'superadmin', sysdate(), '', null, '正常状态');
+insert into sys_dict_data values(7,  2,  '停用',     '1',       'sys_normal_disable',  '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '停用状态');
+insert into sys_dict_data values(8,  1,  '正常',     '0',       'sys_job_status',      '',   'primary', 'Y', '0', 'superadmin', sysdate(), '', null, '正常状态');
+insert into sys_dict_data values(9,  2,  '暂停',     '1',       'sys_job_status',      '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '停用状态');
+insert into sys_dict_data values(10, 1,  '默认',     'DEFAULT', 'sys_job_group',       '',   '',        'Y', '0', 'superadmin', sysdate(), '', null, '默认分组');
+insert into sys_dict_data values(11, 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'superadmin', sysdate(), '', null, '系统分组');
+insert into sys_dict_data values(12, 1,  '是',       '1',       'sys_yes_no',          '',   'primary', 'Y', '0', 'superadmin', sysdate(), '', null, '系统默认是');
+insert into sys_dict_data values(13, 2,  '否',       '0',       'sys_yes_no',          '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '系统默认否');
+insert into sys_dict_data values(14, 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'superadmin', sysdate(), '', null, '新闻');
+insert into sys_dict_data values(15, 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'superadmin', sysdate(), '', null, '公告');
+insert into sys_dict_data values(18, 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'superadmin', sysdate(), '', null, '新增操作');
+insert into sys_dict_data values(19, 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'superadmin', sysdate(), '', null, '修改操作');
+insert into sys_dict_data values(20, 3,  '删除',     '3',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '删除操作');
+insert into sys_dict_data values(21, 4,  '授权',     '4',       'sys_oper_type',       '',   'primary', 'N', '0', 'superadmin', sysdate(), '', null, '授权操作');
+insert into sys_dict_data values(22, 5,  '导出',     '5',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', sysdate(), '', null, '导出操作');
+insert into sys_dict_data values(23, 6,  '导入',     '6',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', sysdate(), '', null, '导入操作');
+insert into sys_dict_data values(24, 7,  '强退',     '7',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '强退操作');
+insert into sys_dict_data values(25, 8,  '生成代码', '8',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', sysdate(), '', null, '生成操作');
+insert into sys_dict_data values(26, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '清空操作');
+insert into sys_dict_data values(27, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'superadmin', sysdate(), '', null, '正常状态');
+insert into sys_dict_data values(28, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'superadmin', sysdate(), '', null, '停用状态');
+insert into sys_dict_data values(29, 1,  '信息发布',  'SysInfo', 'sys_biz_model',       '',   '', 'N', '0', 'superadmin', sysdate(), '', null, '信息发布');
+insert into sys_dict_data values(30, 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'superadmin', sysdate(), '', null, '提交');
+insert into sys_dict_data values(31, 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'superadmin', sysdate(), '', null, '审批通过');
+insert into sys_dict_data values(32, 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'superadmin', sysdate(), '', null, '审批驳回');
+insert into sys_dict_data values(33, 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'superadmin', sysdate(), '', null, '已发布的信息被撤销');
 
 -- ----------------------------
 -- 13、参数配置表
@@ -596,13 +596,13 @@ create table sys_config (
   primary key (config_id)
 ) engine=innodb auto_increment=100 comment = '参数配置表';
 
-insert into sys_config values(1, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
-insert into sys_config values(2, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'fqyczadmin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
-insert into sys_config values(3, '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'fqyczadmin', sysdate(), '', null, '短信发送标识（向领导申请）');
-insert into sys_config values(4, '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'fqyczadmin', sysdate(), '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
-insert into sys_config values(5, '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'fqyczadmin', sysdate(), '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
-insert into sys_config values(6, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'fqyczadmin', sysdate(), '', null, '初始化密码 rs@123!' );
-insert into sys_config values(7, '系统访问地址',         		   'sys.visit.baseurl',             'http://localhost:1024',      '0', 'fqyczadmin', sysdate(), '', null, '系统访问地址' );
+insert into sys_config values(1, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'superadmin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
+insert into sys_config values(2, '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'superadmin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
+insert into sys_config values(3, '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'superadmin', sysdate(), '', null, '短信发送标识（向领导申请）');
+insert into sys_config values(4, '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'superadmin', sysdate(), '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
+insert into sys_config values(5, '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'superadmin', sysdate(), '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
+insert into sys_config values(6, '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'superadmin', sysdate(), '', null, '初始化密码 rs@123!' );
+insert into sys_config values(7, '系统访问地址',         		   'sys.visit.baseurl',             'http://localhost:1024',      '0', 'superadmin', sysdate(), '', null, '系统访问地址' );
 
 -- ----------------------------
 -- 14、系统访问记录
@@ -645,9 +645,9 @@ create table sys_job (
   primary key (job_id, job_name, job_group)
 ) engine=innodb auto_increment=100 comment = '定时任务调度表';
 
-insert into sys_job values(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_job values(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')',  '0/15 * * * * ?', '3', '1', '1', 'fqyczadmin', sysdate(), '', null, '');
-insert into sys_job values(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'fqyczadmin', sysdate(), '', null, '');
+insert into sys_job values(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'superadmin', sysdate(), '', null, '');
+insert into sys_job values(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')',  '0/15 * * * * ?', '3', '1', '1', 'superadmin', sysdate(), '', null, '');
+insert into sys_job values(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'superadmin', sysdate(), '', null, '');
 
 
 -- ----------------------------
