@@ -1,7 +1,7 @@
 {
   "name": "spirit-project",
   "version": "4.0.0",
-  "description": "Spirit精灵开发框架",
+  "description": "精灵Spirit开发框架",
   "author": "但丁",
   "license": "MIT",
   "scripts": {
