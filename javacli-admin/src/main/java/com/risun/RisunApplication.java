@@ -12,9 +12,9 @@ import cn.hutool.core.lang.Console;
  * @author ruoyi
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
-public class RisunApplication {
+public class SpiritApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(RisunApplication.class, args);
+		SpringApplication.run(SpiritApplication.class, args);
 		Console.log("XX项目启动成功");
 	}
 }

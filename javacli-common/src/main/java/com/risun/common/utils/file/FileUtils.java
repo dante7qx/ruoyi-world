@@ -17,7 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 import com.spirit.common.utils.DateUtils;
 import com.spirit.common.utils.uuid.IdUtils;
@@ -78,7 +78,7 @@ public class FileUtils
      */
     public static String writeImportBytes(byte[] data) throws IOException
     {
-        return writeBytes(data, RisunConfig.getImportPath());
+        return writeBytes(data, SpiritConfig.getImportPath());
     }
 
     /**
@@ -323,7 +323,7 @@ public class FileUtils
     public static String getLocalPath(String dbPath) {
     	String localPath = "";
     	if(StrUtil.isNotEmpty(dbPath)) {
-    		localPath = RisunConfig.getProfile() + "/" + StrUtil.removePrefix(dbPath, Constants.RESOURCE_PREFIX);
+    		localPath = SpiritConfig.getProfile() + "/" + StrUtil.removePrefix(dbPath, Constants.RESOURCE_PREFIX);
     	}
     	return localPath;
     }

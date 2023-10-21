@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.core.domain.entity.SysDownload;
@@ -71,7 +71,7 @@ public class CommonController {
 				throw new Exception(StrUtil.format("文件名称({})非法，不允许下载。 ", fileName));
 			}
 			String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-			String filePath = RisunConfig.getDownloadPath() + fileName;
+			String filePath = SpiritConfig.getDownloadPath() + fileName;
 
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 			FileUtils.setAttachmentResponseHeader(response, realFileName);
@@ -92,7 +92,7 @@ public class CommonController {
 		Assert.isTrue(!bizModel.equals("_"), "业务模块不能为空！");
 		try {
 			// 上传文件路径
-			String filePath = RisunConfig.getUploadPath();
+			String filePath = SpiritConfig.getUploadPath();
 			return AjaxResult.success(sysAttachmentService.uploadSysAttachment(filePath, bizModel, file, multipartProp.getMaxFileSize().toBytes()));
 		} catch (Exception e) {
 			return AjaxResult.error(e.getMessage());
@@ -106,7 +106,7 @@ public class CommonController {
 	public AjaxResult uploadFiles(List<MultipartFile> files) throws Exception {
 		try {
 			// 上传文件路径
-			String filePath = RisunConfig.getUploadPath();
+			String filePath = SpiritConfig.getUploadPath();
 			List<String> urls = new ArrayList<String>();
 			List<String> fileNames = new ArrayList<String>();
 			List<String> newFileNames = new ArrayList<String>();
@@ -142,7 +142,7 @@ public class CommonController {
 				throw new Exception(StrUtil.format("资源文件({})非法，不允许下载。 ", resource));
 			}
 			// 本地资源路径
-			String localPath = RisunConfig.getProfile();
+			String localPath = SpiritConfig.getProfile();
 			// 数据库资源地址
 			String downloadPath = localPath + StrUtil.subAfter(resource, Constants.RESOURCE_PREFIX, false);
 			// 下载名称
@@ -162,7 +162,7 @@ public class CommonController {
 	public AjaxResult uploadOnlyFile(MultipartFile file) throws Exception {
 		try {
 			// 上传文件路径
-			String filePath = RisunConfig.getUploadPath();
+			String filePath = SpiritConfig.getUploadPath();
 			// 上传并返回新文件名称
 			String fileName = FileUploadUtils.upload(filePath, file, multipartProp.getMaxFileSize().toBytes());
 			String url = serverConfig.getUrl() + fileName;
@@ -184,8 +184,8 @@ public class CommonController {
 	public AjaxResult uploadImgWithThumb(MultipartFile file) throws Exception {
 		try {
 			// 上传文件路径
-			String profile = RisunConfig.getProfile();
-			String filePath = RisunConfig.getUploadPath();
+			String profile = SpiritConfig.getProfile();
+			String filePath = SpiritConfig.getUploadPath();
 			// 上传并返回新文件名称
 			String fileName = FileUploadUtils.upload(filePath, file, multipartProp.getMaxFileSize().toBytes());
 			String url = serverConfig.getUrl() + fileName;
@@ -220,7 +220,7 @@ public class CommonController {
 				throw new Exception(StrUtil.format("资源文件({})非法，不允许下载。 ", downloadName));
 			}
 			// 本地资源路径
-			String localPath = RisunConfig.getProfile();
+			String localPath = SpiritConfig.getProfile();
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 			FileUtils.setAttachmentResponseHeader(response, downloadName);
 			ZipDownloadUtil.zip(localPath, resource, response.getOutputStream());

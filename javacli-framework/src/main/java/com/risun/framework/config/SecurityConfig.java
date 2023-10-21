@@ -1,7 +1,7 @@
 package com.spirit.framework.config;
 
 import com.spirit.common.constant.Constants;
-import com.spirit.common.utils.sign.RisunRASPasswordEncoder;
+import com.spirit.common.utils.sign.SpiritRASPasswordEncoder;
 import com.spirit.framework.config.properties.PermitAllUrlProperties;
 import com.spirit.framework.security.filter.JwtAuthenticationTokenFilter;
 import com.spirit.framework.security.handle.AuthenticationEntryPointImpl;
@@ -143,8 +143,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     */
     
     @Bean
-    public RisunRASPasswordEncoder spiritRASPasswordEncoder() {
-    	return new RisunRASPasswordEncoder();
+    public SpiritRASPasswordEncoder spiritRASPasswordEncoder() {
+    	return new SpiritRASPasswordEncoder();
     }
 
     /**

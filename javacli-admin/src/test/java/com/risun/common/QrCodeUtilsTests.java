@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.alibaba.fastjson2.JSON;
-import com.spirit.RisunApplicationTests;
+import com.spirit.SpiritApplicationTests;
 import com.spirit.biz.demo.domain.Demo;
 import com.spirit.common.utils.DateUtils;
 import com.spirit.common.utils.QrCodeUtils;
@@ -15,7 +15,7 @@ import cn.hutool.core.util.ClassUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class QrCodeUtilsTests extends RisunApplicationTests {
+class QrCodeUtilsTests extends SpiritApplicationTests {
 	
 	private Demo demo;
 	

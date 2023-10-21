@@ -1,7 +1,7 @@
 package com.spirit.system.service.impl;
 
-import com.spirit.system.mapper.SysMonitor4RisunMapper;
-import com.spirit.system.service.ISysMonitor4RisunService;
+import com.spirit.system.mapper.SysMonitor4SpiritMapper;
+import com.spirit.system.service.ISysMonitor4SpiritService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,17 @@ import cn.hutool.core.util.ObjectUtil;
  * 
  */
 @Service
-public class SysMonitor4RisunServiceImpl implements ISysMonitor4RisunService {
+public class SysMonitor4SpiritServiceImpl implements ISysMonitor4SpiritService {
 	
 	@Autowired
-	private SysMonitor4RisunMapper sysMonitor4RisunMapper;
+	private SysMonitor4SpiritMapper sysMonitor4SpiritMapper;
 
 	/**
 	 * 每日用户访问数
 	 */
 	@Override
 	public int selectSysUserVisitCount(String queryDate) {
-		Integer result = sysMonitor4RisunMapper.selectSysUserVisitCount(queryDate);
+		Integer result = sysMonitor4SpiritMapper.selectSysUserVisitCount(queryDate);
 		return ObjectUtil.isNotNull(result) ? result : 0;
 	}
 	
@@ -34,7 +34,7 @@ public class SysMonitor4RisunServiceImpl implements ISysMonitor4RisunService {
 	 */
 	@Override
 	public int selectSysUserIncreaseCount(String queryDate) {
-		Integer result = sysMonitor4RisunMapper.selectSysUserIncreaseCount(queryDate);
+		Integer result = sysMonitor4SpiritMapper.selectSysUserIncreaseCount(queryDate);
 		return ObjectUtil.isNotNull(result) ? result : 0;
 	}
 

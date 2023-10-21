@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * 加密类
  */
-public class RisunRASPasswordEncoder implements PasswordEncoder {
+public class SpiritRASPasswordEncoder implements PasswordEncoder {
 
 	@Override
 	public String encode(CharSequence rawPassword) {

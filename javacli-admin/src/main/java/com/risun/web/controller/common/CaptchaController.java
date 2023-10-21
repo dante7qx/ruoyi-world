@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.code.kaptcha.Producer;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.CacheConstants;
 import com.spirit.common.constant.Constants;
 import com.spirit.common.core.domain.AjaxResult;
@@ -71,7 +71,7 @@ public class CaptchaController {
 		BufferedImage image = null;
 
 		// 生成验证码
-		String captchaType = RisunConfig.getCaptchaType();
+		String captchaType = SpiritConfig.getCaptchaType();
 		if (MATH_.equals(captchaType)) {
 			String capText = captchaProducerMath.createText();
 			capStr = capText.substring(0, capText.lastIndexOf("@"));

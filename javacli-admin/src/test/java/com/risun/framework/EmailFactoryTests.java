@@ -6,10 +6,10 @@ import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.spirit.RisunApplicationTests;
+import com.spirit.SpiritApplicationTests;
 import com.spirit.framework.email.EmailFactory;
 
-class EmailFactoryTests extends RisunApplicationTests {
+class EmailFactoryTests extends SpiritApplicationTests {
 	
 	@Autowired
 	private EmailFactory emailFactory;

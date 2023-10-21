@@ -2,7 +2,7 @@ package com.spirit.common.utils;
 
 import java.awt.Color;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.io.FileUtil;
@@ -18,7 +18,7 @@ import cn.hutool.extra.qrcode.QrConfig;
  */
 public class QrCodeUtils {
 	
-    private static String baseDir = RisunConfig.getProfile();
+    private static String baseDir = SpiritConfig.getProfile();
     
     private static String parentDir = "qrcode";
     

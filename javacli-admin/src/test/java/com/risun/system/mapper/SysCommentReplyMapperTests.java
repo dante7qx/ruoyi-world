@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.collect.Lists;
-import com.spirit.RisunApplicationTests;
+import com.spirit.SpiritApplicationTests;
 import com.spirit.system.domain.SysCommentReply;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class SysCommentReplyMapperTests extends RisunApplicationTests {
+class SysCommentReplyMapperTests extends SpiritApplicationTests {
 
 	@Autowired
 	private SysCommentReplyMapper sysCommentReplyMapper;

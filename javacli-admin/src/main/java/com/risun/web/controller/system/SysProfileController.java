@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spirit.common.annotation.Log;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.core.controller.BaseController;
 import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.core.domain.entity.SysUser;
@@ -126,7 +126,7 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = getLoginUser();
-            String avatar = FileUploadUtils.upload(RisunConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION, multipartProp.getMaxFileSize().toBytes());
+            String avatar = FileUploadUtils.upload(SpiritConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION, multipartProp.getMaxFileSize().toBytes());
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();

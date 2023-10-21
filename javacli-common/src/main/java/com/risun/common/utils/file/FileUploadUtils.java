@@ -9,7 +9,7 @@ import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 import com.spirit.common.exception.file.FileNameInvalidException;
 import com.spirit.common.exception.file.FileNameLengthLimitExceededException;
@@ -40,7 +40,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RisunConfig.getProfile();
+    private static String defaultBaseDir = SpiritConfig.getProfile();
     
     private static final String FILE_DELIMETER = ",";
 
@@ -150,7 +150,7 @@ public class FileUploadUtils
 
     public static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
-        int dirLastIndex = RisunConfig.getProfile().length() + 1;
+        int dirLastIndex = SpiritConfig.getProfile().length() + 1;
         String currentDir = uploadDir.substring(dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }

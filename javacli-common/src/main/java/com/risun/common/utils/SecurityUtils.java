@@ -3,7 +3,7 @@ package com.spirit.common.utils;
 import com.spirit.common.constant.HttpStatus;
 import com.spirit.common.core.domain.model.LoginUser;
 import com.spirit.common.exception.ServiceException;
-import com.spirit.common.utils.sign.RisunRASPasswordEncoder;
+import com.spirit.common.utils.sign.SpiritRASPasswordEncoder;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -84,14 +84,14 @@ public class SecurityUtils
     }
 
     /**
-     * 生成RisunRASPasswordEncoder密码
+     * 生成SpiritRASPasswordEncoder密码
      *
      * @param password 密码
      * @return 加密字符串
      */
     public static String encryptPassword(String password)
     {
-        RisunRASPasswordEncoder passwordEncoder = new RisunRASPasswordEncoder();
+        SpiritRASPasswordEncoder passwordEncoder = new SpiritRASPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 
@@ -104,7 +104,7 @@ public class SecurityUtils
      */
     public static boolean matchesPassword(String rawPassword, String encodedPassword)
     {
-    	RisunRASPasswordEncoder passwordEncoder = new RisunRASPasswordEncoder();
+    	SpiritRASPasswordEncoder passwordEncoder = new SpiritRASPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
