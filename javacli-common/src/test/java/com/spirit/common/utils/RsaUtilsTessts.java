@@ -12,10 +12,10 @@ public class RsaUtilsTessts {
 
 	@Test
 	void encryptDecrypt() {
-		String pwd = "gzxqj1028#";
+		String pwd = "SdlL!B$RV@";
 		String encPwd = RsaUtils.encryptByPublicKey(pwd);
 		String decPwd = RsaUtils.decryptByPrivateKey(encPwd);
-		Console.log(pwd, encPwd);
+		Console.log(encPwd);
 		Console.log("长度: {}", encPwd.length());
 		assertEquals(pwd, decPwd);
 	}
