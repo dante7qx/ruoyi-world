@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysEmailLogMapper">
+    
+    <resultMap type="SysEmailLog" id="SysEmailLogResult">
+        <result property="emailId"    column="email_id"    />
+        <result property="sendTo"    column="send_to"    />
+        <result property="sendCc"    column="send_cc"    />
+        <result property="sendBcc"    column="send_bcc"    />
+        <result property="subject"    column="subject"    />
+        <result property="content"    column="content"    />
+        <result property="sendDate"    column="send_date"    />
+        <result property="sendLog"    column="send_log"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysEmailLogVo">
+        select email_id, send_to, send_cc, send_bcc, subject, content, send_date, send_log, status, create_by, create_time, update_by, update_time from sys_email_log
+    </sql>
+
+    <select id="selectSysEmailLogList" parameterType="SysEmailLog" resultMap="SysEmailLogResult">
+        <include refid="selectSysEmailLogVo"/>
+        <where>  
+            <if test="sendTo != null  and sendTo != ''"> and send_to = #{sendTo}</if>
+            <if test="sendCc != null  and sendCc != ''"> and send_cc = #{sendCc}</if>
+            <if test="sendBcc != null  and sendBcc != ''"> and send_bcc = #{sendBcc}</if>
+            <if test="subject != null  and subject != ''"> and subject = #{subject}</if>
+            <if test="content != null  and content != ''"> and content like concat('%', #{content}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="params.beginSendDate != null and params.beginSendDate != '' and params.endSendDate != null and params.endSendDate != ''"> and send_date between #{params.beginSendDate} and #{params.endSendDate}</if>
+        </where>
+        order by send_date desc
+    </select>
+    
+    <select id="selectSysEmailLogByEmailId" parameterType="Long" resultMap="SysEmailLogResult">
+        <include refid="selectSysEmailLogVo"/>
+        where email_id = #{emailId}
+    </select>
+        
+    <insert id="insertSysEmailLog" parameterType="SysEmailLog" useGeneratedKeys="true" keyProperty="emailId">
+        insert into sys_email_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sendTo != null">send_to,</if>
+            <if test="sendCc != null">send_cc,</if>
+            <if test="sendBcc != null">send_bcc,</if>
+            <if test="subject != null">subject,</if>
+            <if test="content != null">content,</if>
+            <if test="sendDate != null">send_date,</if>
+            <if test="sendLog != null">send_log,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sendTo != null">#{sendTo},</if>
+            <if test="sendCc != null">#{sendCc},</if>
+            <if test="sendBcc != null">#{sendBcc},</if>
+            <if test="subject != null">#{subject},</if>
+            <if test="content != null">#{content},</if>
+            <if test="sendDate != null">#{sendDate},</if>
+            <if test="sendLog != null">#{sendLog},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+	
+	<delete id="deleteSysEmailLogByEmailId" parameterType="Long">
+        delete from sys_email_log where email_id = #{emailId}
+    </delete>
+
+    <delete id="deleteSysEmailLogByEmailIds" parameterType="String">
+        delete from sys_email_log where email_id in 
+        <foreach item="emailId" collection="array" open="(" separator="," close=")">
+            #{emailId}
+        </foreach>
+    </delete>
+	
+</mapper>

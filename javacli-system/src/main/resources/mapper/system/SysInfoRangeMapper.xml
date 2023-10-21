@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysInfoRangeMapper">
+    
+    <resultMap type="SysInfoRange" id="SysInfoRangeResult">
+        <result property="rangeId"    column="range_id"    />
+        <result property="infoId"    column="info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectSysInfoRangeVo">
+        select range_id, info_id, dept_id from sys_info_range
+    </sql>
+
+    <select id="selectSysInfoRangeList" parameterType="SysInfoRange" resultMap="SysInfoRangeResult">
+        <include refid="selectSysInfoRangeVo"/>
+        <where>  
+            <if test="infoId != null "> and info_id = #{infoId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysInfoRangeByRangeId" parameterType="Long" resultMap="SysInfoRangeResult">
+        <include refid="selectSysInfoRangeVo"/>
+        where range_id = #{rangeId}
+    </select>
+    
+    <select id="selectSysInfoRangeByInfoId" parameterType="Long" resultMap="SysInfoRangeResult">
+        <include refid="selectSysInfoRangeVo"/>
+        where info_id = #{infoId}
+    </select>
+        
+    <insert id="insertSysInfoRange" parameterType="SysInfoRange" useGeneratedKeys="true" keyProperty="rangeId">
+        insert into sys_info_range
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="infoId != null">#{infoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysInfoRange" parameterType="SysInfoRange">
+        update sys_info_range
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="infoId != null">info_id = #{infoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where range_id = #{rangeId}
+    </update>
+
+    <delete id="deleteSysInfoRangeByRangeId" parameterType="Long">
+        delete from sys_info_range where range_id = #{rangeId}
+    </delete>
+    
+    <delete id="deleteSysInfoRangeByInfoId" parameterType="Long">
+        delete from sys_info_range where info_id = #{infoId}
+    </delete>
+
+    <delete id="deleteSysInfoRangeByRangeIds" parameterType="String">
+        delete from sys_info_range where range_id in 
+        <foreach item="rangeId" collection="array" open="(" separator="," close=")">
+            #{rangeId}
+        </foreach>
+    </delete>
+</mapper>

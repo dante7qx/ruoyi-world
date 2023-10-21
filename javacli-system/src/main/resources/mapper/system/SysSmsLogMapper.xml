@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysSmsLogMapper">
+    
+    <resultMap type="SysSmsLog" id="SysSmsLogResult">
+        <result property="smsId"    column="sms_id"    />
+        <result property="sendTo"    column="send_to"    />
+        <result property="content"    column="content"    />
+        <result property="sendDate"    column="send_date"    />
+        <result property="sendLog"    column="send_log"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysSmsLogVo">
+        select sms_id, send_to, content, send_date, send_log, status, create_by, create_time, update_by, update_time from sys_sms_log
+    </sql>
+
+    <select id="selectSysSmsLogList" parameterType="SysSmsLog" resultMap="SysSmsLogResult">
+        <include refid="selectSysSmsLogVo"/>
+        <where>  
+            <if test="sendTo != null  and sendTo != ''"> and send_to = #{sendTo}</if>
+            <if test="content != null  and content != ''"> and content like concat('%', #{content}, '%')</if>
+            <if test="params.beginSendDate != null and params.beginSendDate != '' and params.endSendDate != null and params.endSendDate != ''"> and send_date between #{params.beginSendDate} and #{params.endSendDate}</if>
+            <if test="sendLog != null  and sendLog != ''"> and send_log = #{sendLog}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+        order by send_date desc
+    </select>
+    
+    <select id="selectSysSmsLogBySmsId" parameterType="Long" resultMap="SysSmsLogResult">
+        <include refid="selectSysSmsLogVo"/>
+        where sms_id = #{smsId}
+    </select>
+        
+    <insert id="insertSysSmsLog" parameterType="SysSmsLog" useGeneratedKeys="true" keyProperty="smsId">
+        insert into sys_sms_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sendTo != null">send_to,</if>
+            <if test="content != null">content,</if>
+            <if test="sendDate != null">send_date,</if>
+            <if test="sendLog != null">send_log,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sendTo != null">#{sendTo},</if>
+            <if test="content != null">#{content},</if>
+            <if test="sendDate != null">#{sendDate},</if>
+            <if test="sendLog != null">#{sendLog},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysSmsLog" parameterType="SysSmsLog">
+        update sys_sms_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sendTo != null">send_to = #{sendTo},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="sendDate != null">send_date = #{sendDate},</if>
+            <if test="sendLog != null">send_log = #{sendLog},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where sms_id = #{smsId}
+    </update>
+
+    <delete id="deleteSysSmsLogBySmsId" parameterType="Long">
+        delete from sys_sms_log where sms_id = #{smsId}
+    </delete>
+
+    <delete id="deleteSysSmsLogBySmsIds" parameterType="String">
+        delete from sys_sms_log where sms_id in 
+        <foreach item="smsId" collection="array" open="(" separator="," close=")">
+            #{smsId}
+        </foreach>
+    </delete>
+</mapper>

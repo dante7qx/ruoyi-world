@@ -1,0 +1,338 @@
+<template>
+  <div>
+    <el-row>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+#foreach($column in $columns)
+#set($field=$column.javaField)
+#if($column.insert && !$column.pk)
+#if(($column.usableColumn) || (!$column.superColumn))
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#set($dictType=$column.dictType)
+#if($column.htmlType == "input")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}" prop="${field}">
+          <el-input v-model="form.${field}" placeholder="请输入${comment}" #if(${column.columnLength})maxlength="${column.columnLength}" show-word-limit#end :disabled="disabled"/>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "imageUpload")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <image-upload v-model="form.${field}" :disabled="disabled"/>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "fileUpload")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <file-upload v-model="form.${field}" :bizModel="'${className}'" :disabled="disabled"/>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "editor")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <editor v-model="form.${field}" :disabled="disabled"/>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "select" && "" != $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}" prop="${field}">
+          <el-select v-model="form.${field}" placeholder="请选择${comment}" :disabled="disabled" style="width: 100%;">
+            <el-option
+              v-for="dict in dict.type.${dictType}"
+              :key="dict.value"
+              :label="dict.label"
+#if($column.javaType == "Integer" || $column.javaType == "Long"):value="parseInt(dict.value)"#else            :value="dict.value"#end
+            ></el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "select" && $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}" prop="${field}">
+          <el-select v-model="form.${field}" placeholder="请选择${comment}" :disabled="disabled">
+            <el-option label="请选择字典生成" value="" />
+          </el-select>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "checkbox" && "" != $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <el-checkbox-group v-model="form.${field}">
+            <el-checkbox
+              v-for="dict in dict.type.${dictType}"
+              :key="dict.value"
+              :label="dict.value">
+              {{dict.label}}
+            </el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "checkbox" && $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <el-checkbox-group v-model="form.${field}">
+            <el-checkbox>请选择字典生成</el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "radio" && "" != $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <el-radio-group v-model="form.${field}" :disabled="disabled">
+            <el-radio
+              v-for="dict in dict.type.${dictType}"
+              :key="dict.value"
+              #if($column.javaType == "Integer" || $column.javaType == "Long"):label="parseInt(dict.value)"#else:label="dict.value"#end
+            >{{dict.label}}</el-radio>
+          </el-radio-group>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "radio" && $dictType)
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}">
+          <el-radio-group v-model="form.${field}" :disabled="disabled">
+            <el-radio label="1">请选择字典生成</el-radio>
+          </el-radio-group>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "datetime")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}" prop="${field}">
+          <el-date-picker clearable
+            v-model="form.${field}"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="请选择${comment}"
+            :disabled="disabled"
+            style="width: 100%;">
+          </el-date-picker>
+        </el-form-item>
+      </el-col>
+#elseif($column.htmlType == "textarea")
+      <el-col :span="${rowFieldCount}">
+        <el-form-item label="${comment}" prop="${field}">
+          <el-input v-model="form.${field}" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" resize="none" show-word-limit maxlength="${column.columnLength}"  placeholder="请输入内容" :readonly="disabled"/>
+        </el-form-item>
+      </el-col>
+#end
+#end
+#end
+#end
+#if($table.sub)
+      <el-divider content-position="center">${subTable.functionName}信息</el-divider>
+      <el-row :gutter="10" class="mb8" v-if="!disabled">
+        <el-col :span="1.5">
+          <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd${subClassName}">添加</el-button>
+        </el-col>
+        <el-col :span="1.5">
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDelete${subClassName}">删除</el-button>
+        </el-col>
+      </el-row>
+      <el-table :data="${subclassName}List" :row-class-name="row${subClassName}Index" @selection-change="handle${subClassName}SelectionChange" ref="${subclassName}">
+        <el-table-column type="selection" width="50" align="center" />
+        <el-table-column label="序号" align="center" prop="index" width="50"/>
+#foreach($column in $subTable.columns)
+#set($javaField=$column.javaField)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($column.pk || $javaField == ${subTableFkclassName})
+#elseif($column.list && $column.htmlType == "input")
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-input v-model="scope.row.$javaField" placeholder="请输入$comment" #if(${column.columnLength})maxlength="${column.columnLength}" show-word-limit#end :disabled="disabled"/>
+          </template>
+        </el-table-column>
+#elseif($column.list && $column.htmlType == "datetime")
+        <el-table-column label="$comment" prop="${javaField}" width="240">
+          <template v-slot="scope">
+            <el-date-picker clearable v-model="scope.row.$javaField" type="date" value-format="yyyy-MM-dd" placeholder="请选择$comment" :disabled="disabled"/>
+          </template>
+        </el-table-column>
+#elseif($column.list && ($column.htmlType == "select" || $column.htmlType == "radio") && "" != $column.dictType)
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-select v-model="scope.row.$javaField" placeholder="请选择$comment" :disabled="disabled">
+              <el-option
+                v-for="dict in dict.type.$column.dictType"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+#elseif($column.list && ($column.htmlType == "select" || $column.htmlType == "radio") && "" == $column.dictType)
+        <el-table-column label="$comment" prop="${javaField}" width="150">
+          <template v-slot="scope">
+            <el-select v-model="scope.row.$javaField" placeholder="请选择$comment" :disabled="disabled">
+              <el-option label="请选择字典生成" value="" />
+            </el-select>
+          </template>
+        </el-table-column>
+#end
+#end
+      </el-table>
+#end
+      </el-form>
+    </el-row>
+    <div slot="footer" class="dialog-footer" style="text-align: right;">
+      <el-button type="primary" @click="submitForm" v-show="!disabled">确 定</el-button>
+      <el-button @click="cancel">取 消</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { get${BusinessName}, add${BusinessName}, update${BusinessName} } from "@/api/${moduleName}/${businessName}";
+
+export default {
+  name: "${BusinessName}Detail",
+  props: {
+    ${pkColumn.javaField}: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    disabled: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
+  },
+#if(${dicts} != '')
+  dicts: [${dicts}],
+#end
+  data() {
+    return {
+      form: {},
+      rules: {
+#foreach ($column in $columns)
+#if($column.required)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+        $column.javaField: [
+          { required: true, message: "$comment不能为空", trigger: #if($column.htmlType == "select")"change"#else"blur"#end }
+        ]#if($foreach.count != $columns.size()),#end
+#end
+#end
+      },
+#if($table.sub)
+      checked${subClassName}: [],
+      ${subclassName}List: []
+#end
+    };
+  },
+  created() {
+    this.loadForm()
+  },
+  methods: {
+    loadForm() {
+      this.reset();
+      if(this.${pkColumn.javaField} > 0) {
+        get${BusinessName}(this.${pkColumn.javaField}).then(response => {
+          this.form = response.data;
+#foreach ($column in $columns)
+#if($column.htmlType == "checkbox")
+          this.form.$column.javaField = this.form.${column.javaField} && this.form.${column.javaField}.split(",");
+#end
+#end
+#if($table.sub)
+        this.${subclassName}List = response.data.${subclassName}List;
+#end
+        });
+      }
+    },
+#if($table.sub)
+    /** ${subTable.functionName}序号 */
+    row${subClassName}Index({ row, rowIndex }) {
+      row.index = rowIndex + 1;
+    },
+    /** ${subTable.functionName}添加按钮操作 */
+    handleAdd${subClassName}() {
+      let obj = {};
+#foreach($column in $subTable.columns)
+#if($column.pk || $column.javaField == ${subTableFkclassName})
+#elseif($column.list && "" != $javaField)
+      obj.$column.javaField = "";
+#end
+#end
+      this.${subclassName}List.push(obj);
+    },
+    /** ${subTable.functionName}删除按钮操作 */
+    handleDelete${subClassName}() {
+      if (this.checked${subClassName}.length == 0) {
+        this.#[[$modal]]#.msgError("请先选择要删除的${subTable.functionName}数据");
+      } else {
+        const ${subclassName}List = this.${subclassName}List;
+        const checked${subClassName} = this.checked${subClassName};
+        this.${subclassName}List = ${subclassName}List.filter(function(item) {
+          return checked${subClassName}.indexOf(item.index) == -1
+        });
+      }
+    },
+    /** 复选框选中数据 */
+    handle${subClassName}SelectionChange(selection) {
+      this.checked${subClassName} = selection.map(item => item.index)
+    },
+#end
+    reset() {
+      this.form = {
+#foreach ($column in $columns)
+#if($column.htmlType == "radio")
+        $column.javaField: #if($column.javaType == "Integer" || $column.javaType == "Long")0#else"0"#end#if($foreach.count != $columns.size()),#end
+#elseif($column.htmlType == "checkbox")
+        $column.javaField: []#if($foreach.count != $columns.size()),#end
+#else
+        $column.javaField: null#if($foreach.count != $columns.size()),#end
+#end
+#end
+      };
+#if($table.sub)
+      this.${subclassName}List = [];
+#end
+      this.resetForm("form");
+    },
+    submitForm() {
+      this.#[[$]]#refs["form"].validate(valid => {
+        if (valid) {
+#foreach ($column in $columns)
+#if($column.htmlType == "checkbox")
+          this.form.$column.javaField = this.form.${column.javaField} && this.form.${column.javaField}.join(",");
+#end
+#end
+#if($table.sub)
+          this.form.${subclassName}List = this.${subclassName}List;
+#end
+          if (this.form.${pkColumn.javaField} != null) {
+            update${BusinessName}(this.form).then(response => {
+              this.#[[$modal]]#.msgSuccess("修改成功");
+              this.cancel();
+            });
+          } else {
+            add${BusinessName}(this.form).then(response => {
+              this.#[[$modal]]#.msgSuccess("新增成功");
+              this.cancel();
+            });
+          }
+        }
+      });
+    },
+    cancel() {
+      this.reset();
+      this.$emit('closeWindow');
+    }
+  }
+};
+</script>

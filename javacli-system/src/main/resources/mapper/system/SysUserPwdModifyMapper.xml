@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.risun.system.mapper.SysUserPwdModifyMapper">
+    
+    <resultMap type="SysUserPwdModify" id="SysUserPwdModifyResult">
+        <result property="userId"    column="user_id"    />
+        <result property="modifyBy"    column="modify_by"    />
+        <result property="modifyTime"    column="modify_time"    />
+    </resultMap>
+
+    <sql id="selectSysUserPwdModifyVo">
+        select user_id, modify_by, modify_time from sys_user_pwd_modify
+    </sql>
+
+    <select id="selectSysUserPwdModifyByUserId" parameterType="Long" resultMap="SysUserPwdModifyResult">
+        <include refid="selectSysUserPwdModifyVo"/>
+        where user_id = #{userId}
+    </select>
+        
+    <insert id="insertSysUserPwdModify" parameterType="SysUserPwdModify">
+        insert into sys_user_pwd_modify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="modifyBy != null">modify_by,</if>
+            <if test="modifyTime != null">modify_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="modifyBy != null">#{modifyBy},</if>
+            <if test="modifyTime != null">#{modifyTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysUserPwdModify" parameterType="SysUserPwdModify">
+        update sys_user_pwd_modify
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="modifyBy != null">modify_by = #{modifyBy},</if>
+            <if test="modifyTime != null">modify_time = #{modifyTime},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+</mapper>
