@@ -23,8 +23,8 @@ class QrCodeUtilsTests extends RisunApplicationTests {
 	public void init() {
 		demo = new Demo();
 		demo.setDemoId(100L);
-		demo.setDemoName("睿阳科技");
-		demo.setDemoContent("你好，睿阳科技！");
+		demo.setDemoName("精灵Spirit");
+		demo.setDemoContent("你好，精灵Spirit！");
 		demo.setDemoTime(DateUtils.getNowDate());
 	}
 	

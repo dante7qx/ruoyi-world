@@ -2,7 +2,7 @@
   <div class="login">
     
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">睿阳RSP开发框架</h3>
+      <h3 class="title">精灵Spirit开发框架</h3>
       <el-tabs v-model="loginType" @tab-click="switchLoginType" v-if="smsEnabled">
         <el-tab-pane label="账号密码登录" name="uname"></el-tab-pane>
         <el-tab-pane label="短信验证码登录" name="sms"></el-tab-pane>
@@ -99,7 +99,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2014-2023 睿阳科技 All Rights Reserved.</span>
+      <span>Copyright © 2014-2023 精灵Spirit All Rights Reserved.</span>
     </div>
   </div>
 </template>

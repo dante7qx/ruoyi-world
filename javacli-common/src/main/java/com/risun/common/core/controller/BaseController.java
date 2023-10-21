@@ -85,12 +85,12 @@ public class BaseController
     @SuppressWarnings({ "rawtypes", "unchecked" })
     protected TableDataInfo getDataTable(List<?> list)
     {
-        TableDataInfo rspData = new TableDataInfo();
-        rspData.setCode(HttpStatus.SUCCESS);
-        rspData.setMsg("查询成功");
-        rspData.setRows(list);
-        rspData.setTotal(new PageInfo(list).getTotal());
-        return rspData;
+        TableDataInfo resData = new TableDataInfo();
+        resData.setCode(HttpStatus.SUCCESS);
+        resData.setMsg("查询成功");
+        resData.setRows(list);
+        resData.setTotal(new PageInfo(list).getTotal());
+        return resData;
     }
 
     /**

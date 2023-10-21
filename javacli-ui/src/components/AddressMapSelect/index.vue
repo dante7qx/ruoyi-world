@@ -14,7 +14,7 @@ export default {
     },
     keyName: {
       type: String,
-      default: '睿阳RSP开发框架'
+      default: '精灵Spirit开发框架'
     },
     lat: {
       type: [String, Number]

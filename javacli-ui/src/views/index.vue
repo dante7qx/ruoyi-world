@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h1>睿阳RSP开发框架</h1>
+    <h1>精灵Spirit开发框架</h1>
     <init-modify-pwd />
   </div>
 </template>
