@@ -177,4 +177,6 @@ public class Constants
     public static final String JIMU_PREFIX = "jmreport";
     public static final String JIMU_STATIC = "desreport_";
 
+    /** 国密密钥 */
+    public static final String SM4_KEY = "Spirit@JavaCli#$";
 }

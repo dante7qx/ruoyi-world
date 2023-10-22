@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 
 import com.spirit.common.annotation.DesensitizeField;
 import com.spirit.common.annotation.DesensitizeMethod;
+import com.spirit.common.constant.Constants;
 import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.core.page.TableDataInfo;
 import com.spirit.common.enums.DesensitizeType;
@@ -45,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DesensitizedAspect {
 
 	private static final String SUPER_PARAMS = "params";
-	private static SymmetricCrypto chinaCipher = SmUtil.sm4();
+	private static SymmetricCrypto chinaCipher = SmUtil.sm4(Constants.SM4_KEY.getBytes());
 	
 	/**
 	 * 数据脱敏环绕切面
