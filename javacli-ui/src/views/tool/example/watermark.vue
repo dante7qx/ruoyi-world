@@ -22,7 +22,7 @@ import watermark from "watermark-dom"
 export default {
 	name: 'WatermarkPage',
 	mounted() {
-    watermark.load({ watermark_txt: "睿阳Risun" });
+    watermark.load({ watermark_txt: "精灵spirit" });
   }
 }
 </script>

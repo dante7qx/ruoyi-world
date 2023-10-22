@@ -14,11 +14,12 @@ import com.spirit.common.constant.GenConstants;
 import com.spirit.common.core.domain.BaseEntity;
 import com.spirit.common.core.domain.model.CustAdvCond;
 import com.spirit.common.core.domain.model.CustAdvTemplate;
-import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SmUtil;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -40,7 +41,7 @@ public class CustAdvSearchAspect {
 	/** 数据库参数Key */
 	private static final String DB_TABLE_ALIAS = "cads";
 	
-	private static ChinaCipher chinaCipher = new ChinaCipher();
+	private static SymmetricCrypto chinaCipher = SmUtil.sm4();
 
 	@Before("@annotation(customizeAdvancedSearch)")
 	public void doBefore(JoinPoint point, CustomizeAdvancedSearch customizeAdvancedSearch) throws Throwable {
@@ -153,7 +154,7 @@ public class CustAdvSearchAspect {
 				.append(transfer(queryType))
 				.append(" ")
 				.append("'")
-				.append(cipherFlag && ObjectUtil.isNotEmpty(value) ? chinaCipher.SM4EncDefault(value.toString()) : value)
+				.append(cipherFlag && ObjectUtil.isNotEmpty(value) ? chinaCipher.encryptHex(value.toString()) : value)
 				.append("'");
 		}
 	}

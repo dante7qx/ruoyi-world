@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
  * 
  * @author dante
  */
-public interface SysMonitor4RisunMapper {
+public interface SysMonitor4SpiritMapper {
 	
 	/**
 	 * 每日用户访问数

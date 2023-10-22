@@ -1,6 +1,7 @@
 package com.spirit.framework.aspectj;
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,10 +27,11 @@ import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.core.page.TableDataInfo;
 import com.spirit.common.enums.DesensitizeType;
 import com.spirit.common.exception.ServiceException;
-import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.SmUtil;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -43,7 +45,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DesensitizedAspect {
 
 	private static final String SUPER_PARAMS = "params";
-	private static ChinaCipher chinaCipher = new ChinaCipher();
+	private static SymmetricCrypto chinaCipher = SmUtil.sm4();
 	
 	/**
 	 * 数据脱敏环绕切面
@@ -124,7 +126,7 @@ public class DesensitizedAspect {
 				if (annotation != null && DesensitizeType.DB.equals(annotation.type())) {
 					Object fieldVal = declaredField.get(data);
 					if (ObjectUtil.isNotNull(fieldVal)) {
-						declaredField.set(data, chinaCipher.SM4EncDefault(fieldVal.toString()));
+						declaredField.set(data, chinaCipher.encryptHex(fieldVal.toString()));
 					}
 				}
 			} else if (!isPrimite(declaredField.getType()) && recursion) {
@@ -266,7 +268,7 @@ public class DesensitizedAspect {
 		}
 		DesensitizeType type = annotation.type();
 		if(DesensitizeType.DB.equals(type)) {
-			desensitiveVal = isString(field.getType()) ? chinaCipher.SM4DecDefault(fieldVal.toString()) : fieldVal;
+			desensitiveVal = isString(field.getType()) ? chinaCipher.decryptStr(fieldVal.toString(), StandardCharsets.UTF_8) : fieldVal;
 		} else {
 			desensitiveVal = DesensitizeType.valueOf(type.name()).desensitive(fieldVal.toString(), annotation);
 		}

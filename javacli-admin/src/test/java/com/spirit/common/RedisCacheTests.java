@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.spirit.RisunApplicationTests;
+import com.spirit.SpiritApplicationTests;
 import com.spirit.common.core.redis.RedisCache;
 
-class RedisCacheTests extends RisunApplicationTests {
+class RedisCacheTests extends SpiritApplicationTests {
 	
 	@Autowired
 	private RedisCache redisCache;

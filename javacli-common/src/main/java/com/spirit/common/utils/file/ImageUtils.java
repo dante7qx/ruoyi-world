@@ -11,7 +11,7 @@ import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 import com.spirit.common.exception.ServiceException;
 
@@ -86,7 +86,7 @@ public class ImageUtils
             else
             {
                 // 本机地址
-                String localPath = RisunConfig.getProfile();
+                String localPath = SpiritConfig.getProfile();
                 String downloadPath = localPath + StrUtil.subAfter(url, Constants.RESOURCE_PREFIX, false);
                 in = new FileInputStream(downloadPath);
             }

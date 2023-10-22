@@ -2,8 +2,8 @@
 
 ## 修改启动端口号SERVER_PORT、运行jar包所在目录APP_HOME、jar包名称RUN_JAR
 SERVER_PORT=8100
-RUN_JAR="risun-rsp.jar"
-APP_HOME="/home/risun-app/rsp"
+RUN_JAR="spirit.jar"
+APP_HOME="/home/spirit"
 APP_NAME="${APP_HOME}/${RUN_JAR}"
 LOG_HOME="${APP_HOME}/logs"
 UPLOAD_PATH="${APP_HOME}/files"
@@ -41,8 +41,8 @@ start() {
      	-Dfile.encoding=utf-8 \
      	-Djava.security.egd=file:/dev/./urandom \
 		-jar $APP_NAME \
-		--risun.profile=${UPLOAD_PATH} \
-        --risun.apiKey=${APIKEY_PATH} \
+		--spirit.profile=${UPLOAD_PATH} \
+        --spirit.apiKey=${APIKEY_PATH} \
      	--server.port=${SERVER_PORT} \
 		--spring.redis.host="127.0.0.1" \
 	    --spring.redis.port=6379 \

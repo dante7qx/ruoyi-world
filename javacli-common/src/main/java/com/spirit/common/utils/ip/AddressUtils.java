@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 
 import cn.hutool.core.util.StrUtil;
@@ -35,7 +35,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (RisunConfig.isAddressEnabled())
+        if (SpiritConfig.isAddressEnabled())
         {
             try
             {

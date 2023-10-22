@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class RisunRuntimeInitConfig implements ApplicationListener<ContextRefreshedEvent> {
+public class SpiritRuntimeInitConfig implements ApplicationListener<ContextRefreshedEvent> {
 	
 	@Autowired
     private ISysConfigService sysConfigService;

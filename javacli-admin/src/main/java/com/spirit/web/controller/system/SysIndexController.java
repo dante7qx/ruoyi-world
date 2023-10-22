@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 
 import cn.hutool.core.util.StrUtil;
 
@@ -18,7 +18,7 @@ public class SysIndexController
 {
     /** 系统基础配置 */
     @Autowired
-    private RisunConfig ruoyiConfig;
+    private SpiritConfig ruoyiConfig;
 
     /**
      * 访问首页，提示语

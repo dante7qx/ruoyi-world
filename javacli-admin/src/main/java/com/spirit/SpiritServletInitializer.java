@@ -8,11 +8,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * 
  * @author ruoyi
  */
-public class RisunServletInitializer extends SpringBootServletInitializer
+public class SpiritServletInitializer extends SpringBootServletInitializer
 {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
     {
-        return application.sources(RisunApplication.class);
+        return application.sources(SpiritApplication.class);
     }
 }

@@ -1,7 +1,7 @@
 package com.spirit.web.controller.monitor;
 
 import com.spirit.common.annotation.Anonymous;
-import com.spirit.system.service.ISysMonitor4RisunService;
+import com.spirit.system.service.ISysMonitor4SpiritService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -18,11 +18,11 @@ import cn.hutool.core.util.ReUtil;
  * @author dante
  */
 @RestController
-@RequestMapping("/risun/monitor")
-public class SysMonitor4RisunController {
+@RequestMapping("/Spirit/monitor")
+public class SysMonitor4SpiritController {
 	
 	@Autowired
-	private ISysMonitor4RisunService sysMonitor4RisunService;
+	private ISysMonitor4SpiritService sysMonitor4SpiritService;
 	
 	/**
 	 * 每日用户访问数
@@ -35,7 +35,7 @@ public class SysMonitor4RisunController {
 	public int userVisitCount(@PathVariable String queryDate) {
 		Assert.hasText(queryDate, "查询日期不能为空，格式必须为 yyyyMMdd");
 		Assert.isTrue(matchArgFormat(queryDate), "格式必须为 yyyyMMdd");
-		return sysMonitor4RisunService.selectSysUserVisitCount(queryDate);
+		return sysMonitor4SpiritService.selectSysUserVisitCount(queryDate);
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class SysMonitor4RisunController {
 	public int userIncreaseCount(@PathVariable String queryDate) {
 		Assert.hasText(queryDate, "查询日期不能为空，格式必须为 yyyyMMdd");
 		Assert.isTrue(matchArgFormat(queryDate), "格式必须为 yyyyMMdd");
-		return sysMonitor4RisunService.selectSysUserIncreaseCount(queryDate);
+		return sysMonitor4SpiritService.selectSysUserIncreaseCount(queryDate);
 	}
 	
 	/**

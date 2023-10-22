@@ -1,4 +1,4 @@
-Application Version: ${risun.version}
+Application Version: ${spirit.version}
 Spring Boot Version: ${spring-boot.version}
 ////////////////////////////////////////////////////////////////////
 //                          _ooOoo_                               //
