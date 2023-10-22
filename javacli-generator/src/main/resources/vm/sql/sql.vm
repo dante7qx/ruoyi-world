@@ -1,0 +1,23 @@
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}', '${parentMenuId}', '1', '${businessName}', '${moduleName}/${businessName}/index', 1, 0, 'C', '0', '0', '${permissionPrefix}:list', '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '${functionName}菜单');
+
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}查询', (select menu_id from sys_menu where menu_name = '${functionName}'), '1',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:query',        '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}新增', (select menu_id from sys_menu where menu_name = '${functionName}'), '2',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:add',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}修改', (select menu_id from sys_menu where menu_name = '${functionName}'), '3',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:edit',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}删除', (select menu_id from sys_menu where menu_name = '${functionName}'), '4',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:remove',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导入', (select menu_id from sys_menu where menu_name = '${functionName}'), '5',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:import',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导出', (select menu_id from sys_menu where menu_name = '${functionName}'), '6',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:export',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');

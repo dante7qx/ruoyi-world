@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.system.mapper.SysApprovalLogMapper">
+    
+    <resultMap type="SysApprovalLog" id="SysApprovalLogResult">
+        <result property="logId"    column="log_id"    />
+        <result property="bizModel"    column="biz_model"    />
+        <result property="bizId"    column="biz_id"    />
+        <result property="comment"    column="comment"    />
+        <result property="operateType"    column="operate_type"    />
+        <result property="operator"    column="operator"    />
+        <result property="operateTime"    column="operate_time"    />
+    </resultMap>
+
+    <sql id="selectSysApprovalLogVo">
+        select log_id, biz_model, biz_id, comment, operate_type, operator, operate_time from sys_approval_log
+    </sql>
+
+    <select id="selectSysApprovalLogList" parameterType="SysApprovalLog" resultMap="SysApprovalLogResult">
+        <include refid="selectSysApprovalLogVo"/>
+        <where>  
+            <if test="bizModel != null  and bizModel != ''"> and biz_model = #{bizModel}</if>
+            <if test="bizId != null "> and biz_id = #{bizId}</if>
+            <if test="comment != null  and comment != ''"> and comment like concat('%', #{comment}, '%')</if>
+            <if test="operateType != null  and operateType != ''"> and operate_type = #{operateType}</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="params.beginOperateTime != null and params.beginOperateTime != '' and params.endOperateTime != null and params.endOperateTime != ''"> and operate_time between #{params.beginOperateTime} and #{params.endOperateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysApprovalLogByLogId" parameterType="Long" resultMap="SysApprovalLogResult">
+        <include refid="selectSysApprovalLogVo"/>
+        where log_id = #{logId}
+        order by biz_id, operate_time desc
+    </select>
+        
+    <insert id="insertSysApprovalLog" parameterType="SysApprovalLog" useGeneratedKeys="true" keyProperty="logId">
+        insert into sys_approval_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bizModel != null">biz_model,</if>
+            <if test="bizId != null">biz_id,</if>
+            <if test="comment != null">comment,</if>
+            <if test="operateType != null">operate_type,</if>
+            <if test="operator != null">operator,</if>
+            <if test="operateTime != null">operate_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bizModel != null">#{bizModel},</if>
+            <if test="bizId != null">#{bizId},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="operateType != null">#{operateType},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="operateTime != null">#{operateTime},</if>
+         </trim>
+    </insert>
+
+</mapper>

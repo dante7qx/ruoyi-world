@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-    <groupId>com.risun</groupId>
-    <artifactId>project</artifactId>
+    <groupId>com.spirit</groupId>
+    <artifactId>javacli</artifactId>
     <version>4.0.0</version>
     <packaging>pom</packaging>
 
     <name>Risun Project With Java</name>
-    <description>睿阳RSP开发框架</description>
+    <description>精灵Spirit开发框架</description>
     
     <properties>
         <project.version>4.0.0</project.version>
@@ -32,9 +32,7 @@
         <jwt.version>0.9.1</jwt.version>
         <poi-tl.version>1.10.5</poi-tl.version>
         <poi-tl-ext.version>0.4.2</poi-tl-ext.version>
-        <latex-mathml-ooxml.version>1.0.0</latex-mathml-ooxml.version>
         <jdom2.version>2.0.6.1</jdom2.version>
-        <aspose-word.version>15.8.0</aspose-word.version>
         <hutool.version>5.8.20</hutool.version>
         <guava.version>32.1.2-jre</guava.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
@@ -42,7 +40,6 @@
         <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
         <flyway.version>7.15.0</flyway.version>
         <redisson.version>3.17.7</redisson.version>
-        <chinacipher-encryption.version>1.0.0</chinacipher-encryption.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -120,23 +117,11 @@
 			</dependency>
 			<!-- 数学公式 -->
 			<dependency>
-			 	<groupId>com.risun</groupId>
-			  	<artifactId>latex-mathml-ooxml</artifactId>
-			  <version>${latex-mathml-ooxml.version}</version>
-			</dependency>
-			<dependency>
 			    <groupId>org.jdom</groupId>
 			    <artifactId>jdom2</artifactId>
 			    <version>${jdom2.version}</version>
 			</dependency>
 			
-			<!-- word2pdf工具 -->
-			<dependency>
-			  <groupId>com.risun</groupId>
-			  <artifactId>aspose-word</artifactId>
-			  <version>${aspose-word.version}</version>
-			</dependency>
-
             <!-- velocity代码生成使用模板 -->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
@@ -221,52 +206,45 @@
 			    <version>${redisson.version}</version>
 			</dependency>
 			
-			<!-- 国密算法 -->
-			<dependency>
-			  <groupId>com.risun</groupId>
-			  <artifactId>chinacipher-encryption</artifactId>
-			  <version>${chinacipher-encryption.version}</version>
-			</dependency>
-
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-quartz</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-quartz</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-generator</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-generator</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-framework</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-framework</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-system</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-system</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-common</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             
             <!-- 业务管理-->
             <dependency>
-                <groupId>com.risun</groupId>
-                <artifactId>project-biz</artifactId>
+                <groupId>com.spirit</groupId>
+                <artifactId>javacli-biz</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -274,13 +252,13 @@
     </dependencyManagement>
 
     <modules>
-        <module>project-admin</module>
-        <module>project-framework</module>
-        <module>project-system</module>
-        <module>project-quartz</module>
-        <module>project-generator</module>
-        <module>project-common</module>
-        <module>project-biz</module>
+        <module>javacli-admin</module>
+        <module>javacli-framework</module>
+        <module>javacli-system</module>
+        <module>javacli-quartz</module>
+        <module>javacli-generator</module>
+        <module>javacli-common</module>
+        <module>javacli-biz</module>
     </modules>
     
 
@@ -309,30 +287,15 @@
 
     <repositories>
         <repository>
-            <id>maven-risun</id>
-            <name>maven-risun</name>
-            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
-            <releases>
-            	<enabled>true</enabled>
-            </releases>
-            <snapshots>
-	            <enabled>false</enabled>
-	        </snapshots>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+        <repository>
+            <id>huaweicloud</id>
+            <name>huawei</name>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
         </repository>
     </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven-risun</id>
-            <name>maven-risun</name>
-            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
