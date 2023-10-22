@@ -94,7 +94,7 @@ COMMENT ON TABLE sys_user IS '用户信息表';
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(nextval('sys_user_user_id_seq'),  (select dept_id from sys_dept where dept_name = '精灵Spirit'), 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, 'superadmin', CURRENT_TIMESTAMP, '', null, '管理员');
+insert into sys_user values(nextval('sys_user_user_id_seq'),  (select dept_id from sys_dept where dept_name = '精灵Spirit'), 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'xOZzNBQl1Da8mSmjgS+y7gNqqQ4+ZZ2KGPQHoMr6k7rN3719ZIYm9kJC9Qolj/Ut2O+FRIC8QUUm6ZDg9fM6GFLh3DAwlgujXQrLG3tq5innzfJ8SUyuhWBkuTVWsWkr1mMrEyqhJEeTadi4i6X4QCoegAyFhJiXoxnaopRrxHKcvHW1Ne6GGPqMAMi+7e43I4K0fA3Y5dlEgGZfKbJlF8SzzdurSrD+O/R9QknBFZ4DYvOW1QbZdCRiK0IPpf06IlB8bEDaU8DHocOT05jBpfq1SvRJGTzElY+oJf/fMNvZHmCKSb2EpJYCaol3YWt0Vxx880UEDcoznqylqzbcQQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, 'superadmin', CURRENT_TIMESTAMP, '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表

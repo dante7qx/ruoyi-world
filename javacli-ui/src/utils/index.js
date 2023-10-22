@@ -1,4 +1,4 @@
-import { parseTime } from './risun'
+import { parseTime } from './spirit'
 
 /**
  * 表格时间格式化
