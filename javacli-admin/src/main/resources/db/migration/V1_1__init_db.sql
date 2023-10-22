@@ -39,7 +39,7 @@ COMMENT ON TABLE sys_dept IS '部门表';
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-insert into sys_dept values(nextval('sys_dept_dept_id_seq'),  0,   '0',          '精灵Spirit',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', '', 'fqyczadmin', CURRENT_TIMESTAMP, '', null);
+insert into sys_dept values(nextval('sys_dept_dept_id_seq'),  0,   '0',          '精灵Spirit',   0, '系统管理员', '15888888888', 'admin@admin.com', '0', '0', '', 'superadmin', CURRENT_TIMESTAMP, '', null);
 
 -- ----------------------------
 -- 2、用户信息表
@@ -94,7 +94,7 @@ COMMENT ON TABLE sys_user IS '用户信息表';
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(nextval('sys_user_user_id_seq'),  (select dept_id from sys_dept where dept_name = '精灵Spirit'), 'fqyczadmin', '系统管理员', '00', 'fqyczadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '管理员');
+insert into sys_user values(nextval('sys_user_user_id_seq'),  (select dept_id from sys_dept where dept_name = '精灵Spirit'), 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, 'superadmin', CURRENT_TIMESTAMP, '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表
@@ -143,7 +143,7 @@ COMMENT ON TABLE sys_post IS '岗位信息表';
 -- ----------------------------
 -- 初始化-岗位信息表数据
 -- ----------------------------
-insert into sys_post values(nextval('sys_post_post_id_seq'), 'ceo',  '总负责人',    1, '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_post values(nextval('sys_post_post_id_seq'), 'ceo',  '总负责人',    1, '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 -- ----------------------------
 -- 4、角色信息表
@@ -184,10 +184,10 @@ COMMENT ON TABLE sys_role IS '角色信息表';
 -- ----------------------------
 -- 初始化-角色信息表数据
 -- ----------------------------
-insert into sys_role values(nextval('sys_role_role_id_seq'), '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '超级管理员');
-insert into sys_role values(nextval('sys_role_role_id_seq'), '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '普通角色');
-insert into sys_role values(nextval('sys_role_role_id_seq'), '信息录入员',  'info_record', 3, 2, 0, 0, '0', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息录入员');
-insert into sys_role values(nextval('sys_role_role_id_seq'), '信息管理员',  'info_mgr', 4, 2, 0, 0, '0', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息管理员');
+insert into sys_role values(nextval('sys_role_role_id_seq'), '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '超级管理员');
+insert into sys_role values(nextval('sys_role_role_id_seq'), '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '普通角色');
+insert into sys_role values(nextval('sys_role_role_id_seq'), '信息录入员',  'info_record', 3, 2, 0, 0, '0', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '信息录入员');
+insert into sys_role values(nextval('sys_role_role_id_seq'), '信息管理员',  'info_mgr', 4, 2, 0, 0, '0', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '信息管理员');
 
 -- ----------------------------
 -- 5、菜单权限表
@@ -239,125 +239,125 @@ COMMENT ON TABLE sys_menu IS '菜单权限表';
 -- 初始化-菜单信息表数据
 -- ----------------------------
 -- 一级菜单
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统管理', '0', '100', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统管理目录');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统监控', '0', '110', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统监控目录');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统工具', '0', '120', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统工具目录');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '业务逻辑', '0', '10', 'biz',               null, '', 1, 0, 'M', '0', '0', '', 'list',   'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务逻辑目录');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统管理', '0', '100', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'superadmin', CURRENT_TIMESTAMP, '', null, '系统管理目录');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统监控', '0', '110', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'superadmin', CURRENT_TIMESTAMP, '', null, '系统监控目录');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统工具', '0', '120', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'superadmin', CURRENT_TIMESTAMP, '', null, '系统工具目录');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '业务逻辑', '0', '10', 'biz',               null, '', 1, 0, 'M', '0', '0', '', 'list',   'superadmin', CURRENT_TIMESTAMP, '', null, '业务逻辑目录');
 -- 二级菜单
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '用户管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '用户管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '角色管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '角色管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '菜单管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'fqyczadmin', CURRENT_TIMESTAMP, '', null, '菜单管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '部门管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '部门管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '岗位管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '岗位管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '字典管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '字典管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '参数设置', (select menu_id from sys_menu where menu_name = '系统管理'),   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '参数设置菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '系统附件', (select menu_id from sys_menu where menu_name = '系统管理'),   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统业务附件菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '日志管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '10', 'log',        '',                        '', 1, 0, 'M', '0', '0', '',                       'log',           'fqyczadmin', CURRENT_TIMESTAMP, '', null, '日志管理菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '在线用户', (select menu_id from sys_menu where menu_name = '系统监控'),   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'fqyczadmin', CURRENT_TIMESTAMP, '', null, '在线用户菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '定时任务', (select menu_id from sys_menu where menu_name = '系统监控'),   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'fqyczadmin', CURRENT_TIMESTAMP, '', null, '定时任务菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '数据监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'fqyczadmin', CURRENT_TIMESTAMP, '', null, '数据监控菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '服务监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'fqyczadmin', CURRENT_TIMESTAMP, '', null, '服务监控菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '缓存监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'fqyczadmin', CURRENT_TIMESTAMP, '', null, '缓存监控菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '缓存列表', (select menu_id from sys_menu where menu_name = '系统监控'),   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'fqyczadmin', CURRENT_TIMESTAMP, '', null, '缓存列表菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '审批记录', (select menu_id from sys_menu where menu_name = '系统监控'),   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批记录菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '表单构建', (select menu_id from sys_menu where menu_name = '系统工具'),   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'fqyczadmin', CURRENT_TIMESTAMP, '', null, '表单构建菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码生成', (select menu_id from sys_menu where menu_name = '系统工具'),   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '代码生成菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码示例', (select menu_id from sys_menu where menu_name = '系统工具'),   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '代码示例菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '用户管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'superadmin', CURRENT_TIMESTAMP, '', null, '用户管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '角色管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'superadmin', CURRENT_TIMESTAMP, '', null, '角色管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '菜单管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'superadmin', CURRENT_TIMESTAMP, '', null, '菜单管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '部门管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'superadmin', CURRENT_TIMESTAMP, '', null, '部门管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '岗位管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'superadmin', CURRENT_TIMESTAMP, '', null, '岗位管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '字典管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'superadmin', CURRENT_TIMESTAMP, '', null, '字典管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '参数设置', (select menu_id from sys_menu where menu_name = '系统管理'),   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'superadmin', CURRENT_TIMESTAMP, '', null, '参数设置菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '8', 'info',		 '',                         '', 1, 0, 'M', '0', '0', '',                        'message',       'superadmin', CURRENT_TIMESTAMP, '', null, '信息管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '系统附件', (select menu_id from sys_menu where menu_name = '系统管理'),   '9', 'attachment', 'system/attachment/index',  '', 1, 0, 'C', '0', '0', 'system:attachment:list',  'upload',        'superadmin', CURRENT_TIMESTAMP, '', null, '系统业务附件菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '日志管理', (select menu_id from sys_menu where menu_name = '系统管理'),   '10', 'log',        '',                        '', 1, 0, 'M', '0', '0', '',                       'log',           'superadmin', CURRENT_TIMESTAMP, '', null, '日志管理菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '在线用户', (select menu_id from sys_menu where menu_name = '系统监控'),   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'superadmin', CURRENT_TIMESTAMP, '', null, '在线用户菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '定时任务', (select menu_id from sys_menu where menu_name = '系统监控'),   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'superadmin', CURRENT_TIMESTAMP, '', null, '定时任务菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '数据监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'superadmin', CURRENT_TIMESTAMP, '', null, '数据监控菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '服务监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'superadmin', CURRENT_TIMESTAMP, '', null, '服务监控菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '缓存监控', (select menu_id from sys_menu where menu_name = '系统监控'),   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'superadmin', CURRENT_TIMESTAMP, '', null, '缓存监控菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '缓存列表', (select menu_id from sys_menu where menu_name = '系统监控'),   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'superadmin', CURRENT_TIMESTAMP, '', null, '缓存列表菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '审批记录', (select menu_id from sys_menu where menu_name = '系统监控'),   '7', 'approvalList','monitor/approval/index',  '', 1, 0, 'C', '0', '0', 'monitor:approvallog:list','time-range',    'superadmin', CURRENT_TIMESTAMP, '', null, '审批记录菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '表单构建', (select menu_id from sys_menu where menu_name = '系统工具'),   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'superadmin', CURRENT_TIMESTAMP, '', null, '表单构建菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码生成', (select menu_id from sys_menu where menu_name = '系统工具'),   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'superadmin', CURRENT_TIMESTAMP, '', null, '代码生成菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '代码示例', (select menu_id from sys_menu where menu_name = '系统工具'),   '4', 'codeexample','tool/example/index',       '', 1, 0, 'C', '0', '0', '',                        'code',          'superadmin', CURRENT_TIMESTAMP, '', null, '代码示例菜单');
 -- 三级菜单
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '栏目分类', (select menu_id from sys_menu where menu_name = '信息管理'), '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息栏目菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息发布', (select menu_id from sys_menu where menu_name = '信息管理'), '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息发布菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息浏览', (select menu_id from sys_menu where menu_name = '信息管理'), '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息浏览菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '栏目分类', (select menu_id from sys_menu where menu_name = '信息管理'), '1', 'infocategory',    'system/info/category/index', '', 1, 0, 'C', '0', '0', 'system:info:list',  'dict',          'superadmin', CURRENT_TIMESTAMP, '', null, '信息栏目菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息发布', (select menu_id from sys_menu where menu_name = '信息管理'), '2', 'infomgr',         'system/info/index',        '', 1, 0, 'C', '0', '0', 'system:info:list',    'message',       'superadmin', CURRENT_TIMESTAMP, '', null, '信息发布菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '信息浏览', (select menu_id from sys_menu where menu_name = '信息管理'), '3', 'infoview',        'system/info/view',        '', 1, 0, 'C', '0', '0', 'system:info:list',     'eye-open',      'superadmin', CURRENT_TIMESTAMP, '', null, '信息浏览菜单');
 
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '操作日志', (select menu_id from sys_menu where menu_name = '日志管理'), '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'fqyczadmin', CURRENT_TIMESTAMP, '', null, '操作日志菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '登录日志', (select menu_id from sys_menu where menu_name = '日志管理'), '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'fqyczadmin', CURRENT_TIMESTAMP, '', null, '登录日志菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '邮件日志', (select menu_id from sys_menu where menu_name = '日志管理'), '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'fqyczadmin', CURRENT_TIMESTAMP, '', null, '邮件日志菜单');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '短信日志', (select menu_id from sys_menu where menu_name = '日志管理'), '4', 'smslog',     'monitor/smslog/index',     '', 1, 0, 'C', '0', '0', 'monitor:smslog:list',     'message',       'fqyczadmin', CURRENT_TIMESTAMP, '', null, '短信日志菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '操作日志', (select menu_id from sys_menu where menu_name = '日志管理'), '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'superadmin', CURRENT_TIMESTAMP, '', null, '操作日志菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '登录日志', (select menu_id from sys_menu where menu_name = '日志管理'), '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'superadmin', CURRENT_TIMESTAMP, '', null, '登录日志菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '邮件日志', (select menu_id from sys_menu where menu_name = '日志管理'), '3', 'emaillog',   'monitor/emaillog/index',   '', 1, 0, 'C', '0', '0', 'monitor:emaillog:list',   'email',         'superadmin', CURRENT_TIMESTAMP, '', null, '邮件日志菜单');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'),  '短信日志', (select menu_id from sys_menu where menu_name = '日志管理'), '4', 'smslog',     'monitor/smslog/index',     '', 1, 0, 'C', '0', '0', 'monitor:smslog:list',     'message',       'superadmin', CURRENT_TIMESTAMP, '', null, '短信日志菜单');
 -- 用户管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户查询', (select menu_id from sys_menu where menu_name = '用户管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户新增', (select menu_id from sys_menu where menu_name = '用户管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户修改', (select menu_id from sys_menu where menu_name = '用户管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户删除', (select menu_id from sys_menu where menu_name = '用户管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户导出', (select menu_id from sys_menu where menu_name = '用户管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户导入', (select menu_id from sys_menu where menu_name = '用户管理'), '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '重置密码', (select menu_id from sys_menu where menu_name = '用户管理'), '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户查询', (select menu_id from sys_menu where menu_name = '用户管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户新增', (select menu_id from sys_menu where menu_name = '用户管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户修改', (select menu_id from sys_menu where menu_name = '用户管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户删除', (select menu_id from sys_menu where menu_name = '用户管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户导出', (select menu_id from sys_menu where menu_name = '用户管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '用户导入', (select menu_id from sys_menu where menu_name = '用户管理'), '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '重置密码', (select menu_id from sys_menu where menu_name = '用户管理'), '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 角色管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色查询', (select menu_id from sys_menu where menu_name = '角色管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色新增', (select menu_id from sys_menu where menu_name = '角色管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色修改', (select menu_id from sys_menu where menu_name = '角色管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色删除', (select menu_id from sys_menu where menu_name = '角色管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色导出', (select menu_id from sys_menu where menu_name = '角色管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色查询', (select menu_id from sys_menu where menu_name = '角色管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色新增', (select menu_id from sys_menu where menu_name = '角色管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色修改', (select menu_id from sys_menu where menu_name = '角色管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色删除', (select menu_id from sys_menu where menu_name = '角色管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '角色导出', (select menu_id from sys_menu where menu_name = '角色管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 菜单管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单查询', (select menu_id from sys_menu where menu_name = '菜单管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单新增', (select menu_id from sys_menu where menu_name = '菜单管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单修改', (select menu_id from sys_menu where menu_name = '菜单管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单删除', (select menu_id from sys_menu where menu_name = '菜单管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单查询', (select menu_id from sys_menu where menu_name = '菜单管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单新增', (select menu_id from sys_menu where menu_name = '菜单管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单修改', (select menu_id from sys_menu where menu_name = '菜单管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '菜单删除', (select menu_id from sys_menu where menu_name = '菜单管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 部门管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门查询', (select menu_id from sys_menu where menu_name = '部门管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门新增', (select menu_id from sys_menu where menu_name = '部门管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门修改', (select menu_id from sys_menu where menu_name = '部门管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门删除', (select menu_id from sys_menu where menu_name = '部门管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门查询', (select menu_id from sys_menu where menu_name = '部门管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门新增', (select menu_id from sys_menu where menu_name = '部门管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门修改', (select menu_id from sys_menu where menu_name = '部门管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '部门删除', (select menu_id from sys_menu where menu_name = '部门管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 岗位管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位查询', (select menu_id from sys_menu where menu_name = '岗位管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位新增', (select menu_id from sys_menu where menu_name = '岗位管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位修改', (select menu_id from sys_menu where menu_name = '岗位管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位删除', (select menu_id from sys_menu where menu_name = '岗位管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位导出', (select menu_id from sys_menu where menu_name = '岗位管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位查询', (select menu_id from sys_menu where menu_name = '岗位管理'), '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位新增', (select menu_id from sys_menu where menu_name = '岗位管理'), '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位修改', (select menu_id from sys_menu where menu_name = '岗位管理'), '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位删除', (select menu_id from sys_menu where menu_name = '岗位管理'), '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '岗位导出', (select menu_id from sys_menu where menu_name = '岗位管理'), '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 字典管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典查询', (select menu_id from sys_menu where menu_name = '字典管理'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典新增', (select menu_id from sys_menu where menu_name = '字典管理'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典修改', (select menu_id from sys_menu where menu_name = '字典管理'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典删除', (select menu_id from sys_menu where menu_name = '字典管理'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典导出', (select menu_id from sys_menu where menu_name = '字典管理'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典查询', (select menu_id from sys_menu where menu_name = '字典管理'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典新增', (select menu_id from sys_menu where menu_name = '字典管理'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典修改', (select menu_id from sys_menu where menu_name = '字典管理'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典删除', (select menu_id from sys_menu where menu_name = '字典管理'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '字典导出', (select menu_id from sys_menu where menu_name = '字典管理'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 参数设置按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数查询', (select menu_id from sys_menu where menu_name = '参数设置'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数新增', (select menu_id from sys_menu where menu_name = '参数设置'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数修改', (select menu_id from sys_menu where menu_name = '参数设置'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数删除', (select menu_id from sys_menu where menu_name = '参数设置'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数导出', (select menu_id from sys_menu where menu_name = '参数设置'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数查询', (select menu_id from sys_menu where menu_name = '参数设置'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数新增', (select menu_id from sys_menu where menu_name = '参数设置'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数修改', (select menu_id from sys_menu where menu_name = '参数设置'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数删除', (select menu_id from sys_menu where menu_name = '参数设置'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '参数导出', (select menu_id from sys_menu where menu_name = '参数设置'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 信息管理按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息查询', (select menu_id from sys_menu where menu_name = '信息管理'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:query',        '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息新增', (select menu_id from sys_menu where menu_name = '信息管理'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:add',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息修改', (select menu_id from sys_menu where menu_name = '信息管理'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:edit',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息删除', (select menu_id from sys_menu where menu_name = '信息管理'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:remove',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息查询', (select menu_id from sys_menu where menu_name = '信息管理'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:query',        '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息新增', (select menu_id from sys_menu where menu_name = '信息管理'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:add',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息修改', (select menu_id from sys_menu where menu_name = '信息管理'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:edit',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '信息删除', (select menu_id from sys_menu where menu_name = '信息管理'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:info:remove',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 系统附件按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统附件查询', (select menu_id from sys_menu where menu_name = '系统附件'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统附件删除', (select menu_id from sys_menu where menu_name = '系统附件'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统附件查询', (select menu_id from sys_menu where menu_name = '系统附件'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:query',   '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '系统附件删除', (select menu_id from sys_menu where menu_name = '系统附件'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:attachment:remove',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 操作日志按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '操作查询', (select menu_id from sys_menu where menu_name = '操作日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '操作删除', (select menu_id from sys_menu where menu_name = '操作日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '日志导出', (select menu_id from sys_menu where menu_name = '操作日志'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '操作查询', (select menu_id from sys_menu where menu_name = '操作日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '操作删除', (select menu_id from sys_menu where menu_name = '操作日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '日志导出', (select menu_id from sys_menu where menu_name = '操作日志'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 登录日志按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '登录查询', (select menu_id from sys_menu where menu_name = '登录日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '登录删除', (select menu_id from sys_menu where menu_name = '登录日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '日志导出', (select menu_id from sys_menu where menu_name = '登录日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '登录查询', (select menu_id from sys_menu where menu_name = '登录日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '登录删除', (select menu_id from sys_menu where menu_name = '登录日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '日志导出', (select menu_id from sys_menu where menu_name = '登录日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 邮件日志按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志查询', (select menu_id from sys_menu where menu_name = '邮件日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:query',   '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志删除', (select menu_id from sys_menu where menu_name = '邮件日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:remove',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志导出', (select menu_id from sys_menu where menu_name = '邮件日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:export',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志查询', (select menu_id from sys_menu where menu_name = '邮件日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:query',   '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志删除', (select menu_id from sys_menu where menu_name = '邮件日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:remove',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '邮件日志导出', (select menu_id from sys_menu where menu_name = '邮件日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:emaillog:export',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 短信日志按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志查询', (select menu_id from sys_menu where menu_name = '短信日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志删除', (select menu_id from sys_menu where menu_name = '短信日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志导出', (select menu_id from sys_menu where menu_name = '短信日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志查询', (select menu_id from sys_menu where menu_name = '短信日志'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:query',   '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志删除', (select menu_id from sys_menu where menu_name = '短信日志'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:remove',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '短信日志导出', (select menu_id from sys_menu where menu_name = '短信日志'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:smslog:export',  '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 -- 在线用户按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '在线查询', (select menu_id from sys_menu where menu_name = '在线用户'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '批量强退', (select menu_id from sys_menu where menu_name = '在线用户'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '单条强退', (select menu_id from sys_menu where menu_name = '在线用户'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '在线查询', (select menu_id from sys_menu where menu_name = '在线用户'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '批量强退', (select menu_id from sys_menu where menu_name = '在线用户'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '单条强退', (select menu_id from sys_menu where menu_name = '在线用户'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 定时任务按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务查询', (select menu_id from sys_menu where menu_name = '定时任务'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务新增', (select menu_id from sys_menu where menu_name = '定时任务'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务修改', (select menu_id from sys_menu where menu_name = '定时任务'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务删除', (select menu_id from sys_menu where menu_name = '定时任务'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '状态修改', (select menu_id from sys_menu where menu_name = '定时任务'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务导出', (select menu_id from sys_menu where menu_name = '定时任务'), '7', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务查询', (select menu_id from sys_menu where menu_name = '定时任务'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务新增', (select menu_id from sys_menu where menu_name = '定时任务'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务修改', (select menu_id from sys_menu where menu_name = '定时任务'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务删除', (select menu_id from sys_menu where menu_name = '定时任务'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '状态修改', (select menu_id from sys_menu where menu_name = '定时任务'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '任务导出', (select menu_id from sys_menu where menu_name = '定时任务'), '7', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 -- 代码生成按钮
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成查询', (select menu_id from sys_menu where menu_name = '表单构建'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成修改', (select menu_id from sys_menu where menu_name = '表单构建'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成删除', (select menu_id from sys_menu where menu_name = '表单构建'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '导入代码', (select menu_id from sys_menu where menu_name = '表单构建'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '预览代码', (select menu_id from sys_menu where menu_name = '表单构建'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成代码', (select menu_id from sys_menu where menu_name = '表单构建'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成查询', (select menu_id from sys_menu where menu_name = '表单构建'), '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成修改', (select menu_id from sys_menu where menu_name = '表单构建'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成删除', (select menu_id from sys_menu where menu_name = '表单构建'), '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '导入代码', (select menu_id from sys_menu where menu_name = '表单构建'), '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '预览代码', (select menu_id from sys_menu where menu_name = '表单构建'), '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_menu values(nextval('sys_menu_menu_id_seq'), '生成代码', (select menu_id from sys_menu where menu_name = '表单构建'), '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 -- ----------------------------
 -- 6、用户和角色关联表  用户N-1角色
@@ -375,7 +375,7 @@ COMMENT ON TABLE sys_user_role IS '用户和角色关联表';
 -- ----------------------------
 -- 初始化-用户和角色关联表数据
 -- ----------------------------
-insert into sys_user_role values ((select user_id from sys_user where user_name = 'fqyczadmin'), (select role_id from sys_role where role_key = 'admin'));
+insert into sys_user_role values ((select user_id from sys_user where user_name = 'superadmin'), (select role_id from sys_role where role_key = 'admin'));
 
 
 -- ----------------------------
@@ -442,7 +442,7 @@ COMMENT ON TABLE sys_user_post IS '用户与岗位关联表';
 -- ----------------------------
 -- 初始化-用户与岗位关联表数据
 -- ----------------------------
-insert into sys_user_post values ((select user_id from sys_user where user_name = 'fqyczadmin'), (select post_id from sys_post where post_code = 'ceo'));
+insert into sys_user_post values ((select user_id from sys_user where user_name = 'superadmin'), (select post_id from sys_post where post_code = 'ceo'));
 
 
 -- ----------------------------
@@ -533,17 +533,17 @@ CREATE UNIQUE INDEX dict_type ON sys_dict_type USING btree (
   dict_type pg_catalog.text_ops ASC NULLS LAST
 );
 
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '用户性别', 'sys_user_sex',        '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '用户性别列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '菜单状态', 'sys_show_hide',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '菜单状态列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统开关', 'sys_normal_disable',  '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统开关列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务状态', 'sys_job_status',      '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '任务状态列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务分组', 'sys_job_group',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '任务分组列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统是否', 'sys_yes_no',          '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统是否列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '栏目类型', 'sys_info_type',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '栏目类型列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '操作类型', 'sys_oper_type',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '操作类型列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '系统状态', 'sys_common_status',   '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '登录状态列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '业务模块', 'sys_biz_model',       '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务模块列表');
-insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '审批类型', 'sys_approval_type',   '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批类型列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '用户性别', 'sys_user_sex',        '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '用户性别列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '菜单状态', 'sys_show_hide',       '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '菜单状态列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统开关', 'sys_normal_disable',  '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统开关列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务状态', 'sys_job_status',      '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '任务状态列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '任务分组', 'sys_job_group',       '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '任务分组列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '系统是否', 'sys_yes_no',          '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统是否列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '栏目类型', 'sys_info_type',       '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '栏目类型列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'),  '操作类型', 'sys_oper_type',       '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '操作类型列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '系统状态', 'sys_common_status',   '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '登录状态列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '业务模块', 'sys_biz_model',       '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '业务模块列表');
+insert into sys_dict_type values(nextval('sys_dict_type_dict_id_seq'), '审批类型', 'sys_approval_type',   '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '审批类型列表');
 
 
 -- ----------------------------
@@ -583,37 +583,37 @@ COMMENT ON COLUMN sys_dict_data.update_time IS '更新时间';
 COMMENT ON COLUMN sys_dict_data.remark IS '备注';
 COMMENT ON TABLE sys_dict_data IS '字典数据表';
 
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '男',       '0',       'sys_user_sex',        '',   '',        'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '性别男');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '女',       '1',       'sys_user_sex',        '',   '',        'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '性别女');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  3,  '未知',     '2',       'sys_user_sex',        '',   '',        'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '性别未知');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '显示',     '0',       'sys_show_hide',       '',   'primary', 'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '显示菜单');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '隐藏',     '1',       'sys_show_hide',       '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '隐藏菜单');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '正常',     '0',       'sys_normal_disable',  '',   'primary', 'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '停用',     '1',       'sys_normal_disable',  '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '正常',     '0',       'sys_job_status',      '',   'primary', 'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '暂停',     '1',       'sys_job_status',      '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '默认',     'DEFAULT', 'sys_job_group',       '',   '',        'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '默认分组');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统分组');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '是',       '1',       'sys_yes_no',          '',   'primary', 'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统默认是');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '否',       '0',       'sys_yes_no',          '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统默认否');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '新闻');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '公告');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '新增操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '修改操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 3,  '删除',     '3',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '删除操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 4,  '授权',     '4',       'sys_oper_type',       '',   'primary', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '授权操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 5,  '导出',     '5',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '导出操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 6,  '导入',     '6',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '导入操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 7,  '强退',     '7',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '强退操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 8,  '生成代码', '8',       'sys_oper_type',       '',   'warning', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '生成操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '清空操作');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '信息发布',  'SysInfo', 'sys_biz_model',       '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '信息发布');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '提交');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批通过');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '审批驳回');
-insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '已发布的信息被撤销');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '男',       '0',       'sys_user_sex',        '',   '',        'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '性别男');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '女',       '1',       'sys_user_sex',        '',   '',        'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '性别女');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  3,  '未知',     '2',       'sys_user_sex',        '',   '',        'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '性别未知');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '显示',     '0',       'sys_show_hide',       '',   'primary', 'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '显示菜单');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '隐藏',     '1',       'sys_show_hide',       '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '隐藏菜单');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '正常',     '0',       'sys_normal_disable',  '',   'primary', 'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '停用',     '1',       'sys_normal_disable',  '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  1,  '正常',     '0',       'sys_job_status',      '',   'primary', 'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'),  2,  '暂停',     '1',       'sys_job_status',      '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '默认',     'DEFAULT', 'sys_job_group',       '',   '',        'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '默认分组');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '系统',     'SYSTEM',  'sys_job_group',       '',   '',        'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统分组');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '是',       '1',       'sys_yes_no',          '',   'primary', 'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统默认是');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '否',       '0',       'sys_yes_no',          '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统默认否');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '新闻',     '1',       'sys_info_type',       '',   'danger',  'Y', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '新闻');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '公告',     '2',       'sys_info_type',       '',   'success', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '公告');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '新增',     '1',       'sys_oper_type',       '',   'info',    'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '新增操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '修改',     '2',       'sys_oper_type',       '',   'info',    'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '修改操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 3,  '删除',     '3',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '删除操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 4,  '授权',     '4',       'sys_oper_type',       '',   'primary', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '授权操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 5,  '导出',     '5',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '导出操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 6,  '导入',     '6',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '导入操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 7,  '强退',     '7',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '强退操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 8,  '生成代码', '8',       'sys_oper_type',       '',   'warning', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '生成操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '清空操作');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '正常状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '停用状态');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '信息发布',  'SysInfo', 'sys_biz_model',       '',   '', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '信息发布');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 1,  '提交',     'COMMIT',  'sys_approval_type',   '',   '', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '提交');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 2,  '审批通过',  'PASS',    'sys_approval_type',   '',   '', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '审批通过');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 3,  '审批驳回',  'REJECT',  'sys_approval_type',   '',   '', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '审批驳回');
+insert into sys_dict_data values(nextval('sys_dict_data_dict_code_seq'), 4,  '发布撤销',  'WITHDRAW','sys_approval_type',   '',   '', 'N', '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '已发布的信息被撤销');
 
 -- ----------------------------
 -- 13、参数配置表
@@ -643,13 +643,13 @@ COMMENT ON COLUMN sys_config.update_time IS '更新时间';
 COMMENT ON COLUMN sys_config.remark IS '备注';
 COMMENT ON TABLE sys_config IS '参数配置表';
 
-insert into sys_config values(nextval('sys_config_config_id_seq'), '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '是否开启验证码功能（true开启，false关闭）');
-insert into sys_config values(nextval('sys_config_config_id_seq'), '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '是否开启注册用户功能（true开启，false关闭）');
-insert into sys_config values(nextval('sys_config_config_id_seq'), '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '短信发送标识（向领导申请）');
-insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
-insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
-insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '初始化密码 rs@123!' );
-insert into sys_config values(nextval('sys_config_config_id_seq'), '系统访问地址',         		   'sys.visit.baseurl',             'http://localhost:1024',      '0', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '系统访问地址' );
+insert into sys_config values(nextval('sys_config_config_id_seq'), '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',         '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '是否开启验证码功能（true开启，false关闭）');
+insert into sys_config values(nextval('sys_config_config_id_seq'), '账号自助-是否开启用户注册功能',  'sys.account.registerUser',      'false',         '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '是否开启注册用户功能（true开启，false关闭）');
+insert into sys_config values(nextval('sys_config_config_id_seq'), '短信发送标识码',               'sys.sms.sendModelID',           '123456',        '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '短信发送标识（向领导申请）');
+insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号初始密码修改',      'sys.user.modifyInitPassword',   '0',        	    '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '初始密码修改（0: 不提示修改；1: 提示修改）' );
+insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号密码更新周期',      'sys.user.modifyPasswordPeriod', '0',            '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '单位为天，账号密码每隔多少天进行修改提示。0表示不提示修改' );
+insert into sys_config values(nextval('sys_config_config_id_seq'), '用户管理-账号初始密码',         'sys.user.initPassword',         'rs@123!',      '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '初始化密码 rs@123!' );
+insert into sys_config values(nextval('sys_config_config_id_seq'), '系统访问地址',         		   'sys.visit.baseurl',             'http://localhost:1024',      '0', 'superadmin', CURRENT_TIMESTAMP, '', null, '系统访问地址' );
 
 
 -- ----------------------------
@@ -723,9 +723,9 @@ COMMENT ON COLUMN sys_job.update_time IS '更新时间';
 COMMENT ON COLUMN sys_job.remark IS '备注信息';
 COMMENT ON TABLE sys_job IS '定时任务调度表';
 
-insert into sys_job values(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_job values(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(''ry'')',  '0/15 * * * * ?', '3', '1', '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
-insert into sys_job values(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(''ry'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_job values(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_job values(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(''ry'')',  '0/15 * * * * ?', '3', '1', '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
+insert into sys_job values(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(''ry'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 
 -- ----------------------------

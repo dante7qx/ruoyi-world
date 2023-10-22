@@ -39,23 +39,23 @@ delete from sys_role_menu where menu_id = (select menu_id from sys_menu where me
 delete from sys_role_menu where menu_id in (select menu_id from sys_menu where parent_id = (select menu_id from sys_menu where menu_name = '视频监控'));
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控', '2', '7', 'camera', 'monitor/camera/index', 1, 0, 'C', '0', '0', 'monitor:camera:list', 'eye-open', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '视频监控菜单');
+values('视频监控', '2', '7', 'camera', 'monitor/camera/index', 1, 0, 'C', '0', '0', 'monitor:camera:list', 'eye-open', 'superadmin', CURRENT_TIMESTAMP, '', null, '视频监控菜单');
 
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控查询', (select menu_id from sys_menu where menu_name = '视频监控'), '1',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:query',        '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+values('视频监控查询', (select menu_id from sys_menu where menu_name = '视频监控'), '1',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:query',        '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控新增', (select menu_id from sys_menu where menu_name = '视频监控'), '2',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:add',          '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+values('视频监控新增', (select menu_id from sys_menu where menu_name = '视频监控'), '2',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:add',          '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控修改', (select menu_id from sys_menu where menu_name = '视频监控'), '3',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:edit',         '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+values('视频监控修改', (select menu_id from sys_menu where menu_name = '视频监控'), '3',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:edit',         '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控删除', (select menu_id from sys_menu where menu_name = '视频监控'), '4',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:remove',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+values('视频监控删除', (select menu_id from sys_menu where menu_name = '视频监控'), '4',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:remove',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('视频监控导出', (select menu_id from sys_menu where menu_name = '视频监控'), '5',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:export',       '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '');
+values('视频监控导出', (select menu_id from sys_menu where menu_name = '视频监控'), '5',  '#', '', 1, 0, 'F', '0', '0', 'monitor:camera:export',       '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '');
 
 -- 角色菜单
 insert into sys_role_menu values (2, (select menu_id from sys_menu where menu_name = '视频监控'));
@@ -64,4 +64,4 @@ insert into sys_role_menu select 2, menu_id from sys_menu where parent_id = (sel
 
 -- 参数配置
 delete from sys_config where config_key = 'sys.monitor.camera.server';
-insert into sys_config values(nextval('sys_config_config_id_seq'), '视频监控服务器', 'sys.monitor.camera.server', '127.0.0.1:3000', '1', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '视频监控服务器地址(IP:PORT)' );
+insert into sys_config values(nextval('sys_config_config_id_seq'), '视频监控服务器', 'sys.monitor.camera.server', '127.0.0.1:3000', '1', 'superadmin', CURRENT_TIMESTAMP, '', null, '视频监控服务器地址(IP:PORT)' );

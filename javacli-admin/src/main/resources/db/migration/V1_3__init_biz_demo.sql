@@ -34,5 +34,5 @@ COMMENT ON TABLE t_demo is '业务表';
 delete from sys_menu where parent_id = 4;
 insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
 values
-('业务', 4, 1, 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单'),
-('业务部门树', 4, 2, 'demodept', 'biz/demo/index_dept', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'fqyczadmin', CURRENT_TIMESTAMP, '', null, '业务菜单');
+('业务', 4, 1, 'demo', 'biz/demo/index', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '业务菜单'),
+('业务部门树', 4, 2, 'demodept', 'biz/demo/index_dept', 1, 0, 'C', '0', '0', 'biz:demo:list', '#', 'superadmin', CURRENT_TIMESTAMP, '', null, '业务菜单');
