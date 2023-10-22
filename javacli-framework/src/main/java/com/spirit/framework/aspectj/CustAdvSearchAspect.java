@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.spirit.common.annotation.CustomizeAdvancedSearch;
+import com.spirit.common.constant.Constants;
 import com.spirit.common.constant.GenConstants;
 import com.spirit.common.core.domain.BaseEntity;
 import com.spirit.common.core.domain.model.CustAdvCond;
@@ -41,7 +42,7 @@ public class CustAdvSearchAspect {
 	/** 数据库参数Key */
 	private static final String DB_TABLE_ALIAS = "cads";
 	
-	private static SymmetricCrypto chinaCipher = SmUtil.sm4();
+	private static SymmetricCrypto chinaCipher = SmUtil.sm4(Constants.SM4_KEY.getBytes());
 
 	@Before("@annotation(customizeAdvancedSearch)")
 	public void doBefore(JoinPoint point, CustomizeAdvancedSearch customizeAdvancedSearch) throws Throwable {
