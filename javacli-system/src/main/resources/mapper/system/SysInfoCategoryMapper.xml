@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.system.mapper.SysInfoCategoryMapper">
+
+    <resultMap type="SysInfoCategory" id="SysInfoCategoryResult">
+        <result property="categoryId"    column="category_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="categoryKey"    column="category_key"    />
+        <result property="categoryType"    column="category_type"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="disabled"    column="disabled"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysInfoCategoryVo">
+        select t.category_id, t.parent_id, t.ancestors, t.category_name, t.category_key, t.category_type, t.order_num, t.disabled, t.create_by, t.create_time, t.update_by, t.update_time from sys_info_category t
+    </sql>
+
+    <select id="selectSysInfoCategoryList" parameterType="SysInfoCategory" resultMap="SysInfoCategoryResult">
+        <include refid="selectSysInfoCategoryVo"/>
+        <where>  
+            <if test="categoryName != null  and categoryName != ''"> and t.category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categoryKey != null  and categoryKey != ''"> and t.category_key = #{categoryKey}</if>
+            <if test="categoryType != null  and categoryType != ''"> and t.category_type = #{categoryType}</if>
+            <if test="disabled != null "> and t.disabled = #{disabled}</if>
+        </where>
+        order by t.parent_id, t.order_num
+    </select>
+    
+    <select id="selectSysInfoCategoryByCategoryId" parameterType="Long" resultMap="SysInfoCategoryResult">
+        <include refid="selectSysInfoCategoryVo"/>
+        where t.category_id = #{categoryId}
+    </select>
+        
+    <insert id="insertSysInfoCategory" parameterType="SysInfoCategory" useGeneratedKeys="true" keyProperty="categoryId">
+        insert into sys_info_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">parent_id,</if>
+            <if test="ancestors != null">ancestors,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="categoryKey != null">category_key,</if>
+            <if test="categoryType != null">category_type,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="disabled != null">disabled,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">#{parentId},</if>
+            <if test="ancestors != null">#{ancestors},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="categoryKey != null">#{categoryKey},</if>
+            <if test="categoryType != null">#{categoryType},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="disabled != null">case when #{disabled} then 1 else 0 end,</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysInfoCategory" parameterType="SysInfoCategory">
+        update sys_info_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="ancestors != null">ancestors = #{ancestors},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="categoryKey != null">category_key = #{categoryKey},</if>
+            <if test="categoryType != null">category_type = #{categoryType},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="disabled != null">disabled = case when #{disabled} then 1 else 0 end,</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where category_id = #{categoryId}
+    </update>
+
+    <delete id="deleteSysInfoCategoryByCategoryId" parameterType="Long">
+        delete from sys_info_category where category_id = #{categoryId}
+    </delete>
+
+    <delete id="deleteSysInfoCategoryByCategoryIds" parameterType="String">
+        delete from sys_info_category where category_id in 
+        <foreach item="categoryId" collection="array" open="(" separator="," close=")">
+            #{categoryId}
+        </foreach>
+    </delete>
+
+	<select id="hasChildSysInfoCategoryByCategoryId" parameterType="Long" resultType="Boolean">
+       select case count(category_id) when 0 then false  else true end from sys_info_category where parent_id = #{categoryId};
+    </select>
+	    
+</mapper>
