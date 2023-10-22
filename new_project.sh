@@ -32,7 +32,7 @@ createNewProject() {
     sed -i "s/127.0.0.1:15432/<数据库url>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i "s/spirit_javacli/<数据库>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i "s/root/<数据库账号>/g" ./javacli-admin/src/main/resources/application-mysql.yml
-    sed -i "s/iamdante/<数据库密码>/g" ./javacli-admin/src/main/resources/application-mysql.yml
+    sed -i "s/spirit@321#!/<数据库密码>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i "s/spirit-javacli/${projectName}/g" ./sonar-project.properties
     sed -i "s/javacli-/${projectName}-/g" ./sonar-project.properties
 
