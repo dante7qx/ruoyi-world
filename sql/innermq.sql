@@ -12,4 +12,4 @@ create table sys_inner_mq_exception (
 ) engine=innodb auto_increment=1 comment = '内部消息队列异常消息';
 
 
-insert into sys_menu values('121',  '消息队列补偿', '2',   '8', 'innermqList','monitor/mq/inner',  '', 1, 0, 'C', '0', '0', 'monitor:innermq:list','row', 'fqyczadmin', sysdate(), '', null, '消息队列补偿菜单');
+insert into sys_menu values('121',  '消息队列补偿', '2',   '8', 'innermqList','monitor/mq/inner',  '', 1, 0, 'C', '0', '0', 'monitor:innermq:list','row', 'superadmin', sysdate(), '', null, '消息队列补偿菜单');
