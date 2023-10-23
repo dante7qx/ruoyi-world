@@ -61,7 +61,7 @@ COMMENT ON TABLE sys_user IS '用户信息表';
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'MLSXAYsCSDZiZRqNDy4S0QMPqnpJ3K+rZZEVcl+xNHNyHdggEdwomfc0hGlL5QvcsxXxA1VJigcVqEM5wZ3XbMkYw0HIwaytIjXtV2VFYgE1IWsYw8QdUnNeJn9aySBoeIl0ojGj3qS7XULnvBUm6/w1IYw4t31PFuAPc9XQAEMdvw0mH9fEEWGXhWIOff0ZE/dowNNjFJrn4/CMsxy0GPIm/WqRaRR+dCliZYjg9z4TE3c4EYi75/DIdfHGhAdL/60CVijKrsxXeV/61D+qpK30jYE79kyRiI+er8y1ryxBFyKxgC7Obi3yrnH/T5fWHkGJT2tDF3eNvTFN4ZQbxQ==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'superadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'I75nbL6vrBvIljOAfD1nKWCq7o+4+2YZiDJmJ1KsBBs+P5u2DBBm25DoV5SFGtQ/FXscGCpfU+blwrzsn70gUKHF22F934Pett2k5KskrO4DcaJZhVrV6Rp/fw7loElRPXgIMmUQ7+8AaTwmWAT1xVE91Xp9HQQfwLLTFjctPP8EEvrzgNDG01NZbYubvRTDmWWy/V8F6T++tvsxv6FJz1KDOkMaCH2OUiCeGo7kMrTjmAaCuCiLbe6ny/f90kmOSTzcJFMj2x8UpFADjujTOnXKWX2sFE4S/+am4Ten6a4EjjfVq+N2UNighWDBBZ0DysKrjzlMXJSb2gOxmArpBA==', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'superadmin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表
