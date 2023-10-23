@@ -6,7 +6,7 @@ package com.spirit.system.service;
  * @author dante
  * 
  */
-public interface ISysMonitor4RisunService {
+public interface ISysMonitor4SpiritService {
 	
 	/**
 	 * 每日用户访问数

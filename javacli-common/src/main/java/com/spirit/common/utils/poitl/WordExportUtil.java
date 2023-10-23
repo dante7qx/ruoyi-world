@@ -17,7 +17,7 @@ import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.plugin.table.LoopRowTableRenderPolicy;
 import com.deepoove.poi.policy.AttachmentRenderPolicy;
 import com.deepoove.poi.util.PoitlIOUtils;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.utils.poitl.plugin.LaTeXPolicy;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +67,7 @@ public class WordExportUtil {
 	 */
 	public static void createWord(Map<String, Object> dataMap, String templateName, String filePath, String fileName,
 			HttpServletResponse response) throws FileNotFoundException, IOException {
-		String templateDir = RisunConfig.getProfile() + "/" + DOC_TEMPLATE_DIR+ "/";;
+		String templateDir = SpiritConfig.getProfile() + "/" + DOC_TEMPLATE_DIR+ "/";;
 		response.setHeader("Content-disposition",
 				"attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
 		// 定义输出类型
@@ -129,7 +129,7 @@ public class WordExportUtil {
 	 */
 	public static void createWordMoreTable(Map<String, Object> dataMap, String templateName,Configure configure, String filePath, String fileName,
 								  HttpServletResponse response) throws FileNotFoundException, IOException {
-		String templateDir = RisunConfig.getProfile() + "/" + DOC_TEMPLATE_DIR + "/";;
+		String templateDir = SpiritConfig.getProfile() + "/" + DOC_TEMPLATE_DIR + "/";;
 		response.setHeader("Content-disposition",
 				"attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
 		// 定义输出类型

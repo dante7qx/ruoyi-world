@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.spirit.RisunApplicationTests;
+import com.spirit.SpiritApplicationTests;
 import com.spirit.biz.demo.domain.Demo;
 import com.spirit.biz.demo.mapper.DemoMapper;
 import com.spirit.common.core.redis.RedisLock;
@@ -21,7 +21,7 @@ import cn.hutool.core.collection.CollUtil;
  * @author dante
  *
  */
-public class IDemoServiceTests extends RisunApplicationTests {
+public class IDemoServiceTests extends SpiritApplicationTests {
 
 	@Autowired
 	private IDemoService demoService;

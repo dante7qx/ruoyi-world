@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirit.common.annotation.Anonymous;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.utils.wordfilter.SensitiveWordUtil;
 
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HealthCheckController {
 	
 	@Autowired
-	private RisunConfig spiritConfig;
+	private SpiritConfig spiritConfig;
 	
 	@PostConstruct
 	@SuppressWarnings("static-access")
@@ -55,7 +55,7 @@ public class HealthCheckController {
 	@Anonymous
 	@GetMapping("/refresh_sensitive_word")
 	public AjaxResult refreshSensitiveWord() {
-		String path = RisunConfig.getProfile() + "/SensitiveWord.txt";
+		String path = SpiritConfig.getProfile() + "/SensitiveWord.txt";
 		log.info("重新加载敏感词文件 - {}", path);
 		SensitiveWordUtil.loadWordFromFile(path);
 		return AjaxResult.success();

@@ -1,7 +1,7 @@
 package com.spirit.system.service.impl;
 
 import com.spirit.system.mapper.SysMonitor4RisunMapper;
-import com.spirit.system.service.ISysMonitor4RisunService;
+import com.spirit.system.service.ISysMonitor4SpiritService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import cn.hutool.core.util.ObjectUtil;
  * 
  */
 @Service
-public class SysMonitor4RisunServiceImpl implements ISysMonitor4RisunService {
+public class SysMonitor4SpiritServiceImpl implements ISysMonitor4SpiritService {
 	
 	@Autowired
 	private SysMonitor4RisunMapper sysMonitor4RisunMapper;

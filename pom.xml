@@ -122,27 +122,11 @@
 			    <artifactId>poi-tl-ext</artifactId>
 			    <version>${poi-tl-ext.version}</version>
 			</dependency>
-            <dependency>
-                <groupId>com.spirit</groupId>
-                <artifactId>latex-mathml-ooxml</artifactId>
-                <version>1.0.0</version>
-                <scope>system</scope>
-                <systemPath>${project.basedir}/lib/latex-mathml-ooxml-1.0.0.jar</systemPath>
-            </dependency>
 			<dependency>
 			    <groupId>org.jdom</groupId>
 			    <artifactId>jdom2</artifactId>
 			    <version>${jdom2.version}</version>
 			</dependency>
-
-            <!-- word2pdf工具 -->
-            <dependency>
-                <groupId>com.spirit</groupId>
-                <artifactId>aspose-word</artifactId>
-                <version>15.8.0</version>
-                <scope>system</scope>
-                <systemPath>${project.basedir}/lib/aspose-word-15.8.0.jar</systemPath>
-            </dependency>
 			
             <!-- velocity代码生成使用模板 -->
             <dependency>

@@ -1,7 +1,7 @@
 package com.spirit.web.controller.monitor;
 
 import com.spirit.common.annotation.Anonymous;
-import com.spirit.system.service.ISysMonitor4RisunService;
+import com.spirit.system.service.ISysMonitor4SpiritService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -22,7 +22,7 @@ import cn.hutool.core.util.ReUtil;
 public class SysMonitor4RisunController {
 	
 	@Autowired
-	private ISysMonitor4RisunService sysMonitor4RisunService;
+	private ISysMonitor4SpiritService sysMonitor4RisunService;
 	
 	/**
 	 * 每日用户访问数

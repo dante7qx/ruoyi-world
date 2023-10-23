@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.constant.Constants;
 import com.spirit.framework.interceptor.RepeatSubmitInterceptor;
 
@@ -30,7 +30,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     {
         /** 本地文件上传路径 */
         registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**")
-                .addResourceLocations("file:" + RisunConfig.getProfile() + "/");
+                .addResourceLocations("file:" + SpiritConfig.getProfile() + "/");
 
     }
 

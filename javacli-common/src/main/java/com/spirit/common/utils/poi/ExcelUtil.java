@@ -73,7 +73,7 @@ import com.spirit.common.annotation.Excel;
 import com.spirit.common.annotation.Excel.ColumnType;
 import com.spirit.common.annotation.Excel.Type;
 import com.spirit.common.annotation.Excels;
-import com.spirit.common.config.RisunConfig;
+import com.spirit.common.config.SpiritConfig;
 import com.spirit.common.core.domain.AjaxResult;
 import com.spirit.common.core.text.Convert;
 import com.spirit.common.exception.UtilException;
@@ -1271,7 +1271,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RisunConfig.getDownloadPath() + filename;
+        String downloadPath = SpiritConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {
