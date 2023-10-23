@@ -15,7 +15,6 @@ import com.spirit.common.utils.DateUtils;
 #break
 #end
 #end
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 #if($table.sub)
@@ -37,8 +36,12 @@ import ${packageName}.service.I${ClassName}Service;
  */
 @Service
 public class ${ClassName}ServiceImpl implements I${ClassName}Service {
-    @Autowired
-    private ${ClassName}Mapper ${className}Mapper;
+    
+    private final ${ClassName}Mapper ${className}Mapper;
+    
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper) {
+    	this.${className}Mapper = ${className}Mapper;
+    }
 
     /**
      * 查询${functionName}

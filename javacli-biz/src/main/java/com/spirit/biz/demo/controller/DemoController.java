@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +41,12 @@ import cn.hutool.core.util.RandomUtil;
 @RestController
 @RequestMapping("/biz/demo")
 public class DemoController extends BaseController {
-	@Autowired
-	private IDemoService demoService;
+	
+	private final IDemoService demoService;
+	
+	public DemoController(IDemoService demoService) {
+		this.demoService = demoService;
+	}
 
 	/**
 	 * 查询业务列表
