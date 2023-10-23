@@ -450,4 +450,17 @@ public class GenTableColumn extends BaseEntity
             return this.columnComment;
         }
     }
+
+	@Override
+	public String toString() {
+		return "GenTableColumn [columnId=" + columnId + ", tableId=" + tableId + ", columnName=" + columnName
+				+ ", columnComment=" + columnComment + ", columnType=" + columnType + ", columnLength=" + columnLength
+				+ ", javaType=" + javaType + ", javaField=" + javaField + ", isPk=" + isPk + ", isIncrement="
+				+ isIncrement + ", isRequired=" + isRequired + ", isInsert=" + isInsert + ", isEdit=" + isEdit
+				+ ", isList=" + isList + ", isQuery=" + isQuery + ", queryType=" + queryType + ", htmlType=" + htmlType
+				+ ", dictType=" + dictType + ", sort=" + sort + ", relTableName=" + relTableName + ", relColumnName="
+				+ relColumnName + ", relColumnComment=" + relColumnComment + ", relColumnType=" + relColumnType
+				+ ", relJavaType=" + relJavaType + ", relJavaField=" + relJavaField + "]";
+	}
+    
 }
