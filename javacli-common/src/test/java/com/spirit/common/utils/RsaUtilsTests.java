@@ -13,7 +13,7 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 
-public class RsaUtilsTessts {
+public class RsaUtilsTests {
 	
 	@Test
 	void encryptDecrypt() {
