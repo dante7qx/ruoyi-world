@@ -6,9 +6,9 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:dm://localhost:5236?schema=spirit
-        username: spirit
-        password: spirit@123!
+        url: jdbc:dm://localhost:5236?schema=spiritcli
+        username: spiritcli
+        password: spirit@1234!
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
