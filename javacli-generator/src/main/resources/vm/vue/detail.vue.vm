@@ -5,7 +5,7 @@
 #foreach($column in $columns)
 #set($field=$column.javaField)
 #if($column.insert && !$column.pk)
-#if(($column.usableColumn) || (!$column.superColumn))
+#if(($column.usableColumn) || (!$column.superColumn && $column.columnName != "del_flag"))
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
 #if($parentheseIndex != -1)
 #set($comment=$column.columnComment.substring(0, $parentheseIndex))
