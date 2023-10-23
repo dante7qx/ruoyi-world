@@ -78,7 +78,7 @@
         <completionCondition>${nrOfCompletedInstances / nrOfInstances == 1}</completionCondition>
       </multiInstanceLoopCharacteristics>
     </userTask>
-    <userTask id="Activity_066l8s2" name="Boss审批" flowable:candidateGroups="14" flowable:dataType="fixed">
+    <userTask id="Activity_066l8s2" name="Boss审批" flowable:candidateGroups="5" flowable:dataType="fixed">
       <documentation>G_GK_ZY</documentation>
       <incoming>Flow_0t5ww0j</incoming>
       <outgoing>Flow_16rosyz</outgoing>

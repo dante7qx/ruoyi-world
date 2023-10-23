@@ -41,7 +41,7 @@
     <sequenceFlow id="Flow_0g2wxcu" sourceRef="Gateway_0p42kw5" targetRef="Activity_1ydzl5w">
       <conditionExpression xsi:type="tFormalExpression">${!agree}</conditionExpression>
     </sequenceFlow>
-    <userTask id="Activity_06txmgf" name="BOOS审批" flowable:candidateGroups="14" flowable:dataType="fixed">
+    <userTask id="Activity_06txmgf" name="BOOS审批" flowable:candidateGroups="5" flowable:dataType="fixed">
       <incoming>Flow_1vkumno</incoming>
       <outgoing>Flow_0q8escm</outgoing>
     </userTask>
