@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.report.mapper.RiJmReportMapper">
+    
+    <resultMap type="RiJmReport" id="JimuReportResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="note"    column="note"    />
+        <result property="status"    column="status"    />
+        <result property="type"    column="type"    />
+        <result property="jsonStr"    column="json_str"    />
+        <result property="apiUrl"    column="api_url"    />
+        <result property="thumb"    column="thumb"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="apiMethod"    column="api_method"    />
+        <result property="apiCode"    column="api_code"    />
+        <result property="template"    column="template"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="cssStr"    column="css_str"    />
+        <result property="jsStr"    column="js_str"    />
+        <result property="tenantId"    column="tenant_id"    />
+        <result property="menuId"    column="menu_id"    />
+        <result property="setupAcl"    column="setupAcl"    />
+    </resultMap>
+
+    <sql id="selectRiJmReportVo">
+        select 
+        	t.id, t.code, t.name, t.note, t.status, t.type, t.json_str, t.api_url, t.thumb, t.create_by, t.create_time, t.update_by, t.update_time, t.del_flag, t.api_method, t.api_code, t.template, t.view_count, t.css_str, t.js_str, t.tenant_id, m.menu_id,
+        	(select count(0) from  jimu_report_dept_acl d 
+        	 where d.report_id = t.id 
+        	 <if test="deptId != null  and deptId != ''"> and d.dept_id = #{deptId}</if> limit 1
+			) as setupAcl
+       	from jimu_report t
+       	left join jimu_report_menu m on m.report_id = t.id
+    </sql>
+
+    <select id="selectRiJmReportList" parameterType="RiJmReport" resultMap="JimuReportResult">
+        <include refid="selectRiJmReportVo"/>
+        <where>  
+            <if test="code != null  and code != ''"> and t.code = #{code}</if>
+            <if test="name != null  and name != ''"> and t.name like concat('%', #{name}, '%')</if>
+            <if test="note != null  and note != ''"> and t.note = #{note}</if>
+            <if test="status != null  and status != ''"> and t.status = #{status}</if>
+            <if test="type != null  and type != ''"> and t.type = #{type}</if>
+            <if test="jsonStr != null  and jsonStr != ''"> and t.json_str = #{jsonStr}</if>
+            <if test="apiUrl != null  and apiUrl != ''"> and t.api_url = #{apiUrl}</if>
+            <if test="thumb != null  and thumb != ''"> and t.thumb = #{thumb}</if>
+            <if test="delFlag != null "> and t.del_flag = #{delFlag}</if>
+            <if test="apiMethod != null  and apiMethod != ''"> and t.api_method = #{apiMethod}</if>
+            <if test="apiCode != null  and apiCode != ''"> and t.api_code = #{apiCode}</if>
+            <if test="template != null "> and t.template = #{template}</if>
+            <if test="viewCount != null "> and t.view_count = #{viewCount}</if>
+            <if test="cssStr != null  and cssStr != ''"> and t.css_str = #{cssStr}</if>
+            <if test="jsStr != null  and jsStr != ''"> and t.js_str = #{jsStr}</if>
+            <if test="tenantId != null  and tenantId != ''"> and t.tenant_id = #{tenantId}</if>
+        </where>
+        order by t.create_time desc
+    </select>
+    
+    <select id="selectRiJmReportById" parameterType="String" resultMap="JimuReportResult">
+        <include refid="selectRiJmReportVo"/>
+        where t.id = #{id}
+    </select>
+    
+    <select id="selectRiJmReportExcel" parameterType="RiJmReport" resultMap="JimuReportResult">
+        select distinct t.id,t.name,t.code,t.type,t.template,t.thumb
+		from jimu_report t 
+		left join jimu_report_dept_acl d on d.report_id = t.id
+		<where>
+		    t.del_flag = 0
+		    and t.type = #{type}
+		    and t.template = #{template}
+		    <if test="name != null and name != ''">and t.name like concat('%', #{name}, '%')</if>
+		    <if test="deptId != null">and d.dept_id = #{deptId}</if>
+		    <if test="createBy != null and createBy != '' ">
+		      	or (
+		      		t.del_flag = 0
+			        and t.type = #{type}
+			        and t.template = #{template}
+			        and t.create_by = #{createBy}
+			        <if test="name != null and name != ''">and t.name like concat('%', #{name}, '%')</if>
+		        )
+		    </if>
+		</where>
+		order by t.create_time desc
+    </select>
+        
+    <insert id="insertRiJmReport" parameterType="RiJmReport">
+        insert into jimu_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="code != null">code,</if>
+            <if test="name != null">name,</if>
+            <if test="note != null">note,</if>
+            <if test="status != null">status,</if>
+            <if test="type != null">type,</if>
+            <if test="jsonStr != null">json_str,</if>
+            <if test="apiUrl != null">api_url,</if>
+            <if test="thumb != null">thumb,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="apiMethod != null">api_method,</if>
+            <if test="apiCode != null">api_code,</if>
+            <if test="template != null">template,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="cssStr != null">css_str,</if>
+            <if test="jsStr != null">js_str,</if>
+            <if test="tenantId != null">tenant_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="code != null">#{code},</if>
+            <if test="name != null">#{name},</if>
+            <if test="note != null">#{note},</if>
+            <if test="status != null">#{status},</if>
+            <if test="type != null">#{type},</if>
+            <if test="jsonStr != null">#{jsonStr},</if>
+            <if test="apiUrl != null">#{apiUrl},</if>
+            <if test="thumb != null">#{thumb},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="apiMethod != null">#{apiMethod},</if>
+            <if test="apiCode != null">#{apiCode},</if>
+            <if test="template != null">#{template},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="cssStr != null">#{cssStr},</if>
+            <if test="jsStr != null">#{jsStr},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRiJmReport" parameterType="RiJmReport">
+        update jimu_report
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null">code = #{code},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="jsonStr != null">json_str = #{jsonStr},</if>
+            <if test="apiUrl != null">api_url = #{apiUrl},</if>
+            <if test="thumb != null">thumb = #{thumb},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="apiMethod != null">api_method = #{apiMethod},</if>
+            <if test="apiCode != null">api_code = #{apiCode},</if>
+            <if test="template != null">template = #{template},</if>
+            <if test="viewCount != null">view_count = #{viewCount},</if>
+            <if test="cssStr != null">css_str = #{cssStr},</if>
+            <if test="jsStr != null">js_str = #{jsStr},</if>
+            <if test="tenantId != null">tenant_id = #{tenantId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRiJmReportById" parameterType="String">
+        delete from jimu_report where id = #{id}
+    </delete>
+
+    <delete id="deleteRiJmReportByIds" parameterType="String">
+        delete from jimu_report where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    
+    <select id="selectRiJmReportMenuByReportId" parameterType="String" resultType="com.spirit.report.domain.RiJmReportMenu">
+    	select id, report_id as reportId, menu_id as menuId from jimu_report_menu where report_id in 
+    	<foreach item="reportId" collection="array" open="(" separator="," close=")">
+            #{reportId}
+        </foreach>
+    </select>
+    
+    <insert id="insertRiJmReportMenu" parameterType="com.spirit.report.domain.RiJmReportMenu">
+        insert into jimu_report_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reportId != null">report_id,</if>
+            <if test="menuId != null">menu_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reportId != null">#{reportId},</if>
+            <if test="menuId != null">#{menuId},</if>
+         </trim>
+    </insert>
+    
+    <delete id="deleteRiJmReportMenuByReportId" parameterType="list">
+        delete from jimu_report_menu where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <insert id="insertMenuByReport" parameterType="SysMenu" useGeneratedKeys="true" keyProperty="menuId">
+		insert into sys_menu(
+			<if test="parentId != null and parentId != 0">parent_id,</if>
+			<if test="menuName != null and menuName != ''">menu_name,</if>
+			<if test="orderNum != null">order_num,</if>
+			<if test="path != null and path != ''">path,</if>
+			<if test="component != null and component != ''">component,</if>
+			<if test="query != null and query != ''">`query`,</if>
+			<if test="isFrame != null and isFrame != ''">is_frame,</if>
+			<if test="isCache != null and isCache != ''">is_cache,</if>
+			<if test="menuType != null and menuType != ''">menu_type,</if>
+			<if test="visible != null">visible,</if>
+			<if test="status != null">status,</if>
+			<if test="perms !=null and perms != ''">perms,</if>
+			<if test="icon != null and icon != ''">icon,</if>
+			<if test="remark != null and remark != ''">remark,</if>
+			<if test="createBy != null and createBy != ''">create_by,</if>
+			create_time
+		)values(
+			<if test="parentId != null and parentId != 0">#{parentId},</if>
+			<if test="menuName != null and menuName != ''">#{menuName},</if>
+			<if test="orderNum != null">#{orderNum},</if>
+			<if test="path != null and path != ''">#{path},</if>
+			<if test="component != null and component != ''">#{component},</if>
+			<if test="query != null and query != ''">#{query},</if>
+			<if test="isFrame != null and isFrame != ''">#{isFrame},</if>
+			<if test="isCache != null and isCache != ''">#{isCache},</if>
+			<if test="menuType != null and menuType != ''">#{menuType},</if>
+			<if test="visible != null">#{visible},</if>
+			<if test="status != null">#{status},</if>
+			<if test="perms !=null and perms != ''">#{perms},</if>
+			<if test="icon != null and icon != ''">#{icon},</if>
+			<if test="remark != null and remark != ''">#{remark},</if>
+			<if test="createBy != null and createBy != ''">#{createBy},</if>
+			sysdate()
+		)
+	</insert>
+	
+	
+	<delete id="deleteRiJmReportDbFieldByReportId" parameterType="String">
+		delete from jimu_report_db_field where jimu_report_db_id in (select id from jimu_report_db where jimu_report_id = #{reportId})
+    </delete>
+    
+    <delete id="deleteRiJmReportDbByReportId" parameterType="String">
+    	delete from jimu_report_db where jimu_report_id = #{reportId}
+    </delete>
+    
+    <delete id="deleteRiJmReportShareByReportId" parameterType="String">
+    	delete from jimu_report_share where report_id = #{reportId}
+    </delete>
+    
+    
+</mapper>
