@@ -2,15 +2,15 @@
 
 ## 修改启动端口号SERVER_PORT、运行jar包所在目录APP_HOME、jar包名称RUN_JAR
 SERVER_PORT=8100
-RUN_JAR="spirit-rsp.jar"
-APP_HOME="/home/spirit-app/rsp"
+RUN_JAR="spirit.jar"
+APP_HOME="/home/spirit"
 APP_NAME="${APP_HOME}/${RUN_JAR}"
 LOG_HOME="${APP_HOME}/logs"
 UPLOAD_PATH="${APP_HOME}/files"
 APIKEY_PATH="${APP_HOME}/apikey"
 HEALTH_CHECK="health_check"
 
-JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+JAVA_OPTS="-Xmn256m -Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 
 # 使用说明，用来提示输入参数
 usage() {

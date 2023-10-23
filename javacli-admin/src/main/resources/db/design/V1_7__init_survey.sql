@@ -1,6 +1,6 @@
 
 -- 问卷调查表
-drop table if exists svy_survey
+drop table if exists svy_survey;
 create table svy_survey (
   survey_id bigint not null auto_increment comment '主键Id',
   survey_type varchar(20) not null default '' comment '调查类型（问卷、考试）',
@@ -16,7 +16,7 @@ create table svy_survey (
 ) engine=innodb comment = '问卷调查表';
 
 -- 问卷调查属性表
-drop table if exists svy_survey_prop
+drop table if exists svy_survey_prop;
 create table svy_survey_prop (
   prop_id bigint not null auto_increment comment '主键Id',
   survey_id bigint not null comment '问卷调查Id',
@@ -36,7 +36,7 @@ create table svy_survey_prop (
 
 
 -- 问卷调查权限表
-drop table if exists svy_survey_acl
+drop table if exists svy_survey_acl;
 create table svy_survey_acl (
   acl_id bigint not null auto_increment comment '主键Id',
   survey_id bigint not null comment '问卷调查Id',
@@ -47,7 +47,7 @@ create table svy_survey_acl (
 
 -- 问卷调查权限用户表
 drop table if exists svy_survey_acl_user
-create table svy_survey_acl (
+create table svy_survey_acl_user (
   acl_user_id  bigint not null auto_increment comment '主键Id',
   acl_id 	   bigint not null comment '权限Id',
   user_id 	   bigint not null comment '用户Id',

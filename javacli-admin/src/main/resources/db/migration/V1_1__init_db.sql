@@ -59,7 +59,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'fFkaUuxwx9ICnqBXDYBZXnHZ1zJU5gVzdssxJJuSf+idRQZl2ELxBSaAp6HGh1hJVNOa3xcqeBUOzy/fEobZmDG7jsW8PhTKyfs4kkywQqAtHMs1A72o36WxR6H9M88+LDz9+3a7YFm44JzPUCxdhhR8yvzZbjWVAM24ee2DMtI=', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'superadmin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, 'superadmin', '系统管理员', '00', 'superadmin@admin.com', '15888888888', '1', '', 'aQQAmDEA6WjSVDVPpalOTtXzat8QLVymKr3RsYRFA6ne7Tz19Qa4TpHHBa7vybfckUBxecLMuAggzOyaHFby5t9FYsqqnYpE1jms9c28SOcJgPP3esbExuyO0GyTtQdXVqcyPOTpYz6Fv4KpgSoG1gH0DCFfn0rROKtm3uVjCow=', 'xitongguanliyuan', 'XTGLY', '0', '0', '127.0.0.1', sysdate(), 'superadmin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 用户密码修改记录表

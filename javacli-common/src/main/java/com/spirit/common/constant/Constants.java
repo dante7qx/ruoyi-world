@@ -10,159 +10,160 @@ import lombok.NoArgsConstructor;
  * @author ruoyi
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Constants
-{
-    /**
-     * UTF-8 字符集
-     */
-    public static final String UTF8 = "UTF-8";
+public class Constants {
+	/**
+	 * UTF-8 字符集
+	 */
+	public static final String UTF8 = "UTF-8";
 
-    /**
-     * GBK 字符集
-     */
-    public static final String GBK = "GBK";
-    
-    /**
-     * www主域
-     */
-    public static final String WWW = "www.";
+	/**
+	 * GBK 字符集
+	 */
+	public static final String GBK = "GBK";
 
-    /**
-     * http请求
-     */
-    public static final String HTTP = "http://";
+	/**
+	 * www主域
+	 */
+	public static final String WWW = "www.";
 
-    /**
-     * https请求
-     */
-    public static final String HTTPS = "https://";
-    
-    /**
-     * wobsocket请求
-     */
-    public static final String WEBSCOKET = "ws://";
-    
-    /**
-     * 通用删除标识
-     */
-    public static final String DEL_FLAG = "1";
-    
-    /**
-     * 通用停用标识
-     */
-    public static final String LOCK_FLAG = "1";
+	/**
+	 * http请求
+	 */
+	public static final String HTTP = "http://";
 
-    /**
-     * 通用成功标识
-     */
-    public static final String SUCCESS = "0";
+	/**
+	 * https请求
+	 */
+	public static final String HTTPS = "https://";
 
-    /**
-     * 通用失败标识
-     */
-    public static final String FAIL = "1";
+	/**
+	 * wobsocket请求
+	 */
+	public static final String WEBSCOKET = "ws://";
 
-    /**
-     * 登录成功
-     */
-    public static final String LOGIN_SUCCESS = "Success";
+	/**
+	 * 通用删除标识
+	 */
+	public static final String DEL_FLAG = "1";
 
-    /**
-     * 注销
-     */
-    public static final String LOGOUT = "Logout";
+	/**
+	 * 通用停用标识
+	 */
+	public static final String LOCK_FLAG = "1";
 
-    /**
-     * 注册
-     */
-    public static final String REGISTER = "Register";
+	/**
+	 * 通用成功标识
+	 */
+	public static final String SUCCESS = "0";
 
-    /**
-     * 登录失败
-     */
-    public static final String LOGIN_FAIL = "Error";
- 
-    /**
-     * 验证码有效期（分钟）
-     */
-    public static final Integer CAPTCHA_EXPIRATION = 2;
+	/**
+	 * 通用失败标识
+	 */
+	public static final String FAIL = "1";
 
-    /**
-     * 令牌
-     */
-    public static final String TOKEN = "token";
-    
-    /**
-     * 令牌前缀
-     */
-    public static final String TOKEN_PREFIX = "Bearer ";
+	/**
+	 * 登录成功
+	 */
+	public static final String LOGIN_SUCCESS = "Success";
 
-    /**
-     * 令牌前缀
-     */
-    public static final String LOGIN_USER_KEY = "login_user_key";
+	/**
+	 * 注销
+	 */
+	public static final String LOGOUT = "Logout";
 
-    /**
-     * 用户ID
-     */
-    public static final String JWT_USERID = "userid";
+	/**
+	 * 注册
+	 */
+	public static final String REGISTER = "Register";
 
-    /**
-     * 用户名称
-     */
-    public static final String JWT_USERNAME = Claims.SUBJECT;
+	/**
+	 * 登录失败
+	 */
+	public static final String LOGIN_FAIL = "Error";
 
-    /**
-     * 用户头像
-     */
-    public static final String JWT_AVATAR = "avatar";
+	/**
+	 * 验证码有效期（分钟）
+	 */
+	public static final Integer CAPTCHA_EXPIRATION = 2;
 
-    /**
-     * 创建时间
-     */
-    public static final String JWT_CREATED = "created";
+	/**
+	 * 令牌
+	 */
+	public static final String TOKEN = "token";
 
-    /**
-     * 用户权限
-     */
-    public static final String JWT_AUTHORITIES = "authorities";
+	/**
+	 * 令牌前缀
+	 */
+	public static final String TOKEN_PREFIX = "Bearer ";
 
-    /**
-     * 资源映射路径 前缀
-     */
-    public static final String RESOURCE_PREFIX = "/project-profile";
+	/**
+	 * 令牌前缀
+	 */
+	public static final String LOGIN_USER_KEY = "login_user_key";
 
-    /**
-     * RMI 远程方法调用
-     */
-    public static final String LOOKUP_RMI = "rmi:";
+	/**
+	 * 用户ID
+	 */
+	public static final String JWT_USERID = "userid";
 
-    /**
-     * LDAP 远程方法调用
-     */
-    public static final String LOOKUP_LDAP = "ldap:";
+	/**
+	 * 用户名称
+	 */
+	public static final String JWT_USERNAME = Claims.SUBJECT;
 
-    /**
-     * LDAPS 远程方法调用
-     */
-    public static final String LOOKUP_LDAPS = "ldaps:";
+	/**
+	 * 用户头像
+	 */
+	public static final String JWT_AVATAR = "avatar";
 
-    /**
-     * 定时任务白名单配置（仅允许访问的包名，如其他需要可以自行添加）
-     */
-    public static final String[] JOB_WHITELIST_STR = { "com.spirit" };
+	/**
+	 * 创建时间
+	 */
+	public static final String JWT_CREATED = "created";
 
-    /**
-     * 定时任务违规的字符
-     */
-    public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
-            "org.springframework", "org.apache", "com.spirit.common.utils.file" };
-    
-    /** 
-     * 积木报表
-     */
-    public static final String JIMU_TOKEN = "X-Access-Token";
-    public static final String JIMU_PREFIX = "jmreport";
-    public static final String JIMU_STATIC = "desreport_";
-    
+	/**
+	 * 用户权限
+	 */
+	public static final String JWT_AUTHORITIES = "authorities";
+
+	/**
+	 * 资源映射路径 前缀
+	 */
+	public static final String RESOURCE_PREFIX = "/project-profile";
+
+	/**
+	 * RMI 远程方法调用
+	 */
+	public static final String LOOKUP_RMI = "rmi:";
+
+	/**
+	 * LDAP 远程方法调用
+	 */
+	public static final String LOOKUP_LDAP = "ldap:";
+
+	/**
+	 * LDAPS 远程方法调用
+	 */
+	public static final String LOOKUP_LDAPS = "ldaps:";
+
+	/**
+	 * 定时任务白名单配置（仅允许访问的包名，如其他需要可以自行添加）
+	 */
+	public static final String[] JOB_WHITELIST_STR = { "com.spirit" };
+
+	/**
+	 * 定时任务违规的字符
+	 */
+	public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
+			"org.springframework", "org.apache", "com.spirit.common.utils.file" };
+
+	/** 
+	 * 积木报表
+	 */
+	public static final String JIMU_TOKEN = "X-Access-Token";
+	public static final String JIMU_PREFIX = "jmreport";
+	public static final String JIMU_STATIC = "desreport_";
+
+	/** 国密密钥 */
+    public static final String SM4_KEY = "Spirit@JavaCli#$";
 }
