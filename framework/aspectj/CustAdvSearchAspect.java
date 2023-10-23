@@ -1,4 +1,4 @@
-package com.risun.framework.aspectj;
+package com.spirit.framework.aspectj;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
-import com.risun.common.annotation.CustomizeAdvancedSearch;
-import com.risun.common.constant.GenConstants;
-import com.risun.common.core.domain.BaseEntity;
-import com.risun.common.core.domain.model.CustAdvCond;
-import com.risun.common.core.domain.model.CustAdvTemplate;
+import com.spirit.common.annotation.CustomizeAdvancedSearch;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.model.CustAdvCond;
+import com.spirit.common.core.domain.model.CustAdvTemplate;
 import com.wxtool.ChinaCipher;
 
 import cn.hutool.core.collection.CollUtil;

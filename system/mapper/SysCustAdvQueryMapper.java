@@ -1,7 +1,7 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
-import com.risun.system.domain.SysCustAdvQuery;
+import com.spirit.system.domain.SysCustAdvQuery;
 
 /**
  * 自定义高级查询模板Mapper接口

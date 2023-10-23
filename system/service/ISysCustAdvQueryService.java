@@ -1,7 +1,7 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
-import com.risun.system.domain.SysCustAdvQuery;
+import com.spirit.system.domain.SysCustAdvQuery;
 
 /**
  * 自定义高级查询模板Service接口

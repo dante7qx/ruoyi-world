@@ -1,16 +1,16 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import java.util.List;
-import com.risun.common.utils.DateUtils;
+import com.spirit.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.mapper.SysCustAdvQueryCondMapper;
-import com.risun.system.mapper.SysCustAdvQueryMapper;
-import com.risun.system.domain.SysCustAdvQuery;
-import com.risun.system.service.ISysCustAdvQueryService;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.mapper.SysCustAdvQueryCondMapper;
+import com.spirit.system.mapper.SysCustAdvQueryMapper;
+import com.spirit.system.domain.SysCustAdvQuery;
+import com.spirit.system.service.ISysCustAdvQueryService;
 
 import cn.hutool.core.util.StrUtil;
 

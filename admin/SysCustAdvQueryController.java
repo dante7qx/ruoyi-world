@@ -1,4 +1,4 @@
-package com.risun.web.controller.system;
+package com.spirit.web.controller.system;
 
 import java.util.List;
 
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.system.domain.SysCustAdvQuery;
-import com.risun.system.domain.SysCustAdvQueryCond;
-import com.risun.system.service.ISysCustAdvQueryCondService;
-import com.risun.system.service.ISysCustAdvQueryService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.system.domain.SysCustAdvQuery;
+import com.spirit.system.domain.SysCustAdvQueryCond;
+import com.spirit.system.service.ISysCustAdvQueryCondService;
+import com.spirit.system.service.ISysCustAdvQueryService;
 
 /**
  * 自定义高级查询模板Controller

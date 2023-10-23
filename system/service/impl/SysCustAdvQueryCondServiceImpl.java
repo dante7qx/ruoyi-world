@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import static java.util.stream.Collectors.toList;
 import java.util.Arrays;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.risun.common.constant.GenConstants;
-import com.risun.system.domain.SysCustAdvQuery;
-import com.risun.system.domain.SysCustAdvQueryCond;
-import com.risun.system.mapper.SysCustAdvQueryCondMapper;
-import com.risun.system.mapper.SysCustAdvQueryMapper;
-import com.risun.system.service.ISysCustAdvQueryCondService;
+import com.spirit.common.constant.GenConstants;
+import com.spirit.system.domain.SysCustAdvQuery;
+import com.spirit.system.domain.SysCustAdvQueryCond;
+import com.spirit.system.mapper.SysCustAdvQueryCondMapper;
+import com.spirit.system.mapper.SysCustAdvQueryMapper;
+import com.spirit.system.service.ISysCustAdvQueryCondService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
