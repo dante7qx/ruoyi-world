@@ -1,30 +1,36 @@
-package com.risun.system.domain;
+package com.spirit.system.domain;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
- * 留言评论回复对象 sys_comment_reply
+ * 留言管理对象 sys_comment
  * 
  * @author sunchao
  * @date 2023-01-05
  */
-public class SysCommentReply extends BaseEntity {
+public class SysComment extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
-	/** 回复id */
-	private Long replyId;
-
-	/** 父评论id */
-	@Excel(name = "父评论id")
+	/** 评论id */
 	private Long commentId;
 
+	/** 业务模块 */
+	@Excel(name = "业务模块")
+	private String bizModel;
+
+	/** 业务id */
+	@Excel(name = "业务id")
+	private Long bizId;
+
 	/** 评论者id */
-	@Excel(name = "评论者id")
 	private String fromId;
 
 	/** 评论者昵称 */
@@ -33,17 +39,6 @@ public class SysCommentReply extends BaseEntity {
 
 	/** 评论者头像 */
 	private String fromAvatar;
-
-	/** 被评论者id */
-	@Excel(name = "被评论者id")
-	private String toId;
-
-	/** 被评论者昵称 */
-	@Excel(name = "评论者")
-	private String toName;
-
-	/** 被评论者头像 */
-	private String toAvatar;
 
 	/** 评论时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -57,21 +52,19 @@ public class SysCommentReply extends BaseEntity {
 	/** 评论图片 */
 	@Excel(name = "评论图片")
 	private String imgUrl;
-
+	
 	/** 评论缩略图 */
 	private String thumbUrl;
-	
+
 	/** 评论视频 */
 	@Excel(name = "评论视频")
 	private String videoUrl;
 
-	public void setReplyId(Long replyId) {
-		this.replyId = replyId;
-	}
-
-	public Long getReplyId() {
-		return replyId;
-	}
+	/** 回复 */
+	private List<SysCommentReply> reply;
+	
+	/** 点赞数 */
+	private int likeNum;
 
 	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
@@ -81,6 +74,22 @@ public class SysCommentReply extends BaseEntity {
 		return commentId;
 	}
 
+	public void setBizModel(String bizModel) {
+		this.bizModel = bizModel;
+	}
+
+	public String getBizModel() {
+		return bizModel;
+	}
+
+	public void setBizId(Long bizId) {
+		this.bizId = bizId;
+	}
+
+	public Long getBizId() {
+		return bizId;
+	}
+
 	public void setFromId(String fromId) {
 		this.fromId = fromId;
 	}
@@ -88,7 +97,7 @@ public class SysCommentReply extends BaseEntity {
 	public String getFromId() {
 		return fromId;
 	}
-	
+
 	public String getFromName() {
 		return fromName;
 	}
@@ -103,30 +112,6 @@ public class SysCommentReply extends BaseEntity {
 
 	public void setFromAvatar(String fromAvatar) {
 		this.fromAvatar = fromAvatar;
-	}
-
-	public void setToId(String toId) {
-		this.toId = toId;
-	}
-
-	public String getToId() {
-		return toId;
-	}
-
-	public String getToName() {
-		return toName;
-	}
-
-	public void setToName(String toName) {
-		this.toName = toName;
-	}
-
-	public String getToAvatar() {
-		return toAvatar;
-	}
-
-	public void setToAvatar(String toAvatar) {
-		this.toAvatar = toAvatar;
 	}
 
 	public void setCommentDate(Date commentDate) {
@@ -169,10 +154,26 @@ public class SysCommentReply extends BaseEntity {
 		return videoUrl;
 	}
 
+	public List<SysCommentReply> getReply() {
+		return reply;
+	}
+
+	public void setReply(List<SysCommentReply> reply) {
+		this.reply = reply;
+	}
+
+	public int getLikeNum() {
+		return likeNum;
+	}
+
+	public void setLikeNum(int likeNum) {
+		this.likeNum = likeNum;
+	}
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("replyId", getReplyId())
-				.append("commentId", getCommentId()).append("fromId", getFromId()).append("toId", getToId())
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("commentId", getCommentId())
+				.append("bizModel", getBizModel()).append("bizId", getBizId()).append("fromId", getFromId())
 				.append("commentDate", getCommentDate()).append("content", getContent()).append("imgUrl", getImgUrl())
 				.append("videoUrl", getVideoUrl()).toString();
 	}

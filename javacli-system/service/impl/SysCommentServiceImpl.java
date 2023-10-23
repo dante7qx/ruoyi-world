@@ -1,4 +1,4 @@
-package com.risun.system.service.impl;
+package com.spirit.system.service.impl;
 
 import static java.util.stream.Collectors.toList;
 
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.system.domain.SysComment;
-import com.risun.system.domain.SysCommentLike;
-import com.risun.system.domain.SysCommentReply;
-import com.risun.system.mapper.SysCommentLikeMapper;
-import com.risun.system.mapper.SysCommentMapper;
-import com.risun.system.mapper.SysCommentReplyMapper;
-import com.risun.system.service.ISysCommentService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.system.domain.SysComment;
+import com.spirit.system.domain.SysCommentLike;
+import com.spirit.system.domain.SysCommentReply;
+import com.spirit.system.mapper.SysCommentLikeMapper;
+import com.spirit.system.mapper.SysCommentMapper;
+import com.spirit.system.mapper.SysCommentReplyMapper;
+import com.spirit.system.service.ISysCommentService;
 
 import cn.hutool.core.collection.CollUtil;
 

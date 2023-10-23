@@ -1,7 +1,7 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
-import com.risun.system.domain.SysCommentLike;
+import com.spirit.system.domain.SysCommentLike;
 
 /**
  * 留言点赞Mapper接口

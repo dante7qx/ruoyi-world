@@ -1,10 +1,10 @@
-package com.risun.system.mapper;
+package com.spirit.system.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.risun.system.domain.SysComment;
+import com.spirit.system.domain.SysComment;
 
 /**
  * 留言管理Mapper接口

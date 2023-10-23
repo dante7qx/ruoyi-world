@@ -1,8 +1,8 @@
-package com.risun.system.service;
+package com.spirit.system.service;
 
 import java.util.List;
 
-import com.risun.system.domain.SysComment;
+import com.spirit.system.domain.SysComment;
 
 /**
  * 留言管理Service接口
