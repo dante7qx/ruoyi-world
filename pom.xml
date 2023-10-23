@@ -246,6 +246,13 @@
                 <artifactId>javacli-biz</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <!-- 流程管理 -->
+            <dependency>
+		        <groupId>com.spirit</groupId>
+		        <artifactId>javacli-flowable</artifactId>
+		        <version>${project.version}</version>
+		    </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -258,6 +265,7 @@
         <module>javacli-generator</module>
         <module>javacli-common</module>
         <module>javacli-biz</module>
+        <module>javacli-flowable</module>
     </modules>
     
 

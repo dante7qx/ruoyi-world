@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.flowable.mapper.SysFlowAssignMapper">
+    
+    <resultMap type="SysFlowAssign" id="SysFlowAssignResult">
+        <result property="flowAssignId"    column="flow_assign_id"    />
+        <result property="procInstId"    column="proc_inst_id"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="keepTodo"    column="keep_todo"    />
+        <result property="comment"    column="comment"    />
+        <result property="ownerId"    column="owner_id"    />
+        <result property="ownerName"    column="owner_name"    />
+        <result property="ownerDept"    column="owner_dept"    />
+        <result property="assigneeId"    column="assignee_id"    />
+        <result property="assigneeName"    column="assignee_name"    />
+        <result property="assigneeDept"    column="assignee_dept"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectSysFlowAssignVo">
+        select flow_assign_id, proc_inst_id, task_id, keep_todo, comment, owner_id, owner_name, owner_dept, assignee_id, assignee_name, assignee_dept, create_time from sys_flow_assign
+    </sql>
+
+    <select id="selectSysFlowAssignList" parameterType="SysFlowAssign" resultMap="SysFlowAssignResult">
+        <include refid="selectSysFlowAssignVo"/>
+        <where>  
+            <if test="procInstId != null  and procInstId != ''"> and proc_inst_id = #{procInstId}</if>
+            <if test="taskId != null  and taskId != ''"> and task_id = #{taskId}</if>
+            <if test="keepTodo != null "> and keep_todo = #{keepTodo}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="ownerId != null "> and owner_id = #{ownerId}</if>
+            <if test="ownerName != null  and ownerName != ''"> and owner_name like concat('%', #{ownerName}, '%')</if>
+            <if test="ownerDept != null  and ownerDept != ''"> and owner_dept = #{ownerDept}</if>
+            <if test="assigneeId != null "> and assignee_id = #{assigneeId}</if>
+            <if test="assigneeName != null  and assigneeName != ''"> and assignee_name like concat('%', #{assigneeName}, '%')</if>
+            <if test="assigneeDept != null  and assigneeDept != ''"> and assignee_dept = #{assigneeDept}</if>
+        </where>
+        order by create_time asc
+    </select>
+    
+    <select id="selectSysFlowAssignByFlowAssignId" parameterType="Long" resultMap="SysFlowAssignResult">
+        <include refid="selectSysFlowAssignVo"/>
+        where flow_assign_id = #{flowAssignId}
+    </select>
+        
+    <insert id="insertSysFlowAssign" parameterType="SysFlowAssign" useGeneratedKeys="true" keyProperty="flowAssignId">
+        insert into sys_flow_assign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="procInstId != null and procInstId != ''">proc_inst_id,</if>
+            <if test="taskId != null and taskId != ''">task_id,</if>
+            <if test="keepTodo != null">keep_todo,</if>
+            <if test="comment != null">comment,</if>
+            <if test="ownerId != null">owner_id,</if>
+            <if test="ownerName != null and ownerName != ''">owner_name,</if>
+            <if test="ownerDept != null">owner_dept,</if>
+            <if test="assigneeId != null">assignee_id,</if>
+            <if test="assigneeName != null and assigneeName != ''">assignee_name,</if>
+            <if test="assigneeDept != null">assignee_dept,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="procInstId != null and procInstId != ''">#{procInstId},</if>
+            <if test="taskId != null and taskId != ''">#{taskId},</if>
+            <if test="keepTodo != null">#{keepTodo},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="ownerId != null">#{ownerId},</if>
+            <if test="ownerName != null and ownerName != ''">#{ownerName},</if>
+            <if test="ownerDept != null">#{ownerDept},</if>
+            <if test="assigneeId != null">#{assigneeId},</if>
+            <if test="assigneeName != null and assigneeName != ''">#{assigneeName},</if>
+            <if test="assigneeDept != null">#{assigneeDept},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysFlowAssign" parameterType="SysFlowAssign">
+        update sys_flow_assign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="procInstId != null and procInstId != ''">proc_inst_id = #{procInstId},</if>
+            <if test="taskId != null and taskId != ''">task_id = #{taskId},</if>
+            <if test="keepTodo != null">keep_todo = #{keepTodo},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="ownerId != null">owner_id = #{ownerId},</if>
+            <if test="ownerName != null and ownerName != ''">owner_name = #{ownerName},</if>
+            <if test="ownerDept != null">owner_dept = #{ownerDept},</if>
+            <if test="assigneeId != null">assignee_id = #{assigneeId},</if>
+            <if test="assigneeName != null and assigneeName != ''">assignee_name = #{assigneeName},</if>
+            <if test="assigneeDept != null">assignee_dept = #{assigneeDept},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where flow_assign_id = #{flowAssignId}
+    </update>
+
+    <delete id="deleteSysFlowAssignByFlowAssignId" parameterType="Long">
+        delete from sys_flow_assign where flow_assign_id = #{flowAssignId}
+    </delete>
+
+    <delete id="deleteSysFlowAssignByFlowAssignIds" parameterType="String">
+        delete from sys_flow_assign where flow_assign_id in 
+        <foreach item="flowAssignId" collection="array" open="(" separator="," close=")">
+            #{flowAssignId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteSysFlowAssignByProcInstId" parameterType="String">
+        delete from sys_flow_assign where proc_inst_id = #{procInstId}
+    </delete>
+</mapper>

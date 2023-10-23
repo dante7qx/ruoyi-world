@@ -60,10 +60,6 @@
 	color: inherit;
 }
 
-.el-message-box__status + .el-message-box__message{
-	word-break: break-word;
-}
-
 .el-dialog:not(.is-fullscreen) {
 	margin-top: 6vh !important;
 }
@@ -275,18 +271,4 @@
 .top-right-btn {
 	position: relative;
 	float: right;
-}
-
-/* 分割面板样式 */
-.splitpanes--vertical > .splitpanes__splitter {
-	width: 4px;
-  min-width: 4px;
-  background-color: #9e9e9e;
-  margin-right: 5px;
-}
-
-.splitpanes--horizontal > .splitpanes__splitter {
-	width: 4px;
-  min-width: 4px;
-  background-color: #9e9e9e;
 }

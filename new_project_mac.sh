@@ -30,7 +30,7 @@ createNewProject() {
     sed -i '' "s/-/_/g" ./javacli-common/src/main/java/com/spirit/common/constant/CacheConstants.java
     sed -i '' "s/: files/: <文件上传目录>/g" ./javacli-admin/src/main/resources/application.yml
     sed -i '' "s/127.0.0.1:3307/<数据库url>/g" ./javacli-admin/src/main/resources/application-mysql.yml
-    sed -i '' "s/spirit_javacli_dev/<数据库>/g" ./javacli-admin/src/main/resources/application-mysql.yml
+    sed -i '' "s/spirit_javacli_flowable/<数据库>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i '' "s/root/<数据库账号>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i '' "s/iamdante/<数据库密码>/g" ./javacli-admin/src/main/resources/application-mysql.yml
     sed -i '' "s/spirit-javacli/${projectName}/g" ./sonar-project.properties

@@ -63,6 +63,12 @@
 			<groupId>com.spirit</groupId>
 			<artifactId>javacli-biz</artifactId>
 		</dependency>
+		
+		 <!-- 流程管理 -->
+        <dependency>
+	        <groupId>com.spirit</groupId>
+	        <artifactId>javacli-flowable</artifactId>
+	    </dependency>
 	</dependencies>
 
 	<build>
