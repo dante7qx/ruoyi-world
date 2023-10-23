@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.system.mapper.SysAttachmentMapper">
+    
+    <resultMap type="SysAttachment" id="SysAttachmentResult">
+        <result property="attachId"    column="attach_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="fileUrl"    column="file_url"    />
+        <result property="fileSuffix"    column="file_suffix"    />
+        <result property="fileSize"    column="file_size"    />
+        <result property="bizModel"    column="biz_model"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysAttachmentVo">
+        select attach_id, file_name, file_url, file_suffix, file_size, biz_model, create_by, create_time, update_by, update_time from sys_attachment
+    </sql>
+
+    <select id="selectSysAttachmentList" parameterType="SysAttachment" resultMap="SysAttachmentResult">
+        <include refid="selectSysAttachmentVo"/>
+        <where>  
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="fileUrl != null  and fileUrl != ''"> and file_url = #{fileUrl}</if>
+            <if test="fileSuffix != null  and fileSuffix != ''"> and file_suffix = #{fileSuffix}</if>
+            <if test="fileSize != null  and fileSize != ''"> and file_size = #{fileSize}</if>
+            <if test="bizModel != null  and bizModel != ''"> and biz_model = #{bizModel}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectSysAttachmentByAttachId" parameterType="Long" resultMap="SysAttachmentResult">
+        <include refid="selectSysAttachmentVo"/>
+        where attach_id = #{attachId}
+    </select>
+    
+    <select id="selectSysAttachmentByFileUrl" parameterType="String" resultMap="SysAttachmentResult">
+        <include refid="selectSysAttachmentVo"/>
+        where file_url = #{fileUrl}
+    </select>
+        
+    <insert id="insertSysAttachment" parameterType="SysAttachment" useGeneratedKeys="true" keyProperty="attachId">
+        insert into sys_attachment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="fileUrl != null">file_url,</if>
+            <if test="fileSuffix != null">file_suffix,</if>
+            <if test="fileSize != null">file_size,</if>
+            <if test="bizModel != null">biz_model,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="fileUrl != null">#{fileUrl},</if>
+            <if test="fileSuffix != null">#{fileSuffix},</if>
+            <if test="fileSize != null">#{fileSize},</if>
+            <if test="bizModel != null">#{bizModel},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysAttachment" parameterType="SysAttachment">
+        update sys_attachment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="fileUrl != null">file_url = #{fileUrl},</if>
+            <if test="fileSuffix != null">file_suffix = #{fileSuffix},</if>
+            <if test="fileSize != null">file_size = #{fileSize},</if>
+            <if test="bizModel != null">biz_model = #{bizModel},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where attach_id = #{attachId}
+    </update>
+
+    <delete id="deleteSysAttachmentByAttachId" parameterType="Long">
+        delete from sys_attachment where attach_id = #{attachId}
+    </delete>
+
+    <delete id="deleteSysAttachmentByAttachIds" parameterType="String">
+        delete from sys_attachment where attach_id in 
+        <foreach item="attachId" collection="array" open="(" separator="," close=")">
+            #{attachId}
+        </foreach>
+    </delete>
+</mapper>

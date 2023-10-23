@@ -1,7 +1,7 @@
 #! /bin/bash
 
 curProject="project"
-curProjectCN="睿阳RSP开发框架"
+curProjectCN="精灵Spirit开发框架"
 projectName="xx-sys"
 projectCN="XX管理系统"
 
@@ -15,7 +15,7 @@ createNewProject() {
         sed -i '' "s/${curProject}-/${projectName}-/g" $pom
     done
     
-    ## 修改睿阳RSP开发框架
+    ## 修改精灵Spirit开发框架
     echo "2. 修改${curProjectCN}"
     cnfiles=`grep ${curProjectCN} -rl ./ | grep -v new_project.sh | grep -v new_project_mac.sh | grep -v git`
     for cnfile in $cnfiles; do
@@ -23,15 +23,15 @@ createNewProject() {
         sed -i '' "s/${curProjectCN}/${projectCN}/g" $cnfile
     done
     
-    sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/risun/RisunApplication.java
+    sed -i '' "s/XX项目/${projectCN}/g" ./project-admin/src/main/java/com/spirit/SpiritApplication.java
     echo "修改常量 Common 下 Constants.java"
-    sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/risun/common/constant/Constants.java
-    sed -i '' "s/project/${projectName}/g" ./project-common/src/main/java/com/risun/common/constant/CacheConstants.java
-    sed -i '' "s/-/_/g" ./project-common/src/main/java/com/risun/common/constant/CacheConstants.java
+    sed -i '' "s/project-/${projectName}-/g" ./project-common/src/main/java/com/spirit/common/constant/Constants.java
+    sed -i '' "s/project/${projectName}/g" ./project-common/src/main/java/com/spirit/common/constant/CacheConstants.java
+    sed -i '' "s/-/_/g" ./project-common/src/main/java/com/spirit/common/constant/CacheConstants.java
     sed -i '' "s/192.168.1.30/127.0.0.1/g" ./project-admin/src/main/resources/application.yml
     sed -i '' "s/: files/: <文件上传目录>/g" ./project-admin/src/main/resources/application.yml
     sed -i '' "s/192.168.1.30:3306/<数据库url>/g" ./project-admin/src/main/resources/application-druid.yml
-    sed -i '' "s/risun_project/<数据库>/g" ./project-admin/src/main/resources/application-druid.yml
+    sed -i '' "s/spirit_project/<数据库>/g" ./project-admin/src/main/resources/application-druid.yml
     sed -i '' "s/root/<数据库账号>/g" ./project-admin/src/main/resources/application-druid.yml
     sed -i '' "s/iamdante/<数据库密码>/g" ./project-admin/src/main/resources/application-druid.yml
 

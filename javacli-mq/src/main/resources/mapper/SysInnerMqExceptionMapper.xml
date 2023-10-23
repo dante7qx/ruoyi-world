@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.mq.mapper.SysInnerMqExceptionMapper">
+
+	<resultMap type="SysInnerMqException" id="SysInnerMqExceptionResult">
+		<result property="id" column="id" />
+		<result property="consumerClass" column="consumer_class" />
+		<result property="bizMsg" column="biz_msg" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<sql id="selectSysInnerMqExceptionVo">
+		select id, consumer_class, biz_msg, create_time from sys_inner_mq_exception
+	</sql>
+
+	<select id="selectSysInnerMqExceptionList" parameterType="SysInnerMqException" resultMap="SysInnerMqExceptionResult">
+		<include refid="selectSysInnerMqExceptionVo" />
+		<where>
+			<if test="consumerClass != null  and consumerClass != ''"> and consumer_class like concat('%', #{consumerClass}, '%')</if>
+            <if test="bizMsg != null  and bizMsg != ''"> and biz_msg like concat('%', #{bizMsg}, '%')</if>
+		</where>
+	</select>
+
+	<select id="selectSysInnerMqExceptionById" parameterType="Long" resultMap="SysInnerMqExceptionResult">
+		<include refid="selectSysInnerMqExceptionVo" />
+		where id = #{id}
+	</select>
+
+	<insert id="insertSysInnerMqException" parameterType="SysInnerMqException" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_inner_mq_exception
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="consumerClass != null and consumerClass != ''">consumer_class,</if>
+			<if test="bizMsg != null">biz_msg,</if>
+			<if test="createTime != null">create_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="consumerClass != null and consumerClass != ''">#{consumerClass},</if>
+			<if test="bizMsg != null">#{bizMsg},</if>
+			<if test="createTime != null">#{createTime},</if>
+		</trim>
+	</insert>
+
+	<update id="updateSysInnerMqException" parameterType="SysInnerMqException">
+		update sys_inner_mq_exception
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="consumerClass != null and consumerClass != ''">consumer_class = #{consumerClass},</if>
+			<if test="bizMsg != null">biz_msg = #{bizMsg},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteSysInnerMqExceptionById" parameterType="Long">
+		delete from sys_inner_mq_exception where id = #{id}
+	</delete>
+
+	<delete id="deleteSysInnerMqExceptionByIds"
+		parameterType="String">
+		delete from sys_inner_mq_exception where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
