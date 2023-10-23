@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spirit.flowable.mapper.SysFlowDeployMapper">
+    
+
+    <select id="selectDeployList" parameterType="com.spirit.flowable.domain.dto.FlowProcDefDto" resultType="com.spirit.flowable.domain.dto.FlowProcDefDto">
+
+        SELECT
+            rp.id_ as id,
+            rd.id_ as deploymentId,
+            rd.name_ as name,
+            rd.category_ as category,
+            rp.key_ as flowKey,
+            rp.version_ as version,
+            rp.suspension_state_ as suspensionState,
+            rd.deploy_time_  as deploymentTime
+        FROM
+            ACT_RE_PROCDEF rp
+                LEFT JOIN ACT_RE_DEPLOYMENT rd ON rp.deployment_id_ = rd.id_
+        <where>
+            <if test="name != null and name != ''">
+               and rd.name_ like concat('%', #{name}, '%')
+            </if>
+            <if test="params.beginDeploymentTime != null and params.beginDeploymentTime != '' and params.endDeploymentTime != null and params.endDeploymentTime != ''"> 
+            	and rd.deploy_time_ between #{params.beginDeploymentTime} and #{params.endDeploymentTime}
+            </if>
+        </where>
+        order by rd.deploy_time_ desc
+    </select>
+
+	<select id="selectLatestProcDefList" resultType="com.spirit.flowable.domain.dto.FlowProcDefDto">
+		select
+			res.id_ as id,
+			res.deployment_id_ as deploymentid,
+			res.name_ as name, 
+			res.category_ as category, 
+			res.key_ as flowkey, 
+			res.version_ as version
+		from
+			act_re_procdef res
+		where
+			res.version_ = (
+				select
+					max(version_) from act_re_procdef
+				where
+					key_ = res.key_
+					and ((tenant_id_ is not null and tenant_id_ = res.tenant_id_) or (tenant_id_ is null and res.tenant_id_ is null))
+			)
+			and (res.suspension_state_ = 1)
+		order by
+			res.category_ desc
+	</select>
+
+</mapper>
