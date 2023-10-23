@@ -1,8 +1,8 @@
-package com.risun.mq;
+package com.spirit.mq;
 
 import org.springframework.stereotype.Service;
 
-import com.risun.mq.inner.event.InnerMQEvent;
+import com.spirit.mq.inner.event.InnerMQEvent;
 
 @Service
 public class DemoBizService {

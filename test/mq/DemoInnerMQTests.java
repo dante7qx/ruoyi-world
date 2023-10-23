@@ -1,4 +1,4 @@
-package com.risun.mq;
+package com.spirit.mq;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.risun.RisunApplicationTests;
-import com.risun.mq.inner.InnerMQService;
-import com.risun.mq.inner.event.InnerMQEvent;
+import com.spirit.RisunApplicationTests;
+import com.spirit.mq.inner.InnerMQService;
+import com.spirit.mq.inner.event.InnerMQEvent;
 
 import cn.hutool.core.thread.ThreadUtil;
 

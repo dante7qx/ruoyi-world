@@ -1,4 +1,4 @@
-package com.risun.mq;
+package com.spirit.mq;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

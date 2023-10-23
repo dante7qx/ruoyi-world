@@ -1,9 +1,9 @@
-package com.risun.mq;
+package com.spirit.mq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.mq.inner.InnerMQService;
+import com.spirit.mq.inner.InnerMQService;
 
 /**
  * 发布消息以及设置消费者处理方式

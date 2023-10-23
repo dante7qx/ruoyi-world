@@ -1,7 +1,7 @@
-package com.risun.mq;
+package com.spirit.mq;
 
-import com.risun.mq.inner.consumer.TogetherConsumer;
-import com.risun.mq.inner.event.InnerMQEvent;
+import com.spirit.mq.inner.consumer.TogetherConsumer;
+import com.spirit.mq.inner.event.InnerMQEvent;
 
 import lombok.extern.slf4j.Slf4j;
 
