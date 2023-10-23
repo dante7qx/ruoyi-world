@@ -1,11 +1,11 @@
-package com.risun.flowable.event;
+package com.spirit.flowable.event;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.risun.flowable.common.enums.SysFlowTypeEnum;
-import com.risun.flowable.demo.service.IFlowDemoService;
+import com.spirit.flowable.common.enums.SysFlowTypeEnum;
+import com.spirit.flowable.demo.service.IFlowDemoService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

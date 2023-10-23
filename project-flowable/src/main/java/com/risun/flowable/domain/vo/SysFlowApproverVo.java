@@ -1,8 +1,8 @@
-package com.risun.flowable.domain.vo;
+package com.spirit.flowable.domain.vo;
 
 import java.util.List;
 
-import com.risun.flowable.domain.SysFlowGroupUser;
+import com.spirit.flowable.domain.SysFlowGroupUser;
 
 import lombok.Data;
 

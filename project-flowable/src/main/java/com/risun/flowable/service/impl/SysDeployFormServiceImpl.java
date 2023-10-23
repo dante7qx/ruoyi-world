@@ -1,12 +1,12 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import java.util.List;
 import java.util.Objects;
 
-import com.risun.flowable.domain.SysDeployForm;
-import com.risun.flowable.domain.SysForm;
-import com.risun.flowable.mapper.SysDeployFormMapper;
-import com.risun.flowable.service.ISysDeployFormService;
+import com.spirit.flowable.domain.SysDeployForm;
+import com.spirit.flowable.domain.SysForm;
+import com.spirit.flowable.mapper.SysDeployFormMapper;
+import com.spirit.flowable.service.ISysDeployFormService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

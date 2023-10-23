@@ -1,4 +1,4 @@
-package com.risun.flowable.domain.vo;
+package com.spirit.flowable.domain.vo;
 
 import java.io.Serializable;
 import java.util.Map;

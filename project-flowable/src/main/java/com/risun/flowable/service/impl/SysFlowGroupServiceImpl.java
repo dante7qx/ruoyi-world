@@ -1,14 +1,14 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import java.util.List;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.flowable.domain.SysFlowGroup;
-import com.risun.flowable.domain.SysFlowGroupUser;
-import com.risun.flowable.mapper.SysFlowGroupMapper;
-import com.risun.flowable.mapper.SysFlowGroupUserMapper;
-import com.risun.flowable.service.ISysFlowGroupService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.flowable.domain.SysFlowGroup;
+import com.spirit.flowable.domain.SysFlowGroupUser;
+import com.spirit.flowable.mapper.SysFlowGroupMapper;
+import com.spirit.flowable.mapper.SysFlowGroupUserMapper;
+import com.spirit.flowable.service.ISysFlowGroupService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

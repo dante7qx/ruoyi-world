@@ -1,8 +1,8 @@
-package com.risun.flowable.mapper;
+package com.spirit.flowable.mapper;
 
 import java.util.List;
 
-import com.risun.flowable.domain.dto.FlowProcDefDto;
+import com.spirit.flowable.domain.dto.FlowProcDefDto;
 
 /**
  * 流程定义查询

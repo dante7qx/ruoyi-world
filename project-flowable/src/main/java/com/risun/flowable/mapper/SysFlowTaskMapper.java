@@ -1,9 +1,9 @@
-package com.risun.flowable.mapper;
+package com.spirit.flowable.mapper;
 
 import java.util.List;
 
-import com.risun.flowable.domain.vo.SysFlowTaskQueryVo;
-import com.risun.flowable.domain.vo.SysFlowTaskVo;
+import com.spirit.flowable.domain.vo.SysFlowTaskQueryVo;
+import com.spirit.flowable.domain.vo.SysFlowTaskVo;
 
 /**
  * 流程列表Mapper接口

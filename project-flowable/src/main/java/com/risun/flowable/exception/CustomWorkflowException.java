@@ -1,6 +1,6 @@
-package com.risun.flowable.exception;
+package com.spirit.flowable.exception;
 
-import com.risun.common.exception.base.BaseException;
+import com.spirit.common.exception.base.BaseException;
 
 /**
  * 自定义工作流异常

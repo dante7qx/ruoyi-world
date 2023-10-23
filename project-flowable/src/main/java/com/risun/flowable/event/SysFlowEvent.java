@@ -1,4 +1,4 @@
-package com.risun.flowable.event;
+package com.spirit.flowable.event;
 
 import org.springframework.context.ApplicationEvent;
 

@@ -1,7 +1,7 @@
-package com.risun.flowable.mapper;
+package com.spirit.flowable.mapper;
 
 import java.util.List;
-import com.risun.flowable.domain.SysFlowGroupUser;
+import com.spirit.flowable.domain.SysFlowGroupUser;
 
 /**
  * 流程审批组人关联Mapper接口

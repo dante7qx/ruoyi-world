@@ -1,4 +1,4 @@
-package com.risun.flowable.event;
+package com.spirit.flowable.event;
 
 import java.io.Serializable;
 import java.util.Map;

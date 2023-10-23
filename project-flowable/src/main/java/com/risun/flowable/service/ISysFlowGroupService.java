@@ -1,7 +1,7 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
 import java.util.List;
-import com.risun.flowable.domain.SysFlowGroup;
+import com.spirit.flowable.domain.SysFlowGroup;
 
 /**
  * 流程审批组Service接口

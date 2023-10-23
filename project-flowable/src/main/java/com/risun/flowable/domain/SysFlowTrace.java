@@ -1,4 +1,4 @@
-package com.risun.flowable.domain;
+package com.spirit.flowable.domain;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.risun.common.annotation.Excel;
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.annotation.Excel;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 流程跟踪对象 sys_flow_trace

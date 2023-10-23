@@ -1,8 +1,8 @@
-package com.risun.flowable.mapper;
+package com.spirit.flowable.mapper;
 
 import java.util.List;
 
-import com.risun.flowable.domain.SysTaskForm;
+import com.spirit.flowable.domain.SysTaskForm;
 
 /**
  * 流程任务关联单Mapper接口

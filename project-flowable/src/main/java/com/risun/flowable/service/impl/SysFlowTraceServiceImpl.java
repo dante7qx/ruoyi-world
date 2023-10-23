@@ -1,4 +1,4 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.flowable.common.enums.SysFlowStatusEnum;
-import com.risun.flowable.domain.SysFlowSeq;
-import com.risun.flowable.domain.SysFlowTrace;
-import com.risun.flowable.domain.vo.SysApprovalFlowVo;
-import com.risun.flowable.domain.vo.SysStartFlowVo;
-import com.risun.flowable.mapper.SysFlowTraceMapper;
-import com.risun.flowable.service.ISysFlowBpmnModelService;
-import com.risun.flowable.service.ISysFlowSeqService;
-import com.risun.flowable.service.ISysFlowTraceService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.flowable.common.enums.SysFlowStatusEnum;
+import com.spirit.flowable.domain.SysFlowSeq;
+import com.spirit.flowable.domain.SysFlowTrace;
+import com.spirit.flowable.domain.vo.SysApprovalFlowVo;
+import com.spirit.flowable.domain.vo.SysStartFlowVo;
+import com.spirit.flowable.mapper.SysFlowTraceMapper;
+import com.spirit.flowable.service.ISysFlowBpmnModelService;
+import com.spirit.flowable.service.ISysFlowSeqService;
+import com.spirit.flowable.service.ISysFlowTraceService;
 
 import cn.hutool.core.collection.CollUtil;
 

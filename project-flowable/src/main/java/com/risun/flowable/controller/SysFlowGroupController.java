@@ -1,20 +1,20 @@
-package com.risun.flowable.controller;
+package com.spirit.flowable.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.core.page.TableDataInfo;
-import com.risun.common.enums.BusinessType;
-import com.risun.common.utils.poi.ExcelUtil;
-import com.risun.flowable.domain.SysFlowGroup;
-import com.risun.flowable.domain.SysFlowGroupUser;
-import com.risun.flowable.service.ISysFlowGroupService;
-import com.risun.flowable.service.ISysFlowGroupUserService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.core.page.TableDataInfo;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.common.utils.poi.ExcelUtil;
+import com.spirit.flowable.domain.SysFlowGroup;
+import com.spirit.flowable.domain.SysFlowGroupUser;
+import com.spirit.flowable.service.ISysFlowGroupService;
+import com.spirit.flowable.service.ISysFlowGroupUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

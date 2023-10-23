@@ -1,4 +1,4 @@
-package com.risun.flowable.factory;
+package com.spirit.flowable.factory;
 
 import javax.annotation.Resource;
 
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.risun.flowable.service.ISysFlowGroupService;
+import com.spirit.flowable.service.ISysFlowGroupService;
 
 import lombok.Getter;
 

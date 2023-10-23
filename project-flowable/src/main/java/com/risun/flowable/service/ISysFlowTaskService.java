@@ -1,17 +1,17 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
 import java.io.InputStream;
 import java.util.List;
 
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.flowable.domain.SysFlowAssign;
-import com.risun.flowable.domain.SysFlowTrace;
-import com.risun.flowable.domain.vo.SysFlowApproverVo;
-import com.risun.flowable.domain.vo.SysApprovalFlowVo;
-import com.risun.flowable.domain.vo.SysFlowAssignVo;
-import com.risun.flowable.domain.vo.SysFlowTaskQueryVo;
-import com.risun.flowable.domain.vo.SysFlowTaskVo;
-import com.risun.flowable.domain.vo.SysStartFlowVo;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.flowable.domain.SysFlowAssign;
+import com.spirit.flowable.domain.SysFlowTrace;
+import com.spirit.flowable.domain.vo.SysFlowApproverVo;
+import com.spirit.flowable.domain.vo.SysApprovalFlowVo;
+import com.spirit.flowable.domain.vo.SysFlowAssignVo;
+import com.spirit.flowable.domain.vo.SysFlowTaskQueryVo;
+import com.spirit.flowable.domain.vo.SysFlowTaskVo;
+import com.spirit.flowable.domain.vo.SysStartFlowVo;
 
 /**
  * 系统流程服务接口

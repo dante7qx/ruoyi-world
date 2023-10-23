@@ -1,7 +1,7 @@
-package com.risun.flowable.demo.mapper;
+package com.spirit.flowable.demo.mapper;
 
 import java.util.List;
-import com.risun.flowable.demo.domain.FlowDemo;
+import com.spirit.flowable.demo.domain.FlowDemo;
 
 /**
  * 业务流程示例Mapper接口

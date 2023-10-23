@@ -1,12 +1,12 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
 import java.util.List;
 
 import org.flowable.task.api.Task;
 
-import com.risun.flowable.domain.SysFlowRecord;
-import com.risun.flowable.domain.vo.SysApprovalFlowVo;
-import com.risun.flowable.domain.vo.SysStartFlowVo;
+import com.spirit.flowable.domain.SysFlowRecord;
+import com.spirit.flowable.domain.vo.SysApprovalFlowVo;
+import com.spirit.flowable.domain.vo.SysStartFlowVo;
 
 /**
  * 流程记录Service接口

@@ -1,6 +1,6 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
-import com.risun.flowable.domain.SysFlowSeq;
+import com.spirit.flowable.domain.SysFlowSeq;
 
 /**
  * 流程序号Service接口

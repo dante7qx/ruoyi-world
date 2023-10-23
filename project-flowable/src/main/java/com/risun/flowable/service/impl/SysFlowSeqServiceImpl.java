@@ -1,4 +1,4 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import java.time.Instant;
 import java.util.Date;
@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.flowable.domain.SysFlowSeq;
-import com.risun.flowable.mapper.SysFlowSeqMapper;
-import com.risun.flowable.service.ISysFlowSeqService;
+import com.spirit.flowable.domain.SysFlowSeq;
+import com.spirit.flowable.mapper.SysFlowSeqMapper;
+import com.spirit.flowable.service.ISysFlowSeqService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;

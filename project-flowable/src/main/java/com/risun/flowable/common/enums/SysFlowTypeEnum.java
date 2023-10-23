@@ -1,4 +1,4 @@
-package com.risun.flowable.common.enums;
+package com.spirit.flowable.common.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

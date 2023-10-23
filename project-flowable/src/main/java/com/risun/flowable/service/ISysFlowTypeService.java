@@ -1,10 +1,10 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.risun.flowable.domain.SysFlowType;
+import com.spirit.flowable.domain.SysFlowType;
 
 /**
  * 流程类型Service接口

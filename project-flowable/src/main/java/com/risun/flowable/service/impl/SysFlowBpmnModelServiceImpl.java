@@ -1,4 +1,4 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.flowable.bpmn.model.Process;
 import org.flowable.bpmn.model.UserTask;
 import org.springframework.stereotype.Service;
 
-import com.risun.flowable.factory.FlowServiceFactory;
-import com.risun.flowable.service.ISysFlowBpmnModelService;
+import com.spirit.flowable.factory.FlowServiceFactory;
+import com.spirit.flowable.service.ISysFlowBpmnModelService;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

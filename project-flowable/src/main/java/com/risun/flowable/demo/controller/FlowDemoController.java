@@ -1,4 +1,4 @@
-package com.risun.flowable.demo.controller;
+package com.spirit.flowable.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.risun.common.annotation.Log;
-import com.risun.common.core.controller.BaseController;
-import com.risun.common.core.domain.AjaxResult;
-import com.risun.common.enums.BusinessType;
-import com.risun.flowable.demo.domain.FlowDemo;
-import com.risun.flowable.demo.service.IFlowDemoService;
+import com.spirit.common.annotation.Log;
+import com.spirit.common.core.controller.BaseController;
+import com.spirit.common.core.domain.AjaxResult;
+import com.spirit.common.enums.BusinessType;
+import com.spirit.flowable.demo.domain.FlowDemo;
+import com.spirit.flowable.demo.service.IFlowDemoService;
 
 /**
  * 业务流程示例Controller

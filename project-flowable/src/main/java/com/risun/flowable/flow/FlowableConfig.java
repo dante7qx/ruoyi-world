@@ -1,4 +1,4 @@
-package com.risun.flowable.flow;
+package com.spirit.flowable.flow;
 
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;

@@ -1,4 +1,4 @@
-package com.risun.flowable.domain;
+package com.spirit.flowable.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.risun.common.core.domain.BaseEntity;
+import com.spirit.common.core.domain.BaseEntity;
 
 /**
  * 流程组对象 sys_flow_group

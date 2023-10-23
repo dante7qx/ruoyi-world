@@ -1,4 +1,4 @@
-package com.risun.flowable.domain.dto;
+package com.spirit.flowable.domain.dto;
 
 import java.io.Serializable;
 

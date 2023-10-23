@@ -1,8 +1,8 @@
-package com.risun.flowable.service;
+package com.spirit.flowable.service;
 
 import java.util.List;
 
-import com.risun.flowable.domain.SysForm;
+import com.spirit.flowable.domain.SysForm;
 
 /**
  * 表单

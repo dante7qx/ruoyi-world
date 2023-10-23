@@ -1,4 +1,4 @@
-package com.risun.flowable.service.impl;
+package com.spirit.flowable.service.impl;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
@@ -12,11 +12,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.risun.common.utils.DateUtils;
-import com.risun.common.utils.SecurityUtils;
-import com.risun.flowable.domain.SysFlowType;
-import com.risun.flowable.mapper.SysFlowTypeMapper;
-import com.risun.flowable.service.ISysFlowTypeService;
+import com.spirit.common.utils.DateUtils;
+import com.spirit.common.utils.SecurityUtils;
+import com.spirit.flowable.domain.SysFlowType;
+import com.spirit.flowable.mapper.SysFlowTypeMapper;
+import com.spirit.flowable.service.ISysFlowTypeService;
 
 import cn.hutool.core.collection.CollUtil;;
 
