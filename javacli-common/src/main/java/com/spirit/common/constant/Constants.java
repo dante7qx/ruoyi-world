@@ -127,7 +127,7 @@ public class Constants
     /**
      * 资源映射路径 前缀
      */
-    public static final String RESOURCE_PREFIX = "/project-profile";
+    public static final String RESOURCE_PREFIX = "/spirit-profile";
 
     /**
      * RMI 远程方法调用
