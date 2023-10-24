@@ -10,7 +10,7 @@ public class CacheConstants
 	/**
 	 * 项目 redis key
 	 */
-	public static final String SYS_KEY = "project:";
+	public static final String SYS_KEY = "spirit:";
 	
     /**
      * 登录用户 redis key
