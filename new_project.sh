@@ -25,8 +25,8 @@ createNewProject() {
     
     sed -i "s/XX项目/${projectCN}/g" ./javacli-admin/src/main/java/com/spirit/SpiritApplication.java
     echo "修改常量 Common 下 Constants.java"
-    sed -i "s/javacli-/${projectName}-/g" ./javacli-common/src/main/java/com/spirit/common/constant/Constants.java
-    sed -i "s/javacli/${projectName}/g" ./javacli-common/src/main/java/com/spirit/common/constant/CacheConstants.java
+    sed -i "s/spirit-/${projectName}-/g" ./javacli-common/src/main/java/com/spirit/common/constant/Constants.java
+    sed -i "s/spirit/${projectName}/g" ./javacli-common/src/main/java/com/spirit/common/constant/CacheConstants.java
     sed -i "s/-/_/g" ./javacli-common/src/main/java/com/spirit/common/constant/CacheConstants.java
     sed -i "s/: files/: <文件上传目录>/g" ./javacli-admin/src/main/resources/application.yml
     sed -i "s/127.0.0.1:15432/<数据库url>/g" ./javacli-admin/src/main/resources/application-mysql.yml
